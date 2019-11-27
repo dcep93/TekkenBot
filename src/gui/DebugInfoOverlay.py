@@ -1,7 +1,7 @@
-from . import GUI_Overlay
+from . import Overlay
 from tkinter import *
 from tkinter.ttk import *
-from .GUI_Overlay import CurrentColorScheme, ColorSchemeEnum
+from .Overlay import CurrentColorScheme, ColorSchemeEnum
 
 
 class TextRedirector(object):
@@ -12,7 +12,7 @@ class TextRedirector(object):
     def write(self, str):
         pass
 
-class GUI_DebugInfoOverlay(GUI_Overlay.Overlay):
+class GUI_DebugInfoOverlay(Overlay.Overlay):
     def __init__(self, master, launcher):
 
         GUI_Overlay.Overlay.__init__(self, master, (1200, 120), "Tekken Bot: Match Stats Overlay")

@@ -1,4 +1,4 @@
-from . import GUI_Overlay
+from . import Overlay
 from tkinter import *
 from tkinter.ttk import *
 
@@ -70,7 +70,7 @@ class TextRedirector(object):
                     self.p2_x0, self.p2_y0 = x2, y2
 
 
-class GUI_TimelineOverlay(GUI_Overlay.Overlay):
+class GUI_TimelineOverlay(Overlay.Overlay):
     def __init__(self, master, launcher):
 
 

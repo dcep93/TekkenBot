@@ -7,8 +7,8 @@ from tkinter import *
 from tkinter.ttk import *
 import sys
 from enum import Enum
-from . import GUI_Overlay
-from .GUI_Overlay import CurrentColorScheme, ColorSchemeEnum
+from . import Overlay
+from .Overlay import CurrentColorScheme, ColorSchemeEnum
 
 from collections import Counter
 
@@ -166,7 +166,7 @@ class TextRedirector(object):
 
 
 
-class GUI_FrameDataOverlay(GUI_Overlay.Overlay):
+class GUI_FrameDataOverlay(Overlay.Overlay):
     def __init__(self, master, launcher):
 
         GUI_Overlay.Overlay.__init__(self, master, (1021, 86), "Tekken Bot: Frame Data Overlay")

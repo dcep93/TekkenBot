@@ -1,11 +1,11 @@
 from tkinter import *
 from tkinter.ttk import *
-from . import GUI_FrameDataOverlay as fdo
-from . import GUI_Overlay as ovr
-from . import GUI_TimelineOverlay as tlo
-from . import GUI_CommandInputOverlay as cio
-from . import GUI_MatchStatOverlay as mso
-from . import GUI_DebugInfoOverlay as dio
+from . import FrameDataOverlay as fdo
+from . import Overlay as ovr
+from . import TimelineOverlay as tlo
+from . import CommandInputOverlay as cio
+from . import MatchStatOverlay as mso
+from . import DebugInfoOverlay as dio
 from misc import ConfigReader
 from launcher._FrameDataLauncher import FrameDataLauncher
 import time

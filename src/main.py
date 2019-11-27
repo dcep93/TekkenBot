@@ -1,1 +1,1 @@
-import gui.GUI_TekkenBotPrime
+import gui.TekkenBotPrime

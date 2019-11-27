@@ -1,4 +1,4 @@
-from . import GUI_Overlay
+from . import Overlay
 from tkinter import *
 from tkinter.ttk import *
 from moves.MoveInfoEnums import InputDirectionCodes
@@ -14,7 +14,7 @@ class TextRedirector(object):
         pass
 
 
-class GUI_CommandInputOverlay(GUI_Overlay.Overlay):
+class GUI_CommandInputOverlay(Overlay.Overlay):
 
     symbol_map = {
 
