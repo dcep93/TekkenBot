@@ -3,10 +3,10 @@ Collects information from TekkenGameState over time in hopes of synthesizing it 
 
 """
 
-from MoveInfoEnums import AttackType
-from MoveInfoEnums import ThrowTechs
-from MoveInfoEnums import ComplexMoveStates
-from TekkenGameState import TekkenGameState
+from moves.MoveInfoEnums import AttackType
+from moves.MoveInfoEnums import ThrowTechs
+from moves.MoveInfoEnums import ComplexMoveStates
+from game_parser.TekkenGameState import TekkenGameState
 import time
 from enum import Enum
 

@@ -1,5 +1,5 @@
-from TekkenGameState import TekkenGameState
-from TekkenEncyclopedia import TekkenEncyclopedia
+from game_parser.TekkenGameState import TekkenGameState
+from moves.TekkenEncyclopedia import TekkenEncyclopedia
 import time
 
 class FrameDataLauncher:

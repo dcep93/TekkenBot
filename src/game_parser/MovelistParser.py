@@ -1,7 +1,7 @@
 import struct
 from collections import Counter
 from collections import defaultdict
-from MoveInfoEnums import InputDirectionCodes
+from moves.MoveInfoEnums import InputDirectionCodes
 
 class MovelistParser:
     class EscapeAll(bytes):

@@ -2,7 +2,7 @@
 Our abstract overlay class provides shared tools for our overlays
 """
 
-from ConfigReader import ConfigReader, ReloadableConfig
+from misc.ConfigReader import ConfigReader, ReloadableConfig
 from enum import Enum
 import platform
 from tkinter import *

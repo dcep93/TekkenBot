@@ -1,8 +1,8 @@
-import GUI_Overlay
+from . import GUI_Overlay
 from tkinter import *
 from tkinter.ttk import *
-from MoveInfoEnums import InputDirectionCodes
-from MoveInfoEnums import InputAttackCodes
+from moves.MoveInfoEnums import InputDirectionCodes
+from moves.MoveInfoEnums import InputAttackCodes
 
 
 

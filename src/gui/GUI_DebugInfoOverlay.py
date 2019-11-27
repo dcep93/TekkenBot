@@ -1,7 +1,7 @@
-import GUI_Overlay
+from . import GUI_Overlay
 from tkinter import *
 from tkinter.ttk import *
-from GUI_Overlay import CurrentColorScheme, ColorSchemeEnum
+from .GUI_Overlay import CurrentColorScheme, ColorSchemeEnum
 
 
 class TextRedirector(object):

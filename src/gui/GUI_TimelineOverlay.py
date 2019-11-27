@@ -1,4 +1,4 @@
-import GUI_Overlay
+from . import GUI_Overlay
 from tkinter import *
 from tkinter.ttk import *
 

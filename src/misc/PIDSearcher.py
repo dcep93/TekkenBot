@@ -1,17 +1,5 @@
-import sys, os.path, ctypes, ctypes.wintypes
-
-Psapi = ctypes.WinDLL('Psapi.dll')
-EnumProcesses = Psapi.EnumProcesses
-EnumProcesses.restype = ctypes.wintypes.BOOL
-GetProcessImageFileName = Psapi.GetProcessImageFileNameA
-GetProcessImageFileName.restype = ctypes.wintypes.DWORD
-
-Kernel32 = ctypes.WinDLL('kernel32.dll')
-OpenProcess = Kernel32.OpenProcess
-OpenProcess.restype = ctypes.wintypes.HANDLE
-TerminateProcess = Kernel32.TerminateProcess
-TerminateProcess.restype = ctypes.wintypes.BOOL
-CloseHandle = Kernel32.CloseHandle
+import sys, os.path, ctypes
+import windows
 
 MAX_PATH = 260
 PROCESS_TERMINATE = 0x0001
@@ -21,9 +9,9 @@ def GetPIDByName(process_name_in_bytes):
     pid = -1
     count = 32
     while True:
-        ProcessIds = (ctypes.wintypes.DWORD*count)()
+        ProcessIds = (windows.wintypes.DWORD*count)()
         cb = ctypes.sizeof(ProcessIds)
-        BytesReturned = ctypes.wintypes.DWORD()
+        BytesReturned = windows.wintypes.DWORD()
         if EnumProcesses(ctypes.byref(ProcessIds), cb, ctypes.byref(BytesReturned)):
             if BytesReturned.value<cb:
                 break
@@ -32,7 +20,7 @@ def GetPIDByName(process_name_in_bytes):
         else:
             sys.exit("Call to EnumProcesses failed")
 
-    for index in range(int(BytesReturned.value / ctypes.sizeof(ctypes.wintypes.DWORD))):
+    for index in range(int(BytesReturned.value / ctypes.sizeof(windows.wintypes.DWORD))):
         ProcessId = ProcessIds[index]
         hProcess = OpenProcess(PROCESS_TERMINATE | PROCESS_QUERY_INFORMATION, False, ProcessId)
         if hProcess:

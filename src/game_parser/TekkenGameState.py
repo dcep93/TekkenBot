@@ -16,35 +16,17 @@ frame?, what was the last move player 2 did?).
 from collections import Counter
 
 import ctypes as c
-from ctypes import wintypes as w
 import struct
 import math
 
-import ModuleEnumerator
-import PIDSearcher
-from MoveInfoEnums import *
-from ConfigReader import ConfigReader, ReloadableConfig
-from MoveDataReport import MoveDataReport
-import MovelistParser
+import misc.ModuleEnumerator
+import misc.PIDSearcher
+from moves.MoveInfoEnums import *
+from misc.ConfigReader import ConfigReader, ReloadableConfig
+from moves.MoveDataReport import MoveDataReport
+import game_parser.MovelistParser
 
-k32 = c.windll.kernel32
-
-OpenProcess = k32.OpenProcess
-OpenProcess.argtypes = [w.DWORD,w.BOOL,w.DWORD]
-OpenProcess.restype = w.HANDLE
-
-ReadProcessMemory = k32.ReadProcessMemory
-ReadProcessMemory.argtypes = [w.HANDLE,w.LPCVOID,w.LPVOID,c.c_size_t,c.POINTER(c.c_size_t)]
-ReadProcessMemory.restype = w.BOOL
-
-GetLastError = k32.GetLastError
-GetLastError.argtypes = None
-GetLastError.restype = w.DWORD
-
-CloseHandle = k32.CloseHandle
-CloseHandle.argtypes = [w.HANDLE]
-CloseHandle.restype = w.BOOL
-
+import windows
 
 class TekkenGameReader:
     def __init__(self):

@@ -7,8 +7,8 @@ from tkinter import *
 from tkinter.ttk import *
 import sys
 from enum import Enum
-import GUI_Overlay
-from GUI_Overlay import CurrentColorScheme, ColorSchemeEnum
+from . import GUI_Overlay
+from .GUI_Overlay import CurrentColorScheme, ColorSchemeEnum
 
 from collections import Counter
 

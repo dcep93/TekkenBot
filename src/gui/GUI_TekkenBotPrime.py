@@ -1,17 +1,16 @@
 from tkinter import *
 from tkinter.ttk import *
-import GUI_FrameDataOverlay as fdo
-import GUI_Overlay as ovr
-import GUI_TimelineOverlay as tlo
-import GUI_CommandInputOverlay as cio
-import GUI_MatchStatOverlay as mso
-import GUI_DebugInfoOverlay as dio
-import GUI_PunishCoachOverlay as pco
-import ConfigReader
-from _FrameDataLauncher import FrameDataLauncher
+from . import GUI_FrameDataOverlay as fdo
+from . import GUI_Overlay as ovr
+from . import GUI_TimelineOverlay as tlo
+from . import GUI_CommandInputOverlay as cio
+from . import GUI_MatchStatOverlay as mso
+from . import GUI_DebugInfoOverlay as dio
+from misc import ConfigReader
+from launcher._FrameDataLauncher import FrameDataLauncher
 import time
 from enum import Enum
-import VersionChecker
+import misc.VersionChecker
 import webbrowser
 
 class GUI_TekkenBotPrime(Tk):
