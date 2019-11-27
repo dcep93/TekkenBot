@@ -1,1 +1,0 @@
-This file allows version control to commit an otherwise empty directory.
