@@ -1,6 +1,6 @@
-#These are output folders, we don't want them in github
-__pycache__/
 /build
 /dist
+/venv
 
-TekkenBotPrime.spec
+*.pyc
+
