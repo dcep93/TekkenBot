@@ -141,7 +141,7 @@ class TekkenGameReader:
         gameSnapshot = None
 
         if not self.HasWorkingPID():
-            self.pid = PIDSearcher.GetPIDByName(b'TekkenGame-Win64-Shipping.exe')
+            self.pid = misc.PIDSearcher.GetPIDByName(b'TekkenGame-Win64-Shipping.exe')
             if self.HasWorkingPID():
                 print("Tekken pid acquired: " + str(self.pid))
             else:

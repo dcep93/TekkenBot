@@ -20,10 +20,10 @@ class TextRedirector(object):
             self.text.see('0.0')
 
 
-class GUI_MatchStatOverlay(Overlay.Overlay):
+class MatchStatOverlay(Overlay.Overlay):
     def __init__(self, master, launcher):
 
-        GUI_Overlay.Overlay.__init__(self, master, (600, 70), "Tekken Bot: Match Stats Overlay")
+        Overlay.Overlay.__init__(self, master, (600, 70), "Tekken Bot: Match Stats Overlay")
 
         #self.launcher = FrameDataLauncher(self.enable_nerd_data)
         self.launcher = launcher

@@ -12,10 +12,10 @@ class TextRedirector(object):
     def write(self, str):
         pass
 
-class GUI_DebugInfoOverlay(Overlay.Overlay):
+class DebugInfoOverlay(Overlay.Overlay):
     def __init__(self, master, launcher):
 
-        GUI_Overlay.Overlay.__init__(self, master, (1200, 120), "Tekken Bot: Match Stats Overlay")
+        Overlay.Overlay.__init__(self, master, (1200, 120), "Tekken Bot: Match Stats Overlay")
 
         #self.launcher = FrameDataLauncher(self.enable_nerd_data)
         self.launcher = launcher

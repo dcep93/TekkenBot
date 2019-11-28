@@ -70,11 +70,11 @@ class TextRedirector(object):
                     self.p2_x0, self.p2_y0 = x2, y2
 
 
-class GUI_TimelineOverlay(Overlay.Overlay):
+class TimelineOverlay(Overlay.Overlay):
     def __init__(self, master, launcher):
 
 
-        GUI_Overlay.Overlay.__init__(self, master, (1800, 86), "Tekken Bot: Timeline Overlay")
+        Overlay.Overlay.__init__(self, master, (1800, 86), "Tekken Bot: Timeline Overlay")
 
         #self.launcher = FrameDataLauncher(self.enable_nerd_data)
         self.launcher = launcher

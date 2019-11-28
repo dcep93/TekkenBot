@@ -71,14 +71,7 @@ class Overlay:
 
         self.background_color = CurrentColorScheme.dict[ColorSchemeEnum.background]
 
-        if self.is_transparency:
-            self.tranparency_color = CurrentColorScheme.dict[ColorSchemeEnum.transparent]
-            self.toplevel.wm_attributes("-transparentcolor", self.tranparency_color)
-            self.toplevel.attributes("-alpha", "0.75")
-        else:
-            if is_windows_7:
-                print("Windows 7 detected. Disabling transparency.")
-            self.tranparency_color = self.background_color
+        self.tranparency_color = self.background_color
         self.toplevel.configure(background=self.tranparency_color)
 
         self.toplevel.iconbitmap('TekkenData/tekken_bot_close.ico')

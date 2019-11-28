@@ -166,12 +166,12 @@ class TextRedirector(object):
 
 
 
-class GUI_FrameDataOverlay(Overlay.Overlay):
+class FrameDataOverlay(Overlay.Overlay):
     def __init__(self, master, launcher):
 
-        GUI_Overlay.Overlay.__init__(self, master, (1021, 86), "Tekken Bot: Frame Data Overlay")
+        Overlay.Overlay.__init__(self, master, (1021, 86), "Tekken Bot: Frame Data Overlay")
 
-        self.show_live_framedata = self.tekken_config.get_property(GUI_Overlay.DisplaySettings.config_name(), GUI_Overlay.DisplaySettings.tiny_live_frame_data_numbers.name, True)
+        self.show_live_framedata = self.tekken_config.get_property(Overlay.DisplaySettings.config_name(), Overlay.DisplaySettings.tiny_live_frame_data_numbers.name, True)
 
         #self.launcher = FrameDataLauncher(self.enable_nerd_data)
         self.launcher = launcher
@@ -263,7 +263,6 @@ class GUI_FrameDataOverlay(Overlay.Overlay):
 
 
     def update_state(self):
-        #GUI_Overlay.Overlay.update_state(self)
         if self.show_live_framedata:
             if len(self.launcher.gameState.stateLog) > 1:
                 l_recovery = str(self.launcher.gameState.GetOppFramesTillNextMove() - self.launcher.gameState.GetBotFramesTillNextMove())
