@@ -10,56 +10,64 @@ from misc import ConfigReader
 from launcher._FrameDataLauncher import FrameDataLauncher
 import time
 from enum import Enum
+from misc.Path import path
 import misc.VersionChecker
 import webbrowser
 
-class GUI_TekkenBotPrime(Tk):
+class TekkenBotPrime(Tk):
     def __init__(self):
         self.overlay = None
 
+        self.init_tk()
+        self.print_readme()
+        self.add_menu_cascade()
+        self.add_columns_cascade()
+        self.add_display_cascade()
+        self.add_color_schema_cascade()
+        self.add_mode_cascade()
+        self.add_version_cascade()
+        self.configure_grid()
+        self.update_launcher()
+        self.overlay.hide()
+
+    def init_tk(self):
         Tk.__init__(self)
-        self.wm_title("Tekken Bot Prime")
-        self.iconbitmap('TekkenData/tekken_bot_close.ico')
+        self.wm_title("dcep93/TekkenBot")
+        self.iconbitmap('./TekkenData/tekken_bot_close.ico')
 
         self.color_scheme_config = ConfigReader.ConfigReader("color_scheme")
-        self.color_scheme_config.add_comment("colors with names -> http://www.science.smith.edu/dftwiki/images/3/3d/TkInterColorCharts.png")
-        self.changed_color_scheme("Current", False)
 
         self.menu = Menu(self)
         self.configure(menu=self.menu)
 
         self.text = Text(self, wrap="word")
         self.stdout = sys.stdout
-        self.var_print_frame_data_to_file = BooleanVar(value=False)
-        sys.stdout = TextRedirector(self.text, sys.stdout, self.write_to_overlay, self.var_print_frame_data_to_file, "stdout")
+        sys.stdout = TextRedirector(self.text, self.stdout, "stdout")
         self.stderr = sys.stderr
-        sys.stderr = TextRedirector(self.text, sys.stderr, self.write_to_error, "stderr")
+        sys.stderr = TextRedirector(self.text, self.stderr, "stderr")
         self.text.tag_configure("stderr", foreground="#b22222")
 
+        self.protocol("WM_DELETE_WINDOW", self.on_closing)
 
-
+    def print_readme(self):
         try:
-            with open("TekkenData/tekken_bot_readme.txt") as fr:
+            with open(path + "TekkenData/tekken_bot_readme.txt") as fr:
                 lines = fr.readlines()
-            for line in lines: print(line)
+            for line in lines: print(line.strip())
         except:
             print("Error reading readme file.")
 
-        VersionChecker.check_version()
-
+    def add_menu_cascade(self):
         print("Tekken Bot Starting...")
         self.launcher = FrameDataLauncher(False)
 
-        self.overlay = fdo.GUI_FrameDataOverlay(self, self.launcher)
-        #self.graph = tlo.GUI_TimelineOverlay(self, self.launcher)
+        self.overlay = fdo.FrameDataOverlay(self, self.launcher)
 
         self.tekken_bot_menu = Menu(self.menu)
-        self.tekken_bot_menu.add_command(label="Restart", command=self.restart)
 
-        self.tekken_bot_menu.add_checkbutton(label="Print Frame Data To \"TekkenData/frame_data_output.txt\"", onvalue=True, offvalue=False, variable=self.var_print_frame_data_to_file)
         self.menu.add_cascade(label="Tekken Bot", menu=self.tekken_bot_menu)
 
-
+    def add_columns_cascade(self):
         self.checkbox_dict = {}
         self.column_menu = Menu(self.menu)
         for i, enum in enumerate(fdo.DataColumns):
@@ -67,12 +75,14 @@ class GUI_TekkenBotPrime(Tk):
             self.add_checkbox(self.column_menu, enum, "{} ({})".format(enum.name.replace('X', ' ').strip(), fdo.DataColumnsToMenuNames[enum]), bool, self.changed_columns)
         self.menu.add_cascade(label='Columns', menu=self.column_menu)
 
+    def add_display_cascade(self):
         self.display_menu = Menu(self.menu)
         for enum in ovr.DisplaySettings:
             default = self.overlay.tekken_config.get_property(ovr.DisplaySettings.config_name(), enum.name, False)
             self.add_checkbox(self.display_menu, enum, enum.name, default, self.changed_display)
         self.menu.add_cascade(label="Display", menu=self.display_menu)
 
+    def add_color_schema_cascade(self):
         self.color_scheme_menu = Menu(self.menu)
         self.scheme_var = StringVar()
         for section in self.color_scheme_config.parser.sections():
@@ -80,6 +90,7 @@ class GUI_TekkenBotPrime(Tk):
                 self.color_scheme_menu.add_radiobutton(label=section, variable=self.scheme_var, value=section, command=lambda : self.changed_color_scheme(self.scheme_var.get()))
         self.menu.add_cascade(label="Color Scheme", menu=self.color_scheme_menu)
 
+    def add_mode_cascade(self):
         self.overlay_mode_menu = Menu(self.menu)
         self.overlay_var = StringVar()
         for mode in OverlayMode:
@@ -87,13 +98,11 @@ class GUI_TekkenBotPrime(Tk):
         self.menu.add_cascade(label="Mode", menu=self.overlay_mode_menu)
         self.mode = OverlayMode.FrameData
 
+    def add_version_cascade(self):
         self.tekken_bot_menu = Menu(self.menu)
-        self.tekken_bot_menu.add_command(label=VersionChecker.CURRENT_VERSION)
-        self.tekken_bot_menu.add_command(label="Check for new version", command=self.print_release_notes)
-        self.tekken_bot_menu.add_command(label="Download Latest Release", command=self.download_latest_release)
         self.menu.add_cascade(label="Version", menu=self.tekken_bot_menu)
 
-
+    def configure_grid(self):
         self.text.grid(row = 2, column = 0, columnspan=2, sticky=N+S+E+W)
         #self.grid_rowconfigure(0, weight=1)
         self.grid_rowconfigure(2, weight=1)
@@ -101,34 +110,6 @@ class GUI_TekkenBotPrime(Tk):
         #self.grid_columnconfigure(1, weight=1)
 
         self.geometry(str(920) + 'x' + str(720))
-
-        self.update_launcher()
-        self.overlay.hide()
-
-        self.protocol("WM_DELETE_WINDOW", self.on_closing)
-
-    def print_release_notes(self):
-        VersionChecker.check_version(force_print=True)
-
-    def download_latest_release(self):
-        webbrowser.open('https://github.com/roguelike2d/TekkenBot/releases/')
-
-    def restart(self):
-        self.launcher = FrameDataLauncher(False)
-        self.stop_overlay()
-        self.start_overlay()
-
-    def write_to_overlay(self, string):
-        if self.var_print_frame_data_to_file.get() and 'NOW:' in string:
-            with open("TekkenData/frame_data_output.txt", 'a') as fa:
-                fa.write(string +'\n')
-        if self.overlay != None:
-            self.overlay.redirector.write(string)
-        #if 'HIT' in string:
-            #self.graph.redirector.write(string)
-
-    def write_to_error(self, string):
-        self.stderr.write(string)
 
     def add_checkbox(self, menu, lookup_key, display_string, default_value, button_command):
         var = BooleanVar()
@@ -145,15 +126,10 @@ class GUI_TekkenBotPrime(Tk):
             self.reboot_overlay()
 
     def changed_mode(self, mode):
-
         self.stop_overlay()
-
         self.mode = OverlayMode[mode]
-
         if self.mode != OverlayMode.Off:
             self.start_overlay()
-
-
 
     def changed_columns(self):
         generated_columns = []
@@ -181,26 +157,20 @@ class GUI_TekkenBotPrime(Tk):
 
     def start_overlay(self):
         if self.mode == OverlayMode.FrameData:
-            self.overlay = fdo.GUI_FrameDataOverlay(self, self.launcher)
+            self.overlay = fdo.FrameDataOverlay(self, self.launcher)
             self.overlay.hide()
-        #if self.mode == OverlayMode.Timeline:
-        #    self.overlay = tlo.GUI_TimelineOverlay(self, self.launcher)
-        #    self.overlay.hide()
         if self.mode == OverlayMode.CommandInput:
-            self.overlay = cio.GUI_CommandInputOverlay(self, self.launcher)
+            self.overlay = cio.CommandInputOverlay(self, self.launcher)
             self.overlay.hide()
         if self.mode == OverlayMode.PunishCoach:
-            self.overlay = pco.GUI_PunishCoachOverlay(self, self.launcher)
+            self.overlay = pco.PunishCoachOverlay(self, self.launcher)
             self.overlay.hide()
         if self.mode == OverlayMode.MatchupRecord:
-            self.overlay = mso.GUI_MatchStatOverlay(self, self.launcher)
+            self.overlay = mso.MatchStatOverlay(self, self.launcher)
             self.overlay.hide()
         if self.mode == OverlayMode.DebugInfo:
-            self.overlay = dio.GUI_DebugInfoOverlay(self, self.launcher)
+            self.overlay = dio.DebugInfoOverlay(self, self.launcher)
             self.overlay.hide()
-
-
-
 
     def reboot_overlay(self):
         self.stop_overlay()
@@ -227,23 +197,18 @@ class GUI_TekkenBotPrime(Tk):
         sys.stderr = self.stderr
         self.destroy()
 
-
-
 class TextRedirector(object):
-    def __init__(self, widget, stdout, callback_function, var_print_frame_data_to_file,tag="stdout"):
+    def __init__(self, widget, stdout, tag="stdout"):
         self.widget = widget
         self.stdout = stdout
         self.tag = tag
-        self.callback_function = callback_function
-        self.var_print_frame_data_to_file = var_print_frame_data_to_file
 
-    def write(self, str):
-
+    def write(self, s):
         self.widget.configure(state="normal")
-        self.widget.insert("end", str, (self.tag,))
+        self.widget.insert("end", s, (self.tag,))
         self.widget.configure(state="disabled")
         self.widget.see('end')
-        self.callback_function(str)
+        self.stdout.write(s)
 
     def flush(self):
         pass
@@ -253,20 +218,9 @@ class OverlayMode(Enum):
     FrameData = 1
     #Timeline = 2
     CommandInput = 3
-    PunishCoach = 4
-    MatchupRecord = 5
-    DebugInfo = 6
 
 OverlayModeToDisplayName = {
     OverlayMode.Off : 'Off',
     OverlayMode.FrameData: 'Frame Data',
     OverlayMode.CommandInput: 'Command Inputs (and cancel window)',
-    OverlayMode.PunishCoach: 'Punish Alarm (loud!)',
-    OverlayMode.MatchupRecord: 'Matchup Stats',
-    OverlayMode.DebugInfo: 'Debugging Variables',
 }
-
-if __name__ == '__main__':
-    app = GUI_TekkenBotPrime()
-    #app.update_launcher()
-    app.mainloop()
