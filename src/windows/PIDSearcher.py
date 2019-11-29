@@ -7,6 +7,7 @@ PROCESS_QUERY_INFORMATION = 0x0400
 
 def GetPIDByName(process_name_in_bytes):
     pid = -1
+    if not windows.valid: return pid
     count = 32
     while True:
         ProcessIds = (windows.wintypes.DWORD*count)()

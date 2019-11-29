@@ -184,7 +184,6 @@ class TekkenBotPrime(Tk):
             self.overlay.update_location()
             if successful_update:
                 self.overlay.update_state()
-        #self.graph.update_state()
         time2 = time.time()
         elapsed_time = 1000 * (time2 - time1)
         if self.launcher.gameState.gameReader.HasWorkingPID():

@@ -5,18 +5,19 @@ Reads in simple config files
 from configparser import ConfigParser
 import collections
 
+import misc.Path
+
 
 class ConfigReader:
-    DATA_FOLDUER = "TekkenData/"
+    DATA_FOLDER = "TekkenData/"
 
     values = {}
 
     def __init__(self, filename):
-        self.path = ConfigReader.DATA_FOLDUER + filename + ".ini"
+        self.path = '%s/%s/%s.ini' % (misc.Path.path, self.DATA_FOLDER, filename)
         self.parser = ConfigParser()
-        try:
-            self.parser.read(self.path)
-        except:
+        parsed = self.parser.read(self.path)
+        if not parsed:
             print("Error reading config data from " + self.path + ". Using default values.")
 
     def get_property(self, section, property_string, default_value):

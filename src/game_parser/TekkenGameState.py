@@ -20,7 +20,7 @@ import struct
 import math
 
 import misc.ModuleEnumerator
-import misc.PIDSearcher
+import windows.PIDSearcher
 from moves.MoveInfoEnums import *
 from misc.ConfigReader import ConfigReader, ReloadableConfig
 from moves.MoveDataReport import MoveDataReport
@@ -141,7 +141,7 @@ class TekkenGameReader:
         gameSnapshot = None
 
         if not self.HasWorkingPID():
-            self.pid = misc.PIDSearcher.GetPIDByName(b'TekkenGame-Win64-Shipping.exe')
+            self.pid = windows.PIDSearcher.GetPIDByName(b'TekkenGame-Win64-Shipping.exe')
             if self.HasWorkingPID():
                 print("Tekken pid acquired: " + str(self.pid))
             else:
