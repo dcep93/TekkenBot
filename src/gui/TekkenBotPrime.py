@@ -1,23 +1,23 @@
-from tkinter import *
-from tkinter.ttk import *
-from . import FrameDataOverlay as fdo
+import enum
+import tkinter
+import time
+import sys
+
 from . import Overlay as ovr
+from . import FrameDataOverlay as fdo
 from . import TimelineOverlay as tlo
 from . import CommandInputOverlay as cio
 from . import MatchStatOverlay as mso
 from . import DebugInfoOverlay as dio
-from misc import ConfigReader
-from launcher._FrameDataLauncher import FrameDataLauncher
-import time
-from enum import Enum
-from misc.Path import path
-import misc.VersionChecker
-import webbrowser
+
+import misc.Path
+
+import launcher._FrameDataLauncher
 
 # todo
 # Frame specific stuff
 
-class TekkenBotPrime(Tk):
+class TekkenBotPrime(tkinter.Tk):
     def __init__(self):
         self.overlay = None
 
@@ -33,14 +33,14 @@ class TekkenBotPrime(Tk):
         self.overlay.hide()
 
     def init_tk(self):
-        Tk.__init__(self)
+        tkinter.Tk.__init__(self)
         self.wm_title("dcep93/TekkenBot")
-        self.iconbitmap('./src/TekkenData/tekken_bot_close.ico')
+        self.iconbitmap(misc.Path.path('TekkenData/tekken_bot_close.ico'))
 
-        self.menu = Menu(self)
+        self.menu = tkinter.Menu(self)
         self.configure(menu=self.menu)
 
-        self.text = Text(self, wrap="word")
+        self.text = tkinter.Text(self, wrap="word")
         stdout = sys.stdout
         sys.stdout = TextRedirector(self.text, stdout, "stdout")
         stderr = sys.stderr
@@ -51,24 +51,25 @@ class TekkenBotPrime(Tk):
 
     def print_readme(self):
         try:
-            with open(path + "TekkenData/tekken_bot_readme.txt") as fr:
+            with open(misc.Path.path("TekkenData/tekken_bot_readme.txt")) as fr:
                 lines = fr.readlines()
             for line in lines: print(line.strip())
-        except:
+        except Exception as e:
+            print(e)
             print("Error reading readme file.")
 
     def add_menu_cascade(self):
-        self.launcher = FrameDataLauncher(False)
+        self.launcher = launcher._FrameDataLauncher.FrameDataLauncher(False)
 
         self.overlay = fdo.FrameDataOverlay(self, self.launcher)
 
-        tekken_bot_menu = Menu(self.menu)
+        tekken_bot_menu = tkinter.Menu(self.menu)
 
         self.menu.add_cascade(label="Tekken Bot", menu=tekken_bot_menu)
 
     def add_columns_cascade(self):
         self.checkbox_dict = {}
-        column_menu = Menu(self.menu)
+        column_menu = tkinter.Menu(self.menu)
         for i, enum in enumerate(fdo.DataColumns):
             checked = self.overlay.redirector.columns_to_print[i]
             name = "{} ({})".format(enum.name.replace('X', ' ').strip(), fdo.DataColumnsToMenuNames[enum])
@@ -76,15 +77,15 @@ class TekkenBotPrime(Tk):
         self.menu.add_cascade(label='Columns', menu=column_menu)
 
     def add_display_cascade(self):
-        display_menu = Menu(self.menu)
+        display_menu = tkinter.Menu(self.menu)
         for enum in ovr.DisplaySettings:
             default = self.overlay.tekken_config.get_property(ovr.DisplaySettings.config_name(), enum.name, False)
             self.add_checkbox(display_menu, enum, enum.name, default, self.changed_display)
         self.menu.add_cascade(label="Display", menu=display_menu)
 
     def add_mode_cascade(self):
-        overlay_mode_menu = Menu(self.menu)
-        self.overlay_var = StringVar()
+        overlay_mode_menu = tkinter.Menu(self.menu)
+        self.overlay_var = tkinter.StringVar()
         for mode in OverlayMode:
             label = OverlayModeToDisplayName[mode]
             command = lambda: self.changed_mode(self.overlay_var.get())
@@ -93,14 +94,14 @@ class TekkenBotPrime(Tk):
         self.mode = OverlayMode.FrameData
 
     def configure_grid(self):
-        self.text.grid(row = 2, column = 0, columnspan=2, sticky=N+S+E+W)
+        self.text.grid(row = 2, column = 0, columnspan=2, sticky=tkinter.N+tkinter.S+tkinter.E+tkinter.W)
         self.grid_rowconfigure(2, weight=1)
         self.grid_columnconfigure(0, weight=1)
 
         self.geometry(str(920) + 'x' + str(720))
 
     def add_checkbox(self, menu, lookup_key, display_string, default_value, button_command):
-        var = BooleanVar()
+        var = tkinter.BooleanVar()
         var.set(default_value)
         self.checkbox_dict[lookup_key] = var
         menu.add_checkbutton(label=display_string, onvalue=True, offvalue=False, variable=var, command = button_command)
@@ -188,7 +189,7 @@ class TextRedirector(object):
     def flush(self):
         pass
 
-class OverlayMode(Enum):
+class OverlayMode(enum.Enum):
     Off = 0
     FrameData = 1
     #Timeline = 2

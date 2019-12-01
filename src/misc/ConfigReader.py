@@ -14,7 +14,7 @@ class ConfigReader:
     values = {}
 
     def __init__(self, filename):
-        self.path = '%s/%s/%s.ini' % (misc.Path.path, self.DATA_FOLDER, filename)
+        self.path = misc.Path.path('%s/%s.ini' % (self.DATA_FOLDER, filename))
         self.parser = ConfigParser()
         parsed = self.parser.read(self.path)
         if not parsed:
