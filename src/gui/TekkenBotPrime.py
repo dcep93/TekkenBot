@@ -11,6 +11,7 @@ from . import MatchStatOverlay as mso
 from . import DebugInfoOverlay as dio
 
 import misc.Path
+import windows
 
 import launcher._FrameDataLauncher
 
@@ -153,6 +154,9 @@ class TekkenBotPrime(tkinter.Tk):
         self.start_overlay()
 
     def update_launcher(self):
+        if not windows.valid:
+            print('Mac')
+            return
         time1 = time.time()
         successful_update = self.launcher.Update()
 

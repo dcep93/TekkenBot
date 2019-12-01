@@ -1,5 +1,3 @@
-class o(object): pass
-
 valid = False
 
 try:
