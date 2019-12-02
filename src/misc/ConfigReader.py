@@ -27,10 +27,8 @@ class ConfigReader:
         section = enum_item.__class__.__name__
         property_string = enum_item.name
         try:
-            value = self.parser.get(section, property_string)
-            if type(default_value) is bool:
-                value = bool(value)
-            return value
+            f = self.parser.getboolean if type(default_value) is bool else self.parser.get
+            return f(section, property_string)
         except:
             value = default_value
 
