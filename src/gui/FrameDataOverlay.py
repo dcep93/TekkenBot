@@ -28,9 +28,6 @@ class DataColumns(Enum):
     opp = 13
     notes = 14
 
-    def config_name():
-        return "DataColumns"
-
 DataColumnsToMenuNames = {
     DataColumns.XcommX : 'input command',
     DataColumns.XidX : 'internal move id number',
@@ -169,9 +166,9 @@ class TextRedirector(object):
 class FrameDataOverlay(Overlay.Overlay):
     def __init__(self, master, launcher):
 
-        Overlay.Overlay.__init__(self, master, (1021, 86), "Tekken Bot: Frame Data Overlay")
+        self.initialize(master, (1021, 86))
 
-        self.show_live_framedata = self.tekken_config.get_property(Overlay.DisplaySettings.config_name(), Overlay.DisplaySettings.tiny_live_frame_data_numbers.name, True)
+        self.show_live_framedata = self.tekken_config.get_property(Overlay.DisplaySettings.tiny_live_frame_data_numbers, True)
 
         #self.launcher = FrameDataLauncher(self.enable_nerd_data)
         self.launcher = launcher
@@ -221,8 +218,8 @@ class FrameDataOverlay(Overlay.Overlay):
     def get_data_columns(self):
         booleans_for_columns = []
         for enum in DataColumns:
-            bool = self.tekken_config.get_property(DataColumns.config_name(), enum.name, True)
-            booleans_for_columns.append(bool)
+            selected = self.tekken_config.get_property(enum, True)
+            booleans_for_columns.append(selected)
         return booleans_for_columns
 
     def create_padding_frame(self, col):
@@ -280,5 +277,5 @@ class FrameDataOverlay(Overlay.Overlay):
         self.redirector.set_columns_to_print(columns_to_print)
 
     def update_column_to_print(self, enum, value):
-        self.tekken_config.set_property(DataColumns.config_name(), enum.name, value)
+        self.tekken_config.set_property(enum, value)
         self.write_config_file()

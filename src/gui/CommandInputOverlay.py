@@ -45,7 +45,7 @@ class CommandInputOverlay(Overlay.Overlay):
     def __init__(self, master, launcher):
 
 
-        Overlay.Overlay.__init__(self, master, (1200, 86), "Tekken Bot: Command Input Overlay")
+        self.initialize(master, (1200, 86))
 
         self.launcher = launcher
 

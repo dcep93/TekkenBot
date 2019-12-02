@@ -67,7 +67,7 @@ class TekkenBotPrime(tkinter.Tk):
     def add_display_cascade(self):
         display_menu = tkinter.Menu(self.menu)
         for enum in ovr.DisplaySettings:
-            default = self.overlay.tekken_config.get_property(ovr.DisplaySettings.config_name(), enum.name, False)
+            default = self.overlay.tekken_config.get_property(enum, False)
             self.add_checkbox(display_menu, enum, enum.name, default, self.changed_display)
         self.menu.add_cascade(label="Display", menu=display_menu)
 
@@ -109,7 +109,7 @@ class TekkenBotPrime(tkinter.Tk):
         for enum in ovr.DisplaySettings:
             var = self.checkbox_dict[enum]
             if self.overlay != None:
-                self.overlay.tekken_config.set_property(ovr.DisplaySettings.config_name(), enum.name, var.get())
+                self.overlay.tekken_config.set_property(enum, var.get())
         if self.overlay != None:
             self.overlay.tekken_config.write()
         self.reboot_overlay()

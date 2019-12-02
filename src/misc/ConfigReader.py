@@ -23,7 +23,9 @@ class ConfigReader:
     def get_path(self, filename):
         return misc.Path.path('%s/%s.ini' % (self.DATA_FOLDER, filename))
 
-    def get_property(self, section, property_string, default_value):
+    def get_property(self, enum_item, default_value):
+        section = enum_item.__class__.__name__
+        property_string = enum_item.name
         try:
             value = self.parser.get(section, property_string)
             if type(default_value) is bool:
@@ -35,7 +37,9 @@ class ConfigReader:
         self.set_property(section, property_string, value)
         return value
 
-    def set_property(self, section, property_string, value):
+    def set_property(self, enum_item, value):
+        section = enum_item.__class__.__name__
+        property_string = enum_item.name
         if section not in self.parser.sections():
             self.parser.add_section(section)
         self.parser.set(section, property_string, str(value))

@@ -8,6 +8,7 @@ import platform
 import tkinter
 
 import misc.ConfigReader
+import misc.Path
 
 class DisplaySettings(enum.Enum):
     overlay_on_bottom = -1
@@ -15,9 +16,6 @@ class DisplaySettings(enum.Enum):
     only_appears_when_Tekken_7_has_focus = 1
     transparent_background = 2
     tiny_live_frame_data_numbers = 3
-
-    def config_name():
-        return "DisplaySettings"
 
 class ColorSchemeEnum(enum.Enum):
     background = 0
@@ -48,16 +46,19 @@ class CurrentColorScheme:
     }
 
 class Overlay:
-    def __init__(self, master, xy_size, window_name):
+    def get_name(self):
+        return self.__class__.__name__
+
+    def initialize(self, master, xy_size):
+        window_name = self.get_name()
         print("Launching {}".format(window_name))
         config_filename = "overlay"
         self.tekken_config = misc.ConfigReader.ConfigReader(config_filename)
         is_windows_7 = 'Windows-7' in platform.platform()
-        section = DisplaySettings.config_name()
-        self.is_draggable_window = self.tekken_config.get_property(section, DisplaySettings.overlay_as_draggable_window.name, False)
-        self.is_minimize_on_lost_focus = self.tekken_config.get_property(section, DisplaySettings.only_appears_when_Tekken_7_has_focus.name, True)
-        self.is_transparency = self.tekken_config.get_property(section, DisplaySettings.transparent_background.name, not is_windows_7)
-        self.is_overlay_on_top = not self.tekken_config.get_property(section, DisplaySettings.overlay_on_bottom.name, False)
+        self.is_draggable_window = self.tekken_config.get_property(DisplaySettings.overlay_as_draggable_window, False)
+        self.is_minimize_on_lost_focus = self.tekken_config.get_property(DisplaySettings.only_appears_when_Tekken_7_has_focus, True)
+        self.is_transparency = self.tekken_config.get_property(DisplaySettings.transparent_background, not is_windows_7)
+        self.is_overlay_on_top = not self.tekken_config.get_property(DisplaySettings.overlay_on_bottom, False)
 
         self.overlay_visible = False
         if master == None:
@@ -74,14 +75,13 @@ class Overlay:
         self.tranparency_color = self.background_color
         self.toplevel.configure(background=self.tranparency_color)
 
-        self.toplevel.iconbitmap('src/assets/tekken_bot_close.ico')
+        self.toplevel.iconbitmap(misc.Path.path('assets/tekken_bot_close.ico'))
         if not self.is_draggable_window:
             self.toplevel.overrideredirect(True)
 
-        self.w = xy_size[0]
-        self.h = xy_size[1]
+        self.w, self.h = xy_size
 
-        self.toplevel.geometry(str(self.w) + 'x' + str(self.h))
+        self.toplevel.geometry('%sx%s' % (self.w, self.h))
 
 
     def update_location(self):
