@@ -5,10 +5,7 @@ import sys
 
 from . import Overlay as ovr
 from . import FrameDataOverlay as fdo
-from . import TimelineOverlay as tlo
 from . import CommandInputOverlay as cio
-from . import MatchStatOverlay as mso
-from . import DebugInfoOverlay as dio
 
 import misc.Path
 import windows
@@ -23,7 +20,6 @@ class TekkenBotPrime(tkinter.Tk):
         self.overlay = None
 
         self.init_tk()
-        self.print_readme()
         print("Tekken Bot Starting...")
         self.add_menu_cascade()
         self.add_columns_cascade()
@@ -49,15 +45,6 @@ class TekkenBotPrime(tkinter.Tk):
         self.text.tag_configure("stderr", foreground="#b22222")
 
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
-
-    def print_readme(self):
-        try:
-            with open(misc.Path.path("TekkenData/tekken_bot_readme.txt")) as fr:
-                lines = fr.readlines()
-            for line in lines: print(line.strip())
-        except Exception as e:
-            print(e)
-            print("Error reading readme file.")
 
     def add_menu_cascade(self):
         self.launcher = launcher._FrameDataLauncher.FrameDataLauncher(False)
@@ -138,15 +125,6 @@ class TekkenBotPrime(tkinter.Tk):
             self.overlay.hide()
         if self.mode == OverlayMode.CommandInput:
             self.overlay = cio.CommandInputOverlay(self, self.launcher)
-            self.overlay.hide()
-        if self.mode == OverlayMode.PunishCoach:
-            self.overlay = pco.PunishCoachOverlay(self, self.launcher)
-            self.overlay.hide()
-        if self.mode == OverlayMode.MatchupRecord:
-            self.overlay = mso.MatchStatOverlay(self, self.launcher)
-            self.overlay.hide()
-        if self.mode == OverlayMode.DebugInfo:
-            self.overlay = dio.DebugInfoOverlay(self, self.launcher)
             self.overlay.hide()
 
     def reboot_overlay(self):

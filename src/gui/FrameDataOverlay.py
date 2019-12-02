@@ -55,11 +55,11 @@ class TextRedirector(object):
         self.fa_p1_var = fa_p1_var
         self.fa_p2_var = fa_p2_var
         self.style = style
-        self.widget.tag_config("p1", foreground=CurrentColorScheme.dict[ColorSchemeEnum.p1_text])
-        self.widget.tag_config("p2", foreground=CurrentColorScheme.dict[ColorSchemeEnum.p2_text])
+        self.widget.tag_config("p1", foreground=CurrentColorScheme.scheme[ColorSchemeEnum.p1_text])
+        self.widget.tag_config("p2", foreground=CurrentColorScheme.scheme[ColorSchemeEnum.p2_text])
         self.columns_to_print = [True] * len(DataColumns)
 
-        self.style.configure('.', background=CurrentColorScheme.dict[ColorSchemeEnum.advantage_slight_minus])
+        self.style.configure('.', background=CurrentColorScheme.scheme[ColorSchemeEnum.advantage_slight_minus])
 
     def set_columns_to_print(self, booleans_for_columns):
         self.columns_to_print = booleans_for_columns
@@ -117,15 +117,15 @@ class TextRedirector(object):
 
             if '?' not in fa:
                 if int(fa) <= -14:
-                    self.style.configure('.', background=CurrentColorScheme.dict[ColorSchemeEnum.advantage_very_punishible])
+                    self.style.configure('.', background=CurrentColorScheme.scheme[ColorSchemeEnum.advantage_very_punishible])
                 elif int(fa) <= -10:
-                    self.style.configure('.', background=CurrentColorScheme.dict[ColorSchemeEnum.advantage_punishible])
+                    self.style.configure('.', background=CurrentColorScheme.scheme[ColorSchemeEnum.advantage_punishible])
                 elif int(fa) <= -5:
-                    self.style.configure('.', background=CurrentColorScheme.dict[ColorSchemeEnum.advantage_safe_minus])
+                    self.style.configure('.', background=CurrentColorScheme.scheme[ColorSchemeEnum.advantage_safe_minus])
                 elif int(fa) < 0:
-                    self.style.configure('.', background=CurrentColorScheme.dict[ColorSchemeEnum.advantage_slight_minus])
+                    self.style.configure('.', background=CurrentColorScheme.scheme[ColorSchemeEnum.advantage_slight_minus])
                 else:
-                    self.style.configure('.', background=CurrentColorScheme.dict[ColorSchemeEnum.advantage_plus])
+                    self.style.configure('.', background=CurrentColorScheme.scheme[ColorSchemeEnum.advantage_plus])
 
             text_tag = None
             if "p1:" in output_str:
@@ -180,7 +180,7 @@ class FrameDataOverlay(Overlay.Overlay):
         self.s = Style()
         self.s.theme_use('alt')
         self.s.configure('.', background=self.background_color)
-        self.s.configure('.', foreground=CurrentColorScheme.dict[ColorSchemeEnum.advantage_text])
+        self.s.configure('.', foreground=CurrentColorScheme.scheme[ColorSchemeEnum.advantage_text])
 
         Grid.columnconfigure(self.toplevel, 0, weight=0)
         Grid.columnconfigure(self.toplevel, 1, weight=0)
@@ -258,7 +258,7 @@ class FrameDataOverlay(Overlay.Overlay):
         textbox = Text(self.toplevel, font=("Consolas", 11), wrap=NONE, highlightthickness=0, pady=0, relief='flat')
         textbox.grid(row=0, column=col, rowspan=2, sticky=N + S + W + E)
         textbox.configure(background=self.background_color)
-        textbox.configure(foreground=CurrentColorScheme.dict[ColorSchemeEnum.system_text])
+        textbox.configure(foreground=CurrentColorScheme.scheme[ColorSchemeEnum.system_text])
         return textbox
 
 

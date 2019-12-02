@@ -2,13 +2,13 @@
 Our abstract overlay class provides shared tools for our overlays
 """
 
-from misc.ConfigReader import ConfigReader, ReloadableConfig
-from enum import Enum
+import enum
 import platform
-from tkinter import *
-from tkinter.ttk import *
+import tkinter
 
-class DisplaySettings(Enum):
+import misc.ConfigReader
+
+class DisplaySettings(enum.Enum):
     overlay_on_bottom = -1
     overlay_as_draggable_window = 0
     only_appears_when_Tekken_7_has_focus = 1
@@ -18,7 +18,7 @@ class DisplaySettings(Enum):
     def config_name():
         return "DisplaySettings"
 
-class ColorSchemeEnum(Enum):
+class ColorSchemeEnum(enum.Enum):
     background = 0
     transparent = 1
     p1_text = 2
@@ -32,7 +32,7 @@ class ColorSchemeEnum(Enum):
     advantage_text = 10
 
 class CurrentColorScheme:
-    dict = {
+    scheme = {
         ColorSchemeEnum.background : 'gray10',
         ColorSchemeEnum.transparent: 'white',
         ColorSchemeEnum.p1_text: '#93A1A1',
@@ -49,27 +49,25 @@ class CurrentColorScheme:
 class Overlay:
     def __init__(self, master, xy_size, window_name):
         print("Launching {}".format(window_name))
-        config_filename = "frame_data_overlay"
-        self.tekken_config = ConfigReader(config_filename)
+        config_filename = "overlay"
+        self.tekken_config = misc.ConfigReader.ConfigReader(config_filename)
         is_windows_7 = 'Windows-7' in platform.platform()
         self.is_draggable_window = self.tekken_config.get_property(DisplaySettings.config_name(), DisplaySettings.overlay_as_draggable_window.name, False)
         self.is_minimize_on_lost_focus = self.tekken_config.get_property(DisplaySettings.config_name(), DisplaySettings.only_appears_when_Tekken_7_has_focus.name, True)
         self.is_transparency = self.tekken_config.get_property(DisplaySettings.config_name(), DisplaySettings.transparent_background.name, not is_windows_7)
         self.is_overlay_on_top = not self.tekken_config.get_property(DisplaySettings.config_name(), DisplaySettings.overlay_on_bottom.name, False)
 
-
-
         self.overlay_visible = False
         if master == None:
-            self.toplevel = Tk()
+            self.toplevel = tkinter.Tk()
         else:
-            self.toplevel = Toplevel()
+            self.toplevel = tkinter.Toplevel()
 
         self.toplevel.wm_title(window_name)
 
         self.toplevel.attributes("-topmost", True)
 
-        self.background_color = CurrentColorScheme.dict[ColorSchemeEnum.background]
+        self.background_color = CurrentColorScheme.scheme[ColorSchemeEnum.background]
 
         self.tranparency_color = self.background_color
         self.toplevel.configure(background=self.tranparency_color)
@@ -109,7 +107,6 @@ class Overlay:
             self.overlay_visible = False
 
     def show(self):
-#       print("Reloading configs...")
         ReloadableConfig.reload()
         self.toplevel.deiconify()
         self.overlay_visible = True
