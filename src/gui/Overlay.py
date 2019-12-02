@@ -2,6 +2,7 @@
 Our abstract overlay class provides shared tools for our overlays
 """
 
+import abc
 import enum
 import platform
 import tkinter
@@ -52,10 +53,11 @@ class Overlay:
         config_filename = "overlay"
         self.tekken_config = misc.ConfigReader.ConfigReader(config_filename)
         is_windows_7 = 'Windows-7' in platform.platform()
-        self.is_draggable_window = self.tekken_config.get_property(DisplaySettings.config_name(), DisplaySettings.overlay_as_draggable_window.name, False)
-        self.is_minimize_on_lost_focus = self.tekken_config.get_property(DisplaySettings.config_name(), DisplaySettings.only_appears_when_Tekken_7_has_focus.name, True)
-        self.is_transparency = self.tekken_config.get_property(DisplaySettings.config_name(), DisplaySettings.transparent_background.name, not is_windows_7)
-        self.is_overlay_on_top = not self.tekken_config.get_property(DisplaySettings.config_name(), DisplaySettings.overlay_on_bottom.name, False)
+        section = DisplaySettings.config_name()
+        self.is_draggable_window = self.tekken_config.get_property(section, DisplaySettings.overlay_as_draggable_window.name, False)
+        self.is_minimize_on_lost_focus = self.tekken_config.get_property(section, DisplaySettings.only_appears_when_Tekken_7_has_focus.name, True)
+        self.is_transparency = self.tekken_config.get_property(section, DisplaySettings.transparent_background.name, not is_windows_7)
+        self.is_overlay_on_top = not self.tekken_config.get_property(section, DisplaySettings.overlay_on_bottom.name, False)
 
         self.overlay_visible = False
         if master == None:
@@ -72,7 +74,7 @@ class Overlay:
         self.tranparency_color = self.background_color
         self.toplevel.configure(background=self.tranparency_color)
 
-        self.toplevel.iconbitmap('TekkenData/tekken_bot_close.ico')
+        self.toplevel.iconbitmap('src/assets/tekken_bot_close.ico')
         if not self.is_draggable_window:
             self.toplevel.overrideredirect(True)
 
@@ -98,6 +100,7 @@ class Overlay:
                 if self.overlay_visible:
                     self.hide()
 
+    @abc.abstractmethod
     def update_state(self):
         pass
 

@@ -37,7 +37,7 @@ class Gameplan:
 
 
 def GetGameplan(char_id):
-    directory = "TekkenData/CharacterData/"
+    directory = "src/moves/CharacterData/"
     for filename in os.listdir(directory):
         if filename.endswith(".txt"):
             #print(os.path.join(directory, filename))

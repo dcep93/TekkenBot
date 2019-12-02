@@ -32,7 +32,7 @@ class TekkenBotPrime(tkinter.Tk):
     def init_tk(self):
         tkinter.Tk.__init__(self)
         self.wm_title("dcep93/TekkenBot")
-        self.iconbitmap(misc.Path.path('TekkenData/tekken_bot_close.ico'))
+        self.iconbitmap(misc.Path.path('src/assets/tekken_bot_close.ico'))
 
         self.menu = tkinter.Menu(self)
         self.configure(menu=self.menu)

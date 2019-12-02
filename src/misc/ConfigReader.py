@@ -9,38 +9,39 @@ import misc.Path
 
 
 class ConfigReader:
-    DATA_FOLDER = "TekkenData/"
+    DATA_FOLDER = 'config'
 
     values = {}
 
     def __init__(self, filename):
-        self.path = misc.Path.path('%s/%s.ini' % (self.DATA_FOLDER, filename))
         self.parser = ConfigParser()
+        self.path = self.get_path(filename)
         parsed = self.parser.read(self.path)
         if not parsed:
-            print("Error reading config data from " + self.path + ". Using default values.")
+            print('Error reading config data from %s. Using default values.' % self.path)
+
+    def get_path(self, filename):
+        return misc.Path.path('%s/%s.ini' % (self.DATA_FOLDER, filename))
 
     def get_property(self, section, property_string, default_value):
         try:
+            value = self.parser.get(section, property_string)
             if type(default_value) is bool:
-                value = self.parser.getboolean(section, property_string)
-            else:
-                value = self.parser.get(section, property_string)
+                value = bool(value)
+            return value
         except:
             value = default_value
 
-        if section not in self.parser.sections():
-            self.parser.add_section(section)
-        self.parser.set(section, property_string, str(value))
+        self.set_property(section, property_string, value)
         return value
 
     def set_property(self, section, property_string, value):
+        if section not in self.parser.sections():
+            self.parser.add_section(section)
         self.parser.set(section, property_string, str(value))
 
     def add_comment(self, comment):
-        if 'Comments' not in self.parser.sections():
-            self.parser.add_section('Comments')
-        self.parser.set('Comments', '; ' + comment, "")
+        self.set_property('Comments', '; %s' % comment, '')
 
     def write(self):
         with open(self.path, 'w') as fw:
@@ -71,27 +72,26 @@ def config_from_path(config_path, input_dict=None, parse_nums=False):
                 input_dict[section] = CaseInsensitiveDict()
             for key, value in proxy.items():
                 if parse_nums:
-                    try:
-                        # NonPlayerDataAddresses consists of space delimited lists of hex numbers
-                        # so just ignore strings with spaces in them
-                        if value.startswith('0x') and not ' ' in value:
-                            value = int(value, 16)
-                        else:
-                            value = int(value)
-                    except ValueError:
-                        pass
+                    if ' ' not in value:
+                        try:
+                            # NonPlayerDataAddresses consists of space delimited lists of hex numbers
+                            # so just ignore strings with spaces in them
+                            if value.startswith('0x'):
+                                value = int(value, 16)
+                            else:
+                                value = int(value)
+                        except ValueError:
+                            pass
 
                 input_dict[section][key] = value
     return input_dict
 
 
-class ReloadableConfig():
-    DATA_FOLDER = "TekkenData/"
-
+class ReloadableConfig(ConfigReader):
     # Store configs so we can reload and update them later when needed
     configs = []
 
-    def __init__(self, file_name, parse_nums=False):
+    def __init__(self, filename, parse_nums=False):
         '''
         Configuration class that can reload all class instances with the
         .reload() class method.
@@ -99,11 +99,13 @@ class ReloadableConfig():
         'parse_nums' determines if we keep values as strings or try to convert
         to int/hex
         '''
-        self.path = self.DATA_FOLDER + file_name + ".ini"
-        self.should_parse = parse_nums
-        self.file_name = file_name
+        self.path = self.get_path(filename)
+        self.parse_nums = parse_nums
+        self.filename = filename
 
-        self.config = config_from_path(self.path, parse_nums=parse_nums)
+        self.config = None
+
+        self.reload_self()
 
         ReloadableConfig.configs.append(self)
 
@@ -120,8 +122,10 @@ class ReloadableConfig():
     @classmethod
     def reload(cls):
         for config in cls.configs:
-            config.config = config_from_path(config.path, input_dict=config.config, parse_nums=config.should_parse)
-            #print("Reloaded {}.ini".format(config.file_name))
+            config.reload_self()
+
+    def reload_self(self):
+        self.config = config_from_path(self.path, parse_nums=self.parse_nums, input_dict=self.config)
 
 
 class CaseInsensitiveDict(dict):

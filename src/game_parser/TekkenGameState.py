@@ -22,7 +22,7 @@ import math
 import misc.ModuleEnumerator
 import windows.PIDSearcher
 from moves.MoveInfoEnums import *
-from misc.ConfigReader import ConfigReader, ReloadableConfig
+from misc.ConfigReader import ReloadableConfig
 from moves.MoveDataReport import MoveDataReport
 import game_parser.MovelistParser
 
