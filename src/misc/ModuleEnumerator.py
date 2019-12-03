@@ -56,8 +56,7 @@ def GetModuleAddressByPIDandName(pid, name):
         if ret == 0 :
             print('ListProcessModules() Error on Module32First[%d]' % GetLastError())
             CloseHandle( hModuleSnap )
-        global PROGMainBase
-        PROGMainBase=False
+        PROGMainBase = False
         while ret :
             #print(me32.dwSize)
             #print(me32.th32ModuleID)
