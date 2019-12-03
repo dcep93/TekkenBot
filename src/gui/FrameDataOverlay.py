@@ -229,16 +229,17 @@ class FrameDataOverlay(Overlay.Overlay):
     def update_state(self):
         if self.show_live_framedata:
             if len(self.launcher.gameState.stateLog) > 1:
-                l_recovery = str(self.launcher.gameState.GetOppFramesTillNextMove() - self.launcher.gameState.GetBotFramesTillNextMove())
-                r_recovery = str(self.launcher.gameState.GetBotFramesTillNextMove() - self.launcher.gameState.GetOppFramesTillNextMove())
-                if not '-' in l_recovery:
-                    l_recovery = '+' + l_recovery
-                
-                if not '-' in r_recovery:
-                    r_recovery = '+' + r_recovery
+                recovery = self.launcher.gameState.GetOppFramesTillNextMove() - self.launcher.gameState.GetBotFramesTillNextMove()
+                if recovery is 0:
+                    l_recovery = r_recovery = '+0'
+                elif recovery > 0:
+                    l_recovery = '+%s' % recovery
+                    r_recovery = str(recovery)
+                else:
+                    l_recovery = str(recovery)
+                    r_recovery = '+%s' % recovery
                 self.l_live_recovery.set(l_recovery)
                 self.r_live_recovery.set(r_recovery)
-
 
     def set_columns_to_print(self, columns_to_print):
         self.redirector.set_columns_to_print(columns_to_print)
