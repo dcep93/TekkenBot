@@ -11,14 +11,14 @@ from . import Overlay
 from . import tkinter
 
 class DataColumns(enum.Enum):
-    XcommX = 0
-    XidX = 1
+    comm = 0
+    id = 1
     name = 3
-    XtypeXX = 4
-    XstX = 5
-    bloX = 6
-    hitX = 7
-    XchXX = 8
+    type = 4
+    st = 5
+    blo = 6
+    hit = 7
+    ch = 8
     act = 9
     T = 10
     tot = 11
@@ -31,14 +31,14 @@ class DataColumns(enum.Enum):
         return {enum: tekken_config.get_property(enum, True) for enum in cls}
 
 DataColumnsToMenuNames = {
-    DataColumns.XcommX : 'input command',
-    DataColumns.XidX : 'internal move id number',
+    DataColumns.comm : 'input command',
+    DataColumns.id : 'internal move id number',
     DataColumns.name: 'internal move name',
-    DataColumns.XtypeXX: 'attack type',
-    DataColumns.XstX: 'startup frames',
-    DataColumns.bloX: 'frame advantage on block',
-    DataColumns.hitX: 'frame advantage on hit',
-    DataColumns.XchXX: 'frame advantage on counter hit',
+    DataColumns.type: 'attack type',
+    DataColumns.st: 'startup frames',
+    DataColumns.blo: 'frame advantage on block',
+    DataColumns.hit: 'frame advantage on hit',
+    DataColumns.ch: 'frame advantage on counter hit',
     DataColumns.act: 'active frame connected on / total active frames',
     DataColumns.T: 'how well move tracks during startup',
     DataColumns.tot: 'total number of frames in move',
@@ -69,7 +69,7 @@ class TextRedirector(object):
     def populate_column_names(self):
         column_names = ''
         for enum in DataColumns:
-            col_name = enum.name.replace('X', '')
+            col_name = enum.name
             col_len = len(col_name)
             if self.columns_to_print[enum]:
                 needed_spaces = self.col_max_length - col_len

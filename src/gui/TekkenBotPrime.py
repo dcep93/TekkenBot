@@ -63,7 +63,7 @@ class TekkenBotPrime(tkinter.Tk):
         columns_to_print = fdo.DataColumns.get_checked(self.tekken_config)
         for enum in fdo.DataColumns:
             checked = columns_to_print[enum]
-            name = "{} ({})".format(enum.name.replace('X', ' ').strip(), fdo.DataColumnsToMenuNames[enum])
+            name = "{} ({})".format(enum.name, fdo.DataColumnsToMenuNames[enum])
             self.add_checkbox(column_menu, enum, name, checked, self.changed_columns)
         self.menu.add_cascade(label='Columns', menu=column_menu)
 

@@ -32,7 +32,7 @@ class ConfigReader:
         except:
             value = default_value
 
-        self.set_property(section, property_string, value)
+        self.set_property(enum_item, value)
         return value
 
     def set_property(self, enum_item, value):
