@@ -5,11 +5,10 @@ A transparent frame data display that sits on top of Tekken.exe in windowed or b
 """
 
 import enum
-import tkinter
-import tkinter.ttk
 import sys
 
 from . import Overlay
+from . import tkinter
 
 class DataColumns(enum.Enum):
     XcommX = 0
@@ -150,7 +149,7 @@ class FrameDataOverlay(Overlay.Overlay):
 
         self.show_live_framedata = self.tekken_config.get_property(Overlay.DisplaySettings.tiny_live_frame_data_numbers, True)
 
-        style = tkinter.ttk.Style()
+        style = tkinter.Style()
         style.theme_use('alt')
         style.configure('.', background=self.background_color)
         style.configure('.', foreground=Overlay.CurrentColorScheme.scheme[Overlay.ColorSchemeEnum.advantage_text])
@@ -193,7 +192,7 @@ class FrameDataOverlay(Overlay.Overlay):
         return [self.tekken_config.get_property(enum, True) for enum in DataColumns]
 
     def create_padding_frame(self, col):
-        padding = tkinter.ttk.Frame(self.toplevel, width=10)
+        padding = tkinter.Frame(self.toplevel, width=10)
         padding.grid(row=0, column=col, rowspan=2, sticky=tkinter.N + tkinter.S + tkinter.W + tkinter.E)
         return padding
 

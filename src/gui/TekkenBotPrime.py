@@ -1,11 +1,12 @@
 import enum
-import tkinter
 import time
 import sys
 
 from . import Overlay as ovr
 from . import FrameDataOverlay as fdo
 from . import CommandInputOverlay as cio
+
+from . import tkinter
 
 import misc.Path
 import windows

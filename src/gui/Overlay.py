@@ -5,10 +5,11 @@ Our abstract overlay class provides shared tools for our overlays
 import abc
 import enum
 import platform
-import tkinter
 
 import misc.ConfigReader
 import misc.Path
+
+from . import tkinter
 
 class DisplaySettings(enum.Enum):
     overlay_on_bottom = -1

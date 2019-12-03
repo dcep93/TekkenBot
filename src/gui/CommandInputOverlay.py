@@ -1,6 +1,5 @@
-import tkinter
-
 from . import Overlay
+from . import tkinter
 from moves.MoveInfoEnums import InputDirectionCodes
 from moves.MoveInfoEnums import InputAttackCodes
 
