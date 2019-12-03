@@ -113,6 +113,3 @@ class Overlay:
         ReloadableConfig.reload()
         self.toplevel.deiconify()
         self.overlay_visible = True
-
-    def write_config_file(self):
-        self.tekken_config.write()

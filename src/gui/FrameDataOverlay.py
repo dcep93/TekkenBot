@@ -230,9 +230,8 @@ class FrameDataOverlay(Overlay.Overlay):
                 self.l_live_recovery.set(l_recovery)
                 self.r_live_recovery.set(r_recovery)
 
-    def set_columns_to_print(self, columns_to_print):
-        self.redirector.set_columns_to_print(columns_to_print)
-
     def update_column_to_print(self, enum, value):
+        self.redirector.columns_to_print[enum] = value
+        self.redirector.populate_column_names()
         self.master.tekken_config.set_property(enum, value)
-        self.write_config_file()
+        self.master.tekken_config.write()

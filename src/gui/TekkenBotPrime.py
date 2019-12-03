@@ -58,7 +58,6 @@ class TekkenBotPrime(tkinter.Tk):
         self.menu.add_cascade(label="Tekken Bot", menu=tekken_bot_menu)
 
     def add_columns_cascade(self):
-        self.checkbox_dict = {}
         column_menu = tkinter.Menu(self.menu)
         all_checked = self.tekken_config.get_all(fdo.DataColumns, True)
         for enum in fdo.DataColumns:
@@ -92,11 +91,10 @@ class TekkenBotPrime(tkinter.Tk):
 
         self.geometry('920x720')
 
-    def add_checkbox(self, menu, lookup_key, display_string, default_value, button_command):
+    def add_checkbox(self, menu, enum, display_string, default_value, button_command):
         var = tkinter.BooleanVar()
         var.set(default_value)
-        self.checkbox_dict[lookup_key] = var
-        menu.add_checkbutton(label=display_string, onvalue=True, offvalue=False, variable=var, command=button_command)
+        menu.add_checkbutton(label=display_string, onvalue=True, offvalue=False, variable=var, command=lambda: button_command(enum, var))
 
     def changed_mode(self, mode):
         self.stop_overlay()
@@ -104,12 +102,10 @@ class TekkenBotPrime(tkinter.Tk):
         if self.mode != OverlayMode.Off:
             self.start_overlay()
 
-    def changed_display(self):
+    def changed_display(self, enum, var):
         if self.overlay is not None:
-            for enum in ovr.DisplaySettings:
-                var = self.checkbox_dict[enum]
-                self.overlay.tekken_config.set_property(enum, var.get())
-            self.overlay.tekken_config.write()
+            self.tekken_config.set_property(enum, var.get())
+            self.tekken_config.write()
         self.reboot_overlay()
 
     def stop_overlay(self):
@@ -156,10 +152,9 @@ class TekkenBotPrime(tkinter.Tk):
         sys.stderr = sys.__stderr__
         self.destroy()
 
-    def changed_columns(self):
+    def changed_columns(self, enum, var):
         if self.mode == OverlayMode.FrameData:
-            generated_columns = {enum: self.checkbox_dict[enum].get() for enum in fdo.DataColumns}
-            self.overlay.set_columns_to_print(generated_columns)
+            self.overlay.update_column_to_print(enum, var.get())
 
 class TextRedirector(object):
     def __init__(self, widget, stdout, tag="stdout"):
