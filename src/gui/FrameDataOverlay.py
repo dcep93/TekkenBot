@@ -26,10 +26,6 @@ class DataColumns(enum.Enum):
     opp = 13
     notes = 14
 
-    @classmethod
-    def get_checked(cls, tekken_config):
-        return {enum: tekken_config.get_property(enum, True) for enum in cls}
-
 DataColumnsToMenuNames = {
     DataColumns.comm : 'input command',
     DataColumns.id : 'internal move id number',
@@ -188,7 +184,7 @@ class FrameDataOverlay(Overlay.Overlay):
         self.redirector = TextRedirector(stdout, self.text, style, self.fa_p1_var, self.fa_p2_var)
         self.text.configure(state="normal")
         self.text.delete("1.0", "end")
-        self.redirector.set_columns_to_print(DataColumns.get_checked(self.master.tekken_config))
+        self.redirector.set_columns_to_print(self.master.tekken_config.get_all(DataColumns, True))
 
         self.text.configure(state="disabled")
 

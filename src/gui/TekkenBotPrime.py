@@ -60,18 +60,19 @@ class TekkenBotPrime(tkinter.Tk):
     def add_columns_cascade(self):
         self.checkbox_dict = {}
         column_menu = tkinter.Menu(self.menu)
-        columns_to_print = fdo.DataColumns.get_checked(self.tekken_config)
+        all_checked = self.tekken_config.get_all(fdo.DataColumns, True)
         for enum in fdo.DataColumns:
-            checked = columns_to_print[enum]
-            name = "{} ({})".format(enum.name, fdo.DataColumnsToMenuNames[enum])
+            checked = all_checked[enum]
+            name = "%s (%s)" % (enum.name, fdo.DataColumnsToMenuNames[enum])
             self.add_checkbox(column_menu, enum, name, checked, self.changed_columns)
         self.menu.add_cascade(label='Columns', menu=column_menu)
 
     def add_display_cascade(self):
         display_menu = tkinter.Menu(self.menu)
+        all_checked = self.tekken_config.get_all(ovr.DisplaySettings, False)
         for enum in ovr.DisplaySettings:
-            default = self.tekken_config.get_property(enum, False)
-            self.add_checkbox(display_menu, enum, enum.name, default, self.changed_display)
+            checked = all_checked[enum]
+            self.add_checkbox(display_menu, enum, enum.name, checked, self.changed_display)
         self.menu.add_cascade(label="Display", menu=display_menu)
 
     def add_mode_cascade(self):
@@ -85,11 +86,11 @@ class TekkenBotPrime(tkinter.Tk):
         self.mode = OverlayMode.FrameData
 
     def configure_grid(self):
-        self.text.grid(row = 2, column = 0, columnspan=2, sticky=tkinter.NESW)
+        self.text.grid(row=2, column=0, columnspan=2, sticky=tkinter.NESW)
         self.grid_rowconfigure(2, weight=1)
         self.grid_columnconfigure(0, weight=1)
 
-        self.geometry(str(920) + 'x' + str(720))
+        self.geometry('920x720')
 
     def add_checkbox(self, menu, lookup_key, display_string, default_value, button_command):
         var = tkinter.BooleanVar()
@@ -102,11 +103,6 @@ class TekkenBotPrime(tkinter.Tk):
         self.mode = mode
         if self.mode != OverlayMode.Off:
             self.start_overlay()
-
-    def changed_columns(self):
-        if self.mode == OverlayMode.FrameData:
-            generated_columns = [self.checkbox_dict[enum].get() for enum in fdo.DataColumns]
-            self.overlay.set_columns_to_print(generated_columns)
 
     def changed_display(self):
         if self.overlay is not None:
@@ -135,6 +131,8 @@ class TekkenBotPrime(tkinter.Tk):
         now = time.time()
         print(now, now-self.last_update)
         self.last_update = now
+
+        # until keyboard reader works as a launcher
         if not windows.valid:
             print('Mac')
             return
@@ -157,6 +155,11 @@ class TekkenBotPrime(tkinter.Tk):
         sys.stdout = sys.__stdout__
         sys.stderr = sys.__stderr__
         self.destroy()
+
+    def changed_columns(self):
+        if self.mode == OverlayMode.FrameData:
+            generated_columns = {enum: self.checkbox_dict[enum].get() for enum in fdo.DataColumns}
+            self.overlay.set_columns_to_print(generated_columns)
 
 class TextRedirector(object):
     def __init__(self, widget, stdout, tag="stdout"):

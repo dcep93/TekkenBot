@@ -49,6 +49,9 @@ class ConfigReader:
         with open(self.path, 'w') as fw:
             self.parser.write(fw)
 
+    def get_all(self, enum_class, default):
+        return {enum: self.get_property(enum, default) for enum in enum_class}
+
 
 def config_from_path(config_path, input_dict=None, parse_nums=False):
     '''
