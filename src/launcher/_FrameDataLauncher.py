@@ -15,9 +15,3 @@ class FrameDataLauncher:
             self.cyclopedia_p1.Update(self.gameState)
             self.cyclopedia_p2.Update(self.gameState)
         return successfulUpdate
-
-if __name__ == "__main__":
-    launcher = FrameDataLauncher()
-    while(True):
-        launcher.Update()
-        time.sleep(.05)

@@ -51,21 +51,20 @@ class Overlay:
         return self.__class__.__name__
 
     def initialize(self, master, xy_size):
+        self.master = master
+
         window_name = self.get_name()
         print("Launching {}".format(window_name))
-        config_filename = "overlay"
-        self.tekken_config = misc.ConfigReader.ConfigReader(config_filename)
         is_windows_7 = 'Windows-7' in platform.platform()
-        self.is_draggable_window = self.tekken_config.get_property(DisplaySettings.overlay_as_draggable_window, False)
-        self.is_minimize_on_lost_focus = self.tekken_config.get_property(DisplaySettings.only_appears_when_Tekken_7_has_focus, True)
-        self.is_transparency = self.tekken_config.get_property(DisplaySettings.transparent_background, not is_windows_7)
-        self.is_overlay_on_top = not self.tekken_config.get_property(DisplaySettings.overlay_on_bottom, False)
+
+        g = self.master.tekken_config.get_property
+        self.is_draggable_window = g(DisplaySettings.overlay_as_draggable_window, False)
+        self.is_minimize_on_lost_focus = g(DisplaySettings.only_appears_when_Tekken_7_has_focus, True)
+        self.is_transparency = g(DisplaySettings.transparent_background, not is_windows_7)
+        self.is_overlay_on_top = not g(DisplaySettings.overlay_on_bottom, False)
 
         self.overlay_visible = False
-        if master == None:
-            self.toplevel = tkinter.Tk()
-        else:
-            self.toplevel = tkinter.Toplevel()
+        self.toplevel = tkinter.Toplevel()
 
         self.toplevel.wm_title(window_name)
 

@@ -66,12 +66,3 @@ def press_and_release_n_times(hex_key_code, time_interval, n_times):
         ReleaseKey(hex_key_code)
         if n_times != 1:
             time.sleep(time_interval)
-
-
-# directx scan codes http://www.gamespp.com/directx/directInputKeyboardScanCodes.html
-if __name__ == "__main__":
-    for i in range(5):
-        PressKey(0x16)
-        time.sleep(1)
-        ReleaseKey(0x16)
-        time.sleep(1)

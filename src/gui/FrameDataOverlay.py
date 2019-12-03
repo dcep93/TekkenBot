@@ -26,6 +26,10 @@ class DataColumns(enum.Enum):
     opp = 13
     notes = 14
 
+    @classmethod
+    def get_checked(cls, tekken_config):
+        return {enum: tekken_config.get_property(enum, True) for enum in cls}
+
 DataColumnsToMenuNames = {
     DataColumns.XcommX : 'input command',
     DataColumns.XidX : 'internal move id number',
@@ -64,10 +68,10 @@ class TextRedirector(object):
 
     def populate_column_names(self):
         column_names = ''
-        for i, enum in enumerate(DataColumns):
+        for enum in DataColumns:
             col_name = enum.name.replace('X', '')
             col_len = len(col_name)
-            if self.columns_to_print[i]:
+            if self.columns_to_print[enum]:
                 needed_spaces = self.col_max_length - col_len
                 if col_len < self.col_max_length:
                     col_name = '%s%s%s' % (" " * int(needed_spaces / 2), col_name, " " * int((needed_spaces+1) / 2))
@@ -147,7 +151,7 @@ class FrameDataOverlay(Overlay.Overlay):
         self.initialize(master, (1021, 86))
         self.launcher = launcher
 
-        self.show_live_framedata = self.tekken_config.get_property(Overlay.DisplaySettings.tiny_live_frame_data_numbers, True)
+        self.show_live_framedata = self.master.tekken_config.get_property(Overlay.DisplaySettings.tiny_live_frame_data_numbers, True)
 
         style = tkinter.Style()
         style.theme_use('alt')
@@ -184,16 +188,13 @@ class FrameDataOverlay(Overlay.Overlay):
         self.redirector = TextRedirector(stdout, self.text, style, self.fa_p1_var, self.fa_p2_var)
         self.text.configure(state="normal")
         self.text.delete("1.0", "end")
-        self.redirector.set_columns_to_print(self.get_data_columns())
+        self.redirector.set_columns_to_print(DataColumns.get_checked(self.master.tekken_config))
 
         self.text.configure(state="disabled")
 
-    def get_data_columns(self):
-        return [self.tekken_config.get_property(enum, True) for enum in DataColumns]
-
     def create_padding_frame(self, col):
         padding = tkinter.Frame(self.toplevel, width=10)
-        padding.grid(row=0, column=col, rowspan=2, sticky=tkinter.N + tkinter.S + tkinter.W + tkinter.E)
+        padding.grid(row=0, column=col, rowspan=2, sticky=tkinter.NESW)
         return padding
 
     def create_live_recovery(self, parent, col):
@@ -213,7 +214,7 @@ class FrameDataOverlay(Overlay.Overlay):
 
     def create_textbox(self, col):
         textbox = tkinter.Text(self.toplevel, font=("Consolas", 11), wrap=tkinter.NONE, highlightthickness=0, pady=0, relief='flat')
-        textbox.grid(row=0, column=col, rowspan=2, sticky=tkinter.N + tkinter.S + tkinter.W + tkinter.E)
+        textbox.grid(row=0, column=col, rowspan=2, sticky=tkinter.NESW)
         textbox.configure(background=self.background_color)
         textbox.configure(foreground=Overlay.CurrentColorScheme.scheme[Overlay.ColorSchemeEnum.system_text])
         return textbox
@@ -237,5 +238,5 @@ class FrameDataOverlay(Overlay.Overlay):
         self.redirector.set_columns_to_print(columns_to_print)
 
     def update_column_to_print(self, enum, value):
-        self.tekken_config.set_property(enum, value)
+        self.master.tekken_config.set_property(enum, value)
         self.write_config_file()

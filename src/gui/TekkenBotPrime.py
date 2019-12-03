@@ -13,27 +13,30 @@ import windows
 
 import launcher._FrameDataLauncher
 
-# todo
-# Frame specific stuff
-
 class TekkenBotPrime(tkinter.Tk):
     def __init__(self):
         self.overlay = None
+        self.last_update = time.time()
 
         self.init_tk()
         print("Tekken Bot Starting...")
+        self.init_config()
+
         self.add_menu_cascade()
         self.add_columns_cascade()
         self.add_display_cascade()
         self.add_mode_cascade()
         self.configure_grid()
         self.update_launcher()
-        self.overlay.hide()
+
+        self.launcher = launcher._FrameDataLauncher.FrameDataLauncher(False)
+
+        self.changed_mode(OverlayMode.FrameData)
 
     def init_tk(self):
-        tkinter.Tk.__init__(self)
+        super().__init__()
         self.wm_title("dcep93/TekkenBot")
-        self.iconbitmap(misc.Path.path('src/assets/tekken_bot_close.ico'))
+        self.iconbitmap(misc.Path.path('assets/tekken_bot_close.ico'))
 
         self.menu = tkinter.Menu(self)
         self.configure(menu=self.menu)
@@ -47,20 +50,19 @@ class TekkenBotPrime(tkinter.Tk):
 
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
 
+    def init_config(self):
+        self.tekken_config = misc.ConfigReader.ConfigReader('tekken_bot')
+
     def add_menu_cascade(self):
-        self.launcher = launcher._FrameDataLauncher.FrameDataLauncher(False)
-
-        self.overlay = fdo.FrameDataOverlay(self, self.launcher)
-
         tekken_bot_menu = tkinter.Menu(self.menu)
-
         self.menu.add_cascade(label="Tekken Bot", menu=tekken_bot_menu)
 
     def add_columns_cascade(self):
         self.checkbox_dict = {}
         column_menu = tkinter.Menu(self.menu)
-        for i, enum in enumerate(fdo.DataColumns):
-            checked = self.overlay.redirector.columns_to_print[i]
+        columns_to_print = fdo.DataColumns.get_checked(self.tekken_config)
+        for enum in fdo.DataColumns:
+            checked = columns_to_print[enum]
             name = "{} ({})".format(enum.name.replace('X', ' ').strip(), fdo.DataColumnsToMenuNames[enum])
             self.add_checkbox(column_menu, enum, name, checked, self.changed_columns)
         self.menu.add_cascade(label='Columns', menu=column_menu)
@@ -68,7 +70,7 @@ class TekkenBotPrime(tkinter.Tk):
     def add_display_cascade(self):
         display_menu = tkinter.Menu(self.menu)
         for enum in ovr.DisplaySettings:
-            default = self.overlay.tekken_config.get_property(enum, False)
+            default = self.tekken_config.get_property(enum, False)
             self.add_checkbox(display_menu, enum, enum.name, default, self.changed_display)
         self.menu.add_cascade(label="Display", menu=display_menu)
 
@@ -83,7 +85,7 @@ class TekkenBotPrime(tkinter.Tk):
         self.mode = OverlayMode.FrameData
 
     def configure_grid(self):
-        self.text.grid(row = 2, column = 0, columnspan=2, sticky=tkinter.N+tkinter.S+tkinter.E+tkinter.W)
+        self.text.grid(row = 2, column = 0, columnspan=2, sticky=tkinter.NESW)
         self.grid_rowconfigure(2, weight=1)
         self.grid_columnconfigure(0, weight=1)
 
@@ -93,11 +95,11 @@ class TekkenBotPrime(tkinter.Tk):
         var = tkinter.BooleanVar()
         var.set(default_value)
         self.checkbox_dict[lookup_key] = var
-        menu.add_checkbutton(label=display_string, onvalue=True, offvalue=False, variable=var, command = button_command)
+        menu.add_checkbutton(label=display_string, onvalue=True, offvalue=False, variable=var, command=button_command)
 
     def changed_mode(self, mode):
         self.stop_overlay()
-        self.mode = OverlayMode[mode]
+        self.mode = mode
         if self.mode != OverlayMode.Off:
             self.start_overlay()
 
@@ -107,11 +109,10 @@ class TekkenBotPrime(tkinter.Tk):
             self.overlay.set_columns_to_print(generated_columns)
 
     def changed_display(self):
-        for enum in ovr.DisplaySettings:
-            var = self.checkbox_dict[enum]
-            if self.overlay != None:
+        if self.overlay is not None:
+            for enum in ovr.DisplaySettings:
+                var = self.checkbox_dict[enum]
                 self.overlay.tekken_config.set_property(enum, var.get())
-        if self.overlay != None:
             self.overlay.tekken_config.write()
         self.reboot_overlay()
 
@@ -121,11 +122,9 @@ class TekkenBotPrime(tkinter.Tk):
             self.overlay = None
 
     def start_overlay(self):
-        if self.mode == OverlayMode.FrameData:
-            self.overlay = fdo.FrameDataOverlay(self, self.launcher)
-            self.overlay.hide()
-        if self.mode == OverlayMode.CommandInput:
-            self.overlay = cio.CommandInputOverlay(self, self.launcher)
+        overlay = OverlayModeToOverlay[self.mode]
+        if overlay is not None:
+            self.overlay = overlay(self, self.launcher)
             self.overlay.hide()
 
     def reboot_overlay(self):
@@ -133,23 +132,26 @@ class TekkenBotPrime(tkinter.Tk):
         self.start_overlay()
 
     def update_launcher(self):
+        now = time.time()
+        print(now, now-self.last_update)
+        self.last_update = now
         if not windows.valid:
             print('Mac')
             return
-        time1 = time.time()
         successful_update = self.launcher.Update()
+        after = time.time()
 
         if self.overlay != None:
             self.overlay.update_location()
             if successful_update:
                 self.overlay.update_state()
-        time2 = time.time()
+
         if self.launcher.gameState.gameReader.HasWorkingPID():
-            elapsed_time = 1000 * (time2 - time1)
-            wait = max(2, 8 - int(round(elapsed_time)))
+            elapsed_time = 1000 * (after - now)
+            wait_ms = max(2, 8 - int(round(elapsed_time)))
         else:
-            wait = 1000
-        self.after(wait, self.update_launcher)
+            wait_ms = 1000
+        self.after(wait_ms, self.update_launcher)
 
     def on_closing(self):
         sys.stdout = sys.__stdout__
@@ -175,11 +177,16 @@ class TextRedirector(object):
 class OverlayMode(enum.Enum):
     Off = 0
     FrameData = 1
-    #Timeline = 2
-    CommandInput = 3
+    CommandInput = 2
 
 OverlayModeToDisplayName = {
     OverlayMode.Off : 'Off',
     OverlayMode.FrameData: 'Frame Data',
     OverlayMode.CommandInput: 'Command Inputs (and cancel window)',
+}
+
+OverlayModeToOverlay = {
+    OverlayMode.Off: None,
+    OverlayMode.FrameData: fdo.FrameDataOverlay,
+    OverlayMode.CommandInput: cio.CommandInputOverlay,
 }
