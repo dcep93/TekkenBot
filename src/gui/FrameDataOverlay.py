@@ -211,14 +211,6 @@ class FrameDataOverlay(Overlay.Overlay):
         frame_advantage_label.grid(row=0, column=col)
         return frame_advantage_var, frame_advantage_label
 
-    def create_attack_type_label(self, col):
-        attack_type_var = tkinter.StringVar()
-        attack_type_var.set('?')
-        attack_type_label = tkinter.Label(self.toplevel, textvariable=attack_type_var, font=("Verdana", 12), width=10, anchor='c',
-                                    borderwidth=4, relief='ridge')
-        attack_type_label.grid(row=1, column=col)
-        return attack_type_var
-
     def create_textbox(self, col):
         textbox = tkinter.Text(self.toplevel, font=("Consolas", 11), wrap=tkinter.NONE, highlightthickness=0, pady=0, relief='flat')
         textbox.grid(row=0, column=col, rowspan=2, sticky=tkinter.N + tkinter.S + tkinter.W + tkinter.E)
