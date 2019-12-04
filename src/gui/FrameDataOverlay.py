@@ -51,7 +51,7 @@ class TextRedirector(object):
         self.fa_p2_var = fa_p2_var
         self.style = style
 
-        self.columns_to_print = {i: True for i in DataColumns}
+        self.columns_to_print = None
 
         self.widget.tag_config("p1", foreground=Overlay.CurrentColorScheme.scheme[Overlay.ColorSchemeEnum.p1_text])
         self.widget.tag_config("p2", foreground=Overlay.CurrentColorScheme.scheme[Overlay.ColorSchemeEnum.p2_text])
