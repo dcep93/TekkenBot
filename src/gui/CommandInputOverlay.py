@@ -16,9 +16,8 @@ symbol_map = {
     InputDirectionCodes.NULL: '!'
 }
 
-length = 60
-
 class CommandInputOverlay(Overlay.Overlay):
+    length = 60
     def __init__(self, master, launcher):
         self.initialize(master, (1200, 86))
 
@@ -33,7 +32,7 @@ class CommandInputOverlay(Overlay.Overlay):
 
         self.canvas.pack()
 
-        self.step = self.w / length
+        self.step = self.w / self.length
         for i in range(self.length):
             self.canvas.create_text(i * self.step + (self.step / 2), 8, text = str(i), fill='snow')
             self.canvas.create_line(i * self.step, 0, i * self.step, self.h, fill="red")

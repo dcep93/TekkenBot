@@ -93,6 +93,7 @@ class TextRedirector(object):
             return Overlay.CurrentColorScheme.scheme[Overlay.ColorSchemeEnum.advantage_plus]
 
     def write(self, output_str):
+        raise Exception('how does this work')
         lines = int(self.widget.index('end-1c').split('.')[0])
         max_lines = 5
         if lines > max_lines:

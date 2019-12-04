@@ -31,7 +31,7 @@ class TekkenBotPrime(tkinter.Tk):
 
         self.launcher = launcher._FrameDataLauncher.FrameDataLauncher(False)
 
-        self.changed_mode(OverlayMode.FrameData)
+        self.init_frame_data()
 
     def init_tk(self):
         super().__init__()
@@ -79,8 +79,8 @@ class TekkenBotPrime(tkinter.Tk):
         self.overlay_var = tkinter.StringVar()
         for mode in OverlayMode:
             label = OverlayModeToDisplayName[mode]
-            command = lambda: self.changed_mode(self.overlay_var.get())
-            overlay_mode_menu.add_radiobutton(label=label,variable=self.overlay_var,value=mode.name,command=command)
+            command = lambda: self.changed_mode(mode)
+            overlay_mode_menu.add_radiobutton(label=label,variable=self.overlay_var,value=mode,command=command)
         self.menu.add_cascade(label="Mode", menu=overlay_mode_menu)
         self.mode = OverlayMode.FrameData
 
@@ -155,6 +155,10 @@ class TekkenBotPrime(tkinter.Tk):
     def changed_columns(self, enum, var):
         if self.mode == OverlayMode.FrameData:
             self.overlay.update_column_to_print(enum, var.get())
+
+    def init_frame_data(self):
+        self.overlay_var.set(OverlayMode.FrameData)
+        self.changed_mode(OverlayMode.FrameData)
 
 class TextRedirector(object):
     def __init__(self, widget, stdout, tag="stdout"):
