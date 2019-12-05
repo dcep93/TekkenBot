@@ -97,10 +97,10 @@ class TekkenGameReader:
             print("Getting Block of Data Error: Code " + str(e))
         return data
 
-    def GetValueFromDataBlock(self, frame, offset, player_2_offset = 0x0, address_type): # player_2_offset = 0x0
+    def GetValueFromDataBlock(self, frame, offset, player_2_offset=0x0, is_float=False): # player_2_offset = 0x0
         address = offset + player_2_offset
         data_bytes = frame[address: address + 4]
-        if address_type is AddressType._float:
+        if is_float:
             return struct.unpack("<f", data_bytes)[0]
         else:
             return struct.unpack("<I", data_bytes)[0]
@@ -158,18 +158,8 @@ class TekkenGameReader:
         return None
 
     def get_game_snapshot(self, rollback_frame, processHandle):
-        addresses = list(map(to_hex, self.player_data_pointer_offset.split()))
-        value = self.module_address
-        for i, offset in enumerate(addresses):
-            if i + 1 < len(addresses):
-                value = self.GetValueFromAddress(processHandle, value + offset, is64bit=True)
-            else:
-                value = self.GetValueFromAddress(processHandle, value + offset, isString=False)
+        player_data_base_address = self.get_player_data_base_address(processHandle)
         
-        player_data_base_address = value
-
-
-        #player_data_base_address = self.GetValueFromAddress(processHandle, self.module_address + self.player_data_pointer_offset, is64bit = True)
         if player_data_base_address == 0:
             if not self.needReaquireGameState:
                 print("No fight detected. Gamestate not updated.")
@@ -178,65 +168,22 @@ class TekkenGameReader:
 
             return None
 
-        last_eight_frames = []
-
-        second_address_base = self.GetValueFromAddress(processHandle, player_data_base_address, is64bit = True)
-        for i in range(8):  # for rollback purposes, there are 8 copies of the game state, each one updatating once every 8 frames
-            potential_second_address = second_address_base + (i * self.c['MemoryAddressOffsets']['rollback_frame_offset'])
-            potential_frame_count = self.GetValueFromAddress(processHandle, potential_second_address +  self.c['GameDataAddress']['frame_count'])
-            last_eight_frames.append((potential_frame_count, potential_second_address))
+        last_eight_frames = self.get_last_eight_frames(processHandle, player_data_base_address)
 
         if rollback_frame >= len(last_eight_frames):
-            print("ERROR: requesting {} frame of {} long rollback frame".format(rollback_frame, len(last_eight_frames)))
+            print("ERROR: requesting %s frame of %s long rollback frame" % (rollback_frame, len(last_eight_frames)))
             rollback_frame = len(last_eight_frames) - 1
 
         best_frame_count, player_data_second_address = sorted(last_eight_frames, key=lambda x: -x[0])[rollback_frame]
 
+        player_data_frame = self.GetBlockOfData(processHandle, player_data_second_address, self.c['MemoryAddressOffsets']['rollback_frame_offset'])
+
         p1_bot = BotSnapshot()
         p2_bot = BotSnapshot()
 
-        player_data_frame = self.GetBlockOfData(processHandle, player_data_second_address, self.c['MemoryAddressOffsets']['rollback_frame_offset'])
-
-        for data_type, value in self.c['PlayerDataAddress'].items():
-            p1_value = self.GetValueFromDataBlock(player_data_frame, value, 0, self.IsDataAFloat(data_type))
-            p2_value = self.GetValueFromDataBlock(player_data_frame, value, self.c['MemoryAddressOffsets']['p2_data_offset'], self.IsDataAFloat(data_type))
-            p1_bot.player_data_dict['PlayerDataAddress.'+data_type] = p1_value
-            p2_bot.player_data_dict['PlayerDataAddress.'+data_type] = p2_value
-
-        for data_type, value in self.c['EndBlockPlayerDataAddress'].items():
-            p1_value = self.GetValueFromDataBlock(player_data_frame, value)
-            p2_value = self.GetValueFromDataBlock(player_data_frame, value, self.c['MemoryAddressOffsets']['p2_end_block_offset'])
-            p1_bot.player_data_dict['EndBlockPlayerDataAddress.'+data_type] = p1_value
-            p2_bot.player_data_dict['EndBlockPlayerDataAddress.'+data_type] = p2_value
+        self.read_from_addresses(p1_bot, p2_bot, player_data_frame)
 
         bot_facing = self.GetValueFromDataBlock(player_data_frame, self.c['GameDataAddress']['facing'])
-        timer_in_frames = self.GetValueFromDataBlock(player_data_frame, self.c['GameDataAddress']['timer_in_frames'])
-
-        pda = self.c['PlayerDataAddress']
-        # This is ugly and hacky
-        for axis, startingAddress in ((k, v) for k,v in self.c['PlayerDataAddress'].items() if k in ('x', 'y', 'z')):
-            positionOffset = 32  # our xyz coordinate is 32 bytes, a 4 byte x, y, and z value followed by five 4 byte values that don't change
-            p1_coord_array = []
-            p2_coord_array = []
-            for i in range(23):
-                p1_coord_array.append(self.GetValueFromDataBlock(player_data_frame, startingAddress + (i * positionOffset), 0, is_float=True))
-                p2_coord_array.append(self.GetValueFromDataBlock(player_data_frame, startingAddress + (i * positionOffset), self.c['MemoryAddressOffsets']['p2_data_offset'], is_float=True))
-            p1_bot.player_data_dict['PlayerDataAddress.'+axis] = p1_coord_array
-            p2_bot.player_data_dict['PlayerDataAddress.'+axis] = p2_coord_array
-            #print("numpy.array(" + str(p1_coord_array) + ")")
-        #list = p1_bot.player_data_dict[self.c['PlayerDataAddress']['y']]
-        #print('{} [{}]'.format(max(list), list.index(max(list))))
-        #print("--------------------")
-
-
-        # FIXME: This seems like it would always be true.
-        # The old code seems to be doing the same, so I don't know.
-        p1_bot.player_data_dict['use_opponent_movelist'] = p1_bot.player_data_dict['PlayerDataAddress.movelist_to_use'] == self.p2_movelist_to_use
-        p2_bot.player_data_dict['use_opponent_movelist'] = p2_bot.player_data_dict['PlayerDataAddress.movelist_to_use'] == self.p1_movelist_to_use
-
-        p1_bot.player_data_dict['movelist_parser'] = self.p1_movelist_parser
-        p2_bot.player_data_dict['movelist_parser'] = self.p2_movelist_parser
-
         if self.original_facing is None and best_frame_count > 0:
             self.original_facing = bot_facing > 0
 
@@ -247,32 +194,10 @@ class TekkenGameReader:
         p1_bot.Bake()
         p2_bot.Bake()
 
-        if self.flagToReacquireNames:
-            if p1_bot.character_name != CharacterCodes.NOT_YET_LOADED.name and p2_bot.character_name != CharacterCodes.NOT_YET_LOADED.name:
-                self.opponent_name = self.GetValueAtEndOfPointerTrail(processHandle, "OPPONENT_NAME", True)
-                self.opponent_side = self.GetValueAtEndOfPointerTrail(processHandle, "OPPONENT_SIDE", False)
-                self.is_player_player_one = (self.opponent_side == 1)
-                #print(self.opponent_char_id)
-                #print(self.is_player_player_one)
+        if self.flagToReacquireNames and p1_bot.character_name != CharacterCodes.NOT_YET_LOADED.name and p2_bot.character_name != CharacterCodes.NOT_YET_LOADED.name:
+            self.reacquire_names()
 
-                self.p1_movelist_to_use = p1_bot.player_data_dict['PlayerDataAddress.movelist_to_use']
-                self.p2_movelist_to_use = p2_bot.player_data_dict['PlayerDataAddress.movelist_to_use']
-
-                self.p1_movelist_block, p1_movelist_address = self.PopulateMovelists(processHandle, "P1_Movelist")
-                self.p2_movelist_block, p2_movelist_address = self.PopulateMovelists(processHandle, "P2_Movelist")
-
-                self.p1_movelist_parser = MovelistParser.MovelistParser(self.p1_movelist_block, p1_movelist_address)
-                self.p2_movelist_parser = MovelistParser.MovelistParser(self.p2_movelist_block, p2_movelist_address)
-
-                #self.WriteMovelistsToFile(self.p1_movelist_block, p1_bot.character_name)
-                #self.WriteMovelistsToFile(self.p2_movelist_block, p2_bot.character_name)
-
-                self.p1_movelist_names = self.p1_movelist_block[0x2E8:200000].split(b'\00') #Todo: figure out the actual size of the name movelist
-                self.p2_movelist_names = self.p2_movelist_block[0x2E8:200000].split(b'\00')
-                #print(self.p1_movelist_names[(1572 * 2)])
-
-                self.flagToReacquireNames = False
-
+        timer_in_frames = self.GetValueFromDataBlock(player_data_frame, self.c['GameDataAddress']['timer_in_frames'])
         return GameSnapshot(p1_bot, p2_bot, best_frame_count, timer_in_frames, bot_facing, self.opponent_name, self.is_player_player_one)
 
     def reacquire_module(self):
@@ -287,32 +212,98 @@ class TekkenGameReader:
             print("Found %s" % game_string)
             self.needReacquireModule = False
 
+    def get_player_data_base_address(self, processHandle):
+        addresses = list(map(to_hex, self.player_data_pointer_offset.split()))
+        player_data_base_address = self.module_address
+        if addresses:
+            offset = addresses[-1]
+            player_data_base_address = self.GetValueFromAddress(processHandle, player_data_base_address + offset, AddressType._float)
+        return player_data_base_address
 
-    def WriteMovelistsToFile(self, movelist, name):
-        with open('RawData/' + name + ".dat", 'wb') as fw:
-            fw.write(movelist)
+    def get_last_eight_frames(self, processHandle, player_data_base_address):
+        last_eight_frames = []
+
+        second_address_base = self.GetValueFromAddress(processHandle, player_data_base_address, AddressType._64bit)
+        offset = self.c['MemoryAddressOffsets']['rollback_frame_offset']
+        frame_count = self.c['GameDataAddress']['frame_count']
+        for i in range(8):  # for rollback purposes, there are 8 copies of the game state, each one updatating once every 8 frames
+            potential_second_address = second_address_base + (i * offset)
+            potential_frame_count = self.GetValueFromAddress(processHandle, potential_second_address + frame_count, AddressType._float)
+            last_eight_frames.append((potential_frame_count, potential_second_address))
+        return last_eight_frames
+
+    def read_from_addresses(self, p1_bot, p2_bot, player_data_frame):
+        for data_type, value in self.c['PlayerDataAddress'].items():
+            p1_value = self.GetValueFromDataBlock(player_data_frame, value, 0, self.IsDataAFloat(data_type))
+            p2_value = self.GetValueFromDataBlock(player_data_frame, value, self.c['MemoryAddressOffsets']['p2_data_offset'], self.IsDataAFloat(data_type))
+            address = 'PlayerDataAddress.%s' % data_type
+            p1_bot.player_data_dict[address] = p1_value
+            p2_bot.player_data_dict[address] = p2_value
+
+        for data_type, value in self.c['EndBlockPlayerDataAddress'].items():
+            p1_value = self.GetValueFromDataBlock(player_data_frame, value)
+            p2_value = self.GetValueFromDataBlock(player_data_frame, value, self.c['MemoryAddressOffsets']['p2_end_block_offset'])
+            address = 'EndBlockPlayerDataAddress.%s' % data_type
+            p1_bot.player_data_dict[address] = p1_value
+            p2_bot.player_data_dict[address] = p2_value
+
+        for axis, startingAddress in ((k, v) for k,v in self.c['PlayerDataAddress'].items() if k in ('x', 'y', 'z')):
+            positionOffset = 32  # our xyz coordinate is 32 bytes, a 4 byte x, y, and z value followed by five 4 byte values that don't change
+            p1_coord_array = []
+            p2_coord_array = []
+            for i in range(23):
+                address = startingAddress + (i * positionOffset)
+                p1_coord_array.append(self.GetValueFromDataBlock(player_data_frame, address, 0, is_float=True))
+                p2_coord_array.append(self.GetValueFromDataBlock(player_data_frame, address, self.c['MemoryAddressOffsets']['p2_data_offset'], is_float=True))
+            address = 'PlayerDataAddress.%s' % axis
+            p1_bot.player_data_dict[address] = p1_coord_array
+            p2_bot.player_data_dict[address] = p2_coord_array
+
+        # FIXME: This seems like it would always be true.
+        # The old code seems to be doing the same, so I don't know.
+        p1_bot.player_data_dict['use_opponent_movelist'] = p1_bot.player_data_dict['PlayerDataAddress.movelist_to_use'] == self.p2.movelist_to_use
+        p2_bot.player_data_dict['use_opponent_movelist'] = p2_bot.player_data_dict['PlayerDataAddress.movelist_to_use'] == self.p1.movelist_to_use
+
+        p1_bot.player_data_dict['movelist_parser'] = self.p1.movelist_parser
+        p2_bot.player_data_dict['movelist_parser'] = self.p2.movelist_parser
+
+    def reacquire_names(self):
+        self.opponent_name = self.GetValueAtEndOfPointerTrail(processHandle, "OPPONENT_NAME", True)
+        self.opponent_side = self.GetValueAtEndOfPointerTrail(processHandle, "OPPONENT_SIDE", False)
+        self.is_player_player_one = (self.opponent_side == 1)
+
+        self.p1.movelist_to_use = p1_bot.player_data_dict['PlayerDataAddress.movelist_to_use']
+        self.p2.movelist_to_use = p2_bot.player_data_dict['PlayerDataAddress.movelist_to_use']
+
+        self.p1.movelist_block, p1_movelist_address = self.PopulateMovelists(processHandle, "P1_Movelist")
+        self.p2.movelist_block, p2_movelist_address = self.PopulateMovelists(processHandle, "P2_Movelist")
+
+        self.p1.movelist_parser = MovelistParser.MovelistParser(self.p1.movelist_block, p1_movelist_address)
+        self.p2.movelist_parser = MovelistParser.MovelistParser(self.p2.movelist_block, p2_movelist_address)
+
+        self.p1.movelist_names = self.p1.movelist_block[0x2E8:200000].split(b'\00') #Todo: figure out the actual size of the name movelist
+        self.p2.movelist_names = self.p2.movelist_block[0x2E8:200000].split(b'\00')
+
+        self.flagToReacquireNames = False
 
     def PopulateMovelists(self, processHandle, data_type):
         movelist_str = self.c["NonPlayerDataAddresses"][data_type]
         movelist_trail = list(map(to_hex, movelist_str.split()))
 
-        movelist_address = self.GetValueFromAddress(processHandle, self.module_address + movelist_trail[0], is64bit=True)
+        movelist_address = self.GetValueFromAddress(processHandle, self.module_address + movelist_trail[0], AddressType._64bit)
         movelist_block = self.GetBlockOfData(processHandle, movelist_address, self.c["MemoryAddressOffsets"]["movelist_size"])
 
         return movelist_block, movelist_address
-
 
     def GetNeedReacquireState(self):
         return self.needReaquireGameState
 
 class BotSnapshot:
-
     def __init__(self):
         self.player_data_dict = {}
 
     def Bake(self):
         d = self.player_data_dict
-        #self.xyz = (d['PlayerDataAddress.x'], d['PlayerDataAddress.y'], d['PlayerDataAddress.z'])
         self.move_id = d['PlayerDataAddress.move_id']
         self.simple_state = SimpleMoveStates(d['PlayerDataAddress.simple_move_state'])
         self.attack_type = AttackType(d['PlayerDataAddress.attack_type'])
@@ -373,8 +364,6 @@ class BotSnapshot:
 
         self.use_opponents_movelist = d['use_opponent_movelist']
         self.movelist_parser = d['movelist_parser']
-
-
 
         try:
             self.character_name = CharacterCodes(d['PlayerDataAddress.char_id']).name
@@ -1374,14 +1363,14 @@ class TekkenGameState:
         try:
             if (not self.isMirrored and not is_for_bot) or (self.isMirrored and is_for_bot):
                 if not use_opponents_movelist:
-                    movelist = self.gameReader.p2_movelist_names
+                    movelist = self.gameReader.p2.movelist_names
                 else:
-                    movelist = self.gameReader.p1_movelist_names
+                    movelist = self.gameReader.p1.movelist_names
             else:
                 if not use_opponents_movelist:
-                    movelist = self.gameReader.p1_movelist_names
+                    movelist = self.gameReader.p1.movelist_names
                 else:
-                    movelist = self.gameReader.p2_movelist_names
+                    movelist = self.gameReader.p2.movelist_names
 
             return movelist[(move_id * 2) + 4].decode('utf-8')
         except:
