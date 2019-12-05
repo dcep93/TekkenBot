@@ -18,10 +18,10 @@ symbol_map = {
 
 class CommandInputOverlay(Overlay.Overlay):
     length = 60
-    def __init__(self, master, launcher):
+    def __init__(self, master, state):
         self.initialize(master, (1200, 86))
 
-        self.launcher = launcher
+        self.state = state
 
         self.stored_inputs = []
 
@@ -39,7 +39,7 @@ class CommandInputOverlay(Overlay.Overlay):
 
     def update_state(self):
         Overlay.Overlay.update_state(self)
-        last_state = self.launcher.gameState.stateLog[-1]
+        last_state = self.state.stateLog[-1]
         if last_state.is_player_player_one:
             player = last_state.bot
         else:

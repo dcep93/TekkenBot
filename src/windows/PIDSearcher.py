@@ -7,8 +7,16 @@ MAX_PATH = 260
 PROCESS_TERMINATE = 0x0001
 PROCESS_QUERY_INFORMATION = 0x0400
 
-def GetPIDByName(process_name_in_bytes):
+def GetForegroundPid():
     if not windows.valid: return None
+    pid = ctypes.wintypes.DWORD()
+    active = ctypes.windll.user32.GetForegroundWindow()
+    active_window = ctypes.windll.user32.GetWindowThreadProcessId(active, ctypes.byref(pid))
+    return pid.value
+
+def GetPIDByName(process_name):
+    if not windows.valid: return None
+    process_name_in_bytes = str.encode(process_name)
     pid = -1
     count = 32
     while True:

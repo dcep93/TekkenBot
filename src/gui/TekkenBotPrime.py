@@ -8,10 +8,10 @@ from . import CommandInputOverlay as cio
 
 from . import tkinter
 
+import game_parser.TekkenGameState
+
 import misc.Path
 import windows
-
-import launcher._FrameDataLauncher
 
 class TekkenBotPrime(tkinter.Tk):
     def __init__(self):
@@ -27,9 +27,9 @@ class TekkenBotPrime(tkinter.Tk):
         self.add_display_cascade()
         self.add_mode_cascade()
         self.configure_grid()
-        self.update_launcher()
+        self.update()
 
-        self.launcher = launcher._FrameDataLauncher.FrameDataLauncher(False)
+        self.state = game_parser.TekkenGameState.TekkenGameReader()
 
         self.init_frame_data()
 
@@ -116,23 +116,23 @@ class TekkenBotPrime(tkinter.Tk):
     def start_overlay(self):
         overlay = OverlayModeToOverlay[self.mode]
         if overlay is not None:
-            self.overlay = overlay(self, self.launcher)
+            self.overlay = overlay(self, self.state)
             self.overlay.hide()
 
     def reboot_overlay(self):
         self.stop_overlay()
         self.start_overlay()
 
-    def update_launcher(self):
+    def update(self):
         now = time.time()
         print(now, now-self.last_update)
         self.last_update = now
 
-        # until keyboard reader works as a launcher
+        # until keyboard reader works as a game state
         if not windows.valid:
             print('Mac')
             return
-        successful_update = self.launcher.Update()
+        successful_update = self.state.Update()
         after = time.time()
 
         if self.overlay != None:
@@ -140,12 +140,12 @@ class TekkenBotPrime(tkinter.Tk):
             if successful_update:
                 self.overlay.update_state()
 
-        if self.launcher.gameState.gameReader.HasWorkingPID():
+        if self.gameReader.HasWorkingPID():
             elapsed_time = 1000 * (after - now)
             wait_ms = max(2, 8 - int(round(elapsed_time)))
         else:
             wait_ms = 1000
-        self.after(wait_ms, self.update_launcher)
+        self.after(wait_ms, self.update)
 
     def on_closing(self):
         sys.stdout = sys.__stdout__

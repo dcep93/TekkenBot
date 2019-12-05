@@ -53,7 +53,7 @@ class ConfigReader:
         return {enum: self.get_property(enum, default) for enum in enum_class}
 
 
-def config_from_path(config_path, input_dict=None, parse_nums=False):
+def config_from_path(config_path, input_dict=None):
     '''
     Parses the file from config_path with configparser and converts configparser's
     pseudo-dict in to a proper dict.
@@ -76,17 +76,16 @@ def config_from_path(config_path, input_dict=None, parse_nums=False):
             if section not in input_dict:
                 input_dict[section] = CaseInsensitiveDict()
             for key, value in proxy.items():
-                if parse_nums:
-                    if ' ' not in value:
-                        try:
-                            # NonPlayerDataAddresses consists of space delimited lists of hex numbers
-                            # so just ignore strings with spaces in them
-                            if value.startswith('0x'):
-                                value = int(value, 16)
-                            else:
-                                value = int(value)
-                        except ValueError:
-                            pass
+                if ' ' not in value:
+                    try:
+                        # NonPlayerDataAddresses consists of space delimited lists of hex numbers
+                        # so just ignore strings with spaces in them
+                        if value.startswith('0x'):
+                            value = int(value, 16)
+                        else:
+                            value = int(value)
+                    except ValueError:
+                        pass
 
                 input_dict[section][key] = value
     return input_dict
@@ -96,7 +95,7 @@ class ReloadableConfig(ConfigReader):
     # Store configs so we can reload and update them later when needed
     configs = []
 
-    def __init__(self, filename, parse_nums=False):
+    def __init__(self, filename):
         '''
         Configuration class that can reload all class instances with the
         .reload() class method.
@@ -105,8 +104,6 @@ class ReloadableConfig(ConfigReader):
         to int/hex
         '''
         self.path = self.get_path(filename)
-        self.parse_nums = parse_nums
-        self.filename = filename
 
         self.config = None
 
@@ -130,7 +127,7 @@ class ReloadableConfig(ConfigReader):
             config.reload_self()
 
     def reload_self(self):
-        self.config = config_from_path(self.path, parse_nums=self.parse_nums, input_dict=self.config)
+        self.config = config_from_path(self.path, input_dict=self.config)
 
 
 class CaseInsensitiveDict(dict):
