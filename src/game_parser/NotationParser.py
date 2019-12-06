@@ -12,7 +12,7 @@ def ParseMoveList(moveList:str):
         notationResult = ConvertNotationToCommands(moveOrTiming.strip(), timingOccurances)
         timingOccurances = notationResult[1]
         commands += notationResult[0]
-    # print(commands)
+
     return commands
 
 def ConvertNotationToCommands(notation:str, timingOccurances:int):

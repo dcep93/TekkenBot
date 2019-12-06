@@ -1,71 +1,63 @@
+import enum
 import struct
 from collections import Counter
 from collections import defaultdict
+
 from moves.MoveInfoEnums import InputDirectionCodes
 
+class MoveNode:
+    def __init__(self, forty_bytes, offset, all_bytes, all_names):
+        unpacked = struct.unpack('<H', forty_bytes[0:2])[0]
+        try:
+            self.direction_bytes = MovelistInputCodes(unpacked).name
+        except:
+            self.direction_bytes = '{:x}'.format(unpacked)
+
+        self.unknown_input_dir = struct.unpack('<H', forty_bytes[2:4])[0]
+
+        attack_bytes = struct.unpack('<H', forty_bytes[4:6])[0]
+        try:
+            self.attack_bytes = MovelistButtonCodes(attack_bytes).name
+        except:
+            self.attack_bytes = str(attack_bytes)
+
+        button_press = struct.unpack('<H', forty_bytes[6:8])[0]
+        try:
+            self.button_press = ButtonPressCodes(button_press).name
+        except:
+            self.button_press = str(button_press)
+
+        self.pointer_one = struct.unpack('<Q', forty_bytes[8:16])[0] - offset
+        self.pointer_two = struct.unpack('<Q', forty_bytes[16:24])[0] - offset
+        self.number_one = struct.unpack('<I', all_bytes[self.pointer_one: self.pointer_one + 4])[0]
+        self.number_two = struct.unpack('<I', all_bytes[self.pointer_two: self.pointer_two + 4])[0]
+
+        self.unknown_bool = struct.unpack('<I', forty_bytes[24:28])[0]
+        self.cancel_window_1 = struct.unpack('<I', forty_bytes[28:32])[0]
+        self.cancel_window_2 = struct.unpack('<I', forty_bytes[32:36])[0]
+        self.move_id = int(struct.unpack('<H', forty_bytes[36:38])[0])
+
+        active = struct.unpack('<B', forty_bytes[38:39])[0]
+        try:
+            self.move_requires_input = ActiveCodes(active).name
+        except:
+            self.move_requires_input = str(active)
+
+        if self.move_id < len(all_names):
+            self.name = all_names[self.move_id]
+        else:
+            self.name = str(self.move_id)
+
+    def __repr__(self):
+        return '{} | {} |{:x} | {} | {} | {:x} | {:x} | {} | {} | {} | {:x} | {}'.format(
+            self.name, self.direction_bytes, self.unknown_input_dir, self.attack_bytes, self.button_press, self.number_one, self.number_two, self.unknown_bool, self.cancel_window_1, self.cancel_window_2, self.move_id, self.move_requires_input)
+
+
 class MovelistParser:
-    class EscapeAll(bytes):
-        def __str__(self):
-            return 'b\'{}\''.format(''.join('\\x{:02x}'.format(b) for b in self))
-
-    class MoveNode:
-        def __init__(self, forty_bytes, offset, all_bytes, all_names):
-
-            #self.input_bytes = forty_bytes[0:8]
-
-            try:
-                self.direction_bytes = MovelistInputCodes(struct.unpack('<H', forty_bytes[0:2])[0]).name
-            except:
-                self.direction_bytes = '{:x}'.format(struct.unpack('<H', forty_bytes[0:2])[0])
-                #print("Failed to find direction code for {}".format(self.direction_bytes))
-
-            self.unknown_input_dir = struct.unpack('<H', forty_bytes[2:4])[0]
-
-            attack_bytes = struct.unpack('<H', forty_bytes[4:6])[0]
-            try:
-                self.attack_bytes = MovelistButtonCodes(attack_bytes).name
-            except:
-                self.attack_bytes = str(attack_bytes)
-
-            button_press = struct.unpack('<H', forty_bytes[6:8])[0]
-            try:
-                self.button_press = ButtonPressCodes(button_press).name
-            except:
-                self.button_press = str(button_press)
-
-            self.pointer_one = struct.unpack('<Q', forty_bytes[8:16])[0] - offset
-            self.pointer_two = struct.unpack('<Q', forty_bytes[16:24])[0] - offset
-            self.number_one = struct.unpack('<I', all_bytes[self.pointer_one: self.pointer_one + 4])[0]
-            self.number_two = struct.unpack('<I', all_bytes[self.pointer_two: self.pointer_two + 4])[0]
-
-            self.unknown_bool = struct.unpack('<I', forty_bytes[24:28])[0]
-            self.cancel_window_1 = struct.unpack('<I', forty_bytes[28:32])[0]
-            self.cancel_window_2 = struct.unpack('<I', forty_bytes[32:36])[0]
-            #self.unknown_bytes = forty_bytes[24:36]
-            self.move_id = int(struct.unpack('<H', forty_bytes[36:38])[0])
-
-            active = struct.unpack('<B', forty_bytes[38:39])[0]
-            try:
-                self.move_requires_input = ActiveCodes(active).name
-            except:
-                self.move_requires_input = str(active)
-
-            if self.move_id < len(all_names):
-                self.name = all_names[self.move_id]
-            else:
-                self.name = str(self.move_id)
-
-        def __repr__(self):
-            return '{} | {} |{:x} | {} | {} | {:x} | {:x} | {} | {} | {} | {:x} | {}'.format(
-                self.name, self.direction_bytes, self.unknown_input_dir, self.attack_bytes, self.button_press, self.number_one, self.number_two, self.unknown_bool, self.cancel_window_1, self.cancel_window_2, self.move_id, self.move_requires_input)
-
-
     def __init__(self, movelist_bytes, movelist_pointer):
         self.bytes = movelist_bytes
         self.pointer = movelist_pointer
         self.parse_header()
-
-
 
     def parse_header(self):
         header_length = 0x2e8
@@ -76,58 +68,24 @@ class MovelistParser:
         date_address = self.header_line(3)
         timestamp_address = self.header_line(4)
 
-
-        #print ('{:x}'.format(date_address - self.pointer))
         self.char_name = self.bytes[char_name_address:developer_name_address].strip(b'\00').decode('utf-8')
         print("Parsing movelist for {}".format(self.char_name))
 
         unknown_regions = {}
         for i in range(42, 91, 2):
             unknown_regions[i] = self.header_line(i)
-            #print(unknown_regions[i])
 
-        #self.names = self.bytes[timestamp_address:unknown_regions[42]]
         self.names_double = self.bytes[header_length:unknown_regions[42]].split(b'\00')[4:]
         self.names = []
         for i in range(0, len(self.names_double) - 1, 2):
-            self.names.append(self.names_double[i].decode('utf-8'))# + '/' + self.names_double[i+1].decode('utf-8'))
+            self.names.append(self.names_double[i].decode('utf-8'))
 
 
         self.move_nodes_raw = self.bytes[unknown_regions[54]:unknown_regions[58]] #there's two regions of move nodes, first one might be blocks????
         self.move_nodes = []
         for i in range(0, len(self.move_nodes_raw), 40):
-            self.move_nodes.append(MovelistParser.MoveNode(self.move_nodes_raw[i:i+40], self.pointer, self.bytes, self.names))
+            self.move_nodes.append(MoveNode(self.move_nodes_raw[i:i+40], self.pointer, self.bytes, self.names))
 
-
-        self.linked_nodes_raw = self.bytes[unknown_regions[46]:unknown_regions[48]]
-        self.linked_nodes = []
-        #for i in range(0, len(self.linked_nodes_raw), 24):
-
-        #for node in self.move_nodes:
-            #if node.move_id == 324:
-                #print(node.move_id)
-
-
-        #self.print_nodes(0x180)
-
-        #print('{:x}'.format(unknown_regions[54] + self.pointer))
-        #print(self.bytes[date_address:timestamp_address])
-        #uniques = []
-        #for node in self.move_nodes:
-            #uniques.append(node.button_press)
-        #counter = Counter(uniques)
-        #for key, value in sorted(counter.items()):
-            #print('{} | {}'.format(key, value))
-
-        #with open('movelist' + self.char_name + '.txt', 'w') as fw:
-            #for node in self.move_nodes:
-                #fw.write(str(node) + '\n')
-            #for name in self.names:
-                #fw.write(name + '\n')
-
-        #for node in self.move_nodes:
-            #if node.unknown_buton_press == 4:
-                #print(node)
         self.can_move_be_done_from_neutral = {}
 
         for node in self.move_nodes:
@@ -146,32 +104,16 @@ class MovelistParser:
                 inputs = self.democratically_chosen_input[node.move_id]
             inputs.append((node.direction_bytes, node.attack_bytes, node.button_press))
 
+        sort_directions = defaultdict(int)
 
+        sort_attacks = defaultdict(int)
 
-        sort_directions = {}
-        sort_directions = defaultdict(lambda : 0, sort_directions)
+        sort_presses = defaultdict(int)
 
-        sort_attacks = {}
-        sort_attacks = defaultdict(lambda : 0,sort_attacks)
-
-        sort_presses = {}
-        sort_presses = defaultdict(lambda: 0, sort_presses)
-
-        #sort_directions[MovelistInputCodes.RUN_KICK.name] = 120
-        #sort_directions[MovelistInputCodes.RUNx.name] = 120
-        #sort_directions[MovelistInputCodes.RUN_CHOP.name] = 120
-
-        #sort_directions[MovelistInputCodes.RUN_1.name] = 120
-        #sort_directions[MovelistInputCodes.RUN_2.name] = 120
-        #sort_directions[MovelistInputCodes.RUN_3.name] = 120
-        #sort_directions[MovelistInputCodes.RUN_4.name] = 120
         sort_directions[MovelistInputCodes.FC.name] = 110
-        #sort_directions[MovelistInputCodes.ff.name] = 110
         sort_directions[MovelistInputCodes.N.name] = 100
         sort_directions[MovelistInputCodes.ws.name] = 90
         sort_directions[MovelistInputCodes.uf.name] = 80
-
-        #sort_directions[MovelistInputCodes.cBT.name] = -1
 
         sort_attacks[MovelistButtonCodes.B_1.name] = 100
         sort_attacks[MovelistButtonCodes.B_2.name] = 99
@@ -184,12 +126,9 @@ class MovelistParser:
         self.move_id_to_input = {}
         for move_id, value in self.democratically_chosen_input.items():
 
-            #candidates = [a for a in value if a[2] == ButtonPressCodes.Press.name]
             candidates = value
 
             if len(candidates) > 0:
-            #candidates = sorted(candidates, key = lambda candidate: (candidate[2], Counter(candidates)[candidate], sort_directions[candidate[0]], sort_attacks[candidate[1]]), reverse=True)
-
                 direction = sorted(candidates, key = lambda c: (sort_directions[c[0]], sort_presses[c[2]]), reverse=True)[0][0]
 
                 button = sorted(candidates, key=lambda c: (sort_presses[c[2]], Counter(candidates)[c], sort_attacks[c[1]]), reverse=True)[0][1]
@@ -199,8 +138,8 @@ class MovelistParser:
                 self.move_id_to_input[move_id] = (direction, button, press)
 
     def header_line(self, line):
-        bytes = self.bytes[line * 8:(line+1) * 8]
-        return struct.unpack('<Q', bytes)[0] - self.pointer
+        header_bytes = self.bytes[line * 8:(line+1) * 8]
+        return struct.unpack('<Q', header_bytes)[0] - self.pointer
 
     def can_be_done_from_neutral(self, move_id):
         if move_id in self.can_move_be_done_from_neutral:
@@ -246,11 +185,7 @@ class MovelistParser:
             if node_id == node.move_id:
                 print(node)
 
-
-
-from enum import Enum
-
-class ButtonPressCodes(Enum):
+class ButtonPressCodes(enum.Enum):
     NULL = 0
     Release_4 = 4
     Release_8 = 8
@@ -258,12 +193,12 @@ class ButtonPressCodes(Enum):
     Release = 0x2000
     Press = 0x4000
 
-class ActiveCodes(Enum):
+class ActiveCodes(enum.Enum):
     NULL = 0
     A = 65 #active? seem to require a button to go into cancel
     P = 80 #passive? seem to happen without further input
 
-class MovelistButtonCodes(Enum):
+class MovelistButtonCodes(enum.Enum):
     NULL = 0
     B_1 = 1
     B_2 = 2
@@ -285,7 +220,7 @@ class MovelistButtonCodes(Enum):
     UNK_600= 0x600 #1+2 only maybe? on hwoarangs b2, not HOLD
 
 
-class MovelistInputCodes(Enum):
+class MovelistInputCodes(enum.Enum):
     NULL = 0
 
     N = 0x20
@@ -401,10 +336,3 @@ class MovelistInputCodes(Enum):
     qcf_129 = 0x8129 #1, seems to be the most common, maybe the 'normal' qcf
     qcf_12a = 0x812a #2
     qcf_12e = 0x812e
-
-
-
-
-
-
-
