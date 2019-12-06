@@ -19,11 +19,10 @@ import enum
 import math
 import struct
 
-import misc.ModuleEnumerator
 import windows.PIDSearcher
-import moves.MoveInfoEnums
+from . import MoveInfoEnums
 import misc.ConfigReader
-import moves.MoveDataReport
+from . import MoveDataReport
 import game_parser.MovelistParser
 
 import windows

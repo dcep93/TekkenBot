@@ -3,7 +3,7 @@ import struct
 from collections import Counter
 from collections import defaultdict
 
-from moves.MoveInfoEnums import InputDirectionCodes
+from .MoveInfoEnums import InputDirectionCodes
 
 class MoveNode:
     def __init__(self, forty_bytes, offset, all_bytes, all_names):

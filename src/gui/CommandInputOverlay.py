@@ -1,7 +1,7 @@
 from . import Overlay
 from . import tkinter
-from moves.MoveInfoEnums import InputDirectionCodes
-from moves.MoveInfoEnums import InputAttackCodes
+from game_parser.MoveInfoEnums import InputDirectionCodes
+from game_parser.MoveInfoEnums import InputAttackCodes
 
 symbol_map = {
     InputDirectionCodes.u : '↑',

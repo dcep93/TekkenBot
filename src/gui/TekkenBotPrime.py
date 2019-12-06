@@ -9,6 +9,7 @@ from . import CommandInputOverlay as cio
 from . import tkinter
 
 import game_parser.TekkenGameState
+import game_parser.TekkenGameReader
 
 import misc.Path
 import windows
@@ -29,7 +30,7 @@ class TekkenBotPrime(tkinter.Tk):
         self.configure_grid()
         self.update()
 
-        self.state = game_parser.TekkenGameState.TekkenGameReader()
+        self.state = game_parser.TekkenGameReader.TekkenGameReader()
 
         self.init_frame_data()
 
