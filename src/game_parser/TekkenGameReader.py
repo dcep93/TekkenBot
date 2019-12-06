@@ -491,8 +491,5 @@ class GameSnapshot:
     def FromMirrored(self):
         return GameSnapshot(self.opp, self.bot, self.frame_count, self.timer_frames_remaining, self.facing_bool, self.opponent_name, self.is_player_player_one)
 
-    def GetDist(self):
-        return math.hypot(self.bot.skeleton[0][22] - self.opp.skeleton[0][22], self.bot.skeleton[2][22] - self.opp.skeleton[2][22])
-
 def to_hex(x):
     return int(x, 16)

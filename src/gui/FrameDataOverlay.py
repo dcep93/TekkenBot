@@ -219,7 +219,7 @@ class FrameDataOverlay(Overlay.Overlay):
     def update_state(self):
         if self.show_live_framedata:
             if len(self.state.stateLog) > 1:
-                recovery = self.state.GetOppFramesTillNextMove() - self.state.GetBotFramesTillNextMove()
+                recovery = self.state.get_recovery()
                 if recovery is 0:
                     l_recovery = r_recovery = '+0'
                 elif recovery > 0:
