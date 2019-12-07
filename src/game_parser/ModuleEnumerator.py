@@ -1,4 +1,5 @@
 from ctypes import *
+from ctypes.wintypes import *
 import sys
 
 import windows

@@ -28,11 +28,12 @@ class TekkenBotPrime(tkinter.Tk):
         self.add_display_cascade()
         self.add_mode_cascade()
         self.configure_grid()
-        self.update()
 
-        self.state = game_parser.TekkenGameReader.TekkenGameReader()
+        self.tekken_state = game_parser.TekkenGameState.TekkenGameState()
 
         self.init_frame_data()
+
+        self.update()
 
     def init_tk(self):
         super().__init__()
@@ -117,7 +118,7 @@ class TekkenBotPrime(tkinter.Tk):
     def start_overlay(self):
         overlay = OverlayModeToOverlay[self.mode]
         if overlay is not None:
-            self.overlay = overlay(self, self.state)
+            self.overlay = overlay(self, self.tekken_state)
             self.overlay.hide()
 
     def reboot_overlay(self):
@@ -133,7 +134,7 @@ class TekkenBotPrime(tkinter.Tk):
         if not windows.valid:
             print('Mac')
             return
-        successful_update = self.state.Update()
+        successful_update = self.tekken_state.Update()
         after = time.time()
 
         if self.overlay != None:

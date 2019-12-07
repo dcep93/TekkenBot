@@ -220,7 +220,7 @@ class FrameDataOverlay(Overlay.Overlay):
         if self.show_live_framedata:
             if len(self.state.stateLog) > 1:
                 recovery = self.state.get_recovery()
-                if recovery is 0:
+                if recovery == 0:
                     l_recovery = r_recovery = '+0'
                 elif recovery > 0:
                     l_recovery = '+%s' % recovery

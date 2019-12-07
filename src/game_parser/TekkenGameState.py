@@ -1,7 +1,8 @@
+from . import TekkenGameReader
 
 class TekkenGameState:
     def __init__(self):
-        self.gameReader = TekkenGameReader()
+        self.gameReader = TekkenGameReader.TekkenGameReader()
         self.isPlayer1 = True
 
         self.duplicateFrameObtained = 0

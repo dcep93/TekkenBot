@@ -24,6 +24,7 @@ from . import MoveInfoEnums
 import misc.ConfigReader
 from . import MoveDataReport
 import game_parser.MovelistParser
+from . import ModuleEnumerator
 
 import windows
 

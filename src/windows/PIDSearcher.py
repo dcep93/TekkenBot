@@ -7,6 +7,8 @@ MAX_PATH = 260
 PROCESS_TERMINATE = 0x0001
 PROCESS_QUERY_INFORMATION = 0x0400
 
+w = windows.Windows()
+
 def GetForegroundPid():
     if not windows.valid: return None
     pid = ctypes.wintypes.DWORD()
@@ -24,7 +26,7 @@ def GetPIDByName(process_name):
         cb = ctypes.sizeof(process_ids)
         bytes_returned = windows.wintypes.DWORD()
         # ???
-        if EnumProcesses(ctypes.byref(process_ids), cb, ctypes.byref(bytes_returned)):
+        if w.EnumProcesses(ctypes.byref(process_ids), cb, ctypes.byref(bytes_returned)):
             if bytes_returned.value < cb:
                 break
             else:
@@ -35,12 +37,12 @@ def GetPIDByName(process_name):
     for index in range(int(bytes_returned.value / ctypes.sizeof(windows.wintypes.DWORD))):
         process_id = process_ids[index]
         # ???
-        h_process = OpenProcess(PROCESS_TERMINATE | PROCESS_QUERY_INFORMATION, False, process_id)
+        h_process = w.OpenProcess(PROCESS_TERMINATE | PROCESS_QUERY_INFORMATION, False, process_id)
         if h_process:
             image_file_name = (ctypes.c_char*MAX_PATH)()
-            if GetProcessImageFileName(h_process, image_file_name, MAX_PATH)>0:
+            if w.GetProcessImageFileName(h_process, image_file_name, MAX_PATH)>0:
                 filename = os.path.basename(image_file_name.value)
                 if filename == process_name_in_bytes:
                     pid = process_id
-            CloseHandle(h_process)
+            w.CloseHandle(h_process)
     return pid

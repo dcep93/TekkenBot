@@ -1,3 +1,5 @@
+import ctypes
+
 valid = False
 
 try:
@@ -10,33 +12,33 @@ except ValueError:
 class Windows(object):
     def __init__(self):
         if not valid: return
-        self.k32 = c.windll.kernel32
+        self.k32 = ctypes.windll.kernel32
 
-        self.OpenProcess = k32.OpenProcess
-        self.OpenProcess.argtypes = [w.DWORD,w.BOOL,w.DWORD]
-        self.OpenProcess.restype = w.HANDLE
+        self.OpenProcess = self.k32.OpenProcess
+        self.OpenProcess.argtypes = [ctypes.wintypes.DWORD,ctypes.wintypes.BOOL,ctypes.wintypes.DWORD]
+        self.OpenProcess.restype = ctypes.wintypes.HANDLE
 
-        self.ReadProcessMemory = k32.ReadProcessMemory
-        self.ReadProcessMemory.argtypes = [w.HANDLE,w.LPCVOID,w.LPVOID,c.c_size_t,c.POINTER(c.c_size_t)]
-        self.ReadProcessMemory.restype = w.BOOL
+        self.ReadProcessMemory = self.k32.ReadProcessMemory
+        self.ReadProcessMemory.argtypes = [ctypes.wintypes.HANDLE,ctypes.wintypes.LPCVOID,ctypes.wintypes.LPVOID,ctypes.c_size_t,ctypes.POINTER(ctypes.c_size_t)]
+        self.ReadProcessMemory.restype = ctypes.wintypes.BOOL
 
-        self.GetLastError = k32.GetLastError
+        self.GetLastError = self.k32.GetLastError
         self.GetLastError.argtypes = None
-        self.GetLastError.restype = w.DWORD
+        self.GetLastError.restype = ctypes.wintypes.DWORD
 
-        self.CloseHandle = k32.CloseHandle
-        self.CloseHandle.argtypes = [w.HANDLE]
-        self.CloseHandle.restype = w.BOOL
+        self.CloseHandle = self.k32.CloseHandle
+        self.CloseHandle.argtypes = [ctypes.wintypes.HANDLE]
+        self.CloseHandle.restype = ctypes.wintypes.BOOL
 
         self.Psapi = ctypes.WinDLL('Psapi.dll')
-        self.EnumProcesses = Psapi.EnumProcesses
+        self.EnumProcesses = self.Psapi.EnumProcesses
         self.EnumProcesses.restype = ctypes.wintypes.BOOL
-        self.GetProcessImageFileName = Psapi.GetProcessImageFileNameA
+        self.GetProcessImageFileName = self.Psapi.GetProcessImageFileNameA
         self.GetProcessImageFileName.restype = ctypes.wintypes.DWORD
 
         self.Kernel32 = ctypes.WinDLL('kernel32.dll')
-        self.OpenProcess = Kernel32.OpenProcess
+        self.OpenProcess = self.Kernel32.OpenProcess
         self.OpenProcess.restype = ctypes.wintypes.HANDLE
-        self.TerminateProcess = Kernel32.TerminateProcess
+        self.TerminateProcess = self.Kernel32.TerminateProcess
         self.TerminateProcess.restype = ctypes.wintypes.BOOL
-        self.CloseHandle = Kernel32.CloseHandle
+        self.CloseHandle = self.Kernel32.CloseHandle
