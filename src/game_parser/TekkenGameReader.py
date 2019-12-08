@@ -59,7 +59,7 @@ class TekkenGameReader:
         self.pid = None
 
     def GetValueFromAddress(self, processHandle, address, address_type):
-        if address_type is AddressType._float:
+        if address_type is AddressType._string:
             data = ctypes.create_string_buffer(16)
             bytesRead = ctypes.c_ulonglong(16)
         elif address_type is AddressType._64bit:
@@ -71,7 +71,7 @@ class TekkenGameReader:
 
         successful = windows.w.ReadProcessMemory(processHandle, address, ctypes.byref(data), ctypes.sizeof(data), ctypes.byref(bytesRead))
         if not successful:
-            e = GetLastError()
+            e = windows.w.GetLastError()
             print("ReadProcessMemory Error: Code %s" % e)
             self.ReacquireEverything()
 
@@ -79,21 +79,21 @@ class TekkenGameReader:
 
         if address_type is AddressType._float:
             return struct.unpack("<f", value)[0]
-        elif address_type is AddressType._64bit:
-            return int(value)
-        else:
+        elif address_type is AddressType._string:
             try:
                 return value.decode('utf-8')
             except:
                 print("ERROR: Couldn't decode string from memory")
                 return "ERROR"
+        else:
+            return int(value)
 
     def GetBlockOfData(self, processHandle, address, size_of_block):
         data = ctypes.create_string_buffer(size_of_block)
         bytesRead = ctypes.c_ulonglong(size_of_block)
-        successful = ReadProcessMemory(processHandle, address, ctypes.byref(data), ctypes.sizeof(data), ctypes.byref(bytesRead))
+        successful = windows.w.ReadProcessMemory(processHandle, address, ctypes.byref(data), ctypes.sizeof(data), ctypes.byref(bytesRead))
         if not successful:
-            e = GetLastError()
+            e = windows.w.GetLastError()
             print("Getting Block of Data Error: Code " + str(e))
         return data
 
@@ -217,7 +217,7 @@ class TekkenGameReader:
         player_data_base_address = self.module_address
         if addresses:
             offset = addresses[-1]
-            player_data_base_address = self.GetValueFromAddress(processHandle, player_data_base_address + offset, AddressType._float)
+            player_data_base_address = self.GetValueFromAddress(processHandle, player_data_base_address + offset, AddressType._64bit)
         return player_data_base_address
 
     def get_last_eight_frames(self, processHandle, player_data_base_address):
@@ -228,7 +228,7 @@ class TekkenGameReader:
         frame_count = self.c['GameDataAddress']['frame_count']
         for i in range(8):  # for rollback purposes, there are 8 copies of the game state, each one updatating once every 8 frames
             potential_second_address = second_address_base + (i * offset)
-            potential_frame_count = self.GetValueFromAddress(processHandle, potential_second_address + frame_count, AddressType._float)
+            potential_frame_count = self.GetValueFromAddress(processHandle, potential_second_address + frame_count, None)
             last_eight_frames.append((potential_frame_count, potential_second_address))
         return last_eight_frames
 
