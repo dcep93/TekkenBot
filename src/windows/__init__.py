@@ -2,13 +2,6 @@ import ctypes
 
 valid = False
 
-try:
-    from ctypes import wintypes
-    valid = True
-
-except ValueError:
-    pass
-
 class Windows(object):
     def __init__(self):
         if not valid: return
@@ -42,3 +35,11 @@ class Windows(object):
         self.TerminateProcess = self.Kernel32.TerminateProcess
         self.TerminateProcess.restype = ctypes.wintypes.BOOL
         self.CloseHandle = self.Kernel32.CloseHandle
+
+try:
+    from ctypes import wintypes
+    valid = True
+    w = Windows()
+
+except ValueError:
+    pass

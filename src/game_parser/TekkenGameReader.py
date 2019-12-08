@@ -69,7 +69,7 @@ class TekkenGameReader:
             data = ctypes.c_ulong()
             bytesRead = ctypes.c_ulonglong(4)
 
-        successful = ReadProcessMemory(processHandle, address, ctypes.byref(data), ctypes.sizeof(data), ctypes.byref(bytesRead))
+        successful = windows.w.ReadProcessMemory(processHandle, address, ctypes.byref(data), ctypes.sizeof(data), ctypes.byref(bytesRead))
         if not successful:
             e = GetLastError()
             print("ReadProcessMemory Error: Code %s" % e)
@@ -149,11 +149,11 @@ class TekkenGameReader:
             self.reacquire_module()
 
         if self.module_address != None:
-            processHandle = OpenProcess(0x10, False, self.pid)
+            processHandle = windows.w.OpenProcess(0x10, False, self.pid)
             try:
                 return self.get_game_snapshot(rollback_frame, processHandle)
             finally:
-                CloseHandle(processHandle)
+                windows.w.CloseHandle(processHandle)
 
         return None
 
