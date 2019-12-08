@@ -19,7 +19,7 @@ def GetForegroundPid():
 def GetPIDByName(process_name):
     if not windows.valid: return None
     process_name_in_bytes = str.encode(process_name)
-    pid = -1
+    pid = None
     count = 32
     while True:
         process_ids = (windows.wintypes.DWORD*count)()

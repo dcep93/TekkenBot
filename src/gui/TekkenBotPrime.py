@@ -9,7 +9,6 @@ from . import CommandInputOverlay as cio
 from . import tkinter
 
 import game_parser.TekkenGameState
-import game_parser.TekkenGameReader
 
 import misc.Path
 import windows
@@ -142,7 +141,7 @@ class TekkenBotPrime(tkinter.Tk):
             if successful_update:
                 self.overlay.update_state()
 
-        if self.gameReader.HasWorkingPID():
+        if self.tekken_state.gameReader.HasWorkingPID():
             elapsed_time = 1000 * (after - now)
             wait_ms = max(2, 8 - int(round(elapsed_time)))
         else:
