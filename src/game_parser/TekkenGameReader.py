@@ -34,6 +34,7 @@ class Player(object):
     def __init__(self):
         self.movelist = []
         self.movelist_to_use = None
+        self.movelist_parser = None
 
 class AddressType(enum.Enum):
     _float = 0
@@ -305,8 +306,8 @@ class BotSnapshot:
     def Bake(self):
         d = self.player_data_dict
         self.move_id = d['PlayerDataAddress.move_id']
-        self.simple_state = SimpleMoveStates(d['PlayerDataAddress.simple_move_state'])
-        self.attack_type = AttackType(d['PlayerDataAddress.attack_type'])
+        self.simple_state = MoveInfoEnums.SimpleMoveStates(d['PlayerDataAddress.simple_move_state'])
+        self.attack_type = MoveInfoEnums.AttackType(d['PlayerDataAddress.attack_type'])
         self.startup = d['PlayerDataAddress.attack_startup']
         self.startup_end = d['PlayerDataAddress.attack_startup_end']
         self.attack_damage = d['PlayerDataAddress.attack_damage']
@@ -382,7 +383,7 @@ class BotSnapshot:
         return self.hit_outcome in (HitOutcome.GROUNDED_FACE_DOWN, HitOutcome.GROUNDED_FACE_UP)
 
     def IsGettingWallSplatted(self):
-        return self.simple_state in (SimpleMoveStates.WALL_SPLAT_18, SimpleMoveStates.WALL_SPLAT_19)
+        return self.simple_state in (MoveInfoEnums.SimpleMoveStates.WALL_SPLAT_18, MoveInfoEnums.SimpleMoveStates.WALL_SPLAT_19)
 
     def IsGettingHit(self):
         return self.stun_state in (StunStates.BEING_PUNISHED, StunStates.GETTING_HIT)
@@ -394,22 +395,22 @@ class BotSnapshot:
         return self.stun_state == StunStates.BEING_PUNISHED
 
     def IsAttackMid(self):
-        return self.attack_type == AttackType.MID
+        return self.attack_type == MoveInfoEnums.AttackType.MID
 
     def IsAttackUnblockable(self):
-        return self.attack_type in {AttackType.HIGH_UNBLOCKABLE, AttackType.LOW_UNBLOCKABLE, AttackType.MID_UNBLOCKABLE}
+        return self.attack_type in {MoveInfoEnums.AttackType.HIGH_UNBLOCKABLE, MoveInfoEnums.AttackType.LOW_UNBLOCKABLE, MoveInfoEnums.AttackType.MID_UNBLOCKABLE}
 
     def IsAttackAntiair(self):
-        return self.attack_type == AttackType.ANTIAIR_ONLY
+        return self.attack_type == MoveInfoEnums.AttackType.ANTIAIR_ONLY
 
     def IsAttackThrow(self):
         return self.throw_flag == 1
 
     def IsAttackLow(self):
-        return self.attack_type == AttackType.LOW
+        return self.attack_type == MoveInfoEnums.AttackType.LOW
 
     def IsInThrowing(self):
-        return self.attack_type == AttackType.THROW
+        return self.attack_type == MoveInfoEnums.AttackType.THROW
 
     def GetActiveFrames(self):
         return self.startup_end - self.startup + 1
@@ -418,13 +419,13 @@ class BotSnapshot:
         return self.complex_state in {ComplexMoveStates.END1, ComplexMoveStates.F_MINUS, ComplexMoveStates.RECOVERING, ComplexMoveStates.UN17, ComplexMoveStates.SS, ComplexMoveStates.WALK}
 
     def IsOnGround(self):
-        return self.simple_state in {SimpleMoveStates.GROUND_FACEDOWN, SimpleMoveStates.GROUND_FACEUP}
+        return self.simple_state in {MoveInfoEnums.SimpleMoveStates.GROUND_FACEDOWN, MoveInfoEnums.SimpleMoveStates.GROUND_FACEUP}
 
     def IsBeingJuggled(self):
-        return self.simple_state == SimpleMoveStates.JUGGLED
+        return self.simple_state == MoveInfoEnums.SimpleMoveStates.JUGGLED
 
     def IsAirborne(self):
-        return self.simple_state == SimpleMoveStates.AIRBORNE
+        return self.simple_state == MoveInfoEnums.SimpleMoveStates.AIRBORNE
 
     def IsHoldingUp(self):
         return self.input_direction == InputDirectionCodes.u
@@ -433,7 +434,7 @@ class BotSnapshot:
         return self.input_direction == InputDirectionCodes.ub
 
     def IsTechnicalCrouch(self):
-        return self.simple_state in (SimpleMoveStates.CROUCH, SimpleMoveStates.CROUCH_BACK, SimpleMoveStates.CROUCH_FORWARD)
+        return self.simple_state in (MoveInfoEnums.SimpleMoveStates.CROUCH, MoveInfoEnums.SimpleMoveStates.CROUCH_BACK, MoveInfoEnums.SimpleMoveStates.CROUCH_FORWARD)
 
     def IsTechnicalJump(self):
         return self.is_jump
@@ -448,10 +449,10 @@ class BotSnapshot:
         return self.power_crush_flag
 
     def IsBeingKnockedDown(self):
-        return self.simple_state == SimpleMoveStates.KNOCKDOWN
+        return self.simple_state == MoveInfoEnums.SimpleMoveStates.KNOCKDOWN
 
     def IsWhileStanding(self):
-        return (self.simple_state in {SimpleMoveStates.CROUCH, SimpleMoveStates.CROUCH_BACK, SimpleMoveStates.CROUCH_FORWARD})
+        return (self.simple_state in {MoveInfoEnums.SimpleMoveStates.CROUCH, MoveInfoEnums.SimpleMoveStates.CROUCH_BACK, MoveInfoEnums.SimpleMoveStates.CROUCH_FORWARD})
 
     def IsWallSplat(self):
         return self.move_id == 2396 or self.move_id == 2387 or self.move_id == 2380 or self.move_id == 2382 #TODO: use the wall splat states in ComplexMoveStates #move ids may be different for 'big' characters
