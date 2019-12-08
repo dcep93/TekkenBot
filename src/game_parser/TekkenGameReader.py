@@ -215,11 +215,14 @@ class TekkenGameReader:
 
     def get_player_data_base_address(self, processHandle):
         addresses = list(map(to_hex, self.player_data_pointer_offset.split()))
-        player_data_base_address = self.module_address
-        if addresses:
-            offset = addresses[-1]
-            player_data_base_address = self.GetValueFromAddress(processHandle, player_data_base_address + offset, AddressType._64bit)
-        return player_data_base_address
+        address = self.module_address
+        for i, offset in enumerate(addresses):
+            address += offset
+            if i + 1 < len(addresses):
+                address = self.GetValueFromAddress(processHandle, address, AddressType._64bit)
+            else:
+                address = self.GetValueFromAddress(processHandle, address, None)
+        return address
 
     def get_last_eight_frames(self, processHandle, player_data_base_address):
         last_eight_frames = []
