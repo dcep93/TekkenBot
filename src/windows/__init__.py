@@ -4,7 +4,6 @@ valid = False
 
 class Windows(object):
     def __init__(self):
-        if not valid: return
         self.k32 = ctypes.windll.kernel32
 
         self.OpenProcess = self.k32.OpenProcess
@@ -28,13 +27,6 @@ class Windows(object):
         self.EnumProcesses.restype = ctypes.wintypes.BOOL
         self.GetProcessImageFileName = self.Psapi.GetProcessImageFileNameA
         self.GetProcessImageFileName.restype = ctypes.wintypes.DWORD
-
-        self.Kernel32 = ctypes.WinDLL('kernel32.dll')
-        self.OpenProcess = self.Kernel32.OpenProcess
-        self.OpenProcess.restype = ctypes.wintypes.HANDLE
-        self.TerminateProcess = self.Kernel32.TerminateProcess
-        self.TerminateProcess.restype = ctypes.wintypes.BOOL
-        self.CloseHandle = self.Kernel32.CloseHandle
 
 try:
     from ctypes import wintypes
