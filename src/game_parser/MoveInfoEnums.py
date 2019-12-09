@@ -1,6 +1,6 @@
-from enum import Enum
+import enum
 
-class AttackType(Enum):
+class AttackType(enum.Enum):
     ANTIAIR_ONLY = 11 #Doesn't hit characters on the ground? Very rare, appears on Alisa's chainsaw stance f+2
     THROW = 10  #this is only the attack type *during* the throw animation
     LOW_UNBLOCKABLE = 9 #Yoshimitsu's 10 hit combo 2 has one
@@ -14,16 +14,13 @@ class AttackType(Enum):
     LOW = 1
     NA = 0 #This move is not an attack
 
-
-class SimpleMoveStates(Enum):
+class SimpleMoveStates(enum.Enum):
     UNINITIALIZED = 0
 
     STANDING_FORWARD = 1
     STANDING_BACK = 2
     STANDING = 3
     STEVE = 4 #steve?
-
-
 
     CROUCH_FORWARD = 5
     CROUCH_BACK = 6
@@ -55,10 +52,7 @@ class SimpleMoveStates(Enum):
     AIRBORNE_26 = 26 #Eliza. Chloe
     FLY = 27 #Devil Jin 3+4
 
-
-
-
-class ComplexMoveStates(Enum):  #These are tracking states>
+class ComplexMoveStates(enum.Enum):  #These are tracking states>
     F_MINUS = 0 # this doubles as the nothing state and an attack_starting state. #occurs on kazuya's hellsweep
 
     S_PLUS = 1 #homing
@@ -76,7 +70,6 @@ class ComplexMoveStates(Enum):  #These are tracking states>
     SIDEROLL_STAYDOWN = 14
     SS = 15 #sidestep left or right, also applies to juggle techs
 
-
     RECOVERING = 16 #happens after you stop walking forward or backward, jumping, getting hit, going into a stance, and some other places
     UN17 = 17  # f+4 with Ling
     UN18 = 18 #King's 1+2+3+4 ki charge
@@ -88,16 +81,15 @@ class ComplexMoveStates(Enum):  #These are tracking states>
 
     SW = 28 #sidewalk left or right
 
-
     UNKN = 999999 #used to indicate a non standard tracking move
 
-class ThrowTechs(Enum):
+class ThrowTechs(enum.Enum):
     NONE = 0
     TE1 = 1 #both 1 and 2 seem to sometimes include normal throws that can be broken with either
     TE2 = 2
     TE1_2 = 3
 
-class StunStates(Enum):
+class StunStates(enum.Enum):
     NONE = 0
     UNKNOWN_2 = 2 #Lili BT/Jumping/Kicks?
     BLOCK = 0x01000100
@@ -107,27 +99,14 @@ class StunStates(Enum):
 
     BLOCK_NO_HIT = 0x1000000 #law's UF+4, sometimes???? Proximity guard maybe?
 
-class RawCancelStates(Enum):
-    STUCK = 0 #Pressing buttons doesn't do anything
-    UNKNOWN_1 = 1 #1 frames occurs during Alisa's u/f 1+2 command grab, also occurs during asuka's parry escapes
-    CANCELABLE = 0x00010000
-    BUFFERABLE = 0x01010000 #coming out of attack for sure, probably block and hit stun too?
-    UNKNOWN_2 = 2 #Alisa's d+3 and chainsaw stance moves cause this, maybe it's a conditional buffer?  Also triggers during normal throws
-    MOVE_ENDING_1 = 0x00010001  # ??? 3 frames at the end of cancel window??? alisa d+2
-    MOVE_ENDING_2 = 0x00010002 #??? 1 frames near the end (or at the end?) of cancelable moves
-    #Theory: 1 and 2 refer to 'parryable' states, these include the active frames of moves and the throw tech windows of moves
-    # the next bit is the cancelable/not cancelable bit and finally there's a 'is being buffered' bit
-    #EDIT: Doesn't seem to be parryyable state. Mostly correspond to active frames, but not entirely.
-
-class CancelStatesBitmask(Enum):
+class CancelStatesBitmask(enum.Enum):
     CANCELABLE =  0x00010000
     BUFFERABLE =  0x01000000
     PARRYABLE_1 = 0x00000001
     PARRYABLE_2 = 0x00000002
 
-
 #Note that this information resides on the player BEING hit not the player doing the hitting. Also note that there's no counter hit state for side or back attacks.
-class HitOutcome(Enum):
+class HitOutcome(enum.Enum):
     NONE = 0
     BLOCKED_STANDING = 1
     BLOCKED_CROUCHING = 2
@@ -149,13 +128,12 @@ class HitOutcome(Enum):
     NORMAL_HIT_STANDING_RIGHT = 18
     NORMAL_HIT_CROUCHING_RIGHT = 19
 
-
-class JumpFlagBitmask(Enum):
+class JumpFlagBitmask(enum.Enum):
     #GROUND = 0x800000
     #LANDING_OR_STANDING = 0x810000
     JUMP = 0x820000
 
-class InputDirectionCodes(Enum):
+class InputDirectionCodes(enum.Enum):
     NULL = 0
 
     N = 0x20
@@ -171,7 +149,7 @@ class InputDirectionCodes(Enum):
     df = 8
     db = 2
 
-class InputAttackCodes(Enum):
+class InputAttackCodes(enum.Enum):
     N = 0
     x1 = 512
     x2 = 1024
@@ -190,7 +168,7 @@ class InputAttackCodes(Enum):
     x1x2x3x4 = 7680
     xRAGE = 8192
 
-class CharacterCodes(Enum):
+class CharacterCodes(enum.Enum):
     PAUL = 0
     LAW = 1
     KING = 2
@@ -247,7 +225,3 @@ class CharacterCodes(Enum):
     NOT_YET_LOADED = 71 #value when a match starts for (??) frames until char_id loads
 
     NO_SELECTION = 255 #value if cursor is not shown
-
-class UniversalAnimationCodes(Enum):
-    NEUTRAL = 32769
-    CROUCHING_NEUTRAL = 32770

@@ -9,7 +9,7 @@ import platform
 import misc.ConfigReader
 import misc.Path
 
-from . import tkinter
+from . import t_tkinter
 
 class DisplaySettings(enum.Enum):
     overlay_on_bottom = -1
@@ -64,7 +64,7 @@ class Overlay:
         self.is_overlay_on_top = not g(DisplaySettings.overlay_on_bottom, False)
 
         self.overlay_visible = False
-        self.toplevel = tkinter.Toplevel()
+        self.toplevel = t_tkinter.Toplevel()
 
         self.toplevel.wm_title(window_name)
 

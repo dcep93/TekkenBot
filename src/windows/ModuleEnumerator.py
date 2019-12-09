@@ -1,21 +1,9 @@
-from ctypes import *
-from ctypes.wintypes import *
 import sys
 
 import windows
 
-
 def GetModuleAddressByPIDandName(pid, name):
-    # const variable
-    # Establish rights and basic options needed for all process declartion / iteration
-    TH32CS_SNAPPROCESS = 2
-    STANDARD_RIGHTS_REQUIRED = 0x000F0000
-    SYNCHRONIZE = 0x00100000
-    PROCESS_ALL_ACCESS = (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | 0xFFF)
-    TH32CS_SNAPMODULE = 0x00000008
-    TH32CS_SNAPTHREAD = 0x00000004
-
-    class MODULEENTRY32(Structure):
+    class MODULEENTRY32(windows.ctypes.Structure):
         _fields_ = [( 'dwSize' , DWORD ) ,
                     ( 'th32ModuleID' , DWORD ),
                     ( 'th32ProcessID' , DWORD ),
@@ -26,6 +14,14 @@ def GetModuleAddressByPIDandName(pid, name):
                     ( 'hModule' , HMODULE ) ,
                     ( 'szModule' , c_char * 256 ),
                     ( 'szExePath' , c_char * 260 ) ]
+    # const variable
+    # Establish rights and basic options needed for all process declartion / iteration
+    TH32CS_SNAPPROCESS = 2
+    STANDARD_RIGHTS_REQUIRED = 0x000F0000
+    SYNCHRONIZE = 0x00100000
+    PROCESS_ALL_ACCESS = (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | 0xFFF)
+    TH32CS_SNAPMODULE = 0x00000008
+    TH32CS_SNAPTHREAD = 0x00000004
 
 
     CreateToolhelp32Snapshot= windll.kernel32.CreateToolhelp32Snapshot
@@ -82,6 +78,3 @@ def GetModuleAddressByPIDandName(pid, name):
     except:
         print("Error in ListProcessModules")
         raise
-
-
-

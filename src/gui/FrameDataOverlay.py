@@ -1,5 +1,3 @@
-# bad
-
 """
 A transparent frame data display that sits on top of Tekken.exe in windowed or borderless mode.
 """
@@ -8,7 +6,7 @@ import enum
 import sys
 
 from . import Overlay
-from . import tkinter
+from . import t_tkinter
 
 class DataColumns(enum.Enum):
     comm = 0
@@ -150,21 +148,21 @@ class FrameDataOverlay(Overlay.Overlay):
 
         self.show_live_framedata = self.master.tekken_config.get_property(Overlay.DisplaySettings.tiny_live_frame_data_numbers, True)
 
-        style = tkinter.Style()
+        style = t_tkinter.Style()
         style.theme_use('alt')
         style.configure('.', background=self.background_color)
         style.configure('.', foreground=Overlay.CurrentColorScheme.scheme[Overlay.ColorSchemeEnum.advantage_text])
 
         # ???
-        tkinter.Grid.columnconfigure(self.toplevel, 0, weight=0)
-        tkinter.Grid.columnconfigure(self.toplevel, 1, weight=0)
-        tkinter.Grid.columnconfigure(self.toplevel, 2, weight=0)
-        tkinter.Grid.columnconfigure(self.toplevel, 3, weight=1)
-        tkinter.Grid.columnconfigure(self.toplevel, 4, weight=0)
-        tkinter.Grid.columnconfigure(self.toplevel, 5, weight=0)
-        tkinter.Grid.columnconfigure(self.toplevel, 6, weight=0)
-        tkinter.Grid.rowconfigure(self.toplevel, 0, weight=1)
-        tkinter.Grid.rowconfigure(self.toplevel, 1, weight=0)
+        t_tkinter.Grid.columnconfigure(self.toplevel, 0, weight=0)
+        t_tkinter.Grid.columnconfigure(self.toplevel, 1, weight=0)
+        t_tkinter.Grid.columnconfigure(self.toplevel, 2, weight=0)
+        t_tkinter.Grid.columnconfigure(self.toplevel, 3, weight=1)
+        t_tkinter.Grid.columnconfigure(self.toplevel, 4, weight=0)
+        t_tkinter.Grid.columnconfigure(self.toplevel, 5, weight=0)
+        t_tkinter.Grid.columnconfigure(self.toplevel, 6, weight=0)
+        t_tkinter.Grid.rowconfigure(self.toplevel, 0, weight=1)
+        t_tkinter.Grid.rowconfigure(self.toplevel, 1, weight=0)
 
         style.configure('TFrame', background=self.tranparency_color)
         self.fa_p1_var, fa_p1_label = self.create_frame_advantage_label(1)
@@ -190,28 +188,28 @@ class FrameDataOverlay(Overlay.Overlay):
         self.text.configure(state="disabled")
 
     def create_padding_frame(self, col):
-        padding = tkinter.Frame(self.toplevel, width=10)
-        padding.grid(row=0, column=col, rowspan=2, sticky=tkinter.NESW)
+        padding = t_tkinter.Frame(self.toplevel, width=10)
+        padding.grid(row=0, column=col, rowspan=2, sticky=t_tkinter.NESW)
         return padding
 
     def create_live_recovery(self, parent, col):
-        live_recovery_var = tkinter.StringVar()
+        live_recovery_var = t_tkinter.StringVar()
         live_recovery_var.set('??')
-        live_recovery_label = tkinter.Label(parent, textvariable=live_recovery_var, font=("Segoe UI", 12), width=5, anchor='c')
-        live_recovery_label.place(rely=0.0, relx=0.0, x=4, y=4, anchor=tkinter.NW)
+        live_recovery_label = t_tkinter.Label(parent, textvariable=live_recovery_var, font=("Segoe UI", 12), width=5, anchor='c')
+        live_recovery_label.place(rely=0.0, relx=0.0, x=4, y=4, anchor=t_tkinter.NW)
         return live_recovery_var
 
     def create_frame_advantage_label(self, col):
-        frame_advantage_var = tkinter.StringVar()
+        frame_advantage_var = t_tkinter.StringVar()
         frame_advantage_var.set('?')
-        frame_advantage_label = tkinter.Label(self.toplevel, textvariable=frame_advantage_var, font=("Consolas", 44), width=4, anchor='c',
+        frame_advantage_label = t_tkinter.Label(self.toplevel, textvariable=frame_advantage_var, font=("Consolas", 44), width=4, anchor='c',
                                         borderwidth=1, relief='ridge')
         frame_advantage_label.grid(row=0, column=col)
         return frame_advantage_var, frame_advantage_label
 
     def create_textbox(self, col):
-        textbox = tkinter.Text(self.toplevel, font=("Consolas", 11), wrap=tkinter.NONE, highlightthickness=0, pady=0, relief='flat')
-        textbox.grid(row=0, column=col, rowspan=2, sticky=tkinter.NESW)
+        textbox = t_tkinter.Text(self.toplevel, font=("Consolas", 11), wrap=t_tkinter.NONE, highlightthickness=0, pady=0, relief='flat')
+        textbox.grid(row=0, column=col, rowspan=2, sticky=t_tkinter.NESW)
         textbox.configure(background=self.background_color)
         textbox.configure(foreground=Overlay.CurrentColorScheme.scheme[Overlay.ColorSchemeEnum.system_text])
         return textbox

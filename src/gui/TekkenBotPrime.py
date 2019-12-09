@@ -6,14 +6,14 @@ from . import Overlay as ovr
 from . import FrameDataOverlay as fdo
 from . import CommandInputOverlay as cio
 
-from . import tkinter
+from . import t_tkinter
 
 import game_parser.TekkenGameState
 
 import misc.Path
 import windows
 
-class TekkenBotPrime(tkinter.Tk):
+class TekkenBotPrime(t_tkinter.Tk):
     def __init__(self):
         self.overlay = None
         self.last_update = time.time()
@@ -39,10 +39,10 @@ class TekkenBotPrime(tkinter.Tk):
         self.wm_title("dcep93/TekkenBot")
         self.iconbitmap(misc.Path.path('assets/tekken_bot_close.ico'))
 
-        self.menu = tkinter.Menu(self)
+        self.menu = t_tkinter.Menu(self)
         self.configure(menu=self.menu)
 
-        self.text = tkinter.Text(self, wrap="word")
+        self.text = t_tkinter.Text(self, wrap="word")
         stdout = sys.stdout
         sys.stdout = TextRedirector(self.text, stdout, "stdout")
         stderr = sys.stderr
@@ -55,11 +55,11 @@ class TekkenBotPrime(tkinter.Tk):
         self.tekken_config = misc.ConfigReader.ConfigReader('tekken_bot')
 
     def add_menu_cascade(self):
-        tekken_bot_menu = tkinter.Menu(self.menu)
+        tekken_bot_menu = t_tkinter.Menu(self.menu)
         self.menu.add_cascade(label="Tekken Bot", menu=tekken_bot_menu)
 
     def add_columns_cascade(self):
-        column_menu = tkinter.Menu(self.menu)
+        column_menu = t_tkinter.Menu(self.menu)
         all_checked = self.tekken_config.get_all(fdo.DataColumns, True)
         for enum in fdo.DataColumns:
             checked = all_checked[enum]
@@ -68,7 +68,7 @@ class TekkenBotPrime(tkinter.Tk):
         self.menu.add_cascade(label='Columns', menu=column_menu)
 
     def add_display_cascade(self):
-        display_menu = tkinter.Menu(self.menu)
+        display_menu = t_tkinter.Menu(self.menu)
         all_checked = self.tekken_config.get_all(ovr.DisplaySettings, False)
         for enum in ovr.DisplaySettings:
             checked = all_checked[enum]
@@ -76,8 +76,8 @@ class TekkenBotPrime(tkinter.Tk):
         self.menu.add_cascade(label="Display", menu=display_menu)
 
     def add_mode_cascade(self):
-        overlay_mode_menu = tkinter.Menu(self.menu)
-        self.overlay_var = tkinter.StringVar()
+        overlay_mode_menu = t_tkinter.Menu(self.menu)
+        self.overlay_var = t_tkinter.StringVar()
         for mode in OverlayMode:
             label = OverlayModeToDisplayName[mode]
             command = lambda: self.changed_mode(mode)
@@ -86,14 +86,14 @@ class TekkenBotPrime(tkinter.Tk):
         self.mode = OverlayMode.FrameData
 
     def configure_grid(self):
-        self.text.grid(row=2, column=0, columnspan=2, sticky=tkinter.NESW)
+        self.text.grid(row=2, column=0, columnspan=2, sticky=t_tkinter.NESW)
         self.grid_rowconfigure(2, weight=1)
         self.grid_columnconfigure(0, weight=1)
 
         self.geometry('920x720')
 
     def add_checkbox(self, menu, enum, display_string, default_value, button_command):
-        var = tkinter.BooleanVar()
+        var = t_tkinter.BooleanVar()
         var.set(default_value)
         menu.add_checkbutton(label=display_string, onvalue=True, offvalue=False, variable=var, command=lambda: button_command(enum, var))
 

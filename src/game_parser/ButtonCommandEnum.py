@@ -1,5 +1,6 @@
-from enum import Enum
-class Command(Enum):
+import enum
+
+class Command(enum.Enum):
     Wait = 0
     TapBack = 1
     TapForward = 2
@@ -7,9 +8,6 @@ class Command(Enum):
     TapUp = 4
     TapRight = 5
     TapLeft = 6
-
-
-
 
     HoldBack = 30
     ReleaseBack = 31
@@ -39,15 +37,12 @@ class Command(Enum):
     HoldRage = 120
     ReleaseRage = 121
 
-
-
     HitConfirm = 200
     PunishConfirm = 201 #we mash our punish until it comes out
     Recovery = 202 #wait until move recovers
     Nextmove = 203
     Startupmove = 204
     FullRecovery = 205
-
 
     ReleaseAll = 999
 

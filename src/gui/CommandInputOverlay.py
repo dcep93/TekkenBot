@@ -1,7 +1,6 @@
 from . import Overlay
-from . import tkinter
+from . import t_tkinter
 from game_parser.MoveInfoEnums import InputDirectionCodes
-from game_parser.MoveInfoEnums import InputAttackCodes
 
 symbol_map = {
     InputDirectionCodes.u : '↑',
@@ -28,7 +27,7 @@ class CommandInputOverlay(Overlay.Overlay):
         self.init_canvas()
 
     def init_canvas(self):
-        self.canvas = tkinter.Canvas(self.toplevel, width=self.w, height=self.h, bg='black', highlightthickness=0, relief='flat')
+        self.canvas = t_tkinter.Canvas(self.toplevel, width=self.w, height=self.h, bg='black', highlightthickness=0, relief='flat')
 
         self.canvas.pack()
 

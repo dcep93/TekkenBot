@@ -1,9 +1,6 @@
 import enum
+import collections
 import struct
-from collections import Counter
-from collections import defaultdict
-
-from .MoveInfoEnums import InputDirectionCodes
 
 class MoveNode:
     def __init__(self, forty_bytes, offset, all_bytes, all_names):
@@ -104,11 +101,11 @@ class MovelistParser:
                 inputs = self.democratically_chosen_input[node.move_id]
             inputs.append((node.direction_bytes, node.attack_bytes, node.button_press))
 
-        sort_directions = defaultdict(int)
+        sort_directions = collections.defaultdict(int)
 
-        sort_attacks = defaultdict(int)
+        sort_attacks = collections.defaultdict(int)
 
-        sort_presses = defaultdict(int)
+        sort_presses = collections.defaultdict(int)
 
         sort_directions[MovelistInputCodes.FC.name] = 110
         sort_directions[MovelistInputCodes.N.name] = 100
@@ -131,7 +128,7 @@ class MovelistParser:
             if len(candidates) > 0:
                 direction = sorted(candidates, key = lambda c: (sort_directions[c[0]], sort_presses[c[2]]), reverse=True)[0][0]
 
-                button = sorted(candidates, key=lambda c: (sort_presses[c[2]], Counter(candidates)[c], sort_attacks[c[1]]), reverse=True)[0][1]
+                button = sorted(candidates, key=lambda c: (sort_presses[c[2]], collections.Counter(candidates)[c], sort_attacks[c[1]]), reverse=True)[0][1]
 
                 press = sorted(candidates, key=lambda c: sort_presses[c[2]], reverse=True)[0][2]
 
