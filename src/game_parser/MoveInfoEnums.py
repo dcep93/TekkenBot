@@ -221,6 +221,8 @@ class CharacterCodes(enum.Enum):
     JULIA = 49 # DLC
     NEGAN = 50 # DLC
     ZAFINA = 51 # DLC
+    GANRYU = 52 # DLC
+    LEROY = 53 # DLC
 
     NOT_YET_LOADED = 71 #value when a match starts for (??) frames until char_id loads
 

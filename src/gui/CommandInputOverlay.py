@@ -37,7 +37,6 @@ class CommandInputOverlay(Overlay.Overlay):
             self.canvas.create_line(i * self.step, 0, i * self.step, self.h, fill="red")
 
     def update_state(self):
-        Overlay.Overlay.update_state(self)
         last_state = self.state.stateLog[-1]
         if last_state.is_player_player_one:
             player = last_state.bot
@@ -70,13 +69,13 @@ class CommandInputOverlay(Overlay.Overlay):
                 self.canvas.delete(input_tag)
                 for i, stored_input_and_cancel in enumerate(self.stored_inputs):
                     stored_input, stored_cancel = stored_input_and_cancel
-                    self.update_canvas_with_input(i, stored_input, stored_cancel)
+                    self.update_canvas_with_input(i, stored_input, stored_cancel, input_tag)
 
-    def update_canvas_with_input(i, self, stored_input, stored_cancel):
+    def update_canvas_with_input(self, i, stored_input, stored_cancel, input_tag):
         direction_code, attack_code, rage_flag = stored_input
         posn = i * self.step + (self.step / 2)
-        self.canvas.create_text(posn, 30, text=CommandInputOverlay.symbol_map[direction_code], fill='snow',  font=("Consolas", 20), tag=input_tag)
+        self.canvas.create_text(posn, 30, text=symbol_map[direction_code], fill='snow',  font=("Consolas", 20), tag=input_tag)
         self.canvas.create_text(posn, 55, text=attack_code.name.replace('x', '').replace('N', ''), fill='snow',  font=("Consolas", 12), tag=input_tag)
         x0 = i * self.step + 4
         x1 = x0 + self.step - 8
-        self.canvas.create_rectangle(x0, 70, x1, self.h - 5, fill=self.stored_cancel, tag=input_tag)
+        self.canvas.create_rectangle(x0, 70, x1, self.h - 5, fill=stored_cancel, tag=input_tag)

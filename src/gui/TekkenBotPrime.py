@@ -16,7 +16,6 @@ import windows
 class TekkenBotPrime(t_tkinter.Tk):
     def __init__(self):
         self.overlay = None
-        self.last_update = time.time()
 
         self.init_tk()
         print("Tekken Bot Starting...")
@@ -80,7 +79,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.overlay_var = t_tkinter.StringVar()
         for mode in OverlayMode:
             label = OverlayModeToDisplayName[mode]
-            command = lambda: self.changed_mode(mode)
+            command = (lambda i: lambda: self.changed_mode(i))(mode)
             overlay_mode_menu.add_radiobutton(label=label,variable=self.overlay_var,value=mode,command=command)
         self.menu.add_cascade(label="Mode", menu=overlay_mode_menu)
         self.mode = OverlayMode.FrameData
@@ -90,7 +89,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.grid_rowconfigure(2, weight=1)
         self.grid_columnconfigure(0, weight=1)
 
-        self.geometry('920x720')
+        self.geometry('720x420')
 
     def add_checkbox(self, menu, enum, display_string, default_value, button_command):
         var = t_tkinter.BooleanVar()
@@ -125,14 +124,11 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.start_overlay()
 
     def update(self):
-        now = time.time()
-        print(now, now-self.last_update)
-        self.last_update = now
-
         # until keyboard reader works as a game state
         if not windows.valid:
             print('Mac')
             return
+        now = time.time()
         successful_update = self.tekken_state.Update()
         after = time.time()
 

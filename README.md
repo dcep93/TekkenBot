@@ -20,6 +20,16 @@ If you'd rather run from source instead, install Python 3 and run `exec.sh`
 **Q:** The bot stopped working after a game patch!\
 **A:** Wait for a good soul to update the `memory_address.ini` file, or fix it yourself by following the guide on the Wiki.
 
+<<<<<<< HEAD
+=======
+**Q:** The frame advantage of this move seems wrong!\
+**A:** Double check using the alternative "manual" method to find frame advantage with the help of `tiny_live_frame_data_numbers`:
+1. start a mirror match (because not all characters have the same jumps)
+2. set the dummy to neutral jump as second action
+3. do your attack, neutral jump, and don't do anything else\
+...the little numbers near the big frame advantage ones should now hopefully display the correct advantage.
+
+>>>>>>> 861ec2db3737c7db8334ed116a55cd8d00aa8d83
 **Q:** I'm getting the `PID not found` error even though the game is running!\
 **A:** Start the bot as admin (or alternatively start the game as non-admin).
 
