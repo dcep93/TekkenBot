@@ -10,6 +10,8 @@ import sys
 from . import Overlay
 from . import tkinter
 
+from misc import TekkenEncyclopedia
+
 class DataColumns(enum.Enum):
     comm = 0
     id = 1
@@ -147,6 +149,7 @@ class TextRedirector(object):
 class FrameDataOverlay(Overlay.Overlay):
     def __init__(self, master, state):
         self.initialize(master, (1021, 86))
+        self.init_encyclopedia()
         self.state = state
 
         self.show_live_framedata = self.master.tekken_config.get_property(Overlay.DisplaySettings.tiny_live_frame_data_numbers, True)
@@ -218,6 +221,7 @@ class FrameDataOverlay(Overlay.Overlay):
         return textbox
 
     def update_state(self):
+        self.update_encyclopedia()
         if self.show_live_framedata:
             if len(self.state.stateLog) > 1:
                 recovery = self.state.get_recovery()
@@ -231,6 +235,14 @@ class FrameDataOverlay(Overlay.Overlay):
                     r_recovery = '+%s' % recovery
                 self.l_live_recovery.set(l_recovery)
                 self.r_live_recovery.set(r_recovery)
+
+    def init_encyclopedia(self):
+        self.cyclopedia_p1 = TekkenEncyclopedia.TekkenEncyclopedia(True)
+        self.cyclopedia_p2 = TekkenEncyclopedia.TekkenEncyclopedia(False)
+
+    def update_encyclopedia(self):
+        self.cyclopedia_p1.Update(self.state)
+        self.cyclopedia_p2.Update(self.state)
 
     def update_column_to_print(self, enum, value):
         self.redirector.columns_to_print[enum] = value
