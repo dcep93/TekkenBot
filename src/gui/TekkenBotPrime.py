@@ -79,7 +79,7 @@ class TekkenBotPrime(tkinter.Tk):
         self.overlay_var = tkinter.StringVar()
         for mode in OverlayMode:
             label = OverlayModeToDisplayName[mode]
-            command = lambda: self.changed_mode(mode)
+            command = (lambda i: lambda: self.changed_mode(i))(mode)
             overlay_mode_menu.add_radiobutton(label=label,variable=self.overlay_var,value=mode,command=command)
         self.menu.add_cascade(label="Mode", menu=overlay_mode_menu)
         self.mode = OverlayMode.FrameData
