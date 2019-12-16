@@ -16,7 +16,6 @@ import windows
 class TekkenBotPrime(tkinter.Tk):
     def __init__(self):
         self.overlay = None
-        self.last_update = time.time()
 
         self.init_tk()
         print("Tekken Bot Starting...")
@@ -125,14 +124,11 @@ class TekkenBotPrime(tkinter.Tk):
         self.start_overlay()
 
     def update(self):
-        now = time.time()
-        print(now, now-self.last_update)
-        self.last_update = now
-
         # until keyboard reader works as a game state
         if not windows.valid:
             print('Mac')
             return
+        now = time.time()
         successful_update = self.tekken_state.Update()
         after = time.time()
 

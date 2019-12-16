@@ -23,7 +23,7 @@ import windows.PIDSearcher
 from . import MoveInfoEnums
 import misc.ConfigReader
 from . import MoveDataReport
-import game_parser.MovelistParser
+from  game_parser import MovelistParser
 from . import ModuleEnumerator
 
 import windows
@@ -195,8 +195,8 @@ class TekkenGameReader:
         p1_bot.Bake()
         p2_bot.Bake()
 
-        if self.flagToReacquireNames and p1_bot.character_name != CharacterCodes.NOT_YET_LOADED.name and p2_bot.character_name != CharacterCodes.NOT_YET_LOADED.name:
-            self.reacquire_names()
+        if self.flagToReacquireNames and p1_bot.character_name != MoveInfoEnums.CharacterCodes.NOT_YET_LOADED.name and p2_bot.character_name != MoveInfoEnums.CharacterCodes.NOT_YET_LOADED.name:
+            self.reacquire_names(processHandle, p1_bot, p2_bot)
 
         timer_in_frames = self.GetValueFromDataBlock(player_data_frame, self.c['GameDataAddress']['timer_in_frames'])
         return GameSnapshot(p1_bot, p2_bot, best_frame_count, timer_in_frames, bot_facing, self.opponent_name, self.is_player_player_one)
@@ -271,7 +271,7 @@ class TekkenGameReader:
         p1_bot.player_data_dict['movelist_parser'] = self.p1.movelist_parser
         p2_bot.player_data_dict['movelist_parser'] = self.p2.movelist_parser
 
-    def reacquire_names(self):
+    def reacquire_names(self, processHandle, p1_bot, p2_bot):
         self.opponent_name = self.GetValueAtEndOfPointerTrail(processHandle, "OPPONENT_NAME", True)
         self.opponent_side = self.GetValueAtEndOfPointerTrail(processHandle, "OPPONENT_SIDE", False)
         self.is_player_player_one = (self.opponent_side == 1)
@@ -289,6 +289,7 @@ class TekkenGameReader:
         self.p2.movelist_names = self.p2.movelist_block[0x2E8:200000].split(b'\00')
 
         self.flagToReacquireNames = False
+        print("acquired")
 
     def PopulateMovelists(self, processHandle, data_type):
         movelist_str = self.c["NonPlayerDataAddresses"][data_type]
@@ -314,7 +315,7 @@ class BotSnapshot:
         self.startup = d['PlayerDataAddress.attack_startup']
         self.startup_end = d['PlayerDataAddress.attack_startup_end']
         self.attack_damage = d['PlayerDataAddress.attack_damage']
-        self.complex_state = ComplexMoveStates(d['PlayerDataAddress.complex_move_state'])
+        self.complex_state = MoveInfoEnums.ComplexMoveStates(d['PlayerDataAddress.complex_move_state'])
         self.damage_taken = d['PlayerDataAddress.damage_taken']
         self.move_timer = d['PlayerDataAddress.move_timer']
         self.recovery = d['PlayerDataAddress.recovery']
@@ -322,35 +323,35 @@ class BotSnapshot:
         self.throw_flag = d['PlayerDataAddress.throw_flag']
         self.rage_flag = d['PlayerDataAddress.rage_flag']
         self.input_counter = d['PlayerDataAddress.input_counter']
-        self.input_direction = InputDirectionCodes(d['PlayerDataAddress.input_direction'])
-        self.input_button = InputAttackCodes(d['PlayerDataAddress.input_attack'] % InputAttackCodes.xRAGE.value)
-        self.rage_button_flag = d['PlayerDataAddress.input_attack'] >= InputAttackCodes.xRAGE.value
-        self.stun_state = StunStates(d['PlayerDataAddress.stun_type'])
+        self.input_direction = MoveInfoEnums.InputDirectionCodes(d['PlayerDataAddress.input_direction'])
+        self.input_button = MoveInfoEnums.InputAttackCodes(d['PlayerDataAddress.input_attack'] % MoveInfoEnums.InputAttackCodes.xRAGE.value)
+        self.rage_button_flag = d['PlayerDataAddress.input_attack'] >= MoveInfoEnums.InputAttackCodes.xRAGE.value
+        self.stun_state = MoveInfoEnums.StunStates(d['PlayerDataAddress.stun_type'])
         self.power_crush_flag = d['PlayerDataAddress.power_crush'] > 0
 
         cancel_window_bitmask = d['PlayerDataAddress.cancel_window']
         recovery_window_bitmask = d['PlayerDataAddress.recovery']
 
-        self.is_cancelable = (CancelStatesBitmask.CANCELABLE.value & cancel_window_bitmask) == CancelStatesBitmask.CANCELABLE.value
-        self.is_bufferable = (CancelStatesBitmask.BUFFERABLE.value & cancel_window_bitmask) == CancelStatesBitmask.BUFFERABLE.value
-        self.is_parry_1 = (CancelStatesBitmask.PARRYABLE_1.value & cancel_window_bitmask) == CancelStatesBitmask.PARRYABLE_1.value
-        self.is_parry_2 = (CancelStatesBitmask.PARRYABLE_2.value & cancel_window_bitmask) == CancelStatesBitmask.PARRYABLE_2.value
+        self.is_cancelable = (MoveInfoEnums.CancelStatesBitmask.CANCELABLE.value & cancel_window_bitmask) == MoveInfoEnums.CancelStatesBitmask.CANCELABLE.value
+        self.is_bufferable = (MoveInfoEnums.CancelStatesBitmask.BUFFERABLE.value & cancel_window_bitmask) == MoveInfoEnums.CancelStatesBitmask.BUFFERABLE.value
+        self.is_parry_1 = (MoveInfoEnums.CancelStatesBitmask.PARRYABLE_1.value & cancel_window_bitmask) == MoveInfoEnums.CancelStatesBitmask.PARRYABLE_1.value
+        self.is_parry_2 = (MoveInfoEnums.CancelStatesBitmask.PARRYABLE_2.value & cancel_window_bitmask) == MoveInfoEnums.CancelStatesBitmask.PARRYABLE_2.value
         
-        self.is_recovering = (ComplexMoveStates.RECOVERING.value & recovery_window_bitmask) == ComplexMoveStates.RECOVERING.value
+        self.is_recovering = (MoveInfoEnums.ComplexMoveStates.RECOVERING.value & recovery_window_bitmask) == MoveInfoEnums.ComplexMoveStates.RECOVERING.value
         
         if self.startup > 0:
             self.is_starting = (self.move_timer <= self.startup)
         else:
             self.is_starting = False
 
-        self.throw_tech = ThrowTechs(d['PlayerDataAddress.throw_tech'])
+        self.throw_tech = MoveInfoEnums.ThrowTechs(d['PlayerDataAddress.throw_tech'])
 
         self.skeleton = (d['PlayerDataAddress.x'], d['PlayerDataAddress.y'], d['PlayerDataAddress.z'])
 
         self.active_xyz = (d['PlayerDataAddress.activebox_x'], d['PlayerDataAddress.activebox_y'], d['PlayerDataAddress.activebox_z'])
 
-        self.is_jump = d['PlayerDataAddress.jump_flags'] & JumpFlagBitmask.JUMP.value == JumpFlagBitmask.JUMP.value
-        self.hit_outcome = HitOutcome(d['PlayerDataAddress.hit_outcome'])
+        self.is_jump = d['PlayerDataAddress.jump_flags'] & MoveInfoEnums.JumpFlagBitmask.JUMP.value == MoveInfoEnums.JumpFlagBitmask.JUMP.value
+        self.hit_outcome = MoveInfoEnums.HitOutcome(d['PlayerDataAddress.hit_outcome'])
         self.mystery_state = d['PlayerDataAddress.mystery_state']
 
         self.wins = d['EndBlockPlayerDataAddress.round_wins']
