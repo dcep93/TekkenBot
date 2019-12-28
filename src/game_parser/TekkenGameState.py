@@ -1,5 +1,11 @@
 from . import TekkenGameReader
 
+import misc.MoveDataReport
+
+from . import MoveInfoEnums
+
+import collections
+
 class TekkenGameState:
     def __init__(self):
         self.gameReader = TekkenGameReader.TekkenGameReader()
@@ -667,9 +673,9 @@ class TekkenGameState:
     def GetBotThrowTech(self, activeFrames):
         for state in reversed(self.stateLog[-activeFrames:]):
             tech = state.bot.throw_tech
-            if tech != ThrowTechs.NONE:
+            if tech != MoveInfoEnums.ThrowTechs.NONE:
                 return tech
-        return ThrowTechs.NONE
+        return MoveInfoEnums.ThrowTechs.NONE
 
     def GetOppTrackingType(self, startup):
         if len(self.stateLog) > startup:

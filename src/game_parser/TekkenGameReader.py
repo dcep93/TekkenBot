@@ -381,10 +381,10 @@ class BotSnapshot:
         return self.complex_state == MoveInfoEnums.ComplexMoveStates.BLOCK
 
     def IsGettingCounterHit(self):
-        return self.hit_outcome in (HitOutcome.COUNTER_HIT_CROUCHING, HitOutcome.COUNTER_HIT_STANDING)
+        return self.hit_outcome in (MoveInfoEnums.HitOutcome.COUNTER_HIT_CROUCHING, MoveInfoEnums.HitOutcome.COUNTER_HIT_STANDING)
 
     def IsGettingGroundHit(self):
-        return self.hit_outcome in (HitOutcome.GROUNDED_FACE_DOWN, HitOutcome.GROUNDED_FACE_UP)
+        return self.hit_outcome in (MoveInfoEnums.HitOutcome.GROUNDED_FACE_DOWN, MoveInfoEnums.HitOutcome.GROUNDED_FACE_UP)
 
     def IsGettingWallSplatted(self):
         return self.simple_state in (MoveInfoEnums.SimpleMoveStates.WALL_SPLAT_18, MoveInfoEnums.SimpleMoveStates.WALL_SPLAT_19)
