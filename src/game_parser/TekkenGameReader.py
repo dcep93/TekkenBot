@@ -203,7 +203,7 @@ class TekkenGameReader:
 
     def reacquire_module(self):
         print("Trying to acquire Tekken library in pid: %s" % self.pid)
-        self.module_address = ModuleEnumerator.GetModuleAddressByPIDandName(self.pid, game_string)
+        self.module_address = windows.ModuleEnumerator.GetModuleAddressByPIDandName(self.pid, game_string)
         if self.module_address == None:
             print("%s not found. Likely wrong process id. Reacquiring pid." % game_string)
             self.ReacquireEverything()

@@ -3,17 +3,18 @@ import sys
 import windows
 
 def GetModuleAddressByPIDandName(pid, name):
+    DWORD = windows.ctypes.wintypes.DWORD
     class MODULEENTRY32(windows.ctypes.Structure):
         _fields_ = [( 'dwSize' , DWORD ) ,
                     ( 'th32ModuleID' , DWORD ),
                     ( 'th32ProcessID' , DWORD ),
                     ( 'GlblcntUsage' , DWORD ),
                     ( 'ProccntUsage' , DWORD ) ,
-                    ( 'modBaseAddr' , POINTER(BYTE) ) ,
+                    ( 'modBaseAddr' , windows.ctypes.POINTER(windows.ctypes.wintypes.BYTE) ) ,
                     ( 'modBaseSize' , DWORD ) ,
-                    ( 'hModule' , HMODULE ) ,
-                    ( 'szModule' , c_char * 256 ),
-                    ( 'szExePath' , c_char * 260 ) ]
+                    ( 'hModule' , windows.ctypes.wintypes.HMODULE ) ,
+                    ( 'szModule' , windows.ctypes.c_char * 256 ),
+                    ( 'szExePath' , windows.ctypes.c_char * 260 ) ]
     # const variable
     # Establish rights and basic options needed for all process declartion / iteration
     TH32CS_SNAPPROCESS = 2
@@ -24,6 +25,7 @@ def GetModuleAddressByPIDandName(pid, name):
     TH32CS_SNAPTHREAD = 0x00000004
 
 
+    windll = windows.ctypes.windll
     CreateToolhelp32Snapshot= windll.kernel32.CreateToolhelp32Snapshot
     Process32First = windll.kernel32.Process32First
     Process32Next = windll.kernel32.Process32Next
@@ -41,7 +43,7 @@ def GetModuleAddressByPIDandName(pid, name):
         ProcessID=pid
         hModuleSnap = DWORD
         me32 = MODULEENTRY32()
-        me32.dwSize = sizeof( MODULEENTRY32 )
+        me32.dwSize = windows.ctypes.sizeof( MODULEENTRY32 )
         #me32.dwSize = 5000
 
         hModuleSnap = CreateToolhelp32Snapshot( TH32CS_SNAPMODULE, ProcessID )
@@ -49,7 +51,7 @@ def GetModuleAddressByPIDandName(pid, name):
             print('CreateToolhelp32Snapshot Error [%d]' % GetLastError())
             print('Build the code yourself? This is the error for using 32-bit Python. Try the 64-bit version.')
 
-        ret = Module32First( hModuleSnap, pointer(me32) )
+        ret = Module32First( hModuleSnap, windows.ctypes.pointer(me32) )
         if ret == 0 :
             print('ListProcessModules() Error on Module32First[%d]' % GetLastError())
             CloseHandle( hModuleSnap )
@@ -70,7 +72,7 @@ def GetModuleAddressByPIDandName(pid, name):
                 addressToReturn = me32.hModule
                 #print(me32.modBaseAddr.value)
 
-            ret = Module32Next( hModuleSnap , pointer(me32) )
+            ret = Module32Next( hModuleSnap , windows.ctypes.pointer(me32) )
         CloseHandle( hModuleSnap )
 
         return addressToReturn
