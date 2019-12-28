@@ -378,7 +378,7 @@ class BotSnapshot:
         return self.complex_state
 
     def IsBlocking(self):
-        return self.complex_state == ComplexMoveStates.BLOCK
+        return self.complex_state == MoveInfoEnums.ComplexMoveStates.BLOCK
 
     def IsGettingCounterHit(self):
         return self.hit_outcome in (HitOutcome.COUNTER_HIT_CROUCHING, HitOutcome.COUNTER_HIT_STANDING)
@@ -420,7 +420,7 @@ class BotSnapshot:
         return self.startup_end - self.startup + 1
 
     def IsAttackWhiffing(self):
-        return self.complex_state in {ComplexMoveStates.END1, ComplexMoveStates.F_MINUS, ComplexMoveStates.RECOVERING, ComplexMoveStates.UN17, ComplexMoveStates.SS, ComplexMoveStates.WALK}
+        return self.complex_state in {MoveInfoEnums.ComplexMoveStates.END1, MoveInfoEnums.ComplexMoveStates.F_MINUS, MoveInfoEnums.ComplexMoveStates.RECOVERING, MoveInfoEnums.ComplexMoveStates.UN17, MoveInfoEnums.ComplexMoveStates.SS, MoveInfoEnums.ComplexMoveStates.WALK}
 
     def IsOnGround(self):
         return self.simple_state in {MoveInfoEnums.SimpleMoveStates.GROUND_FACEDOWN, MoveInfoEnums.SimpleMoveStates.GROUND_FACEUP}
@@ -444,10 +444,10 @@ class BotSnapshot:
         return self.is_jump
 
     def IsHoming1(self):
-        return self.complex_state == ComplexMoveStates.S_PLUS
+        return self.complex_state == MoveInfoEnums.ComplexMoveStates.S_PLUS
 
     def IsHoming2(self):
-        return self.complex_state == ComplexMoveStates.S
+        return self.complex_state == MoveInfoEnums.ComplexMoveStates.S
 
     def IsPowerCrush(self):
         return self.power_crush_flag
