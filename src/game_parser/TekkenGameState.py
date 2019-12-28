@@ -673,13 +673,13 @@ class TekkenGameState:
 
     def GetOppTrackingType(self, startup):
         if len(self.stateLog) > startup:
-            complex_states = [ComplexMoveStates.UNKN]
+            complex_states = [MoveInfoEnums.ComplexMoveStates.UNKN]
             for state in reversed(self.stateLog[-startup:]):
                 if -1 < state.opp.GetTrackingType().value < 8:
                     complex_states.append(state.opp.GetTrackingType())
             return collections.Counter(complex_states).most_common(1)[0][0]
         else:
-            return ComplexMoveStates.F_MINUS
+            return MoveInfoEnums.ComplexMoveStates.F_MINUS
 
 
     def GetOppTechnicalStates(self, startup):
