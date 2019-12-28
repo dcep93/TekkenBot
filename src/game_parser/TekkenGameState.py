@@ -58,6 +58,20 @@ class TekkenGameState:
         self.stateLog = tempLog
         self.isMirrored = not self.isMirrored
 
+    def BackToTheFuture(self, frames):
+        if self.futureStateLog != None:
+            raise AssertionError('Already called BackToTheFuture, need to return to the present first, Marty')
+        else:
+            self.futureStateLog = self.stateLog[0 - frames:]
+            self.stateLog = self.stateLog[:0 - frames]
+
+    def ReturnToPresent(self):
+        if self.futureStateLog == None:
+            raise AssertionError("We're already in the present, Marty, what are you doing?")
+        else:
+            self.stateLog += self.futureStateLog
+            self.futureStateLog = None
+
     def IsGameHappening(self):
         return not self.gameReader.GetNeedReacquireState()
 
