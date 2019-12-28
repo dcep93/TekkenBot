@@ -378,7 +378,7 @@ class BotSnapshot:
         return self.complex_state
 
     def IsBlocking(self):
-        return self.complex_state == ComplexMoveStates.BLOCK
+        return self.complex_state == MoveInfoEnums.ComplexMoveStates.BLOCK
 
     def IsGettingCounterHit(self):
         return self.hit_outcome in (HitOutcome.COUNTER_HIT_CROUCHING, HitOutcome.COUNTER_HIT_STANDING)
@@ -390,13 +390,13 @@ class BotSnapshot:
         return self.simple_state in (MoveInfoEnums.SimpleMoveStates.WALL_SPLAT_18, MoveInfoEnums.SimpleMoveStates.WALL_SPLAT_19)
 
     def IsGettingHit(self):
-        return self.stun_state in (StunStates.BEING_PUNISHED, StunStates.GETTING_HIT)
+        return self.stun_state in (MoveInfoEnums.StunStates.BEING_PUNISHED, MoveInfoEnums.StunStates.GETTING_HIT)
 
     def IsHitting(self):
-        return self.stun_state == StunStates.DOING_THE_HITTING
+        return self.stun_state == MoveInfoEnums.StunStates.DOING_THE_HITTING
 
     def IsPunish(self):
-        return self.stun_state == StunStates.BEING_PUNISHED
+        return self.stun_state == MoveInfoEnums.StunStates.BEING_PUNISHED
 
     def IsAttackMid(self):
         return self.attack_type == MoveInfoEnums.AttackType.MID
