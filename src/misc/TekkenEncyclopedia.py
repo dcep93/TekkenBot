@@ -36,103 +36,95 @@ class TekkenEncyclopedia:
         if self.isPlayerOne:
             gameState.FlipMirror()
 
-        self.DetermineFrameData(gameState)
+        if self.ShouldDetermineFrameData(): self.DetermineFrameData(gameState)
 
         if self.isPlayerOne:
             gameState.FlipMirror()
 
+    def ShouldDetermineFrameData(self, gameState):
+        if gameState.IsBotBlocking() or gameState.IsBotGettingHit() or gameState.IsBotBeingThrown() or gameState.IsBotBeingKnockedDown() or gameState.IsBotBeingWallSplatted():
+            if gameState.DidBotIdChangeXMovesAgo(self.active_frame_wait) or gameState.DidBotTimerInterruptXMovesAgo(self.active_frame_wait):
+                    return True
+        return False
+
     def DetermineFrameData(self, gameState):
-        if (gameState.IsBotBlocking() or gameState.IsBotGettingHit() or gameState.IsBotBeingThrown() or gameState.IsBotBeingKnockedDown() or gameState.IsBotBeingWallSplatted()): #or gameState.IsBotUsingOppMovelist()): #or  gameState.IsBotStartedBeingJuggled() or gameState.IsBotJustGrounded()):
-            # print(gameState.stateLog[-1].bot.move_id)
-            #print(gameState.stateLog[-1].bot.move_timer)
-            #print(gameState.stateLog[-1].bot.recovery)
-            #print(gameState.DidBotIdChangeXMovesAgo(self.active_frame_wait))
+        is_recovering_before_long_active_frame_move_completes = (gameState.GetBotRecovery() - gameState.GetBotMoveTimer() == 0)
+        gameState.BackToTheFuture(self.active_frame_wait)
 
-            if gameState.DidBotIdChangeXMovesAgo(self.active_frame_wait) or gameState.DidBotTimerInterruptXMovesAgo(
-                    self.active_frame_wait):  # or gameState.DidOppIdChangeXMovesAgo(self.active_frame_wait):
+        if (not self.active_frame_wait >= gameState.GetOppActiveFrames() + 1) and not is_recovering_before_long_active_frame_move_completes:
+            self.active_frame_wait += 1
+        else:
+            self.DetermineFrameDataHelper(gameState)
+        gameState.ReturnToPresent()
 
-                is_recovering_before_long_active_frame_move_completes = (gameState.GetBotRecovery() - gameState.GetBotMoveTimer() == 0)
-                gameState.BackToTheFuture(self.active_frame_wait)
+    def DetermineFrameDataHelper(self, gameState):
+        gameState.ReturnToPresent()
 
-                #print(gameState.GetOppActiveFrames())
-                if (not self.active_frame_wait >= gameState.GetOppActiveFrames() + 1) and not is_recovering_before_long_active_frame_move_completes:
-                    self.active_frame_wait += 1
-                else:
-                    gameState.ReturnToPresent()
+        currentActiveFrame = gameState.GetLastActiveFrameHitWasOn(self.active_frame_wait)
 
-                    currentActiveFrame = gameState.GetLastActiveFrameHitWasOn(self.active_frame_wait)
+        gameState.BackToTheFuture(self.active_frame_wait)
 
-                    gameState.BackToTheFuture(self.active_frame_wait)
+        opp_id = gameState.GetOppMoveId()
 
+        if opp_id in self.FrameData:
+            frameDataEntry = self.FrameData[opp_id]
+        else:
+            frameDataEntry = FrameDataEntry()
+            self.FrameData[opp_id] = frameDataEntry
 
-                    opp_id = gameState.GetOppMoveId()
+        frameDataEntry.currentActiveFrame = currentActiveFrame
 
-                    if opp_id in self.FrameData:
-                        frameDataEntry = self.FrameData[opp_id]
-                    else:
-                        frameDataEntry = FrameDataEntry()
-                        self.FrameData[opp_id] = frameDataEntry
+        frameDataEntry.currentFrameAdvantage = '??'
+        frameDataEntry.move_id = opp_id
+        frameDataEntry.damage = gameState.GetOppDamage()
+        frameDataEntry.startup = gameState.GetOppStartup()
 
-                    frameDataEntry.currentActiveFrame = currentActiveFrame
+        if frameDataEntry.damage == 0 and frameDataEntry.startup == 0:
+            frameDataEntry.startup, frameDataEntry.damage = gameState.GetOppLatestNonZeroStartupAndDamage()
 
-                    frameDataEntry.currentFrameAdvantage = '??'
-                    frameDataEntry.move_id = opp_id
-                    # frameDataEntry.damage =
-                    frameDataEntry.damage = gameState.GetOppDamage()
-                    frameDataEntry.startup = gameState.GetOppStartup()
+        frameDataEntry.activeFrames = gameState.GetOppActiveFrames()
+        frameDataEntry.hitType = AttackType(gameState.GetOppAttackType()).name
+        if gameState.IsOppAttackThrow():
+            frameDataEntry.hitType += "_THROW"
 
-                    if frameDataEntry.damage == 0 and frameDataEntry.startup == 0:
-                        frameDataEntry.startup, frameDataEntry.damage = gameState.GetOppLatestNonZeroStartupAndDamage()
+        frameDataEntry.recovery = gameState.GetOppRecovery()
 
-                    frameDataEntry.activeFrames = gameState.GetOppActiveFrames()
-                    frameDataEntry.hitType = AttackType(gameState.GetOppAttackType()).name
-                    if gameState.IsOppAttackThrow():
-                        frameDataEntry.hitType += "_THROW"
+        frameDataEntry.input = gameState.GetCurrentOppMoveString()
 
-                    frameDataEntry.recovery = gameState.GetOppRecovery()
+        frameDataEntry.technical_state_reports = gameState.GetOppTechnicalStates(frameDataEntry.startup - 1)
 
-                    #frameDataEntry.input = frameDataEntry.InputTupleToInputString(gameState.GetOppLastMoveInput())
+        frameDataEntry.tracking = gameState.GetOppTrackingType(frameDataEntry.startup)
 
-                    frameDataEntry.input = gameState.GetCurrentOppMoveString()
+        gameState.ReturnToPresent()
 
-                    frameDataEntry.technical_state_reports = gameState.GetOppTechnicalStates(frameDataEntry.startup - 1)
+        frameDataEntry.throwTech = gameState.GetBotThrowTech(1)
 
-                    frameDataEntry.tracking = gameState.GetOppTrackingType(frameDataEntry.startup)
+        time_till_recovery_opp = gameState.GetOppFramesTillNextMove()
+        time_till_recovery_bot = gameState.GetBotFramesTillNextMove()
 
-                    #print(gameState.GetRangeOfMove())
+        new_frame_advantage_calc = time_till_recovery_bot - time_till_recovery_opp
 
-                    gameState.ReturnToPresent()
+        frameDataEntry.currentFrameAdvantage = frameDataEntry.WithPlusIfNeeded(new_frame_advantage_calc)
 
-                    #frameDataEntry.throwTech = gameState.GetBotThrowTech(frameDataEntry.activeFrames + frameDataEntry.startup)
-                    frameDataEntry.throwTech = gameState.GetBotThrowTech(1)
+        if gameState.IsBotBlocking():
+            frameDataEntry.onBlock = new_frame_advantage_calc
+        else:
+            if gameState.IsBotGettingCounterHit():
+                frameDataEntry.onCounterHit = new_frame_advantage_calc
+            else:
+                frameDataEntry.onNormalHit = new_frame_advantage_calc
 
-                    time_till_recovery_opp = gameState.GetOppFramesTillNextMove()
-                    time_till_recovery_bot = gameState.GetBotFramesTillNextMove()
+        frameDataEntry.hitRecovery = time_till_recovery_opp
+        frameDataEntry.blockRecovery = time_till_recovery_bot
 
-                    new_frame_advantage_calc = time_till_recovery_bot - time_till_recovery_opp
+        frameDataEntry.move_str = gameState.GetCurrentOppMoveName()
+        frameDataEntry.prefix = self.GetPlayerString()
 
-                    frameDataEntry.currentFrameAdvantage = frameDataEntry.WithPlusIfNeeded(new_frame_advantage_calc)
+        print(str(frameDataEntry))
 
-                    if gameState.IsBotBlocking():
-                        frameDataEntry.onBlock = new_frame_advantage_calc
-                    else:
-                        if gameState.IsBotGettingCounterHit():
-                            frameDataEntry.onCounterHit = new_frame_advantage_calc
-                        else:
-                            frameDataEntry.onNormalHit = new_frame_advantage_calc
+        gameState.BackToTheFuture(self.active_frame_wait)
 
-                    frameDataEntry.hitRecovery = time_till_recovery_opp
-                    frameDataEntry.blockRecovery = time_till_recovery_bot
-
-                    frameDataEntry.move_str = gameState.GetCurrentOppMoveName()
-                    frameDataEntry.prefix = self.GetPlayerString()
-
-                    print(str(frameDataEntry))
-
-                    gameState.BackToTheFuture(self.active_frame_wait)
-
-                    self.active_frame_wait = 1
-                gameState.ReturnToPresent()
+        self.active_frame_wait = 1
 
 class FrameDataEntry:
     def __init__(self):
@@ -217,7 +209,6 @@ class FrameDataEntry:
             self.hitRecovery,
             self.blockRecovery
         )
-
 
         notes_string = "{}".format(notes)
         now_string = " NOW:{}".format(str(self.currentFrameAdvantage))
