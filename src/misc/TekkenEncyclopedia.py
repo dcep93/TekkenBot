@@ -36,7 +36,7 @@ class TekkenEncyclopedia:
         if self.isPlayerOne:
             gameState.FlipMirror()
 
-        if self.ShouldDetermineFrameData(): self.DetermineFrameData(gameState)
+        if self.ShouldDetermineFrameData(gameState): self.DetermineFrameData(gameState)
 
         if self.isPlayerOne:
             gameState.FlipMirror()
