@@ -19,8 +19,8 @@ class TekkenGameState:
 
         self.futureStateLog = None
 
-    def Update(self, buffer=0):
-        gameData = self.gameReader.GetUpdatedState(buffer)
+    def Update(self):
+        gameData = self.gameReader.GetUpdatedState(0)
 
         if(gameData != None):
             if len(self.stateLog) == 0 or gameData.frame_count != self.stateLog[-1].frame_count: #we don't run perfectly in sync, if we get back the same frame, throw it away
@@ -30,8 +30,9 @@ class TekkenGameState:
                 if len(self.stateLog) > 0:
                     frames_lost = gameData.frame_count - self.stateLog[-1].frame_count - 1
 
-                for i in range(min(7 - buffer, frames_lost)):
-                    droppedState = self.gameReader.GetUpdatedState(min(7, frames_lost + buffer) - i)
+                missed_states = min(7, frames_lost)
+                for i in range(missed_states, 0, -1):
+                    droppedState = self.gameReader.GetUpdatedState(i)
                     self.AppendGamedata(droppedState)
 
                 self.AppendGamedata(gameData)

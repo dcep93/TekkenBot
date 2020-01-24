@@ -138,6 +138,12 @@ class TekkenGameReader:
         return data in ('x', 'y', 'z', 'activebox_x', 'activebox_y', 'activebox_z')
 
     def GetUpdatedState(self, rollback_frame = 0):
+        gameData = self.GetUpdatedStateHelper(rollback_frame)
+        if ScriptedGameReader.Recorder.recording:
+            ScriptedGameRecorder.Recorder(rollback_frame is 0, gameData)
+        return gameData
+
+    def GetUpdatedStateHelper(self, rollback_frame):
         if not self.HasWorkingPID():
             self.pid = windows.PIDSearcher.GetPIDByName(game_string)
             if self.HasWorkingPID():
