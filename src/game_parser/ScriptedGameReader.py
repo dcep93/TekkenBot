@@ -2,19 +2,23 @@ import pickle
 import signal
 import time
 
+from misc import Flags
+
 class Recorder:
     recording = False
-    pickle_dest = None
     all_datas = []
+    num_datas = 0
 
     @classmethod
-    def record(cls, pickle_dest):
+    def record(cls):
+        print('recording')
         cls.recording = True
-        cls.pickle_dest = pickle_dest
-        signal.signal(signal.SIGQUIT, cls.save_and_quit)
+        signal.signal(signal.SIGINT, lambda _,__: cls.save_and_quit())
 
     @classmethod
     def record_data(cls, new_update, gameData):
+        cls.num_datas += 1
+        print('data', cls.num_datas, len(cls.all_datas))
         if new_update:
             now = time.time()
             cls.all_datas.append((now, [gameData]))
@@ -23,13 +27,14 @@ class Recorder:
 
     @classmethod
     def save_and_quit(cls):
-        with open(cls.pickle_dest, 'w') as fh:
+        print('writing')
+        with open(Flags.Flags.pickle_dest, 'wb') as fh:
             pickle.dump(cls.all_datas, fh)
         exit(1)
 
 class ScriptedGameReader:
     def replay(self, gui):
-        with open(self.pickle_src) as fh:
+        with open(Flags.Flags.pickle_src, 'rb') as fh:
             all_datas = pickle.load(fh)
 
         gui.tekken_state.gameReader = self

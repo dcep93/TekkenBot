@@ -26,6 +26,8 @@ import game_parser.MovelistParser
 import windows.ModuleEnumerator
 from  game_parser import MovelistParser
 
+from game_parser import ScriptedGameReader
+
 import windows
 
 game_string = 'TekkenGame-Win64-Shipping.exe'
@@ -140,7 +142,7 @@ class TekkenGameReader:
     def GetUpdatedState(self, rollback_frame = 0):
         gameData = self.GetUpdatedStateHelper(rollback_frame)
         if ScriptedGameReader.Recorder.recording:
-            ScriptedGameRecorder.Recorder(rollback_frame is 0, gameData)
+            ScriptedGameReader.Recorder.record_data(rollback_frame is 0, gameData)
         return gameData
 
     def GetUpdatedStateHelper(self, rollback_frame):

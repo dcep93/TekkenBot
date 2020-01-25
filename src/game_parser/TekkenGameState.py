@@ -4,10 +4,16 @@ import misc.MoveDataReport
 
 from . import MoveInfoEnums
 
+from game_parser import ScriptedGameReader
+
+from misc import Flags
+
 import collections
 
 class TekkenGameState:
     def __init__(self):
+        if Flags.Flags.pickle_dest is not None:
+            ScriptedGameReader.Recorder.record()
         self.gameReader = TekkenGameReader.TekkenGameReader()
         self.isPlayer1 = True
 

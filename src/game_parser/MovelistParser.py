@@ -182,6 +182,11 @@ class MovelistParser:
             if node_id == node.move_id:
                 print(node)
 
+    def __getstate__(self):
+        state = self.__dict__.copy()
+        state['bytes'] = state['bytes'].value
+        return state
+
 class ButtonPressCodes(enum.Enum):
     NULL = 0
     Release_4 = 4
