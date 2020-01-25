@@ -13,6 +13,8 @@ import game_parser.TekkenGameState
 import misc.Path
 import windows
 
+from misc import Flags
+
 class TekkenBotPrime(t_tkinter.Tk):
     def __init__(self):
         self.overlay = None
@@ -124,6 +126,8 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.start_overlay()
 
     def update(self):
+        if Flags.Flags.pickle_src is not None:
+            return self.tekken_state.gameReader.replay(self)
         # until keyboard reader works as a game state
         if not windows.valid:
             print('Mac')

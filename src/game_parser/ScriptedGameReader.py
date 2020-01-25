@@ -4,21 +4,25 @@ import time
 
 from misc import Flags
 
-class Recorder:
-    recording = False
+from . import TekkenGameReader
+
+class Recorder(TekkenGameReader.TekkenGameReader):
     all_datas = []
     num_datas = 0
+    active = True
 
-    @classmethod
-    def record(cls):
-        print('recording')
-        cls.recording = True
-        signal.signal(signal.SIGINT, lambda _,__: cls.save_and_quit())
+    def __init__(self):
+        super().__init__()
+        signal.signal(signal.SIGINT, lambda _,__: self.save_and_quit())
+
+    def GetUpdatedState(self, rollback_frame = 0):
+        gameData = super().GetUpdatedState(rollback_frame)
+        if self.active: self.record_data(rollback_frame == 0, gameData)
+        return gameData
 
     @classmethod
     def record_data(cls, new_update, gameData):
         cls.num_datas += 1
-        print('data', cls.num_datas, len(cls.all_datas))
         if new_update:
             now = time.time()
             cls.all_datas.append((now, [gameData]))
@@ -27,12 +31,13 @@ class Recorder:
 
     @classmethod
     def save_and_quit(cls):
-        print('writing')
+        cls.active = False
+        print('writing', cls.num_datas, len(cls.all_datas))
         with open(Flags.Flags.pickle_dest, 'wb') as fh:
             pickle.dump(cls.all_datas, fh)
         exit(1)
 
-class ScriptedGameReader:
+class ScriptedGameReader(TekkenGameReader.TekkenGameReader):
     def replay(self, gui):
         with open(Flags.Flags.pickle_src, 'rb') as fh:
             all_datas = pickle.load(fh)
@@ -46,7 +51,7 @@ class ScriptedGameReader:
                 total_wait = timestamp - last_ref
                 now = time.time()
                 wait = total_wait - (now - last_abs)
-                time.sleep(wait)
+                if wait > 0: time.sleep(wait)
                 last_abs = now
             last_ref = timestamp
 

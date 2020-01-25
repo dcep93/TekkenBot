@@ -13,8 +13,11 @@ import collections
 class TekkenGameState:
     def __init__(self):
         if Flags.Flags.pickle_dest is not None:
-            ScriptedGameReader.Recorder.record()
-        self.gameReader = TekkenGameReader.TekkenGameReader()
+            self.gameReader = ScriptedGameReader.Recorder()
+        elif Flags.Flags.pickle_src is not None:
+            self.gameReader = ScriptedGameReader.ScriptedGameReader()
+        else:
+            self.gameReader = TekkenGameReader.TekkenGameReader()
         self.isPlayer1 = True
 
         self.duplicateFrameObtained = 0
