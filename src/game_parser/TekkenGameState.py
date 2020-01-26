@@ -13,7 +13,7 @@ import collections
 class TekkenGameState:
     def __init__(self):
         if Flags.Flags.pickle_dest is not None:
-            self.gameReader = ScriptedGameReader.Recorder()
+            self.gameReader = ScriptedGameReader.Recorder(Flags.Flags.pickle_dest)
         elif Flags.Flags.pickle_src is not None:
             self.gameReader = ScriptedGameReader.ScriptedGameReader()
         else:

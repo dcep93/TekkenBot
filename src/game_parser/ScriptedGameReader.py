@@ -2,8 +2,6 @@ import pickle
 import signal
 import time
 
-from misc import Flags
-
 from . import TekkenGameReader
 
 class Recorder(TekkenGameReader.TekkenGameReader):
@@ -11,9 +9,9 @@ class Recorder(TekkenGameReader.TekkenGameReader):
     num_datas = 0
     active = True
 
-    def __init__(self):
+    def __init__(self, pickle_dest):
         super().__init__()
-        signal.signal(signal.SIGINT, lambda _,__: self.save_and_quit())
+        signal.signal(signal.SIGINT, lambda _,__: self.save_and_quit(pickle_dest))
 
     def GetUpdatedState(self, rollback_frame = 0):
         gameData = super().GetUpdatedState(rollback_frame)
@@ -30,35 +28,43 @@ class Recorder(TekkenGameReader.TekkenGameReader):
             cls.all_datas[-1][1].append(gameData)
 
     @classmethod
-    def save_and_quit(cls):
+    def save_and_quit(cls, pickle_dest):
         cls.active = False
         print('writing', cls.num_datas, len(cls.all_datas))
-        with open(Flags.Flags.pickle_dest, 'wb') as fh:
+        with open(pickle_dest, 'wb') as fh:
             pickle.dump(cls.all_datas, fh)
         exit(1)
 
 class ScriptedGameReader(TekkenGameReader.TekkenGameReader):
-    def replay(self, gui):
-        with open(Flags.Flags.pickle_src, 'rb') as fh:
-            all_datas = pickle.load(fh)
+    def replay(self, gui, pickle_src):
+        with open(pickle_src, 'rb') as fh:
+            self.all_datas = pickle.load(fh)
 
-        gui.tekken_state.gameReader = self
+        if not self.all_datas:
+            print("no data in pickle")
+            exit(1)
 
-        last_ref = None
-        last_abs = time.time()
-        for timestamp, datas in all_datas:
-            if last_ref is not None:
-                total_wait = timestamp - last_ref
-                now = time.time()
-                wait = total_wait - (now - last_abs)
-                if wait > 0: time.sleep(wait)
-                last_abs = now
-            last_ref = timestamp
+        self.gui = gui
 
-            self.datas = datas
+        print("replaying")
 
-            gui.tekken_state.Update()
-            gui.update_overlay()
+        self.offset = time.time() - self.all_datas[0][0]
+
+        self.update()
+
+    def update(self):
+        timestamp, datas = self.all_datas.pop(0)
+
+        self.datas = datas
+
+        self.gui.tekken_state.Update()
+        self.gui.update_overlay()
+
+        if len(self.all_datas) > 0:
+            next_timestamp = self.all_datas[0][0]
+            wait_s = next_timestamp + self.offset - time.time()
+            wait_ms = max(int(wait_s * 1000), 0)
+            self.gui.after(wait_ms, self.update)
 
     def GetUpdatedState(self, buffer=None):
         return self.datas.pop(0)

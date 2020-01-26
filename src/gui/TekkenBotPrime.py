@@ -127,11 +127,13 @@ class TekkenBotPrime(t_tkinter.Tk):
 
     def update(self):
         if Flags.Flags.pickle_src is not None:
-            return self.tekken_state.gameReader.replay(self)
-        # until keyboard reader works as a game state
+            self.tekken_state.gameReader.replay(self, Flags.Flags.pickle_src)
+            return
+
         if not windows.valid:
             print('Mac')
             return
+
         now = time.time()
         successful_update = self.tekken_state.Update()
         after = time.time()
@@ -143,7 +145,7 @@ class TekkenBotPrime(t_tkinter.Tk):
             wait_ms = max(2, 8 - int(round(elapsed_time)))
         else:
             wait_ms = 1000
-        self.after(wait_ms, self.update)
+        self.after(wait_ms, self.update)        
 
     def update_overlay(self, successful_update=True):
         if self.overlay != None:
