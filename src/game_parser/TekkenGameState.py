@@ -15,7 +15,7 @@ class TekkenGameState:
         if Flags.Flags.pickle_dest is not None:
             self.gameReader = ScriptedGameReader.Recorder(Flags.Flags.pickle_dest)
         elif Flags.Flags.pickle_src is not None:
-            self.gameReader = ScriptedGameReader.ScriptedGameReader()
+            self.gameReader = ScriptedGameReader.ScriptedGameReader(Flags.Flags.pickle_src)
         else:
             self.gameReader = TekkenGameReader.TekkenGameReader()
         self.isPlayer1 = True
@@ -62,6 +62,14 @@ class TekkenGameState:
         if (len(self.stateLog) > 300):
             self.stateLog.pop(0)
             self.mirroredStateLog.pop(0)
+
+    def getUpdateWaitMs(self, elapsed_ms):
+        if self.tekken_state.gameReader.HasWorkingPID():
+            elapsed_time = 1000 * elapsed_ms
+            wait_ms = max(2, 8 - int(round(elapsed_time)))
+        else:
+            wait_ms = 1000
+        return wait_ms
 
     def get_recovery(self):
         opp_frames = self.stateLog[-1].opp.recovery - self.stateLog[-1].opp.move_timer

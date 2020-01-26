@@ -13,8 +13,6 @@ import game_parser.TekkenGameState
 import misc.Path
 import windows
 
-from misc import Flags
-
 class TekkenBotPrime(t_tkinter.Tk):
     def __init__(self):
         self.overlay = None
@@ -126,32 +124,18 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.start_overlay()
 
     def update(self):
-        if Flags.Flags.pickle_src is not None:
-            self.tekken_state.gameReader.replay(self, Flags.Flags.pickle_src)
-            return
-
-        if not windows.valid:
-            print('Mac')
-            return
-
         now = time.time()
         successful_update = self.tekken_state.Update()
         after = time.time()
 
-        self.update_overlay(successful_update)
-
-        if self.tekken_state.gameReader.HasWorkingPID():
-            elapsed_time = 1000 * (after - now)
-            wait_ms = max(2, 8 - int(round(elapsed_time)))
-        else:
-            wait_ms = 1000
-        self.after(wait_ms, self.update)        
-
-    def update_overlay(self, successful_update=True):
         if self.overlay != None:
             self.overlay.update_location()
             if successful_update:
                 self.overlay.update_state()
+
+        elapsed_ms = after - now
+        wait_ms = self.tekken_state.gameReader.getUpdateWaitMs(elapsed_ms)
+        if wait_ms >= 0: self.after(wait_ms, self.update)
 
     def on_closing(self):
         sys.stdout = sys.__stdout__

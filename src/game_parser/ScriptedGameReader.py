@@ -36,7 +36,9 @@ class Recorder(TekkenGameReader.TekkenGameReader):
         exit(1)
 
 class ScriptedGameReader(TekkenGameReader.TekkenGameReader):
-    def replay(self, gui, pickle_src):
+    def __init__(self, pickle_src):
+        super().__init__()
+
         with open(pickle_src, 'rb') as fh:
             self.all_datas = pickle.load(fh)
 
@@ -44,27 +46,20 @@ class ScriptedGameReader(TekkenGameReader.TekkenGameReader):
             print("no data in pickle")
             exit(1)
 
-        self.gui = gui
-
-        print("replaying")
-
         self.offset = time.time() - self.all_datas[0][0]
+        self.load()
 
-        self.update()
+    def load(self):
+        timestamp, self.datas = self.all_datas.pop(0)
+        return timestamp
 
-    def update(self):
-        timestamp, datas = self.all_datas.pop(0)
+    def getUpdateWaitMs(self, _):
+        if len(self.all_datas) == 0: return -1
 
-        self.datas = datas
-
-        self.gui.tekken_state.Update()
-        self.gui.update_overlay()
-
-        if len(self.all_datas) > 0:
-            next_timestamp = self.all_datas[0][0]
-            wait_s = next_timestamp + self.offset - time.time()
-            wait_ms = max(int(wait_s * 1000), 0)
-            self.gui.after(wait_ms, self.update)
+        next_timestamp = self.load()
+        wait_s = next_timestamp + self.offset - time.time()
+        wait_ms = max(int(wait_s * 1000), 0)
+        return wait_ms
 
     def GetUpdatedState(self, buffer=None):
         return self.datas.pop(0)
