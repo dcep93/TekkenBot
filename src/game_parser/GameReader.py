@@ -300,9 +300,6 @@ class GameReader:
 
         return movelist_block, movelist_address
 
-    def GetNeedReacquireState(self):
-        return self.needReaquireGameState
-
 class BotSnapshot:
     def __init__(self):
         self.player_data_dict = {}

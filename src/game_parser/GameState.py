@@ -15,7 +15,6 @@ class GameState(GameStateGetters.GameStateGetters):
         else:
             self.gameReader = GameReader.GameReader()
 
-        self.duplicateFrameObtained = 0
         self.stateLog = []
         self.mirroredStateLog = []
 
@@ -28,23 +27,18 @@ class GameState(GameStateGetters.GameStateGetters):
         gameData = self.gameReader.GetUpdatedState(0)
 
         if(gameData != None):
-            if len(self.stateLog) == 0 or gameData.frame_count != self.stateLog[-1].frame_count: #we don't run perfectly in sync, if we get back the same frame, throw it away
-                self.duplicateFrameObtained = 0
-
-                frames_lost = 0
+            # we don't run perfectly in sync, if we get back the same frame, throw it away
+            if len(self.stateLog) == 0 or gameData.frame_count != self.stateLog[-1].frame_count:
                 if len(self.stateLog) > 0:
                     frames_lost = gameData.frame_count - self.stateLog[-1].frame_count - 1
+                    missed_states = min(7, frames_lost)
 
-                missed_states = min(7, frames_lost)
-                for i in range(missed_states, 0, -1):
-                    droppedState = self.gameReader.GetUpdatedState(i)
-                    self.AppendGamedata(droppedState)
+                    for i in range(missed_states):
+                        droppedState = self.gameReader.GetUpdatedState(missed_states - i)
+                        self.AppendGamedata(droppedState)
 
                 self.AppendGamedata(gameData)
                 return True
-
-            if gameData.frame_count == self.stateLog[-1].frame_count:
-                self.duplicateFrameObtained += 1
         return False
 
     def AppendGamedata(self, gameData):
@@ -67,9 +61,6 @@ class GameState(GameStateGetters.GameStateGetters):
             wait_ms = 1000
         return wait_ms
 
-    def IsFightOver(self):
-        return self.duplicateFrameObtained > 5
-
     def FlipMirror(self):
         self.mirroredStateLog, self.stateLog = self.stateLog, self.mirroredStateLog
         self.isMirrored = not self.isMirrored
@@ -81,9 +72,3 @@ class GameState(GameStateGetters.GameStateGetters):
     def ReturnToPresent(self):
         self.stateLog += self.futureStateLog
         self.futureStateLog = None
-
-    def IsGameHappening(self):
-        return not self.gameReader.GetNeedReacquireState()
-
-    def IsForegroundPID(self):
-        return self.gameReader.IsForegroundPID()
