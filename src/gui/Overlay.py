@@ -10,12 +10,13 @@ import misc.Path
 
 from . import t_tkinter
 
+@enum.unique
 class DisplaySettings(enum.Enum):
-    overlay_on_bottom = enum.auto()
-    overlay_as_draggable_window = enum.auto()
-    only_appears_when_Tekken_7_has_focus = enum.auto()
-    transparent_background = enum.auto()
-    tiny_live_frame_data_numbers = enum.auto()
+    overlay_on_bottom = 'overlay on bottom'
+    overlay_as_draggable_window = 'overlay as draggable window'
+    only_appears_when_Tekken_7_has_focus = 'only appears when Tekken 7 has focus'
+    transparent_background = 'transparent background'
+    tiny_live_frame_data_numbers = 'tiny live frame data numbers'
 
 @enum.unique
 class ColorSchemeEnum(enum.Enum):

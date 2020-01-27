@@ -75,7 +75,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         all_checked = self.tekken_config.get_all(ovr.DisplaySettings, False)
         for enum in ovr.DisplaySettings:
             checked = all_checked[enum]
-            self.add_checkbox(display_menu, enum, enum.name, checked, self.changed_display)
+            self.add_checkbox(display_menu, enum, enum.value, checked, self.changed_display)
         self.menu.add_cascade(label="Display", menu=display_menu)
 
     def add_mode_cascade(self):
