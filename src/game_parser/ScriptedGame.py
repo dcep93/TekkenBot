@@ -13,9 +13,10 @@ class Recorder(TekkenGameReader.TekkenGameReader):
         super().__init__()
         signal.signal(signal.SIGINT, lambda _,__: self.save_and_quit(pickle_dest))
 
-    def GetUpdatedState(self, rollback_frame = 0):
+    @classmethod
+    def GetUpdatedState(cls, rollback_frame = 0):
         gameData = super().GetUpdatedState(rollback_frame)
-        if self.active: self.record_data(rollback_frame == 0, gameData)
+        if cls.active: cls.record_data(rollback_frame == 0, gameData)
         return gameData
 
     @classmethod
@@ -35,31 +36,34 @@ class Recorder(TekkenGameReader.TekkenGameReader):
             pickle.dump(cls.all_datas, fh)
         exit(1)
 
-class ScriptedGameReader(TekkenGameReader.TekkenGameReader):
+class Reader(TekkenGameReader.TekkenGameReader):
     def __init__(self, pickle_src):
         super().__init__()
 
+        cls = self.__class__
         with open(pickle_src, 'rb') as fh:
-            self.all_datas = pickle.load(fh)
+            cls.all_datas = pickle.load(fh)
 
-        if not self.all_datas:
+        if not cls.all_datas:
             print("no data in pickle")
             exit(1)
 
-        self.offset = time.time() - self.all_datas[0][0]
-        self.load()
+        cls.offset = cls.load()
 
-    def load(self):
-        timestamp, self.datas = self.all_datas.pop(0)
+    @classmethod
+    def load(cls):
+        timestamp, cls.datas = cls.all_datas.pop(0)
         return timestamp
 
-    def getUpdateWaitMs(self, _):
-        if len(self.all_datas) == 0: return -1
+    @classmethod
+    def getUpdateWaitMs(cls, _):
+        if len(cls.all_datas) == 0: return -1
 
-        next_timestamp = self.load()
-        wait_s = next_timestamp + self.offset - time.time()
+        next_timestamp = cls.load()
+        wait_s = next_timestamp + cls.offset - time.time()
         wait_ms = max(int(wait_s * 1000), 0)
         return wait_ms
 
-    def GetUpdatedState(self, buffer=None):
-        return self.datas.pop(0)
+    @classmethod
+    def GetUpdatedState(cls, _=None):
+        return cls.datas.pop(0)
