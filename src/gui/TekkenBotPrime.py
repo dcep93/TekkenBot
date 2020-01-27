@@ -15,17 +15,15 @@ import windows
 
 class TekkenBotPrime(t_tkinter.Tk):
     def __init__(self):
+        super().__init__()
+
+        print("Tekken Bot Starting...")
+
         self.overlay = None
 
         self.init_tk()
-        print("Tekken Bot Starting...")
         self.init_config()
-
-        self.add_menu_cascade()
-        self.add_columns_cascade()
-        self.add_display_cascade()
-        self.add_mode_cascade()
-        self.configure_grid()
+        self.init_view()
 
         self.tekken_state = game_parser.TekkenGameState.TekkenGameState()
 
@@ -34,7 +32,6 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.update()
 
     def init_tk(self):
-        super().__init__()
         self.wm_title("dcep93/TekkenBot")
         self.iconbitmap(misc.Path.path('assets/tekken_bot_close.ico'))
 
@@ -52,6 +49,13 @@ class TekkenBotPrime(t_tkinter.Tk):
 
     def init_config(self):
         self.tekken_config = misc.ConfigReader.ConfigReader('tekken_bot')
+
+    def init_vies(self):
+        self.add_menu_cascade()
+        self.add_columns_cascade()
+        self.add_display_cascade()
+        self.add_mode_cascade()
+        self.configure_grid()
 
     def add_menu_cascade(self):
         tekken_bot_menu = t_tkinter.Menu(self.menu)
@@ -150,7 +154,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.overlay_var.set(OverlayMode.FrameData)
         self.changed_mode(OverlayMode.FrameData)
 
-class TextRedirector(object):
+class TextRedirector:
     def __init__(self, widget, stdout, tag="stdout"):
         self.widget = widget
         self.stdout = stdout
