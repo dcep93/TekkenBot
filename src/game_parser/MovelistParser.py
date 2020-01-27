@@ -177,13 +177,8 @@ class MovelistParser:
         else:
             return "N/A", False
 
-    def print_nodes(self, node_id):
-        for node in self.move_nodes:
-            if node_id == node.move_id:
-                print(node)
-
     def __getstate__(self):
-        state = self.__dict__.copy()
+        state = super().__getstate__().copy()
         state['bytes'] = state['bytes'].value
         return state
 

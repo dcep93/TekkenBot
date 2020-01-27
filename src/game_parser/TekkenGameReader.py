@@ -367,10 +367,6 @@ class BotSnapshot:
         except:
             self.character_name = "UNKNOWN"
 
-
-    def PrintYInfo(self):
-        print('{:.4f}, {:.4f}, {:.4f}'.format(self.highest_y, self.lowest_y, self.highest_y - self.lowest_y))
-
     def GetInputState(self):
         return (self.input_direction, self.input_button, self.rage_button_flag)
 
@@ -427,15 +423,6 @@ class BotSnapshot:
 
     def IsBeingJuggled(self):
         return self.simple_state == MoveInfoEnums.SimpleMoveStates.JUGGLED
-
-    def IsAirborne(self):
-        return self.simple_state == MoveInfoEnums.SimpleMoveStates.AIRBORNE
-
-    def IsHoldingUp(self):
-        return self.input_direction == InputDirectionCodes.u
-
-    def IsHoldingUpBack(self):
-        return self.input_direction == InputDirectionCodes.ub
 
     def IsTechnicalCrouch(self):
         return self.simple_state in (MoveInfoEnums.SimpleMoveStates.CROUCH, MoveInfoEnums.SimpleMoveStates.CROUCH_BACK, MoveInfoEnums.SimpleMoveStates.CROUCH_FORWARD)
