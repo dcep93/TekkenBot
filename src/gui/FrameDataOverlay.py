@@ -184,7 +184,7 @@ class FrameDataOverlay(Overlay.Overlay):
 
     def create_live_recovery(self, parent, col):
         live_recovery_var = t_tkinter.StringVar()
-        live_recovery_var.set('??')
+        live_recovery_var.set('???')
         live_recovery_label = t_tkinter.Label(parent, textvariable=live_recovery_var, font=("Segoe UI", 12), width=5, anchor='c')
         live_recovery_label.place(rely=0.0, relx=0.0, x=4, y=4, anchor=t_tkinter.NW)
         return live_recovery_var

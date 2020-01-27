@@ -12,16 +12,12 @@ from enum import Enum
 
 class TekkenEncyclopedia:
     def __init__(self, isPlayerOne):
-        self.FrameData = {}
+        # a single class instance should be sufficient
+        # sibling instances seem to make it more complicated
         self.isPlayerOne = isPlayerOne
 
+        # I dont understand what this does yet
         self.active_frame_wait = 1
-
-    def GetPlayerString(self, reverse = False):
-        if (self.isPlayerOne and not reverse) or (not self.isPlayerOne and reverse):
-            return "p1: "
-        else:
-            return "p2: "
 
     def Update(self, gameState: TekkenGameState):
         if self.isPlayerOne:
@@ -32,7 +28,6 @@ class TekkenEncyclopedia:
         if self.isPlayerOne:
             gameState.FlipMirror()
 
-    # uhh this seems wrong
     def ShouldDetermineFrameData(self, gameState):
         if gameState.IsBotBlocking() or gameState.IsBotGettingHit() or gameState.IsBotBeingThrown() or gameState.IsBotBeingKnockedDown() or gameState.IsBotBeingWallSplatted():
             if gameState.DidBotIdChangeXMovesAgo(self.active_frame_wait) or gameState.DidBotTimerInterruptXMovesAgo(self.active_frame_wait):
@@ -58,38 +53,23 @@ class TekkenEncyclopedia:
 
         opp_id = gameState.GetOppMoveId()
 
-        if opp_id in self.FrameData:
-            frameDataEntry = self.FrameData[opp_id]
-        else:
-            frameDataEntry = FrameDataEntry()
-            self.FrameData[opp_id] = frameDataEntry
+        frameDataEntry = FrameDataEntry(self.isPlayerOne)
 
-        frameDataEntry.currentActiveFrame = currentActiveFrame
-
-        frameDataEntry.currentFrameAdvantage = '??'
         frameDataEntry.move_id = opp_id
+        frameDataEntry.currentActiveFrame = currentActiveFrame
         frameDataEntry.damage = gameState.GetOppDamage()
         frameDataEntry.startup = gameState.GetOppStartup()
-
-        if frameDataEntry.damage == 0 and frameDataEntry.startup == 0:
-            frameDataEntry.startup, frameDataEntry.damage = gameState.GetOppLatestNonZeroStartupAndDamage()
-
         frameDataEntry.activeFrames = gameState.GetOppActiveFrames()
-        frameDataEntry.hitType = AttackType(gameState.GetOppAttackType()).name
-        if gameState.IsOppAttackThrow():
-            frameDataEntry.hitType += "_THROW"
-
+        frameDataEntry.hitType = AttackType(gameState.GetOppAttackType()).name + ("_THROW" if gameState.IsOppAttackThrow() else "")
         frameDataEntry.recovery = gameState.GetOppRecovery()
-
         frameDataEntry.input = gameState.GetCurrentOppMoveString()
 
         frameDataEntry.technical_state_reports = gameState.GetOppTechnicalStates(frameDataEntry.startup - 1)
-
         frameDataEntry.tracking = gameState.GetOppTrackingType(frameDataEntry.startup)
 
         gameState.ReturnToPresent()
 
-        frameDataEntry.throwTech = gameState.GetBotThrowTech(1)
+        frameDataEntry.throwTech = gameState.GetBotThrowTech()
 
         time_till_recovery_opp = gameState.GetOppFramesTillNextMove()
         time_till_recovery_bot = gameState.GetBotFramesTillNextMove()
@@ -110,35 +90,40 @@ class TekkenEncyclopedia:
         frameDataEntry.blockRecovery = time_till_recovery_bot
 
         frameDataEntry.move_str = gameState.GetCurrentOppMoveName()
-        frameDataEntry.prefix = self.GetPlayerString()
 
-        print(str(frameDataEntry))
+        self.printFrameData(frameDataEntry)
 
         gameState.BackToTheFuture(self.active_frame_wait)
 
         self.active_frame_wait = 1
 
+    def printFrameData(self, frameDataEntry):
+        print(str(frameDataEntry))
+
 class FrameDataEntry:
-    def __init__(self):
-        self.prefix = '??'
-        self.move_id = '??'
-        self.move_str = '??'
-        self.startup = '??'
+    unknown = '??'
+    def __init__(self, isPlayerOne):
+        self.isPlayerOne = isPlayerOne
+
+        self.move_id = self.unknown
+        self.move_str = self.unknown
+        self.startup = self.unknown
+        self.hitType = self.unknown
+        self.onBlock = self.unknown
+        self.onCounterHit = self.unknown
+        self.onNormalHit = self.unknown
+        self.recovery = self.unknown
+        self.damage = self.unknown
+        self.blockFrames = self.unknown
+        self.activeFrames = self.unknown
+        self.currentFrameAdvantage = self.unknown
+        self.currentActiveFrame = self.unknown
+        self.input = self.unknown
+        self.blockRecovery = self.unknown
+        self.hitRecovery = self.unknown
+
         self.calculated_startup = -1
-        self.hitType = '??'
-        self.onBlock = '??'
-        self.onCounterHit = '??'
-        self.onNormalHit = '??'
-        self.recovery = '??'
-        self.damage = '??'
-        self.blockFrames = '??'
-        self.activeFrames = '??'
-        self.currentFrameAdvantage = '??'
-        self.currentActiveFrame = '??'
-        self.input = '??'
         self.technical_state_reports = []
-        self.blockRecovery = '??'
-        self.hitRecovery = '??'
         self.throwTech = None
         self.tracking = ComplexMoveStates.F_MINUS
 
@@ -151,14 +136,10 @@ class FrameDataEntry:
         except:
             return str(value)
 
-    def InputTupleToInputString(self, inputTuple):
-        s = ""
-        for input in inputTuple:
-            s += (input[0].name + input[1].name.replace('x', '+')).replace('N', '')
-        if input[2]:
-            s += "+R"
-        return s
+    def getPrefix(self):
+        return "p1: " if self.isPlayerOne else "p2: "
 
+    # todo revisit
     def __repr__(self):
         notes = ''
 
@@ -204,4 +185,4 @@ class FrameDataEntry:
 
         notes_string = "{}".format(notes)
         now_string = " NOW:{}".format(str(self.currentFrameAdvantage))
-        return self.prefix + non_nerd_string + notes_string + now_string
+        return self.getPrefix() + non_nerd_string + notes_string + now_string

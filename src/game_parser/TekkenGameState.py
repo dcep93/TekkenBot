@@ -688,11 +688,10 @@ class TekkenGameState:
     def GetOppName(self):
         return self.stateLog[-1].opp.character_name
 
-    def GetBotThrowTech(self, activeFrames):
-        for state in reversed(self.stateLog[-activeFrames:]):
-            tech = state.bot.throw_tech
-            if tech != MoveInfoEnums.ThrowTechs.NONE:
-                return tech
+    def GetBotThrowTech(self):
+        tech = self.stateLog[-1].bot.throw_tech
+        if tech != MoveInfoEnums.ThrowTechs.NONE:
+            return tech
         return MoveInfoEnums.ThrowTechs.NONE
 
     def GetOppTrackingType(self, startup):
