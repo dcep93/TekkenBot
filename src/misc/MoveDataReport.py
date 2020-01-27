@@ -3,7 +3,6 @@ class MoveDataReport:
         self.name = name
         self.start_stop_pairs = self.process_list(true_false_list)
 
-
     def process_list(self, true_false_list):
         total_frames = len(true_false_list)
         start_stop_pairs = []
@@ -31,7 +30,6 @@ class MoveDataReport:
         for pair in self.start_stop_pairs:
             total += pair[1] - pair[0] + 1
         return total
-
 
     def __repr__(self):
         repr = self.name + ": "
