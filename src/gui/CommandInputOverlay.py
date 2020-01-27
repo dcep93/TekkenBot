@@ -18,7 +18,7 @@ symbol_map = {
 class CommandInputOverlay(Overlay.Overlay):
     length = 60
     def __init__(self, master, state):
-        self.initialize(master, (1200, 86))
+        super().__init__(master, (1200, 86))
 
         self.state = state
 

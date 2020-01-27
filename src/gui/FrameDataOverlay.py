@@ -146,7 +146,7 @@ class TextRedirector(object):
 
 class FrameDataOverlay(Overlay.Overlay):
     def __init__(self, master, state):
-        self.initialize(master, (1021, 86))
+        super().__init__(master, (1021, 86))
         self.init_encyclopedia()
         self.state = state
 
@@ -193,7 +193,7 @@ class FrameDataOverlay(Overlay.Overlay):
 
     def create_padding_frame(self, col):
         padding = t_tkinter.Frame(self.toplevel, width=10)
-        padding.grid(row=0, column=col, rowspan=2, sticky=t_tkinter.NESW)
+        padding.grid(row=0, column=col, rowspan=2, sticky=t_tkinter.NSEW)
         return padding
 
     def create_live_recovery(self, parent, col):
@@ -213,7 +213,7 @@ class FrameDataOverlay(Overlay.Overlay):
 
     def create_textbox(self, col):
         textbox = t_tkinter.Text(self.toplevel, font=("Consolas", 11), wrap=t_tkinter.NONE, highlightthickness=0, pady=0, relief='flat')
-        textbox.grid(row=0, column=col, rowspan=2, sticky=t_tkinter.NESW)
+        textbox.grid(row=0, column=col, rowspan=2, sticky=t_tkinter.NSEW)
         textbox.configure(background=self.background_color)
         textbox.configure(foreground=Overlay.CurrentColorScheme.scheme[Overlay.ColorSchemeEnum.system_text])
         return textbox

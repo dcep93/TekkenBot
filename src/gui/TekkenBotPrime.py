@@ -89,7 +89,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.mode = OverlayMode.FrameData
 
     def configure_grid(self):
-        self.text.grid(row=2, column=0, columnspan=2, sticky=t_tkinter.NESW)
+        self.text.grid(row=2, column=0, columnspan=2, sticky=t_tkinter.NSEW)
         self.grid_rowconfigure(2, weight=1)
         self.grid_columnconfigure(0, weight=1)
 
