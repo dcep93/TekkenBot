@@ -3,37 +3,35 @@ Reads in simple config files
 """
 
 from configparser import ConfigParser
-import collections
+from collections import defaultdict
 
 import misc.Path
 
-
 class ConfigReader:
-    DATA_FOLDER = 'config'
-
-    values = {}
-
     def __init__(self, filename):
-        self.parser = ConfigParser()
         self.path = self.get_path(filename)
+
+        self.parse()
+
+    def parse(self):
+        self.parser = ConfigParser()
         parsed = self.parser.read(self.path)
         if not parsed:
             print('Error reading config data from %s. Using default values.' % self.path)
 
     def get_path(self, filename):
-        return misc.Path.path('%s/%s.ini' % (self.DATA_FOLDER, filename))
+        return misc.Path.path('config/%s.ini' % filename)
 
     def get_property(self, enum_item, default_value):
         section = enum_item.__class__.__name__
         property_string = enum_item.name
+        f = self.parser.getboolean if type(default_value) is bool else self.parser.get
         try:
-            f = self.parser.getboolean if type(default_value) is bool else self.parser.get
             return f(section, property_string)
         except:
             value = default_value
-
-        self.set_property(enum_item, value)
-        return value
+            self.set_property(enum_item, value)
+            return value
 
     def set_property(self, enum_item, value):
         section = enum_item.__class__.__name__
@@ -42,9 +40,6 @@ class ConfigReader:
             self.parser.add_section(section)
         self.parser.set(section, property_string, str(value))
 
-    def add_comment(self, comment):
-        self.set_property('Comments', '; %s' % comment, '')
-
     def write(self):
         with open(self.path, 'w') as fw:
             self.parser.write(fw)
@@ -52,29 +47,59 @@ class ConfigReader:
     def get_all(self, enum_class, default):
         return {enum: self.get_property(enum, default) for enum in enum_class}
 
-
-def config_from_path(config_path, input_dict=None):
+class ReloadableConfig(ConfigReader):
     '''
-    Parses the file from config_path with configparser and converts configparser's
-    pseudo-dict in to a proper dict.
-    Configparser's section proxies and string-only values are unsuitable for our use.
+    Configuration class that can reload all class instances with the
+    .reload() class method.
 
-    Overwrites old values in input_dict
+    'parse_nums' determines if we keep values as strings or try to convert
+    to int/hex
     '''
-    if input_dict is None:
-        input_dict = CaseInsensitiveDict()
+    # Store configs so we can reload and update them later when needed
+    configs = []
 
-    config_data = ConfigParser(inline_comment_prefixes=('#', ';'))
-    try:
-        config_data.read(config_path)
-    except:
-        print("Error reading config data from " + config_path)
-    else:
+    def parse(self):
+        self.config = CaseInsensitiveDict()
+
+        self.reload_self()
+
+        ReloadableConfig.configs.append(self)
+
+    def __getitem__(self, key):
+        if key not in self.config:
+            # This is maybe a bit ugly but won't crash the program if the config file
+            # is broken or missing entries. Assumes int values.
+            # Maybe not needed.
+            print('{} section missing from {}.ini'.format(key, self.file_name))
+            return defaultdict(lambda: defaultdict(int))
+        else:
+            return self.config[key]
+
+    @classmethod
+    def reload(cls):
+        for config in cls.configs:
+            config.reload_self()
+
+    def reload_self(self):
+        '''
+        Parses the file from config_path with configparser and converts configparser's
+        pseudo-dict in to a proper dict.
+        Configparser's section proxies and string-only values are unsuitable for our use.
+
+        Overwrites old values in input_dict
+        '''
+        config_data = ConfigParser(inline_comment_prefixes=('#', ';'))
+        try:
+            config_data.read(self.path)
+        except:
+            print("Error reading config data from %s" % self.path)
+            return
+
         for section, proxy in config_data.items():
             if section == 'DEFAULT':
                 continue
-            if section not in input_dict:
-                input_dict[section] = CaseInsensitiveDict()
+            if section not in self.config:
+                self.config[section] = CaseInsensitiveDict()
             for key, value in proxy.items():
                 if ' ' not in value:
                     try:
@@ -87,48 +112,7 @@ def config_from_path(config_path, input_dict=None):
                     except ValueError:
                         pass
 
-                input_dict[section][key] = value
-    return input_dict
-
-
-class ReloadableConfig(ConfigReader):
-    # Store configs so we can reload and update them later when needed
-    configs = []
-
-    def __init__(self, filename):
-        '''
-        Configuration class that can reload all class instances with the
-        .reload() class method.
-
-        'parse_nums' determines if we keep values as strings or try to convert
-        to int/hex
-        '''
-        self.path = self.get_path(filename)
-
-        self.config = None
-
-        self.reload_self()
-
-        ReloadableConfig.configs.append(self)
-
-    def __getitem__(self, key):
-        if key not in self.config:
-            # This is maybe a bit ugly but won't crash the program if the config file
-            # is broken or missing entries. Assumes int values.
-            # Maybe not needed.
-            print('{} section missing from {}.ini'.format(key, self.file_name))
-            return collections.defaultdict(lambda: collections.defaultdict(int))
-        else:
-            return self.config[key]
-
-    @classmethod
-    def reload(cls):
-        for config in cls.configs:
-            config.reload_self()
-
-    def reload_self(self):
-        self.config = config_from_path(self.path, input_dict=self.config)
-
+                self.config[section][key] = value
 
 class CaseInsensitiveDict(dict):
     def __contains__(self, key):
@@ -139,4 +123,3 @@ class CaseInsensitiveDict(dict):
 
     def __getitem__(self, key):
         return super().__getitem__(key.lower())
-

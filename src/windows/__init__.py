@@ -28,6 +28,7 @@ class Windows(object):
 
 try:
     from ctypes import wintypes
-    w = Windows()
 except ValueError:
     pass
+else:
+    w = Windows()
