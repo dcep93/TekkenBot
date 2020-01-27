@@ -54,14 +54,14 @@ class TextRedirector(object):
             if self.columns_to_print[enum]:
                 needed_spaces = self.col_max_length - col_len
                 if col_len < self.col_max_length:
-                    col_name = '%s%s%s' % (" " * int(needed_spaces / 2), col_name, " " * int((needed_spaces+1) / 2))
+                    spaces_before = " " * int(needed_spaces / 2)
+                    spaces_after = " " * (needed_spaces - spaces_before)
+                    col_name = spaces_before + col_name + spaces_after
                 column_names += '|%s' % col_name
-        self.set_first_column(column_names)
 
-    def set_first_column(self, first_column_string):
         self.widget.configure(state="normal")
         self.widget.delete("1.0", "2.0")
-        self.widget.insert("1.0", first_column_string + '\n')
+        self.widget.insert("1.0", column_names + '\n')
         self.widget.configure(state="disabled")
 
     def get_background(self, fa):
@@ -78,6 +78,7 @@ class TextRedirector(object):
 
     def write(self, output_str):
         exit()
+        # todo review this whole func and instance attributes
         raise Exception('how does this work')
         lines = int(self.widget.index('end-1c').split('.')[0])
         max_lines = 5
@@ -127,21 +128,21 @@ class TextRedirector(object):
                 self.widget.see('0.0')
                 self.widget.yview('moveto', '.02')
 
-
 class FrameDataOverlay(Overlay.Overlay):
     def __init__(self, master, state):
         super().__init__(master, (1021, 86))
         self.init_encyclopedia()
+        self.init_tkinter()
         self.state = state
 
         self.show_live_framedata = self.master.tekken_config.get_property(Overlay.DisplaySettings.tiny_live_frame_data_numbers, True)
 
+    def init_tkinter(self):
         style = t_tkinter.Style()
         style.theme_use('alt')
         style.configure('.', background=self.background_color)
         style.configure('.', foreground=Overlay.ColorSchemeEnum.advantage_text.value)
 
-        # ???
         t_tkinter.Grid.columnconfigure(self.toplevel, 0, weight=0)
         t_tkinter.Grid.columnconfigure(self.toplevel, 1, weight=0)
         t_tkinter.Grid.columnconfigure(self.toplevel, 2, weight=0)
@@ -204,6 +205,7 @@ class FrameDataOverlay(Overlay.Overlay):
 
     def update_state(self):
         self.update_encyclopedia()
+        # y tho
         if self.show_live_framedata:
             if len(self.state.stateLog) > 1:
                 recovery = self.state.get_recovery()
