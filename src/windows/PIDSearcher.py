@@ -1,6 +1,5 @@
 import sys
 import os.path
-import ctypes
 import windows
 
 MAX_PATH = 260
@@ -8,23 +7,21 @@ PROCESS_TERMINATE = 0x0001
 PROCESS_QUERY_INFORMATION = 0x0400
 
 def GetForegroundPid():
-    if not windows.valid: return None
-    pid = ctypes.wintypes.DWORD()
-    active = ctypes.windll.user32.GetForegroundWindow()
-    active_window = ctypes.windll.user32.GetWindowThreadProcessId(active, ctypes.byref(pid))
+    pid = windows.ctypes.wintypes.DWORD()
+    active = windows.ctypes.windll.user32.GetForegroundWindow()
+    active_window = windows.ctypes.windll.user32.GetWindowThreadProcessId(active, windows.ctypes.byref(pid))
     return pid.value
 
 def GetPIDByName(process_name):
-    if not windows.valid: return None
     process_name_in_bytes = str.encode(process_name)
     pid = None
     count = 32
     while True:
         process_ids = (windows.wintypes.DWORD*count)()
-        cb = ctypes.sizeof(process_ids)
+        cb = windows.ctypes.sizeof(process_ids)
         bytes_returned = windows.wintypes.DWORD()
         # ???
-        if windows.w.EnumProcesses(ctypes.byref(process_ids), cb, ctypes.byref(bytes_returned)):
+        if windows.w.EnumProcesses(windows.ctypes.byref(process_ids), cb, windows.ctypes.byref(bytes_returned)):
             if bytes_returned.value < cb:
                 break
             else:
@@ -32,12 +29,12 @@ def GetPIDByName(process_name):
         else:
             sys.exit("Call to EnumProcesses failed")
 
-    for index in range(int(bytes_returned.value / ctypes.sizeof(windows.wintypes.DWORD))):
+    for index in range(int(bytes_returned.value / windows.ctypes.sizeof(windows.wintypes.DWORD))):
         process_id = process_ids[index]
         # ???
         h_process = windows.w.OpenProcess(PROCESS_TERMINATE | PROCESS_QUERY_INFORMATION, False, process_id)
         if h_process:
-            image_file_name = (ctypes.c_char*MAX_PATH)()
+            image_file_name = (windows.ctypes.c_char*MAX_PATH)()
             if windows.w.GetProcessImageFileName(h_process, image_file_name, MAX_PATH)>0:
                 filename = os.path.basename(image_file_name.value)
                 if filename == process_name_in_bytes:

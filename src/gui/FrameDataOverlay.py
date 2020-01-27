@@ -55,7 +55,7 @@ class TextRedirector(object):
                 needed_spaces = self.col_max_length - col_len
                 if col_len < self.col_max_length:
                     spaces_before = " " * int(needed_spaces / 2)
-                    spaces_after = " " * (needed_spaces - spaces_before)
+                    spaces_after = " " * (needed_spaces - len(spaces_before))
                     col_name = spaces_before + col_name + spaces_after
                 column_names += '|%s' % col_name
 
@@ -131,11 +131,12 @@ class TextRedirector(object):
 class FrameDataOverlay(Overlay.Overlay):
     def __init__(self, master, state):
         super().__init__(master, (1021, 86))
+
+        self.show_live_framedata = self.master.tekken_config.get_property(Overlay.DisplaySettings.tiny_live_frame_data_numbers, True)
+
         self.init_encyclopedia()
         self.init_tkinter()
         self.state = state
-
-        self.show_live_framedata = self.master.tekken_config.get_property(Overlay.DisplaySettings.tiny_live_frame_data_numbers, True)
 
     def init_tkinter(self):
         style = t_tkinter.Style()

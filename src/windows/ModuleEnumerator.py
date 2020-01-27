@@ -2,19 +2,19 @@ import sys
 
 import windows
 
-class MODULEENTRY32(windows.ctypes.Structure):
-    _fields_ = [( 'dwSize' , windows.ctypes.wintypes.DWORD ) ,
-                ( 'th32ModuleID' , windows.ctypes.wintypes.DWORD ),
-                ( 'th32ProcessID' , windows.ctypes.wintypes.DWORD ),
-                ( 'GlblcntUsage' , windows.ctypes.wintypes.DWORD ),
-                ( 'ProccntUsage' , windows.ctypes.wintypes.DWORD ) ,
-                ( 'modBaseAddr' , windows.ctypes.POINTER(windows.ctypes.wintypes.BYTE) ) ,
-                ( 'modBaseSize' , windows.ctypes.wintypes.DWORD ) ,
-                ( 'hModule' , windows.ctypes.wintypes.HMODULE ) ,
-                ( 'szModule' , windows.ctypes.c_char * 256 ),
-                ( 'szExePath' , windows.ctypes.c_char * 260 ) ]
-
 def GetModuleAddressByPIDandName(pid, name):
+    class MODULEENTRY32(windows.ctypes.Structure):
+        _fields_ = [( 'dwSize' , windows.ctypes.wintypes.DWORD ) ,
+                    ( 'th32ModuleID' , windows.ctypes.wintypes.DWORD ),
+                    ( 'th32ProcessID' , windows.ctypes.wintypes.DWORD ),
+                    ( 'GlblcntUsage' , windows.ctypes.wintypes.DWORD ),
+                    ( 'ProccntUsage' , windows.ctypes.wintypes.DWORD ) ,
+                    ( 'modBaseAddr' , windows.ctypes.POINTER(windows.ctypes.wintypes.BYTE) ) ,
+                    ( 'modBaseSize' , windows.ctypes.wintypes.DWORD ) ,
+                    ( 'hModule' , windows.ctypes.wintypes.HMODULE ) ,
+                    ( 'szModule' , windows.ctypes.c_char * 256 ),
+                    ( 'szExePath' , windows.ctypes.c_char * 260 ) ]
+
     # Establish rights and basic options needed for all process declartion / iteration
     STANDARD_RIGHTS_REQUIRED = 0x000F0000
     SYNCHRONIZE = 0x00100000
