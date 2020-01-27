@@ -66,7 +66,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         all_checked = self.tekken_config.get_all(fdo.DataColumns, True)
         for enum in fdo.DataColumns:
             checked = all_checked[enum]
-            name = "%s (%s)" % (enum.name, fdo.DataColumnsToMenuNames[enum])
+            name = "%s (%s)" % (enum.name, enum.value)
             self.add_checkbox(column_menu, enum, name, checked, self.changed_columns)
         self.menu.add_cascade(label='Columns', menu=column_menu)
 
@@ -82,7 +82,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         overlay_mode_menu = t_tkinter.Menu(self.menu)
         self.overlay_var = t_tkinter.StringVar()
         for mode in OverlayMode:
-            label = OverlayModeToDisplayName[mode]
+            label = mode.value
             command = (lambda i: lambda: self.changed_mode(i))(mode)
             overlay_mode_menu.add_radiobutton(label=label,variable=self.overlay_var,value=mode,command=command)
         self.menu.add_cascade(label="Mode", menu=overlay_mode_menu)
@@ -170,16 +170,11 @@ class TextRedirector:
     def flush(self):
         pass
 
+@enum.unique
 class OverlayMode(enum.Enum):
-    Off = 0
-    FrameData = 1
-    CommandInput = 2
-
-OverlayModeToDisplayName = {
-    OverlayMode.Off : 'Off',
-    OverlayMode.FrameData: 'Frame Data',
-    OverlayMode.CommandInput: 'Command Inputs (and cancel window)',
-}
+    Off = 'Off'
+    FrameData = 'Frame Data'
+    CommandInput = 'Command Inputs (and cancel window)'
 
 OverlayModeToOverlay = {
     OverlayMode.Off: None,

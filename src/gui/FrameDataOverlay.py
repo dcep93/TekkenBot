@@ -10,38 +10,22 @@ from . import t_tkinter
 
 from misc import TekkenEncyclopedia
 
+@enum.unique
 class DataColumns(enum.Enum):
-    comm = 0
-    id = 1
-    name = 3
-    type = 4
-    st = 5
-    blo = 6
-    hit = 7
-    ch = 8
-    act = 9
-    T = 10
-    tot = 11
-    rec = 12
-    opp = 13
-    notes = 14
-
-DataColumnsToMenuNames = {
-    DataColumns.comm : 'input command',
-    DataColumns.id : 'internal move id number',
-    DataColumns.name: 'internal move name',
-    DataColumns.type: 'attack type',
-    DataColumns.st: 'startup frames',
-    DataColumns.blo: 'frame advantage on block',
-    DataColumns.hit: 'frame advantage on hit',
-    DataColumns.ch: 'frame advantage on counter hit',
-    DataColumns.act: 'active frame connected on / total active frames',
-    DataColumns.T: 'how well move tracks during startup',
-    DataColumns.tot: 'total number of frames in move',
-    DataColumns.rec: 'frames before attacker can act',
-    DataColumns.opp: 'frames before defender can act',
-    DataColumns.notes: 'additional move properties',
-}
+    comm = 'input command'
+    id = 'internal move id number'
+    name = 'internal move name'
+    type = 'attack type'
+    st = 'startup frames'
+    blo = 'frame advantage on block'
+    hit = 'frame advantage on hit'
+    ch = 'frame advantage on counter hit'
+    act = 'active frame connected on / total active frames'
+    T = 'how well move tracks during startup'
+    tot = 'total number of frames in move'
+    rec = 'frames before attacker can act'
+    opp = 'frames before defender can act'
+    notes = 'additional move properties'
 
 class TextRedirector(object):
     col_max_length = 8
@@ -53,10 +37,10 @@ class TextRedirector(object):
 
         self.columns_to_print = None
 
-        self.widget.tag_config("p1", foreground=Overlay.CurrentColorScheme.scheme[Overlay.ColorSchemeEnum.p1_text])
-        self.widget.tag_config("p2", foreground=Overlay.CurrentColorScheme.scheme[Overlay.ColorSchemeEnum.p2_text])
+        self.widget.tag_config("p1", foreground=Overlay.ColorSchemeEnum.p1_text.value)
+        self.widget.tag_config("p2", foreground=Overlay.ColorSchemeEnum.p2_text.value)
 
-        self.style.configure('.', background=Overlay.CurrentColorScheme.scheme[Overlay.ColorSchemeEnum.advantage_slight_minus])
+        self.style.configure('.', background=Overlay.ColorSchemeEnum.advantage_slight_minus.value)
 
     def set_columns_to_print(self, booleans_for_columns):
         self.columns_to_print = booleans_for_columns
@@ -82,15 +66,15 @@ class TextRedirector(object):
 
     def get_background(self, fa):
         if fa <= -14:
-            return Overlay.CurrentColorScheme.scheme[Overlay.ColorSchemeEnum.advantage_very_punishible]
+            return Overlay.ColorSchemeEnum.advantage_very_punishible.value
         elif fa <= -10:
-            return Overlay.CurrentColorScheme.scheme[Overlay.ColorSchemeEnum.advantage_punishible]
+            return Overlay.ColorSchemeEnum.advantage_punishible.value
         elif fa <= -5:
-            return Overlay.CurrentColorScheme.scheme[Overlay.ColorSchemeEnum.advantage_safe_minus]
+            return Overlay.ColorSchemeEnum.advantage_safe_minus.value
         elif fa < 0:
-            return Overlay.CurrentColorScheme.scheme[Overlay.ColorSchemeEnum.advantage_slight_minus]
+            return Overlay.ColorSchemeEnum.advantage_slight_minus.value
         else:
-            return Overlay.CurrentColorScheme.scheme[Overlay.ColorSchemeEnum.advantage_plus]
+            return Overlay.ColorSchemeEnum.advantage_plus
 
     def write(self, output_str):
         exit()
@@ -155,7 +139,7 @@ class FrameDataOverlay(Overlay.Overlay):
         style = t_tkinter.Style()
         style.theme_use('alt')
         style.configure('.', background=self.background_color)
-        style.configure('.', foreground=Overlay.CurrentColorScheme.scheme[Overlay.ColorSchemeEnum.advantage_text])
+        style.configure('.', foreground=Overlay.ColorSchemeEnum.advantage_text.value)
 
         # ???
         t_tkinter.Grid.columnconfigure(self.toplevel, 0, weight=0)
@@ -215,7 +199,7 @@ class FrameDataOverlay(Overlay.Overlay):
         textbox = t_tkinter.Text(self.toplevel, font=("Consolas", 11), wrap=t_tkinter.NONE, highlightthickness=0, pady=0, relief='flat')
         textbox.grid(row=0, column=col, rowspan=2, sticky=t_tkinter.NSEW)
         textbox.configure(background=self.background_color)
-        textbox.configure(foreground=Overlay.CurrentColorScheme.scheme[Overlay.ColorSchemeEnum.system_text])
+        textbox.configure(foreground=Overlay.ColorSchemeEnum.system_text.value)
         return textbox
 
     def update_state(self):

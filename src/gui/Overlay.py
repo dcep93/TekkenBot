@@ -17,33 +17,19 @@ class DisplaySettings(enum.Enum):
     transparent_background = enum.auto()
     tiny_live_frame_data_numbers = enum.auto()
 
+@enum.unique
 class ColorSchemeEnum(enum.Enum):
-    background = enum.auto()
-    transparent = enum.auto()
-    p1_text = enum.auto()
-    p2_text = enum.auto()
-    system_text = enum.auto()
-    advantage_plus = enum.auto()
-    advantage_slight_minus = enum.auto()
-    advantage_safe_minus = enum.auto()
-    advantage_punishible = enum.auto()
-    advantage_very_punishible = enum.auto()
-    advantage_text = enum.auto()
-
-class CurrentColorScheme:
-    scheme = {
-        ColorSchemeEnum.background : 'gray10',
-        ColorSchemeEnum.transparent: 'white',
-        ColorSchemeEnum.p1_text: '#93A1A1',
-        ColorSchemeEnum.p2_text: '#586E75',
-        ColorSchemeEnum.system_text: 'lawn green',
-        ColorSchemeEnum.advantage_plus: 'DodgerBlue2',
-        ColorSchemeEnum.advantage_slight_minus: 'ivory2',
-        ColorSchemeEnum.advantage_safe_minus: 'ivory2',
-        ColorSchemeEnum.advantage_punishible: 'orchid2',
-        ColorSchemeEnum.advantage_very_punishible: 'deep pink',
-        ColorSchemeEnum.advantage_text: 'black',
-    }
+    background = 'gray10'
+    transparent = 'white'
+    p1_text = '#93A1A1'
+    p2_text = '#586E75'
+    system_text = 'lawn green'
+    advantage_plus = 'DodgerBlue2'
+    advantage_slight_minus = 'ivory2'
+    advantage_safe_minus = 'ivory3'
+    advantage_punishible = 'orchid2'
+    advantage_very_punishible = 'deep pink'
+    advantage_text = 'black'
 
 class Overlay:
     def __init__(self, master, xy_size):
@@ -60,7 +46,7 @@ class Overlay:
 
         self.toplevel.attributes("-topmost", True)
 
-        self.background_color = CurrentColorScheme.scheme[ColorSchemeEnum.background]
+        self.background_color = ColorSchemeEnum.background.value
 
         self.tranparency_color = self.background_color
         self.toplevel.configure(background=self.tranparency_color)
