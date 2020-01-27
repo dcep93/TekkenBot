@@ -50,7 +50,7 @@ class TekkenBotPrime(t_tkinter.Tk):
     def init_config(self):
         self.tekken_config = misc.ConfigReader.ConfigReader('tekken_bot')
 
-    def init_vies(self):
+    def init_view(self):
         self.add_menu_cascade()
         self.add_columns_cascade()
         self.add_display_cascade()
