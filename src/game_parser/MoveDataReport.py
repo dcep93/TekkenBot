@@ -4,7 +4,6 @@ class MoveDataReport:
         self.start_stop_pairs = self.process_list(true_false_list)
 
     def process_list(self, true_false_list):
-        total_frames = len(true_false_list)
         start_stop_pairs = []
         start = -1
         stop = -1
