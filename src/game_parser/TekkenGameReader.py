@@ -1,12 +1,12 @@
 """
 This module's classes are responsible for reading and interpreting the memory of a Tekken7.exe proecess.
 
-TekkenGameReader reads the memory of Tekken7.exe, extracts information about the state of the game, then saves a
+GameReader reads the memory of Tekken7.exe, extracts information about the state of the game, then saves a
 'snapshot' of each frame.
 
 Each GameSnapshot has 2 BotSnapshots, together encapsulating the information of both players and shared data for a single game frame.
 
-TekkenGameState saves these snapshots and provides an api that abstracts away the difference
+GameState saves these snapshots and provides an api that abstracts away the difference
 between questions that query one player (is player 1 currently attacking?), both players (what is the expected frame
 advantage when player 2 emerges from block), or multiple game states over time (did player 1 just begin to block this
 frame?, what was the last move player 2 did?).

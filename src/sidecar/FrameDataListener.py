@@ -1,12 +1,12 @@
 """
-Collects information from TekkenGameState over time in hopes of synthesizing it and presenting it in a more useful way.
+Collects information from GameState over time in hopes of synthesizing it and presenting it in a more useful way.
 
 """
 
 from game_parser.MoveInfoEnums import AttackType
 from game_parser.MoveInfoEnums import ThrowTechs
 from game_parser.MoveInfoEnums import ComplexMoveStates
-from game_parser.TekkenGameState import TekkenGameState
+from game_parser.GameState import GameState
 import time
 from enum import Enum
 
@@ -19,7 +19,7 @@ class FrameDataListener:
         # I dont understand what this does yet
         self.active_frame_wait = 1
 
-    def Update(self, gameState: TekkenGameState):
+    def Update(self, gameState: GameState):
         if self.isPlayerOne:
             gameState.FlipMirror()
 

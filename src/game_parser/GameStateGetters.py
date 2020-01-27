@@ -1,12 +1,6 @@
-from . import TekkenGameReader
-
 from game_parser.MoveDataReport import MoveDataReport
 
 from . import MoveInfoEnums
-
-from game_parser import ScriptedGame
-
-from misc import Flags
 
 import collections
 
@@ -15,8 +9,8 @@ class GameStateGetters:
         opp_frames = self.stateLog[-1].opp.recovery - self.stateLog[-1].opp.move_timer
         bot_frames = self.stateLog[-1].bot.recovery - self.stateLog[-1].bot.move_timer
         return opp_frames - bot_frames
-    
-        def IsBotOnLeft(self):
+
+    def IsBotOnLeft(self):
         isPlayerOneOnLeft = self.gameReader.original_facing == self.stateLog[-1].facing_bool
         if not self.isMirrored:
             return isPlayerOneOnLeft

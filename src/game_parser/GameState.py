@@ -1,14 +1,8 @@
 from . import TekkenGameReader
 
-from game_parser.MoveDataReport import MoveDataReport
-
-from . import MoveInfoEnums
-
 from game_parser import ScriptedGame
 
 from misc import Flags
-
-import collections
 
 from . import GameStateGetters
 

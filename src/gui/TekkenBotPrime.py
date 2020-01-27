@@ -8,7 +8,7 @@ from . import CommandInputOverlay as cio
 
 from . import t_tkinter
 
-import game_parser.TekkenGameState
+import game_parser.GameState
 
 import misc.Path
 import windows
@@ -25,7 +25,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.init_config()
         self.init_view()
 
-        self.tekken_state = game_parser.TekkenGameState.TekkenGameState()
+        self.tekken_state = game_parser.GameState.GameState()
 
         self.init_frame_data()
 
