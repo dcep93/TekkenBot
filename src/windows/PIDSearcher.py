@@ -29,9 +29,10 @@ def GetPIDByName(process_name):
         else:
             sys.exit("Call to EnumProcesses failed")
 
-    for index in range(int(bytes_returned.value / windows.ctypes.sizeof(windows.wintypes.DWORD))):
+    num_values = int(bytes_returned.value / windows.ctypes.sizeof(windows.wintypes.DWORD))
+    for index in range(num_values):
         process_id = process_ids[index]
-        # ???
+
         h_process = windows.w.OpenProcess(PROCESS_TERMINATE | PROCESS_QUERY_INFORMATION, False, process_id)
         if h_process:
             image_file_name = (windows.ctypes.c_char*MAX_PATH)()
