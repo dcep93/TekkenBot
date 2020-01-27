@@ -8,7 +8,7 @@ import sys
 from . import Overlay
 from . import t_tkinter
 
-from misc import TekkenEncyclopedia
+from game_parser import TekkenEncyclopedia
 
 @enum.unique
 class DataColumns(enum.Enum):

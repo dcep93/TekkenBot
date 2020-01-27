@@ -1,10 +1,10 @@
 from . import TekkenGameReader
 
-import misc.MoveDataReport
+import game_parser.MoveDataReport
 
 from . import MoveInfoEnums
 
-from game_parser import ScriptedGameReader
+from game_parser import ScriptedGame
 
 from misc import Flags
 
@@ -754,23 +754,20 @@ class TekkenGameState:
 
             previous_state = state
 
-        parryable1 = misc.MoveDataReport.MoveDataReport('PY1', parryable_frames1)
-        parryable2 = misc.MoveDataReport.MoveDataReport('PY2', parryable_frames2)
-        unparryable = misc.MoveDataReport.MoveDataReport('NO PARRY?', [not parryable1.is_present() and not parryable2.is_present()])
+        parryable1 = MoveDataReport('PY1', parryable_frames1)
+        parryable2 = MoveDataReport('PY2', parryable_frames2)
+        unparryable = MoveDataReport('NO PARRY?', [not parryable1.is_present() and not parryable2.is_present()])
 
         return [
-            misc.MoveDataReport.MoveDataReport('TC', tc_frames),
-            misc.MoveDataReport.MoveDataReport('TJ', tj_frames),
-            misc.MoveDataReport.MoveDataReport('BUF', buffer_frames),
-            misc.MoveDataReport.MoveDataReport('xx', cancel_frames),
-            misc.MoveDataReport.MoveDataReport('PC', pc_frames),
-            misc.MoveDataReport.MoveDataReport('HOM1', homing_frames1),
-            misc.MoveDataReport.MoveDataReport('HOM2', homing_frames2),
-            misc.MoveDataReport.MoveDataReport('SKIP', startup_frames),
-            misc.MoveDataReport.MoveDataReport('FROZ', frozen_frames),
-            #parryable1,
-            #parryable2,
-            #unparryable
+            MoveDataReport('TC', tc_frames),
+            MoveDataReport('TJ', tj_frames),
+            MoveDataReport('BUF', buffer_frames),
+            MoveDataReport('xx', cancel_frames),
+            MoveDataReport('PC', pc_frames),
+            MoveDataReport('HOM1', homing_frames1),
+            MoveDataReport('HOM2', homing_frames2),
+            MoveDataReport('SKIP', startup_frames),
+            MoveDataReport('FROZ', frozen_frames),
         ]
 
     def IsFightOver(self):
