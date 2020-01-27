@@ -10,7 +10,7 @@ from game_parser.TekkenGameState import TekkenGameState
 import time
 from enum import Enum
 
-class TekkenEncyclopedia:
+class FrameDataListener:
     def __init__(self, isPlayerOne):
         # a single class instance should be sufficient
         # sibling instances seem to make it more complicated

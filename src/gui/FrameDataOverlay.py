@@ -8,7 +8,7 @@ import sys
 from . import Overlay
 from . import t_tkinter
 
-from game_parser import TekkenEncyclopedia
+from sidecar import FrameDataListener
 
 @enum.unique
 class DataColumns(enum.Enum):
@@ -222,8 +222,8 @@ class FrameDataOverlay(Overlay.Overlay):
                 self.r_live_recovery.set(r_recovery)
 
     def init_encyclopedia(self):
-        self.cyclopedia_p1 = TekkenEncyclopedia.TekkenEncyclopedia(True)
-        self.cyclopedia_p2 = TekkenEncyclopedia.TekkenEncyclopedia(False)
+        self.cyclopedia_p1 = FrameDataListener.FrameDataListener(True)
+        self.cyclopedia_p2 = FrameDataListener.FrameDataListener(False)
 
     def update_encyclopedia(self):
         self.cyclopedia_p1.Update(self.state)
