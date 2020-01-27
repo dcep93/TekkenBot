@@ -10,6 +10,7 @@ class Recorder(TekkenGameReader.TekkenGameReader):
     active = True
 
     def __init__(self, pickle_dest):
+        print("recording to %s" % pickle_dest)
         super().__init__()
         signal.signal(signal.SIGINT, lambda _,__: self.save_and_quit(pickle_dest))
 
@@ -38,6 +39,7 @@ class Recorder(TekkenGameReader.TekkenGameReader):
 
 class Reader(TekkenGameReader.TekkenGameReader):
     def __init__(self, pickle_src):
+        print("loading from %s" % pickle_src)
         super().__init__()
 
         cls = self.__class__
@@ -48,7 +50,7 @@ class Reader(TekkenGameReader.TekkenGameReader):
             print("no data in pickle")
             exit(1)
 
-        cls.offset = cls.load()
+        cls.offset = time.time() - cls.load()
 
     @classmethod
     def load(cls):

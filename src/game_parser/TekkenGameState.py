@@ -1,6 +1,6 @@
 from . import TekkenGameReader
 
-import game_parser.MoveDataReport
+from game_parser.MoveDataReport import MoveDataReport
 
 from . import MoveInfoEnums
 
