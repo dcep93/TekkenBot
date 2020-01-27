@@ -2,9 +2,9 @@ import pickle
 import signal
 import time
 
-from . import TekkenGameReader
+from . import GameReader
 
-class Recorder(TekkenGameReader.TekkenGameReader):
+class Recorder(GameReader.GameReader):
     all_datas = []
     num_datas = 0
     active = True
@@ -37,7 +37,7 @@ class Recorder(TekkenGameReader.TekkenGameReader):
             pickle.dump(cls.all_datas, fh)
         exit(1)
 
-class Reader(TekkenGameReader.TekkenGameReader):
+class Reader(GameReader.GameReader):
     def __init__(self, pickle_src):
         print("loading from %s" % pickle_src)
         super().__init__()

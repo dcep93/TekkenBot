@@ -1,4 +1,4 @@
-from . import TekkenGameReader
+from . import GameReader
 
 from game_parser import ScriptedGame
 
@@ -13,7 +13,7 @@ class GameState(GameStateGetters.GameStateGetters):
         elif Flags.Flags.pickle_src is not None:
             self.gameReader = ScriptedGame.Reader(Flags.Flags.pickle_src)
         else:
-            self.gameReader = TekkenGameReader.TekkenGameReader()
+            self.gameReader = GameReader.GameReader()
 
         self.duplicateFrameObtained = 0
         self.stateLog = []
