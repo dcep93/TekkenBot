@@ -23,15 +23,6 @@ class TekkenEncyclopedia:
         else:
             return "p2: "
 
-    def GetFrameAdvantage(self, moveId, isOnBlock = True):
-        if moveId in self.FrameData:
-            if isOnBlock:
-                return self.FrameData[moveId].onBlock
-            else:
-                return self.FrameData[moveId].onNormalHit
-        else:
-            return None
-
     def Update(self, gameState: TekkenGameState):
         if self.isPlayerOne:
             gameState.FlipMirror()
@@ -41,6 +32,7 @@ class TekkenEncyclopedia:
         if self.isPlayerOne:
             gameState.FlipMirror()
 
+    # uhh this seems wrong
     def ShouldDetermineFrameData(self, gameState):
         if gameState.IsBotBlocking() or gameState.IsBotGettingHit() or gameState.IsBotBeingThrown() or gameState.IsBotBeingKnockedDown() or gameState.IsBotBeingWallSplatted():
             if gameState.DidBotIdChangeXMovesAgo(self.active_frame_wait) or gameState.DidBotTimerInterruptXMovesAgo(self.active_frame_wait):
@@ -51,7 +43,7 @@ class TekkenEncyclopedia:
         is_recovering_before_long_active_frame_move_completes = (gameState.GetBotRecovery() - gameState.GetBotMoveTimer() == 0)
         gameState.BackToTheFuture(self.active_frame_wait)
 
-        if (not self.active_frame_wait >= gameState.GetOppActiveFrames() + 1) and not is_recovering_before_long_active_frame_move_completes:
+        if (self.active_frame_wait < gameState.GetOppActiveFrames() + 1) and not is_recovering_before_long_active_frame_move_completes:
             self.active_frame_wait += 1
         else:
             self.DetermineFrameDataHelper(gameState)
