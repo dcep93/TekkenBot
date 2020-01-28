@@ -12,32 +12,25 @@ from enum import Enum
 
 class FrameDataListener:
     def __init__(self, isPlayerOne):
-        # a single class instance should be sufficient
-        # sibling instances seem to make it more complicated
         self.isPlayerOne = isPlayerOne
 
         self.active_frame_wait = 1
 
-    def Update(self, gameState: GameState):
-        if self.isPlayerOne:
-            gameState.FlipMirror()
-
-        if self.ShouldDetermineFrameData(gameState): self.DetermineFrameData(gameState)
-
-        if self.isPlayerOne:
-            gameState.FlipMirror()
+    def Update(self, gameState):
+        if self.ShouldDetermineFrameData(gameState):
+            self.DetermineFrameData(gameState)
 
     def ShouldDetermineFrameData(self, gameState):
-        if gameState.get(True).IsBlocking() or gameState.get(True).IsGettingHit() or gameState.get(False).IsInThrowing() or gameState.get(True).IsBeingKnockedDown() or gameState.get(True).IsGettingWallSplatted():
-            if gameState.DidIdChangeXMovesAgo(True, self.active_frame_wait) or gameState.DidTimerInterruptXMovesAgo(True, self.active_frame_wait):
+        if gameState.get(self.isPlayerOne).IsBlocking() or gameState.get(self.isPlayerOne).IsGettingHit() or gameState.get(self.isPlayerOne).IsInThrowing() or gameState.get(self.isPlayerOne).IsBeingKnockedDown() or gameState.get(self.isPlayerOne).IsGettingWallSplatted():
+            if gameState.DidIdChangeXMovesAgo(self.isPlayerOne, self.active_frame_wait) or gameState.DidTimerInterruptXMovesAgo(self.isPlayerOne, self.active_frame_wait):
                     return True
         return False
 
     def DetermineFrameData(self, gameState):
-        is_recovering_before_long_active_frame_move_completes = (gameState.get(True).recovery - gameState.get(True).move_timer == 0)
+        is_recovering_before_long_active_frame_move_completes = (gameState.get(self.isPlayerOne).recovery - gameState.get(self.isPlayerOne).move_timer == 0)
         gameState.Rewind(self.active_frame_wait)
 
-        if (self.active_frame_wait < gameState.get(False).GetActiveFrames() + 1) and not is_recovering_before_long_active_frame_move_completes:
+        if (self.active_frame_wait < gameState.get(not self.isPlayerOne).GetActiveFrames() + 1) and not is_recovering_before_long_active_frame_move_completes:
             self.active_frame_wait += 1
         else:
             self.DetermineFrameDataHelper(gameState)
@@ -51,35 +44,35 @@ class FrameDataListener:
 
         gameState.Rewind(self.active_frame_wait)
 
-        opp_id = gameState.get(False).move_id
+        opp_id = gameState.get(not self.isPlayerOne).move_id
 
         frameDataEntry = FrameDataEntry(self.isPlayerOne)
 
         frameDataEntry.move_id = opp_id
         frameDataEntry.currentActiveFrame = currentActiveFrame
-        frameDataEntry.startup = gameState.get(False).startup
-        frameDataEntry.activeFrames = gameState.get(False).GetActiveFrames()
-        frameDataEntry.hitType = AttackType(gameState.get(False).attack_type).name + ("_THROW" if gameState.get(False).IsAttackThrow() else "")
-        frameDataEntry.recovery = gameState.get(False).recovery
+        frameDataEntry.startup = gameState.get(not self.isPlayerOne).startup
+        frameDataEntry.activeFrames = gameState.get(not self.isPlayerOne).GetActiveFrames()
+        frameDataEntry.hitType = AttackType(gameState.get(not self.isPlayerOne).attack_type).name + ("_THROW" if gameState.get(not self.isPlayerOne).IsAttackThrow() else "")
+        frameDataEntry.recovery = gameState.get(not self.isPlayerOne).recovery
         frameDataEntry.input = gameState.GetCurrentMoveString(not self.isPlayerOne)
 
-        frameDataEntry.tracking = gameState.GetTrackingType(False, frameDataEntry.startup)
+        frameDataEntry.tracking = gameState.GetTrackingType(not self.isPlayerOne, frameDataEntry.startup)
 
         gameState.Unrewind()
 
-        frameDataEntry.throwTech = gameState.get(True).throw_tech
+        frameDataEntry.throwTech = gameState.get(self.isPlayerOne).throw_tech
 
-        time_till_recovery_opp = gameState.get(False).GetFramesTillNextMove()
-        time_till_recovery_bot = gameState.get(True).GetFramesTillNextMove()
+        time_till_recovery_opp = gameState.get(not self.isPlayerOne).GetFramesTillNextMove()
+        time_till_recovery_bot = gameState.get(self.isPlayerOne).GetFramesTillNextMove()
 
         new_frame_advantage_calc = time_till_recovery_bot - time_till_recovery_opp
 
         frameDataEntry.currentFrameAdvantage = frameDataEntry.WithPlusIfNeeded(new_frame_advantage_calc)
 
-        if gameState.get(True).IsBlocking():
+        if gameState.get(self.isPlayerOne).IsBlocking():
             frameDataEntry.onBlock = new_frame_advantage_calc
         else:
-            if gameState.get(True).IsGettingCounterHit():
+            if gameState.get(self.isPlayerOne).IsGettingCounterHit():
                 frameDataEntry.onCounterHit = new_frame_advantage_calc
             else:
                 frameDataEntry.onNormalHit = new_frame_advantage_calc

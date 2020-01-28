@@ -105,6 +105,3 @@ class GameSnapshot:
         self.facing_bool = facing_bool
         self.timer_frames_remaining = timer_in_frames
         self.is_player_player_one = is_player_player_one
-
-    def FromMirrored(self):
-        return GameSnapshot(self.opp, self.bot, self.frame_count, self.timer_frames_remaining, self.facing_bool, self.is_player_player_one)
