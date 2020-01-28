@@ -64,3 +64,8 @@ class GameState(GameStateGetters.GameStateGetters):
     def Unrewind(self):
         self.stateLog += self.futureStateLog
         self.futureStateLog = None
+
+    def get(playerSelector=None):
+        state = self.stateLog[-1]
+        if playerSelector is None: return state
+        return state.bot if playerSelector else state.opp

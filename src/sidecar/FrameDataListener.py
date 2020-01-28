@@ -64,7 +64,6 @@ class FrameDataListener:
         frameDataEntry.recovery = gameState.GetOppRecovery()
         frameDataEntry.input = gameState.GetCurrentOppMoveString()
 
-        frameDataEntry.technical_state_reports = gameState.GetOppTechnicalStates(frameDataEntry.startup - 1)
         frameDataEntry.tracking = gameState.GetOppTrackingType(frameDataEntry.startup)
 
         gameState.Unrewind()
@@ -121,7 +120,6 @@ class FrameDataEntry:
         self.hitRecovery = self.unknown
 
         self.calculated_startup = -1
-        self.technical_state_reports = []
         self.throwTech = None
         self.tracking = ComplexMoveStates.F_MINUS
 
@@ -145,22 +143,6 @@ class FrameDataEntry:
             notes += self.throwTech.name + " "
 
         self.calculated_startup = self.startup
-        for report in self.technical_state_reports:
-            if 'TC' in report.name and report.is_present():
-                notes += str(report)
-            elif 'TJ' in report.name and report.is_present():
-                notes += str(report)
-            elif 'PC' in report.name and report.is_present():
-                notes += str(report)
-            elif 'SKIP' in report.name and report.is_present():
-                #print(report)
-                self.calculated_startup -= report.total_present()
-            elif 'FROZ' in report.name and report.is_present():
-                #print(report)
-                self.calculated_startup -= report.total_present()
-            else:
-                if report.is_present():
-                    notes += str(report)
 
         if self.calculated_startup != self.startup:
             self.calculated_startup = str(self.calculated_startup) + "?"

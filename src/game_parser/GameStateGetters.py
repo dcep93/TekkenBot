@@ -143,65 +143,6 @@ class GameStateGetters:
         else:
             return MoveInfoEnums.ComplexMoveStates.F_MINUS
 
-    def GetOppTechnicalStates(self, startup):
-        #opp_id = self.stateLog[-1].opp.move_id
-        tc_frames = []
-        tj_frames = []
-        cancel_frames = []
-        buffer_frames = []
-        pc_frames = []
-        homing_frames1 = []
-        homing_frames2 = []
-        parryable_frames1 = []
-        parryable_frames2 = []
-        startup_frames = []
-        frozen_frames = []
-
-        previous_state = None
-        skipped_frames_counter = 0
-        frozen_frames_counter = 0
-        for i, state in enumerate(reversed(self.stateLog[-startup:])):
-            if previous_state != None:
-                is_skipped = state.opp.move_timer != previous_state.opp.move_timer - 1
-                if is_skipped:
-                    skipped_frames_counter += 1
-                is_frozen = state.bot.move_timer == previous_state.bot.move_timer
-                if is_frozen:
-                    frozen_frames_counter += 1
-            else:
-                is_skipped = False
-                is_frozen = False
-            if skipped_frames_counter + i <= startup:
-                tc_frames.append(state.opp.IsTechnicalCrouch())
-                tj_frames.append(state.opp.IsTechnicalJump())
-                cancel_frames.append(state.opp.IsAbleToAct())
-                buffer_frames.append(state.opp.IsBufferable())
-                pc_frames.append(state.opp.IsPowerCrush())
-                homing_frames1.append(state.opp.IsHoming1())
-                homing_frames2.append(state.opp.IsHoming2())
-                parryable_frames1.append(state.opp.IsParryable1())
-                parryable_frames2.append(state.opp.IsParryable2())
-                startup_frames.append(is_skipped)
-                frozen_frames.append(is_frozen)
-
-            previous_state = state
-
-        parryable1 = MoveDataReport('PY1', parryable_frames1)
-        parryable2 = MoveDataReport('PY2', parryable_frames2)
-        unparryable = MoveDataReport('NO PARRY?', [not parryable1.is_present() and not parryable2.is_present()])
-
-        return [
-            MoveDataReport('TC', tc_frames),
-            MoveDataReport('TJ', tj_frames),
-            MoveDataReport('BUF', buffer_frames),
-            MoveDataReport('xx', cancel_frames),
-            MoveDataReport('PC', pc_frames),
-            MoveDataReport('HOM1', homing_frames1),
-            MoveDataReport('HOM2', homing_frames2),
-            MoveDataReport('SKIP', startup_frames),
-            MoveDataReport('FROZ', frozen_frames),
-        ]
-
     def GetCurrentOppMoveName(self):
         move_id = self.stateLog[-1].opp.move_id
         return self.GetOppMoveName(move_id, is_for_bot=False)
