@@ -98,9 +98,9 @@ class BotSnapshot:
         return self.is_cancelable
 
 class GameSnapshot:
-    def __init__(self, bot, opp, frame_count, timer_in_frames, facing_bool, is_player_player_one):
-        self.bot = bot
-        self.opp = opp
+    def __init__(self, p1, p2, frame_count, timer_in_frames, facing_bool, is_player_player_one):
+        self.p1 = p1
+        self.p2 = p2
         self.frame_count = frame_count
         self.facing_bool = facing_bool
         self.timer_frames_remaining = timer_in_frames

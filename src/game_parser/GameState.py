@@ -55,16 +55,16 @@ class GameState:
     def get(self, playerSelector=None):
         state = self.stateLog[-1]
         if playerSelector is None: return state
-        return state.bot if playerSelector else state.opp
+        return state.p1 if playerSelector else state.p2
 
     def GetLastActiveFrameHitWasOn(self, isPlayerOne, frames):
         returnNextState = False
         for state in reversed(self.stateLog[-(frames + 2):]):
             if returnNextState:
-                player = state.opp if isPlayerOne else state.bot
+                player = state.p2 if isPlayerOne else state.p1
                 return (player.move_timer - player.startup) + 1
 
-            player = state.bot if isPlayerOne else state.opp
+            player = state.p1 if isPlayerOne else state.p2
             if player.move_timer == 1:
                 returnNextState = True
         return 0
@@ -83,7 +83,7 @@ class GameState:
     def getOldPlayer(self, isPlayerOne, framesAgo):
         if len(self.stateLog) <= framesAgo: return None
         state = self.stateLog[-framesAgo]
-        return state.bot if isPlayerOne else state.opp
+        return state.p1 if isPlayerOne else state.p2
 
     def GetCurrentMoveName(self, isPlayerOne):
         move_id = self.get(isPlayerOne).move_id
@@ -103,7 +103,7 @@ class GameState:
         if len(self.stateLog) > startup:
             complex_states = [MoveInfoEnums.ComplexMoveStates.UNKN]
             for state in reversed(self.stateLog[-startup:]):
-                player = state.bot if isPlayerOne else state.opp
+                player = state.p1 if isPlayerOne else state.p2
                 tracking = player.GetTrackingType()
                 if -1 < tracking.value < 8:
                     complex_states.append(tracking)
