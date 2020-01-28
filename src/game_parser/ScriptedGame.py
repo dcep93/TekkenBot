@@ -2,6 +2,7 @@ import pickle
 import signal
 import time
 
+from misc import Flags
 from . import GameReader
 
 class Recorder(GameReader.GameReader):
@@ -61,6 +62,7 @@ class Reader(GameReader.GameReader):
         if len(cls.all_datas) == 0: return -1
 
         next_timestamp = cls.load()
+        if Flags.Flags.fast: return 0
         wait_s = next_timestamp + cls.offset - time.time()
         wait_ms = max(int(wait_s * 1000), 0)
         return wait_ms

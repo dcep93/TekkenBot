@@ -3,6 +3,7 @@ import sys
 class Flags:
     pickle_src = None
     pickle_dest = None
+    fast = False
 
 def handle():
     temp_argv = []
@@ -14,6 +15,8 @@ def handle():
         elif arg == '--dest':
             pickle_dest = sys.argv.pop(0)
             Flags.pickle_dest = pickle_dest
+        elif arg == '--fast':
+            Flags.fast = True
         else:
             temp_argv.append(arg)
     sys.argv = temp_argv
