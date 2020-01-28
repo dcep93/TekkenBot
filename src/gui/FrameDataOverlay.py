@@ -163,10 +163,6 @@ class FrameDataOverlay(Overlay.Overlay):
         self.l_seperator = self.create_padding_frame(2)
         self.r_seperator = self.create_padding_frame(4)
 
-        if self.show_live_framedata:
-            self.l_live_recovery = self.create_live_recovery(fa_p1_label, 0)
-            self.r_live_recovery = self.create_live_recovery(fa_p2_label, 0)
-
         self.text = self.create_textbox(3)
 
         stdout = sys.stdout
@@ -181,13 +177,6 @@ class FrameDataOverlay(Overlay.Overlay):
         padding = t_tkinter.Frame(self.toplevel, width=10)
         padding.grid(row=0, column=col, rowspan=2, sticky=t_tkinter.NSEW)
         return padding
-
-    def create_live_recovery(self, parent, col):
-        live_recovery_var = t_tkinter.StringVar()
-        live_recovery_var.set('???')
-        live_recovery_label = t_tkinter.Label(parent, textvariable=live_recovery_var, font=("Segoe UI", 12), width=5, anchor='c')
-        live_recovery_label.place(rely=0.0, relx=0.0, x=4, y=4, anchor=t_tkinter.NW)
-        return live_recovery_var
 
     def create_frame_advantage_label(self, col):
         frame_advantage_var = t_tkinter.StringVar()
@@ -204,28 +193,11 @@ class FrameDataOverlay(Overlay.Overlay):
         textbox.configure(foreground=Overlay.ColorSchemeEnum.system_text.value)
         return textbox
 
-    def update_state(self):
-        self.update_encyclopedia()
-        # y tho
-        if self.show_live_framedata:
-            if len(self.state.stateLog) > 1:
-                recovery = self.state.get_recovery()
-                if recovery == 0:
-                    l_recovery = r_recovery = '+0'
-                elif recovery > 0:
-                    l_recovery = '+%s' % recovery
-                    r_recovery = str(recovery)
-                else:
-                    l_recovery = str(recovery)
-                    r_recovery = '+%s' % recovery
-                self.l_live_recovery.set(l_recovery)
-                self.r_live_recovery.set(r_recovery)
-
     def init_encyclopedia(self):
         self.cyclopedia_p1 = FrameDataListener.FrameDataListener(True)
         self.cyclopedia_p2 = FrameDataListener.FrameDataListener(False)
 
-    def update_encyclopedia(self):
+    def update_state(self):
         self.cyclopedia_p1.Update(self.state)
         self.cyclopedia_p2.Update(self.state)
 
