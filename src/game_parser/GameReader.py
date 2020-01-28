@@ -30,11 +30,10 @@ import windows
 
 game_string = 'TekkenGame-Win64-Shipping.exe'
 
-class Player(object):
+class Player:
     def __init__(self):
-        self.movelist = []
+        self.movelist = None
         self.movelist_names = []
-        self.movelist_to_use = None
         self.movelist_parser = None
 
 class AddressType(enum.Enum):
@@ -268,8 +267,8 @@ class GameReader:
         self.opponent_side = self.GetValueAtEndOfPointerTrail(processHandle, "OPPONENT_SIDE", False)
         self.is_player_player_one = (self.opponent_side == 1)
 
-        self.p1.movelist_to_use = p1_bot.movelist_to_use
-        self.p2.movelist_to_use = p2_bot.movelist_to_use
+        self.p1.movelist = p1_bot.movelist_to_use
+        self.p2.movelist = p2_bot.movelist_to_use
 
         self.p1.movelist_block, p1_movelist_address = self.PopulateMovelists(processHandle, "P1_Movelist")
         self.p2.movelist_block, p2_movelist_address = self.PopulateMovelists(processHandle, "P2_Movelist")

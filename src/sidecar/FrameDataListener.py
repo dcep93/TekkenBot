@@ -8,16 +8,17 @@ from game_parser.MoveInfoEnums import ThrowTechs
 from game_parser.MoveInfoEnums import ComplexMoveStates
 
 class FrameDataListener:
-    def __init__(self):
-        self.listeners = [PlayerListener(i) for i in [True, False]]
+    def __init__(self, printer):
+        self.listeners = [PlayerListener(i, printer) for i in [True, False]]
 
     def update(self, gameState):
         for listener in self.listeners:
             listener.Update(gameState)
 
 class PlayerListener:
-    def __init__(self, isP1):
+    def __init__(self, isP1, printer):
         self.isP1 = isP1
+        self.printer = printer
 
         self.active_frame_wait = 1
 
@@ -87,12 +88,9 @@ class PlayerListener:
 
         frameDataEntry.move_str = gameState.GetCurrentMoveName(not self.isP1)
 
-        self.printFrameData(frameDataEntry)
+        self.printer.print(frameDataEntry)
 
         gameState.Rewind(self.active_frame_wait)
-
-    def printFrameData(self, frameDataEntry):
-        print(str(frameDataEntry))
 
 class FrameDataEntry:
     unknown = '??'

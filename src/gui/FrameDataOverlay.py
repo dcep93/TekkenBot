@@ -76,10 +76,9 @@ class Printer:
         else:
             return Overlay.ColorSchemeEnum.advantage_plus
 
-    def write(self, output_str):
-        exit()
-        # todo review this whole func and instance attributes
-        raise Exception('how does this work')
+    def print(self, frameDataEntry):
+        print(frameDataEntry)
+
         lines = int(self.widget.index('end-1c').split('.')[0])
         max_lines = 5
         if lines > max_lines:
@@ -132,10 +131,10 @@ class FrameDataOverlay(Overlay.Overlay):
     def __init__(self, master, state):
         super().__init__(master, (1021, 86))
 
-        self.listener = FrameDataListener.FrameDataListener()
-        self.state = state
-
         self.init_tkinter()
+
+        self.listener = FrameDataListener.FrameDataListener(self.printer)
+        self.state = state
 
     def update_state(self):
         self.listener.update(self.state)
@@ -167,11 +166,11 @@ class FrameDataOverlay(Overlay.Overlay):
 
         self.text = self.create_textbox(3)
 
-        self.redirector = Printer(self.text, style, self.fa_p1_var, self.fa_p2_var)
+        self.printer = Printer(self.text, style, self.fa_p1_var, self.fa_p2_var)
 
         self.text.configure(state="normal")
         self.text.delete("1.0", "end")
-        self.redirector.set_columns_to_print(self.master.tekken_config.get_all(DataColumns, True))
+        self.printer.set_columns_to_print(self.master.tekken_config.get_all(DataColumns, True))
 
         self.text.configure(state="disabled")
 
@@ -196,7 +195,7 @@ class FrameDataOverlay(Overlay.Overlay):
         return textbox
 
     def update_column_to_print(self, enum, value):
-        self.redirector.columns_to_print[enum] = value
-        self.redirector.populate_column_names()
+        self.printer.columns_to_print[enum] = value
+        self.printer.populate_column_names()
         self.master.tekken_config.set_property(enum, value)
         self.master.tekken_config.write()

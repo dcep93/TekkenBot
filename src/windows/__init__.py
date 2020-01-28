@@ -1,6 +1,6 @@
 import ctypes
 
-class Windows(object):
+class Windows:
     def __init__(self):
         self.k32 = ctypes.windll.kernel32
 
