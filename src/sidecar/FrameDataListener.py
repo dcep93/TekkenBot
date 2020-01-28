@@ -4,7 +4,6 @@ Collects information from GameState over time in hopes of synthesizing it and pr
 """
 
 from game_parser.MoveInfoEnums import AttackType
-from game_parser.MoveInfoEnums import ThrowTechs
 from game_parser.MoveInfoEnums import ComplexMoveStates
 
 class FrameDataListener:
@@ -46,8 +45,6 @@ class PlayerListener:
     def DetermineFrameDataHelper(self, gameState):
         gameState.Unrewind()
 
-        currentActiveFrame = gameState.GetLastActiveFrameHitWasOn(self.isP1, self.active_frame_wait)
-
         gameState.Rewind(self.active_frame_wait)
 
         opp_id = gameState.get(not self.isP1).move_id
@@ -55,18 +52,13 @@ class PlayerListener:
         frameDataEntry = FrameDataEntry(self.isP1)
 
         frameDataEntry.move_id = opp_id
-        frameDataEntry.currentActiveFrame = currentActiveFrame
         frameDataEntry.startup = gameState.get(not self.isP1).startup
         frameDataEntry.activeFrames = gameState.get(not self.isP1).GetActiveFrames()
-        frameDataEntry.hitType = AttackType(gameState.get(not self.isP1).attack_type).name + ("_THROW" if gameState.get(not self.isP1).IsAttackThrow() else "")
+        frameDataEntry.hit_type = AttackType(gameState.get(not self.isP1).attack_type).name + ("_THROW" if gameState.get(not self.isP1).IsAttackThrow() else "")
         frameDataEntry.recovery = gameState.get(not self.isP1).recovery
         frameDataEntry.input = gameState.GetCurrentMoveString(not self.isP1)
 
-        frameDataEntry.tracking = gameState.GetTrackingType(not self.isP1, frameDataEntry.startup)
-
         gameState.Unrewind()
-
-        frameDataEntry.throwTech = gameState.get(self.isP1).throw_tech
 
         time_till_recovery_opp = gameState.get(not self.isP1).GetFramesTillNextMove()
         time_till_recovery_bot = gameState.get(self.isP1).GetFramesTillNextMove()
@@ -76,15 +68,15 @@ class PlayerListener:
         frameDataEntry.currentFrameAdvantage = frameDataEntry.WithPlusIfNeeded(new_frame_advantage_calc)
 
         if gameState.get(self.isP1).IsBlocking():
-            frameDataEntry.onBlock = new_frame_advantage_calc
+            frameDataEntry.on_block = frameDataEntry.currentFrameAdvantage
         else:
             if gameState.get(self.isP1).IsGettingCounterHit():
-                frameDataEntry.onCounterHit = new_frame_advantage_calc
+                frameDataEntry.on_counter_hit = frameDataEntry.currentFrameAdvantage
             else:
-                frameDataEntry.onNormalHit = new_frame_advantage_calc
+                frameDataEntry.on_normal_hit = frameDataEntry.currentFrameAdvantage
 
-        frameDataEntry.hitRecovery = time_till_recovery_opp
-        frameDataEntry.blockRecovery = time_till_recovery_bot
+        frameDataEntry.hit_recovery = time_till_recovery_opp
+        frameDataEntry.block_recovery = time_till_recovery_bot
 
         frameDataEntry.move_str = gameState.GetCurrentMoveName(not self.isP1)
 
@@ -94,69 +86,46 @@ class PlayerListener:
 
 class FrameDataEntry:
     unknown = '??'
+    columns = [
+        'input'
+        'move_id',
+        'move_str',
+        'hit_type',
+        'startup',
+        'on_block',
+        'on_normal_hit',
+        'on_counter_hit',
+        'recovery',
+        'hit_recovery',
+        'block_recovery'
+    ]
     def __init__(self, isP1):
         self.isP1 = isP1
 
+        self.currentFrameAdvantage = self.unknown
+
+        self.input = self.unknown
         self.move_id = self.unknown
         self.move_str = self.unknown
+        self.hit_type = self.unknown
         self.startup = self.unknown
-        self.hitType = self.unknown
-        self.onBlock = self.unknown
-        self.onCounterHit = self.unknown
-        self.onNormalHit = self.unknown
+        self.on_block = self.unknown
+        self.on_normal_hit = self.unknown
+        self.on_counter_hit = self.unknown
         self.recovery = self.unknown
-        self.blockFrames = self.unknown
-        self.activeFrames = self.unknown
-        self.currentFrameAdvantage = self.unknown
-        self.currentActiveFrame = self.unknown
-        self.input = self.unknown
-        self.blockRecovery = self.unknown
-        self.hitRecovery = self.unknown
-
-        self.calculated_startup = -1
-        self.throwTech = None
-        self.tracking = ComplexMoveStates.F_MINUS
+        self.hit_recovery = self.unknown
+        self.block_recovery = self.unknown
 
     def WithPlusIfNeeded(self, value):
-        try:
-            if value >= 0:
-                return '+' + str(value)
-            else:
-                return str(value)
-        except:
-            return str(value)
+        v = str(value)
+        if value >= 0:
+            return '+' + v
+        else:
+            return v
 
-    def getPrefix(self):
-        return "p1: " if self.isP1 else "p2: "
-
-    # todo revisit
     def __repr__(self):
-        notes = ''
+        values = [self.__getattribute__(i) for i in self.columns]
 
-        if self.throwTech != None and self.throwTech != ThrowTechs.NONE:
-            notes += self.throwTech.name + " "
-
-        self.calculated_startup = self.startup
-
-        if self.calculated_startup != self.startup:
-            self.calculated_startup = str(self.calculated_startup) + "?"
-
-        non_nerd_string = "{:^5}|{:^4}|{:^4}|{:^7}|{:^4}|{:^4}|{:^4}|{:^5}|{:^3}|{:^2}|{:^3}|{:^3}|{:^3}|".format(
-            str(self.input),
-            str(self.move_id),
-            self.move_str,
-            str(self.hitType)[:7],
-            str(self.calculated_startup),
-            self.WithPlusIfNeeded(self.onBlock),
-            self.WithPlusIfNeeded(self.onNormalHit),
-            self.WithPlusIfNeeded(self.onCounterHit),
-            (str(self.currentActiveFrame) + "/" + str(self.activeFrames)),
-            self.tracking.name.replace('_MINUS', '-').replace("_PLUS", '+').replace(ComplexMoveStates.UNKN.name, '?'),
-            self.recovery,
-            self.hitRecovery,
-            self.blockRecovery
-        )
-
-        notes_string = "{}".format(notes)
-        now_string = " NOW:{}".format(str(self.currentFrameAdvantage))
-        return self.getPrefix() + non_nerd_string + notes_string + now_string
+        playerName = "p1" if self.isP1 else "p2"
+        string = '|'.join(values)
+        return "%s: %s NOW:%d" % (playerName, string, self.currentFrameAdvantage)
