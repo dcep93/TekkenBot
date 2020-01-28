@@ -87,7 +87,7 @@ class PlayerListener:
 class FrameDataEntry:
     unknown = '??'
     columns = [
-        'input'
+        'input',
         'move_id',
         'move_str',
         'hit_type',
@@ -124,8 +124,9 @@ class FrameDataEntry:
             return v
 
     def __repr__(self):
-        values = [self.__getattribute__(i) for i in self.columns]
+        print(self.columns)
+        values = [str(self.__getattribute__(i)) for i in self.columns]
 
         playerName = "p1" if self.isP1 else "p2"
         string = '|'.join(values)
-        return "%s: %s NOW:%d" % (playerName, string, self.currentFrameAdvantage)
+        return "%s: %s NOW:%s" % (playerName, string, self.currentFrameAdvantage)
