@@ -3,32 +3,6 @@ from . import MoveInfoEnums
 import collections
 
 class GameStateGetters:
-    def GetLastActiveFrameHitWasOn(self, frames):
-        returnNextState = False
-        for state in reversed(self.stateLog[-(frames + 2):]):
-            if returnNextState:
-                return (state.opp.move_timer - state.opp.startup) + 1
-
-            if state.bot.move_timer == 1:
-                returnNextState = True
-
-        return 0
-
-    def DidBotTimerInterruptXMovesAgo(self, framesAgo):
-        if len(self.stateLog) > framesAgo:
-            #if self.stateLog[0 - framesAgo].bot.move_id != 32769 or self.stateLog[0 - framesAgo -1].bot.move_id != 32769:
-            return self.stateLog[0 - framesAgo].bot.move_timer < self.stateLog[0 - framesAgo - 1].bot.move_timer
-            #print('{} {}'.format(self.stateLog[0 - framesAgo].bot.move_timer, self.stateLog[0 - framesAgo - 1].bot.move_timer))
-            #return self.stateLog[0 - framesAgo].bot.move_timer != self.stateLog[0 - framesAgo - 1].bot.move_timer + 1
-
-        return False
-
-    def DidBotIdChangeXMovesAgo(self, framesAgo):
-        if len(self.stateLog) > framesAgo:
-            return self.stateLog[0 - framesAgo].bot.move_id != self.stateLog[0 - framesAgo - 1].bot.move_id
-        else:
-            return False
-
     def GetCurrentOppMoveString(self):
         if self.stateLog[-1].opp.movelist_parser != None:
             move_id = self.stateLog[-1].opp.move_id
@@ -39,7 +13,7 @@ class GameStateGetters:
             i = len(self.stateLog)
 
             while(True):
-                next_move, last_move_was_empty_cancel = self.GetOppMoveString(move_id, previous_move_id)
+                next_move, last_move_was_empty_cancel = self.get(False).movelist_parser.input_for_move(move_id, previous_move_id)
                 next_move = str(next_move)
 
                 if last_move_was_empty_cancel:
@@ -67,9 +41,6 @@ class GameStateGetters:
             return ','.join(clean_input_array)
         else:
             return 'N/A'
-
-    def GetOppMoveString(self, move_id, previous_move_id):
-        return self.stateLog[-1].opp.movelist_parser.input_for_move(move_id, previous_move_id)
 
     def GetOppTrackingType(self, startup):
         if len(self.stateLog) > startup:

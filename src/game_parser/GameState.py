@@ -69,3 +69,31 @@ class GameState(GameStateGetters.GameStateGetters):
         state = self.stateLog[-1]
         if playerSelector is None: return state
         return state.bot if playerSelector else state.opp
+
+    def GetLastActiveFrameHitWasOn(self, isPlayerOne, frames):
+        returnNextState = False
+        for state in reversed(self.stateLog[-(frames + 2):]):
+            if returnNextState:
+                player = state.opp if isPlayerOne else state.bot
+                return (player.move_timer - player.startup) + 1
+
+            player = state.bot if isPlayerOne else state.opp
+            if player.move_timer == 1:
+                returnNextState = True
+        return 0
+
+    def DidTimerInterruptXMovesAgo(self, isPlayerOne, framesAgo):
+        player = self.getOldPlayer(isPlayerOne, framesAgo)
+        if player is None: return False
+        return player.move_timer < player.move_timer
+
+    def DidIdChangeXMovesAgo(self, isPlayerOne, framesAgo):
+        player_before = self.getOldPlayer(isPlayerOne, framesAgo + 1)
+        if player_before is None: return False
+        player_ago = self.getOldPlayer(isPlayerOne, framesAgo)
+        return player_ago.move_id != player_before.move_id
+
+    def getOldPlayer(self, isPlayerOne, framesAgo):
+        if len(self.stateLog) <= framesAgo: return None
+        state = self.stateLog[-framesAgo]
+        return state.bot if isPlayerOne else state.opp       

@@ -29,7 +29,7 @@ class FrameDataListener:
 
     def ShouldDetermineFrameData(self, gameState):
         if gameState.get(True).IsBlocking() or gameState.get(True).IsGettingHit() or gameState.get(False).IsInThrowing() or gameState.get(True).IsBeingKnockedDown() or gameState.get(True).IsGettingWallSplatted():
-            if gameState.DidBotIdChangeXMovesAgo(self.active_frame_wait) or gameState.DidBotTimerInterruptXMovesAgo(self.active_frame_wait):
+            if gameState.DidIdChangeXMovesAgo(True, self.active_frame_wait) or gameState.DidTimerInterruptXMovesAgo(True, self.active_frame_wait):
                     return True
         return False
 
@@ -47,7 +47,7 @@ class FrameDataListener:
     def DetermineFrameDataHelper(self, gameState):
         gameState.Unrewind()
 
-        currentActiveFrame = gameState.GetLastActiveFrameHitWasOn(self.active_frame_wait)
+        currentActiveFrame = gameState.GetLastActiveFrameHitWasOn(self.isPlayerOne, self.active_frame_wait)
 
         gameState.Rewind(self.active_frame_wait)
 
