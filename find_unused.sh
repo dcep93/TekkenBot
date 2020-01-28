@@ -18,12 +18,10 @@ function find_unused() {
         count=`count_matches $func` || (echo $func && exit 1)
         if [[ $count -lt 2 ]]; then
             echo "$file $func"
-        else
-            echo $func keep
         fi
     done
 }
 
-for raw_file in $raw_files;
-    find_unused raw_file
+for raw_file in $raw_files; do
+    find_unused $raw_file
 done
