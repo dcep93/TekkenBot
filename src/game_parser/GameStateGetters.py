@@ -1,16 +1,8 @@
-from game_parser.MoveDataReport import MoveDataReport
-
 from . import MoveInfoEnums
 
 import collections
 
 class GameStateGetters:
-    def IsBotGettingCounterHit(self):
-        return self.stateLog[-1].bot.IsGettingCounterHit()
-
-    def IsBotGettingHit(self):
-        return self.stateLog[-1].bot.IsGettingHit()
-
     def IsOppAttackThrow(self):
         return self.stateLog[-1].opp.IsAttackThrow()
 
@@ -55,17 +47,8 @@ class GameStateGetters:
     def GetOppMoveTimer(self):
         return self.stateLog[-1].opp.move_timer
 
-    def IsBotBeingKnockedDown(self):
-        return self.stateLog[-1].bot.IsBeingKnockedDown()
-
-    def IsBotBeingWallSplatted(self):
-        return self.stateLog[-1].bot.IsGettingWallSplatted()
-
     def GetOppDamage(self):
         return self.stateLog[-1].opp.attack_damage
-
-    def IsBotBeingThrown(self):
-        return self.stateLog[-1].opp.IsInThrowing()
 
     def DidBotTimerInterruptXMovesAgo(self, framesAgo):
         if len(self.stateLog) > framesAgo:

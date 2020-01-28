@@ -87,35 +87,12 @@ class BotSnapshot:
     def GetActiveFrames(self):
         return self.startup_end - self.startup + 1
 
-    def IsTechnicalCrouch(self):
-        return self.simple_state in (MoveInfoEnums.SimpleMoveStates.CROUCH, MoveInfoEnums.SimpleMoveStates.CROUCH_BACK, MoveInfoEnums.SimpleMoveStates.CROUCH_FORWARD)
-
-    def IsTechnicalJump(self):
-        return self.is_jump
-
-    def IsHoming1(self):
-        return self.complex_state == MoveInfoEnums.ComplexMoveStates.S_PLUS
-
-    def IsHoming2(self):
-        return self.complex_state == MoveInfoEnums.ComplexMoveStates.S
-
-    def IsPowerCrush(self):
-        return self.power_crush_flag
-
     def IsBeingKnockedDown(self):
         return self.simple_state == MoveInfoEnums.SimpleMoveStates.KNOCKDOWN
 
+    # todo - for keeping cancelable states longer
     def IsAbleToAct(self):
         return self.is_cancelable
-
-    def IsParryable1(self):
-        return self.is_parry_1
-
-    def IsParryable2(self):
-        return self.is_parry_2
-
-    def IsBufferable(self):
-        return self.is_bufferable
 
 class GameSnapshot:
     def __init__(self, bot, opp, frame_count, timer_in_frames, facing_bool, is_player_player_one):
