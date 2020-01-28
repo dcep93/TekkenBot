@@ -6,11 +6,16 @@ Collects information from GameState over time in hopes of synthesizing it and pr
 from game_parser.MoveInfoEnums import AttackType
 from game_parser.MoveInfoEnums import ThrowTechs
 from game_parser.MoveInfoEnums import ComplexMoveStates
-from game_parser.GameState import GameState
-import time
-from enum import Enum
 
 class FrameDataListener:
+    def __init__(self):
+        self.listeners = [PlayerListener(i) for i in [True, False]]
+
+    def update(self, gameState):
+        for listener in self.listeners:
+            listener.Update(gameState)
+
+class PlayerListener:
     def __init__(self, isP1):
         self.isP1 = isP1
 

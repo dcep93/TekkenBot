@@ -27,9 +27,9 @@ class DataColumns(enum.Enum):
     opp = 'frames before defender can act'
     notes = 'additional move properties'
 
-class TextRedirector(object):
+class Printer:
     col_max_length = 8
-    def __init__(self, stdout, widget, style, fa_p1_var, fa_p2_var):
+    def __init__(self, widget, style, fa_p1_var, fa_p2_var):
         self.widget = widget
         self.fa_p1_var = fa_p1_var
         self.fa_p2_var = fa_p2_var
@@ -132,11 +132,13 @@ class FrameDataOverlay(Overlay.Overlay):
     def __init__(self, master, state):
         super().__init__(master, (1021, 86))
 
-        self.show_live_framedata = self.master.tekken_config.get_property(Overlay.DisplaySettings.tiny_live_frame_data_numbers, True)
-
-        self.init_encyclopedia()
-        self.init_tkinter()
+        self.listener = FrameDataListener.FrameDataListener()
         self.state = state
+
+        self.init_tkinter()
+
+    def update_state(self):
+        self.listener.update(self.state)
 
     def init_tkinter(self):
         style = t_tkinter.Style()
@@ -165,8 +167,8 @@ class FrameDataOverlay(Overlay.Overlay):
 
         self.text = self.create_textbox(3)
 
-        stdout = sys.stdout
-        self.redirector = TextRedirector(stdout, self.text, style, self.fa_p1_var, self.fa_p2_var)
+        self.redirector = Printer(self.text, style, self.fa_p1_var, self.fa_p2_var)
+
         self.text.configure(state="normal")
         self.text.delete("1.0", "end")
         self.redirector.set_columns_to_print(self.master.tekken_config.get_all(DataColumns, True))
@@ -192,14 +194,6 @@ class FrameDataOverlay(Overlay.Overlay):
         textbox.configure(background=self.background_color)
         textbox.configure(foreground=Overlay.ColorSchemeEnum.system_text.value)
         return textbox
-
-    def init_encyclopedia(self):
-        self.cyclopedia_p1 = FrameDataListener.FrameDataListener(True)
-        self.cyclopedia_p2 = FrameDataListener.FrameDataListener(False)
-
-    def update_state(self):
-        self.cyclopedia_p1.Update(self.state)
-        self.cyclopedia_p2.Update(self.state)
 
     def update_column_to_print(self, enum, value):
         self.redirector.columns_to_print[enum] = value

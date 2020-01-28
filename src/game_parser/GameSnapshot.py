@@ -105,3 +105,11 @@ class GameSnapshot:
         self.facing_bool = facing_bool
         self.timer_frames_remaining = timer_in_frames
         self.is_player_player_one = is_player_player_one
+
+    # temp until pickle rebuilt
+    def __getattr__(self, name):
+        if name == 'p1':
+            name = 'bot'
+        elif name == 'p2':
+            name = 'opp'
+        return object.__getattribute__(self, name)
