@@ -134,12 +134,9 @@ class FrameDataOverlay(Overlay.Overlay):
 
         self.show_live_framedata = self.master.tekken_config.get_property(Overlay.DisplaySettings.tiny_live_frame_data_numbers, True)
 
-        self.listener = FrameDataListener.FrameDataListener()
+        self.init_encyclopedia()
         self.init_tkinter()
         self.state = state
-
-    def update_state(self):
-        self.listener.Update(self.state)
 
     def init_tkinter(self):
         style = t_tkinter.Style()
@@ -195,6 +192,14 @@ class FrameDataOverlay(Overlay.Overlay):
         textbox.configure(background=self.background_color)
         textbox.configure(foreground=Overlay.ColorSchemeEnum.system_text.value)
         return textbox
+
+    def init_encyclopedia(self):
+        self.cyclopedia_p1 = FrameDataListener.FrameDataListener(True)
+        self.cyclopedia_p2 = FrameDataListener.FrameDataListener(False)
+
+    def update_state(self):
+        self.cyclopedia_p1.Update(self.state)
+        self.cyclopedia_p2.Update(self.state)
 
     def update_column_to_print(self, enum, value):
         self.redirector.columns_to_print[enum] = value
