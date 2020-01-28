@@ -5,9 +5,6 @@ from . import MoveInfoEnums
 import collections
 
 class GameStateGetters:
-    def IsBotBlocking(self):
-        return self.stateLog[-1].bot.IsBlocking()
-
     def IsBotGettingCounterHit(self):
         return self.stateLog[-1].bot.IsGettingCounterHit()
 

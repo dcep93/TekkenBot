@@ -28,7 +28,7 @@ class FrameDataListener:
             gameState.FlipMirror()
 
     def ShouldDetermineFrameData(self, gameState):
-        if gameState.IsBotBlocking() or gameState.IsBotGettingHit() or gameState.IsBotBeingThrown() or gameState.IsBotBeingKnockedDown() or gameState.IsBotBeingWallSplatted():
+        if gameState.get(True).IsBlocking() or gameState.IsBotGettingHit() or gameState.IsBotBeingThrown() or gameState.IsBotBeingKnockedDown() or gameState.IsBotBeingWallSplatted():
             if gameState.DidBotIdChangeXMovesAgo(self.active_frame_wait) or gameState.DidBotTimerInterruptXMovesAgo(self.active_frame_wait):
                     return True
         return False
@@ -77,7 +77,7 @@ class FrameDataListener:
 
         frameDataEntry.currentFrameAdvantage = frameDataEntry.WithPlusIfNeeded(new_frame_advantage_calc)
 
-        if gameState.IsBotBlocking():
+        if gameState.get(True).IsBlocking():
             frameDataEntry.onBlock = new_frame_advantage_calc
         else:
             if gameState.IsBotGettingCounterHit():
