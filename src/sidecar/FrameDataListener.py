@@ -61,9 +61,9 @@ class FrameDataListener:
         frameDataEntry.activeFrames = gameState.get(False).GetActiveFrames()
         frameDataEntry.hitType = AttackType(gameState.get(False).attack_type).name + ("_THROW" if gameState.get(False).IsAttackThrow() else "")
         frameDataEntry.recovery = gameState.get(False).recovery
-        frameDataEntry.input = gameState.GetCurrentOppMoveString()
+        frameDataEntry.input = gameState.GetCurrentMoveString(not self.isPlayerOne)
 
-        frameDataEntry.tracking = gameState.GetOppTrackingType(frameDataEntry.startup)
+        frameDataEntry.tracking = gameState.GetTrackingType(False, frameDataEntry.startup)
 
         gameState.Unrewind()
 
@@ -87,7 +87,7 @@ class FrameDataListener:
         frameDataEntry.hitRecovery = time_till_recovery_opp
         frameDataEntry.blockRecovery = time_till_recovery_bot
 
-        frameDataEntry.move_str = gameState.GetCurrentOppMoveName()
+        frameDataEntry.move_str = gameState.GetCurrentMoveName(not self.isPlayerOne)
 
         self.printFrameData(frameDataEntry)
 

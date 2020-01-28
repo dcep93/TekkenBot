@@ -33,6 +33,7 @@ game_string = 'TekkenGame-Win64-Shipping.exe'
 class Player(object):
     def __init__(self):
         self.movelist = []
+        self.movelist_names = []
         self.movelist_to_use = None
         self.movelist_parser = None
 
