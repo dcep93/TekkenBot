@@ -46,7 +46,6 @@ class GameReader:
         self.ReacquireEverything()
         self.module_address = 0
         self.original_facing = None
-        self.opponent_name = None
         self.is_player_player_one = None
         self.c = misc.ConfigReader.ReloadableConfig('memory_address')
         self.player_data_pointer_offset = self.c['MemoryAddressOffsets']['player_data_pointer_offset']
@@ -55,7 +54,6 @@ class GameReader:
 
     def ReacquireEverything(self):
         self.needReacquireModule = True
-        self.needReaquireGameState = True
         self.flagToReacquireNames = True
         self.pid = None
 
@@ -95,10 +93,10 @@ class GameReader:
         successful = windows.w.ReadProcessMemory(processHandle, address, ctypes.byref(data), ctypes.sizeof(data), ctypes.byref(bytesRead))
         if not successful:
             e = windows.w.GetLastError()
-            print("Getting Block of Data Error: Code " + str(e))
+            print("Getting Block of Data Error: Code %s" % e)
         return data
 
-    def GetValueFromDataBlock(self, frame, offset, player_2_offset=0x0, is_float=False): # player_2_offset = 0x0
+    def GetValueFromDataBlock(self, frame, offset, player_2_offset=0x0, is_float=False):
         address = offset + player_2_offset
         data_bytes = frame[address: address + 4]
         if is_float:
@@ -137,7 +135,7 @@ class GameReader:
     def IsDataAFloat(self, data):
         return data in ('x', 'y', 'z', 'activebox_x', 'activebox_y', 'activebox_z')
 
-    def GetUpdatedState(self, rollback_frame = 0):
+    def GetUpdatedState(self, rollback_frame):
         if not self.HasWorkingPID():
             self.pid = windows.PIDSearcher.GetPIDByName(game_string)
             if self.HasWorkingPID():
@@ -162,44 +160,36 @@ class GameReader:
         player_data_base_address = self.get_player_data_base_address(processHandle)
         
         if player_data_base_address == 0:
-            if not self.needReaquireGameState:
-                print("No fight detected. Gamestate not updated.")
-            self.needReaquireGameState = True
             self.flagToReacquireNames = True
-
             return None
 
         last_eight_frames = self.get_last_eight_frames(processHandle, player_data_base_address)
 
         if rollback_frame >= len(last_eight_frames):
             print("ERROR: requesting %s frame of %s long rollback frame" % (rollback_frame, len(last_eight_frames)))
-            rollback_frame = len(last_eight_frames) - 1
+            return None
 
         best_frame_count, player_data_second_address = sorted(last_eight_frames, key=lambda x: -x[0])[rollback_frame]
 
         player_data_frame = self.GetBlockOfData(processHandle, player_data_second_address, self.c['MemoryAddressOffsets']['rollback_frame_offset'])
 
-        p1_bot = BotSnapshot()
-        p2_bot = BotSnapshot()
+        p1_dict = {}
+        p2_dict = {}
 
-        self.read_from_addresses(p1_bot, p2_bot, player_data_frame)
+        self.read_from_addresses(p1_dict, p2_dict, player_data_frame)
+
+        p1_bot = BotSnapshot(p1_dict)
+        p2_bot = BotSnapshot(p2_dict)
 
         bot_facing = self.GetValueFromDataBlock(player_data_frame, self.c['GameDataAddress']['facing'])
         if self.original_facing is None and best_frame_count > 0:
             self.original_facing = bot_facing > 0
 
-        if self.needReaquireGameState:
-            print("Fight detected. Updating gamestate.")
-        self.needReaquireGameState = False
-
-        p1_bot.Bake()
-        p2_bot.Bake()
-
         if self.flagToReacquireNames and p1_bot.character_name != MoveInfoEnums.CharacterCodes.NOT_YET_LOADED.name and p2_bot.character_name != MoveInfoEnums.CharacterCodes.NOT_YET_LOADED.name:
             self.reacquire_names(processHandle, p1_bot, p2_bot)
 
         timer_in_frames = self.GetValueFromDataBlock(player_data_frame, self.c['GameDataAddress']['timer_in_frames'])
-        return GameSnapshot(p1_bot, p2_bot, best_frame_count, timer_in_frames, bot_facing, self.opponent_name, self.is_player_player_one)
+        return GameSnapshot(p1_bot, p2_bot, best_frame_count, timer_in_frames, bot_facing, self.is_player_player_one)
 
     def reacquire_module(self):
         print("Trying to acquire Tekken library in pid: %s" % self.pid)
@@ -236,20 +226,20 @@ class GameReader:
             last_eight_frames.append((potential_frame_count, potential_second_address))
         return last_eight_frames
 
-    def read_from_addresses(self, p1_bot, p2_bot, player_data_frame):
+    def read_from_addresses(self, p1_dict, p2_dict, player_data_frame):
         for data_type, value in self.c['PlayerDataAddress'].items():
             p1_value = self.GetValueFromDataBlock(player_data_frame, value, 0, self.IsDataAFloat(data_type))
             p2_value = self.GetValueFromDataBlock(player_data_frame, value, self.c['MemoryAddressOffsets']['p2_data_offset'], self.IsDataAFloat(data_type))
             address = 'PlayerDataAddress.%s' % data_type
-            p1_bot.player_data_dict[address] = p1_value
-            p2_bot.player_data_dict[address] = p2_value
+            p1_dict[address] = p1_value
+            p2_dict[address] = p2_value
 
         for data_type, value in self.c['EndBlockPlayerDataAddress'].items():
             p1_value = self.GetValueFromDataBlock(player_data_frame, value)
             p2_value = self.GetValueFromDataBlock(player_data_frame, value, self.c['MemoryAddressOffsets']['p2_end_block_offset'])
             address = 'EndBlockPlayerDataAddress.%s' % data_type
-            p1_bot.player_data_dict[address] = p1_value
-            p2_bot.player_data_dict[address] = p2_value
+            p1_dict[address] = p1_value
+            p2_dict[address] = p2_value
 
         for axis, startingAddress in ((k, v) for k,v in self.c['PlayerDataAddress'].items() if k in ('x', 'y', 'z')):
             positionOffset = 32  # our xyz coordinate is 32 bytes, a 4 byte x, y, and z value followed by five 4 byte values that don't change
@@ -260,24 +250,18 @@ class GameReader:
                 p1_coord_array.append(self.GetValueFromDataBlock(player_data_frame, address, 0, is_float=True))
                 p2_coord_array.append(self.GetValueFromDataBlock(player_data_frame, address, self.c['MemoryAddressOffsets']['p2_data_offset'], is_float=True))
             address = 'PlayerDataAddress.%s' % axis
-            p1_bot.player_data_dict[address] = p1_coord_array
-            p2_bot.player_data_dict[address] = p2_coord_array
+            p1_dict[address] = p1_coord_array
+            p2_dict[address] = p2_coord_array
 
-        # FIXME: This seems like it would always be true.
-        # The old code seems to be doing the same, so I don't know.
-        p1_bot.player_data_dict['use_opponent_movelist'] = p1_bot.player_data_dict['PlayerDataAddress.movelist_to_use'] == self.p2.movelist_to_use
-        p2_bot.player_data_dict['use_opponent_movelist'] = p2_bot.player_data_dict['PlayerDataAddress.movelist_to_use'] == self.p1.movelist_to_use
-
-        p1_bot.player_data_dict['movelist_parser'] = self.p1.movelist_parser
-        p2_bot.player_data_dict['movelist_parser'] = self.p2.movelist_parser
+        p1_dict['movelist_parser'] = self.p1.movelist_parser
+        p2_dict['movelist_parser'] = self.p2.movelist_parser
 
     def reacquire_names(self, processHandle, p1_bot, p2_bot):
-        self.opponent_name = self.GetValueAtEndOfPointerTrail(processHandle, "OPPONENT_NAME", True)
         self.opponent_side = self.GetValueAtEndOfPointerTrail(processHandle, "OPPONENT_SIDE", False)
         self.is_player_player_one = (self.opponent_side == 1)
 
-        self.p1.movelist_to_use = p1_bot.player_data_dict['PlayerDataAddress.movelist_to_use']
-        self.p2.movelist_to_use = p2_bot.player_data_dict['PlayerDataAddress.movelist_to_use']
+        self.p1.movelist_to_use = p1_bot.movelist_to_use
+        self.p2.movelist_to_use = p2_bot.movelist_to_use
 
         self.p1.movelist_block, p1_movelist_address = self.PopulateMovelists(processHandle, "P1_Movelist")
         self.p2.movelist_block, p2_movelist_address = self.PopulateMovelists(processHandle, "P2_Movelist")
@@ -301,11 +285,10 @@ class GameReader:
         return movelist_block, movelist_address
 
 class BotSnapshot:
-    def __init__(self):
-        self.player_data_dict = {}
+    def __init__(self, player_data_dict):
+        d = player_data_dict
 
-    def Bake(self):
-        d = self.player_data_dict
+        self.movelist_to_use = d['PlayerDataAddress.movelist_to_use']
         self.move_id = d['PlayerDataAddress.move_id']
         self.simple_state = MoveInfoEnums.SimpleMoveStates(d['PlayerDataAddress.simple_move_state'])
         self.attack_type = MoveInfoEnums.AttackType(d['PlayerDataAddress.attack_type'])
@@ -356,13 +339,9 @@ class BotSnapshot:
         self.combo_damage = d['EndBlockPlayerDataAddress.display_combo_damage']
         self.juggle_damage = d['EndBlockPlayerDataAddress.display_juggle_damage']
 
-        self.use_opponents_movelist = d['use_opponent_movelist']
         self.movelist_parser = d['movelist_parser']
 
-        try:
-            self.character_name = CharacterCodes(d['PlayerDataAddress.char_id']).name
-        except:
-            self.character_name = "UNKNOWN"
+        self.character_name = CharacterCodes(d['PlayerDataAddress.char_id']).name
 
     def GetInputState(self):
         return (self.input_direction, self.input_button, self.rage_button_flag)
@@ -466,19 +445,17 @@ class BotSnapshot:
         else:
             return False
 
-
 class GameSnapshot:
-    def __init__(self, bot, opp, frame_count, timer_in_frames, facing_bool, opponent_name, is_player_player_one):
+    def __init__(self, bot, opp, frame_count, timer_in_frames, facing_bool, is_player_player_one):
         self.bot = bot
         self.opp = opp
         self.frame_count = frame_count
         self.facing_bool = facing_bool
         self.timer_frames_remaining = timer_in_frames
-        self.opponent_name = opponent_name
         self.is_player_player_one = is_player_player_one
 
     def FromMirrored(self):
-        return GameSnapshot(self.opp, self.bot, self.frame_count, self.timer_frames_remaining, self.facing_bool, self.opponent_name, self.is_player_player_one)
+        return GameSnapshot(self.opp, self.bot, self.frame_count, self.timer_frames_remaining, self.facing_bool, self.is_player_player_one)
 
 def to_hex(x):
     return int(x, 16)
