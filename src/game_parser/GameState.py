@@ -128,7 +128,6 @@ class GameState:
                 if last_move_was_empty_cancel:
                     input_array[-1] = ''
 
-                #if len(next_move) > 0:
                 input_array.append(next_move)
 
                 if self.get(isP1).movelist_parser.can_be_done_from_neutral(move_id):

@@ -142,7 +142,7 @@ class MovelistParser:
         if move_id in self.can_move_be_done_from_neutral:
             return self.can_move_be_done_from_neutral[move_id]
         else:
-            return True #blocking and damage moves
+            return True
 
     def input_for_move(self, move_id, previous_move_id):
         empty_cancel_strings =[ 'b', '_B', '_R_D', 'y', 'Rv', '_R', '_D', 'Y']
@@ -162,7 +162,6 @@ class MovelistParser:
 
             if 'Release' in tuple[2]:
                 input += '*'
-            #input += tuple[2]
 
             if not tuple[1] in (MovelistButtonCodes.NULL.name,):
                 input += tuple[1].replace("B_", "").replace("_PLUS_", "+")
@@ -170,7 +169,6 @@ class MovelistParser:
             if previous_move_id >= 0 and previous_move_id < len(self.names) and move_id >= 0 and move_id < len(self.names):
 
                 if self.names[previous_move_id] in ([self.names[move_id] + s for s in empty_cancel_strings]):
-                    #print('{} : {}'.format(self.names[previous_move_id], self.names[move_id]))
                     last_move_was_empty_cancel = True
 
             return input, last_move_was_empty_cancel

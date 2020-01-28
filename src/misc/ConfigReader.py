@@ -67,9 +67,6 @@ class ReloadableConfig(ConfigReader):
 
     def __getitem__(self, key):
         if key not in self.config:
-            # This is maybe a bit ugly but won't crash the program if the config file
-            # is broken or missing entries. Assumes int values.
-            # Maybe not needed.
             print('{} section missing from {}.ini'.format(key, self.file_name))
             return defaultdict(lambda: defaultdict(int))
         else:

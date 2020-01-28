@@ -107,7 +107,6 @@ class GameReader:
 
     def GetValueAtEndOfPointerTrail(self, processHandle, data_type, address_type):
         addresses_str = self.c['NonPlayerDataAddresses'][data_type]
-        # The pointer trail is stored as a string of addresses in hex in the config. Split them up and convert
         addresses = split_str_to_hex(addresses_str)
         value = self.module_address
         for i, offset in enumerate(addresses):
@@ -278,11 +277,11 @@ class GameReader:
         self.p1.movelist_parser = MovelistParser.MovelistParser(self.p1.movelist_block, p1_movelist_address)
         self.p2.movelist_parser = MovelistParser.MovelistParser(self.p2.movelist_block, p2_movelist_address)
 
-        self.p1.movelist_names = self.p1.movelist_block[0x2E8:200000].split(b'\00') #Todo: figure out the actual size of the name movelist
+        self.p1.movelist_names = self.p1.movelist_block[0x2E8:200000].split(b'\00') # Todo: figure out the actual size of the name movelist
         self.p2.movelist_names = self.p2.movelist_block[0x2E8:200000].split(b'\00')
 
         self.flagToReacquireNames = False
-        print("acquired")
+        print("acquired movelist")
 
     def PopulateMovelists(self, processHandle, data_type):
         movelist_str = self.c["NonPlayerDataAddresses"][data_type]
