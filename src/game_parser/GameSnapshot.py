@@ -90,6 +90,9 @@ class BotSnapshot:
     def IsBeingKnockedDown(self):
         return self.simple_state == MoveInfoEnums.SimpleMoveStates.KNOCKDOWN
 
+    def GetFramesTillNextMove(self):
+        return self.recovery - self.move_timer
+
     # todo - for keeping cancelable states longer
     def IsAbleToAct(self):
         return self.is_cancelable

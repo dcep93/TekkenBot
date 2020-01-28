@@ -34,10 +34,10 @@ class FrameDataListener:
         return False
 
     def DetermineFrameData(self, gameState):
-        is_recovering_before_long_active_frame_move_completes = (gameState.GetBotRecovery() - gameState.GetBotMoveTimer() == 0)
+        is_recovering_before_long_active_frame_move_completes = (gameState.get(True).recovery - gameState.get(True).move_timer == 0)
         gameState.Rewind(self.active_frame_wait)
 
-        if (self.active_frame_wait < gameState.GetOppActiveFrames() + 1) and not is_recovering_before_long_active_frame_move_completes:
+        if (self.active_frame_wait < gameState.get(False).GetActiveFrames() + 1) and not is_recovering_before_long_active_frame_move_completes:
             self.active_frame_wait += 1
         else:
             self.DetermineFrameDataHelper(gameState)
@@ -51,17 +51,16 @@ class FrameDataListener:
 
         gameState.Rewind(self.active_frame_wait)
 
-        opp_id = gameState.GetOppMoveId()
+        opp_id = gameState.get(False).move_id
 
         frameDataEntry = FrameDataEntry(self.isPlayerOne)
 
         frameDataEntry.move_id = opp_id
         frameDataEntry.currentActiveFrame = currentActiveFrame
-        frameDataEntry.damage = gameState.GetOppDamage()
-        frameDataEntry.startup = gameState.GetOppStartup()
-        frameDataEntry.activeFrames = gameState.GetOppActiveFrames()
-        frameDataEntry.hitType = AttackType(gameState.GetOppAttackType()).name + ("_THROW" if gameState.IsOppAttackThrow() else "")
-        frameDataEntry.recovery = gameState.GetOppRecovery()
+        frameDataEntry.startup = gameState.get(False).startup
+        frameDataEntry.activeFrames = gameState.get(False).GetActiveFrames()
+        frameDataEntry.hitType = AttackType(gameState.get(False).attack_type).name + ("_THROW" if gameState.get(False).IsAttackThrow() else "")
+        frameDataEntry.recovery = gameState.get(False).recovery
         frameDataEntry.input = gameState.GetCurrentOppMoveString()
 
         frameDataEntry.tracking = gameState.GetOppTrackingType(frameDataEntry.startup)
@@ -70,8 +69,8 @@ class FrameDataListener:
 
         frameDataEntry.throwTech = gameState.GetBotThrowTech()
 
-        time_till_recovery_opp = gameState.GetOppFramesTillNextMove()
-        time_till_recovery_bot = gameState.GetBotFramesTillNextMove()
+        time_till_recovery_opp = gameState.get(False).GetFramesTillNextMove()
+        time_till_recovery_bot = gameState.get(True).GetFramesTillNextMove()
 
         new_frame_advantage_calc = time_till_recovery_bot - time_till_recovery_opp
 
@@ -110,7 +109,6 @@ class FrameDataEntry:
         self.onCounterHit = self.unknown
         self.onNormalHit = self.unknown
         self.recovery = self.unknown
-        self.damage = self.unknown
         self.blockFrames = self.unknown
         self.activeFrames = self.unknown
         self.currentFrameAdvantage = self.unknown

@@ -3,15 +3,6 @@ from . import MoveInfoEnums
 import collections
 
 class GameStateGetters:
-    def IsOppAttackThrow(self):
-        return self.stateLog[-1].opp.IsAttackThrow()
-
-    def GetOppStartup(self):
-        return self.stateLog[-1].opp.startup
-
-    def GetOppActiveFrames(self):
-        return self.stateLog[-1].opp.GetActiveFrames()
-
     def GetLastActiveFrameHitWasOn(self, frames):
         returnNextState = False
         for state in reversed(self.stateLog[-(frames + 2):]):
@@ -22,33 +13,6 @@ class GameStateGetters:
                 returnNextState = True
 
         return 0
-
-    def GetOppRecovery(self):
-        return self.stateLog[-1].opp.recovery
-
-    def GetOppFramesTillNextMove(self):
-        return self.GetOppRecovery() - self.GetOppMoveTimer()
-
-    def GetBotFramesTillNextMove(self):
-        return self.GetBotRecovery() - self.GetBotMoveTimer()
-
-    def GetBotRecovery(self):
-        return self.stateLog[-1].bot.recovery
-
-    def GetOppMoveId(self):
-        return self.stateLog[-1].opp.move_id
-
-    def GetOppAttackType(self):
-        return self.stateLog[-1].opp.attack_type
-
-    def GetBotMoveTimer(self):
-        return self.stateLog[-1].bot.move_timer
-
-    def GetOppMoveTimer(self):
-        return self.stateLog[-1].opp.move_timer
-
-    def GetOppDamage(self):
-        return self.stateLog[-1].opp.attack_damage
 
     def DidBotTimerInterruptXMovesAgo(self, framesAgo):
         if len(self.stateLog) > framesAgo:
