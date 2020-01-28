@@ -11,8 +11,8 @@ import time
 from enum import Enum
 
 class FrameDataListener:
-    def __init__(self, isPlayerOne):
-        self.isPlayerOne = isPlayerOne
+    def __init__(self, isP1):
+        self.isP1 = isP1
 
         self.active_frame_wait = 1
 
@@ -21,16 +21,16 @@ class FrameDataListener:
             self.DetermineFrameData(gameState)
 
     def ShouldDetermineFrameData(self, gameState):
-        if gameState.get(self.isPlayerOne).IsBlocking() or gameState.get(self.isPlayerOne).IsGettingHit() or gameState.get(self.isPlayerOne).IsInThrowing() or gameState.get(self.isPlayerOne).IsBeingKnockedDown() or gameState.get(self.isPlayerOne).IsGettingWallSplatted():
-            if gameState.DidIdChangeXMovesAgo(self.isPlayerOne, self.active_frame_wait) or gameState.DidTimerInterruptXMovesAgo(self.isPlayerOne, self.active_frame_wait):
+        if gameState.get(self.isP1).IsBlocking() or gameState.get(self.isP1).IsGettingHit() or gameState.get(self.isP1).IsInThrowing() or gameState.get(self.isP1).IsBeingKnockedDown() or gameState.get(self.isP1).IsGettingWallSplatted():
+            if gameState.DidIdChangeXMovesAgo(self.isP1, self.active_frame_wait) or gameState.DidTimerInterruptXMovesAgo(self.isP1, self.active_frame_wait):
                     return True
         return False
 
     def DetermineFrameData(self, gameState):
-        is_recovering_before_long_active_frame_move_completes = (gameState.get(self.isPlayerOne).recovery - gameState.get(self.isPlayerOne).move_timer == 0)
+        is_recovering_before_long_active_frame_move_completes = (gameState.get(self.isP1).recovery - gameState.get(self.isP1).move_timer == 0)
         gameState.Rewind(self.active_frame_wait)
 
-        if (self.active_frame_wait < gameState.get(not self.isPlayerOne).GetActiveFrames() + 1) and not is_recovering_before_long_active_frame_move_completes:
+        if (self.active_frame_wait < gameState.get(not self.isP1).GetActiveFrames() + 1) and not is_recovering_before_long_active_frame_move_completes:
             self.active_frame_wait += 1
         else:
             self.DetermineFrameDataHelper(gameState)
@@ -40,39 +40,39 @@ class FrameDataListener:
     def DetermineFrameDataHelper(self, gameState):
         gameState.Unrewind()
 
-        currentActiveFrame = gameState.GetLastActiveFrameHitWasOn(self.isPlayerOne, self.active_frame_wait)
+        currentActiveFrame = gameState.GetLastActiveFrameHitWasOn(self.isP1, self.active_frame_wait)
 
         gameState.Rewind(self.active_frame_wait)
 
-        opp_id = gameState.get(not self.isPlayerOne).move_id
+        opp_id = gameState.get(not self.isP1).move_id
 
-        frameDataEntry = FrameDataEntry(self.isPlayerOne)
+        frameDataEntry = FrameDataEntry(self.isP1)
 
         frameDataEntry.move_id = opp_id
         frameDataEntry.currentActiveFrame = currentActiveFrame
-        frameDataEntry.startup = gameState.get(not self.isPlayerOne).startup
-        frameDataEntry.activeFrames = gameState.get(not self.isPlayerOne).GetActiveFrames()
-        frameDataEntry.hitType = AttackType(gameState.get(not self.isPlayerOne).attack_type).name + ("_THROW" if gameState.get(not self.isPlayerOne).IsAttackThrow() else "")
-        frameDataEntry.recovery = gameState.get(not self.isPlayerOne).recovery
-        frameDataEntry.input = gameState.GetCurrentMoveString(not self.isPlayerOne)
+        frameDataEntry.startup = gameState.get(not self.isP1).startup
+        frameDataEntry.activeFrames = gameState.get(not self.isP1).GetActiveFrames()
+        frameDataEntry.hitType = AttackType(gameState.get(not self.isP1).attack_type).name + ("_THROW" if gameState.get(not self.isP1).IsAttackThrow() else "")
+        frameDataEntry.recovery = gameState.get(not self.isP1).recovery
+        frameDataEntry.input = gameState.GetCurrentMoveString(not self.isP1)
 
-        frameDataEntry.tracking = gameState.GetTrackingType(not self.isPlayerOne, frameDataEntry.startup)
+        frameDataEntry.tracking = gameState.GetTrackingType(not self.isP1, frameDataEntry.startup)
 
         gameState.Unrewind()
 
-        frameDataEntry.throwTech = gameState.get(self.isPlayerOne).throw_tech
+        frameDataEntry.throwTech = gameState.get(self.isP1).throw_tech
 
-        time_till_recovery_opp = gameState.get(not self.isPlayerOne).GetFramesTillNextMove()
-        time_till_recovery_bot = gameState.get(self.isPlayerOne).GetFramesTillNextMove()
+        time_till_recovery_opp = gameState.get(not self.isP1).GetFramesTillNextMove()
+        time_till_recovery_bot = gameState.get(self.isP1).GetFramesTillNextMove()
 
         new_frame_advantage_calc = time_till_recovery_bot - time_till_recovery_opp
 
         frameDataEntry.currentFrameAdvantage = frameDataEntry.WithPlusIfNeeded(new_frame_advantage_calc)
 
-        if gameState.get(self.isPlayerOne).IsBlocking():
+        if gameState.get(self.isP1).IsBlocking():
             frameDataEntry.onBlock = new_frame_advantage_calc
         else:
-            if gameState.get(self.isPlayerOne).IsGettingCounterHit():
+            if gameState.get(self.isP1).IsGettingCounterHit():
                 frameDataEntry.onCounterHit = new_frame_advantage_calc
             else:
                 frameDataEntry.onNormalHit = new_frame_advantage_calc
@@ -80,7 +80,7 @@ class FrameDataListener:
         frameDataEntry.hitRecovery = time_till_recovery_opp
         frameDataEntry.blockRecovery = time_till_recovery_bot
 
-        frameDataEntry.move_str = gameState.GetCurrentMoveName(not self.isPlayerOne)
+        frameDataEntry.move_str = gameState.GetCurrentMoveName(not self.isP1)
 
         self.printFrameData(frameDataEntry)
 
@@ -91,8 +91,8 @@ class FrameDataListener:
 
 class FrameDataEntry:
     unknown = '??'
-    def __init__(self, isPlayerOne):
-        self.isPlayerOne = isPlayerOne
+    def __init__(self, isP1):
+        self.isP1 = isP1
 
         self.move_id = self.unknown
         self.move_str = self.unknown
@@ -124,7 +124,7 @@ class FrameDataEntry:
             return str(value)
 
     def getPrefix(self):
-        return "p1: " if self.isPlayerOne else "p2: "
+        return "p1: " if self.isP1 else "p2: "
 
     # todo revisit
     def __repr__(self):
