@@ -32,7 +32,7 @@ def GetModuleAddressByPIDandName(pid, name):
         print('Build the code yourself? This is the error for using 32-bit Python. Try the 64-bit version.')
 
     ret = windll.kernel32.Module32First(hModuleSnap, windows.ctypes.pointer(me32) )
-    if ret is 0:
+    if ret == 0:
         print('ListProcessModules() Error on Module32First[%d]' % windows.w.GetLastError())
         windows.w.CloseHandle(hModuleSnap)
 

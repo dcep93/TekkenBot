@@ -53,14 +53,6 @@ class GameState(GameStateGetters.GameStateGetters):
             self.stateLog.pop(0)
             self.mirroredStateLog.pop(0)
 
-    def getUpdateWaitMs(self, elapsed_ms):
-        if self.tekken_state.gameReader.HasWorkingPID():
-            elapsed_time = 1000 * elapsed_ms
-            wait_ms = max(2, 8 - int(round(elapsed_time)))
-        else:
-            wait_ms = 1000
-        return wait_ms
-
     def FlipMirror(self):
         self.mirroredStateLog, self.stateLog = self.stateLog, self.mirroredStateLog
         self.isMirrored = not self.isMirrored

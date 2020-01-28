@@ -178,7 +178,7 @@ class MovelistParser:
             return "N/A", False
 
     def __getstate__(self):
-        state = super().__getstate__().copy()
+        state = self.__dict__.copy()
         state['bytes'] = state['bytes'].value
         return state
 

@@ -714,32 +714,23 @@ class GameStateGetters:
         max_index = dotproducts.index(max_product)
         return max_index, max_product
 
-    def IsBotUsingOppMovelist(self):
-        return self.stateLog[-1].bot.use_opponents_movelist
-
     def GetCurrentBotMoveName(self):
         move_id = self.stateLog[-1].bot.move_id
-        return self.GetOppMoveName(move_id, self.stateLog[-1].bot.use_opponents_movelist, is_for_bot=True)
+        return self.GetOppMoveName(move_id, is_for_bot=True)
 
     def GetCurrentOppMoveName(self):
         move_id = self.stateLog[-1].opp.move_id
-        return self.GetOppMoveName(move_id, self.stateLog[-1].opp.use_opponents_movelist, is_for_bot=False)
+        return self.GetOppMoveName(move_id, is_for_bot=False)
 
-    def GetOppMoveName(self, move_id, use_opponents_movelist, is_for_bot=False):
+    def GetOppMoveName(self, move_id, is_for_bot=False):
         if move_id > 30000:
             return 'Universal_{}'.format(move_id)
 
         try:
             if (not self.isMirrored and not is_for_bot) or (self.isMirrored and is_for_bot):
-                if not use_opponents_movelist:
-                    movelist = self.gameReader.p2.movelist_names
-                else:
-                    movelist = self.gameReader.p1.movelist_names
+                movelist = self.gameReader.p1.movelist_names
             else:
-                if not use_opponents_movelist:
-                    movelist = self.gameReader.p1.movelist_names
-                else:
-                    movelist = self.gameReader.p2.movelist_names
+                movelist = self.gameReader.p2.movelist_names
 
             return movelist[(move_id * 2) + 4].decode('utf-8')
         except:

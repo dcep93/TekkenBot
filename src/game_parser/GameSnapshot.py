@@ -1,3 +1,5 @@
+from . import MoveInfoEnums
+
 
 class BotSnapshot:
     def __init__(self, player_data_dict):
@@ -56,7 +58,7 @@ class BotSnapshot:
 
         self.movelist_parser = d['movelist_parser']
 
-        self.character_name = CharacterCodes(d['PlayerDataAddress.char_id']).name
+        self.character_name = MoveInfoEnums.CharacterCodes(d['PlayerDataAddress.char_id']).name
 
     def GetInputState(self):
         return (self.input_direction, self.input_button, self.rage_button_flag)

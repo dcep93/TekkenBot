@@ -14,10 +14,9 @@ class Recorder(GameReader.GameReader):
         super().__init__()
         signal.signal(signal.SIGINT, lambda _,__: self.save_and_quit(pickle_dest))
 
-    @classmethod
-    def GetUpdatedState(cls, rollback_frame):
+    def GetUpdatedState(self, rollback_frame):
         gameData = super().GetUpdatedState(rollback_frame)
-        if cls.active: cls.record_data(rollback_frame == 0, gameData)
+        if self.active: self.record_data(rollback_frame == 0, gameData)
         return gameData
 
     @classmethod

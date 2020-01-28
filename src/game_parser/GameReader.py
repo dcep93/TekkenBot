@@ -156,6 +156,14 @@ class GameReader:
 
         return None
 
+    def getUpdateWaitMs(self, elapsed_ms):
+        if self.HasWorkingPID():
+            elapsed_time = 1000 * elapsed_ms
+            wait_ms = max(2, 8 - int(round(elapsed_time)))
+        else:
+            wait_ms = 1000
+        return wait_ms
+
     def get_game_snapshot(self, rollback_frame, processHandle):
         player_data_base_address = self.get_player_data_base_address(processHandle)
         
