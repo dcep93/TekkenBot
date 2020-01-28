@@ -67,7 +67,7 @@ class FrameDataListener:
 
         gameState.Unrewind()
 
-        frameDataEntry.throwTech = gameState.GetBotThrowTech()
+        frameDataEntry.throwTech = gameState.get(True).throw_tech
 
         time_till_recovery_opp = gameState.get(False).GetFramesTillNextMove()
         time_till_recovery_bot = gameState.get(True).GetFramesTillNextMove()

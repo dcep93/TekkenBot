@@ -71,12 +71,6 @@ class GameStateGetters:
     def GetOppMoveString(self, move_id, previous_move_id):
         return self.stateLog[-1].opp.movelist_parser.input_for_move(move_id, previous_move_id)
 
-    def GetBotThrowTech(self):
-        tech = self.stateLog[-1].bot.throw_tech
-        if tech != MoveInfoEnums.ThrowTechs.NONE:
-            return tech
-        return MoveInfoEnums.ThrowTechs.NONE
-
     def GetOppTrackingType(self, startup):
         if len(self.stateLog) > startup:
             complex_states = [MoveInfoEnums.ComplexMoveStates.UNKN]
