@@ -8,6 +8,7 @@ from game_parser.MoveInfoEnums import ComplexMoveStates
 
 class FrameDataListener:
     def __init__(self, printer):
+        FrameDataEntry.printColumns()
         self.listeners = [PlayerListener(i, printer) for i in [True, False]]
 
     def update(self, gameState):
@@ -86,6 +87,8 @@ class PlayerListener:
 
 class FrameDataEntry:
     unknown = '??'
+    prefix_length = 4
+    input_pad = 10
     columns = [
         'input',
         'move_id',
@@ -116,17 +119,36 @@ class FrameDataEntry:
         self.hit_recovery = self.unknown
         self.block_recovery = self.unknown
 
-    def WithPlusIfNeeded(self, value):
+    @classmethod
+    def printColumns(cls):
+        cols = cls.columns[:]
+        before = int(cls.input_pad / 2)
+        after = cls.input_pad - before
+        cols[0] = (" " * before) + cols[0] + (" " * after)
+        string = " ".join(cols)
+        prefix = " " * cls.prefix_length
+        print(prefix + string)
+
+    @staticmethod
+    def WithPlusIfNeeded(value):
         v = str(value)
         if value >= 0:
             return '+' + v
         else:
             return v
 
+    def getField(self, field):
+        v = str(self.__getattribute__(field))
+        diff = len(field) - len(v)
+        if diff <= 0: return v
+        if field == 'input': diff += self.input_pad
+        before = int(diff / 2)
+        after = diff - before
+        return (' ' * before) + v + (' ' * after)
+
     def __repr__(self):
-        print(self.columns)
-        values = [str(self.__getattribute__(i)) for i in self.columns]
+        values = [self.getField(i) for i in self.columns]
 
         playerName = "p1" if self.isP1 else "p2"
         string = '|'.join(values)
-        return "%s: %s NOW:%s" % (playerName, string, self.currentFrameAdvantage)
+        return "%s: %s / NOW:%s" % (playerName, string, self.currentFrameAdvantage)

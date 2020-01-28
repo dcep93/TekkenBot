@@ -88,43 +88,40 @@ class Printer:
                 self.widget.delete('2.0', '3.0')
                 self.widget.configure(state="disabled")
 
-        data = output_str.split('NOW:')[0]
-        fa = output_str.split('NOW:')[1][:3]
+        fa = frameDataEntry.currentFrameAdvantage
 
-        if '?' not in fa:
+        if fa != frameDataEntry.unknown:
             background = self.get_background(int(fa))
             self.style.configure('.', background=background)
 
-        if "p1:" in output_str:
+        if frameDataEntry.isP1:
             self.fa_p1_var.set(fa)
-            data = data.replace('p1:', '')
             text_tag = 'p1'
         else:
             self.fa_p2_var.set(fa)
-            data = data.replace('p2:', '')
             text_tag = 'p2'
 
-        if '|' in output_str:
-            out = ""
-            for col in data.split('|'):
-                if self.columns_to_print[col]:
-                    col_value = col.replace(' ', '')
-                    col_value_len = len(col_value)
+        print(self.columns_to_print)
+        out = ""
+        for col in data.split('|'):
+            if self.columns_to_print[col]:
+                col_value = col.replace(' ', '')
+                col_value_len = len(col_value)
 
-                    if col_value_len < self.col_max_length:
-                        needed_spaces = self.col_max_length - col_value_len
-                        col_value = '%s%s%s' % (' ' * ((needed_spaces+1) / 2), col_value, ' ' * (needed_spaces / 2))
-                    
-                    out += '|%s' % col_value
+                if col_value_len < self.col_max_length:
+                    needed_spaces = self.col_max_length - col_value_len
+                    col_value = '%s%s%s' % (' ' * ((needed_spaces+1) / 2), col_value, ' ' * (needed_spaces / 2))
+                
+                out += '|%s' % col_value
 
-            print("\n" + data)
-                    
-            out += "\n"
-            self.widget.configure(state="normal")
-            self.widget.insert("end", out, text_tag)
-            self.widget.configure(state="disabled")
-            self.widget.see('0.0')
-            self.widget.yview('moveto', '.02')
+        print("\n" + data)
+
+        out += "\n"
+        self.widget.configure(state="normal")
+        self.widget.insert("end", out, text_tag)
+        self.widget.configure(state="disabled")
+        self.widget.see('0.0')
+        self.widget.yview('moveto', '.02')
 
 class FrameDataOverlay(Overlay.Overlay):
     def __init__(self, master, state):
