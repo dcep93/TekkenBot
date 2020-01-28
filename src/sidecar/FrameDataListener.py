@@ -16,7 +16,6 @@ class FrameDataListener:
         # sibling instances seem to make it more complicated
         self.isPlayerOne = isPlayerOne
 
-        # I dont understand what this does yet
         self.active_frame_wait = 1
 
     def Update(self, gameState: GameState):
@@ -36,20 +35,21 @@ class FrameDataListener:
 
     def DetermineFrameData(self, gameState):
         is_recovering_before_long_active_frame_move_completes = (gameState.GetBotRecovery() - gameState.GetBotMoveTimer() == 0)
-        gameState.BackToTheFuture(self.active_frame_wait)
+        gameState.Rewind(self.active_frame_wait)
 
         if (self.active_frame_wait < gameState.GetOppActiveFrames() + 1) and not is_recovering_before_long_active_frame_move_completes:
             self.active_frame_wait += 1
         else:
             self.DetermineFrameDataHelper(gameState)
-        gameState.ReturnToPresent()
+            self.active_frame_wait = 1
+        gameState.Unrewind()
 
     def DetermineFrameDataHelper(self, gameState):
-        gameState.ReturnToPresent()
+        gameState.Unrewind()
 
         currentActiveFrame = gameState.GetLastActiveFrameHitWasOn(self.active_frame_wait)
 
-        gameState.BackToTheFuture(self.active_frame_wait)
+        gameState.Rewind(self.active_frame_wait)
 
         opp_id = gameState.GetOppMoveId()
 
@@ -67,7 +67,7 @@ class FrameDataListener:
         frameDataEntry.technical_state_reports = gameState.GetOppTechnicalStates(frameDataEntry.startup - 1)
         frameDataEntry.tracking = gameState.GetOppTrackingType(frameDataEntry.startup)
 
-        gameState.ReturnToPresent()
+        gameState.Unrewind()
 
         frameDataEntry.throwTech = gameState.GetBotThrowTech()
 
@@ -93,9 +93,7 @@ class FrameDataListener:
 
         self.printFrameData(frameDataEntry)
 
-        gameState.BackToTheFuture(self.active_frame_wait)
-
-        self.active_frame_wait = 1
+        gameState.Rewind(self.active_frame_wait)
 
     def printFrameData(self, frameDataEntry):
         print(str(frameDataEntry))

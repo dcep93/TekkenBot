@@ -65,10 +65,10 @@ class GameState(GameStateGetters.GameStateGetters):
         self.mirroredStateLog, self.stateLog = self.stateLog, self.mirroredStateLog
         self.isMirrored = not self.isMirrored
 
-    def BackToTheFuture(self, frames):
+    def Rewind(self, frames):
         self.futureStateLog = self.stateLog[-frames:]
         self.stateLog = self.stateLog[:-frames]
 
-    def ReturnToPresent(self):
+    def Unrewind(self):
         self.stateLog += self.futureStateLog
         self.futureStateLog = None
