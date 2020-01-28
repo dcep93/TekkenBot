@@ -16,10 +16,6 @@ class GameState(GameStateGetters.GameStateGetters):
             self.gameReader = GameReader.GameReader()
 
         self.stateLog = []
-        self.mirroredStateLog = []
-
-        # gah what is this
-        self.isMirrored = False
 
         self.futureStateLog = None
 
@@ -42,20 +38,10 @@ class GameState(GameStateGetters.GameStateGetters):
         return False
 
     def AppendGamedata(self, gameData):
-        if not self.isMirrored:
-            self.stateLog.append(gameData)
-            self.mirroredStateLog.append(gameData.FromMirrored())
-        else:
-            self.stateLog.append(gameData.FromMirrored())
-            self.mirroredStateLog.append(gameData)
+        self.stateLog.append(gameData)
 
         if (len(self.stateLog) > 300):
             self.stateLog.pop(0)
-            self.mirroredStateLog.pop(0)
-
-    def FlipMirror(self):
-        self.mirroredStateLog, self.stateLog = self.stateLog, self.mirroredStateLog
-        self.isMirrored = not self.isMirrored
 
     def Rewind(self, frames):
         self.futureStateLog = self.stateLog[-frames:]

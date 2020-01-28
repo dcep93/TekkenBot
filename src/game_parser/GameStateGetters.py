@@ -10,13 +10,6 @@ class GameStateGetters:
         bot_frames = self.stateLog[-1].bot.recovery - self.stateLog[-1].bot.move_timer
         return opp_frames - bot_frames
 
-    def IsBotOnLeft(self):
-        isPlayerOneOnLeft = self.gameReader.original_facing == self.stateLog[-1].facing_bool
-        if not self.isMirrored:
-            return isPlayerOneOnLeft
-        else:
-            return not isPlayerOneOnLeft
-
     def GetBotHealth(self):
         return max(0, 170 - self.stateLog[-1].bot.damage_taken)
 
@@ -726,12 +719,12 @@ class GameStateGetters:
         if move_id > 30000:
             return 'Universal_{}'.format(move_id)
 
+        player = self.gameReader.p1 if is_for_bot else self.gameReader.p2
+        movelist = player.movelist
+        if movelist is None:
+            return "UNLOADED"
+        move = movelist[(move_id * 2) + 4]
         try:
-            if (not self.isMirrored and not is_for_bot) or (self.isMirrored and is_for_bot):
-                movelist = self.gameReader.p1.movelist_names
-            else:
-                movelist = self.gameReader.p2.movelist_names
-
-            return movelist[(move_id * 2) + 4].decode('utf-8')
+            return move.decode('utf-8')
         except:
             return "ERROR"

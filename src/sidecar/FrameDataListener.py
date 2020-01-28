@@ -11,21 +11,21 @@ import time
 from enum import Enum
 
 class FrameDataListener:
-    def __init__(self, isPlayerOne):
-        # a single class instance should be sufficient
-        # sibling instances seem to make it more complicated
-        self.isPlayerOne = isPlayerOne
+    def __init__(self):
+        self.listeners = [PlayerListener(i) for i in [True, False]]
 
+    def Update(self, gameState):
+        for listener in self.listeners:
+            listener.Update(gameState)
+
+class PlayerListener:
+    def __init__(self, isPlayerOne):
+        self.isPlayerOne = isPlayerOne
         self.active_frame_wait = 1
 
-    def Update(self, gameState: GameState):
-        if self.isPlayerOne:
-            gameState.FlipMirror()
-
-        if self.ShouldDetermineFrameData(gameState): self.DetermineFrameData(gameState)
-
-        if self.isPlayerOne:
-            gameState.FlipMirror()
+    def Update(self, gameState):
+        if self.ShouldDetermineFrameData(gameState):
+            self.DetermineFrameData(gameState)
 
     def ShouldDetermineFrameData(self, gameState):
         if gameState.IsBotBlocking() or gameState.IsBotGettingHit() or gameState.IsBotBeingThrown() or gameState.IsBotBeingKnockedDown() or gameState.IsBotBeingWallSplatted():
