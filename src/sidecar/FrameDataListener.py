@@ -102,6 +102,7 @@ class FrameDataEntry:
         'hit_recovery',
         'block_recovery'
     ]
+
     def __init__(self, isP1):
         self.isP1 = isP1
 
@@ -137,14 +138,21 @@ class FrameDataEntry:
         else:
             return v
 
+    def getRawField(self, field):
+        return str(self.__getattribute__(field))
+
     def getField(self, field):
-        v = str(self.__getattribute__(field))
+        v = self.getRawField(field)
         diff = len(field) - len(v)
-        if diff <= 0: return v
         if field == 'input': diff += self.input_pad
+        if diff <= 0: return v
         before = int(diff / 2)
         after = diff - before
         return (' ' * before) + v + (' ' * after)
+
+    def getByDataColumn(self, dataColumn):
+        field = self.dataColumnToField[dataColumn]
+        return self.getRawField(field)
 
     def __repr__(self):
         values = [self.getField(i) for i in self.columns]

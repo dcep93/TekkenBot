@@ -28,7 +28,24 @@ class DataColumns(enum.Enum):
     notes = 'additional move properties'
 
 class Printer:
-    col_max_length = 8
+    dataColumnToFrameDataField = {
+        DataColumns.comm: 'input',
+        DataColumns.id: 'move_id',
+        DataColumns.name: 'move_str',
+        DataColumns.type: 'hit_type',
+        DataColumns.st: 'startup',
+        DataColumns.blo: 'on_block',
+        DataColumns.hit: 'on_normal_hit',
+        DataColumns.ch: 'on_counter_hit',
+        DataColumns.act: 'unknown',
+        DataColumns.T: 'unknown',
+        DataColumns.tot: 'recovery',
+        DataColumns.rec: 'hit_recovery',
+        DataColumns.opp: 'block_recovery',
+        DataColumns.notes: 'unknown',
+    }
+
+    col_max_length = 15
     def __init__(self, widget, style, fa_p1_var, fa_p2_var):
         self.widget = widget
         self.fa_p1_var = fa_p1_var
@@ -48,10 +65,10 @@ class Printer:
 
     def populate_column_names(self):
         column_names = ''
-        for enum in DataColumns:
-            col_name = enum.name
-            col_len = len(col_name)
-            if self.columns_to_print[enum]:
+        for col in DataColumns:
+            if self.columns_to_print[col]:
+                col_name = col.name
+                col_len = len(col_name)
                 needed_spaces = self.col_max_length - col_len
                 if col_len < self.col_max_length:
                     spaces_before = " " * int(needed_spaces / 2)
@@ -101,20 +118,20 @@ class Printer:
             self.fa_p2_var.set(fa)
             text_tag = 'p2'
 
-        print(self.columns_to_print)
         out = ""
-        for col in data.split('|'):
+        for col in DataColumns:
             if self.columns_to_print[col]:
-                col_value = col.replace(' ', '')
+                field = self.dataColumnToFrameDataField[col]
+                col_value = frameDataEntry.getRawField(field)
                 col_value_len = len(col_value)
 
                 if col_value_len < self.col_max_length:
                     needed_spaces = self.col_max_length - col_value_len
-                    col_value = '%s%s%s' % (' ' * ((needed_spaces+1) / 2), col_value, ' ' * (needed_spaces / 2))
+                    before = int(needed_spaces / 2)
+                    after = needed_spaces - before
+                    col_value = (' ' * before) + col_value + (' ' * after)
                 
                 out += '|%s' % col_value
-
-        print("\n" + data)
 
         out += "\n"
         self.widget.configure(state="normal")
