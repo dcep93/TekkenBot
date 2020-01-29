@@ -74,18 +74,17 @@ class GameState:
         return player_ago.move_id != player_before.move_id
 
     def GetCurrentMoveName(self, isP1):
-        move_id = self.get(isP1).move_id
+        player = self.get(isP1)
+        move_id = player.move_id
         if move_id > 30000: return 'Universal_{}'.format(move_id)
-        movelist_parser = self.gameReader.p1_movelist_parser if isP1 else self.gameReader.p2_movelist_parser
-        if movelist_parser is not None:
-            movelist_names = movelist_parser.movelist_names
-            index = (move_id * 2) + 4
-            if index < len(movelist_names):
-                move = movelist_names[index]
-                try:
-                    return move.decode('utf-8')
-                except:
-                    pass
+        movelist_names = player.movelist_parser.movelist_names
+        index = (move_id * 2) + 4
+        if index < len(movelist_names):
+            move = movelist_names[index]
+            try:
+                return move.decode('utf-8')
+            except:
+                pass
         return "ERROR"
 
     def GetCurrentMoveString(self, isP1):
