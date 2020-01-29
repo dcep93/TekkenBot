@@ -1,11 +1,10 @@
 from . import MoveInfoEnums
 
 
-class BotSnapshot:
+class PlayerSnapshot:
     def __init__(self, player_data_dict):
         d = player_data_dict
 
-        self.movelist_to_use = d['PlayerDataAddress.movelist_to_use']
         self.move_id = d['PlayerDataAddress.move_id']
         self.simple_state = MoveInfoEnums.SimpleMoveStates(d['PlayerDataAddress.simple_move_state'])
         self.attack_type = MoveInfoEnums.AttackType(d['PlayerDataAddress.attack_type'])

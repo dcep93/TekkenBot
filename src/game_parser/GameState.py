@@ -80,7 +80,7 @@ class GameState:
         movelist_names = player.movelist_names
         index = (move_id * 2) + 4
         if index < len(movelist_names):
-            move = movelist[index]
+            move = movelist_names[index]
             try:
                 return move.decode('utf-8')
             except:

@@ -4,7 +4,7 @@ This module's classes are responsible for reading and interpreting the memory of
 GameReader reads the memory of Tekken7.exe, extracts information about the state of the game, then saves a
 'snapshot' of each frame.
 
-Each GameSnapshot has 2 BotSnapshots, together encapsulating the information of both players and shared data for a single game frame.
+Each GameSnapshot has 2 PlayerSnapshots, together encapsulating the information of both players and shared data for a single game frame.
 
 GameState saves these snapshots and provides an api that abstracts away the difference
 between questions that query one player (is player 1 currently attacking?), both players (what is the expected frame
@@ -32,7 +32,6 @@ game_string = 'TekkenGame-Win64-Shipping.exe'
 
 class Player:
     def __init__(self):
-        self.movelist = None
         self.movelist_names = []
         self.movelist_parser = None
 
@@ -185,18 +184,18 @@ class GameReader:
 
         self.read_from_addresses(p1_dict, p2_dict, player_data_frame)
 
-        p1_bot = GameSnapshot.BotSnapshot(p1_dict)
-        p2_bot = GameSnapshot.BotSnapshot(p2_dict)
+        p1_snapshot = GameSnapshot.PlayerSnapshot(p1_dict)
+        p2_snapshot = GameSnapshot.PlayerSnapshot(p2_dict)
 
-        bot_facing = self.GetValueFromDataBlock(player_data_frame, self.c['GameDataAddress']['facing'])
+        facing = self.GetValueFromDataBlock(player_data_frame, self.c['GameDataAddress']['facing'])
         if self.original_facing is None and best_frame_count > 0:
-            self.original_facing = bot_facing > 0
+            self.original_facing = facing > 0
 
-        if self.flagToReacquireNames and p1_bot.character_name != MoveInfoEnums.CharacterCodes.NOT_YET_LOADED.name and p2_bot.character_name != MoveInfoEnums.CharacterCodes.NOT_YET_LOADED.name:
-            self.reacquire_names(processHandle, p1_bot, p2_bot)
+        if self.flagToReacquireNames and p1_snapshot.character_name != MoveInfoEnums.CharacterCodes.NOT_YET_LOADED.name and p2_snapshot.character_name != MoveInfoEnums.CharacterCodes.NOT_YET_LOADED.name:
+            self.reacquire_names(processHandle, p1_snapshot, p2_snapshot)
 
         timer_in_frames = self.GetValueFromDataBlock(player_data_frame, self.c['GameDataAddress']['timer_in_frames'])
-        return GameSnapshot.GameSnapshot(p1_bot, p2_bot, best_frame_count, timer_in_frames, bot_facing, self.is_player_player_one)
+        return GameSnapshot.GameSnapshot(p1_snapshot, p2_snapshot, best_frame_count, timer_in_frames, facing, self.is_player_player_one)
 
     def reacquire_module(self):
         print("Trying to acquire Tekken library in pid: %s" % self.pid)
@@ -263,21 +262,18 @@ class GameReader:
         p1_dict['movelist_parser'] = self.p1.movelist_parser
         p2_dict['movelist_parser'] = self.p2.movelist_parser
 
-    def reacquire_names(self, processHandle, p1_bot, p2_bot):
+    def reacquire_names(self, processHandle, p1_snapshot, p2_snapshot):
         self.opponent_side = self.GetValueAtEndOfPointerTrail(processHandle, "OPPONENT_SIDE", False)
         self.is_player_player_one = (self.opponent_side == 1)
 
-        self.p1.movelist = p1_bot.movelist_to_use
-        self.p2.movelist = p2_bot.movelist_to_use
+        p1_movelist_block, p1_movelist_address = self.PopulateMovelists(processHandle, "P1_Movelist")
+        p2_movelist_block, p2_movelist_address = self.PopulateMovelists(processHandle, "P2_Movelist")
 
-        self.p1.movelist_block, p1_movelist_address = self.PopulateMovelists(processHandle, "P1_Movelist")
-        self.p2.movelist_block, p2_movelist_address = self.PopulateMovelists(processHandle, "P2_Movelist")
+        self.p1.movelist_parser = MovelistParser.MovelistParser(p1_movelist_block, p1_movelist_address)
+        self.p2.movelist_parser = MovelistParser.MovelistParser(p2_movelist_block, p2_movelist_address)
 
-        self.p1.movelist_parser = MovelistParser.MovelistParser(self.p1.movelist_block, p1_movelist_address)
-        self.p2.movelist_parser = MovelistParser.MovelistParser(self.p2.movelist_block, p2_movelist_address)
-
-        self.p1.movelist_names = self.p1.movelist_block[0x2E8:200000].split(b'\00') # Todo: figure out the actual size of the name movelist
-        self.p2.movelist_names = self.p2.movelist_block[0x2E8:200000].split(b'\00')
+        self.p1.movelist_names = p1_movelist_block[0x2E8:200000].split(b'\00') # Todo: figure out the actual size of the name movelist
+        self.p2.movelist_names = p2_movelist_block[0x2E8:200000].split(b'\00')
 
         self.flagToReacquireNames = False
         print("acquired movelist")
