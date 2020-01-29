@@ -27,16 +27,16 @@ class PlayerListener:
             self.DetermineFrameData(gameState)
 
     def ShouldDetermineFrameData(self, gameState):
-        if gameState.get(self.isP1).IsBlocking() or gameState.get(self.isP1).IsGettingHit() or gameState.get(self.isP1).IsInThrowing() or gameState.get(self.isP1).IsBeingKnockedDown() or gameState.get(self.isP1).IsGettingWallSplatted():
-            if gameState.DidIdChangeXMovesAgo(self.isP1, self.active_frame_wait) or gameState.DidTimerInterruptXMovesAgo(self.isP1, self.active_frame_wait):
+        if gameState.get(not self.isP1).IsBlocking() or gameState.get(not self.isP1).IsGettingHit() or gameState.get(not self.isP1).IsInThrowing() or gameState.get(not self.isP1).IsBeingKnockedDown() or gameState.get(not self.isP1).IsGettingWallSplatted():
+            if gameState.DidIdChangeXMovesAgo(not self.isP1, self.active_frame_wait) or gameState.DidTimerInterruptXMovesAgo(not self.isP1, self.active_frame_wait):
                     return True
         return False
 
     def DetermineFrameData(self, gameState):
-        is_recovering_before_long_active_frame_move_completes = (gameState.get(self.isP1).recovery - gameState.get(self.isP1).move_timer == 0)
+        is_recovering_before_long_active_frame_move_completes = (gameState.get(not self.isP1).recovery - gameState.get(not self.isP1).move_timer == 0)
         gameState.Rewind(self.active_frame_wait)
 
-        if (self.active_frame_wait < gameState.get(not self.isP1).GetActiveFrames() + 1) and not is_recovering_before_long_active_frame_move_completes:
+        if (self.active_frame_wait < gameState.get(self.isP1).GetActiveFrames() + 1) and not is_recovering_before_long_active_frame_move_completes:
             self.active_frame_wait += 1
         else:
             self.DetermineFrameDataHelper(gameState)
@@ -48,38 +48,38 @@ class PlayerListener:
 
         gameState.Rewind(self.active_frame_wait)
 
-        opp_id = gameState.get(not self.isP1).move_id
+        move_id = gameState.get(self.isP1).move_id
 
         frameDataEntry = FrameDataEntry(self.isP1)
 
-        frameDataEntry.move_id = opp_id
-        frameDataEntry.startup = gameState.get(not self.isP1).startup
-        frameDataEntry.activeFrames = gameState.get(not self.isP1).GetActiveFrames()
-        frameDataEntry.hit_type = AttackType(gameState.get(not self.isP1).attack_type).name + ("_THROW" if gameState.get(not self.isP1).IsAttackThrow() else "")
-        frameDataEntry.recovery = gameState.get(not self.isP1).recovery
-        frameDataEntry.input = gameState.GetCurrentMoveString(not self.isP1)
+        frameDataEntry.move_id = move_id
+        frameDataEntry.startup = gameState.get(self.isP1).startup
+        frameDataEntry.activeFrames = gameState.get(self.isP1).GetActiveFrames()
+        frameDataEntry.hit_type = AttackType(gameState.get(self.isP1).attack_type).name + ("_THROW" if gameState.get(self.isP1).IsAttackThrow() else "")
+        frameDataEntry.recovery = gameState.get(self.isP1).recovery
+        frameDataEntry.input = gameState.GetCurrentMoveString(self.isP1)
 
         gameState.Unrewind()
 
-        time_till_recovery_opp = gameState.get(not self.isP1).GetFramesTillNextMove()
-        time_till_recovery_bot = gameState.get(self.isP1).GetFramesTillNextMove()
+        time_till_recovery_p1 = gameState.get(self.isP1).GetFramesTillNextMove()
+        time_till_recovery_p2 = gameState.get(not self.isP1).GetFramesTillNextMove()
 
-        new_frame_advantage_calc = time_till_recovery_bot - time_till_recovery_opp
+        new_frame_advantage_calc = time_till_recovery_p2 - time_till_recovery_p1
 
         frameDataEntry.currentFrameAdvantage = frameDataEntry.WithPlusIfNeeded(new_frame_advantage_calc)
 
-        if gameState.get(self.isP1).IsBlocking():
+        if gameState.get(not self.isP1).IsBlocking():
             frameDataEntry.on_block = frameDataEntry.currentFrameAdvantage
         else:
-            if gameState.get(self.isP1).IsGettingCounterHit():
+            if gameState.get(not self.isP1).IsGettingCounterHit():
                 frameDataEntry.on_counter_hit = frameDataEntry.currentFrameAdvantage
             else:
                 frameDataEntry.on_normal_hit = frameDataEntry.currentFrameAdvantage
 
-        frameDataEntry.hit_recovery = time_till_recovery_opp
-        frameDataEntry.block_recovery = time_till_recovery_bot
+        frameDataEntry.hit_recovery = time_till_recovery_p2
+        frameDataEntry.block_recovery = time_till_recovery_p1
 
-        frameDataEntry.move_str = gameState.GetCurrentMoveName(not self.isP1)
+        frameDataEntry.move_str = gameState.GetCurrentMoveName(self.isP1)
 
         self.printer.print(frameDataEntry)
 
