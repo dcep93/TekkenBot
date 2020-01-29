@@ -57,18 +57,6 @@ class GameState:
         if playerSelector is None: return state
         return state.p1 if playerSelector else state.p2
 
-    def GetLastActiveFrameHitWasOn(self, isP1, frames):
-        returnNextState = False
-        for state in reversed(self.stateLog[-(frames + 2):]):
-            if returnNextState:
-                player = state.p2 if isP1 else state.p1
-                return (player.move_timer - player.startup) + 1
-
-            player = state.p1 if isP1 else state.p2
-            if player.move_timer == 1:
-                returnNextState = True
-        return 0
-
     def DidTimerInterruptXMovesAgo(self, isP1, framesAgo):
         player = self.getOldPlayer(isP1, framesAgo)
         if player is None: return False

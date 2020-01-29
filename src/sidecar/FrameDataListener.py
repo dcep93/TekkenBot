@@ -150,10 +150,6 @@ class FrameDataEntry:
         after = diff - before
         return (' ' * before) + v + (' ' * after)
 
-    def getByDataColumn(self, dataColumn):
-        field = self.dataColumnToField[dataColumn]
-        return self.getRawField(field)
-
     def __repr__(self):
         values = [self.getField(i) for i in self.columns]
 
