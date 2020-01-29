@@ -122,7 +122,7 @@ class GameReader:
     def GetWindowRect(self):
         #see https://stackoverflow.com/questions/21175922/enumerating-windows-trough-ctypes-in-python for clues for doing this without needing focus using WindowsEnum
         if self.IsForegroundPID():
-            rect = ctypes.wintypes.RECT()
+            rect = windows.wintypes.RECT()
             ctypes.windll.user32.GetWindowRect(ctypes.windll.user32.GetForegroundWindow(), ctypes.byref(rect))
             return rect
         else:

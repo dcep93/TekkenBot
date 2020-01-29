@@ -7,7 +7,7 @@ PROCESS_TERMINATE = 0x0001
 PROCESS_QUERY_INFORMATION = 0x0400
 
 def GetForegroundPid():
-    pid = windows.ctypes.wintypes.DWORD()
+    pid = windows.wintypes.DWORD()
     active = windows.ctypes.windll.user32.GetForegroundWindow()
     active_window = windows.ctypes.windll.user32.GetWindowThreadProcessId(active, windows.ctypes.byref(pid))
     return pid.value

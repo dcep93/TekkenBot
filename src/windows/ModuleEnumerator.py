@@ -4,14 +4,14 @@ import windows
 
 def GetModuleAddressByPIDandName(pid, name):
     class MODULEENTRY32(windows.ctypes.Structure):
-        _fields_ = [( 'dwSize' , windows.ctypes.wintypes.DWORD ) ,
-                    ( 'th32ModuleID' , windows.ctypes.wintypes.DWORD ),
-                    ( 'th32ProcessID' , windows.ctypes.wintypes.DWORD ),
-                    ( 'GlblcntUsage' , windows.ctypes.wintypes.DWORD ),
-                    ( 'ProccntUsage' , windows.ctypes.wintypes.DWORD ) ,
-                    ( 'modBaseAddr' , windows.ctypes.POINTER(windows.ctypes.wintypes.BYTE) ) ,
-                    ( 'modBaseSize' , windows.ctypes.wintypes.DWORD ) ,
-                    ( 'hModule' , windows.ctypes.wintypes.HMODULE ) ,
+        _fields_ = [( 'dwSize' , windows.wintypes.DWORD ) ,
+                    ( 'th32ModuleID' , windows.wintypes.DWORD ),
+                    ( 'th32ProcessID' , windows.wintypes.DWORD ),
+                    ( 'GlblcntUsage' , windows.wintypes.DWORD ),
+                    ( 'ProccntUsage' , windows.wintypes.DWORD ) ,
+                    ( 'modBaseAddr' , windows.ctypes.POINTER(windows.wintypes.BYTE) ) ,
+                    ( 'modBaseSize' , windows.wintypes.DWORD ) ,
+                    ( 'hModule' , windows.wintypes.HMODULE ) ,
                     ( 'szModule' , windows.ctypes.c_char * 256 ),
                     ( 'szExePath' , windows.ctypes.c_char * 260 ) ]
 
