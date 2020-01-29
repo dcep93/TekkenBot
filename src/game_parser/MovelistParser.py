@@ -47,8 +47,6 @@ class MoveNode:
         else:
             self.name = str(self.move_id)
 
-        self.movelist_names = forty_bytes[0x2E8:200000].split(b'\00') # Todo: figure out the actual size of the name movelist
-
     def __repr__(self):
         return '{} | {} |{:x} | {} | {} | {:x} | {:x} | {} | {} | {} | {:x} | {}'.format(
             self.name, self.direction_bytes, self.unknown_input_dir, self.attack_bytes, self.button_press, self.number_one, self.number_two, self.unknown_bool, self.cancel_window_1, self.cancel_window_2, self.move_id, self.move_requires_input)
@@ -56,36 +54,35 @@ class MoveNode:
 
 class MovelistParser:
     def __init__(self, movelist_bytes, movelist_pointer):
-        self.bytes = movelist_bytes
         self.pointer = movelist_pointer
-        self.parse_header()
+        self.parse_header(movelist_bytes)
 
-    def parse_header(self):
+    def parse_header(self, all_bytes):
         header_length = 0x2e8
-        header_bytes = self.bytes[0:header_length]
-        identifier = self.header_line(0)
-        char_name_address = self.header_line(1)
-        developer_name_address = self.header_line(2)
-        date_address = self.header_line(3)
-        timestamp_address = self.header_line(4)
+        header_bytes = all_bytes[0:header_length]
+        identifier = self.header_line(0, all_bytes)
+        char_name_address = self.header_line(1, all_bytes)
+        developer_name_address = self.header_line(2, all_bytes)
+        date_address = self.header_line(3, all_bytes)
+        timestamp_address = self.header_line(4, all_bytes)
 
-        self.char_name = self.bytes[char_name_address:developer_name_address].strip(b'\00').decode('utf-8')
+        self.char_name = all_bytes[char_name_address:developer_name_address].strip(b'\00').decode('utf-8')
         print("Parsing movelist for {}".format(self.char_name))
 
         unknown_regions = {}
         for i in range(42, 91, 2):
-            unknown_regions[i] = self.header_line(i)
+            unknown_regions[i] = self.header_line(i, all_bytes)
 
-        self.names_double = self.bytes[header_length:unknown_regions[42]].split(b'\00')[4:]
+        self.names_double = all_bytes[header_length:unknown_regions[42]].split(b'\00')[4:]
         self.names = []
         for i in range(0, len(self.names_double) - 1, 2):
             self.names.append(self.names_double[i].decode('utf-8'))
 
 
-        self.move_nodes_raw = self.bytes[unknown_regions[54]:unknown_regions[58]] #there's two regions of move nodes, first one might be blocks????
+        self.move_nodes_raw = all_bytes[unknown_regions[54]:unknown_regions[58]] #there's two regions of move nodes, first one might be blocks????
         self.move_nodes = []
         for i in range(0, len(self.move_nodes_raw), 40):
-            self.move_nodes.append(MoveNode(self.move_nodes_raw[i:i+40], self.pointer, self.bytes, self.names))
+            self.move_nodes.append(MoveNode(self.move_nodes_raw[i:i+40], self.pointer, all_bytes, self.names))
 
         self.can_move_be_done_from_neutral = {}
 
@@ -138,8 +135,10 @@ class MovelistParser:
 
                 self.move_id_to_input[move_id] = (direction, button, press)
 
-    def header_line(self, line):
-        header_bytes = self.bytes[line * 8:(line+1) * 8]
+        self.movelist_names = all_bytes[0x2E8:200000].split(b'\00') # Todo: figure out the actual size of the name movelist
+
+    def header_line(self, line, all_bytes):
+        header_bytes = all_bytes[line * 8:(line+1) * 8]
         return struct.unpack('<Q', header_bytes)[0] - self.pointer
 
     def can_be_done_from_neutral(self, move_id):
