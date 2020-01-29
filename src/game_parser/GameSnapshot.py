@@ -90,6 +90,10 @@ class PlayerSnapshot:
     def IsAbleToAct(self):
         return self.is_cancelable
 
+# todo temp until pickle rebuilt
+class BotSnapshot(PlayerSnapshot):
+    pass
+
 class GameSnapshot:
     def __init__(self, p1, p2, frame_count, timer_in_frames, facing_bool, is_player_player_one):
         self.p1 = p1
@@ -99,7 +103,7 @@ class GameSnapshot:
         self.timer_frames_remaining = timer_in_frames
         self.is_player_player_one = is_player_player_one
 
-    # temp until pickle rebuilt
+    # todo temp until pickle rebuilt
     def __getattr__(self, name):
         if name == 'p1':
             name = 'bot'

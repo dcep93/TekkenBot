@@ -45,6 +45,8 @@ class MoveNode:
         else:
             self.name = str(self.move_id)
 
+        self.movelist_names = forty_bytes[0x2E8:200000].split(b'\00') # Todo: figure out the actual size of the name movelist
+
     def __repr__(self):
         return '{} | {} |{:x} | {} | {} | {:x} | {:x} | {} | {} | {} | {:x} | {}'.format(
             self.name, self.direction_bytes, self.unknown_input_dir, self.attack_bytes, self.button_press, self.number_one, self.number_two, self.unknown_bool, self.cancel_window_1, self.cancel_window_2, self.move_id, self.move_requires_input)

@@ -30,11 +30,6 @@ import windows
 
 game_string = 'TekkenGame-Win64-Shipping.exe'
 
-class Player:
-    def __init__(self):
-        self.movelist_names = []
-        self.movelist_parser = None
-
 class AddressType(enum.Enum):
     _float = 0
     _64bit = 1
@@ -48,8 +43,8 @@ class GameReader:
         self.is_player_player_one = None
         self.c = misc.ConfigReader.ReloadableConfig('memory_address')
         self.player_data_pointer_offset = self.c['MemoryAddressOffsets']['player_data_pointer_offset']
-        self.p1 = Player()
-        self.p2 = Player()
+        self.p1_movelist_parser = None
+        self.p2_movelist_parser = None
 
     def ReacquireEverything(self):
         self.needReacquireModule = True
@@ -259,8 +254,8 @@ class GameReader:
             p1_dict[address] = p1_coord_array
             p2_dict[address] = p2_coord_array
 
-        p1_dict['movelist_parser'] = self.p1.movelist_parser
-        p2_dict['movelist_parser'] = self.p2.movelist_parser
+        p1_dict['movelist_parser'] = self.p1_movelist_parser
+        p2_dict['movelist_parser'] = self.p2_movelist_parser
 
     def reacquire_names(self, processHandle, p1_snapshot, p2_snapshot):
         self.opponent_side = self.GetValueAtEndOfPointerTrail(processHandle, "OPPONENT_SIDE", False)
@@ -269,11 +264,8 @@ class GameReader:
         p1_movelist_block, p1_movelist_address = self.PopulateMovelists(processHandle, "P1_Movelist")
         p2_movelist_block, p2_movelist_address = self.PopulateMovelists(processHandle, "P2_Movelist")
 
-        self.p1.movelist_parser = MovelistParser.MovelistParser(p1_movelist_block, p1_movelist_address)
-        self.p2.movelist_parser = MovelistParser.MovelistParser(p2_movelist_block, p2_movelist_address)
-
-        self.p1.movelist_names = p1_movelist_block[0x2E8:200000].split(b'\00') # Todo: figure out the actual size of the name movelist
-        self.p2.movelist_names = p2_movelist_block[0x2E8:200000].split(b'\00')
+        self.p1_movelist_parser = MovelistParser.MovelistParser(p1_movelist_block, p1_movelist_address)
+        self.p2_movelist_parser = MovelistParser.MovelistParser(p2_movelist_block, p2_movelist_address)
 
         self.flagToReacquireNames = False
         print("acquired movelist")
