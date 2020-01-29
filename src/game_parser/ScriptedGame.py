@@ -4,6 +4,7 @@ import time
 
 from misc import Flags
 from . import GameReader
+from . import MovelistParser
 
 class Recorder(GameReader.GameReader):
     all_datas = []
@@ -32,10 +33,17 @@ class Recorder(GameReader.GameReader):
     @classmethod
     def save_and_quit(cls, pickle_dest):
         cls.active = False
+        MovelistParser.__getstate__ = self.movelistparser_getstate
         print('writing', cls.num_datas, len(cls.all_datas))
         with open(pickle_dest, 'wb') as fh:
             pickle.dump(cls.all_datas, fh)
         exit(1)
+
+    # intended to assign as a different class method
+    def movelistparser_getstate(movelistparser):
+        state = movelistparser.__dict__.copy()
+        state['bytes'] = state['bytes'].value
+        return state
 
 class Reader(GameReader.GameReader):
     def __init__(self, pickle_src):

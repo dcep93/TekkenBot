@@ -178,8 +178,3 @@ class MovelistParser:
             return input, last_move_was_empty_cancel
         else:
             return "N/A", False
-
-    def __getstate__(self):
-        state = self.__dict__.copy()
-        state['bytes'] = state['bytes'].value
-        return state
