@@ -20,6 +20,24 @@ class GameState:
 
         self.futureStateLog = None
 
+    def Rewind(self, frames):
+        self.futureStateLog = self.stateLog[-frames:]
+        self.stateLog = self.stateLog[:-frames]
+
+    def Unrewind(self):
+        self.stateLog += self.futureStateLog
+        self.futureStateLog = None
+
+    def get(self, playerSelector=None):
+        state = self.stateLog[-1]
+        if playerSelector is None: return state
+        return state.p1 if playerSelector else state.p2
+
+    def getOldPlayer(self, isP1, framesAgo):
+        if len(self.stateLog) <= framesAgo: return None
+        state = self.stateLog[-framesAgo]
+        return state.p1 if isP1 else state.p2
+
     def Update(self):
         gameData = self.gameReader.GetUpdatedState(0)
 
@@ -44,19 +62,6 @@ class GameState:
         if (len(self.stateLog) > 300):
             self.stateLog.pop(0)
 
-    def Rewind(self, frames):
-        self.futureStateLog = self.stateLog[-frames:]
-        self.stateLog = self.stateLog[:-frames]
-
-    def Unrewind(self):
-        self.stateLog += self.futureStateLog
-        self.futureStateLog = None
-
-    def get(self, playerSelector=None):
-        state = self.stateLog[-1]
-        if playerSelector is None: return state
-        return state.p1 if playerSelector else state.p2
-
     def DidTimerInterruptXMovesAgo(self, isP1, framesAgo):
         player = self.getOldPlayer(isP1, framesAgo)
         if player is None: return False
@@ -67,11 +72,6 @@ class GameState:
         if player_before is None: return False
         player_ago = self.getOldPlayer(isP1, framesAgo)
         return player_ago.move_id != player_before.move_id
-
-    def getOldPlayer(self, isP1, framesAgo):
-        if len(self.stateLog) <= framesAgo: return None
-        state = self.stateLog[-framesAgo]
-        return state.p1 if isP1 else state.p2
 
     def GetCurrentMoveName(self, isP1):
         move_id = self.get(isP1).move_id
@@ -87,18 +87,6 @@ class GameState:
                 except:
                     pass
         return "ERROR"
-
-    def GetTrackingType(self, isP1, startup):
-        if len(self.stateLog) > startup:
-            complex_states = [MoveInfoEnums.ComplexMoveStates.UNKN]
-            for state in reversed(self.stateLog[-startup:]):
-                player = state.p1 if isP1 else state.p2
-                tracking = player.GetTrackingType()
-                if -1 < tracking.value < 8:
-                    complex_states.append(tracking)
-            return collections.Counter(complex_states).most_common(1)[0][0]
-        else:
-            return MoveInfoEnums.ComplexMoveStates.F_MINUS
 
     def GetCurrentMoveString(self, isP1):
         if self.get(isP1).movelist_parser != None:

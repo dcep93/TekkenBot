@@ -1,6 +1,5 @@
 from . import MoveInfoEnums
 
-
 class PlayerSnapshot:
     def __init__(self, player_data_dict):
         d = player_data_dict
@@ -55,9 +54,6 @@ class PlayerSnapshot:
 
     def GetInputState(self):
         return (self.input_direction, self.input_button, self.rage_button_flag)
-
-    def GetTrackingType(self):
-        return self.complex_state
 
     def IsBlocking(self):
         return self.complex_state == MoveInfoEnums.ComplexMoveStates.BLOCK
