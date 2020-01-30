@@ -93,8 +93,7 @@ class PlayerListener:
 
         return frameDataEntry
 
-# todo this should be absorbed into FrameDataOverlay
-# gah or maybe it should just be a dict instead of a class
+# not the best organization, but it works
 class FrameDataEntry:
     unknown = '??'
     prefix_length = 4
@@ -111,7 +110,7 @@ class FrameDataEntry:
         'hit_recovery',
         'block_recovery'
     ]
-    paddings = {'input': 18, 'move_str': 8}
+    paddings = {'input': 16, 'move_str': 11}
 
     def __init__(self):
         self.input = self.unknown
@@ -130,13 +129,10 @@ class FrameDataEntry:
 
     @classmethod
     def printColumns(cls):
-        cols = cls.columns[:]
-        for col, padding in cls.paddings.items():
-            before = int(padding / 2)
-            after = padding - before
-            index = cols.index(col)
-            cols[index] = (" " * before) + cols[index] + (" " * after)
-        string = " ".join(cols)
+        obj = cls()
+        for col in cls.columns:
+            obj.__setattr__(col, col)
+        string = str(obj)
         prefix = " " * cls.prefix_length
         print(prefix + string)
 

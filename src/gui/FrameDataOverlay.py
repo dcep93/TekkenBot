@@ -20,12 +20,9 @@ class DataColumns(enum.Enum):
     blo = 'frame advantage on block'
     hit = 'frame advantage on hit'
     ch = 'frame advantage on counter hit'
-    act = 'active frame connected on / total active frames'
-    T = 'how well move tracks during startup'
     tot = 'total number of frames in move'
     rec = 'frames before attacker can act'
     opp = 'frames before defender can act'
-    notes = 'additional move properties'
 
 class Printer:
     dataColumnToFrameDataField = {
@@ -37,12 +34,9 @@ class Printer:
         DataColumns.blo: 'on_block',
         DataColumns.hit: 'on_normal_hit',
         DataColumns.ch: 'on_counter_hit',
-        DataColumns.act: 'unknown',
-        DataColumns.T: 'unknown',
         DataColumns.tot: 'recovery',
         DataColumns.rec: 'hit_recovery',
         DataColumns.opp: 'block_recovery',
-        DataColumns.notes: 'unknown',
     }
 
     col_max_length = 15
