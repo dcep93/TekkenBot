@@ -187,7 +187,7 @@ class GlobalFrameDataEntry:
             if v == frameDataEntry.unknown:
                 new_v = most_common
             else:
-                new_v = "%s (%s)" % (v, most_common)
+                new_v = "(%s)" % (most_common)
             frameDataEntry.__setattr__(field, new_v)
 
 frameDataEntries = collections.defaultdict(GlobalFrameDataEntry)
