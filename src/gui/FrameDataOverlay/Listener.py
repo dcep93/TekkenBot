@@ -41,16 +41,22 @@ class PlayerListener:
 
     def DetermineFrameDataHelper(self, gameState):
         floated = gameState.WasJustFloated(not self.isP1)
-        frameDataEntry = self.buildFrameDataEntry(gameState, floated)
-        fa = frameDataEntry[DataColumns.fa]
+        gameState.Unrewind()
+        fa = self.getFA(gameState, floated)
+        gameState.Rewind(self.active_frame_wait)
+        move_id = gameState.get(self.isP1).move_id
+        if move_id in FrameDataEntry.database:
+            frameDataEntry = dict(FrameDataEntry.database)
+        else:
+            frameDataEntry = self.buildFrameDataEntry(gameState, fa)
+            globalFrameDataEntry = FrameDataEntry.frameDataEntries[move_id]
+            globalFrameDataEntry.record(frameDataEntry, floated)
 
-        globalFrameDataEntry = FrameDataEntry.frameDataEntries[frameDataEntry[DataColumns.move_id]]
-        
-        globalFrameDataEntry.record(frameDataEntry, floated)
+        frameDataEntry[DataColumns.fa] = fa
 
-        self.printer.print(self.isP1, frameDataEntry, floated, fa)
+        self.printer.print(self.isP1, frameDataEntry)
 
-    def buildFrameDataEntry(self, gameState, floated):
+    def buildFrameDataEntry(self, gameState, fa):
         move_id = gameState.get(self.isP1).move_id
 
         frameDataEntry = {}
@@ -62,26 +68,6 @@ class PlayerListener:
         frameDataEntry[DataColumns.cmd] = gameState.GetCurrentMoveString(self.isP1)
 
         gameState.Unrewind()
-        # todo hmm should know when juggled
-        receiver = gameState.get(not self.isP1)
-        if receiver.IsBeingKnockedDown():
-            fa = 'KND'
-        elif receiver.IsBeingJuggled():
-            fa = 'JGL'
-        elif floated:
-            fa = 'FLT'
-        else:
-            time_till_recovery_p1 = gameState.get(self.isP1).GetFramesTillNextMove()
-            time_till_recovery_p2 = gameState.get(not self.isP1).GetFramesTillNextMove()
-
-            frameDataEntry[DataColumns.h_rec] = time_till_recovery_p1
-            frameDataEntry[DataColumns.b_rec] = time_till_recovery_p2
-
-            raw_fa = time_till_recovery_p2 - time_till_recovery_p1
-
-            fa = self.WithPlusIfNeeded(raw_fa)
-
-        frameDataEntry[DataColumns.fa] = fa
 
         if gameState.get(not self.isP1).IsBlocking():
             frameDataEntry[DataColumns.block] = fa
@@ -97,6 +83,22 @@ class PlayerListener:
         gameState.Rewind(self.active_frame_wait)
 
         return frameDataEntry
+
+    def getFA(self, gameState, floated):
+        receiver = gameState.get(not self.isP1)
+        if receiver.IsBeingKnockedDown():
+            return 'KND'
+        elif receiver.IsBeingJuggled():
+            return 'JGL'
+        elif floated:
+            return 'FLT'
+        else:
+            time_till_recovery_p1 = gameState.get(self.isP1).GetFramesTillNextMove()
+            time_till_recovery_p2 = gameState.get(not self.isP1).GetFramesTillNextMove()
+
+            raw_fa = time_till_recovery_p2 - time_till_recovery_p1
+
+            return self.WithPlusIfNeeded(raw_fa)
 
     @staticmethod
     def WithPlusIfNeeded(value):

@@ -35,6 +35,8 @@ class GlobalFrameDataEntry:
             frameDataEntry[field] = new_v
 
 frameDataEntries = collections.defaultdict(GlobalFrameDataEntry)
+# todo load from csv
+database = {}
 
 @enum.unique
 class DataColumns(enum.Enum):
@@ -48,6 +50,4 @@ class DataColumns(enum.Enum):
     normal = 'frame advantage on hit'
     counter = 'frame advantage on counter hit'
     w_rec = 'total number of frames in move'
-    h_rec = 'frames before attacker can act'
-    b_rec = 'frames before defender can act'
     fa = 'frame advantage right now'

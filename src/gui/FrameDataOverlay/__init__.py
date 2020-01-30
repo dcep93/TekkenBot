@@ -44,6 +44,10 @@ class Printer:
         self.widget.configure(state="disabled")
 
     def get_background(self, fa):
+        try:
+            fa = int(fa)
+        except ValueError:
+            return Overlay.ColorSchemeEnum.advantage_plus.value
         if fa <= -14:
             return Overlay.ColorSchemeEnum.advantage_very_punishible.value
         elif fa <= -10:
@@ -59,7 +63,7 @@ class Printer:
         playerName = "p1" if isP1 else "p2"
         return "%s: " % playerName
 
-    def print(self, isP1, frameDataEntry, floated, fa):
+    def print(self, isP1, frameDataEntry):
         lines = int(self.widget.index('end-1c').split('.')[0])
         max_lines = 5
         if lines > max_lines:
@@ -69,9 +73,10 @@ class Printer:
                 self.widget.delete('2.0', '3.0')
                 self.widget.configure(state="disabled")
 
-        if not floated and fa is not None:
-            background = self.get_background(int(fa))
-            self.style.configure('.', background=background)
+        fa = frameDataEntry[DataColumns.fa]
+
+        background = self.get_background(fa)
+        self.style.configure('.', background=background)
 
         self.fa_var.set(fa)
         text_tag = 'p1' if isP1 else 'p2'
