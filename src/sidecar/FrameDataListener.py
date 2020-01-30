@@ -53,7 +53,7 @@ class PlayerListener:
         floated = gameState.WasJustFloated(not self.isP1)
         globalFrameDataEntry.record(frameDataEntry, floated)
 
-        self.printer.print(self.isP1, frameDataEntry)
+        self.printer.print(self.isP1, frameDataEntry, floated)
 
     def buildFrameDataEntry(self, gameState):
         move_id = gameState.get(self.isP1).move_id

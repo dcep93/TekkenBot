@@ -87,7 +87,7 @@ class Printer:
         else:
             return Overlay.ColorSchemeEnum.advantage_plus
 
-    def print(self, isP1, frameDataEntry):
+    def print(self, isP1, frameDataEntry, floated):
         fa = frameDataEntry.fa
 
         playerName = "p1" if isP1 else "p2"
@@ -102,7 +102,7 @@ class Printer:
                 self.widget.delete('2.0', '3.0')
                 self.widget.configure(state="disabled")
 
-        if fa != frameDataEntry.unknown:
+        if not floated and fa != frameDataEntry.unknown:
             background = self.get_background(int(fa))
             self.style.configure('.', background=background)
 
