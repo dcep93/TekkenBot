@@ -39,6 +39,7 @@ frameDataEntries = collections.defaultdict(GlobalFrameDataEntry)
 @enum.unique
 class DataColumns(enum.Enum):
     cmd = 'input command'
+    char_name = 'character name'
     move_id = 'internal move id number'
     move_str = 'internal move name'
     hit_type = 'attack type'
