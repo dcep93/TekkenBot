@@ -90,7 +90,6 @@ class PlayerListener:
 class FrameDataEntry:
     unknown = '??'
     prefix_length = 4
-    input_pad = 10
     columns = [
         'input',
         'move_id',
@@ -104,6 +103,7 @@ class FrameDataEntry:
         'hit_recovery',
         'block_recovery'
     ]
+    paddings = {'input': 18, 'move_str': 8}
 
     def __init__(self):
         self.currentFrameAdvantage = self.unknown
@@ -123,9 +123,11 @@ class FrameDataEntry:
     @classmethod
     def printColumns(cls):
         cols = cls.columns[:]
-        before = int(cls.input_pad / 2)
-        after = cls.input_pad - before
-        cols[0] = (" " * before) + cols[0] + (" " * after)
+        for col, padding in cls.paddings.items():
+            before = int(padding / 2)
+            after = padding - before
+            index = cols.index(col)
+            cols[index] = (" " * before) + cols[index] + (" " * after)
         string = " ".join(cols)
         prefix = " " * cls.prefix_length
         print(prefix + string)
@@ -144,7 +146,7 @@ class FrameDataEntry:
     def getField(self, field):
         v = self.getRawField(field)
         diff = len(field) - len(v)
-        if field == 'input': diff += self.input_pad
+        if field in self.paddings: diff += self.paddings[field]
         if diff <= 0: return v
         before = int(diff / 2)
         after = diff - before
