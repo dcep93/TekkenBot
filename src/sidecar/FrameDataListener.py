@@ -46,13 +46,19 @@ class PlayerListener:
         gameState.Unrewind()
 
     def DetermineFrameDataHelper(self, gameState):
-        gameState.Unrewind()
+        frameDataEntry = self.buildFrameDataEntry(gameState)
 
-        gameState.Rewind(self.active_frame_wait)
+        globalFrameDataEntry = frameDataEntries[frameDataEntry.move_id]
+        
+        floated = gameState.WasJustFloated(not self.isP1)
+        globalFrameDataEntry.record(frameDataEntry, floated)
 
+        self.printer.print(self.isP1, frameDataEntry)
+
+    def buildFrameDataEntry(self, gameState):
         move_id = gameState.get(self.isP1).move_id
 
-        frameDataEntry = frameDataEntries[move_id]
+        frameDataEntry = FrameDataEntry()
 
         frameDataEntry.move_id = move_id
         frameDataEntry.startup = gameState.get(self.isP1).startup
@@ -66,27 +72,29 @@ class PlayerListener:
         time_till_recovery_p1 = gameState.get(self.isP1).GetFramesTillNextMove()
         time_till_recovery_p2 = gameState.get(not self.isP1).GetFramesTillNextMove()
 
-        new_frame_advantage_calc = time_till_recovery_p2 - time_till_recovery_p1
+        raw_fa = time_till_recovery_p2 - time_till_recovery_p1
 
-        frameDataEntry.currentFrameAdvantage = frameDataEntry.WithPlusIfNeeded(new_frame_advantage_calc)
+        frameDataEntry.fa = frameDataEntry.WithPlusIfNeeded(raw_fa)
 
         if gameState.get(not self.isP1).IsBlocking():
-            frameDataEntry.on_block = frameDataEntry.currentFrameAdvantage
+            frameDataEntry.on_block = frameDataEntry.fa
         else:
             if gameState.get(not self.isP1).IsGettingCounterHit():
-                frameDataEntry.on_counter_hit = frameDataEntry.currentFrameAdvantage
+                frameDataEntry.on_counter_hit = frameDataEntry.fa
             else:
-                frameDataEntry.on_normal_hit = frameDataEntry.currentFrameAdvantage
+                frameDataEntry.on_normal_hit = frameDataEntry.fa
 
         frameDataEntry.hit_recovery = time_till_recovery_p1
         frameDataEntry.block_recovery = time_till_recovery_p2
 
         frameDataEntry.move_str = gameState.GetCurrentMoveName(self.isP1)
 
-        self.printer.print(self.isP1, frameDataEntry)
-
         gameState.Rewind(self.active_frame_wait)
 
+        return frameDataEntry
+
+# todo this should be absorbed into FrameDataOverlay
+# gah or maybe it should just be a dict instead of a class
 class FrameDataEntry:
     unknown = '??'
     prefix_length = 4
@@ -106,8 +114,6 @@ class FrameDataEntry:
     paddings = {'input': 18, 'move_str': 8}
 
     def __init__(self):
-        self.currentFrameAdvantage = self.unknown
-
         self.input = self.unknown
         self.move_id = self.unknown
         self.move_str = self.unknown
@@ -119,6 +125,8 @@ class FrameDataEntry:
         self.recovery = self.unknown
         self.hit_recovery = self.unknown
         self.block_recovery = self.unknown
+
+        self.fa = self.unknown
 
     @classmethod
     def printColumns(cls):
@@ -154,8 +162,36 @@ class FrameDataEntry:
 
     def __repr__(self):
         values = [self.getField(i) for i in self.columns]
+        return '|'.join(values)
 
-        string = '|'.join(values)
-        return "%s / NOW:%s" % (string, self.currentFrameAdvantage)
+class GlobalFrameDataEntry:
+    def __init__(self):
+        self.counts = collections.defaultdict(lambda: collections.defaultdict(int))
 
-frameDataEntries = collections.defaultdict(FrameDataEntry)
+    def record(self, frameDataEntry, floated):
+        for field in frameDataEntry.columns:
+            self.recordField(field, frameDataEntry, floated)
+
+    def recordField(self, field, frameDataEntry, floated):
+        v = frameDataEntry.getRawField(field)
+        most_common = v
+        if v == frameDataEntry.unknown:
+            max_count = 0
+        else:
+            if floated:
+                max_count = 0
+            else:
+                max_count = self.counts[field][v] + 1
+                self.counts[field][v] = max_count
+        for record, count in self.counts[field].items():
+            if count > max_count:
+                most_common = record
+                max_count = count
+        if most_common != v:
+            if v == frameDataEntry.unknown:
+                new_v = most_common
+            else:
+                new_v = "%s (%s)" % (v, most_common)
+            frameDataEntry.__setattr__(field, new_v)
+
+frameDataEntries = collections.defaultdict(GlobalFrameDataEntry)

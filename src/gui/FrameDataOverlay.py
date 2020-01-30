@@ -94,8 +94,10 @@ class Printer:
             return Overlay.ColorSchemeEnum.advantage_plus
 
     def print(self, isP1, frameDataEntry):
+        fa = frameDataEntry.fa
+
         playerName = "p1" if isP1 else "p2"
-        print("%s: %s" % (playerName, frameDataEntry))
+        print("%s: %s / NOW:%s" % (playerName, frameDataEntry, fa))
 
         lines = int(self.widget.index('end-1c').split('.')[0])
         max_lines = 5
@@ -105,8 +107,6 @@ class Printer:
                 self.widget.configure(state="normal")
                 self.widget.delete('2.0', '3.0')
                 self.widget.configure(state="disabled")
-
-        fa = frameDataEntry.currentFrameAdvantage
 
         if fa != frameDataEntry.unknown:
             background = self.get_background(int(fa))

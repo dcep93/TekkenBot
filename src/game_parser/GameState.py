@@ -62,6 +62,11 @@ class GameState:
         if (len(self.stateLog) > 300):
             self.stateLog.pop(0)
 
+    def WasJustFloated(self, isP1):
+        player = self.getOldPlayer(isP1, 1)
+        if player is None: return False
+        return player.is_jump
+
     def DidTimerInterruptXMovesAgo(self, isP1, framesAgo):
         player = self.getOldPlayer(isP1, framesAgo)
         if player is None: return False
