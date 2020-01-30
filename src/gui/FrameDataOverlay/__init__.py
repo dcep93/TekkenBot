@@ -11,7 +11,9 @@ from .Listener import *
 from .FrameDataEntry import *
 
 class Printer:
-    col_max_length = 15
+    unknown = '??'
+    col_max_length = 14
+    altColSizes = {}
     def __init__(self, widget, style, fa_p1_var, fa_p2_var):
         self.widget = widget
         self.fa_p1_var = fa_p1_var
@@ -30,19 +32,12 @@ class Printer:
         self.populate_column_names()
 
     def populate_column_names(self):
-        column_names = ''
-        for col in DataColumns:
-            if self.columns_to_print[col]:
-                col_name = col.name
-                col_len = len(col_name)
-                needed_spaces = self.col_max_length - col_len
-                if col_len < self.col_max_length:
-                    spaces_before = " " * int(needed_spaces / 2)
-                    spaces_after = " " * (needed_spaces - len(spaces_before))
-                    col_name = spaces_before + col_name + spaces_after
-                column_names += '|%s' % col_name
+        columnsEntry = {col:col.name for col in DataColumns}
+        column_names = self.getFrameDataString(columnsEntry)
+        prefix = self.getPrefix(True)
+        spaces = " " * len(prefix)
 
-        print(column_names)
+        print(spaces + column_names)
 
         self.widget.configure(state="normal")
         self.widget.delete("1.0", "2.0")
@@ -61,6 +56,10 @@ class Printer:
         else:
             return Overlay.ColorSchemeEnum.advantage_plus
 
+    def getPrefix(self, isP1):
+        playerName = "p1" if isP1 else "p2"
+        return "%s: " % playerName
+
     def print(self, isP1, frameDataEntry, floated, fa):
         lines = int(self.widget.index('end-1c').split('.')[0])
         max_lines = 5
@@ -71,7 +70,7 @@ class Printer:
                 self.widget.delete('2.0', '3.0')
                 self.widget.configure(state="disabled")
 
-        if not floated and fa != frameDataEntry.unknown:
+        if not floated and fa is not None:
             background = self.get_background(int(fa))
             self.style.configure('.', background=background)
 
@@ -82,10 +81,9 @@ class Printer:
             self.fa_p2_var.set(fa)
             text_tag = 'p2'
 
-        columns = [col.name for col in DataColumns if self.columns_to_print[col]]
-        out = frameDataEntry.getString(columns)
-        playerName = "p1" if isP1 else "p2"
-        print("%s: %s / NOW:%s" % (playerName, out, fa))
+        out = self.getFrameDataString(frameDataEntry)
+        prefix = self.getPrefix(isP1)
+        print("%s%s / NOW:%s" % (prefix, out, fa))
 
         out += "\n"
         self.widget.configure(state="normal")
@@ -93,6 +91,26 @@ class Printer:
         self.widget.configure(state="disabled")
         self.widget.see('0.0')
         self.widget.yview('moveto', '.02')
+
+    def getFrameDataString(self, frameDataEntry):
+        values = [self.getValue(frameDataEntry, col) for col in DataColumns if self.columns_to_print[col]]
+        return '|'.join(values)
+
+    def getValue(self, frameDataEntry, col):
+        if col in frameDataEntry:
+            value = str(frameDataEntry[col])
+        else:
+            value = self.unknown
+        
+        if col in self.altColSizes:
+            size = self.altColSizes[col]
+        else:
+            size = self.col_max_length
+        diff = size - len(value)
+        if diff <= 0: return value[:size]
+        before = int(diff / 2)
+        after = diff - before
+        return (' ' * before) + value + (' ' * after)
 
 class FrameDataOverlay(Overlay.Overlay):
     def __init__(self, master, state):

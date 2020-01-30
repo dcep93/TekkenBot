@@ -41,9 +41,9 @@ class PlayerListener:
 
     def DetermineFrameDataHelper(self, gameState):
         frameDataEntry = self.buildFrameDataEntry(gameState)
-        fa = frameDataEntry.fa
+        fa = frameDataEntry[DataColumns.fa]
 
-        globalFrameDataEntry = FrameDataEntry.frameDataEntries[frameDataEntry.move_id]
+        globalFrameDataEntry = FrameDataEntry.frameDataEntries[frameDataEntry[DataColumns.move_id]]
         
         floated = gameState.WasJustFloated(not self.isP1)
         globalFrameDataEntry.record(frameDataEntry, floated)
@@ -53,14 +53,13 @@ class PlayerListener:
     def buildFrameDataEntry(self, gameState):
         move_id = gameState.get(self.isP1).move_id
 
-        frameDataEntry = FrameDataEntry.FrameDataEntry()
+        frameDataEntry = {}
 
-        frameDataEntry.move_id = move_id
-        frameDataEntry.startup = gameState.get(self.isP1).startup
-        frameDataEntry.activeFrames = gameState.get(self.isP1).GetActiveFrames()
-        frameDataEntry.hit_type = AttackType(gameState.get(self.isP1).attack_type).name + ("_THROW" if gameState.get(self.isP1).IsAttackThrow() else "")
-        frameDataEntry.recovery = gameState.get(self.isP1).recovery
-        frameDataEntry.input = gameState.GetCurrentMoveString(self.isP1)
+        frameDataEntry[DataColumns.move_id] = move_id
+        frameDataEntry[DataColumns.startup] = gameState.get(self.isP1).startup
+        frameDataEntry[DataColumns.hit_type] = AttackType(gameState.get(self.isP1).attack_type).name + ("_THROW" if gameState.get(self.isP1).IsAttackThrow() else "")
+        frameDataEntry[DataColumns.recovery] = gameState.get(self.isP1).recovery
+        frameDataEntry[DataColumns.input] = gameState.GetCurrentMoveString(self.isP1)
 
         gameState.Unrewind()
 
@@ -69,21 +68,32 @@ class PlayerListener:
 
         raw_fa = time_till_recovery_p2 - time_till_recovery_p1
 
-        frameDataEntry.fa = frameDataEntry.WithPlusIfNeeded(raw_fa)
+        fa = self.WithPlusIfNeeded(raw_fa)
+        frameDataEntry[DataColumns.fa] = fa
 
         if gameState.get(not self.isP1).IsBlocking():
-            frameDataEntry.on_block = frameDataEntry.fa
+            frameDataEntry[DataColumns.on_block] = fa
         else:
             if gameState.get(not self.isP1).IsGettingCounterHit():
-                frameDataEntry.on_counter_hit = frameDataEntry.fa
+                frameDataEntry[DataColumns.on_counter_hit] = fa
             else:
-                frameDataEntry.on_normal_hit = frameDataEntry.fa
+                frameDataEntry[DataColumns.on_normal_hit] = fa
 
-        frameDataEntry.hit_recovery = time_till_recovery_p1
-        frameDataEntry.block_recovery = time_till_recovery_p2
+        frameDataEntry[DataColumns.hit_recovery] = time_till_recovery_p1
+        frameDataEntry[DataColumns.block_recovery] = time_till_recovery_p2
 
-        frameDataEntry.move_str = gameState.GetCurrentMoveName(self.isP1)
+        frameDataEntry[DataColumns.move_str] = gameState.GetCurrentMoveName(self.isP1)
 
         gameState.Rewind(self.active_frame_wait)
 
         return frameDataEntry
+
+    @staticmethod
+    def WithPlusIfNeeded(value):
+        v = str(value)
+        if value >= 0:
+            return '+' + v
+        else:
+            return v
+
+DataColumns = FrameDataEntry.DataColumns
