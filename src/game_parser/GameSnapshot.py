@@ -76,6 +76,9 @@ class PlayerSnapshot:
     def GetActiveFrames(self):
         return self.startup_end - self.startup + 1
 
+    def IsBeingJuggled(self):
+        return self.simple_state == MoveInfoEnums.SimpleMoveStates.KNOCKDOWN
+
     def IsBeingKnockedDown(self):
         return self.simple_state == MoveInfoEnums.SimpleMoveStates.KNOCKDOWN
 

@@ -40,17 +40,17 @@ class PlayerListener:
         gameState.Unrewind()
 
     def DetermineFrameDataHelper(self, gameState):
-        frameDataEntry = self.buildFrameDataEntry(gameState)
+        floated = gameState.WasJustFloated(not self.isP1)
+        frameDataEntry = self.buildFrameDataEntry(gameState, floated)
         fa = frameDataEntry[DataColumns.fa]
 
         globalFrameDataEntry = FrameDataEntry.frameDataEntries[frameDataEntry[DataColumns.move_id]]
         
-        floated = gameState.WasJustFloated(not self.isP1)
         globalFrameDataEntry.record(frameDataEntry, floated)
 
         self.printer.print(self.isP1, frameDataEntry, floated, fa)
 
-    def buildFrameDataEntry(self, gameState):
+    def buildFrameDataEntry(self, gameState, floated):
         move_id = gameState.get(self.isP1).move_id
 
         frameDataEntry = {}
@@ -61,14 +61,30 @@ class PlayerListener:
         frameDataEntry[DataColumns.w_rec] = gameState.get(self.isP1).recovery
         frameDataEntry[DataColumns.cmd] = gameState.GetCurrentMoveString(self.isP1)
 
+        # todo hmm should know when juggled
+        receiver = gameState.get(self.isP1)
+        if floated:
+            fa = 'FLT'
+        elif receiver.IsBeingJuggled():
+            fa = 'JGL'
+        elif receiver.IsBeingKnockedDown():
+            fa = 'KND'
+        else:
+            fa = None
+
         gameState.Unrewind()
 
-        time_till_recovery_p1 = gameState.get(self.isP1).GetFramesTillNextMove()
-        time_till_recovery_p2 = gameState.get(not self.isP1).GetFramesTillNextMove()
+        if fa is None:
+            time_till_recovery_p1 = gameState.get(self.isP1).GetFramesTillNextMove()
+            time_till_recovery_p2 = gameState.get(not self.isP1).GetFramesTillNextMove()
 
-        raw_fa = time_till_recovery_p2 - time_till_recovery_p1
+            frameDataEntry[DataColumns.h_rec] = time_till_recovery_p1
+            frameDataEntry[DataColumns.b_rec] = time_till_recovery_p2
 
-        fa = self.WithPlusIfNeeded(raw_fa)
+            raw_fa = time_till_recovery_p2 - time_till_recovery_p1
+
+            fa = self.WithPlusIfNeeded(raw_fa)
+
         frameDataEntry[DataColumns.fa] = fa
 
         if gameState.get(not self.isP1).IsBlocking():
@@ -78,9 +94,6 @@ class PlayerListener:
                 frameDataEntry[DataColumns.counter] = fa
             else:
                 frameDataEntry[DataColumns.normal] = fa
-
-        frameDataEntry[DataColumns.h_rec] = time_till_recovery_p1
-        frameDataEntry[DataColumns.b_rec] = time_till_recovery_p2
 
         frameDataEntry[DataColumns.move_str] = gameState.GetCurrentMoveName(self.isP1)
 
