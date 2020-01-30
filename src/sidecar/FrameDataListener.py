@@ -3,6 +3,8 @@ Collects information from GameState over time in hopes of synthesizing it and pr
 
 """
 
+import collections
+
 from game_parser.MoveInfoEnums import AttackType
 from game_parser.MoveInfoEnums import ComplexMoveStates
 
@@ -50,7 +52,7 @@ class PlayerListener:
 
         move_id = gameState.get(self.isP1).move_id
 
-        frameDataEntry = FrameDataEntry(self.isP1)
+        frameDataEntry = frameDataEntries[move_id]
 
         frameDataEntry.move_id = move_id
         frameDataEntry.startup = gameState.get(self.isP1).startup
@@ -76,12 +78,12 @@ class PlayerListener:
             else:
                 frameDataEntry.on_normal_hit = frameDataEntry.currentFrameAdvantage
 
-        frameDataEntry.hit_recovery = time_till_recovery_p2
-        frameDataEntry.block_recovery = time_till_recovery_p1
+        frameDataEntry.hit_recovery = time_till_recovery_p1
+        frameDataEntry.block_recovery = time_till_recovery_p2
 
         frameDataEntry.move_str = gameState.GetCurrentMoveName(self.isP1)
 
-        self.printer.print(frameDataEntry)
+        self.printer.print(self.isP1, frameDataEntry)
 
         gameState.Rewind(self.active_frame_wait)
 
@@ -103,9 +105,7 @@ class FrameDataEntry:
         'block_recovery'
     ]
 
-    def __init__(self, isP1):
-        self.isP1 = isP1
-
+    def __init__(self):
         self.currentFrameAdvantage = self.unknown
 
         self.input = self.unknown
@@ -153,6 +153,7 @@ class FrameDataEntry:
     def __repr__(self):
         values = [self.getField(i) for i in self.columns]
 
-        playerName = "p1" if self.isP1 else "p2"
         string = '|'.join(values)
-        return "%s: %s / NOW:%s" % (playerName, string, self.currentFrameAdvantage)
+        return "%s / NOW:%s" % (string, self.currentFrameAdvantage)
+
+frameDataEntries = collections.defaultdict(FrameDataEntry)

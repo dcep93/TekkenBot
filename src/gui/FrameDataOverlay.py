@@ -93,8 +93,9 @@ class Printer:
         else:
             return Overlay.ColorSchemeEnum.advantage_plus
 
-    def print(self, frameDataEntry):
-        print(frameDataEntry)
+    def print(self, isP1, frameDataEntry):
+        playerName = "p1" if isP1 else "p2"
+        print("%s: %s" % (playerName, frameDataEntry))
 
         lines = int(self.widget.index('end-1c').split('.')[0])
         max_lines = 5
@@ -111,7 +112,7 @@ class Printer:
             background = self.get_background(int(fa))
             self.style.configure('.', background=background)
 
-        if frameDataEntry.isP1:
+        if isP1:
             self.fa_p1_var.set(fa)
             text_tag = 'p1'
         else:
