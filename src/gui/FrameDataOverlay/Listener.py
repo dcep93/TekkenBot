@@ -61,20 +61,16 @@ class PlayerListener:
         frameDataEntry[DataColumns.w_rec] = gameState.get(self.isP1).recovery
         frameDataEntry[DataColumns.cmd] = gameState.GetCurrentMoveString(self.isP1)
 
+        gameState.Unrewind()
         # todo hmm should know when juggled
-        receiver = gameState.get(self.isP1)
-        if floated:
-            fa = 'FLT'
+        receiver = gameState.get(not self.isP1)
+        if receiver.IsBeingKnockedDown():
+            fa = 'KND'
         elif receiver.IsBeingJuggled():
             fa = 'JGL'
-        elif receiver.IsBeingKnockedDown():
-            fa = 'KND'
+        elif floated:
+            fa = 'FLT'
         else:
-            fa = None
-
-        gameState.Unrewind()
-
-        if fa is None:
             time_till_recovery_p1 = gameState.get(self.isP1).GetFramesTillNextMove()
             time_till_recovery_p2 = gameState.get(not self.isP1).GetFramesTillNextMove()
 
