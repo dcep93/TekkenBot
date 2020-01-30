@@ -53,7 +53,7 @@ class Printer:
         elif fa < 0:
             return Overlay.ColorSchemeEnum.advantage_slight_minus.value
         else:
-            return Overlay.ColorSchemeEnum.advantage_plus
+            return Overlay.ColorSchemeEnum.advantage_plus.value
 
     def getPrefix(self, isP1):
         playerName = "p1" if isP1 else "p2"
@@ -166,7 +166,7 @@ class FrameDataOverlay(Overlay.Overlay):
         return frame_advantage_var
 
     def create_textbox(self, col):
-        textbox = t_tkinter.Text(self.toplevel, font=("Courier New", 16), wrap=t_tkinter.NONE, highlightthickness=0, pady=0, relief='flat')
+        textbox = t_tkinter.Text(self.toplevel, font=("Courier New", 14), wrap=t_tkinter.NONE, highlightthickness=0, pady=0, relief='flat')
         textbox.grid(row=0, column=col, rowspan=2, sticky=t_tkinter.NSEW)
         textbox.configure(background=self.background_color)
         textbox.configure(foreground=Overlay.ColorSchemeEnum.system_text.value)
