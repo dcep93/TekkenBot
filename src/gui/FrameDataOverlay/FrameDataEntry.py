@@ -7,7 +7,7 @@ class GlobalFrameDataEntry:
 
     def record(self, frameDataEntry, floated):
         for field in DataColumns:
-            self.recordField(field.name, frameDataEntry, floated)
+            self.recordField(field, frameDataEntry, floated)
 
     def recordField(self, field, frameDataEntry, floated):
         if field in frameDataEntry:
