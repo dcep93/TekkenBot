@@ -8,6 +8,7 @@ from .. import Overlay
 from .. import t_tkinter
 
 from .Listener import *
+from .FrameDataEntry import *
 
 class Printer:
     col_max_length = 15
