@@ -60,7 +60,9 @@ class Reader(GameReader.GameReader):
 
     @classmethod
     def getUpdateWaitMs(cls, _):
-        if len(cls.all_datas) == 0: return -1
+        if len(cls.all_datas) == 0:
+            print("done with pickle")
+            return -1
 
         next_timestamp = cls.load()
         if Flags.Flags.fast: return 0

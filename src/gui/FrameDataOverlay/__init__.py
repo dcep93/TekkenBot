@@ -12,12 +12,11 @@ from .FrameDataEntry import *
 
 class Printer:
     unknown = '??'
-    col_max_length = 14
+    col_max_length = 10
     altColSizes = {}
-    def __init__(self, widget, style, fa_p1_var, fa_p2_var):
+    def __init__(self, widget, style, fa_var):
         self.widget = widget
-        self.fa_p1_var = fa_p1_var
-        self.fa_p2_var = fa_p2_var
+        self.fa_var = fa_var
         self.style = style
 
         self.columns_to_print = None
@@ -74,12 +73,8 @@ class Printer:
             background = self.get_background(int(fa))
             self.style.configure('.', background=background)
 
-        if isP1:
-            self.fa_p1_var.set(fa)
-            text_tag = 'p1'
-        else:
-            self.fa_p2_var.set(fa)
-            text_tag = 'p2'
+        self.fa_var.set(fa)
+        text_tag = 'p1' if isP1 else 'p2'
 
         out = self.getFrameDataString(frameDataEntry)
         prefix = self.getPrefix(isP1)
@@ -114,7 +109,7 @@ class Printer:
 
 class FrameDataOverlay(Overlay.Overlay):
     def __init__(self, master, state):
-        super().__init__(master, (1021, 86))
+        super().__init__(master, (1400, 128))
 
         self.init_tkinter()
 
@@ -141,17 +136,16 @@ class FrameDataOverlay(Overlay.Overlay):
         t_tkinter.Grid.rowconfigure(self.toplevel, 1, weight=0)
 
         style.configure('TFrame', background=self.tranparency_color)
-        self.fa_p1_var, fa_p1_label = self.create_frame_advantage_label(1)
-        self.fa_p2_var, fa_p2_label = self.create_frame_advantage_label(5)
+        self.fa_var = self.create_frame_advantage_label(1)
 
         self.l_margin = self.create_padding_frame(0)
-        self.r_margin = self.create_padding_frame(6)
+        self.r_margin = self.create_padding_frame(5)
         self.l_seperator = self.create_padding_frame(2)
         self.r_seperator = self.create_padding_frame(4)
 
         self.text = self.create_textbox(3)
 
-        self.printer = Printer(self.text, style, self.fa_p1_var, self.fa_p2_var)
+        self.printer = Printer(self.text, style, self.fa_var)
 
         self.text.configure(state="normal")
         self.text.delete("1.0", "end")
@@ -166,14 +160,13 @@ class FrameDataOverlay(Overlay.Overlay):
 
     def create_frame_advantage_label(self, col):
         frame_advantage_var = t_tkinter.StringVar()
-        frame_advantage_var.set('?')
-        frame_advantage_label = t_tkinter.Label(self.toplevel, textvariable=frame_advantage_var, font=("Consolas", 44), width=4, anchor='c',
+        frame_advantage_label = t_tkinter.Label(self.toplevel, textvariable=frame_advantage_var, font=("Courier New", 44), width=4, anchor='c',
                                         borderwidth=1, relief='ridge')
         frame_advantage_label.grid(row=0, column=col)
-        return frame_advantage_var, frame_advantage_label
+        return frame_advantage_var
 
     def create_textbox(self, col):
-        textbox = t_tkinter.Text(self.toplevel, font=("Consolas", 11), wrap=t_tkinter.NONE, highlightthickness=0, pady=0, relief='flat')
+        textbox = t_tkinter.Text(self.toplevel, font=("Courier New", 16), wrap=t_tkinter.NONE, highlightthickness=0, pady=0, relief='flat')
         textbox.grid(row=0, column=col, rowspan=2, sticky=t_tkinter.NSEW)
         textbox.configure(background=self.background_color)
         textbox.configure(foreground=Overlay.ColorSchemeEnum.system_text.value)

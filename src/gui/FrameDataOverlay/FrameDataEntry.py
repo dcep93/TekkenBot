@@ -38,15 +38,15 @@ frameDataEntries = collections.defaultdict(GlobalFrameDataEntry)
 
 @enum.unique
 class DataColumns(enum.Enum):
-    input = 'input command'
+    cmd = 'input command'
     move_id = 'internal move id number'
     move_str = 'internal move name'
     hit_type = 'attack type'
     startup = 'startup frames'
-    on_block = 'frame advantage on block'
-    on_normal_hit = 'frame advantage on hit'
-    on_counter_hit = 'frame advantage on counter hit'
-    recovery = 'total number of frames in move'
-    hit_recovery = 'frames before attacker can act'
-    block_recovery = 'frames before defender can act'
+    block = 'frame advantage on block'
+    normal = 'frame advantage on hit'
+    counter = 'frame advantage on counter hit'
+    w_rec = 'total number of frames in move'
+    h_rec = 'frames before attacker can act'
+    b_rec = 'frames before defender can act'
     fa = 'frame advantage right now'

@@ -58,8 +58,8 @@ class PlayerListener:
         frameDataEntry[DataColumns.move_id] = move_id
         frameDataEntry[DataColumns.startup] = gameState.get(self.isP1).startup
         frameDataEntry[DataColumns.hit_type] = AttackType(gameState.get(self.isP1).attack_type).name + ("_THROW" if gameState.get(self.isP1).IsAttackThrow() else "")
-        frameDataEntry[DataColumns.recovery] = gameState.get(self.isP1).recovery
-        frameDataEntry[DataColumns.input] = gameState.GetCurrentMoveString(self.isP1)
+        frameDataEntry[DataColumns.w_rec] = gameState.get(self.isP1).recovery
+        frameDataEntry[DataColumns.cmd] = gameState.GetCurrentMoveString(self.isP1)
 
         gameState.Unrewind()
 
@@ -72,15 +72,15 @@ class PlayerListener:
         frameDataEntry[DataColumns.fa] = fa
 
         if gameState.get(not self.isP1).IsBlocking():
-            frameDataEntry[DataColumns.on_block] = fa
+            frameDataEntry[DataColumns.block] = fa
         else:
             if gameState.get(not self.isP1).IsGettingCounterHit():
-                frameDataEntry[DataColumns.on_counter_hit] = fa
+                frameDataEntry[DataColumns.counter] = fa
             else:
-                frameDataEntry[DataColumns.on_normal_hit] = fa
+                frameDataEntry[DataColumns.normal] = fa
 
-        frameDataEntry[DataColumns.hit_recovery] = time_till_recovery_p1
-        frameDataEntry[DataColumns.block_recovery] = time_till_recovery_p2
+        frameDataEntry[DataColumns.h_rec] = time_till_recovery_p1
+        frameDataEntry[DataColumns.b_rec] = time_till_recovery_p2
 
         frameDataEntry[DataColumns.move_str] = gameState.GetCurrentMoveName(self.isP1)
 
