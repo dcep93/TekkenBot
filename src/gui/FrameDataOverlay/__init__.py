@@ -26,6 +26,8 @@ class Printer:
 
         self.style.configure('.', background=Overlay.ColorSchemeEnum.advantage_slight_minus.value)
 
+        self.entries = []
+
     def set_columns_to_print(self, booleans_for_columns):
         self.columns_to_print = booleans_for_columns
         self.populate_column_names()
@@ -38,10 +40,8 @@ class Printer:
 
         print(spaces + column_names)
 
-        self.widget.configure(state="normal")
         self.widget.delete("1.0", "2.0")
         self.widget.insert("1.0", column_names + '\n')
-        self.widget.configure(state="disabled")
 
     def get_background(self, fa):
         try:
@@ -63,16 +63,26 @@ class Printer:
         playerName = "p1" if isP1 else "p2"
         return "%s: " % playerName
 
-    def print(self, isP1, frameDataEntry):
-        lines = int(self.widget.index('end-1c').split('.')[0])
-        max_lines = 5
-        if lines > max_lines:
-            r = lines - max_lines
-            for _ in range(r):
-                self.widget.configure(state="normal")
-                self.widget.delete('2.0', '3.0')
-                self.widget.configure(state="disabled")
+    def scroll(self):
+        max_lines = 6
+        offset = 2
+        while len(self.entries) >= max_lines:
+            index = self.getScrollIndex()
+            self.entries.pop(index)
+            start = "%0.1f" % (index + offset)
+            end = "%0.1f" % (index + offset + 1)
+            self.widget.delete(start, end)
 
+    def getScrollIndex(self):
+        for i, entry in enumerate(self.entries[1:]):
+            if entry[DataColumns.opp_free]:
+                return 0
+        return 1
+
+    def print(self, isP1, frameDataEntry):
+        self.scroll()
+
+        self.entries.append(frameDataEntry)
         fa = frameDataEntry[DataColumns.fa]
 
         background = self.get_background(fa)
@@ -86,11 +96,7 @@ class Printer:
         print("%s%s / NOW:%s" % (prefix, out, fa))
 
         out += "\n"
-        self.widget.configure(state="normal")
         self.widget.insert("end", out, text_tag)
-        self.widget.configure(state="disabled")
-        self.widget.see('0.0')
-        self.widget.yview('moveto', '.02')
 
     def getFrameDataString(self, frameDataEntry):
         values = [self.getValue(frameDataEntry, col) for col in DataColumns if self.columns_to_print[col]]
@@ -152,11 +158,8 @@ class FrameDataOverlay(Overlay.Overlay):
 
         self.printer = Printer(self.text, style, self.fa_var)
 
-        self.text.configure(state="normal")
         self.text.delete("1.0", "end")
         self.printer.set_columns_to_print(self.master.tekken_config.get_all(DataColumns, True))
-
-        self.text.configure(state="disabled")
 
     def create_padding_frame(self, col):
         padding = t_tkinter.Frame(self.toplevel, width=10)

@@ -16,8 +16,7 @@ def handle():
             pickle_dest = sys.argv.pop(0)
             Flags.pickle_dest = pickle_dest
         elif arg == '--fast':
-            fast_raw = sys.argv.pop(0)
-            Flags.fast = int(fast_raw)
+            Flags.fast = True
         else:
             temp_argv.append(arg)
     sys.argv = temp_argv
