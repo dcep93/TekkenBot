@@ -75,7 +75,7 @@ class Printer:
 
     def getScrollIndex(self):
         for entry in self.entries[1:]:
-            if entry[DataColumns.opp_free]:
+            if not entry[DataColumns.guaranteed]:
                 return 0
         return 1
 

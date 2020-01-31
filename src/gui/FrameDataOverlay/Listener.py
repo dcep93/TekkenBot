@@ -81,7 +81,7 @@ class PlayerListener:
         frameDataEntry[DataColumns.move_str] = gameState.GetCurrentMoveName(self.isP1)
 
         gameState.Rewind(self.active_frame_wait + 1)
-        frameDataEntry[DataColumns.opp_free] = gameState.get(not self.isP1).IsAbleToAct()
+        frameDataEntry[DataColumns.guaranteed] = not gameState.get(not self.isP1).IsAbleToAct()
         gameState.Unrewind()
         gameState.Rewind(self.active_frame_wait)
 

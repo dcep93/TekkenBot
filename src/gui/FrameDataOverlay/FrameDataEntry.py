@@ -51,4 +51,4 @@ class DataColumns(enum.Enum):
     counter = 'frame advantage on counter hit'
     w_rec = 'total number of frames in move'
     fa = 'frame advantage right now'
-    opp_free = 'opponent was free to act'
+    guaranteed = 'hit is guaranteed'
