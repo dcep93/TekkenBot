@@ -74,7 +74,7 @@ class Printer:
             self.widget.delete(start, end)
 
     def getScrollIndex(self):
-        for i, entry in enumerate(self.entries[1:]):
+        for entry in self.entries[1:]:
             if entry[DataColumns.opp_free]:
                 return 0
         return 1
