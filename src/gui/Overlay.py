@@ -10,13 +10,13 @@ import misc.Path
 
 from . import t_tkinter
 
+import windows
+
 @enum.unique
 class DisplaySettings(enum.Enum):
     overlay_on_bottom = 'overlay on bottom'
     overlay_as_draggable_window = 'overlay as draggable window'
     only_appears_when_Tekken_7_has_focus = 'only appears when Tekken 7 has focus'
-    transparent_background = 'transparent background'
-    tiny_live_frame_data_numbers = 'tiny live frame data numbers'
 
 @enum.unique
 class ColorSchemeEnum(enum.Enum):
@@ -67,7 +67,6 @@ class Overlay:
         g = self.master.tekken_config.get_property
         self.is_draggable_window = g(DisplaySettings.overlay_as_draggable_window, False)
         self.is_minimize_on_lost_focus = g(DisplaySettings.only_appears_when_Tekken_7_has_focus, True)
-        self.is_transparency = g(DisplaySettings.transparent_background, 'Windows-7' not in platform.platform())
         self.is_overlay_on_top = not g(DisplaySettings.overlay_on_bottom, False)
 
     def update_location(self):
@@ -83,7 +82,7 @@ class Overlay:
                 if not self.overlay_visible:
                     self.show()
             else:
-                if self.overlay_visible:
+                if windows.valid and self.overlay_visible:
                     self.hide()
 
     @abc.abstractmethod

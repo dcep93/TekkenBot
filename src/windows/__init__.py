@@ -1,5 +1,7 @@
 import ctypes
 
+valid = True
+
 class Windows:
     def __init__(self):
         self.k32 = ctypes.windll.kernel32
@@ -29,6 +31,6 @@ class Windows:
 try:
     from ctypes import wintypes
 except ValueError:
-    pass
+    valid = False
 else:
     w = Windows()
