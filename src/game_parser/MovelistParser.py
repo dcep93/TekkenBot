@@ -47,11 +47,6 @@ class MoveNode:
         else:
             self.name = str(self.move_id)
 
-    def __repr__(self):
-        return '{} | {} |{:x} | {} | {} | {:x} | {:x} | {} | {} | {} | {:x} | {}'.format(
-            self.name, self.direction_bytes, self.unknown_input_dir, self.attack_bytes, self.button_press, self.number_one, self.number_two, self.unknown_bool, self.cancel_window_1, self.cancel_window_2, self.move_id, self.move_requires_input)
-
-
 class MovelistParser:
     def __init__(self, movelist_bytes, movelist_pointer):
         header_length = 0x2e8

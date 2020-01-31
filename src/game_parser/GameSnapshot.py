@@ -85,7 +85,6 @@ class PlayerSnapshot:
     def GetFramesTillNextMove(self):
         return self.recovery - self.move_timer
 
-    # todo - for keeping cancelable states longer IsAbleToAct
     def IsAbleToAct(self):
         return self.is_cancelable
 
