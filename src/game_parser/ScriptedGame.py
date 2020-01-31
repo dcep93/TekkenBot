@@ -62,13 +62,13 @@ class Reader(GameReader.GameReader):
     def getUpdateWaitMs(cls, _):
         if len(cls.all_datas) == 0:
             print("done with pickle")
-            if Flags.Flags.fast: exit()
+            if Flags.Flags.fast == 0: exit()
             return -1
 
         next_timestamp = cls.load()
-        if Flags.Flags.fast: return 0
         wait_s = next_timestamp + cls.offset - time.time()
         wait_ms = max(int(wait_s * 1000), 0)
+        if Flags.Flags.fast is not None: wait_ms = int(wait_ms / Flags.Flags.fast)
         return wait_ms
 
     @classmethod
