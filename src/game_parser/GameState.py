@@ -67,17 +67,6 @@ class GameState:
         if player is None: return False
         return player.is_jump
 
-    def DidTimerInterruptXMovesAgo(self, isP1, framesAgo):
-        player = self.getOldPlayer(isP1, framesAgo)
-        if player is None: return False
-        return player.move_timer < player.move_timer
-
-    def DidIdChangeXMovesAgo(self, isP1, framesAgo):
-        player_before = self.getOldPlayer(isP1, framesAgo + 1)
-        if player_before is None: return False
-        player_ago = self.getOldPlayer(isP1, framesAgo)
-        return player_ago.move_id != player_before.move_id
-
     def GetCurrentMoveName(self, isP1):
         player = self.get(isP1)
         move_id = player.move_id
@@ -130,3 +119,12 @@ class GameState:
             return ','.join(clean_input_array)
         else:
             return 'N/A'
+
+    def IsLandingAttack(self, isP1):
+        return self.get(not isP1).IsBlocking() or self.get(not isP1).IsGettingHit() or self.get(not isP1).IsInThrowing() or self.get(not isP1).IsBeingKnockedDown() or self.get(not isP1).IsGettingWallSplatted()
+
+    def DidIdOrTimerChangeXFramesAgo(self, isP1, framesAgo):
+        player_older = self.getOldPlayer(isP1, framesAgo + 1)
+        if player_older is None: return False
+        player_newer = self.getOldPlayer(isP1, framesAgo)
+        return (player_newer.move_id != player_older.move_id) or (player_newer.move_timer < player_older.move_timer)
