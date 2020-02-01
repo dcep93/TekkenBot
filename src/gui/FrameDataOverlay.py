@@ -4,11 +4,11 @@ A transparent frame data display that sits on top of Tekken.exe in windowed or b
 
 import sys
 
-from .. import Overlay
-from .. import t_tkinter
+from . import Overlay
+from . import t_tkinter
 
-from .Listener import *
-from .FrameDataEntry import *
+from frame_data import FrameDataEntry
+from frame_data import Listener
 
 class Printer:
     unknown = '??'
@@ -33,7 +33,7 @@ class Printer:
         self.populate_column_names()
 
     def populate_column_names(self):
-        columnsEntry = {col:col.name for col in DataColumns}
+        columnsEntry = {col:col.name for col in FrameDataEntry.DataColumns}
         column_names = self.getFrameDataString(columnsEntry)
         prefix = self.getPrefix(True)
         spaces = " " * len(prefix)
@@ -75,7 +75,7 @@ class Printer:
 
     def getScrollIndex(self):
         for entry in self.entries[1:]:
-            if not entry[DataColumns.guaranteed]:
+            if not entry[FrameDataEntry.DataColumns.guaranteed]:
                 return 0
         return 1
 
@@ -83,7 +83,7 @@ class Printer:
         self.scroll()
 
         self.entries.append(frameDataEntry)
-        fa = frameDataEntry[DataColumns.fa]
+        fa = frameDataEntry[FrameDataEntry.DataColumns.fa]
 
         background = self.get_background(fa)
         self.style.configure('.', background=background)
@@ -99,7 +99,7 @@ class Printer:
         self.widget.insert("end", out, text_tag)
 
     def getFrameDataString(self, frameDataEntry):
-        values = [self.getValue(frameDataEntry, col) for col in DataColumns if self.columns_to_print[col]]
+        values = [self.getValue(frameDataEntry, col) for col in FrameDataEntry.DataColumns if self.columns_to_print[col]]
         return '|'.join(values)
 
     def getValue(self, frameDataEntry, col):
@@ -124,7 +124,7 @@ class FrameDataOverlay(Overlay.Overlay):
 
         self.init_tkinter()
 
-        self.listener = FrameDataListener(self.printer)
+        self.listener = Listener.FrameDataListener(self.printer)
         self.state = state
 
     def update_state(self):
@@ -159,7 +159,7 @@ class FrameDataOverlay(Overlay.Overlay):
         self.printer = Printer(self.text, style, self.fa_var)
 
         self.text.delete("1.0", "end")
-        self.printer.set_columns_to_print(self.master.tekken_config.get_all(DataColumns, True))
+        self.printer.set_columns_to_print(self.master.tekken_config.get_all(FrameDataEntry.DataColumns, True))
 
     def create_padding_frame(self, col):
         padding = t_tkinter.Frame(self.toplevel, width=10)

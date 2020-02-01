@@ -1,12 +1,13 @@
 import collections
-import enum
+
+from . import FrameDataEntry
 
 class GlobalFrameDataEntry:
     def __init__(self):
         self.counts = collections.defaultdict(lambda: collections.defaultdict(int))
 
     def record(self, frameDataEntry, floated):
-        for field in DataColumns:
+        for field in FrameDataEntry.DataColumns:
             self.recordField(field, frameDataEntry, floated)
 
     def recordField(self, field, frameDataEntry, floated):
@@ -38,17 +39,13 @@ frameDataEntries = collections.defaultdict(GlobalFrameDataEntry)
 # todo load from csv
 database = {}
 
-@enum.unique
-class DataColumns(enum.Enum):
-    cmd = 'input command'
-    char_name = 'character name'
-    move_id = 'internal move id number'
-    move_str = 'internal move name'
-    hit_type = 'attack type'
-    startup = 'startup frames'
-    block = 'frame advantage on block'
-    normal = 'frame advantage on hit'
-    counter = 'frame advantage on counter hit'
-    w_rec = 'total number of frames in move'
-    fa = 'frame advantage right now'
-    guaranteed = 'hit is guaranteed'
+def get(move_id):
+    if move_id in database:
+        return database[move_id]
+    else:
+        return None
+
+def record(frameDataEntry, floated):
+    move_id = frameDataEntry[FrameDataEntry.DataColumns.move_id]
+    globalFrameDataEntry = frameDataEntries[move_id]
+    globalFrameDataEntry.record(frameDataEntry, floated)

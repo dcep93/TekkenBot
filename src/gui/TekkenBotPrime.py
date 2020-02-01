@@ -10,6 +10,8 @@ from . import t_tkinter
 
 import game_parser.GameState
 
+import frame_data.FrameDataEntry
+
 import misc.Path
 import windows
 
@@ -63,8 +65,8 @@ class TekkenBotPrime(t_tkinter.Tk):
 
     def add_columns_cascade(self):
         column_menu = t_tkinter.Menu(self.menu)
-        all_checked = self.tekken_config.get_all(fdo.DataColumns, True)
-        for enum in fdo.DataColumns:
+        all_checked = self.tekken_config.get_all(frame_data.FrameDataEntry.DataColumns, True)
+        for enum in frame_data.FrameDataEntry.DataColumns:
             checked = all_checked[enum]
             name = "%s (%s)" % (enum.name, enum.value)
             self.add_checkbox(column_menu, enum, name, checked, self.changed_columns)
