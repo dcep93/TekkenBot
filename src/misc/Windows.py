@@ -2,7 +2,6 @@ import ctypes
 import os.path
 import sys
 
-# todo test and cleanup
 class Windows:
     valid = True
     def __init__(self):
@@ -82,9 +81,9 @@ class Windows:
 
     @staticmethod
     def GetForegroundPid():
-        pid = windows.wintypes.DWORD()
-        active = windows.ctypes.windll.user32.GetForegroundWindow()
-        active_window = windows.ctypes.windll.user32.GetWindowThreadProcessId(active, windows.ctypes.byref(pid))
+        pid = w.wintypes.DWORD()
+        active = ctypes.windll.user32.GetForegroundWindow()
+        active_window = ctypes.windll.user32.GetWindowThreadProcessId(active, ctypes.byref(pid))
         return pid.value
 
     @staticmethod
@@ -101,7 +100,7 @@ class Windows:
             cb = ctypes.sizeof(process_ids)
             bytes_returned = w.wintypes.DWORD()
             # ???
-            if windows.w.EnumProcesses(windows.ctypes.byref(process_ids), cb, windows.ctypes.byref(bytes_returned)):
+            if w.EnumProcesses(ctypes.byref(process_ids), cb, ctypes.byref(bytes_returned)):
                 if bytes_returned.value < cb:
                     break
                 else:
@@ -109,18 +108,18 @@ class Windows:
             else:
                 sys.exit("Call to EnumProcesses failed")
 
-        num_values = int(bytes_returned.value / windows.ctypes.sizeof(windows.wintypes.DWORD))
+        num_values = int(bytes_returned.value / ctypes.sizeof(w.wintypes.DWORD))
         for index in range(num_values):
             process_id = process_ids[index]
 
-            h_process = windows.w.OpenProcess(PROCESS_TERMINATE | PROCESS_QUERY_INFORMATION, False, process_id)
+            h_process = w.OpenProcess(PROCESS_TERMINATE | PROCESS_QUERY_INFORMATION, False, process_id)
             if h_process:
-                image_file_name = (windows.ctypes.c_char*MAX_PATH)()
-                if windows.w.GetProcessImageFileName(h_process, image_file_name, MAX_PATH)>0:
+                image_file_name = (ctypes.c_char*MAX_PATH)()
+                if w.GetProcessImageFileName(h_process, image_file_name, MAX_PATH)>0:
                     filename = os.path.basename(image_file_name.value)
                     if filename == process_name_in_bytes:
                         pid = process_id
-                windows.w.CloseHandle(h_process)
+                w.CloseHandle(h_process)
         return pid
 
 w = Windows()

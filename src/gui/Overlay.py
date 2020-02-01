@@ -7,7 +7,8 @@ import enum
 import platform
 
 from . import t_tkinter
-from misc import Path, Windows
+from misc import Path
+from misc.Windows import w as Windows
 
 @enum.unique
 class DisplaySettings(enum.Enum):
@@ -67,7 +68,7 @@ class Overlay:
         self.is_overlay_on_top = not g(DisplaySettings.overlay_on_bottom, False)
 
     def update_location(self):
-        if not Windows.w.valid: return
+        if not Windows.valid: return
         if not self.is_draggable_window:
             tekken_rect = self.state.gameReader.GetWindowRect()
             if tekken_rect != None:
