@@ -1,6 +1,4 @@
-from . import Overlay
-from . import t_tkinter
-
+from . import Overlay, t_tkinter
 from game_parser.MoveInfoEnums import InputDirectionCodes
 
 symbol_map = {

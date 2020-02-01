@@ -5,7 +5,7 @@ Reads in simple config files
 from configparser import ConfigParser
 from collections import defaultdict
 
-import misc.Path
+from misc import Path
 
 class ConfigReader:
     def __init__(self, filename):
@@ -20,7 +20,7 @@ class ConfigReader:
             print('Error reading config data from %s. Using default values.' % self.path)
 
     def get_path(self, filename):
-        return misc.Path.path('config/%s.ini' % filename)
+        return Path.path('config/%s.ini' % filename)
 
     def get_property(self, enum_item, default_value):
         section = enum_item.__class__.__name__

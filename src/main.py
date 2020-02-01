@@ -1,7 +1,7 @@
-import gui.TekkenBotPrime
-import misc.Flags
+from gui import TekkenBotPrime
+from misc import Flags
 
 if __name__ == "__main__":
-    misc.Flags.handle()
-    app = gui.TekkenBotPrime.TekkenBotPrime()
+    Flags.handle()
+    app = TekkenBotPrime.TekkenBotPrime()
     app.mainloop()

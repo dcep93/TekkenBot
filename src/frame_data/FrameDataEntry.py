@@ -1,9 +1,7 @@
 import enum
 
 from . import FrameDataDatabase
-
-from game_parser.MoveInfoEnums import AttackType
-from game_parser.MoveInfoEnums import ComplexMoveStates
+from game_parser import MoveInfoEnums
 
 def build(gameState, isP1, active_frame_wait):
     floated = gameState.WasJustFloated(not isP1)
@@ -28,7 +26,7 @@ def buildFrameDataEntry(gameState, isP1, fa, active_frame_wait):
 
     frameDataEntry[DataColumns.move_id] = move_id
     frameDataEntry[DataColumns.startup] = gameState.get(isP1).startup
-    frameDataEntry[DataColumns.hit_type] = AttackType(gameState.get(isP1).attack_type).name + ("_THROW" if gameState.get(isP1).IsAttackThrow() else "")
+    frameDataEntry[DataColumns.hit_type] = MoveInfoEnums.AttackType(gameState.get(isP1).attack_type).name + ("_THROW" if gameState.get(isP1).IsAttackThrow() else "")
     frameDataEntry[DataColumns.w_rec] = gameState.get(isP1).recovery
     frameDataEntry[DataColumns.cmd] = gameState.GetCurrentMoveString(isP1)
 

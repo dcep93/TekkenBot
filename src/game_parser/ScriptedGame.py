@@ -2,9 +2,8 @@ import pickle
 import signal
 import time
 
+from . import GameReader, MovelistParser
 from misc import Flags
-from . import GameReader
-from . import MovelistParser
 
 class Recorder(GameReader.GameReader):
     all_datas = []

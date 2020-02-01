@@ -4,9 +4,7 @@ A transparent frame data display that sits on top of Tekken.exe in windowed or b
 
 import sys
 
-from . import Overlay
-from . import t_tkinter
-
+from . import Overlay, t_tkinter
 from frame_data import FrameDataEntry
 
 class Printer:

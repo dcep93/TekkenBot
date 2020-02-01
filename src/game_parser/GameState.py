@@ -1,10 +1,8 @@
-from . import GameReader
-
 import collections
+
+from . import GameReader
 from game_parser import MoveInfoEnums
-
 from game_parser import ScriptedGame
-
 from misc import Flags
 
 class GameState:

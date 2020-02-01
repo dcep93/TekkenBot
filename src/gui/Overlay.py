@@ -6,11 +6,8 @@ import abc
 import enum
 import platform
 
-import misc.Path
-
 from . import t_tkinter
-
-import windows
+from misc import Path, Windows
 
 @enum.unique
 class DisplaySettings(enum.Enum):
@@ -52,7 +49,7 @@ class Overlay:
         self.tranparency_color = self.background_color
         self.toplevel.configure(background=self.tranparency_color)
 
-        self.toplevel.iconbitmap(misc.Path.path('assets/tekken_bot_close.ico'))
+        self.toplevel.iconbitmap(Path.path('assets/tekken_bot_close.ico'))
         if not self.is_draggable_window:
             self.toplevel.overrideredirect(True)
 
@@ -70,6 +67,7 @@ class Overlay:
         self.is_overlay_on_top = not g(DisplaySettings.overlay_on_bottom, False)
 
     def update_location(self):
+        if not Windows.w.valid: return
         if not self.is_draggable_window:
             tekken_rect = self.state.gameReader.GetWindowRect()
             if tekken_rect != None:
@@ -82,7 +80,7 @@ class Overlay:
                 if not self.overlay_visible:
                     self.show()
             else:
-                if windows.valid and self.overlay_visible:
+                if self.overlay_visible:
                     self.hide()
 
     @abc.abstractmethod

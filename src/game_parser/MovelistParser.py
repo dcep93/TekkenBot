@@ -125,7 +125,7 @@ class MovelistParser:
 
                 self.move_id_to_input[move_id] = (direction, button, press)
 
-        self.movelist_names = movelist_bytes[0x2E8:200000].split(b'\00') # Todo: figure out the actual size of the name movelist
+        self.movelist_names = movelist_bytes[0x2E8:200000].split(b'\00')
 
     @staticmethod
     def header_line(line, movelist_bytes, movelist_pointer):

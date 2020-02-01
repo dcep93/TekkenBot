@@ -36,7 +36,7 @@ class GlobalFrameDataEntry:
             frameDataEntry[field] = new_v
 
 frameDataEntries = collections.defaultdict(GlobalFrameDataEntry)
-# todo load from csv
+# todo load from csv and generate csv
 database = {}
 
 def get(move_id):

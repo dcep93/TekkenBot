@@ -17,16 +17,9 @@ import ctypes
 import enum
 import struct
 
-import windows.PIDSearcher
-from . import MoveInfoEnums
-import misc.ConfigReader
-import game_parser.MovelistParser
-import windows.ModuleEnumerator
-from  game_parser import MovelistParser
-
-from game_parser import GameSnapshot
-
-import windows
+from . import GameSnapshot, MoveInfoEnums
+from game_parser import MovelistParser
+from misc import ConfigReader, Windows
 
 game_string = 'TekkenGame-Win64-Shipping.exe'
 
@@ -41,7 +34,7 @@ class GameReader:
         self.module_address = 0
         self.original_facing = None
         self.is_player_player_one = None
-        self.c = misc.ConfigReader.ReloadableConfig('memory_address')
+        self.c = ConfigReader.ReloadableConfig('memory_address')
         self.player_data_pointer_offset = self.c['MemoryAddressOffsets']['player_data_pointer_offset']
         self.p1_movelist_parser = None
         self.p2_movelist_parser = None
@@ -62,9 +55,9 @@ class GameReader:
             data = ctypes.c_ulong()
             bytesRead = ctypes.c_ulonglong(4)
 
-        successful = windows.w.ReadProcessMemory(processHandle, address, ctypes.byref(data), ctypes.sizeof(data), ctypes.byref(bytesRead))
+        successful = Windows.w.ReadProcessMemory(processHandle, address, ctypes.byref(data), ctypes.sizeof(data), ctypes.byref(bytesRead))
         if not successful:
-            e = windows.w.GetLastError()
+            e = Windows.w.GetLastError()
             print("ReadProcessMemory Error: Code %s" % e)
             self.ReacquireEverything()
 
@@ -84,9 +77,9 @@ class GameReader:
     def GetBlockOfData(self, processHandle, address, size_of_block):
         data = ctypes.create_string_buffer(size_of_block)
         bytesRead = ctypes.c_ulonglong(size_of_block)
-        successful = windows.w.ReadProcessMemory(processHandle, address, ctypes.byref(data), ctypes.sizeof(data), ctypes.byref(bytesRead))
+        successful = Windows.w.ReadProcessMemory(processHandle, address, ctypes.byref(data), ctypes.sizeof(data), ctypes.byref(bytesRead))
         if not successful:
-            e = windows.w.GetLastError()
+            e = Windows.w.GetLastError()
             print("Getting Block of Data Error: Code %s" % e)
         return data
 
@@ -110,13 +103,13 @@ class GameReader:
         return value
 
     def IsForegroundPID(self):
-        pid = windows.PIDSearcher.GetForegroundPid()
+        pid = Windows.w.GetForegroundPid()
         return pid == self.pid
 
     def GetWindowRect(self):
         #see https://stackoverflow.com/questions/21175922/enumerating-windows-trough-ctypes-in-python for clues for doing this without needing focus using WindowsEnum
         if self.IsForegroundPID():
-            rect = windows.wintypes.RECT()
+            rect = Windows.w.wintypes.RECT()
             ctypes.windll.user32.GetWindowRect(ctypes.windll.user32.GetForegroundWindow(), ctypes.byref(rect))
             return rect
         else:
@@ -130,7 +123,8 @@ class GameReader:
 
     def GetUpdatedState(self, rollback_frame):
         if not self.HasWorkingPID():
-            self.pid = windows.PIDSearcher.GetPIDByName(game_string)
+            # todo where did this go
+            self.pid = Windows.w.GetPIDByName(game_string)
             if self.HasWorkingPID():
                 print("Tekken pid acquired: %s" % self.pid)
             else:
@@ -141,11 +135,11 @@ class GameReader:
             self.reacquire_module()
 
         if self.module_address != None:
-            processHandle = windows.w.OpenProcess(0x10, False, self.pid)
+            processHandle = Windows.w.OpenProcess(0x10, False, self.pid)
             try:
                 return self.get_game_snapshot(rollback_frame, processHandle)
             finally:
-                windows.w.CloseHandle(processHandle)
+                Windows.w.CloseHandle(processHandle)
 
         return None
 
@@ -194,7 +188,7 @@ class GameReader:
 
     def reacquire_module(self):
         print("Trying to acquire Tekken library in pid: %s" % self.pid)
-        self.module_address = windows.ModuleEnumerator.GetModuleAddressByPIDandName(self.pid, game_string)
+        self.module_address = Windows.w.GetModuleAddressByPIDandName(self.pid, game_string)
         if self.module_address == None:
             print("%s not found. Likely wrong process id. Reacquiring pid." % game_string)
             self.ReacquireEverything()
