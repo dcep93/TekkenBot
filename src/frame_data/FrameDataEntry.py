@@ -5,55 +5,55 @@ from . import FrameDataDatabase
 from game_parser.MoveInfoEnums import AttackType
 from game_parser.MoveInfoEnums import ComplexMoveStates
 
-def process(listener, gameState):
-    floated = gameState.WasJustFloated(not listener.isP1)
+def build(gameState, isP1, active_frame_wait):
+    floated = gameState.WasJustFloated(not isP1)
     gameState.Unrewind()
-    fa = getFA(listener, gameState, floated)
-    gameState.Rewind(listener.active_frame_wait)
-    move_id = gameState.get(listener.isP1).move_id
+    fa = getFA(gameState, isP1, floated)
+    gameState.Rewind(active_frame_wait)
+    move_id = gameState.get(isP1).move_id
 
     frameDataEntry = FrameDataDatabase.get(move_id)
     if frameDataEntry is None:
-        frameDataEntry = buildFrameDataEntry(listener, gameState, fa)
+        frameDataEntry = buildFrameDataEntry(gameState, isP1, fa, active_frame_wait)
         FrameDataDatabase.record(frameDataEntry, floated)
 
     frameDataEntry[DataColumns.fa] = fa
 
-    listener.printer.print(listener.isP1, frameDataEntry)
+    return frameDataEntry
 
-def buildFrameDataEntry(listener, gameState, fa):
-    move_id = gameState.get(listener.isP1).move_id
+def buildFrameDataEntry(gameState, isP1, fa, active_frame_wait):
+    move_id = gameState.get(isP1).move_id
 
     frameDataEntry = {}
 
     frameDataEntry[DataColumns.move_id] = move_id
-    frameDataEntry[DataColumns.startup] = gameState.get(listener.isP1).startup
-    frameDataEntry[DataColumns.hit_type] = AttackType(gameState.get(listener.isP1).attack_type).name + ("_THROW" if gameState.get(listener.isP1).IsAttackThrow() else "")
-    frameDataEntry[DataColumns.w_rec] = gameState.get(listener.isP1).recovery
-    frameDataEntry[DataColumns.cmd] = gameState.GetCurrentMoveString(listener.isP1)
+    frameDataEntry[DataColumns.startup] = gameState.get(isP1).startup
+    frameDataEntry[DataColumns.hit_type] = AttackType(gameState.get(isP1).attack_type).name + ("_THROW" if gameState.get(isP1).IsAttackThrow() else "")
+    frameDataEntry[DataColumns.w_rec] = gameState.get(isP1).recovery
+    frameDataEntry[DataColumns.cmd] = gameState.GetCurrentMoveString(isP1)
 
     gameState.Unrewind()
 
-    if gameState.get(not listener.isP1).IsBlocking():
+    if gameState.get(not isP1).IsBlocking():
         frameDataEntry[DataColumns.block] = fa
     else:
-        if gameState.get(not listener.isP1).IsGettingCounterHit():
+        if gameState.get(not isP1).IsGettingCounterHit():
             frameDataEntry[DataColumns.counter] = fa
         else:
             frameDataEntry[DataColumns.normal] = fa
 
-    frameDataEntry[DataColumns.char_name] = gameState.get(listener.isP1).movelist_parser.char_name
-    frameDataEntry[DataColumns.move_str] = gameState.GetCurrentMoveName(listener.isP1)
+    frameDataEntry[DataColumns.char_name] = gameState.get(isP1).movelist_parser.char_name
+    frameDataEntry[DataColumns.move_str] = gameState.GetCurrentMoveName(isP1)
 
-    gameState.Rewind(listener.active_frame_wait + 1)
-    frameDataEntry[DataColumns.guaranteed] = not gameState.get(not listener.isP1).IsAbleToAct()
+    gameState.Rewind(active_frame_wait + 1)
+    frameDataEntry[DataColumns.guaranteed] = not gameState.get(not isP1).IsAbleToAct()
     gameState.Unrewind()
-    gameState.Rewind(listener.active_frame_wait)
+    gameState.Rewind(active_frame_wait)
 
     return frameDataEntry
 
-def getFA(listener, gameState, floated):
-    receiver = gameState.get(not listener.isP1)
+def getFA(gameState, isP1, floated):
+    receiver = gameState.get(not isP1)
     if receiver.IsBeingKnockedDown():
         return 'KND'
     elif receiver.IsBeingJuggled():
@@ -61,8 +61,8 @@ def getFA(listener, gameState, floated):
     elif floated:
         return 'FLT'
     else:
-        time_till_recovery_p1 = gameState.get(listener.isP1).GetFramesTillNextMove()
-        time_till_recovery_p2 = gameState.get(not listener.isP1).GetFramesTillNextMove()
+        time_till_recovery_p1 = gameState.get(isP1).GetFramesTillNextMove()
+        time_till_recovery_p2 = gameState.get(not isP1).GetFramesTillNextMove()
 
         raw_fa = time_till_recovery_p2 - time_till_recovery_p1
 

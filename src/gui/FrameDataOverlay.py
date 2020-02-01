@@ -204,7 +204,8 @@ class PlayerListener:
         if (self.active_frame_wait < gameState.get(self.isP1).GetActiveFrames() + 1) and not is_recovering_before_long_active_frame_move_completes:
             self.active_frame_wait += 1
         else:
-            FrameDataEntry.process(self, gameState)
+            frameDataEntry = FrameDataEntry.build(gameState, self.isP1, self.active_frame_wait)
+            self.printer.print(self.isP1, frameDataEntry)
             self.active_frame_wait = 1
 
         gameState.Unrewind()
