@@ -108,7 +108,7 @@ class GameReader:
         return pid == self.pid
 
     def GetWindowRect(self):
-        #see https://stackoverflow.com/questions/21175922/enumerating-windows-trough-ctypes-in-python for clues for doing this without needing focus using WindowsEnum
+        # see https://stackoverflow.com/questions/21175922/enumerating-windows-trough-ctypes-in-python for clues for doing this without needing focus using WindowsEnum
         if self.IsForegroundPID():
             rect = Windows.wintypes.RECT()
             ctypes.windll.user32.GetWindowRect(ctypes.windll.user32.GetForegroundWindow(), ctypes.byref(rect))
@@ -124,7 +124,6 @@ class GameReader:
 
     def GetUpdatedState(self, rollback_frame):
         if not self.HasWorkingPID():
-            # todo where did this go
             self.pid = Windows.GetPIDByName(game_string)
             if self.HasWorkingPID():
                 print("Tekken pid acquired: %s" % self.pid)
