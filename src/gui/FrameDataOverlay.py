@@ -56,8 +56,8 @@ class Printer:
         else:
             return Overlay.ColorSchemeEnum.advantage_plus.value
 
-    def getPrefix(self, isP1):
-        playerName = "p1" if isP1 else "p2"
+    def getPrefix(self, is_p1):
+        playerName = "p1" if is_p1 else "p2"
         return "%s: " % playerName
 
     def scroll(self):
@@ -76,32 +76,32 @@ class Printer:
                 return 0
         return 1
 
-    def print(self, isP1, frameDataEntry):
+    def print(self, is_p1, frame_data_entry):
         self.scroll()
 
-        self.entries.append(frameDataEntry)
-        fa = frameDataEntry[FrameDataEntry.DataColumns.fa]
+        self.entries.append(frame_data_entry)
+        fa = frame_data_entry[FrameDataEntry.DataColumns.fa]
 
         background = self.get_background(fa)
         self.style.configure('.', background=background)
 
         self.fa_var.set(fa)
-        text_tag = 'p1' if isP1 else 'p2'
+        text_tag = 'p1' if is_p1 else 'p2'
 
-        out = self.getFrameDataString(frameDataEntry)
-        prefix = self.getPrefix(isP1)
+        out = self.getFrameDataString(frame_data_entry)
+        prefix = self.getPrefix(is_p1)
         print("%s%s / NOW:%s" % (prefix, out, fa))
 
         out += "\n"
         self.widget.insert("end", out, text_tag)
 
-    def getFrameDataString(self, frameDataEntry):
-        values = [self.getValue(frameDataEntry, col) for col in FrameDataEntry.DataColumns if self.columns_to_print[col]]
+    def getFrameDataString(self, frame_data_entry):
+        values = [self.getValue(frame_data_entry, col) for col in FrameDataEntry.DataColumns if self.columns_to_print[col]]
         return '|'.join(values)
 
-    def getValue(self, frameDataEntry, col):
-        if col in frameDataEntry:
-            value = str(frameDataEntry[col])
+    def getValue(self, frame_data_entry, col):
+        if col in frame_data_entry:
+            value = str(frame_data_entry[col])
         else:
             value = self.unknown
         
@@ -185,25 +185,25 @@ class FrameDataOverlay(Overlay.Overlay):
         self.master.tekken_config.write()
 
 class PlayerListener:
-    def __init__(self, isP1, printer):
-        self.isP1 = isP1
+    def __init__(self, is_p1, printer):
+        self.is_p1 = is_p1
         self.printer = printer
 
         self.active_frame_wait = 1
 
-    def Update(self, gameState):
-        if gameState.IsLandingAttack(self.isP1) and gameState.DidIdOrTimerChangeXFramesAgo(not self.isP1, self.active_frame_wait):
-            self.DetermineFrameData(gameState)
+    def Update(self, game_state):
+        if game_state.IsLandingAttack(self.is_p1) and game_state.DidIdOrTimerChangeXFramesAgo(not self.is_p1, self.active_frame_wait):
+            self.DetermineFrameData(game_state)
 
-    def DetermineFrameData(self, gameState):
-        is_recovering_before_long_active_frame_move_completes = (gameState.get(not self.isP1).recovery - gameState.get(not self.isP1).move_timer == 0)
-        gameState.Rewind(self.active_frame_wait)
+    def DetermineFrameData(self, game_state):
+        is_recovering_before_long_active_frame_move_completes = (game_state.get(not self.is_p1).recovery - game_state.get(not self.is_p1).move_timer == 0)
+        game_state.rewind(self.active_frame_wait)
 
-        if (self.active_frame_wait < gameState.get(self.isP1).GetActiveFrames() + 1) and not is_recovering_before_long_active_frame_move_completes:
+        if (self.active_frame_wait < game_state.get(self.is_p1).GetActiveFrames() + 1) and not is_recovering_before_long_active_frame_move_completes:
             self.active_frame_wait += 1
         else:
-            frameDataEntry = FrameDataEntry.build(gameState, self.isP1, self.active_frame_wait)
-            self.printer.print(self.isP1, frameDataEntry)
+            frame_data_entry = FrameDataEntry.build(game_state, self.is_p1, self.active_frame_wait)
+            self.printer.print(self.is_p1, frame_data_entry)
             self.active_frame_wait = 1
 
-        gameState.Unrewind()
+        game_state.unrewind()

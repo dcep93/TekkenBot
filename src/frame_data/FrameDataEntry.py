@@ -3,55 +3,56 @@ import enum
 from . import FrameDataDatabase
 from game_parser import MoveInfoEnums
 
-def build(gameState, isP1, active_frame_wait):
-    floated = gameState.WasJustFloated(not isP1)
-    gameState.Unrewind()
-    fa = getFA(gameState, isP1, floated)
-    gameState.Rewind(active_frame_wait)
-    move_id = gameState.get(isP1).move_id
+def build(game_state, is_p1, active_frame_wait):
+    floated = game_state.was_just_floated(not is_p1)
+    game_state.unrewind()
+    fa = get_fa(game_state, is_p1, floated)
+    game_state.rewind(active_frame_wait)
+    move_id = game_state.get(is_p1).move_id
 
-    frameDataEntry = FrameDataDatabase.get(move_id)
-    if frameDataEntry is None:
-        frameDataEntry = buildFrameDataEntry(gameState, isP1, fa, active_frame_wait)
-        FrameDataDatabase.record(frameDataEntry, floated)
+    frame_data_entry = FrameDataDatabase.get(move_id)
+    if frame_data_entry is None:
+        frame_data_entry = build_frame_data_entry(game_state, is_p1, fa, active_frame_wait)
+        FrameDataDatabase.record(frame_data_entry, floated)
 
-    frameDataEntry[DataColumns.fa] = fa
+    frame_data_entry[DataColumns.fa] = fa
 
-    return frameDataEntry
+    return frame_data_entry
 
-def buildFrameDataEntry(gameState, isP1, fa, active_frame_wait):
-    move_id = gameState.get(isP1).move_id
+def build_frame_data_entry(game_state, is_p1, fa, active_frame_wait):
+    # todo do we need active_frame_wait?
+    move_id = game_state.get(is_p1).move_id
 
-    frameDataEntry = {}
+    frame_data_entry = {}
 
-    frameDataEntry[DataColumns.move_id] = move_id
-    frameDataEntry[DataColumns.startup] = gameState.get(isP1).startup
-    frameDataEntry[DataColumns.hit_type] = MoveInfoEnums.AttackType(gameState.get(isP1).attack_type).name + ("_THROW" if gameState.get(isP1).IsAttackThrow() else "")
-    frameDataEntry[DataColumns.w_rec] = gameState.get(isP1).recovery
-    frameDataEntry[DataColumns.cmd] = gameState.GetCurrentMoveString(isP1)
+    frame_data_entry[DataColumns.move_id] = move_id
+    frame_data_entry[DataColumns.startup] = game_state.get(is_p1).startup
+    frame_data_entry[DataColumns.hit_type] = MoveInfoEnums.AttackType(game_state.get(is_p1).attack_type).name + ("_THROW" if game_state.get(is_p1).IsAttackThrow() else "")
+    frame_data_entry[DataColumns.w_rec] = game_state.get(is_p1).recovery
+    frame_data_entry[DataColumns.cmd] = game_state.GetCurrentMoveString(is_p1)
 
-    gameState.Unrewind()
+    game_state.unrewind()
 
-    if gameState.get(not isP1).IsBlocking():
-        frameDataEntry[DataColumns.block] = fa
+    if game_state.get(not is_p1).IsBlocking():
+        frame_data_entry[DataColumns.block] = fa
     else:
-        if gameState.get(not isP1).IsGettingCounterHit():
-            frameDataEntry[DataColumns.counter] = fa
+        if game_state.get(not is_p1).IsGettingCounterHit():
+            frame_data_entry[DataColumns.counter] = fa
         else:
-            frameDataEntry[DataColumns.normal] = fa
+            frame_data_entry[DataColumns.normal] = fa
 
-    frameDataEntry[DataColumns.char_name] = gameState.get(isP1).movelist_parser.char_name
-    frameDataEntry[DataColumns.move_str] = gameState.GetCurrentMoveName(isP1)
+    frame_data_entry[DataColumns.char_name] = game_state.get(is_p1).movelist_parser.char_name
+    frame_data_entry[DataColumns.move_str] = game_state.GetCurrentMoveName(is_p1)
 
-    gameState.Rewind(active_frame_wait + 1)
-    frameDataEntry[DataColumns.guaranteed] = not gameState.get(not isP1).IsAbleToAct()
-    gameState.Unrewind()
-    gameState.Rewind(active_frame_wait)
+    game_state.rewind(active_frame_wait + 1)
+    frame_data_entry[DataColumns.guaranteed] = not game_state.get(not is_p1).IsAbleToAct()
+    game_state.unrewind()
+    game_state.rewind(active_frame_wait)
 
-    return frameDataEntry
+    return frame_data_entry
 
-def getFA(gameState, isP1, floated):
-    receiver = gameState.get(not isP1)
+def get_fa(game_state, is_p1, floated):
+    receiver = game_state.get(not is_p1)
     if receiver.IsBeingKnockedDown():
         return 'KND'
     elif receiver.IsBeingJuggled():
@@ -59,19 +60,15 @@ def getFA(gameState, isP1, floated):
     elif floated:
         return 'FLT'
     else:
-        time_till_recovery_p1 = gameState.get(isP1).GetFramesTillNextMove()
-        time_till_recovery_p2 = gameState.get(not isP1).GetFramesTillNextMove()
+        time_till_recovery_p1 = game_state.get(is_p1).GetFramesTillNextMove()
+        time_till_recovery_p2 = game_state.get(not is_p1).GetFramesTillNextMove()
 
         raw_fa = time_till_recovery_p2 - time_till_recovery_p1
+        raw_fa_str = str(raw_fa)
 
-        return WithPlusIfNeeded(raw_fa)
-
-def WithPlusIfNeeded(value):
-    v = str(value)
-    if value >= 0:
-        return '+' + v
-    else:
-        return v
+        if raw_fa > 0:
+            raw_fa_str = "+%s" % raw_fa_str
+        return raw_fa_str
 
 @enum.unique
 class DataColumns(enum.Enum):
