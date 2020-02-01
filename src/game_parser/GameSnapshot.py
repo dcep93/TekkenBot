@@ -52,13 +52,13 @@ class PlayerSnapshot:
 
         self.character_name = MoveInfoEnums.CharacterCodes(d['PlayerDataAddress.char_id']).name
 
-    def GetInputState(self):
+    def get_input_state(self):
         return (self.input_direction, self.input_button, self.rage_button_flag)
 
-    def IsBlocking(self):
+    def is_blocking(self):
         return self.complex_state == MoveInfoEnums.ComplexMoveStates.BLOCK
 
-    def IsGettingCounterHit(self):
+    def is_getting_counter_hit(self):
         return self.hit_outcome in (MoveInfoEnums.HitOutcome.COUNTER_HIT_CROUCHING, MoveInfoEnums.HitOutcome.COUNTER_HIT_STANDING)
 
     def IsGettingWallSplatted(self):
@@ -67,25 +67,25 @@ class PlayerSnapshot:
     def IsGettingHit(self):
         return self.stun_state in (MoveInfoEnums.StunStates.BEING_PUNISHED, MoveInfoEnums.StunStates.GETTING_HIT)
 
-    def IsAttackThrow(self):
+    def is_attack_throw(self):
         return self.throw_flag == 1
 
     def IsInThrowing(self):
         return self.attack_type == MoveInfoEnums.AttackType.THROW
 
-    def GetActiveFrames(self):
+    def get_active_frames(self):
         return self.startup_end - self.startup + 1
 
-    def IsBeingJuggled(self):
+    def is_being_juggled(self):
         return self.simple_state == MoveInfoEnums.SimpleMoveStates.KNOCKDOWN
 
-    def IsBeingKnockedDown(self):
+    def is_being_knocked_down(self):
         return self.simple_state == MoveInfoEnums.SimpleMoveStates.KNOCKDOWN
 
-    def GetFramesTillNextMove(self):
+    def get_frames_til_next_move(self):
         return self.recovery - self.move_timer
 
-    def IsAbleToAct(self):
+    def is_able_to_act(self):
         return self.is_cancelable
 
 class GameSnapshot:

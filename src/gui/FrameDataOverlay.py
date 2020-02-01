@@ -7,10 +7,10 @@ import sys
 from . import Overlay, t_tkinter
 from frame_data import FrameDataEntry
 
+# todo trim
 class Printer:
     unknown = '??'
     col_max_length = 10
-    altColSizes = {}
     def __init__(self, widget, style, fa_var):
         self.widget = widget
         self.fa_var = fa_var
@@ -30,9 +30,9 @@ class Printer:
         self.populate_column_names()
 
     def populate_column_names(self):
-        columnsEntry = {col:col.name for col in FrameDataEntry.DataColumns}
-        column_names = self.getFrameDataString(columnsEntry)
-        prefix = self.getPrefix(True)
+        columns_entry = {col:col.name for col in FrameDataEntry.DataColumns}
+        column_names = self.get_frame_data_string(columns_entry)
+        prefix = self.get_prefix(True)
         spaces = " " * len(prefix)
 
         print(spaces + column_names)
@@ -56,21 +56,21 @@ class Printer:
         else:
             return Overlay.ColorSchemeEnum.advantage_plus.value
 
-    def getPrefix(self, is_p1):
-        playerName = "p1" if is_p1 else "p2"
-        return "%s: " % playerName
+    def get_prefix(self, is_p1):
+        player_name = "p1" if is_p1 else "p2"
+        return "%s: " % player_name
 
     def scroll(self):
         max_lines = 6
         offset = 2
         while len(self.entries) >= max_lines:
-            index = self.getScrollIndex()
+            index = self.get_scroll_index()
             self.entries.pop(index)
             start = "%0.1f" % (index + offset)
             end = "%0.1f" % (index + offset + 1)
             self.widget.delete(start, end)
 
-    def getScrollIndex(self):
+    def get_scroll_index(self):
         for entry in self.entries[1:]:
             if not entry[FrameDataEntry.DataColumns.guaranteed]:
                 return 0
@@ -88,27 +88,24 @@ class Printer:
         self.fa_var.set(fa)
         text_tag = 'p1' if is_p1 else 'p2'
 
-        out = self.getFrameDataString(frame_data_entry)
-        prefix = self.getPrefix(is_p1)
-        print("%s%s / NOW:%s" % (prefix, out, fa))
+        out = self.get_frame_data_string(frame_data_entry)
+        prefix = self.get_prefix(is_p1)
+        print("%s%s / %s" % (prefix, out, fa))
 
         out += "\n"
         self.widget.insert("end", out, text_tag)
 
-    def getFrameDataString(self, frame_data_entry):
-        values = [self.getValue(frame_data_entry, col) for col in FrameDataEntry.DataColumns if self.columns_to_print[col]]
+    def get_frame_data_string(self, frame_data_entry):
+        values = [self.get_value(frame_data_entry, col) for col in FrameDataEntry.DataColumns if self.columns_to_print[col]]
         return '|'.join(values)
 
-    def getValue(self, frame_data_entry, col):
+    def get_value(self, frame_data_entry, col):
         if col in frame_data_entry:
             value = str(frame_data_entry[col])
         else:
             value = self.unknown
         
-        if col in self.altColSizes:
-            size = self.altColSizes[col]
-        else:
-            size = self.col_max_length
+        size = self.col_max_length
         diff = size - len(value)
         if diff <= 0: return value[:size]
         before = int(diff / 2)
@@ -126,7 +123,7 @@ class FrameDataOverlay(Overlay.Overlay):
 
     def update_state(self):
         for listener in self.listeners:
-            listener.Update(self.state)
+            listener.update(self.state)
 
     def init_tkinter(self):
         style = t_tkinter.Style()
@@ -191,19 +188,16 @@ class PlayerListener:
 
         self.active_frame_wait = 1
 
-    def Update(self, game_state):
-        if game_state.IsLandingAttack(self.is_p1) and game_state.DidIdOrTimerChangeXFramesAgo(not self.is_p1, self.active_frame_wait):
-            self.DetermineFrameData(game_state)
+    def update(self, game_state):
+        if game_state.is_landing_attack(self.is_p1) and game_state.did_id_or_timer_change(not self.is_p1, self.active_frame_wait):
+            is_recovering_before_long_active_frame_move_completes = (game_state.get(not self.is_p1).recovery - game_state.get(not self.is_p1).move_timer == 0)
+            game_state.rewind(self.active_frame_wait)
 
-    def DetermineFrameData(self, game_state):
-        is_recovering_before_long_active_frame_move_completes = (game_state.get(not self.is_p1).recovery - game_state.get(not self.is_p1).move_timer == 0)
-        game_state.rewind(self.active_frame_wait)
+            if (self.active_frame_wait < game_state.get(self.is_p1).get_active_frames() + 1) and not is_recovering_before_long_active_frame_move_completes:
+                self.active_frame_wait += 1
+            else:
+                frame_data_entry = FrameDataEntry.build(game_state, self.is_p1, self.active_frame_wait)
+                self.printer.print(self.is_p1, frame_data_entry)
+                self.active_frame_wait = 1
 
-        if (self.active_frame_wait < game_state.get(self.is_p1).GetActiveFrames() + 1) and not is_recovering_before_long_active_frame_move_completes:
-            self.active_frame_wait += 1
-        else:
-            frame_data_entry = FrameDataEntry.build(game_state, self.is_p1, self.active_frame_wait)
-            self.printer.print(self.is_p1, frame_data_entry)
-            self.active_frame_wait = 1
-
-        game_state.unrewind()
+            game_state.unrewind()

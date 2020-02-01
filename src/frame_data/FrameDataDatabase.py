@@ -2,7 +2,7 @@ import collections
 
 from . import FrameDataEntry
 
-class Globalframe_data_entry:
+class GlobalFrameDataEntry:
     def __init__(self):
         self.counts = collections.defaultdict(lambda: collections.defaultdict(int))
 
@@ -35,7 +35,7 @@ class Globalframe_data_entry:
                 new_v = "(%s)" % (most_common)
             frame_data_entry[field] = new_v
 
-frame_data_entries = collections.defaultdict(Globalframe_data_entry)
+frame_data_entries = collections.defaultdict(GlobalFrameDataEntry)
 # todo load from csv and generate csv
 database = {}
 
@@ -47,5 +47,5 @@ def get(move_id):
 
 def record(frame_data_entry, floated):
     move_id = frame_data_entry[FrameDataEntry.DataColumns.move_id]
-    globalframe_data_entry = frame_data_entries[move_id]
-    globalframe_data_entry.record(frame_data_entry, floated)
+    GlobalFrameDataEntry = frame_data_entries[move_id]
+    GlobalFrameDataEntry.record(frame_data_entry, floated)

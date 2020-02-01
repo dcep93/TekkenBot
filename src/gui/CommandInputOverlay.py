@@ -41,7 +41,7 @@ class CommandInputOverlay(Overlay.Overlay):
         last_state = self.state.state_log[-1]
         player = last_state.p1 if last_state.is_player_player_one else last_state.p2
         
-        input_state = player.GetInputState()
+        input_state = player.get_input_state()
         color = self.color_from_cancel_booleans(player)
         self.update_input(input_state, color)
 

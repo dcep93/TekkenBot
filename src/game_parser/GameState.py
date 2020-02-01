@@ -59,7 +59,7 @@ class GameState:
         if (len(self.state_log) > 300):
             self.state_log.pop(0)
 
-    def GetCurrentMoveName(self, is_p1):
+    def get_current_move_name(self, is_p1):
         player = self.get(is_p1)
         move_id = player.move_id
         if move_id > 30000: return 'Universal_{}'.format(move_id)
@@ -73,7 +73,7 @@ class GameState:
                 pass
         return "ERROR"
 
-    def GetCurrentMoveString(self, is_p1):
+    def get_current_move_string(self, is_p1):
         if self.get(is_p1).movelist_parser != None:
             move_id = self.get(is_p1).move_id
             previous_move_id = -1
@@ -117,10 +117,10 @@ class GameState:
         if player is None: return False
         return player.is_jump
 
-    def IsLandingAttack(self, is_p1):
-        return self.get(not is_p1).IsBlocking() or self.get(not is_p1).IsGettingHit() or self.get(not is_p1).IsInThrowing() or self.get(not is_p1).IsBeingKnockedDown() or self.get(not is_p1).IsGettingWallSplatted()
+    def is_landing_attack(self, is_p1):
+        return self.get(not is_p1).is_blocking() or self.get(not is_p1).IsGettingHit() or self.get(not is_p1).IsInThrowing() or self.get(not is_p1).is_being_knocked_down() or self.get(not is_p1).IsGettingWallSplatted()
 
-    def DidIdOrTimerChangeXFramesAgo(self, is_p1, frames_ago):
+    def did_id_or_timer_change(self, is_p1, frames_ago):
         player_older = self.get_old_player(is_p1, frames_ago + 1)
         if player_older is None: return False
         player_newer = self.get_old_player(is_p1, frames_ago)
