@@ -123,7 +123,7 @@ class TekkenBotPrime(t_tkinter.Tk):
 
     def update(self):
         now = time.time()
-        successful_update = self.tekken_state.Update()
+        successful_update = self.tekken_state.update()
         after = time.time()
 
         if self.overlay != None:
@@ -132,7 +132,7 @@ class TekkenBotPrime(t_tkinter.Tk):
                 self.overlay.update_state()
 
         elapsed_ms = after - now
-        wait_ms = self.tekken_state.gameReader.getUpdateWaitMs(elapsed_ms)
+        wait_ms = self.tekken_state.gameReader.get_update_wait_ms(elapsed_ms)
         if wait_ms >= 0: self.after(wait_ms, self.update)
 
     def on_closing(self):

@@ -15,8 +15,8 @@ class Recorder(GameReader.GameReader):
         super().__init__()
         signal.signal(signal.SIGINT, lambda _,__: self.save_and_quit(pickle_dest))
 
-    def GetUpdatedState(self, rollback_frame):
-        gameData = super().GetUpdatedState(rollback_frame)
+    def get_updated_state(self, rollback_frame):
+        gameData = super().get_updated_state(rollback_frame)
         if self.active: self.record_data(rollback_frame == 0, gameData)
         return gameData
 
@@ -58,7 +58,7 @@ class Reader(GameReader.GameReader):
         return timestamp
 
     @classmethod
-    def getUpdateWaitMs(cls, _):
+    def get_update_wait_ms(cls, _):
         if len(cls.all_datas) == 0:
             print("done with pickle")
             if Flags.Flags.fast: exit()
@@ -71,5 +71,5 @@ class Reader(GameReader.GameReader):
         return wait_ms
 
     @classmethod
-    def GetUpdatedState(cls, _):
+    def get_updated_state(cls, _):
         return cls.datas.pop(0)

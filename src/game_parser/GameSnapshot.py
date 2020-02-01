@@ -61,16 +61,16 @@ class PlayerSnapshot:
     def is_getting_counter_hit(self):
         return self.hit_outcome in (MoveInfoEnums.HitOutcome.COUNTER_HIT_CROUCHING, MoveInfoEnums.HitOutcome.COUNTER_HIT_STANDING)
 
-    def IsGettingWallSplatted(self):
+    def is_getting_wall_splatted(self):
         return self.simple_state in (MoveInfoEnums.SimpleMoveStates.WALL_SPLAT_18, MoveInfoEnums.SimpleMoveStates.WALL_SPLAT_19)
 
-    def IsGettingHit(self):
+    def is_getting_hit(self):
         return self.stun_state in (MoveInfoEnums.StunStates.BEING_PUNISHED, MoveInfoEnums.StunStates.GETTING_HIT)
 
     def is_attack_throw(self):
         return self.throw_flag == 1
 
-    def IsInThrowing(self):
+    def is_in_throwing(self):
         return self.attack_type == MoveInfoEnums.AttackType.THROW
 
     def get_active_frames(self):

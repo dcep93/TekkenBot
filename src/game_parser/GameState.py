@@ -35,26 +35,26 @@ class GameState:
         state = self.state_log[-frames_ago]
         return state.p1 if is_p1 else state.p2
 
-    def Update(self):
-        gameData = self.gameReader.GetUpdatedState(0)
+    def update(self):
+        game_data = self.gameReader.get_updated_state(0)
 
-        if(gameData != None):
+        if(game_data != None):
             # we don't run perfectly in sync, if we get back the same frame, throw it away
-            if len(self.state_log) == 0 or gameData.frame_count != self.state_log[-1].frame_count:
+            if len(self.state_log) == 0 or game_data.frame_count != self.state_log[-1].frame_count:
                 if len(self.state_log) > 0:
-                    frames_lost = gameData.frame_count - self.state_log[-1].frame_count - 1
+                    frames_lost = game_data.frame_count - self.state_log[-1].frame_count - 1
                     missed_states = min(7, frames_lost)
 
                     for i in range(missed_states):
-                        droppedState = self.gameReader.GetUpdatedState(missed_states - i)
-                        self.AppendGamedata(droppedState)
+                        droppedState = self.gameReader.get_updated_state(missed_states - i)
+                        self.append_gamedata(droppedState)
 
-                self.AppendGamedata(gameData)
+                self.append_gamedata(game_data)
                 return True
         return False
 
-    def AppendGamedata(self, gameData):
-        self.state_log.append(gameData)
+    def append_gamedata(self, game_data):
+        self.state_log.append(game_data)
 
         if (len(self.state_log) > 300):
             self.state_log.pop(0)
@@ -118,7 +118,7 @@ class GameState:
         return player.is_jump
 
     def is_landing_attack(self, is_p1):
-        return self.get(not is_p1).is_blocking() or self.get(not is_p1).IsGettingHit() or self.get(not is_p1).IsInThrowing() or self.get(not is_p1).is_being_knocked_down() or self.get(not is_p1).IsGettingWallSplatted()
+        return self.get(not is_p1).is_blocking() or self.get(not is_p1).is_getting_hit() or self.get(not is_p1).is_in_throwing() or self.get(not is_p1).is_being_knocked_down() or self.get(not is_p1).is_getting_wall_splatted()
 
     def did_id_or_timer_change(self, is_p1, frames_ago):
         player_older = self.get_old_player(is_p1, frames_ago + 1)

@@ -18,13 +18,13 @@ class Windows:
         self.OpenProcess.argtypes = [wintypes.DWORD,ctypes.wintypes.BOOL,ctypes.wintypes.DWORD]
         self.OpenProcess.restype = wintypes.HANDLE
 
-        self.ReadProcessMemory = self.k32.ReadProcessMemory
-        self.ReadProcessMemory.argtypes = [wintypes.HANDLE,ctypes.wintypes.LPCVOID,ctypes.wintypes.LPVOID,ctypes.c_size_t,ctypes.POINTER(ctypes.c_size_t)]
-        self.ReadProcessMemory.restype = wintypes.BOOL
+        self.read_process_memory = self.k32.read_process_memory
+        self.read_process_memory.argtypes = [wintypes.HANDLE,ctypes.wintypes.LPCVOID,ctypes.wintypes.LPVOID,ctypes.c_size_t,ctypes.POINTER(ctypes.c_size_t)]
+        self.read_process_memory.restype = wintypes.BOOL
 
-        self.GetLastError = self.k32.GetLastError
-        self.GetLastError.argtypes = None
-        self.GetLastError.restype = wintypes.DWORD
+        self.get_last_error = self.k32.get_last_error
+        self.get_last_error.argtypes = None
+        self.get_last_error.restype = wintypes.DWORD
 
         self.CloseHandle = self.k32.CloseHandle
         self.CloseHandle.argtypes = [wintypes.HANDLE]
@@ -61,12 +61,12 @@ class Windows:
 
         hModuleSnap = ctypes.windll.kernel32.CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pid)
         if hModuleSnap == -1:
-            print('CreateToolhelp32Snapshot Error [%d]' % w.GetLastError())
+            print('CreateToolhelp32Snapshot Error [%d]' % w.get_last_error())
             print('Build the code yourself? This is the error for using 32-bit Python. Try the 64-bit version.')
 
         ret = ctypes.windll.kernel32.Module32First(hModuleSnap, ctypes.pointer(me32) )
         if ret == 0:
-            print('ListProcessModules() Error on Module32First[%d]' % w.GetLastError())
+            print('ListProcessModules() Error on Module32First[%d]' % w.get_last_error())
             w.CloseHandle(hModuleSnap)
 
         addressToReturn = None

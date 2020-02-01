@@ -70,7 +70,7 @@ class Overlay:
     def update_location(self):
         if not Windows.valid: return
         if not self.is_draggable_window:
-            tekken_rect = self.state.gameReader.GetWindowRect()
+            tekken_rect = self.state.gameReader.get_window_rect()
             if tekken_rect != None:
                 x = (tekken_rect.right + tekken_rect.left) / 2 - self.w / 2
                 if self.is_overlay_on_top:
