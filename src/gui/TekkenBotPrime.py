@@ -112,7 +112,7 @@ class TekkenBotPrime(t_tkinter.Tk):
             self.overlay = None
 
     def start_overlay(self):
-        overlay = OverlayModeToOverlay[self.mode]
+        overlay = overlay_mode_to_overlay[self.mode]
         if overlay is not None:
             self.overlay = overlay(self, self.tekken_state)
             self.overlay.hide()
@@ -170,7 +170,7 @@ class OverlayMode(enum.Enum):
     FrameData = 'Frame Data'
     CommandInput = 'Command Inputs (and cancel window)'
 
-OverlayModeToOverlay = {
+overlay_mode_to_overlay = {
     OverlayMode.Off: None,
     OverlayMode.FrameData: FrameDataOverlay.FrameDataOverlay,
     OverlayMode.CommandInput: CommandInputOverlay.CommandInputOverlay,
