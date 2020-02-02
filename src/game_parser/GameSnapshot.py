@@ -88,7 +88,6 @@ class PlayerSnapshot:
     def is_able_to_act(self):
         return self.is_cancelable
 
-# todo could be a dict
 class GameSnapshot:
     def __init__(self, p1, p2, frame_count, timer_in_frames, facing_bool, is_player_player_one):
         self.p1 = p1

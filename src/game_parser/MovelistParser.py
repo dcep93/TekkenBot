@@ -3,7 +3,6 @@ import struct
 
 from . import MoveInfoEnums
 
-# todo could be a dict
 class MoveNode:
     def __init__(self, forty_bytes, offset, movelist_bytes, all_names):
         unpacked = struct.unpack('<H', forty_bytes[0:2])[0]

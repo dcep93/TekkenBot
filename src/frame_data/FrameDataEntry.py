@@ -20,7 +20,6 @@ def build(game_state, is_p1, active_frame_wait):
     return frame_data_entry
 
 def build_frame_data_entry(game_state, is_p1, fa, active_frame_wait):
-    # todo do we need active_frame_wait?
     move_id = game_state.get(is_p1).move_id
 
     frame_data_entry = {}
