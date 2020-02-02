@@ -104,7 +104,7 @@ class GameReader:
         return value
 
     def is_foreground_pid(self):
-        pid = Windows.GetForegroundPid()
+        pid = Windows.get_foreground_pid()
         return pid == self.pid
 
     def get_window_rect(self):
@@ -124,7 +124,7 @@ class GameReader:
 
     def get_updated_state(self, rollback_frame):
         if not self.has_working_pid():
-            self.pid = Windows.GetPIDByName(game_string)
+            self.pid = Windows.get_pid(game_string)
             if self.has_working_pid():
                 print("Tekken pid acquired: %s" % self.pid)
             else:
@@ -135,11 +135,11 @@ class GameReader:
             self.reacquire_module()
 
         if self.module_address != None:
-            process_handle = Windows.OpenProcess(0x10, False, self.pid)
+            process_handle = Windows.open_process(0x10, False, self.pid)
             try:
                 return self.get_game_snapshot(rollback_frame, process_handle)
             finally:
-                Windows.CloseHandle(process_handle)
+                Windows.close_handle(process_handle)
 
         return None
 
@@ -188,7 +188,7 @@ class GameReader:
 
     def reacquire_module(self):
         print("Trying to acquire Tekken library in pid: %s" % self.pid)
-        self.module_address = Windows.GetModuleAddressByPIDandName(self.pid, game_string)
+        self.module_address = Windows.get_module_address(self.pid, game_string)
         if self.module_address == None:
             print("%s not found. Likely wrong process id. Reacquiring pid." % game_string)
             self.reacquire_everything()
