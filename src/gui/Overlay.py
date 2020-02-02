@@ -1,7 +1,3 @@
-"""
-Our abstract overlay class provides shared tools for our overlays
-"""
-
 import abc
 import enum
 

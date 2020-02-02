@@ -1,7 +1,3 @@
-"""
-Reads in simple config files
-"""
-
 from configparser import ConfigParser
 from collections import defaultdict
 
@@ -50,13 +46,6 @@ class ConfigReader:
         return {enum: self.get_property(enum, default) for enum in enum_class}
 
 class ReloadableConfig(ConfigReader):
-    '''
-    Configuration class that can reload all class instances with the
-    .reload() class method.
-
-    'parse_nums' determines if we keep values as strings or try to convert
-    to int/hex
-    '''
     # Store configs so we can reload and update them later when needed
     configs = []
 
@@ -80,13 +69,6 @@ class ReloadableConfig(ConfigReader):
             config.reload_self()
 
     def reload_self(self):
-        '''
-        Parses the file from config_path with configparser and converts configparser's
-        pseudo-dict in to a proper dict.
-        Configparser's section proxies and string-only values are unsuitable for our use.
-
-        Overwrites old values in input_dict
-        '''
         config_data = ConfigParser(inline_comment_prefixes=('#', ';'))
         try:
             config_data.read(self.path)

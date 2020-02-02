@@ -1,7 +1,3 @@
-"""
-A transparent frame data display that sits on top of Tekken.exe in windowed or borderless mode.
-"""
-
 from . import Overlay, t_tkinter
 from frame_data import FrameDataEntry
 
