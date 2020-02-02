@@ -6,8 +6,7 @@ import abc
 import enum
 
 from . import t_tkinter
-from config import ReloadableConfig
-from misc import Path
+from misc import ConfigReader, Path
 from misc.Windows import w as Windows
 
 @enum.unique
@@ -96,6 +95,6 @@ class Overlay:
             self.overlay_visible = False
 
     def show(self):
-        ReloadableConfig.reload()
+        ConfigReader.ReloadableConfig.reload()
         self.toplevel.deiconify()
         self.overlay_visible = True
