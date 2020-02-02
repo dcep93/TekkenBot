@@ -12,11 +12,10 @@ class FrameDataOverlay(Overlay.Overlay):
     def __init__(self, master, state):
         super().__init__(master, state, (1400, 128))
 
-        self.init_tkinter()
-
         self.listeners = [PlayerListener(i, self.print_f) for i in [True, False]]
         self.entries = []
         self.columns_to_print = None
+        self.init_tkinter()
 
     def update_state(self):
         for listener in self.listeners:
@@ -165,7 +164,6 @@ class FrameDataOverlay(Overlay.Overlay):
         self.text.insert("1.0", column_names + '\n')
 
     def set_columns_to_print(self, booleans_for_columns):
-        print('setting', booleans_for_columns)
         self.columns_to_print = booleans_for_columns
         self.populate_column_names()
 
