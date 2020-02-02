@@ -2,8 +2,6 @@
 A transparent frame data display that sits on top of Tekken.exe in windowed or borderless mode.
 """
 
-import sys
-
 from . import Overlay, t_tkinter
 from frame_data import FrameDataEntry
 
@@ -40,7 +38,8 @@ class Printer:
         self.widget.delete("1.0", "2.0")
         self.widget.insert("1.0", column_names + '\n')
 
-    def get_background(self, fa):
+    @staticmethod
+    def get_background(fa):
         try:
             fa = int(fa)
         except ValueError:
@@ -56,7 +55,8 @@ class Printer:
         else:
             return Overlay.ColorSchemeEnum.advantage_plus.value
 
-    def get_prefix(self, is_p1):
+    @staticmethod
+    def get_prefix(is_p1):
         player_name = "p1" if is_p1 else "p2"
         return "%s: " % player_name
 
@@ -104,22 +104,22 @@ class Printer:
             value = str(frame_data_entry[col])
         else:
             value = self.unknown
-        
+
         size = self.col_max_length
         diff = size - len(value)
-        if diff <= 0: return value[:size]
+        if diff <= 0:
+            return value[:size]
         before = int(diff / 2)
         after = diff - before
         return (' ' * before) + value + (' ' * after)
 
 class FrameDataOverlay(Overlay.Overlay):
     def __init__(self, master, state):
-        super().__init__(master, (1400, 128))
+        super().__init__(master, state, (1400, 128))
 
         self.init_tkinter()
 
         self.listeners = [PlayerListener(i, self.printer) for i in [True, False]]
-        self.state = state
 
     def update_state(self):
         for listener in self.listeners:
@@ -163,8 +163,8 @@ class FrameDataOverlay(Overlay.Overlay):
 
     def create_frame_advantage_label(self, col):
         frame_advantage_var = t_tkinter.StringVar()
-        frame_advantage_label = t_tkinter.Label(self.toplevel, textvariable=frame_advantage_var, font=("Courier New", 44), width=4, anchor='c',
-                                        borderwidth=1, relief='ridge')
+        frame_advantage_label = t_tkinter.Label(self.toplevel, textvariable=frame_advantage_var,
+            font=("Courier New", 44), width=4, anchor='c', borderwidth=1, relief='ridge')
         frame_advantage_label.grid(row=0, column=col)
         return frame_advantage_var
 

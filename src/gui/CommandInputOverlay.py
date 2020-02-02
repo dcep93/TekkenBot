@@ -19,9 +19,7 @@ class CommandInputOverlay(Overlay.Overlay):
     input_tag = "inputs"
 
     def __init__(self, master, state):
-        super().__init__(master, (1200, 86))
-
-        self.state = state
+        super().__init__(master, state, (1200, 86))
 
         self.stored_inputs = []
 
@@ -34,18 +32,19 @@ class CommandInputOverlay(Overlay.Overlay):
 
         self.step = self.w / self.length
         for i in range(self.length):
-            self.canvas.create_text(i * self.step + (self.step / 2), 8, text = str(i), fill='snow')
+            self.canvas.create_text(i * self.step + (self.step / 2), 8, text=str(i), fill='snow')
             self.canvas.create_line(i * self.step, 0, i * self.step, self.h, fill="red")
 
     def update_state(self):
         last_state = self.state.state_log[-1]
         player = last_state.p1 if last_state.is_player_player_one else last_state.p2
-        
+
         input_state = player.get_input_state()
         color = self.color_from_cancel_booleans(player)
         self.update_input(input_state, color)
 
-    def color_from_cancel_booleans(self, player):
+    @staticmethod
+    def color_from_cancel_booleans(player):
         if player.is_parry_1:
             fill_color = 'orange'
         elif player.is_parry_2:
@@ -59,7 +58,7 @@ class CommandInputOverlay(Overlay.Overlay):
         return fill_color
 
     def update_input(self, input_state, cancel_color):
-        self.stored_inputs.append((input_state,cancel_color))
+        self.stored_inputs.append((input_state, cancel_color))
         if len(self.stored_inputs) >= self.length:
             self.stored_inputs = self.stored_inputs[-self.length:]
             if input_state != self.stored_inputs[-2]:
@@ -68,10 +67,10 @@ class CommandInputOverlay(Overlay.Overlay):
                     self.update_canvas_with_input(i, stored_input, stored_cancel)
 
     def update_canvas_with_input(self, i, stored_input, stored_cancel):
-        direction_code, attack_code, rage_flag = stored_input
+        direction_code, attack_code, _ = stored_input
         posn = i * self.step + (self.step / 2)
         self.canvas.create_text(posn, 30, text=symbol_map[direction_code], fill='snow', font=("Consolas", 20), tag=self.input_tag)
-        self.canvas.create_text(posn, 55, text=attack_code.name.replace('x', '').replace('N', ''), fill='snow',  font=("Consolas", 12), tag=input_tag)
+        self.canvas.create_text(posn, 55, text=attack_code.name.replace('x', '').replace('N', ''), fill='snow', font=("Consolas", 12), tag=self.input_tag)
         x0 = i * self.step + 4
         x1 = x0 + self.step - 8
         self.canvas.create_rectangle(x0, 70, x1, self.h - 5, fill=stored_cancel, tag=self.input_tag)

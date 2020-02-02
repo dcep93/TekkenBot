@@ -1,18 +1,15 @@
-import collections
-
 from . import GameReader
-from game_parser import MoveInfoEnums
 from game_parser import ScriptedGame
 from misc import Flags
 
 class GameState:
     def __init__(self):
         if Flags.Flags.pickle_dest is not None:
-            self.gameReader = ScriptedGame.Recorder(Flags.Flags.pickle_dest)
+            self.game_reader = ScriptedGame.Recorder(Flags.Flags.pickle_dest)
         elif Flags.Flags.pickle_src is not None:
-            self.gameReader = ScriptedGame.Reader(Flags.Flags.pickle_src)
+            self.game_reader = ScriptedGame.Reader(Flags.Flags.pickle_src)
         else:
-            self.gameReader = GameReader.GameReader()
+            self.game_reader = GameReader.GameReader()
 
         self.state_log = []
 
@@ -31,14 +28,15 @@ class GameState:
         return state.p1 if is_p1 else state.p2
 
     def get_old_player(self, is_p1, frames_ago):
-        if len(self.state_log) <= frames_ago: return None
+        if len(self.state_log) <= frames_ago:
+            return None
         state = self.state_log[-frames_ago]
         return state.p1 if is_p1 else state.p2
 
     def update(self):
-        game_data = self.gameReader.get_updated_state(0)
+        game_data = self.game_reader.get_updated_state(0)
 
-        if(game_data != None):
+        if game_data is not None:
             # we don't run perfectly in sync, if we get back the same frame, throw it away
             if len(self.state_log) == 0 or game_data.frame_count != self.state_log[-1].frame_count:
                 if len(self.state_log) > 0:
@@ -46,7 +44,7 @@ class GameState:
                     missed_states = min(7, frames_lost)
 
                     for i in range(missed_states):
-                        dropped_state = self.gameReader.get_updated_state(missed_states - i)
+                        dropped_state = self.game_reader.get_updated_state(missed_states - i)
                         self.append_gamedata(dropped_state)
 
                 self.append_gamedata(game_data)
@@ -56,13 +54,14 @@ class GameState:
     def append_gamedata(self, game_data):
         self.state_log.append(game_data)
 
-        if (len(self.state_log) > 300):
+        if len(self.state_log) > 300:
             self.state_log.pop(0)
 
     def get_current_move_name(self, is_p1):
         player = self.get(is_p1)
         move_id = player.move_id
-        if move_id > 30000: return 'Universal_{}'.format(move_id)
+        if move_id > 30000:
+            return 'Universal_{}'.format(move_id)
         movelist_names = player.movelist_parser.movelist_names
         index = (move_id * 2) + 4
         if index < len(movelist_names):
@@ -74,7 +73,7 @@ class GameState:
         return "ERROR"
 
     def get_current_move_string(self, is_p1):
-        if self.get(is_p1).movelist_parser != None:
+        if self.get(is_p1).movelist_parser is not None:
             move_id = self.get(is_p1).move_id
             previous_move_id = -1
 
@@ -83,7 +82,7 @@ class GameState:
             i = 0
             done = False
 
-            while(True):
+            while True:
                 next_move, last_move_was_empty_cancel = self.get(is_p1).movelist_parser.input_for_move(move_id, previous_move_id)
                 next_move = str(next_move)
 
@@ -95,7 +94,7 @@ class GameState:
                 if self.get(is_p1).movelist_parser.can_be_done_from_neutral(move_id):
                     break
 
-                while(True):
+                while True:
                     old_player = self.get_old_player(is_p1, i)
                     i += 1
                     if old_player is None:
@@ -105,7 +104,8 @@ class GameState:
                         previous_move_id = move_id
                         move_id = old_player.move_id
                         break
-                if done: break
+                if done:
+                    break
 
             clean_input_array = reversed([a for a in input_array if len(a) > 0])
             return ','.join(clean_input_array)
@@ -114,7 +114,8 @@ class GameState:
 
     def was_just_floated(self, is_p1):
         player = self.get_old_player(is_p1, 1)
-        if player is None: return False
+        if player is None:
+            return False
         return player.is_jump
 
     def is_landing_attack(self, is_p1):
@@ -122,6 +123,7 @@ class GameState:
 
     def did_id_or_timer_change(self, is_p1, frames_ago):
         player_older = self.get_old_player(is_p1, frames_ago + 1)
-        if player_older is None: return False
+        if player_older is None:
+            return False
         player_newer = self.get_old_player(is_p1, frames_ago)
         return (player_newer.move_id != player_older.move_id) or (player_newer.move_timer < player_older.move_timer)

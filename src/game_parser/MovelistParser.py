@@ -1,9 +1,9 @@
-import enum
 import collections
 import struct
 
 from . import MoveInfoEnums
 
+# todo could be a dict
 class MoveNode:
     def __init__(self, forty_bytes, offset, movelist_bytes, all_names):
         unpacked = struct.unpack('<H', forty_bytes[0:2])[0]
@@ -50,12 +50,8 @@ class MoveNode:
 class MovelistParser:
     def __init__(self, movelist_bytes, movelist_pointer):
         header_length = 0x2e8
-        header_bytes = movelist_bytes[0:header_length]
-        identifier = self.header_line(0, movelist_bytes, movelist_pointer)
         char_name_address = self.header_line(1, movelist_bytes, movelist_pointer)
         developer_name_address = self.header_line(2, movelist_bytes, movelist_pointer)
-        date_address = self.header_line(3, movelist_bytes, movelist_pointer)
-        timestamp_address = self.header_line(4, movelist_bytes, movelist_pointer)
 
         self.char_name = movelist_bytes[char_name_address:developer_name_address].strip(b'\00').decode('utf-8')
         print("Parsing movelist for {}".format(self.char_name))
@@ -117,7 +113,7 @@ class MovelistParser:
             candidates = value
 
             if len(candidates) > 0:
-                direction = sorted(candidates, key = lambda c: (sort_directions[c[0]], sort_presses[c[2]]), reverse=True)[0][0]
+                direction = sorted(candidates, key=lambda c: (sort_directions[c[0]], sort_presses[c[2]]), reverse=True)[0][0]
 
                 button = sorted(candidates, key=lambda c: (sort_presses[c[2]], collections.Counter(candidates)[c], sort_attacks[c[1]]), reverse=True)[0][1]
 
@@ -139,7 +135,7 @@ class MovelistParser:
             return True
 
     def input_for_move(self, move_id, previous_move_id):
-        empty_cancel_strings =[ 'b', '_B', '_R_D', 'y', 'Rv', '_R', '_D', 'Y']
+        empty_cancel_strings = ['b', '_B', '_R_D', 'y', 'Rv', '_R', '_D', 'Y']
 
         if move_id in self.move_id_to_input:
             string = ''
@@ -149,7 +145,7 @@ class MovelistParser:
 
             if not input_tuple[0] in (MoveInfoEnums.MovelistInputCodes.NULL.name, MoveInfoEnums.MovelistInputCodes.N.name):
 
-                if move_id > -1 and move_id < len(self.names) and '66' in self.names[move_id] and not '666' in self.names[move_id]:
+                if (-1 < move_id < len(self.names)) and ('66' in self.names[move_id]) and ('666' not in self.names[move_id]):
                     string += 'ff'
                 else:
                     string += input_tuple[0]
@@ -160,7 +156,7 @@ class MovelistParser:
             if not input_tuple[1] in (MoveInfoEnums.MovelistButtonCodes.NULL.name,):
                 string += input_tuple[1].replace("B_", "").replace("_PLUS_", "+")
 
-            if previous_move_id >= 0 and previous_move_id < len(self.names) and move_id >= 0 and move_id < len(self.names):
+            if (0 <= previous_move_id < len(self.names)) and (0 <= move_id < len(self.names)):
 
                 if self.names[previous_move_id] in ([self.names[move_id] + s for s in empty_cancel_strings]):
                     last_move_was_empty_cancel = True

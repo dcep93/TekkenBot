@@ -100,8 +100,8 @@ class StunStates(enum.Enum):
     BLOCK_NO_HIT = 0x1000000 #law's UF+4, sometimes???? Proximity guard maybe?
 
 class CancelStatesBitmask(enum.Enum):
-    CANCELABLE =  0x00010000
-    BUFFERABLE =  0x01000000
+    CANCELABLE = 0x00010000
+    BUFFERABLE = 0x01000000
     PARRYABLE_1 = 0x00000001
     PARRYABLE_2 = 0x00000002
 
@@ -115,7 +115,7 @@ class HitOutcome(enum.Enum):
     UNKNOWN_SCREW_5 = 5 #Xiaoyu's sample combo 3 ends with this, off-axis or right side maybe?
     UNKNOWN_6 = 6 #May not exist???
     UNKNOWN_SCREW_7 = 7 #Xiaoy's sample combo 3 includes this
-    GROUNDED_FACE_DOWN= 8
+    GROUNDED_FACE_DOWN = 8
     GROUNDED_FACE_UP = 9
     COUNTER_HIT_STANDING = 10
     COUNTER_HIT_CROUCHING = 11
@@ -173,7 +173,7 @@ class CharacterCodes(enum.Enum):
     LAW = 1
     KING = 2
     YOSHIMITSU = 3
-    HWOARANG  = 4
+    HWOARANG = 4
     XIAOYU = 5
     JIN = 6
     BRYAN = 7
@@ -189,7 +189,7 @@ class CharacterCodes(enum.Enum):
     LEO = 17
     LARS = 18
     ALISA = 19
-    CLAUDIO  = 20
+    CLAUDIO = 20
     KATARINA = 21
     LUCKY_CHLOE = 22
     SHAHEEN = 23
@@ -260,7 +260,7 @@ class MovelistButtonCodes(enum.Enum):
     B_1_PLUS_2_PLUS_3_PLUS_4 = 15
     B_R = 16
 
-    UNK_600= 0x600 #1+2 only maybe? on hwoarangs b2, not HOLD
+    UNK_600 = 0x600 # 1+2 only maybe? on hwoarangs b2, not HOLD
 
 
 class MovelistInputCodes(enum.Enum):

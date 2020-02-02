@@ -15,11 +15,11 @@ class Windows:
         self.k32 = ctypes.windll.kernel32
 
         self.open_process = self.k32.OpenProcess
-        self.open_process.argtypes = [wintypes.DWORD,ctypes.wintypes.BOOL,ctypes.wintypes.DWORD]
+        self.open_process.argtypes = [wintypes.DWORD, ctypes.wintypes.BOOL, ctypes.wintypes.DWORD]
         self.open_process.restype = wintypes.HANDLE
 
         self.read_process_memory = self.k32.read_process_memory
-        self.read_process_memory.argtypes = [wintypes.HANDLE,ctypes.wintypes.LPCVOID,ctypes.wintypes.LPVOID,ctypes.c_size_t,ctypes.POINTER(ctypes.c_size_t)]
+        self.read_process_memory.argtypes = [wintypes.HANDLE, ctypes.wintypes.LPCVOID, ctypes.wintypes.LPVOID, ctypes.c_size_t, ctypes.POINTER(ctypes.c_size_t)]
         self.read_process_memory.restype = wintypes.BOOL
 
         self.get_last_error = self.k32.get_last_error
@@ -39,21 +39,18 @@ class Windows:
     @staticmethod
     def get_module_address(pid, name):
         class ModuleEntry(ctypes.Structure):
-            _fields_ = [( 'dwSize' , w.wintypes.DWORD ) ,
-                        ( 'th32ModuleID' , w.wintypes.DWORD ),
-                        ( 'th32ProcessID' , w.wintypes.DWORD ),
-                        ( 'GlblcntUsage' , w.wintypes.DWORD ),
-                        ( 'ProccntUsage' , w.wintypes.DWORD ) ,
-                        ( 'modBaseAddr' , ctypes.POINTER(w.wintypes.BYTE) ) ,
-                        ( 'modBaseSize' , w.wintypes.DWORD ) ,
-                        ( 'hModule' , w.wintypes.HMODULE ) ,
-                        ( 'szModule' , ctypes.c_char * 256 ),
-                        ( 'szExePath' , ctypes.c_char * 260 ) ]
+            _fields_ = [('dwSize', w.wintypes.DWORD),
+                        ('th32ModuleID', w.wintypes.DWORD),
+                        ('th32ProcessID', w.wintypes.DWORD),
+                        ('GlblcntUsage', w.wintypes.DWORD),
+                        ('ProccntUsage', w.wintypes.DWORD),
+                        ('modBaseAddr', ctypes.POINTER(w.wintypes.BYTE)),
+                        ('modBaseSize', w.wintypes.DWORD),
+                        ('hModule', w.wintypes.HMODULE),
+                        ('szModule', ctypes.c_char * 256),
+                        ('szExePath', ctypes.c_char * 260)]
 
         # Establish rights and basic options needed for all process declartion / iteration
-        STANDARD_RIGHTS_REQUIRED = 0x000F0000
-        SYNCHRONIZE = 0x00100000
-        PROCESS_ALL_ACCESS = (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | 0xFFF)
         TH32CS_SNAPMODULE = 0x00000008
 
         me32 = ModuleEntry()
@@ -64,7 +61,7 @@ class Windows:
             print('CreateToolhelp32Snapshot Error [%d]' % w.get_last_error())
             print('Build the code yourself? This is the error for using 32-bit Python. Try the 64-bit version.')
 
-        ret = ctypes.windll.kernel32.Module32First(h_module_snap, ctypes.pointer(me32) )
+        ret = ctypes.windll.kernel32.Module32First(h_module_snap, ctypes.pointer(me32))
         if ret == 0:
             print('ListProcessModules() Error on Module32First[%d]' % w.get_last_error())
             w.close_handle(h_module_snap)
@@ -83,7 +80,7 @@ class Windows:
     def get_foreground_pid():
         pid = w.wintypes.DWORD()
         active = ctypes.windll.user32.GetForegroundWindow()
-        active_window = ctypes.windll.user32.GetWindowThreadProcessId(active, ctypes.byref(pid))
+        ctypes.windll.user32.GetWindowThreadProcessId(active, ctypes.byref(pid))
         return pid.value
 
     @staticmethod
@@ -103,8 +100,7 @@ class Windows:
             if w.enum_processes(ctypes.byref(process_ids), cb, ctypes.byref(bytes_returned)):
                 if bytes_returned.value < cb:
                     break
-                else:
-                    count *= 2
+                count *= 2
             else:
                 sys.exit("Call to enum_processes failed")
 
@@ -115,7 +111,7 @@ class Windows:
             h_process = w.open_process(PROCESS_TERMINATE | PROCESS_QUERY_INFORMATION, False, process_id)
             if h_process:
                 image_file_name = (ctypes.c_char*MAX_PATH)()
-                if w.get_process_image_filename(h_process, image_file_name, MAX_PATH)>0:
+                if w.get_process_image_filename(h_process, image_file_name, MAX_PATH) > 0:
                     filename = os.path.basename(image_file_name.value)
                     if filename == process_name_in_bytes:
                         pid = process_id

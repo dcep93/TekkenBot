@@ -31,9 +31,9 @@ class PlayerSnapshot:
         self.is_bufferable = (MoveInfoEnums.CancelStatesBitmask.BUFFERABLE.value & cancel_window_bitmask) == MoveInfoEnums.CancelStatesBitmask.BUFFERABLE.value
         self.is_parry_1 = (MoveInfoEnums.CancelStatesBitmask.PARRYABLE_1.value & cancel_window_bitmask) == MoveInfoEnums.CancelStatesBitmask.PARRYABLE_1.value
         self.is_parry_2 = (MoveInfoEnums.CancelStatesBitmask.PARRYABLE_2.value & cancel_window_bitmask) == MoveInfoEnums.CancelStatesBitmask.PARRYABLE_2.value
-        
+
         self.is_recovering = (MoveInfoEnums.ComplexMoveStates.RECOVERING.value & recovery_window_bitmask) == MoveInfoEnums.ComplexMoveStates.RECOVERING.value
-        
+
         if self.startup > 0:
             self.is_starting = (self.move_timer <= self.startup)
         else:
@@ -88,6 +88,7 @@ class PlayerSnapshot:
     def is_able_to_act(self):
         return self.is_cancelable
 
+# todo could be a dict
 class GameSnapshot:
     def __init__(self, p1, p2, frame_count, timer_in_frames, facing_bool, is_player_player_one):
         self.p1 = p1

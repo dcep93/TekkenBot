@@ -4,9 +4,9 @@ Our abstract overlay class provides shared tools for our overlays
 
 import abc
 import enum
-import platform
 
 from . import t_tkinter
+from config import ReloadableConfig
 from misc import Path
 from misc.Windows import w as Windows
 
@@ -31,10 +31,11 @@ class ColorSchemeEnum(enum.Enum):
     advantage_text = 'black'
 
 class Overlay:
-    def __init__(self, master, xy_size):
+    def __init__(self, master, state, xy_size):
         window_name = self.get_name()
         print("Launching {}".format(window_name))
         self.master = master
+        self.state = state
 
         self.set_config()
 
@@ -68,10 +69,11 @@ class Overlay:
         self.is_overlay_on_top = not g(DisplaySettings.overlay_on_bottom, False)
 
     def update_location(self):
-        if not Windows.valid: return
+        if not Windows.valid:
+            return
         if not self.is_draggable_window:
-            tekken_rect = self.state.gameReader.get_window_rect()
-            if tekken_rect != None:
+            tekken_rect = self.state.game_reader.get_window_rect()
+            if tekken_rect is not None:
                 x = (tekken_rect.right + tekken_rect.left) / 2 - self.w / 2
                 if self.is_overlay_on_top:
                     y = tekken_rect.top

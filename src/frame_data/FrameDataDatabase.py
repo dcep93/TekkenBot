@@ -24,9 +24,9 @@ class GlobalFrameDataEntry:
             else:
                 max_count = self.counts[field][v] + 1
                 self.counts[field][v] = max_count
-        for record, count in self.counts[field].items():
+        for existing, count in self.counts[field].items():
             if count > max_count:
-                most_common = record
+                most_common = existing
                 max_count = count
         if most_common != v:
             if v is None:

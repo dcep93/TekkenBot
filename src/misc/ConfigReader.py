@@ -9,6 +9,7 @@ from misc import Path
 
 class ConfigReader:
     def __init__(self, filename):
+        self.file_name = filename
         self.path = self.get_path(filename)
 
         self.parse()
@@ -19,7 +20,8 @@ class ConfigReader:
         if not parsed:
             print('Error reading config data from %s. Using default values.' % self.path)
 
-    def get_path(self, filename):
+    @staticmethod
+    def get_path(filename):
         return Path.path('config/%s.ini' % filename)
 
     def get_property(self, enum_item, default_value):

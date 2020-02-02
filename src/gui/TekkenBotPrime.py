@@ -14,6 +14,8 @@ class TekkenBotPrime(t_tkinter.Tk):
         print("Tekken Bot Starting...")
 
         self.overlay = None
+        self.overlay_var = None
+        self.mode = None
 
         self.init_tk()
         self.init_config()
@@ -58,18 +60,18 @@ class TekkenBotPrime(t_tkinter.Tk):
     def add_columns_cascade(self):
         column_menu = t_tkinter.Menu(self.menu)
         all_checked = self.tekken_config.get_all(FrameDataEntry.DataColumns, True)
-        for enum in FrameDataEntry.DataColumns:
-            checked = all_checked[enum]
-            name = "%s (%s)" % (enum.name, enum.value)
-            self.add_checkbox(column_menu, enum, name, checked, self.changed_columns)
+        for col in FrameDataEntry.DataColumns:
+            checked = all_checked[col]
+            name = "%s (%s)" % (col.name, col.value)
+            self.add_checkbox(column_menu, col, name, checked, self.changed_columns)
         self.menu.add_cascade(label='Columns', menu=column_menu)
 
     def add_display_cascade(self):
         display_menu = t_tkinter.Menu(self.menu)
         all_checked = self.tekken_config.get_all(Overlay.DisplaySettings, False)
-        for enum in Overlay.DisplaySettings:
-            checked = all_checked[enum]
-            self.add_checkbox(display_menu, enum, enum.value, checked, self.changed_display)
+        for setting in Overlay.DisplaySettings:
+            checked = all_checked[setting]
+            self.add_checkbox(display_menu, setting, setting.value, checked, self.changed_display)
         self.menu.add_cascade(label="Display", menu=display_menu)
 
     def add_mode_cascade(self):
@@ -78,7 +80,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         for mode in OverlayMode:
             label = mode.value
             command = (lambda i: lambda: self.changed_mode(i))(mode)
-            overlay_mode_menu.add_radiobutton(label=label,variable=self.overlay_var,value=mode,command=command)
+            overlay_mode_menu.add_radiobutton(label=label, variable=self.overlay_var, value=mode, command=command)
         self.menu.add_cascade(label="Mode", menu=overlay_mode_menu)
         self.mode = OverlayMode.FrameData
 
@@ -100,14 +102,14 @@ class TekkenBotPrime(t_tkinter.Tk):
         if self.mode != OverlayMode.Off:
             self.start_overlay()
 
-    def changed_display(self, enum, var):
+    def changed_display(self, prop, var):
         if self.overlay is not None:
-            self.tekken_config.set_property(enum, var.get())
+            self.tekken_config.set_property(prop, var.get())
             self.tekken_config.write()
         self.reboot_overlay()
 
     def stop_overlay(self):
-        if self.overlay != None:
+        if self.overlay is not None:
             self.overlay.toplevel.destroy()
             self.overlay = None
 
@@ -126,23 +128,24 @@ class TekkenBotPrime(t_tkinter.Tk):
         successful_update = self.tekken_state.update()
         after = time.time()
 
-        if self.overlay != None:
+        if self.overlay is not None:
             self.overlay.update_location()
             if successful_update:
                 self.overlay.update_state()
 
         elapsed_ms = after - now
-        wait_ms = self.tekken_state.gameReader.get_update_wait_ms(elapsed_ms)
-        if wait_ms >= 0: self.after(wait_ms, self.update)
+        wait_ms = self.tekken_state.game_reader.get_update_wait_ms(elapsed_ms)
+        if wait_ms >= 0:
+            self.after(wait_ms, self.update)
 
     def on_closing(self):
         sys.stdout = sys.__stdout__
         sys.stderr = sys.__stderr__
         self.destroy()
 
-    def changed_columns(self, enum, var):
+    def changed_columns(self, col, var):
         if self.mode == OverlayMode.FrameData:
-            self.overlay.update_column_to_print(enum, var.get())
+            self.overlay.update_column_to_print(col, var.get())
 
     def init_frame_data(self):
         self.overlay_var.set(OverlayMode.FrameData)
