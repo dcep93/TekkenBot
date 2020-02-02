@@ -196,7 +196,7 @@ class GameReader:
             print("Unrecognized location for %s module. Tekken.exe Patch? Wrong process id?" % game_string)
         else:
             print("Found %s" % game_string)
-            self.needReacquireModule = False
+            self.need_reacquire_module = False
 
     def get_player_data_base_address(self, process_handle):
         addresses = split_str_to_hex(self.player_data_pointer_offset)

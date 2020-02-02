@@ -16,15 +16,15 @@ class GameState:
 
         self.state_log = []
 
-        self.futureStateLog = None
+        self.future_state_log = None
 
     def rewind(self, frames):
-        self.futureStateLog = self.state_log[-frames:]
+        self.future_state_log = self.state_log[-frames:]
         self.state_log = self.state_log[:-frames]
 
     def unrewind(self):
-        self.state_log += self.futureStateLog
-        self.futureStateLog = None
+        self.state_log += self.future_state_log
+        self.future_state_log = None
 
     def get(self, is_p1):
         state = self.state_log[-1]
@@ -46,8 +46,8 @@ class GameState:
                     missed_states = min(7, frames_lost)
 
                     for i in range(missed_states):
-                        droppedState = self.gameReader.get_updated_state(missed_states - i)
-                        self.append_gamedata(droppedState)
+                        dropped_state = self.gameReader.get_updated_state(missed_states - i)
+                        self.append_gamedata(dropped_state)
 
                 self.append_gamedata(game_data)
                 return True

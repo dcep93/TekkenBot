@@ -16,18 +16,18 @@ class Recorder(GameReader.GameReader):
         signal.signal(signal.SIGINT, lambda _,__: self.save_and_quit(pickle_dest))
 
     def get_updated_state(self, rollback_frame):
-        gameData = super().get_updated_state(rollback_frame)
-        if self.active: self.record_data(rollback_frame == 0, gameData)
-        return gameData
+        game_data = super().get_updated_state(rollback_frame)
+        if self.active: self.record_data(rollback_frame == 0, game_data)
+        return game_data
 
     @classmethod
-    def record_data(cls, new_update, gameData):
+    def record_data(cls, new_update, game_data):
         cls.num_datas += 1
         if new_update:
             now = time.time()
-            cls.all_datas.append((now, [gameData]))
+            cls.all_datas.append((now, [game_data]))
         else:
-            cls.all_datas[-1][1].append(gameData)
+            cls.all_datas[-1][1].append(game_data)
 
     @classmethod
     def save_and_quit(cls, pickle_dest):

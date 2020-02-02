@@ -47,5 +47,5 @@ def get(move_id):
 
 def record(frame_data_entry, floated):
     move_id = frame_data_entry[FrameDataEntry.DataColumns.move_id]
-    GlobalFrameDataEntry = frame_data_entries[move_id]
-    GlobalFrameDataEntry.record(frame_data_entry, floated)
+    global_frame_data_entry = frame_data_entries[move_id]
+    global_frame_data_entry.record(frame_data_entry, floated)
