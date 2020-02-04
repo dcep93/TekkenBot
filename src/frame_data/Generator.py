@@ -1,4 +1,3 @@
-import copy
 import pickle
 
 from . import Database
@@ -11,7 +10,7 @@ class Generator:
 
     def record(self):
         print("writing Database.History pickle to %s" % Flags.Flags.generate_pkl)
-        histories = {move_id: copy.deepcopy(history.counts) for move_id, history in Database.histories.items()}
+        histories = {move_id: dict(history.counts) for move_id, history in Database.histories.items()}
         with open(Flags.Flags.generate_pkl, 'wb') as fh:
             pickle.dump(histories, fh)
         print("done")
