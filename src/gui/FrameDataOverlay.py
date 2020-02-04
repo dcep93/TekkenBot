@@ -1,5 +1,6 @@
 from . import Overlay, t_tkinter
 from frame_data import Entry
+from misc import Flags
 
 class FrameDataOverlay(Overlay.Overlay):
     unknown = '??'
