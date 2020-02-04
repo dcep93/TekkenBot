@@ -1,5 +1,5 @@
 from . import Overlay, t_tkinter
-from frame_data import FrameDataEntry
+from frame_data import Entry
 
 class FrameDataOverlay(Overlay.Overlay):
     unknown = '??'
@@ -46,13 +46,13 @@ class FrameDataOverlay(Overlay.Overlay):
         self.text.tag_config("p2", foreground=Overlay.ColorSchemeEnum.p2_text.value)
 
         self.text.delete("1.0", "end")
-        self.set_columns_to_print(self.master.tekken_config.get_all(FrameDataEntry.DataColumns, True))
+        self.set_columns_to_print(self.master.tekken_config.get_all(Entry.DataColumns, True))
 
-    def print_f(self, is_p1, frame_data_entry):
+    def print_f(self, is_p1, entry):
         self.scroll()
 
-        self.entries.append(frame_data_entry)
-        fa = frame_data_entry[FrameDataEntry.DataColumns.fa]
+        self.entries.append(entry)
+        fa = entry[Entry.DataColumns.fa]
 
         background = self.get_background(fa)
         self.style.configure('.', background=background)
@@ -60,7 +60,7 @@ class FrameDataOverlay(Overlay.Overlay):
         self.fa_var.set(fa)
         text_tag = 'p1' if is_p1 else 'p2'
 
-        out = self.get_frame_data_string(frame_data_entry)
+        out = self.get_frame_data_string(entry)
         prefix = self.get_prefix(is_p1)
         print("%s%s / %s" % (prefix, out, fa))
 
@@ -114,9 +114,9 @@ class FrameDataOverlay(Overlay.Overlay):
         player_name = "p1" if is_p1 else "p2"
         return "%s: " % player_name
 
-    def get_value(self, frame_data_entry, col):
-        if col in frame_data_entry:
-            value = str(frame_data_entry[col])
+    def get_value(self, entry, col):
+        if col in entry:
+            value = str(entry[col])
         else:
             value = self.unknown
 
@@ -128,13 +128,13 @@ class FrameDataOverlay(Overlay.Overlay):
         after = diff - before
         return (' ' * before) + value + (' ' * after)
 
-    def get_frame_data_string(self, frame_data_entry):
-        values = [self.get_value(frame_data_entry, col) for col in FrameDataEntry.DataColumns if self.columns_to_print[col]]
+    def get_frame_data_string(self, entry):
+        values = [self.get_value(entry, col) for col in Entry.DataColumns if self.columns_to_print[col]]
         return '|'.join(values)
 
     def get_scroll_index(self):
         for entry in self.entries[1:]:
-            if not entry[FrameDataEntry.DataColumns.guaranteed]:
+            if not entry[Entry.DataColumns.guaranteed]:
                 return 0
         return 1
 
@@ -149,7 +149,7 @@ class FrameDataOverlay(Overlay.Overlay):
             self.text.delete(start, end)
 
     def populate_column_names(self):
-        columns_entry = {col:col.name for col in FrameDataEntry.DataColumns}
+        columns_entry = {col:col.name for col in Entry.DataColumns}
         column_names = self.get_frame_data_string(columns_entry)
         prefix = self.get_prefix(True)
         spaces = " " * len(prefix)
@@ -178,8 +178,8 @@ class PlayerListener:
             if (self.active_frame_wait < game_state.get(self.is_p1).get_active_frames() + 1) and not is_recovering_before_long_active_frame_move_completes:
                 self.active_frame_wait += 1
             else:
-                frame_data_entry = FrameDataEntry.build(game_state, self.is_p1, self.active_frame_wait)
-                self.print_f(self.is_p1, frame_data_entry)
+                entry = Entry.build(game_state, self.is_p1, self.active_frame_wait)
+                self.print_f(self.is_p1, entry)
                 self.active_frame_wait = 1
 
             game_state.unrewind()

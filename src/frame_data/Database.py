@@ -1,18 +1,18 @@
 import collections
 
-from . import FrameDataEntry
+from . import Entry
 
-class GlobalFrameDataEntry:
+class History:
     def __init__(self):
         self.counts = collections.defaultdict(lambda: collections.defaultdict(int))
 
-    def record(self, frame_data_entry, floated):
-        for field in FrameDataEntry.DataColumns:
-            self.record_field(field, frame_data_entry, floated)
+    def record(self, entry, floated):
+        for field in Entry.DataColumns:
+            self.record_field(field, entry, floated)
 
-    def record_field(self, field, frame_data_entry, floated):
-        if field in frame_data_entry:
-            v = frame_data_entry[field]
+    def record_field(self, field, entry, floated):
+        if field in entry:
+            v = entry[field]
         else:
             v = None
         most_common = v
@@ -33,9 +33,9 @@ class GlobalFrameDataEntry:
                 new_v = most_common
             else:
                 new_v = "(%s)" % (most_common)
-            frame_data_entry[field] = new_v
+            entry[field] = new_v
 
-frame_data_entries = collections.defaultdict(GlobalFrameDataEntry)
+histories = collections.defaultdict(History)
 # todo load from csv and generate csv
 database = {}
 
@@ -45,7 +45,7 @@ def get(move_id):
     else:
         return None
 
-def record(frame_data_entry, floated):
-    move_id = frame_data_entry[FrameDataEntry.DataColumns.move_id]
-    global_frame_data_entry = frame_data_entries[move_id]
-    global_frame_data_entry.record(frame_data_entry, floated)
+def record(entry, floated):
+    move_id = entry[Entry.DataColumns.move_id]
+    history = histories[move_id]
+    history.record(entry, floated)

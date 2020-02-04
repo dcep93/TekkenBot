@@ -1,6 +1,6 @@
 import enum
 
-from . import FrameDataDatabase
+from . import Database
 from game_parser import MoveInfoEnums
 
 def build(game_state, is_p1, active_frame_wait):
@@ -10,45 +10,45 @@ def build(game_state, is_p1, active_frame_wait):
     game_state.rewind(active_frame_wait)
     move_id = game_state.get(is_p1).move_id
 
-    frame_data_entry = FrameDataDatabase.get(move_id)
-    if frame_data_entry is None:
-        frame_data_entry = build_frame_data_entry(game_state, is_p1, fa, active_frame_wait)
-        FrameDataDatabase.record(frame_data_entry, floated)
+    entry = Database.get(move_id)
+    if entry is None:
+        entry = build_frame_data_entry(game_state, is_p1, fa, active_frame_wait)
+        Database.record(entry, floated)
 
-    frame_data_entry[DataColumns.fa] = fa
+    entry[DataColumns.fa] = fa
 
-    return frame_data_entry
+    return entry
 
 def build_frame_data_entry(game_state, is_p1, fa, active_frame_wait):
     move_id = game_state.get(is_p1).move_id
 
-    frame_data_entry = {}
+    entry = {}
 
-    frame_data_entry[DataColumns.move_id] = move_id
-    frame_data_entry[DataColumns.startup] = game_state.get(is_p1).startup
-    frame_data_entry[DataColumns.hit_type] = MoveInfoEnums.AttackType(game_state.get(is_p1).attack_type).name + ("_THROW" if game_state.get(is_p1).is_attack_throw() else "")
-    frame_data_entry[DataColumns.w_rec] = game_state.get(is_p1).recovery
-    frame_data_entry[DataColumns.cmd] = game_state.get_current_move_string(is_p1)
+    entry[DataColumns.move_id] = move_id
+    entry[DataColumns.startup] = game_state.get(is_p1).startup
+    entry[DataColumns.hit_type] = MoveInfoEnums.AttackType(game_state.get(is_p1).attack_type).name + ("_THROW" if game_state.get(is_p1).is_attack_throw() else "")
+    entry[DataColumns.w_rec] = game_state.get(is_p1).recovery
+    entry[DataColumns.cmd] = game_state.get_current_move_string(is_p1)
 
     game_state.unrewind()
 
     if game_state.get(not is_p1).is_blocking():
-        frame_data_entry[DataColumns.block] = fa
+        entry[DataColumns.block] = fa
     else:
         if game_state.get(not is_p1).is_getting_counter_hit():
-            frame_data_entry[DataColumns.counter] = fa
+            entry[DataColumns.counter] = fa
         else:
-            frame_data_entry[DataColumns.normal] = fa
+            entry[DataColumns.normal] = fa
 
-    frame_data_entry[DataColumns.char_name] = game_state.get(is_p1).movelist_parser.char_name
-    frame_data_entry[DataColumns.move_str] = game_state.get_current_move_name(is_p1)
+    entry[DataColumns.char_name] = game_state.get(is_p1).movelist_parser.char_name
+    entry[DataColumns.move_str] = game_state.get_current_move_name(is_p1)
 
     game_state.rewind(active_frame_wait + 1)
-    frame_data_entry[DataColumns.guaranteed] = not game_state.get(not is_p1).is_able_to_act()
+    entry[DataColumns.guaranteed] = not game_state.get(not is_p1).is_able_to_act()
     game_state.unrewind()
     game_state.rewind(active_frame_wait)
 
-    return frame_data_entry
+    return entry
 
 def get_fa(game_state, is_p1, floated):
     receiver = game_state.get(not is_p1)
