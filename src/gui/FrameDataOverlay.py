@@ -157,6 +157,10 @@ class FrameDataOverlay(Overlay.Overlay):
 
         print(spaces + column_names)
 
+        self.text.update()
+        width = self.text.winfo_width()
+        self.toplevel.geometry('%sx%s' % (width, self.h))
+
         self.text.delete("1.0", "2.0")
         self.text.insert("1.0", column_names + '\n')
 
