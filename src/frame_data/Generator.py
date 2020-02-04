@@ -13,7 +13,6 @@ class Generator:
         histories = {move_id: dict(history.counts) for move_id, history in Database.histories.items()}
         with open(Flags.Flags.generate_pkl, 'wb') as fh:
             pickle.dump(histories, fh)
-        print("done")
         self.gui.after(1000 * Flags.Flags.generate_wait_s, self.record)
 
     @staticmethod
