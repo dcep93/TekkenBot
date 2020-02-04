@@ -18,11 +18,11 @@ class Windows:
         self.open_process.argtypes = [wintypes.DWORD, ctypes.wintypes.BOOL, ctypes.wintypes.DWORD]
         self.open_process.restype = wintypes.HANDLE
 
-        self.read_process_memory = self.k32.read_process_memory
+        self.read_process_memory = self.k32.ReadProcessMemory
         self.read_process_memory.argtypes = [wintypes.HANDLE, ctypes.wintypes.LPCVOID, ctypes.wintypes.LPVOID, ctypes.c_size_t, ctypes.POINTER(ctypes.c_size_t)]
         self.read_process_memory.restype = wintypes.BOOL
 
-        self.get_last_error = self.k32.get_last_error
+        self.get_last_error = self.k32.GetLastError
         self.get_last_error.argtypes = None
         self.get_last_error.restype = wintypes.DWORD
 
