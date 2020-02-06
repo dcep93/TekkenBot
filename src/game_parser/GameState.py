@@ -113,10 +113,3 @@ class GameState:
         player = self.get_old_player(is_p1, 1)
         if player is None or player.startup == 0: return False
         return player.startup != 0 and player.move_timer == player.startup
-
-    def did_id_or_timer_change(self, is_p1, frames_ago):
-        player_older = self.get_old_player(is_p1, frames_ago + 1)
-        if player_older is None:
-            return False
-        player_newer = self.get_old_player(is_p1, frames_ago)
-        return (player_newer.move_id != player_older.move_id) or (player_newer.move_timer < player_older.move_timer)
