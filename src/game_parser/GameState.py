@@ -20,7 +20,7 @@ class GameState:
     def get_old_player(self, is_p1, frames_ago):
         if len(self.state_log) <= frames_ago:
             return None
-        state = self.state_log[-frames_ago]
+        state = self.state_log[-1-frames_ago]
         return state.p1 if is_p1 else state.p2
 
     def update(self):
@@ -109,8 +109,9 @@ class GameState:
         return player.is_jump
 
     def is_starting_attack(self, is_p1):
-        player = self.get(is_p1)
-        return player.startup != 0 and player.move_timer == player.startup + 1
+        player = self.get_old_player(is_p1, 1)
+        if player is None or player.startup == 0: return False
+        return player.startup != 0 and player.move_timer == player.startup
 
     def did_id_or_timer_change(self, is_p1, frames_ago):
         player_older = self.get_old_player(is_p1, frames_ago + 1)

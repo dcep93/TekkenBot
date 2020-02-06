@@ -5,20 +5,18 @@ from game_parser import MoveInfoEnums
 
 def build(game_state, is_p1):
     fa = get_fa(game_state, is_p1)
-    move_id = game_state.get(is_p1).move_id
+    move_id = game_state.get_old_player(is_p1, 1).move_id
 
     entry = Database.get(move_id)
     if entry is None:
-        entry = build_frame_data_entry(game_state, is_p1, fa)
+        entry = build_frame_data_entry(game_state, move_id, is_p1, fa)
         Database.record(entry)
 
     entry[DataColumns.fa] = fa
 
     return entry
 
-def build_frame_data_entry(game_state, is_p1, fa):
-    move_id = game_state.get(is_p1).move_id
-
+def build_frame_data_entry(game_state, move_id, is_p1, fa):
     entry = {}
 
     entry[DataColumns.move_id] = move_id
