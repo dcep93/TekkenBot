@@ -13,16 +13,6 @@ class GameState:
 
         self.state_log = []
 
-        self.future_state_log = None
-
-    def rewind(self, frames):
-        self.future_state_log = self.state_log[-frames:]
-        self.state_log = self.state_log[:-frames]
-
-    def unrewind(self):
-        self.state_log += self.future_state_log
-        self.future_state_log = None
-
     def get(self, is_p1):
         state = self.state_log[-1]
         return state.p1 if is_p1 else state.p2
