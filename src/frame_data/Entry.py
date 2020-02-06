@@ -3,23 +3,20 @@ import enum
 from . import Database
 from game_parser import MoveInfoEnums
 
-def build(game_state, is_p1, active_frame_wait):
-    floated = game_state.was_just_floated(not is_p1)
-    game_state.unrewind()
-    fa = get_fa(game_state, is_p1, floated)
-    game_state.rewind(active_frame_wait)
+def build(game_state, is_p1):
+    fa = get_fa(game_state, is_p1)
     move_id = game_state.get(is_p1).move_id
 
     entry = Database.get(move_id)
     if entry is None:
-        entry = build_frame_data_entry(game_state, is_p1, fa, active_frame_wait)
-        Database.record(entry, floated)
+        entry = build_frame_data_entry(game_state, is_p1, fa)
+        Database.record(entry)
 
     entry[DataColumns.fa] = fa
 
     return entry
 
-def build_frame_data_entry(game_state, is_p1, fa, active_frame_wait):
+def build_frame_data_entry(game_state, is_p1, fa):
     move_id = game_state.get(is_p1).move_id
 
     entry = {}
@@ -29,8 +26,6 @@ def build_frame_data_entry(game_state, is_p1, fa, active_frame_wait):
     entry[DataColumns.hit_type] = MoveInfoEnums.AttackType(game_state.get(is_p1).attack_type).name + ("_THROW" if game_state.get(is_p1).is_attack_throw() else "")
     entry[DataColumns.w_rec] = game_state.get(is_p1).recovery
     entry[DataColumns.cmd] = game_state.get_current_move_string(is_p1)
-
-    game_state.unrewind()
 
     if game_state.get(not is_p1).is_blocking():
         entry[DataColumns.block] = fa
@@ -43,20 +38,17 @@ def build_frame_data_entry(game_state, is_p1, fa, active_frame_wait):
     entry[DataColumns.char_name] = game_state.get(is_p1).movelist_parser.char_name
     entry[DataColumns.move_str] = game_state.get_current_move_name(is_p1)
 
-    game_state.rewind(active_frame_wait + 1)
-    entry[DataColumns.guaranteed] = not game_state.get(not is_p1).is_able_to_act()
-    game_state.unrewind()
-    game_state.rewind(active_frame_wait)
+    entry[DataColumns.punish] = not game_state.get(not is_p1).is_able_to_act()
 
     return entry
 
-def get_fa(game_state, is_p1, floated):
+def get_fa(game_state, is_p1):
     receiver = game_state.get(not is_p1)
     if receiver.is_being_knocked_down():
         return 'KND'
     elif receiver.is_being_juggled():
         return 'JGL'
-    elif floated:
+    elif game_state.was_just_floated(not is_p1):
         return 'FLT'
     else:
         time_till_recovery_p1 = game_state.get(is_p1).get_frames_til_next_move()
@@ -82,4 +74,4 @@ class DataColumns(enum.Enum):
     counter = 'frame advantage on counter hit'
     w_rec = 'total number of frames in move'
     fa = 'frame advantage right now'
-    guaranteed = 'hit is guaranteed'
+    punish = 'hit is a punish'

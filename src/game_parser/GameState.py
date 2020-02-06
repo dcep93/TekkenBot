@@ -118,8 +118,9 @@ class GameState:
             return False
         return player.is_jump
 
-    def is_landing_attack(self, is_p1):
-        return self.get(not is_p1).is_blocking() or self.get(not is_p1).is_getting_hit() or self.get(not is_p1).is_in_throwing() or self.get(not is_p1).is_being_knocked_down() or self.get(not is_p1).is_getting_wall_splatted()
+    def is_starting_attack(self, is_p1):
+        player = self.get(is_p1)
+        return player.startup != 0 and player.move_timer == 1
 
     def did_id_or_timer_change(self, is_p1, frames_ago):
         player_older = self.get_old_player(is_p1, frames_ago + 1)

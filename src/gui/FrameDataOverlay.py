@@ -135,7 +135,7 @@ class FrameDataOverlay(Overlay.Overlay):
 
     def get_scroll_index(self):
         for entry in self.entries[1:]:
-            if not entry[Entry.DataColumns.guaranteed]:
+            if not entry[Entry.DataColumns.punish]:
                 return 0
         return 1
 
@@ -173,18 +173,8 @@ class PlayerListener:
         self.is_p1 = is_p1
         self.print_f = print_f
 
-        self.active_frame_wait = 1
-
     def update(self, game_state):
-        if game_state.is_landing_attack(self.is_p1) and game_state.did_id_or_timer_change(not self.is_p1, self.active_frame_wait):
-            is_recovering_before_long_active_frame_move_completes = (game_state.get(not self.is_p1).recovery - game_state.get(not self.is_p1).move_timer == 0)
-            game_state.rewind(self.active_frame_wait)
-
-            if (self.active_frame_wait < game_state.get(self.is_p1).get_active_frames() + 1) and not is_recovering_before_long_active_frame_move_completes:
-                self.active_frame_wait += 1
-            else:
-                entry = Entry.build(game_state, self.is_p1, self.active_frame_wait)
-                self.print_f(self.is_p1, entry)
-                self.active_frame_wait = 1
-
-            game_state.unrewind()
+        # ignore the fact that some moves have multiple active frames
+        if game_state.is_starting_attack(self.is_p1):
+            entry = Entry.build(game_state, self.is_p1)
+            self.print_f(self.is_p1, entry)
