@@ -34,11 +34,6 @@ class PlayerSnapshot:
 
         self.is_recovering = (MoveInfoEnums.ComplexMoveStates.RECOVERING.value & recovery_window_bitmask) == MoveInfoEnums.ComplexMoveStates.RECOVERING.value
 
-        if self.startup > 0:
-            self.is_starting = (self.move_timer <= self.startup)
-        else:
-            self.is_starting = False
-
         self.is_jump = d['PlayerDataAddress.jump_flags'] & MoveInfoEnums.JumpFlagBitmask.JUMP.value == MoveInfoEnums.JumpFlagBitmask.JUMP.value
         self.hit_outcome = MoveInfoEnums.HitOutcome(d['PlayerDataAddress.hit_outcome'])
         self.mystery_state = d['PlayerDataAddress.mystery_state']

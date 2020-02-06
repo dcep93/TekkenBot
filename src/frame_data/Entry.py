@@ -24,16 +24,18 @@ def build_frame_data_entry(game_state, is_p1, fa):
     entry[DataColumns.move_id] = move_id
     entry[DataColumns.startup] = game_state.get(is_p1).startup
     entry[DataColumns.hit_type] = MoveInfoEnums.AttackType(game_state.get(is_p1).attack_type).name + ("_THROW" if game_state.get(is_p1).is_attack_throw() else "")
-    entry[DataColumns.w_rec] = game_state.get(is_p1).recovery
     entry[DataColumns.cmd] = game_state.get_current_move_string(is_p1)
 
-    if game_state.get(not is_p1).is_blocking():
+    receiver = game_state.get(not is_p1)
+
+    if receiver.is_blocking():
         entry[DataColumns.block] = fa
-    else:
-        if game_state.get(not is_p1).is_getting_counter_hit():
-            entry[DataColumns.counter] = fa
-        else:
-            entry[DataColumns.normal] = fa
+    elif receiver.is_getting_counter_hit():
+        entry[DataColumns.counter] = fa
+    elif receiver.is_getting_hit():
+        entry[DataColumns.normal] = fa
+    elif receiver.startup == 0:
+        entry[DataColumns.w_rec] = game_state.get(is_p1).get_frames_til_next_move()
 
     entry[DataColumns.char_name] = game_state.get(is_p1).movelist_parser.char_name
     entry[DataColumns.move_str] = game_state.get_current_move_name(is_p1)
@@ -52,7 +54,7 @@ def get_fa(game_state, is_p1):
         return 'FLT'
     else:
         time_till_recovery_p1 = game_state.get(is_p1).get_frames_til_next_move()
-        time_till_recovery_p2 = game_state.get(not is_p1).get_frames_til_next_move()
+        time_till_recovery_p2 = 0 if receiver.hit_outcome is MoveInfoEnums.HitOutcome.NONE else receiver.get_frames_til_next_move()
 
         raw_fa = time_till_recovery_p2 - time_till_recovery_p1
         raw_fa_str = str(raw_fa)
