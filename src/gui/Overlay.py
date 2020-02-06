@@ -59,7 +59,7 @@ class Overlay:
 
     def set_config(self):
         g = self.master.tekken_config.get_property
-        self.is_draggable_window = g(DisplaySettings.overlay_as_draggable_window, False)
+        self.is_draggable_window = g(DisplaySettings.overlay_as_draggable_window, True)
         self.is_minimize_on_lost_focus = g(DisplaySettings.only_appears_when_Tekken_7_has_focus, True)
         self.is_overlay_on_bottom = g(DisplaySettings.overlay_on_bottom, True)
 

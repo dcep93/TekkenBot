@@ -74,7 +74,7 @@ class TekkenBotPrime(t_tkinter.Tk):
 
     def add_display_cascade(self):
         display_menu = t_tkinter.Menu(self.menu)
-        all_checked = self.tekken_config.get_all(Overlay.DisplaySettings, False)
+        all_checked = self.tekken_config.get_all(Overlay.DisplaySettings, True)
         for setting in Overlay.DisplaySettings:
             checked = all_checked[setting]
             self.add_checkbox(display_menu, setting, setting.value, checked, self.changed_display)
