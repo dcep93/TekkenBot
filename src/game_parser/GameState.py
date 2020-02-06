@@ -63,17 +63,18 @@ class GameState:
         return "ERROR"
 
     def get_current_move_string(self, is_p1):
-        if self.get(is_p1).movelist_parser is not None:
-            move_id = self.get(is_p1).move_id
+        parser = self.get(is_p1).movelist_parser
+        if parser is not None:
+            move_id = self.get_old_player(is_p1, 1).move_id
             previous_move_id = -1
 
             input_array = []
 
-            i = 0
+            i = 1
             done = False
 
             while True:
-                next_move, last_move_was_empty_cancel = self.get(is_p1).movelist_parser.input_for_move(move_id, previous_move_id)
+                next_move, last_move_was_empty_cancel = parser.input_for_move(move_id, previous_move_id)
                 next_move = str(next_move)
 
                 if last_move_was_empty_cancel:
@@ -81,7 +82,7 @@ class GameState:
 
                 input_array.append(next_move)
 
-                if self.get(is_p1).movelist_parser.can_be_done_from_neutral(move_id):
+                if parser.can_be_done_from_neutral(move_id):
                     break
 
                 while True:
