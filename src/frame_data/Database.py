@@ -10,7 +10,15 @@ class Characters(enum.Enum):
     katarina = '[KATARINA]'
 
 db_field_to_col = {
-    'move_id': DataColumns.DataColumns.move_id
+    'move_id': DataColumns.DataColumns.move_id,
+    'Command': DataColumns.DataColumns.cmd,
+    # 'Hit level':
+    # 'Damage':
+    'Start up frame': DataColumns.DataColumns.startup,
+    'Block frame': DataColumns.DataColumns.block,
+    'Hit frame': DataColumns.DataColumns.normal,
+    'Counter hit frame': DataColumns.DataColumns.counter,
+    # 'Notes':
 }
 
 class History:
