@@ -170,11 +170,9 @@ class FrameDataOverlay(Overlay.Overlay):
         self.populate_column_names()
 
     def get_geometry(self, tekken_rect):
+        super_geometry = super().get_geometry(tekken_rect)
+        y = int(super_geometry.split('+')[-1])
         x = (tekken_rect.right + tekken_rect.left) / 2 - self.toplevel.winfo_width() / 2
-        if self.is_overlay_on_top:
-            y = tekken_rect.top
-        else:
-            y = tekken_rect.bottom - self.h - 10
         geometry = '+%d+%d' % (x, y)
         return geometry
 
