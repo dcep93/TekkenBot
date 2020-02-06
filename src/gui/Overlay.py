@@ -69,17 +69,22 @@ class Overlay:
         if not self.is_draggable_window:
             tekken_rect = self.state.game_reader.get_window_rect()
             if tekken_rect is not None:
-                x = (tekken_rect.right + tekken_rect.left) / 2 - self.w / 2
-                if self.is_overlay_on_top:
-                    y = tekken_rect.top
-                else:
-                    y = tekken_rect.bottom - self.h - 10
-                self.toplevel.geometry('%dx%d+%d+%d' % (self.w, self.h, x, y))
+                geometry = self.get_geometry(tekken_rect)
+                self.toplevel.geometry(geometry)
                 if not self.overlay_visible:
                     self.show()
             else:
                 if self.overlay_visible:
                     self.hide()
+
+    def get_geometry(self, tekken_rect):
+        x = (tekken_rect.right + tekken_rect.left) / 2 - self.w / 2
+        if self.is_overlay_on_top:
+            y = tekken_rect.top
+        else:
+            y = tekken_rect.bottom - self.h - 10
+        geometry = '%dx%d+%d+%d' % (self.w, self.h, x, y)
+        return geometry
 
     @abc.abstractmethod
     def update_state(self):

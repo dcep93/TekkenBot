@@ -169,6 +169,15 @@ class FrameDataOverlay(Overlay.Overlay):
         self.columns_to_print = booleans_for_columns
         self.populate_column_names()
 
+    def get_geometry(self, tekken_rect):
+        x = (tekken_rect.right + tekken_rect.left) / 2 - self.toplevel.winfo_width() / 2
+        if self.is_overlay_on_top:
+            y = tekken_rect.top
+        else:
+            y = tekken_rect.bottom - self.h - 10
+        geometry = '+%d+%d' % (x, y)
+        return geometry
+
 class PlayerListener:
     def __init__(self, is_p1, print_f):
         self.is_p1 = is_p1
