@@ -13,11 +13,7 @@ class GameState:
 
         self.state_log = []
 
-    def get(self, is_p1):
-        state = self.state_log[-1]
-        return state.p1 if is_p1 else state.p2
-
-    def get_old_player(self, is_p1, frames_ago):
+    def get(self, is_p1, frames_ago=0):
         if len(self.state_log) <= frames_ago:
             return None
         state = self.state_log[-1-frames_ago]
@@ -65,7 +61,7 @@ class GameState:
     def get_current_move_string(self, is_p1):
         parser = self.get(is_p1).movelist_parser
         if parser is not None:
-            move_id = self.get_old_player(is_p1, 1).move_id
+            move_id = self.get(is_p1, 1).move_id
             previous_move_id = -1
 
             input_array = []
@@ -86,7 +82,7 @@ class GameState:
                     break
 
                 while True:
-                    old_player = self.get_old_player(is_p1, i)
+                    old_player = self.get(is_p1, i)
                     i += 1
                     if old_player is None:
                         done = True
@@ -104,12 +100,12 @@ class GameState:
             return 'N/A'
 
     def was_just_floated(self, is_p1):
-        player = self.get_old_player(is_p1, 1)
+        player = self.get(is_p1, 1)
         if player is None:
             return False
         return player.is_jump
 
     def is_starting_attack(self, is_p1):
-        player = self.get_old_player(is_p1, 1)
+        player = self.get(is_p1, 1)
         if player is None or player.startup == 0: return False
         return player.startup != 0 and player.move_timer == player.startup

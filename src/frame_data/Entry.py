@@ -5,7 +5,7 @@ from game_parser import MoveInfoEnums
 
 def build(game_state, is_p1):
     fa = get_fa(game_state, is_p1)
-    move_id = game_state.get_old_player(is_p1, 1).move_id
+    move_id = game_state.get(is_p1, 1).move_id
 
     entry = Database.get(move_id)
     if entry is None:
