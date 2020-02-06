@@ -159,6 +159,8 @@ class FrameDataOverlay(Overlay.Overlay):
         print(string)
 
         self.text.config(width=len(string))
+        self.toplevel.geometry('')
+        self.toplevel.maxsize(height=self.h, width=0)
 
         self.text.delete("1.0", "2.0")
         self.text.insert("1.0", string + '\n')
