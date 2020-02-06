@@ -62,8 +62,8 @@ class FrameDataOverlay(Overlay.Overlay):
         text_tag = 'p1' if is_p1 else 'p2'
 
         out = self.get_frame_data_string(entry)
-        prefix = self.get_prefix(is_p1)
-        print("%s%s / %s" % (prefix, out, fa))
+        out = self.get_prefix(is_p1) + out
+        print("%s / %s" % (out, fa))
 
         out += "\n"
         self.text.insert("end", out, text_tag)
