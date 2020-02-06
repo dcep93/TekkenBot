@@ -3,7 +3,7 @@ import time
 import sys
 
 from . import Overlay, CommandInputOverlay, FrameDataOverlay, t_tkinter
-from frame_data import Entry, Generator
+from frame_data import DataColumns, Generator
 from game_parser import GameState
 from misc import ConfigReader, Flags, Path
 
@@ -65,8 +65,8 @@ class TekkenBotPrime(t_tkinter.Tk):
 
     def add_columns_cascade(self):
         column_menu = t_tkinter.Menu(self.menu)
-        all_checked = self.tekken_config.get_all(Entry.DataColumns, True)
-        for col in Entry.DataColumns:
+        all_checked = self.tekken_config.get_all(DataColumns.DataColumns, True)
+        for col in DataColumns.DataColumns:
             checked = all_checked[col]
             name = "%s (%s)" % (col.name, col.value)
             self.add_checkbox(column_menu, col, name, checked, self.changed_columns)

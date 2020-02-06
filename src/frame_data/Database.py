@@ -1,13 +1,24 @@
 import collections
+import csv
+import enum
 
-from . import Entry
+from . import DataColumns
+from misc import Path
+
+@enum.unique
+class Characters(enum.Enum):
+    katarina = '[KATARINA]'
+
+db_field_to_col = {
+    'move_id': DataColumns.DataColumns.move_id
+}
 
 class History:
     def __init__(self):
         self.counts = collections.defaultdict(lambda: collections.defaultdict(int))
 
     def record(self, entry):
-        for field in Entry.DataColumns:
+        for field in DataColumns.DataColumns:
             self.record_field(field, entry)
 
     def record_field(self, field, entry):
@@ -32,17 +43,52 @@ class History:
                 new_v = "(%s)" % (v)
             entry[field] = new_v
 
-histories = collections.defaultdict(History)
-# todo load from csv and generate csv
-database = {}
+def key(entry):
+    return (entry[DataColumns.DataColumns.char_name], entry[DataColumns.DataColumns.move_id])
 
-def get(move_id):
-    if move_id in database:
-        return database[move_id]
+def populate_database():
+    for character in Characters:
+        char_name = character.value
+        file_name = character.name
+        path = Path.path('./database/%s.csv' % file_name)
+        with open(path) as csvfile:
+            reader = csv.reader(csvfile, delimiter='\t')
+            data = [i for i in reader]
+            header = data[0]
+            for move in data[1:]:
+                populate_move(char_name, header, move)
+
+def populate_move(char_name, header, move):
+    entry = {}
+    entry[DataColumns.DataColumns.char_name] = char_name
+    for i, db_field in enumerate(header):
+        if db_field in db_field_to_col:
+            col = db_field_to_col[db_field]
+            val = move[i]
+            entry[col] = val
+    if not entry[DataColumns.DataColumns.move_id]:
+        return
+    k = key(entry)
+    if k in database:
+        print('%s already in database, skipping' % (k,))
+    else: 
+        database[k] = entry
+
+def load(entry):
+    k = key(entry)
+    if k in database:
+        found = database[k]
+        for field, value in found.items():
+            entry[field] = value
+        return True
     else:
-        return None
+        return False
 
 def record(entry):
-    move_id = entry[Entry.DataColumns.move_id]
-    history = histories[move_id]
+    k = key(entry)
+    history = histories[k]
     history.record(entry)
+
+histories = collections.defaultdict(History)
+database = {}
+populate_database()

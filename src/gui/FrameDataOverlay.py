@@ -1,5 +1,5 @@
 from . import Overlay, t_tkinter
-from frame_data import Entry
+from frame_data import DataColumns, Entry
 from misc import Flags
 
 class FrameDataOverlay(Overlay.Overlay):
@@ -48,13 +48,13 @@ class FrameDataOverlay(Overlay.Overlay):
         self.text.tag_config("p2", foreground=Overlay.ColorSchemeEnum.p2_text.value)
 
         self.text.delete("1.0", "end")
-        self.set_columns_to_print(self.master.tekken_config.get_all(Entry.DataColumns, True))
+        self.set_columns_to_print(self.master.tekken_config.get_all(DataColumns.DataColumns, True))
 
     def print_f(self, is_p1, entry):
         self.scroll()
 
         self.entries.append(entry)
-        fa = entry[Entry.DataColumns.fa]
+        fa = entry[DataColumns.DataColumns.fa]
 
         background = self.get_background(fa)
         self.style.configure('.', background=background)
@@ -131,12 +131,12 @@ class FrameDataOverlay(Overlay.Overlay):
         return (' ' * before) + value + (' ' * after)
 
     def get_frame_data_string(self, entry):
-        values = [self.get_value(entry, col) for col in Entry.DataColumns if self.columns_to_print[col]]
+        values = [self.get_value(entry, col) for col in DataColumns.DataColumns if self.columns_to_print[col]]
         return '|'.join(values)
 
     def get_scroll_index(self):
         for entry in self.entries[1:]:
-            if not entry[Entry.DataColumns.punish]:
+            if not entry[DataColumns.DataColumns.punish]:
                 return 0
         return 1
 
@@ -150,7 +150,7 @@ class FrameDataOverlay(Overlay.Overlay):
             self.text.delete(start, end)
 
     def populate_column_names(self):
-        columns_entry = {col:col.name for col in Entry.DataColumns}
+        columns_entry = {col:col.name for col in DataColumns.DataColumns}
         column_names = self.get_frame_data_string(columns_entry)
         prefix = self.get_prefix(True)
         spaces = " " * len(prefix)

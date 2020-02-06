@@ -1,44 +1,40 @@
-import enum
-
 from . import Database
+from . import DataColumns
 from game_parser import MoveInfoEnums
 
 def build(game_state, is_p1):
-    fa = get_fa(game_state, is_p1)
-    move_id = game_state.get(is_p1, 1).move_id
+    entry = {}
+    entry[DataColumns.DataColumns.fa] = get_fa(game_state, is_p1)
+    entry[DataColumns.DataColumns.move_id] = game_state.get(is_p1, 1).move_id
+    entry[DataColumns.DataColumns.char_name] = game_state.get(is_p1).movelist_parser.char_name
 
-    entry = Database.get(move_id)
-    if entry is None:
-        entry = build_frame_data_entry(game_state, move_id, is_p1, fa)
+    loaded = Database.load(entry)
+    if not loaded:
+        entry = build_frame_data_entry(entry, game_state, is_p1)
         Database.record(entry)
-
-    entry[DataColumns.fa] = fa
 
     return entry
 
-def build_frame_data_entry(game_state, move_id, is_p1, fa):
-    entry = {}
-
-    entry[DataColumns.move_id] = move_id
-    entry[DataColumns.startup] = game_state.get(is_p1).startup
-    entry[DataColumns.hit_type] = MoveInfoEnums.AttackType(game_state.get(is_p1).attack_type).name + ("_THROW" if game_state.get(is_p1).is_attack_throw() else "")
-    entry[DataColumns.cmd] = game_state.get_current_move_string(is_p1)
+def build_frame_data_entry(entry, game_state, is_p1):
+    entry[DataColumns.DataColumns.startup] = game_state.get(is_p1).startup
+    entry[DataColumns.DataColumns.hit_type] = MoveInfoEnums.AttackType(game_state.get(is_p1).attack_type).name + ("_THROW" if game_state.get(is_p1).is_attack_throw() else "")
+    entry[DataColumns.DataColumns.cmd] = game_state.get_current_move_string(is_p1)
 
     receiver = game_state.get(not is_p1)
 
+    fa = entry[DataColumns.DataColumns.fa]
     if receiver.is_blocking():
-        entry[DataColumns.block] = fa
+        entry[DataColumns.DataColumns.block] = fa
     elif receiver.is_getting_counter_hit():
-        entry[DataColumns.counter] = fa
+        entry[DataColumns.DataColumns.counter] = fa
     elif receiver.is_getting_hit():
-        entry[DataColumns.normal] = fa
+        entry[DataColumns.DataColumns.normal] = fa
     elif receiver.startup == 0:
-        entry[DataColumns.w_rec] = game_state.get(is_p1).get_frames_til_next_move()
+        entry[DataColumns.DataColumns.w_rec] = game_state.get(is_p1).get_frames_til_next_move()
+    
+    entry[DataColumns.DataColumns.move_name] = game_state.get_current_move_name(is_p1)
 
-    entry[DataColumns.char_name] = game_state.get(is_p1).movelist_parser.char_name
-    entry[DataColumns.move_name] = game_state.get_current_move_name(is_p1)
-
-    entry[DataColumns.punish] = not game_state.get(not is_p1).is_able_to_act()
+    entry[DataColumns.DataColumns.punish] = not game_state.get(not is_p1).is_able_to_act()
 
     return entry
 
@@ -60,18 +56,3 @@ def get_fa(game_state, is_p1):
         if raw_fa > 0:
             raw_fa_str = "+%s" % raw_fa_str
         return raw_fa_str
-
-@enum.unique
-class DataColumns(enum.Enum):
-    cmd = 'input command'
-    char_name = 'character name'
-    move_id = 'internal move id number'
-    move_name = 'internal move name'
-    hit_type = 'attack type'
-    startup = 'startup frames'
-    block = 'frame advantage on block'
-    normal = 'frame advantage on hit'
-    counter = 'frame advantage on counter hit'
-    w_rec = 'total number of frames in move'
-    fa = 'frame advantage right now'
-    punish = 'hit is a punish'
