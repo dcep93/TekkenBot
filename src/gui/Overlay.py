@@ -52,7 +52,7 @@ class Overlay:
 
         self.w, self.h = xy_size
 
-        self.toplevel.geometry('%sx%s' % (self.w, self.h))
+        # self.toplevel.geometry('%sx%s' % (self.w, self.h))
 
     def get_name(self):
         return self.__class__.__name__

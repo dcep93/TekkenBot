@@ -81,7 +81,7 @@ class FrameDataOverlay(Overlay.Overlay):
         return frame_advantage_var
 
     def create_textbox(self, col):
-        textbox = t_tkinter.Text(self.toplevel, font=("Courier New", 14), wrap=t_tkinter.NONE, highlightthickness=0, pady=0, relief='flat')
+        textbox = t_tkinter.Text(self.toplevel, font=("Courier New", 10), highlightthickness=0, pady=0, relief='flat')
         textbox.grid(row=0, column=col, rowspan=2, sticky=t_tkinter.NSEW)
         textbox.configure(background=self.background_color)
         textbox.configure(foreground=Overlay.ColorSchemeEnum.system_text.value)
@@ -154,15 +154,14 @@ class FrameDataOverlay(Overlay.Overlay):
         column_names = self.get_frame_data_string(columns_entry)
         prefix = self.get_prefix(True)
         spaces = " " * len(prefix)
+        string = spaces + column_names
 
-        print(spaces + column_names)
+        print(string)
 
-        self.text.update()
-        width = self.text.winfo_width()
-        self.toplevel.geometry('%sx%s' % (width, self.h))
+        self.text.config(width=len(string))
 
         self.text.delete("1.0", "2.0")
-        self.text.insert("1.0", column_names + '\n')
+        self.text.insert("1.0", string + '\n')
 
     def set_columns_to_print(self, booleans_for_columns):
         self.columns_to_print = booleans_for_columns
