@@ -5,6 +5,7 @@ from misc import Flags
 class FrameDataOverlay(Overlay.Overlay):
     unknown = '??'
     col_max_length = 10
+    max_lines = 6
 
     def __init__(self, master, state):
         super().__init__(master, state, (1400, 128))
@@ -140,9 +141,8 @@ class FrameDataOverlay(Overlay.Overlay):
         return 1
 
     def scroll(self):
-        max_lines = 6
         offset = 2
-        while len(self.entries) >= max_lines:
+        while len(self.entries) >= self.max_lines:
             index = self.get_scroll_index()
             self.entries.pop(index)
             start = "%0.1f" % (index + offset)
@@ -158,9 +158,8 @@ class FrameDataOverlay(Overlay.Overlay):
 
         print(string)
 
-        self.text.config(width=len(string))
+        self.text.config(width=len(string), height=self.max_lines+1)
         self.toplevel.geometry('')
-        self.toplevel.maxsize(height=self.h, width=0)
 
         self.text.delete("1.0", "2.0")
         self.text.insert("1.0", string + '\n')
@@ -168,13 +167,6 @@ class FrameDataOverlay(Overlay.Overlay):
     def set_columns_to_print(self, booleans_for_columns):
         self.columns_to_print = booleans_for_columns
         self.populate_column_names()
-
-    def get_geometry(self, tekken_rect):
-        super_geometry = super().get_geometry(tekken_rect)
-        y = int(super_geometry.split('+')[-1])
-        x = (tekken_rect.right + tekken_rect.left) / 2 - self.toplevel.winfo_width() / 2
-        geometry = '+%d+%d' % (x, y)
-        return geometry
 
 class PlayerListener:
     def __init__(self, is_p1, print_f):
