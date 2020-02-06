@@ -28,7 +28,8 @@ class ConfigReader:
             return f(section, property_string)
         else:
             value = default_value
-            self.set_property(enum_item, value)
+            if default_value is not None:
+                self.set_property(enum_item, value)
             return value
 
     def set_property(self, enum_item, value):
