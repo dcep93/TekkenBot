@@ -36,7 +36,7 @@ def build_frame_data_entry(game_state, move_id, is_p1, fa):
         entry[DataColumns.w_rec] = game_state.get(is_p1).get_frames_til_next_move()
 
     entry[DataColumns.char_name] = game_state.get(is_p1).movelist_parser.char_name
-    entry[DataColumns.move_str] = game_state.get_current_move_name(is_p1)
+    entry[DataColumns.move_name] = game_state.get_current_move_name(is_p1)
 
     entry[DataColumns.punish] = not game_state.get(not is_p1).is_able_to_act()
 
@@ -66,7 +66,7 @@ class DataColumns(enum.Enum):
     cmd = 'input command'
     char_name = 'character name'
     move_id = 'internal move id number'
-    move_str = 'internal move name'
+    move_name = 'internal move name'
     hit_type = 'attack type'
     startup = 'startup frames'
     block = 'frame advantage on block'
