@@ -11,6 +11,5 @@ class DataColumns(enum.Enum):
     block = 'frame advantage on block'
     normal = 'frame advantage on hit'
     counter = 'frame advantage on counter hit'
-    w_rec = 'total number of frames in move'
     fa = 'frame advantage right now'
     punish = 'hit is a punish'

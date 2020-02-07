@@ -32,8 +32,6 @@ def build_frame_data_entry(entry, game_state, is_p1):
         entry[DataColumns.DataColumns.counter] = fa
     elif receiver.is_getting_hit():
         entry[DataColumns.DataColumns.normal] = fa
-    elif receiver.startup == 0:
-        entry[DataColumns.DataColumns.w_rec] = game_state.get(is_p1).get_frames_til_next_move()
 
     return entry
 

@@ -17,7 +17,7 @@ class Characters(enum.Enum):
 db_field_to_col = {
     'move_id': DataColumns.DataColumns.move_id,
     'Command': DataColumns.DataColumns.cmd,
-    # 'Hit level':
+    'Hit level': DataColumns.DataColumns.level,
     # 'Damage':
     'Start up frame': DataColumns.DataColumns.startup,
     'Block frame': DataColumns.DataColumns.block,
