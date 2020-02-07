@@ -1,50 +1,37 @@
-Check out these experimental forks for new TekkenBotPrime features:\
-https://github.com/Alchemy-Meister/TekkenBot/ \
-https://github.com/compsyguy/TekkenBot/
-
 # TekkenBot
 
 AI and tools for playing and understanding Tekken 7.
 
 Created by roguelike2d. Maintained by the community.
 
-# Frequently asked questions
+## Related
 
-**Q:** What is this thing?\
-**A:** It's a program for Tekken 7 that shows frame data information of your moves in real-time on PC.
+1. The original repository:
+    - WAZAAAAA0: [https://github.com/WAZAAAAA0/TekkenBot](https://github.com/WAZAAAAA0/TekkenBot)
+2. Check out this additional fork for new TekkenBotPrime features:
+    - compsyguy: [https://github.com/compsyguy/TekkenBot/](https://github.com/compsyguy/TekkenBot/)
+3. Check out this additional fork for new TekkenBotPrime features:
+    - Alchemy-Meister: [https://github.com/Alchemy-Meister/TekkenBot/](https://github.com/Alchemy-Meister/TekkenBot/)
 
-**Q:** How do I use it?\
-**A:** Go to the releases page, download the latest `TekkenBotPrime_vXXX.zip`, extract the files somewhere, open `TekkenBotPrime.exe`, and finally hop into practice mode.\
-If you'd rather run from source instead, install Python 3 and run `exec.sh`
+## New Features in this fork
 
-**Q:** The bot stopped working after a game patch!\
-**A:** Wait for a good soul to update the `memory_address.ini` file, or fix it yourself by following the guide on the Wiki.
+### Code
 
-**Q:** I'm getting the `PID not found` error even though the game is running!\
-**A:** Start the bot as admin (or alternatively start the game as non-admin).
+-   [x] The main purpose of this project was to simplify the code so that other devs can more easily iterate or fork
 
-**Q:** The bot doesn't show!\
-**A:** Play borderless or windowed, full screen doesn't work.
+### Frame Data
 
-**Q:** But I really really want to play full screen otherwise my game will lag!\
-**A:** If you have a multi-monitor setup, enable `overlay_as_draggable_window` and move the overlay to a different monitor.
+-   [x] Characters' frame data is imported from rbnorway - when that move is detected, its data is shown instead of reading game state
+-   [x] When an unknown move is performed, its data is remembered so that next time there are fewer 'unknown' values
 
-## Tools
+### Taking Requests
 
-### FrameDataOverlay
+-   [x] I'll watch the github issues tab for improvements/bug fixes when they're posted
 
-A window that can go over the game to display real time move information read from memory. Requires the game to be in windowed or borderless to work or can be run as a standalone window on a second screen.
-![Robot feet and bear paws 1](Screenshots/frame_data.png?raw=true)
+### TODO
 
-### CommandInputOverlay
+-   [ ] Finish transcribing moves for remaining cast
 
-Display command inputs, similar to the one already in Tekken 7 except it gives frame by frame information and includes cancelable frames.
-![Robot feet and bear paws 2](Screenshots/command_input.png?raw=true)
+## Disclaimer
 
-### Prerequisites
-
-Tekken Bot is developed on Python 3.5 and tries to use only core libraries to improve portability, download size, and, someday, optimization. It targets the 64-bit version of Tekken 7 available through Steam on Windows 7/8/10.
-
-### Deployment
-
-Tekken Bot distributable is built using pyinstaller with Python 3.5. On Windows, use the included build_project.bat file.
+**Tekken's process memory overwrite has only been tested in offline mode, it probably won't work in online mode, nor I intend to make it work. Its only purpose is for debugging specific characters/stages. No piracy is intended. Use at your own risk, please support BANDAI NAMCO Entertainment and buy the DLC content**
