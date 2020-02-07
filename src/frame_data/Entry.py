@@ -7,6 +7,9 @@ def build(game_state, is_p1):
     entry[DataColumns.DataColumns.fa] = get_fa(game_state, is_p1)
     entry[DataColumns.DataColumns.move_id] = game_state.get(is_p1, 1).move_id
     entry[DataColumns.DataColumns.char_name] = game_state.get(is_p1).movelist_parser.char_name
+    
+    entry[DataColumns.DataColumns.move_name] = game_state.get_current_move_name(is_p1)
+    entry[DataColumns.DataColumns.punish] = not game_state.get(not is_p1).is_able_to_act()
 
     loaded = Database.load(entry)
     if not loaded:
@@ -31,10 +34,6 @@ def build_frame_data_entry(entry, game_state, is_p1):
         entry[DataColumns.DataColumns.normal] = fa
     elif receiver.startup == 0:
         entry[DataColumns.DataColumns.w_rec] = game_state.get(is_p1).get_frames_til_next_move()
-    
-    entry[DataColumns.DataColumns.move_name] = game_state.get_current_move_name(is_p1)
-
-    entry[DataColumns.DataColumns.punish] = not game_state.get(not is_p1).is_able_to_act()
 
     return entry
 
