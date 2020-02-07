@@ -31,6 +31,7 @@ Created by roguelike2d. Maintained by the community.
 ### TODO
 
 -   [ ] Finish transcribing moves for remaining cast
+-   [ ] Throws - how to break and importing from rbnorway
 
 ## Disclaimer
 
