@@ -52,7 +52,7 @@ class History:
             entry[field] = new_v
 
 def key(entry):
-    return (entry[DataColumns.DataColumns.char_name], entry[DataColumns.DataColumns.move_id])
+    return (entry[DataColumns.DataColumns.char_name], str(entry[DataColumns.DataColumns.move_id]))
 
 def populate_database():
     for character in Characters:
