@@ -74,13 +74,18 @@ def populate_move(char_name, header, move):
             col = db_field_to_col[db_field]
             val = move[i]
             entry[col] = val
-    if not entry[DataColumns.DataColumns.move_id]:
+    move_ids_raw = entry[DataColumns.DataColumns.move_id]
+    if not move_ids_raw:
         return
-    k = key(entry)
-    if k in database:
-        print('%s already in database, skipping' % (k,))
-    else: 
-        database[k] = entry
+    move_ids = move_ids_raw.split(',')
+    for move_id in move_ids:
+        entry_to_save = dict(entry)
+        entry_to_save[DataColumns.DataColumns.move_id] = move_id
+        k = key(entry_to_save)
+        if k in database:
+            print('%s already in database, skipping' % (k,))
+        else:
+            database[k] = entry_to_save
 
 def load(entry):
     k = key(entry)
