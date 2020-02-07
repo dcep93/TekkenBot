@@ -48,14 +48,15 @@ class GameState:
         move_id = player.move_id
         if move_id > 30000:
             return 'Universal_{}'.format(move_id)
-        movelist_names = player.movelist_parser.movelist_names
-        index = (move_id * 2) + 4
-        if index < len(movelist_names):
-            move = movelist_names[index]
-            try:
-                return move.decode('utf-8')
-            except:
-                pass
+        if player.movelist_parser is not None:
+            movelist_names = player.movelist_parser.movelist_names
+            index = (move_id * 2) + 4
+            if index < len(movelist_names):
+                move = movelist_names[index]
+                try:
+                    return move.decode('utf-8')
+                except:
+                    pass
         return "ERROR"
 
     def get_current_move_string(self, is_p1):
@@ -107,5 +108,9 @@ class GameState:
 
     def is_starting_attack(self, is_p1):
         player = self.get(is_p1, 1)
-        if player is None or player.startup == 0: return False
-        return player.startup != 0 and player.move_timer == player.startup
+        if player is not None and player.startup != 0:
+            if player.startup != 0 and player.move_timer == player.startup:
+                previous_player = self.get(is_p1, 2)
+                if previous_player is not None and previous_player.move_timer != player.move_timer:
+                    return True
+        return False
