@@ -9,7 +9,7 @@ def build(game_state, is_p1):
     entry[DataColumns.DataColumns.char_name] = game_state.get(is_p1).movelist_parser.char_name
     
     entry[DataColumns.DataColumns.move_name] = game_state.get_current_move_name(is_p1)
-    entry[DataColumns.DataColumns.punish] = not game_state.get(not is_p1, 1).is_able_to_act()
+    entry[DataColumns.DataColumns.punish] = game_state.get(not is_p1, 1).stun_state == MoveInfoEnums.StunStates.BEING_PUNISHED
 
     loaded = Database.load(entry)
     if not loaded:
