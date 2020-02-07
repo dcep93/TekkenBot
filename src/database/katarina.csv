@@ -7,7 +7,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1555	1, 1, 1	h, h, m	7,10,23	10	-5~-4	-1~0	KND	
 1559	1, 1, 2	h, h, h	7,10,17	10	+7	+9	CS	
 1562	1, 1, 3	h, h, m (TJ)	7,10,20	js14~	0~+1s	KND	KND	
-1654	1, 1, 4	h, h, m	7,10,21	14~	-19~-17	Launch (JG?)	Launch (JG?)	
+1564	1, 1, 4	h, h, m	7,10,21	14~	-19~-17	Launch (JG?)	Launch (JG?)
 1547	1, 2	h, h	7,10	14~	-3	+3	+3	
 1548	1, 4	h, l	7,10	14~	-12	+1	+1	
 1565	2 or f+2	h	10	12	-3	+8	+8	
@@ -28,7 +28,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1587	f+3	m (TJ)	23	24~25 js6~	+1~+2s	+5~+6s	Launch	
 1723	f+1+2	h	20	23	+1s	KND	KND	
 1727	f+3+4	m	23	24 pc8~23	-13	KND	KND	Power crush
-1654	d/f+1	m	13	13	-3	+5	+5	
+1652,1654	d/f+1	m	13	13	-3	+5	+5
 1655	d/f+1, 1	m, h	13,8	13	-5	+6	+6	
 	d/f+1, 1, f	m, h, (HAR)	13,8	13	-1	+10	+10	
 1609	d/f+2	m	17	17~18	-7~-6	+4~+5	+4~+5	
@@ -42,7 +42,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1641	d+1	m	20	17	-7s	+3s	KND	
 1677	d+2	m?	18	20~21	-11~-10	0~+1	CS	
 	d+2, F	m?, (HAR)	18	20~21	+3~+4	+14~+15g	CS	
-1677	d+3	l	12	16	-11	0	0	
+1643	d+3	l	12	16	-11	0	0
 1645	d+3, 3	l, m	12,18	16	-13~-12	0~+1	0~+1	
 1646	d+3, 4	l, h	12,18	16	-4	+6	KND	
 1661	d/b+3	l (TC)	24	25~27 cs6~	-26	KND	KND	
@@ -66,8 +66,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1533	u/f+4, 4, 4	m, m, m (TJ)	10,10,10	1~21a	-10~-9	+4~+5	+4~+5	
 1593,1595	u/f+4, 4, 4, 4	m, m, m (TJ), h	10,10,10,10	1~21	-10~-11	+4~+5	+4~+5	
 	u/f+4, 4, 4, 4, F	m, m, m (TJ), h, (HAR)	10,10,10,10	1~21	-1~0	+5~+6	+5~+6	
-1597	u/f+4, 4, 4, 4, 4	m, m, m (TJ), h, h	10,10,10,10,21	1~21	-6~-5	+5~+6	+5~+6	
-1598	u/f+4, 4, 4, 4, 4, 4	m, m, m (TJ), h, h, m	10,10,10,10,21,25	1~21	-9	KND	KND	Wall bounce
+	u/f+4, 4, 4, 4, 4	m, m, m (TJ), h, h	10,10,10,10,21	1~21	-6~-5	+5~+6	+5~+6
+	u/f+4, 4, 4, 4, 4, 4	m, m, m (TJ), h, h, m	10,10,10,10,21,25	1~21	-9	KND	KND	Wall bounce
 1586	u/f+3+4	mm (TJ)	10,20	17~18a ,39 js17~	-10	KND	KND	
 1721	f, F+2	h	13	12(13~)	-5	+6	+6	
 1722	f, F+2, 4	h, h	13,20	12(13~)	-9~-8	Tail spin	Tail spin	Tail spin
