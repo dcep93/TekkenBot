@@ -46,7 +46,9 @@ class GameReader:
         successful = Windows.read_process_memory(process_handle, address, ctypes.byref(data), ctypes.sizeof(data), ctypes.byref(bytes_read))
         if not successful:
             e = Windows.get_last_error()
-            if e != 299:
+            # known problem of failing to read_process_memory
+            # when not in a fight
+            if not (e == 299 and self.acquire_state == AcquireState.need_module):
                 print("read_process_memory Error: Code %s" % e)
             return 0
 
