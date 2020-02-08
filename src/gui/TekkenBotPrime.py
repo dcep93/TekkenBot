@@ -22,6 +22,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.overlay = None
         self.overlay_var = None
         self.mode = None
+        self.last_update = None
 
         self.init_tk()
         self.init_config()
@@ -32,6 +33,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.init_frame_data()
 
         self.update()
+        self.update_restarter()
 
     def init_tk(self):
         self.wm_title("dcep93/TekkenBot")
@@ -131,6 +133,7 @@ class TekkenBotPrime(t_tkinter.Tk):
 
     def update(self):
         now = time.time()
+        self.last_update = now
         successful_update = self.tekken_state.update()
         after = time.time()
 
@@ -143,6 +146,13 @@ class TekkenBotPrime(t_tkinter.Tk):
         wait_ms = self.tekken_state.game_reader.get_update_wait_ms(elapsed_ms)
         if wait_ms >= 0:
             self.after(wait_ms, self.update)
+
+    def update_restarter(self):
+        restart_seconds = 10
+        if self.last_update + restart_seconds < time.time():
+            print("something broke? restarting")
+            self.update()
+        self.after(1000 * restart_seconds, self.update_restarter)
 
     def on_closing(self):
         sys.stdout = sys.__stdout__
