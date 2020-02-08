@@ -46,8 +46,9 @@ class GameReader:
         successful = Windows.read_process_memory(process_handle, address, ctypes.byref(data), ctypes.sizeof(data), ctypes.byref(bytes_read))
         if not successful:
             e = Windows.get_last_error()
-            print("read_process_memory Error: Code %s" % e)
-            self.pid = None
+            if e != 299:
+                print("read_process_memory Error: Code %s" % e)
+            return 0
 
         value = data.value
 
@@ -135,7 +136,7 @@ class GameReader:
         return None
 
     def get_update_wait_ms(self, elapsed_ms):
-        if self.has_working_pid():
+        if self.acquire_state == AcquireState.has_everything:
             elapsed_time = 1000 * elapsed_ms
             wait_ms = max(2, 8 - int(round(elapsed_time)))
         else:
