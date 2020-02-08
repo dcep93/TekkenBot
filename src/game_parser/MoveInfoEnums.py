@@ -224,7 +224,7 @@ class CharacterCodes(enum.Enum):
     GANRYU = 52 # DLC
     LEROY = 53 # DLC
 
-    NOT_YET_LOADED = 71 #value when a match starts for (??) frames until char_id loads
+    NOT_YET_LOADED = 75 #value when a match starts for (??) frames until char_id loads
 
     NO_SELECTION = 255 #value if cursor is not shown
 
