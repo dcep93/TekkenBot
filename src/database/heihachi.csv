@@ -1,4 +1,4 @@
-move_list	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes
+move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes
 2181	in rage d+1+2	m	55	20 pc8~17	-22	KND	KND	Rage art
 1641	in rage b+2, 1+2	m, h	20,21	20 8~17	+9~+10s	JG	JG	Rage drive
 	in rage 1, b+2, 1+2	h, m, h	7, 20,21	10	+9~+10s	JG	JG	Rage drive
