@@ -8,6 +8,7 @@ from misc import Path
 @enum.unique
 class Characters(enum.Enum):
     katarina = '[KATARINA]'
+    kazuya = '[KAZUYA]'
 
 db_field_to_col = {
     'move_id': DataColumns.DataColumns.move_id,
