@@ -33,3 +33,4 @@ Created by roguelike2d. Maintained by the community.
 
 -   [ ] Finish transcribing moves for remaining cast
 -   [ ] Throws - how to break and importing from rbnorway
+-   [ ] What do do about moves that have more than one hit for a single input

@@ -12,6 +12,7 @@ class Characters(enum.Enum):
     heihachi = '[HEIHACHI]'
     devil_jin = '[DEVIL_JIN]'
     paul = '[Paul]'
+    asuka = '[Asuka]'
 
 db_field_to_col = {
     'move_id': DataColumns.DataColumns.move_id,
