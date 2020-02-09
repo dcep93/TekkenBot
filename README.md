@@ -32,7 +32,3 @@ Created by roguelike2d. Maintained by the community.
 
 -   [ ] Finish transcribing moves for remaining cast
 -   [ ] Throws - how to break and importing from rbnorway
-
-## Disclaimer
-
-**Tekken's process memory overwrite has only been tested in offline mode, it probably won't work in online mode, nor I intend to make it work. Its only purpose is for debugging specific characters/stages. No piracy is intended. Use at your own risk, please support BANDAI NAMCO Entertainment and buy the DLC content**
