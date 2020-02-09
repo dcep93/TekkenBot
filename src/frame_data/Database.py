@@ -9,6 +9,8 @@ from misc import Path
 class Characters(enum.Enum):
     katarina = '[KATARINA]'
     kazuya = '[KAZUYA]'
+    heihachi = '[HEIHACHI]'
+    devil_jin = '[DEVIL_JIN]'
 
 db_field_to_col = {
     'move_id': DataColumns.DataColumns.move_id,
