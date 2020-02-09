@@ -23,6 +23,7 @@ Created by roguelike2d. Maintained by the community.
 
 -   [x] Characters' frame data is imported from rbnorway - when that move is detected, its data is shown instead of reading game state
 -   [x] When an unknown move is performed, its data is remembered so that next time there are fewer 'unknown' values
+-   [x] Shows data for whiffed moves too
 
 ### Taking Requests
 
