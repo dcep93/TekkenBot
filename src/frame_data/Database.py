@@ -17,6 +17,8 @@ class Characters(enum.Enum):
     lili = '[EMILIE]'
     kazumi = '[KAZUMI]'
     dragunov = '[Dragunov]'
+    akuma = '[Mr.X]'
+    alisa = '[ALISA]'
 
 db_field_to_col = {
     'move_id': DataColumns.DataColumns.move_id,
