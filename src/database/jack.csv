@@ -60,10 +60,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 ""	d/b+3, 4	l, l(CSK)	15,12	21	-16	-5	-5	
 ""	d/b+3, 4, 3	l, l, l(CSK)	15,12,12	21	-19	-8	-8	
 ""	d/b+3, 4, 3, 4	l, l, l, l(CSK)	15,12,12,12	21	-16	-5	-5	
-""	d/b+3, 4, 3, 4, 3	l, l, l, l, l(CSK)	15,12,12,12
-""	,12	21	-19	-8	-8	
-""	d/b+3, 4, 3, 4, 3, 4	l, l, l, l, l, l(CSK)	15,12,12,12
-""	,12,12	21	-16	-5	-5	
+""	d/b+3, 4, 3, 4, 3	l, l, l, l, l(CSK)	15,12,12,12,12	21	-19	-8	-8	
+""	d/b+3, 4, 3, 4, 3, 4	l, l, l, l, l, l(CSK)	15,12,12,12,12,12	21	-16	-5	-5	
 ""	CSK 1+2	h	21	34~35	+14~+15g	KND	KND	
 ""	CSK d+1+2	l(Throw)	45	34~35		Throw(KND)		
 ""	d/b+4	l (TC)	14	16s cs6~	-13	-2	-2	
