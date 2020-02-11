@@ -17,6 +17,7 @@ symbol_map = {
 class CommandInputOverlay(Overlay.Overlay):
     length = 60
     input_tag = "inputs"
+    silence_after_n = 10
 
     def __init__(self, master, state):
         super().__init__(master, state, (1200, 86))
@@ -40,8 +41,22 @@ class CommandInputOverlay(Overlay.Overlay):
         player = last_state.p1 if last_state.is_player_player_one else last_state.p2
 
         input_state = player.get_input_state()
-        color = self.color_from_cancel_booleans(player)
+
+        if self.last_n_were_same(input_state):
+            color = 'white'
+            if self.stored_inputs[-1][1] == color:
+                return
+        else:
+            color = self.color_from_cancel_booleans(player)
         self.update_input(input_state, color)
+
+    def last_n_were_same(self, input_state):
+        if len(self.stored_inputs) < self.silence_after_n:
+            return False
+        for i in range(self.silence_after_n):
+            if self.stored_inputs[-i-1][0] != input_state:
+                return False
+        return True
 
     @staticmethod
     def color_from_cancel_booleans(player):
