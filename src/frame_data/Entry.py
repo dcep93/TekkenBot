@@ -2,6 +2,8 @@ from . import Database
 from . import DataColumns
 from game_parser import MoveInfoEnums
 
+MAX_HEALTH = 170
+
 def build(game_state, is_p1):
     entry = {}
     entry[DataColumns.DataColumns.fa] = get_fa(game_state, is_p1)
@@ -10,6 +12,8 @@ def build(game_state, is_p1):
     
     entry[DataColumns.DataColumns.move_name] = game_state.get_current_move_name(is_p1)
     entry[DataColumns.DataColumns.punish] = game_state.get(not is_p1, 1).stun_state == MoveInfoEnums.StunStates.BEING_PUNISHED
+
+    entry[DataColumns.DataColumns.health] = MAX_HEALTH - game_state.get(not is_p1).damage_taken
 
     loaded = Database.load(entry)
     if not loaded:

@@ -59,11 +59,12 @@ db_field_to_col = {
 }
 
 class History:
+    might_be_missing = [DataColumns.DataColumns.cmd, DataColumns.DataColumns.block, DataColumns.DataColumns.normal, DataColumns.DataColumns.counter]
     def __init__(self):
         self.counts = collections.defaultdict(lambda: collections.defaultdict(int))
 
     def record(self, entry):
-        for field in DataColumns.DataColumns:
+        for field in self.might_be_missing:
             self.record_field(field, entry)
 
     def record_field(self, field, entry):
