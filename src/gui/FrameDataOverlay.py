@@ -13,6 +13,7 @@ class FrameDataOverlay(Overlay.Overlay):
         self.listeners = [PlayerListener(i, self.print_f) for i in [True, False]]
         self.entries = []
         self.columns_to_print = None
+        self.column_names_string = None
         self.init_tkinter()
 
     def update_state(self):
@@ -64,10 +65,17 @@ class FrameDataOverlay(Overlay.Overlay):
 
         out = self.get_frame_data_string(entry)
         out = self.get_prefix(is_p1) + out
-        print("%s / %s" % (out, fa))
+
+        self.print_helper(out, fa)
 
         out += "\n"
         self.text.insert("end", out, text_tag)
+
+    def print_helper(self, out, fa):
+        if self.column_names_string is not None:
+            print(self.column_names_string)
+            self.column_names_string = None
+        print("%s / %s" % (out, fa))
 
     def create_padding_frame(self, col):
         padding = t_tkinter.Frame(self.toplevel, width=10)
@@ -156,7 +164,7 @@ class FrameDataOverlay(Overlay.Overlay):
         spaces = " " * len(prefix)
         string = spaces + column_names
 
-        print(string)
+        self.column_names_string = string
 
         self.text.config(width=len(string), height=self.max_lines+1)
         self.toplevel.geometry('')
