@@ -1,99 +1,99 @@
 move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes
-""	in rage b+3+4	m (TJ)	55	20 js13~17 pc8~17	-22	KND	KND	Rage art
-""	1 or BT 1 or 2	h	7	10	+1	+8	+8	
-""	1, 1	h, h	7,7	10	-3	+4	+4	
-""	1, 2	h, h	7,10	10	-1	+5	+5	
-""	1, 2, 3	h, h, m (TJ)	7,10,20	js19~	-22~-21	Launch	Launch	
-""	1, 2, 4	h, h, h	7,10,20	19~	-4~-3	KND	KND	Tail spin
-""	2 or f+2	h	9	14	-3	+8	+8	
-""	2, 2	h, m	9,15	14	-12	+2	+2	
-""	3	h	12	13	-8	+8	+8	
-""	4 or BT 3 or 4	h	21	13	-5	KND	KND	Homing, Tail spin
-""	1+2	m	26	13~14	-17~-16	KND	KND	
-""	3+4	l (TJ)	20	33~34a js9~23 cs23~	-27	KND	KND	Homing
-""	f+3	m	17	16~17	-9~-8	0~+1	+25g(KND)	
-""	f+1+2	m	21	25 pc8~24	-13	KND	CS	Homing, Power crush
-""	d/f+1	m	12	13	-3	+3	+3	
-""	d/f+1, 2	m, m	12,17	13	-13	-2	KND	
-""	d/f+1, 4	m, h	12,14	13	-9	+2	+2	
-""	d/f+2	m	10	16~17	-9~-8	+2~+3	+2~+3	
-""	d/f+2, 3	m, m (TJ)	10,10	js14~	-18~-17	Launch	Launch	
-""	d/f+3	m (TJ)	24	25~26 js9~	-6~-5	KND	KND	Homing, Wall bounce
-""	d/f+4	m	16	12	-8	+3	+3	
-""	d/b or d+1 or FC+1 or BT d+1 or d+2	Sm	5	10s cs4or1~	-5	+6	+6	+3 on hit from side or behind
-""	d/b or d+2 or FC+2	Sm (TC)	8	12s cs4or1~	-7	+4	+4	
-""	d/b or d+3 or FC+3 (Close)	l (TC)	10	15s cs4or1~	-16	-5	-5	
-""	d/b or d+3 or FC+3	l (TC)	7	15s cs4or1~	-16	-5	-5	
-""	d/b or d+4 or FC+4 or BT d+3 or d+4	l (TC)	17	20~21s cs6or1~	-27	+5~+6s	KND	
-""	d+1+2 or FC+d/b or d+1+2 Grounded face up d+1+2	(Special) (TC)		20~21 61~				
-""	d/b+1+2	! (TJ)	30	51~52 js21~50	KND	KND	KND	
-""	b+1	m	13	14	-8	+3	+3	
-""	b+1, 2	m, m	13,13	14a	-13~-11	Launch (JG?)	Launch (JG?)	
-""	b+1, 2, 4	m, m, m (TJ)	13,13,23	js1~	-13~-12s	KND	KND	
-""	b+2	h	10	11	-4	+2	+2	
-""	b+2, 3	h, m	10,15	11	-9~-8	+3~+4	uKZD	
-""	b+3	h	12	16	-9	+2	+2	
-""	b+3, 1	h, h	12,20	16	-4~-3	+15~+16kg	+15~+16kg	Tail spin
-""	b+3, 4	h, m	12,20	16	-14~-13	KND	KND	
-""	b+4	Sm	12	15	-14	-2	-2	
-""	b+1+2	hm	5,20	27~28,37~38	-13~-12	KND	KND	
-""	f, F+2 When hit , b	m	25	14(15~)	-9	KND	KND	
-""	f, f+2 When hit or MG 2 When hit	(Special)		14(15~)				
-""	f, F+3	h	12	16~17 (17~)	-10~-9	KND	KND	Homing
-""	f, F+3, 3	h, m	12,24	16~17 (17~)	-13	KND	KND	Homing
-""	f, F+3, 4	h, h (TJ)	12,21	js5~	-7~-6	KND	KND	Tail spin
-""	f, F+4	m (TJ)	10	15~16 (16~) js12~	-16~-15	-5~-4	-5~-4	
-""	f, F+4, 2	m (TJ), m	10,10	js1~	-14~-13	-6~-5 (BU)	-6~-5 (BU)	
-""	f, F+4, 2, qcf+1	m (TJ), m, Sm(DW)	10,10,20	1~	-10~+10	KND	KND	
-""	f, F+4, 2, qcf+2	m (TJ), m, Sm(DW)	10,10,20	1~	-13~+17	-5~+25	-5~+25	
-""	f, F+4, 2, qcf+1, f or d/f+3+4	m (TJ), m, Sm, (MG)	10,10,20	1~	+2	KND	KND	Press down to recover crouching
-""	f, F+4, 2, qcf+2, f or d/f+3+4	m (TJ), m, Sm, (MG)	10,10,20	1~	+2~+32	+10~+40	+10~+40	Press down to recover crouching
-""	f, F+4, 2, qcf+1+2	m (TJ), m, SmSm	10,10,20,20	1~	+5	KND(KND)	KND(KND)	Press down to recover crouching
-""	f, F+1+2	mh (TJ)l	5,6,20	18,31,47 (19~) js25~40	-14	KND	KND	
-""	f+3+4			33 (ex MG)				
-""	f+3+4, D			30s (ex MG)				
-""	f, f, f+1 or WR+1	h	30	18~20 (21~)	+6~+8	KND	KND	Tail spin
-""	f, f, f+3 or WR+3	m	27	24~28a (27~) js3~	0~+4	KND	KND	
-""	WS+1	m	10	14	-7	+4	+4	
-""	WS+2	m	18	15~16a	-9~-8	KND	JG	
-""	WS+3	m (TJ)	20	15~16a js15~	-22~-21	Launch (JG?)	Launch (JG?)	
-""	WS+4	m	15	11~12	-5~-4	+6~+7	+6~+7	
-""	FC+D (One second)			11~12				
-""	Jump 1 BT u or u/f+1	m	10	7a(12~) js1~	-25~0	-15~+10	-15~+10	
-""	Jump 2 BT u or u/f+2	m	15	9a(12~) js1~	-17~+8	-7~+18	-7~+18	
-""	Jump 3 BT u or u/f+3	m	10	7a(12~) js1~	-25~0	-15~+10	-15~+10	
-""	Jump 4 BT u or u/f+4	m	15	9a(14~) js1~	-18~+7	-8~+17	-8~+17	
-""	Grounded face up 1+2	(Special) (TC)		9(14~) 1~				
-""	2+3+4	(Special)		9(14~) 1~				
-""	f+4	(MG)		9(14~) 1~				Press down to recover crouching
-""	MG 1	h	11	10(25~)	-4	+2	+2	
-""	MG 1, 2	h, h	11,12	10(25~)	-8	+1	+1	
-""	MG 1, 2, 1+2	h, h, m	11,12,21	10(25~)	-13~-12	KND	KND	
-""	MG 2	m (DS)	25	14(29~)	-9	KND	KND	
-""	MG 2, b	m	25	14(29~)	-9	KND	KND	
-""	EX MG 2	m (DS)	25	14(29~)	-9	KND	KND	Wall bounce
-""	EX MG 2, b	m	25	14(29~)	-9	KND	KND	Wall bounce
-""	MG 3	h	12	16~17 (31~)	-10~-9	KND	KND	Homing
-""	MG 3, 3	h, m	12,24	16~17 (31~)	-13	KND	KND	<
-""	MG 3, 4	h, h (TJ)	12,21	js5~	-7~-6	KND	KND	Tail spin
-""	MG 4	l	20	18~25 (33~) cs10~	-24~-17	KND	KND	
-""	MG 1+2	! (TJ)	30	51~52a (66~) js21~50	KND	KND	KND	
-""	EX MG 1+2	! (TJ)	30	41~42a js16	KND	KND	KND	
-""	qcf+1	Sm	20	28~48 (28~)	-9~+11	KND	KND	
-""	qcf+2	Sm	20	25~55 (25~)	-13~+17	-5~+25	-5~+25	
-""	f, d, d/f+1	Sm	12	16a(16~)	-22 (12~8a)	Launch	Launch	
-""	f, d, d/f+2	Sm x 3	9,9,9	13,22,31a (13~)	-36 (19~8a)	Launch	Launch	
-""	qcb+1	Sm	20	20~21 (20~)	-11~-10	+11kg	KND	Tail spin
-""	qcb+2	Sm	22	20~21 (20~)	-13~-12	+2~+3	CS	
-""	qcb+3	m (TJ)	20	27~36a (27~) js9~	-13~-4	KND	JG	
-""	qcb+4	m (TJ)	15	26~33a (26~) js9~	-1~+6	+9~+16s	+9~+16s	
-""	Jump qcb+3	m (TJ)	20	13~a (~) js1~	-14~-5	KND	JG	
-""	Jump qcb+4	m (TJ)	15	13~a(~) js1~	-1~+6	+9~+16s	+9~+16s	
-""	qcf+1, f or d/f+3+4	Sm (MG)	20	13~(~) 1~	+2~	KND	KND	Press down to recover crouching
-""	qcf+2, f or d/f+3+4	Sm (MG)	20	13~(~) 1~	+2~+32	+10~+40	+10~+40	Hold down to recover crouching
-""	qcf+1+2	SmSm	10,10	24,53~ (24~)	+10g	KND(KND)	KND(KND)	Press down to recover crouching
-""	f, d, d/f+1+2	Sm x 5	5,5,9,9,9	11,,,a (11~)	-34	Launch	Launch	
-""	qcb+1+2	SmSm	5,20	15,37(15~)	-13~-12	+12kg	KND	
-""	qcb+3+4	m (TJ), m	5,15	25~32a ,49~50 (26~) js9~	-9~-8	KND	KND	
-""	Jump qcb+3+4	m (TJ), m	5,15	10~a, 35~36 (~) js1~	-9~-8	KND	KND	
-""	Two meter bars qcf, qcf+1+2	Sm	15	15	-7	Launch	Launch	
+1975	in rage b+3+4	m (TJ)	55	20 js13~17 pc8~17	-22	KND	KND	Rage art
+1517	1 or BT 1 or 2	h	7	10	+1	+8	+8	
+1523	1, 1	h, h	7,7	10	-3	+4	+4	
+1529	1, 2	h, h	7,10	10	-1	+5	+5	
+1530	1, 2, 3	h, h, m (TJ)	7,10,20	js19~	-22~-21	Launch	Launch	
+1543	1, 2, 4	h, h, h	7,10,20	19~	-4~-3	KND	KND	Tail spin
+1536	2 or f+2	h	9	14	-3	+8	+8	
+1537	2, 2	h, m	9,15	14	-12	+2	+2	
+	3	h	12	13	-8	+8	+8	
+1559	4 or BT 3 or 4	h	21	13	-5	KND	KND	Homing, Tail spin
+1690	1+2	m	26	13~14	-17~-16	KND	KND	
+1962	3+4	l (TJ)	20	33~34a js9~23 cs23~	-27	KND	KND	Homing
+1558	f+3	m	17	16~17	-9~-8	0~+1	+25g(KND)	
+1693	f+1+2	m	21	25 pc8~24	-13	KND	CS	Homing, Power crush
+1611	d/f+1	m	12	13	-3	+3	+3	
+1613	d/f+1, 2	m, m	12,17	13	-13	-2	KND	
+1612	d/f+1, 4	m, h	12,14	13	-9	+2	+2	
+1570	d/f+2	m	10	16~17	-9~-8	+2~+3	+2~+3	
+1577	d/f+2, 3	m, m (TJ)	10,10	js14~	-18~-17	Launch	Launch	
+1614	d/f+3	m (TJ)	24	25~26 js9~	-6~-5	KND	KND	Homing, Wall bounce
+	d/f+4	m	16	12	-8	+3	+3	
+1601	d/b or d+1 or FC+1 or BT d+1 or d+2	Sm	5	10s cs4or1~	-5	+6	+6	+3 on hit from side or behind
+1643	d/b or d+2 or FC+2	Sm (TC)	8	12s cs4or1~	-7	+4	+4	
+1602	d/b or d+3 or FC+3 (Close)	l (TC)	10	15s cs4or1~	-16	-5	-5	
+	d/b or d+3 or FC+3	l (TC)	7	15s cs4or1~	-16	-5	-5	
+1606	d/b or d+4 or FC+4 or BT d+3 or d+4	l (TC)	17	20~21s cs6or1~	-27	+5~+6s	KND	
+	d+1+2 or FC+d/b or d+1+2 Grounded face up d+1+2	(Special) (TC)		20~21 61~				
+	d/b+1+2	! (TJ)	30	51~52 js21~50	KND	KND	KND	
+1649	b+1	m	13	14	-8	+3	+3	
+1655	b+1, 2	m, m	13,13	14a	-13~-11	Launch (JG?)	Launch (JG?)	
+1656	b+1, 2, 4	m, m, m (TJ)	13,13,23	js1~	-13~-12s	KND	KND	
+1544	b+2	h	10	11	-4	+2	+2	
+1545	b+2, 3	h, m	10,15	11	-9~-8	+3~+4	uKZD	
+1661	b+3	h	12	16	-9	+2	+2	
+1662	b+3, 1	h, h	12,20	16	-4~-3	+15~+16kg	+15~+16kg	Tail spin
+1664	b+3, 4	h, m	12,20	16	-14~-13	KND	KND	
+1560	b+4	Sm	12	15	-14	-2	-2	
+1688	b+1+2	hm	5,20	27~28,37~38	-13~-12	KND	KND	
+	f, F+2 When hit , b	m	25	14(15~)	-9	KND	KND	
+	f, f+2 When hit or MG 2 When hit	(Special)		14(15~)				
+	f, F+3	h	12	16~17 (17~)	-10~-9	KND	KND	Homing
+	f, F+3, 3	h, m	12,24	16~17 (17~)	-13	KND	KND	Homing
+	f, F+3, 4	h, h (TJ)	12,21	js5~	-7~-6	KND	KND	Tail spin
+1510	f, F+4	m (TJ)	10	15~16 (16~) js12~	-16~-15	-5~-4	-5~-4	
+1511	f, F+4, 2	m (TJ), m	10,10	js1~	-14~-13	-6~-5 (BU)	-6~-5 (BU)	
+1707	f, F+4, 2, qcf+1	m (TJ), m, Sm(DW)	10,10,20	1~	-10~+10	KND	KND	
+	f, F+4, 2, qcf+2	m (TJ), m, Sm(DW)	10,10,20	1~	-13~+17	-5~+25	-5~+25	
+	f, F+4, 2, qcf+1, f or d/f+3+4	m (TJ), m, Sm, (MG)	10,10,20	1~	+2	KND	KND	Press down to recover crouching
+	f, F+4, 2, qcf+2, f or d/f+3+4	m (TJ), m, Sm, (MG)	10,10,20	1~	+2~+32	+10~+40	+10~+40	Press down to recover crouching
+1709	f, F+4, 2, qcf+1+2	m (TJ), m, SmSm	10,10,20,20	1~	+5	KND(KND)	KND(KND)	Press down to recover crouching
+1686	f, F+1+2	mh (TJ)l	5,6,20	18,31,47 (19~) js25~40	-14	KND	KND	
+	f+3+4			33 (ex MG)				
+	f+3+4, D			30s (ex MG)				
+1641	f, f, f+1 or WR+1	h	30	18~20 (21~)	+6~+8	KND	KND	Tail spin
+1640	f, f, f+3 or WR+3	m	27	24~28a (27~) js3~	0~+4	KND	KND	
+1644	WS+1	m	10	14	-7	+4	+4	
+1620	WS+2	m	18	15~16a	-9~-8	KND	JG	
+1636	WS+3	m (TJ)	20	15~16a js15~	-22~-21	Launch (JG?)	Launch (JG?)	
+	WS+4	m	15	11~12	-5~-4	+6~+7	+6~+7	
+	FC+D (One second)			11~12				
+1464	Jump 1 BT u or u/f+1	m	10	7a(12~) js1~	-25~0	-15~+10	-15~+10	
+1472	Jump 2 BT u or u/f+2	m	15	9a(12~) js1~	-17~+8	-7~+18	-7~+18	
+1478	Jump 3 BT u or u/f+3	m	10	7a(12~) js1~	-25~0	-15~+10	-15~+10	
+1481	Jump 4 BT u or u/f+4	m	15	9a(14~) js1~	-18~+7	-8~+17	-8~+17	
+	Grounded face up 1+2	(Special) (TC)		9(14~) 1~				
+	2+3+4	(Special)		9(14~) 1~				
+	f+4	(MG)		9(14~) 1~				Press down to recover crouching
+1669	MG 1	h	11	10(25~)	-4	+2	+2	
+1670	MG 1, 2	h, h	11,12	10(25~)	-8	+1	+1	
+1695	MG 1, 2, 1+2	h, h, m	11,12,21	10(25~)	-13~-12	KND	KND	
+1678	MG 2	m (DS)	25	14(29~)	-9	KND	KND	
+	MG 2, b	m	25	14(29~)	-9	KND	KND	
+1677	EX MG 2	m (DS)	25	14(29~)	-9	KND	KND	Wall bounce
+	EX MG 2, b	m	25	14(29~)	-9	KND	KND	Wall bounce
+1675	MG 3	h	12	16~17 (31~)	-10~-9	KND	KND	Homing
+1673	MG 3, 3	h, m	12,24	16~17 (31~)	-13	KND	KND	<
+1676	MG 3, 4	h, h (TJ)	12,21	js5~	-7~-6	KND	KND	Tail spin
+1674	MG 4	l	20	18~25 (33~) cs10~	-24~-17	KND	KND	
+1658	MG 1+2	! (TJ)	30	51~52a (66~) js21~50	KND	KND	KND	
+1659	EX MG 1+2	! (TJ)	30	41~42a js16	KND	KND	KND	
+1707	qcf+1	Sm	20	28~48 (28~)	-9~+11	KND	KND	
+1708	qcf+2	Sm	20	25~55 (25~)	-13~+17	-5~+25	-5~+25	
+1934	f, d, d/f+1	Sm	12	16a(16~)	-22 (12~8a)	Launch	Launch	
+1941	f, d, d/f+2	Sm x 3	9,9,9	13,22,31a (13~)	-36 (19~8a)	Launch	Launch	
+1953	qcb+1	Sm	20	20~21 (20~)	-11~-10	+11kg	KND	Tail spin
+1954	qcb+2	Sm	22	20~21 (20~)	-13~-12	+2~+3	CS	
+1948	qcb+3	m (TJ)	20	27~36a (27~) js9~	-13~-4	KND	JG	
+1949	qcb+4	m (TJ)	15	26~33a (26~) js9~	-1~+6	+9~+16s	+9~+16s	
+1964	Jump qcb+3	m (TJ)	20	13~a (~) js1~	-14~-5	KND	JG	
+1967	Jump qcb+4	m (TJ)	15	13~a(~) js1~	-1~+6	+9~+16s	+9~+16s	
+	qcf+1, f or d/f+3+4	Sm (MG)	20	13~(~) 1~	+2~	KND	KND	Press down to recover crouching
+	qcf+2, f or d/f+3+4	Sm (MG)	20	13~(~) 1~	+2~+32	+10~+40	+10~+40	Hold down to recover crouching
+1709	qcf+1+2	SmSm	10,10	24,53~ (24~)	+10g	KND(KND)	KND(KND)	Press down to recover crouching
+1932	f, d, d/f+1+2	Sm x 5	5,5,9,9,9	11,,,a (11~)	-34	Launch	Launch	
+1957	qcb+1+2	SmSm	5,20	15,37(15~)	-13~-12	+12kg	KND	
+1952	qcb+3+4	m (TJ), m	5,15	25~32a ,49~50 (26~) js9~	-9~-8	KND	KND	
+1972	Jump qcb+3+4	m (TJ), m	5,15	10~a, 35~36 (~) js1~	-9~-8	KND	KND	
+1928	Two meter bars qcf, qcf+1+2	Sm	15	15	-7	Launch	Launch	
