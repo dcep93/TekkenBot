@@ -1,302 +1,297 @@
 move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes
-""	in rage b+1+2	m		20?	–	KND	KND	
-""	in rage u/b+1+4	Attack returned	20	6~	–	KND	KND	Rage drive
-""	1	h	9	10	+1	+8	+8	
-""	1, 1	h, m	9,21	10	-8~-7	+4~+5s	KND	
-""	1, 2	h, m	9,16	10	-9	-3	-3	
-""	1, 2, 1	h, m, h	9,16,20	10	-9	-2	KND	
-""	2	h	13	10	-1	+5	+8	
-""	2, 1	h, m	13,31	10	-9	KND	KND	Tail spin
-""	2, 1, B (Cancel)	h, (Special)	13	10	-13	-7	-4	
-""	2, 2	h, h	13,10	10	-1	+5	+5	
-""	2, 2, 1+2	h, h, (KIN)	13,10	10	–	+	+	
-""	2, 3	h, h	13,28	10	-10	KND	KND	Tail spin
-""	2, d+3	h, l (TC)	13,14	10 RC	-12	-1	-1	
-""	3~4	mm (TJ)	16,21	17,28~29 (18~)	-6~-5	+3~+4?	+3~+4?	
-""	3~4, u/b or u or u/f	mm (TJ), (Special) (TJ)(DGF)	16,21	17,28~29 a(18~)	+5~+6	+9~+10?	+9~+10?	
-""	3~4 (Second hit miss)	m	16	17(18~)	-19? (Stance-9?)			
-""	4~3	m (TC)	33	25a(26~)	-12	Launch	Launch	
-""	4	h	22	15	-11	0	KND	
-""	4, 4	h, h	22,22	15	-4	-2	-2	
-""	4, 4, 4	h, h, h	22,22,27	15	-4	KND	KND	Tail spin
-""	1+4 or WS+1+4	m	28	6	-15	CS	CS	
-""	4~1	m	28	6(7~)	-15	CS	CS	
-""	1+2+3	m(!)	0	22~25	-8~-5	0~+3	+16~+19	
-""	f+2	h	24	17	-4	+13kg	SCD	Tail spin
-""	f+2, d/b+2	h, m	24,10	17 RC	-5~-4	+6~+7	+6~+7	
-""	f+2, D/B+2, 2	h, m, m	24,10,9	17 RC	-9~-8	+2~+3	+2~+3	
-""	f+2, D/B+2, 2, 2	h, m, m, m	24,10,9,8	17 RC	-9~-8	+2~+3	+2~+3	
-""	f+2, D/B+2, 2, 2, 2	h, m, m, m, m	24,10,9,8,6	17 RC	-9~-8	+2~+3	+2~+3	
-""	f+2, D/B+2, 2, 2, 2, 2	h, m, m, m, m, m	24,10,9,8,6,5	17 RC	-9~-8	+2~+3	+2~+3	
-""	f+2, D/B+2, 2, 2, 2, 2, 2	h, m, m, m, m, m, m	24,10,9,8,6,5,
-""	4	17 RG	-49~-46	-38~-35	-38~-35	
-""	f+3	h	32	16	-10	KND	KND	Homing, Tail spin
-""	f+3, 3	h, l (TC)	32,21	16	-20	KND	KND	
-""	f+3, 3, d+3+4	h, l (TC), (IND)	32,21	16 Air	-35	KND	KND?	
-""	f+3, 4	h, m	32,27	16b	-6	Launch	Launch	
-""	f+4	m	33	18	-9	KND	KND	Wall bounce
-""	f+1+2	m	29	17?~18	-8?~-7	KND	KND	
-""	f+3+4	m(, (Special))(FLE)	27(35)	21~25?	-14~-10?	KND	KND	Power crush
-""	f+3+4, b	(Special)		RBT				Power crush
-""	d/f+1	m	14	13	-4	+5	+5	
-""	d/f+1, 2	m, h	14,	13	-4	+13kg	SCD	Tail spin
-""	d/f+1, 4	m, m	14,17	13	-12	+4?	+	
-""	d/f+2	m	17	15~16	-7~-6	Launch (JG?)(+4a)	Launch (JG?)	
-""	d/f+3	m	13	17~18 RC	-4~-3	+4~+5	+4~+5	
-""	d/f+3, 1	m, m	13,27	17~18	-9~-8?	+3~+4?s	KND	
-""	d/f+3, 1* (Cancel)	m, !	13,27～	17~18	0~+1 OC	0~+1 OC	KND	
-""	d/f+1+2	l (TC)	12	26 RC	-11	+4	+7	
-""	d/f+1+2, 2	l (TC), m	16,27	26	-13	0	+6k	
-""	d+1	m	20	24~25	-5~-4	0~+1 OC	KND	
-""	d+1, *, n (After on step)	!	27	65~66	0~+1 OC	0~+1 OC	KND	
-""	d+1, *, n (After two step)	!	33	100~101	0~+1 OC	0~+1 OC	KND	
-""	d+1, *, n (After three step)	!	40	135~136	0~+1 OC	0~+1 OC	KND	
-""	d+1, *, n (Four steps)	!	54	170~171	KND	KND	KND	
-""	d+1, *, n (Five steps)	!	81	205~206	KND	KND	KND	
-""	d+1, *, n (Six steps)	!	135	240~241	KND	KND	KND	
-""	d+1, *, B (Cancel)	(Special)		240~241				
-""	d+2	m (TC)	16	16~17	-9~-8	0~+1	0~+1	
-""	d+2, 1	m (TC), h	16,22	16~17	-9?	KND		Tail spin
-""	d+2, 2	m (TC), m	16,22	16~17	-12~-11	+7~+8	CS	
-""	d+2, 2, 1	m (TC), m, h	16,22,27	16~17	-9	KND	KND	
-""	d+2, 2, d+1	m (TC), m, m	16,22,22	16~17	-10	+4s	KND	
-""	d+2, 2, 2+3	m (TC), m, (Special)	16,22	16~17	-12~-11	+7~+8	CS	
-""	d+1+4	!	81(,22)	30d	CS	CS	CS	
-""	d+1+4, b+1 (one spin)	!, !	81,24	30 RG	CS	CS	CS	
-""	d+1+4, B+1, 1 (two spins)	!, !, !	81,24,27	30 RG	CS	CS	CS	
-""	d+1+4, B+1, 1, 1 (three spins)	!, !, !, !	81,24,27,28	30 RG	CS	CS	CS	
-""	d+1+4, B+1, 1, 1, 1 (four spins)	!, !, !, !, !	81,24,27,28,
-""	37	30 RG	CS	CS	CS	
-""	d+1+4, B+1, 1, 1, 1, 1 (five spins)	!, !, !, !, !, !	81,24,27,28,
-""	37,40	30 RG	CS	CS	CS	
-""	d/b+1	m	21	20	-16	0 OC	0 OC	
-""	d/b+1, 1	m, m	21,31	20	-8	KND	KND	
-""	d/b+2	m	10	15 RC	-5	+6	+6	
-""	D/B+2, 2	m, m	10,9	15 RC	-9~-8	+2~+3	+2~+3	
-""	D/B+2, 2, 2	m, m, m	10,9,7	15 RC	-9~-8	+2~+3	+2~+3	
-""	D/B+2, 2, 2, 2	m, m, m, m	10,9,8,6	15 RC	-9~-8	+2~+3	+2~+3	
-""	D/B+2, 2, 2, 2, 2	m, m, m, m, m	10,9,8,6,5	15 RC	-9~-8	+2~+3	+2~+3	
-""	D/B+2, 2, 2, 2, 2, 2	m, m, m, m, m, m	10,9,8,6,5,4	15 RG	-49~-46	-38~-35	-38~-35	
-""	d/b+3 or FC+d/b+3	l (TC)	13	18~19 RC	-25~-24	-14~-13	-14~-13	
-""	d/b+3, 3	l (TC), l (TC)	13,9	18~19 RC	-19~-18	-7~-6	-7~-6	
-""	d/b+3, 3, 3	l (TC) x 3	13,9,9	18~19 RC	-19~-18	-7~-6	-7~-6	
-""	d/b+3, 3, 3, 3	l (TC) x 4	13,9,9,6	18~19 RC	-19~-18	-7~-6	-7~-6	
-""	d/b+3, 3, 3, 3, 3	l (TC) x 5	13,9,9,6,6	18~19 RC	-19~-18	-7~-6	-7~-6	
-""	d/b+3, 3, 3, 3, 3, 3	l (TC) x 6	13,9,9,6,6,6	18~19 RG	-27	-14	-14	
-""	d/b+3, 3.. (two to five hits), f+4	m	20	12	-8	KND	KND	
-""	d/b+3, 3.. (two to five hits), d+3+4	l, l, , (IND)	13,9,,	12 Air	-25	-13	-13	
-""	d/b+4	l	18	17	-12	-1	-1	
-""	d/b*, 1+2 or FC+d/b*, 1+2 (to PDP)	(Special) (TC)(PDP)		RC				
-""	PDP 1 or 2	h!	33	22~37 (37~)	CS	CS	CS	
-""	PDP 3 or 4	m (TJ)	31	17~28 (32~)	-15~-4	-13~-2	CS	
-""	b+1	h	12	17	+1	+7	+12	
-""	b+1, 1	h, h	12,10	17	+4	+5	+10	
-""	b+1, 1, 1	h, h, h	12,10,10	17	+4	+5	+10	
-""	b+1, 1, 1, 1	h, h, h, h	12,10,10,6	17	+4	+5	+10	
-""	b+1, 1, 1, 1, 1	h, h, h, h, h	12,10,10,6,6	17	4	+5	+10	
-""	b+1, 1, 1, 1, 1, 1	h, h, h, h, h, h	12,10,10,6,6,6	17a,d	-75	-74	-69	
-""	b+1, ,, d/b+3	h, , l	12,,9,,	17,	-20	-9	-9	
-""	b+1, 3 or 4	h, (Special)	12	17	-6	0	+5	
-""	b+1, 1.. (two to five hits), 3 or 4	h, h, , (Special)	12,10,,,	17	-3	-2	+3	
-""	b+2	m	16	14	-9	+2	+2	
-""	b+2, 1+2	m, (KIN)	16	14	-9	+2	+2	
-""	b+2, 1	m, m (TJ)	16,27	14	-17~-16	Launch (JG?)	Launch (JG?)	
-""	b+2, 1, 1+2	m, m (TJ), (KIN)	16,27	14	-7	Launch (JG?)	Launch (JG?)	
-""	b+2, 2	m, h	16,28	14	-13	KND	KND	
-""	b+3 or 4 (one spin)	(Special)		14				
-""	B+3 or 4, ,,	(Special)		( RG)				
-""	u/b+1+2	!	50?	50~51	CS	CS	CS	
-""	u/b+1+2, 1+2	h!	24	18~19 (37~)	+1~+2	+1~+2	CS	
-""	u/b+1+2, n+1	!	29	20~104 (21~)	CS	CS	CS	
-""	u/b+1+2, n+1, b	!, !	29,29	20~50 (26~)	CS	CS	CS	
-""	u+3+4	mm (TJ)	13,16	39~41, 45~48	+4~+7s	KND	KND	
-""	u+3+4 (First hit only)	m (TJ)	13	39~41	-9~-7	+2~+4s	+2~+4s	
-""	u/f+1	m (TJ)	25	23 js9	-6	+5s	JG	
-""	u/f+2	l (TJ)	25 js10	35s	-16	+6g	KND	
-""	u/f+3	m (TJ)	20	15	-13	Launch (JG?)	Launch (JG?)	
-""	u/b+4	m (TJ)	22	20	-19	KND	KND	
-""	u or u/f+4	m (TJ)	28	20	-9	KND	KND	Homing
-""	u/f+1+2	! (TJ)	54	113~114	KND	KND	KND	
-""	u/f+1+2, d (First stage)	! (TJ)	27	55~56	+4~+5	+4~+5	+4~+5	
-""	u/f+1+2, d (Second stage)	! (TJ)	40	83~84	+4~+5	+4~+5	+4~+5	
-""	u/f+1+2, 1+2	(Special) (TJ)(DGF)		Air				
-""	u/f+1+2, b	! (TJ)	47	93~94	KND	KND	KND	
-""	u/f+1+2, b, n+1+2	(Special) (TJ)(DGF)		Air				
-""	u/f+3+4	m (TJ)	27	31~34	-16~-13	KND	KND	
-""	u/f+3+4, 1+2	(Special) (TJ)(DGF)		Air				
-""	u/f+3+4, 3+4	m (TJ), m	27,33		-12	Launch	Launch	
-""	u/f+3+4, d+1+2	m (TJ), m (TJ)(FLE)	27,9	Air	+18 GB	KND	KND	
-""	u/f+3+4, d+3+4	m (TJ), (IND)	27	Air	-20	KND	KND	
-""	u/f+3+4, b+1	m (TJ), h	27,10	( Air)	-1~0	-43~-42	-43~-42	
-""	u/f+3+4, b+1, 3+4	m (TJ), h, m (TJ)	27,10,28	()	0~+2 OC	KND	KND	
-""	u/f+3+4, b+1, 4	m (TJ), h, m (TJ)	27,10,20	()	-14~+7	Launch (JG?)	Launch (JG?)	
-""	u/f+3+4, b+1, 4, d+1	m (TJ), h, m (TJ), m	27,10,20,20	()	-5~-4	0~+1 OC	KND	
-""	u/f+3+4, u or u/f+3+4	m (TJ), mm (TJ)	27,13,13	()	-4~-3	KND	KND	
-""	f, F+2	m	24	15(16~)	-10	+3(Throw)	+?(Throw)	
-""	f, F+2 Hit in front1+2	m((throw))	24,20(6,7,7)?	15(16~)			CS	
-""	f, F+3	m	33	23(24~)	-5	+4	CS 12	
-""	f, F+3, 1+2	m, (KIN)	30	23(24~)	+1	+10	CS 18	
-""	f, F+4	m (TJ)	27	15~16 RBT (16~)	-5~-4?	Launch	Launch	
-""	f, F+1+2	m	29	22~24 RBT (23~)	-8~-6	+3~+5 OC	+3~+5 OC	
-""	f, F+3+4	m (TJ)	20	22~24 (23~)	-20~-18	-9~-7 OC	-9~-7 OC	
-""	f, F+3+4, 1+2	m (TJ), m (TJ)	20,20	22~24 (23~)	-31~-25	KND	KND	
-""	f, F+3+4, 1+2, 3+4	m (TJ), m (TJ), m (TC)	20,20,27	22~24 (23~)	-13	Launch	Launch	
-""	f, F+1+4	!	81	45 RG(46~)	CS	CS	CS	
-""	f, F+1+4, f, F	!, !	81,249	45(46~) RG	CS	CS	CS	
-""	f, F+1+4, n	(Special)		RBT				
-""	b, B+1+4	!	67	59(60~)	CS	CS	CS	
-""	b, B+1+4, B (Cancel)	(Special), m	28	47(48~)	-15	CS	CS	
-""	f, n, d, d/f+1	m	22	17~18 (17~)	-15~-14	Launch	Launch	
-""	f, n, d, d/f+1, 1+2	m, (KIN)	27	17~18 (17~)	-7~-6	Launch	Launch	
-""	f, n, d, d/f+2	m (TC)?		14(14~)	-14	+5?k	SCD	Tail spin
-""	in rage f, nf, n, d, d/f+1+2	m (TC)?		14(14~)	+2?	SCD	SCD	Rage art, Tail spin
-""	qcf+1	! (TJ), ! (TJ), !	32,24,33	31,38, 58~59	0~+1 OC	0~+1 OC	0~+1 OC	
-""	f, f, f+3 or 2+4+3	m (TJ)	40	22~23 (25~)	+9~+10g	KND	KND	
-""	WS+1	m	20	14~15	-10~-9	+1~+2	+6~+7	
-""	WS+1, 1	m, h	20,16	14~15	-11	0	0	
-""	WS+1, 1, b+3 or 4	m, h, (Special)	20,16	14~15	-16	-5	-5	
-""	WS+1, 1, 1	m, h, h	20,16,16	14~15	-11	0	0	
-""	WS+1, 1, 1, 1	m, h, h, m	20,16,16,32	14~15	0~+1s	+6~+7s	+6~+7s	
-""	WS+1, 2	m, h	20,24	14~15	-4	+13kg	SCD	Tail spin
-""	WS+1, 2, d/b+2	m, h, m	20,24,10	14~15 RC	-5	+6	+6	
-""	WS+1, 2, D/B+2, 2	m, h, m, m	20,24,10,9	14~15 RC	-9~-8	+2~+3	+2~+3	
-""	WS+1, 2, D/B+2, 2, 2	m, h, m, m, m	20,24,10,9,8	14~15 RC	-9~-8	+2~+3	+2~+3	
-""	WS+1, 2, D/B+2, 2, 2, 2	m, h, m, m, m, m	20,24,10,9,8,
-""	6	14~15 RC	-9~-8	+2~+3	+2~+3	
-""	WS+1, 2, D/B+2, 2, 2, 2, 2	m, h, m, m, m, m, m	20,24,10,9,8,
-""	6,5	14~15 RC	-9~-8	+2~+3	+2~+3	
-""	WS+1, 2, D/B+2, 2, 2, 2, 2, 2	m, h, m, m, m, m, m, m	20,24,10,9,8,6,
-""	5,4	14~15 Air, RG	-49~-46	-38~-35	-38~-35	
-""	WS+2	m	21	15 RBT	-4	+7	+7	
-""	WS+2, 1	m, m, (DGF)	21,	15a	-9?	Launch (JG?)	Launch (JG?)	
-""	WS+3 or 3+4	m	16	16	-6	+3	+3	
-""	WS+3, 2	m, m	16,27	16	-12s	KND	JG	
-""	WS+4	m	14	11	-6	+5	+5	
-""	WS+4, 1+2	m (KIN)	14	11	-6	+5	+5	
-""	FC+d/f+4	l (TC)	18	18 RC	-21	+4?s	KND	Homing
-""	FC+D/F+1 FC+d/b, b+1	l!	16	25(26~)	KND	KND	KND	
-""	SS+1	m	28	17(26~)	-9	+2	Launch (JG?)	
-""	SS+2	m	27	18(27~)	-13	Launch	Launch	
-""	SS+4	h	28	16(25~)	0	KND	CS	Homing, Tail spin
-""	SS+4, 1+2	h, (KIN)	28	16(25~)	+3	KND	CS	Homing, Tail spin
-""	SS+4, 3+4	h, (MED)	28	16 RBT(25~)	-3	KND	CS	Homing, Tail spin
-""	Grounded face up 3+4	(Special) (TC)(IND)		Air				
-""	Opponent Down u/b or u+1	On grounded opponent(m)	24	28	-13	-8 OC	-8 OC	
-""	1+2 or FC+1+2 (to KIN)	(Special)(Returns move)(KIN)		28				
-""	KIN Returns high or mid attacks	Attack returned(mm (TJ))	13,16	39~40	+4~+5s	KND	KND	
-""	KIN F	(Special) (TC)(KIN)		39~40				
-""	KIN D (Cancel)	(KIN)		39~40				
-""	KIN 1	m	13	17(32~)	-12	-1	-1	
-""	KIN 1, 1	m, mm	13,6,20	17(32~)	-12	+4s	+4s	
-""	KIN 1, 1, 2+3	m, mm, (NSS)	13,6,20	17(32~)	-28	-12 OC	-12 OC	
-""	KIN 2	m	20	21(36~)	-14	Launch(JG?)	Launch(JG?)	
-""	KIN 2, 1+2	m, m	20,40	21(36~)	-18~-17 OC	KND	KND	
-""	KIN 2, 1+2*	m, m	20,40	21(36~)	-1~0	KND	KND	
-""	KIN 3	l (TJ)	17	25~32s js10 cs24	-16~-9	KND	KND	
-""	KIN 4	h	23	16(31~)	0	KND	CS	Homing, Tail spin
-""	KIN 4, 1+2	h, (KIN)	28	16(31~)	+3	KND	CS	Homing, Tail spin
-""	KIN 4, 3+4	h, (MED)	28	16 RBT(31~)	-3	KND	CS	Homing, Tail spin
-""	KIN 1+2	mmmm (TJ)	4,4,4,24	12,19, 27,41 RBT (27~)	-6~-5	KND	KND	
-""	KIN f+2	h	33	12(27~)	-13	KND	SCD	
-""	KIN b+2	m	15	12(27~)	-9	+2	+2	
-""	KIN b+2,1	m	15,19	12(27~)	-12	Launch	Launch	
-""	KIN b+1+2	!	30?	45?(?~)	CS	CS	CS	
-""	KIN u+1+2	(Special) (TJ)(KIN)		Air				
-""	3+4 or BT 3+4 (to MED)	(Special)(Recover health)(MED)		RBT				
-""	MED 3+4	(MED)		RBT				
-""	MED f or b,	(MED)		+1~				
-""	MED 3 (Opponent in front)	m (TJ)	20	17~28 RBT	-14~-3	Launch (JG?)	Launch (JG?)	
-""	MED 3 (Opponent behind)	m (TJ)	20	29~38 RBT	+3~+12	KND	KND	
-""	MED 1+2	!	13	30~31	CS	CS	CS	
-""	MED 1+4	!	81(,22)	30 RG	CS	CS	CS	
-""	MED 2+3	h(Throw)	22	38		Throw(0)		
-""	MED 2+3, F	h(Throw)	-26	38		Throw(0)		
-""	MED 2+4 or MED 1+3	h(Throw)	35	12	Throw	Throw	Throw	
-""	d+1+2 (to FLE)	m (TJ)(FLE)	9	16 Air~	+18 GB	KND	KND	
-""	FLE d/b (Cancel)	(FLE)		16~				
-""	FLE 1	(Special)		RC				
-""	FLE 2	l (TC)	27	24~28 RG	-13~-9	KND	KND	
-""	FLE 3 or 4	(Special) (TJ)(FLE)		Air				
-""	FLE 1+2	h	21?	18~19	-8~-7	Launch (JG?)	Launch (JG?)	
-""	FLE 3+4	m (TC)	33	25	-12	Launch	Launch	
-""	FLE f or b (to WFL)	(Special) (TJ)(WFL)		Air				
-""	WFL 3	m, (Special)	33(,10,10)	17 Air(36~)	-17	Throw(KND)	Throw(KND)	
-""	WFL 4	l	20	23 RG(42~)	-10	+11 OC	KND	
-""	FLE f, f	m (TJ) x 5, (FLE)	4,4,4,4,4,2	8,17,25, 34,43 (9~)	+6	+17	+17	
-""	FLE f, f (Second hit miss)	m (TJ) x 4, (FLE)	4,4,4,4,2	8,17,25, 34(9~)	-3	+8	+8	
-""	FLE d	(Special) (TC)(FLE)		RC				
-""	FLE d/b or d or d/f+3+4	(Special) (TC)(FLE)		Air				
-""	FLE u/b or u or u/f+1+2	(Special) (TJ)(DGF)		Air				
-""	FLE u+3+4	m (TJ)	40	38~39 RG	+3~+4	KND	KND	
-""	FLE u+3+4, Any button	m (TJ), (Special)	40	38~39	-9~-8	KND	KND	
-""	FLE u/b or u or u/f	! (TJ), (FLE)	28	30~40	KND	KND	KND	
-""	d+3+4 (to IND)	(Special) (TC)(IND)		Air				
-""	IND n (to INS)	(Special) (TC)(INS)		Air				
-""	INS 1	! (TJ)(INS)	20	53	0 OC	0 OC	0 OC	
-""	INS 2	m(INS)	9	39 RC	-9~-8	+2~+3	+2~+3	
-""	INS 3	m (TJ)(INS)	20	32~38	-31~-25	KND	KND	
-""	INS 3, 3+4	m (TJ), m (TJ)(INS)	20,27	32~38	-13	Launch	Launch	
-""	INS 4	l (TC)(INS)	20	18?s	-21	+3? OC	KND	
-""	INS B or F	(INS)		( RBT)				
-""	INS 3+4* D or b or f or u	(INS)		()				
-""	INS 1+2	(Special) (TJ)(FLE)		a				
-""	INS u+1+2	(Special) (TJ)(INS)		a				
-""	u+1+2 (to DGF)	(Special) (TJ)(DGF)		a				
-""	DGF b or f	(Special) (TJ)		a				
-""	DGF d/b or d or d/f (Cancel)	(DGF)						
-""	DGF 1	!	20	30(40~)	0s	0s	0s	
-""	DGF 2	h (TJ)(DGF)	20	16~17a (26~)	+4~+5	Launch (JG?)	Launch (JG?)	
-""	DGF 3	l (TC)	24	22 RC(32~)	-14	+5?s	KND	
-""	DGF 4	m (TJ)	33	19~20 (29~)	-6~-5?	+14k	KND	Tail spin
-""	DGF 1+2	(Special) (TJ)(FLE)		a				
-""	DGF 3+4	h!, ( (Sky))(throw)	22,18	20~21 (30~)	Throw	Throw	Throw	
-""	DGF f+2	h(DGF)		18?a	-?	KND	SCD	Homing, Tail spin
-""	DGF d+3+4	(Special) (TC)(IND)		a				
-""	BT 1	h	21	15 RBT	-6	+5	+5	
-""	BT 1, 2	h, m	21,24	15 RBT	-5	+5	hKZD	
-""	BT 1, 3	h, h	21,33	15	-7	KND	KND	
-""	BT 2	h	24	16	-4	+13kg	SCD	Tail spin
-""	BT 2, d/b+2	h, m	24,10	16 RC	-5~-4	+6~+7	+6~+7	
-""	BT 3	m (TJ)	27	24~25 RBT	-3~-2	KND	KND	
-""	BT d/b or d or d/f+1	l (TC)	27	17 RC	-13	+3	KND	
-""	BT u+2+3	!	60	50~51 RBT	CS	CS	CS	
-""	2+3 (to NSS)	(NSS)		50~51				
-""	NSS 2+3	(Special)		50~51				
-""	NSS 1	h	9	10	+1	+8	+8	
-""	NSS 1, 2	h, m	9,10	10	-13~-12	-2~-1	-2~-1	
-""	NSS 1, 2, 1	h, m, m	9,10,8	10	-12	-1	-1	
-""	NSS 2	h	13	10	-1	+5	+8	
-""	NSS 2, 1	h, hh	13,6,13	10	-12	KND	KND	
-""	NSS 1+4 or FC+1+2	m, (Special)	28	8~9	-16~-15	CS	CS	
-""	NSS 4~1	m, (Special)	28	8~9 (9~)	-16~-15	CS	CS	
-""	NSS 1+2+3	h	33	22	-18	KND	KND	
-""	NSS f+1+2	m (TC)	33	16~17 RC	-13~-12	+4~+5	KND	
-""	NSS f+3+4	m	27	21~25?	-14~-10?	KND	KND	Power crush
-""	NSS d/f+3	m	13	17~18 RC	-4~-3	+4~+5	+4~+5	
-""	NSS d/f+3, 1	m, m	13,16	17~18	-5	+5 OC	KND	
-""	NSS d+1	m	20	24~25	-7~-6 OC	0~+1 OC	KND	
-""	NSS d+1+4	(Special)		24~25				
-""	NSS d+2, 1	m (TC), h	16,22	24~25	–	+k		Tail spin
-""	NSS d/b+1	Sm (TC)	6	11 RC	-5	+6	+6	
-""	NSS b+2	m	16	14	-9	+2	+2	
-""	NSS b+2, 2	m, h	16,24	14	-10	0	KND	
-""	NSS u/b+1+2	!	67	51	CS	CS	CS	
-""	NSS u/b+1+2, 1	h!	54	20(21~)	KND	KND	KND	
-""	NSS u/b+1+2, 1+2	h	20	18~19 (37~)	-15~-14	-4~-3	CS	
-""	NSS u+1+2	l (TJ), (IND)	24	27 Air	+4 OC	+20 OC	+20 OC	
-""	NSS u/f+3+4, b+1, 4, d+1	m (TJ), h, m (TJ), m	27,10,20,20	27	-7~-6 OC	0~+1 OC	KND	
-""	NSS b, B+1+4	!	54	65~70 (66~)	KND	KND	KND	
-""	NSS b, B+1+4, B (Cancel)	(Special), m	28	47(48~)	-15	CS	CS	
-""	NSS f, F+1+4	(Special)		RBT				
-""	NSS qcf+1	m (TJ)	40	53~55 (53~)	-8~-6 OC	KND	KND	
-""	NSS WS+2, 1	m, h	21,21	53~55 (53~) RBT	-6	+5	+5	
-""	NSS WS+2, 1, 2	m, h, m	21,21,24	53~55 (53~) RBT	-5	+5	FS(+10 GB) 18	
-""	NSS WS+2, 1, 3	m, h, h	21,21,33	53~55 (53~)	-7	KND	KND	
-""	NSS FC+d/b, b+1 FC+D/F+1	l	16	25~26 (26~)	-14~-13?	KND	KND	
-""	NSS FC+d/b, b+1, 2	l, l	16,27	25~26 (26~)	-20	+14	+14	
-""	NSS FC+D/F+3	l		18?(19?~)	-19?	KND	KND	
-""	NSS BT d/b or d or d/f+1	l (TC)	20	17 RC	-13	+3	KND	
-""	NSS IND 1	m (TJ)(INS)	20	48~51	-8~-5 OC	KND	KND	
-""	NSS d+1+2 or d+3+4 (to IND)	(IND)		48~51				
-""	NSS u/f+1+2	(Special) (TJ)		RC				
-""	NSS KIN 1	m	20	16~17	-8~-7 OC	KND	KND	
+2433	in rage b+1+2	m		20?	–	KND	KND	
+	in rage u/b+1+4	Attack returned	20	6~	–	KND	KND	Rage drive
+1611	1	h	9	10	+1	+8	+8	
+1583	1, 1	h, m	9,21	10	-8~-7	+4~+5s	KND	
+	1, 2	h, m	9,16	10	-9	-3	-3	
+	1, 2, 1	h, m, h	9,16,20	10	-9	-2	KND	
+1584	2	h	13	10	-1	+5	+8	
+1589	2, 1	h, m	13,31	10	-9	KND	KND	Tail spin
+	2, 1, B (Cancel)	h, (Special)	13	10	-13	-7	-4	
+1585	2, 2	h, h	13,10	10	-1	+5	+5	
+	2, 2, 1+2	h, h, (KIN)	13,10	10	–	+	+	
+1587	2, 3	h, h	13,28	10	-10	KND	KND	Tail spin
+1588	2, d+3	h, l (TC)	13,14	10 RC	-12	-1	-1	
+1602	3~4	mm (TJ)	16,21	17,28~29 (18~)	-6~-5	+3~+4?	+3~+4?	
+	3~4, u/b or u or u/f	mm (TJ), (Special) (TJ)(DGF)	16,21	17,28~29 a(18~)	+5~+6	+9~+10?	+9~+10?	
+1601	3~4 (Second hit miss)	m	16	17(18~)	-19? (Stance-9?)			
+1968	4~3	m (TC)	33	25a(26~)	-12	Launch	Launch	
+1605	4	h	22	15	-11	0	KND	
+1606	4, 4	h, h	22,22	15	-4	-2	-2	
+1607	4, 4, 4	h, h, h	22,22,27	15	-4	KND	KND	Tail spin
+1882	1+4 or WS+1+4	m	28	6	-15	CS	CS	
+	4~1	m	28	6(7~)	-15	CS	CS	
+2029	1+2+3	m(!)	0	22~25	-8~-5	0~+3	+16~+19	
+1614,1615	f+2	h	24	17	-4	+13kg	SCD	Tail spin
+1616	f+2, d/b+2	h, m	24,10	17 RC	-5~-4	+6~+7	+6~+7	
+1858	f+2, D/B+2, 2	h, m, m	24,10,9	17 RC	-9~-8	+2~+3	+2~+3	
+1860	f+2, D/B+2, 2, 2	h, m, m, m	24,10,9,8	17 RC	-9~-8	+2~+3	+2~+3	
+1861	f+2, D/B+2, 2, 2, 2	h, m, m, m, m	24,10,9,8,6	17 RC	-9~-8	+2~+3	+2~+3	
+1682	f+2, D/B+2, 2, 2, 2, 2	h, m, m, m, m, m	24,10,9,8,6,5	17 RC	-9~-8	+2~+3	+2~+3	
+1683	f+2, D/B+2, 2, 2, 2, 2, 2	h, m, m, m, m, m, m	24,10,9,8,6,5,					
+	4	17 RG	-49~-46	-38~-35	-38~-35			
+1624	f+3	h	32	16	-10	KND	KND	Homing, Tail spin
+1625	f+3, 3	h, l (TC)	32,21	16	-20	KND	KND	
+	f+3, 3, d+3+4	h, l (TC), (IND)	32,21	16 Air	-35	KND	KND?	
+1626	f+3, 4	h, m	32,27	16b	-6	Launch	Launch	
+1627	f+4	m	33	18	-9	KND	KND	Wall bounce
+1612	f+1+2	m	29	17?~18	-8?~-7	KND	KND	
+1984	f+3+4	m(, (Special))(FLE)	27(35)	21~25?	-14~-10?	KND	KND	Power crush
+	f+3+4, b	(Special)		RBT				Power crush
+1831	d/f+1	m	14	13	-4	+5	+5	
+1833	d/f+1, 2	m, h	14,	13	-4	+13kg	SCD	Tail spin
+1832	d/f+1, 4	m, m	14,17	13	-12	+4?	+	
+1699	d/f+2	m	17	15~16	-7~-6	Launch (JG?)(+4a)	Launch (JG?)	
+1701	d/f+3	m	13	17~18 RC	-4~-3	+4~+5	+4~+5	
+1702	d/f+3, 1	m, m	13,27	17~18	-9~-8?	+3~+4?s	KND	
+	d/f+3, 1* (Cancel)	m, !	13,27～	17~18	0~+1 OC	0~+1 OC	KND	
+1933	d/f+1+2	l (TC)	12	26 RC	-11	+4	+7	
+1935	d/f+1+2, 2	l (TC), m	16,27	26	-13	0	+6k	
+1752	d+1	m	20	24~25	-5~-4	0~+1 OC	KND	
+	d+1, *, n (After on step)	!	27	65~66	0~+1 OC	0~+1 OC	KND	
+	d+1, *, n (After two step)	!	33	100~101	0~+1 OC	0~+1 OC	KND	
+	d+1, *, n (After three step)	!	40	135~136	0~+1 OC	0~+1 OC	KND	
+	d+1, *, n (Four steps)	!	54	170~171	KND	KND	KND	
+	d+1, *, n (Five steps)	!	81	205~206	KND	KND	KND	
+1765	d+1, *, n (Six steps)	!	135	240~241	KND	KND	KND	
+	d+1, *, B (Cancel)	(Special)		240~241				
+1679	d+2	m (TC)	16	16~17	-9~-8	0~+1	0~+1	
+1680	d+2, 1	m (TC), h	16,22	16~17	-9?	KND		Tail spin
+1683	d+2, 2	m (TC), m	16,22	16~17	-12~-11	+7~+8	CS	
+1691,1685	d+2, 2, 1	m (TC), m, h	16,22,27	16~17	-9	KND	KND	
+1692	d+2, 2, d+1	m (TC), m, m	16,22,22	16~17	-10	+4s	KND	
+	d+2, 2, 2+3	m (TC), m, (Special)	16,22	16~17	-12~-11	+7~+8	CS	
+2018	d+1+4	!	81(,22)	30d	CS	CS	CS	
+2020	d+1+4, b+1 (one spin)	!, !	81,24	30 RG	CS	CS	CS	
+2021	d+1+4, B+1, 1 (two spins)	!, !, !	81,24,27	30 RG	CS	CS	CS	
+2022	d+1+4, B+1, 1, 1 (three spins)	!, !, !, !	81,24,27,28	30 RG	CS	CS	CS	
+2023	d+1+4, B+1, 1, 1, 1 (four spins)	!, !, !, !, !	81,24,27,28,37	30 RG	CS	CS	CS			
+2024	d+1+4, B+1, 1, 1, 1, 1 (five spins)	!, !, !, !, !, !	81,24,27,28,37,40	30 RG	CS	CS	CS			
+1708	d/b+1	m	21	20	-16	0 OC	0 OC	
+1709	d/b+1, 1	m, m	21,31	20	-8	KND	KND	
+1710	d/b+2	m	10	15 RC	-5	+6	+6	
+1858	D/B+2, 2	m, m	10,9	15 RC	-9~-8	+2~+3	+2~+3	
+1860	D/B+2, 2, 2	m, m, m	10,9,7	15 RC	-9~-8	+2~+3	+2~+3	
+1861	D/B+2, 2, 2, 2	m, m, m, m	10,9,8,6	15 RC	-9~-8	+2~+3	+2~+3	
+1862	D/B+2, 2, 2, 2, 2	m, m, m, m, m	10,9,8,6,5	15 RC	-9~-8	+2~+3	+2~+3	
+1863	D/B+2, 2, 2, 2, 2, 2	m, m, m, m, m, m	10,9,8,6,5,4	15 RG	-49~-46	-38~-35	-38~-35	
+1924	d/b+3 or FC+d/b+3	l (TC)	13	18~19 RC	-25~-24	-14~-13	-14~-13	
+1925	d/b+3, 3	l (TC), l (TC)	13,9	18~19 RC	-19~-18	-7~-6	-7~-6	
+1926	d/b+3, 3, 3	l (TC) x 3	13,9,9	18~19 RC	-19~-18	-7~-6	-7~-6	
+1927	d/b+3, 3, 3, 3	l (TC) x 4	13,9,9,6	18~19 RC	-19~-18	-7~-6	-7~-6	
+1928	d/b+3, 3, 3, 3, 3	l (TC) x 5	13,9,9,6,6	18~19 RC	-19~-18	-7~-6	-7~-6	
+1929	d/b+3, 3, 3, 3, 3, 3	l (TC) x 6	13,9,9,6,6,6	18~19 RG	-27	-14	-14	
+1930	d/b+3, 3.. (two to five hits), f+4	m	20	12	-8	KND	KND	
+	d/b+3, 3.. (two to five hits), d+3+4	l, l, , (IND)	13,9,,	12 Air	-25	-13	-13	
+1695	d/b+4	l	18	17	-12	-1	-1	
+	d/b*, 1+2 or FC+d/b*, 1+2 (to PDP)	(Special) (TC)(PDP)		RC				
+1880	PDP 1 or 2	h!	33	22~37 (37~)	CS	CS	CS	
+1881	PDP 3 or 4	m (TJ)	31	17~28 (32~)	-15~-4	-13~-2	CS	
+1628	b+1	h	12	17	+1	+7	+12	
+1814	b+1, 1	h, h	12,10	17	+4	+5	+10	
+1815	b+1, 1, 1	h, h, h	12,10,10	17	+4	+5	+10	
+1816	b+1, 1, 1, 1	h, h, h, h	12,10,10,6	17	+4	+5	+10	
+1817	b+1, 1, 1, 1, 1	h, h, h, h, h	12,10,10,6,6	17	4	+5	+10	
+1818	b+1, 1, 1, 1, 1, 1	h, h, h, h, h, h	12,10,10,6,6,6	17a,d	-75	-74	-69	
+	b+1, ,, d/b+3	h, , l	12,,9,,	17,	-20	-9	-9	
+	b+1, 3 or 4	h, (Special)	12	17	-6	0	+5	
+	b+1, 1.. (two to five hits), 3 or 4	h, h, , (Special)	12,10,,,	17	-3	-2	+3	
+1629	b+2	m	16	14	-9	+2	+2	
+	b+2, 1+2	m, (KIN)	16	14	-9	+2	+2	
+1639	b+2, 1	m, m (TJ)	16,27	14	-17~-16	Launch (JG?)	Launch (JG?)	
+	b+2, 1, 1+2	m, m (TJ), (KIN)	16,27	14	-7	Launch (JG?)	Launch (JG?)	
+1634	b+2, 2	m, h	16,28	14	-13	KND	KND	
+	b+3 or 4 (one spin)	(Special)		14				
+	B+3 or 4, ,,	(Special)		( RG)				
+1865	u/b+1+2	!	50?	50~51	CS	CS	CS	
+1867	u/b+1+2, 1+2	h!	24	18~19 (37~)	+1~+2	+1~+2	CS	
+1873	u/b+1+2, n+1	!	29	20~104 (21~)	CS	CS	CS	
+	u/b+1+2, n+1, b	!, !	29,29	20~50 (26~)	CS	CS	CS	
+2035	u+3+4	mm (TJ)	13,16	39~41, 45~48	+4~+7s	KND	KND	
+2034	u+3+4 (First hit only)	m (TJ)	13	39~41	-9~-7	+2~+4s	+2~+4s	
+1525	u/f+1	m (TJ)	25	23 js9	-6	+5s	JG	
+1528	u/f+2	l (TJ)	25 js10	35s	-16	+6g	KND	
+1549	u/f+3	m (TJ)	20	15	-13	Launch (JG?)	Launch (JG?)	
+	u/b+4	m (TJ)	22	20	-19	KND	KND	
+1565	u or u/f+4	m (TJ)	28	20	-9	KND	KND	Homing
+1947	u/f+1+2	! (TJ)	54	113~114	KND	KND	KND	
+1950	u/f+1+2, d (First stage)	! (TJ)	27	55~56	+4~+5	+4~+5	+4~+5	
+	u/f+1+2, d (Second stage)	! (TJ)	40	83~84	+4~+5	+4~+5	+4~+5	
+	u/f+1+2, 1+2	(Special) (TJ)(DGF)		Air				
+1951	u/f+1+2, b	! (TJ)	47	93~94	KND	KND	KND	
+	u/f+1+2, b, n+1+2	(Special) (TJ)(DGF)		Air				
+2025	u/f+3+4	m (TJ)	27	31~34	-16~-13	KND	KND	
+	u/f+3+4, 1+2	(Special) (TJ)(DGF)		Air				
+1968	u/f+3+4, 3+4	m (TJ), m	27,33		-12	Launch	Launch	
+	u/f+3+4, d+1+2	m (TJ), m (TJ)(FLE)	27,9	Air	+18 GB	KND	KND	
+	u/f+3+4, d+3+4	m (TJ), (IND)	27	Air	-20	KND	KND	
+1820	u/f+3+4, b+1	m (TJ), h	27,10	( Air)	-1~0	-43~-42	-43~-42	
+1772	u/f+3+4, b+1, 3+4	m (TJ), h, m (TJ)	27,10,28	()	0~+2 OC	KND	KND	
+1822	u/f+3+4, b+1, 4	m (TJ), h, m (TJ)	27,10,20	()	-14~+7	Launch (JG?)	Launch (JG?)	
+1752	u/f+3+4, b+1, 4, d+1	m (TJ), h, m (TJ), m	27,10,20,20	()	-5~-4	0~+1 OC	KND	
+2037	u/f+3+4, u or u/f+3+4	m (TJ), mm (TJ)	27,13,13	()	-4~-3	KND	KND	
+1619	f, F+2	m	24	15(16~)	-10	+3(Throw)	+?(Throw)	
+	f, F+2 Hit in front1+2	m((throw))	24,20(6,7,7)?	15(16~)			CS	
+1937	f, F+3	m	33	23(24~)	-5	+4	CS 12	
+	f, F+3, 1+2	m, (KIN)	30	23(24~)	+1	+10	CS 18	
+1940	f, F+4	m (TJ)	27	15~16 RBT (16~)	-5~-4?	Launch	Launch	
+1952	f, F+1+2	m	29	22~24 RBT (23~)	-8~-6	+3~+5 OC	+3~+5 OC	
+1967	f, F+3+4	m (TJ)	20	22~24 (23~)	-20~-18	-9~-7 OC	-9~-7 OC	
+1942	f, F+3+4, 1+2	m (TJ), m (TJ)	20,20	22~24 (23~)	-31~-25	KND	KND	
+1971	f, F+3+4, 1+2, 3+4	m (TJ), m (TJ), m (TC)	20,20,27	22~24 (23~)	-13	Launch	Launch	
+2015	f, F+1+4	!	81	45 RG(46~)	CS	CS	CS	
+2016	f, F+1+4, f, F	!, !	81,249	45(46~) RG	CS	CS	CS	
+	f, F+1+4, n	(Special)		RBT				
+1869	b, B+1+4	!	67	59(60~)	CS	CS	CS	
+	b, B+1+4, B (Cancel)	(Special), m	28	47(48~)	-15	CS	CS	
+1843	f, n, d, d/f+1	m	22	17~18 (17~)	-15~-14	Launch	Launch	
+	f, n, d, d/f+1, 1+2	m, (KIN)	27	17~18 (17~)	-7~-6	Launch	Launch	
+1841	f, n, d, d/f+2	m (TC)?		14(14~)	-14	+5?k	SCD	Tail spin
+	in rage f, nf, n, d, d/f+1+2	m (TC)?		14(14~)	+2?	SCD	SCD	Rage art, Tail spin
+1856	qcf+1	! (TJ), ! (TJ), !	32,24,33	31,38, 58~59	0~+1 OC	0~+1 OC	0~+1 OC	
+1728	f, f, f+3 or 2+4+3	m (TJ)	40	22~23 (25~)	+9~+10g	KND	KND	
+1714	WS+1	m	20	14~15	-10~-9	+1~+2	+6~+7	
+1851	WS+1, 1	m, h	20,16	14~15	-11	0	0	
+	WS+1, 1, b+3 or 4	m, h, (Special)	20,16	14~15	-16	-5	-5	
+1852	WS+1, 1, 1	m, h, h	20,16,16	14~15	-11	0	0	
+1853	WS+1, 1, 1, 1	m, h, h, m	20,16,16,32	14~15	0~+1s	+6~+7s	+6~+7s	
+1715	WS+1, 2	m, h	20,24	14~15	-4	+13kg	SCD	Tail spin
+	WS+1, 2, d/b+2	m, h, m	20,24,10	14~15 RC	-5	+6	+6	
+	WS+1, 2, D/B+2, 2	m, h, m, m	20,24,10,9	14~15 RC	-9~-8	+2~+3	+2~+3	
+	WS+1, 2, D/B+2, 2, 2	m, h, m, m, m	20,24,10,9,8	14~15 RC	-9~-8	+2~+3	+2~+3	
+	WS+1, 2, D/B+2, 2, 2, 2	m, h, m, m, m, m	20,24,10,9,8,6	14~15 RC	-9~-8	+2~+3	+2~+3			
+	WS+1, 2, D/B+2, 2, 2, 2, 2	m, h, m, m, m, m, m	20,24,10,9,8,6,5	14~15 RC	-9~-8	+2~+3	+2~+3			
+	WS+1, 2, D/B+2, 2, 2, 2, 2, 2	m, h, m, m, m, m, m, m	20,24,10,9,8,6,5,4	14~15 Air, RG	-49~-46	-38~-35	-38~-35			
+1717	WS+2	m	21	15 RBT	-4	+7	+7	
+1718	WS+2, 1	m, m, (DGF)	21,	15a	-9?	Launch (JG?)	Launch (JG?)	
+1723	WS+3 or 3+4	m	16	16	-6	+3	+3	
+1724	WS+3, 2	m, m	16,27	16	-12s	KND	JG	
+1725	WS+4	m	14	11	-6	+5	+5	
+	WS+4, 1+2	m (KIN)	14	11	-6	+5	+5	
+1677	FC+d/f+4	l (TC)	18	18 RC	-21	+4?s	KND	Homing
+1827	FC+D/F+1 FC+d/b, b+1	l!	16	25(26~)	KND	KND	KND	
+2031	SS+1	m	28	17(26~)	-9	+2	Launch (JG?)	
+2032	SS+2	m	27	18(27~)	-13	Launch	Launch	
+	SS+4	h	28	16(25~)	0	KND	CS	Homing, Tail spin
+	SS+4, 1+2	h, (KIN)	28	16(25~)	+3	KND	CS	Homing, Tail spin
+	SS+4, 3+4	h, (MED)	28	16 RBT(25~)	-3	KND	CS	Homing, Tail spin
+	Grounded face up 3+4	(Special) (TC)(IND)		Air				
+1917	Opponent Down u/b or u+1	On grounded opponent(m)	24	28	-13	-8 OC	-8 OC	
+	1+2 or FC+1+2 (to KIN)	(Special)(Returns move)(KIN)		28				
+	KIN Returns high or mid attacks	Attack returned(mm (TJ))	13,16	39~40	+4~+5s	KND	KND	
+	KIN F	(Special) (TC)(KIN)		39~40				
+	KIN D (Cancel)	(KIN)		39~40				
+1892	KIN 1	m	13	17(32~)	-12	-1	-1	
+1894	KIN 1, 1	m, mm	13,6,20	17(32~)	-12	+4s	+4s	
+	KIN 1, 1, 2+3	m, mm, (NSS)	13,6,20	17(32~)	-28	-12 OC	-12 OC	
+1900	KIN 2	m	20	21(36~)	-14	Launch(JG?)	Launch(JG?)	
+1902	KIN 2, 1+2	m, m	20,40	21(36~)	-18~-17 OC	KND	KND	
+	KIN 2, 1+2*	m, m	20,40	21(36~)	-1~0	KND	KND	
+1911	KIN 3	l (TJ)	17	25~32s js10 cs24	-16~-9	KND	KND	
+1914	KIN 4	h	23	16(31~)	0	KND	CS	Homing, Tail spin
+	KIN 4, 1+2	h, (KIN)	28	16(31~)	+3	KND	CS	Homing, Tail spin
+	KIN 4, 3+4	h, (MED)	28	16 RBT(31~)	-3	KND	CS	Homing, Tail spin
+1909	KIN 1+2	mmmm (TJ)	4,4,4,24	12,19, 27,41 RBT (27~)	-6~-5	KND	KND	
+1904	KIN f+2	h	33	12(27~)	-13	KND	SCD	
+1895	KIN b+2	m	15	12(27~)	-9	+2	+2	
+1896	KIN b+2,1	m	15,19	12(27~)	-12	Launch	Launch	
+1910	KIN b+1+2	!	30?	45?(?~)	CS	CS	CS	
+	KIN u+1+2	(Special) (TJ)(KIN)		Air				
+	3+4 or BT 3+4 (to MED)	(Special)(Recover health)(MED)		RBT				
+	MED 3+4	(MED)		RBT				
+	MED f or b,	(MED)		+1~				
+1821	MED 3 (Opponent in front)	m (TJ)	20	17~28 RBT	-14~-3	Launch (JG?)	Launch (JG?)	
+	MED 3 (Opponent behind)	m (TJ)	20	29~38 RBT	+3~+12	KND	KND	
+1460	MED 1+2	!	13	30~31	CS	CS	CS	
+	MED 1+4	!	81(,22)	30 RG	CS	CS	CS	
+	MED 2+3	h(Throw)	22	38		Throw(0)		
+	MED 2+3, F	h(Throw)	-26	38		Throw(0)		
+	MED 2+4 or MED 1+3	h(Throw)	35	12	Throw	Throw	Throw	
+	d+1+2 (to FLE)	m (TJ)(FLE)	9	16 Air~	+18 GB	KND	KND	
+	FLE d/b (Cancel)	(FLE)		16~				
+1777	FLE 1	(Special)		RC				
+1780	FLE 2	l (TC)	27	24~28 RG	-13~-9	KND	KND	
+	FLE 3 or 4	(Special) (TJ)(FLE)		Air				
+2033	FLE 1+2	h	21?	18~19	-8~-7	Launch (JG?)	Launch (JG?)	
+1970	FLE 3+4	m (TC)	33	25	-12	Launch	Launch	
+	FLE f or b (to WFL)	(Special) (TJ)(WFL)		Air				
+1808	WFL 3	m, (Special)	33(,10,10)	17 Air(36~)	-17	Throw(KND)	Throw(KND)	
+1810	WFL 4	l	20	23 RG(42~)	-10	+11 OC	KND	
+	FLE f, f	m (TJ) x 5, (FLE)	4,4,4,4,4,2	8,17,25, 34,43 (9~)	+6	+17	+17	
+	FLE f, f (Second hit miss)	m (TJ) x 4, (FLE)	4,4,4,4,2	8,17,25, 34(9~)	-3	+8	+8	
+	FLE d	(Special) (TC)(FLE)		RC				
+	FLE d/b or d or d/f+3+4	(Special) (TC)(FLE)		Air				
+	FLE u/b or u or u/f+1+2	(Special) (TJ)(DGF)		Air				
+1777	FLE u+3+4	m (TJ)	40	38~39 RG	+3~+4	KND	KND	
+	FLE u+3+4, Any button	m (TJ), (Special)	40	38~39	-9~-8	KND	KND	
+	FLE u/b or u or u/f	! (TJ), (FLE)	28	30~40	KND	KND	KND	
+	d+3+4 (to IND)	(Special) (TC)(IND)		Air				
+	IND n (to INS)	(Special) (TC)(INS)		Air				
+1963	INS 1	! (TJ)(INS)	20	53	0 OC	0 OC	0 OC	
+1858	INS 2	m(INS)	9	39 RC	-9~-8	+2~+3	+2~+3	
+1941	INS 3	m (TJ)(INS)	20	32~38	-31~-25	KND	KND	
+1971	INS 3, 3+4	m (TJ), m (TJ)(INS)	20,27	32~38	-13	Launch	Launch	
+1677	INS 4	l (TC)(INS)	20	18?s	-21	+3? OC	KND	
+	INS B or F	(INS)		( RBT)				
+	INS 3+4* D or b or f or u	(INS)		()				
+	INS 1+2	(Special) (TJ)(FLE)		a				
+	INS u+1+2	(Special) (TJ)(INS)		a				
+	u+1+2 (to DGF)	(Special) (TJ)(DGF)		a				
+	DGF b or f	(Special) (TJ)		a				
+	DGF d/b or d or d/f (Cancel)	(DGF)						
+1737	DGF 1	!	20	30(40~)	0s	0s	0s	
+1740	DGF 2	h (TJ)(DGF)	20	16~17a (26~)	+4~+5	Launch (JG?)	Launch (JG?)	
+1741	DGF 3	l (TC)	24	22 RC(32~)	-14	+5?s	KND	
+1742	DGF 4	m (TJ)	33	19~20 (29~)	-6~-5?	+14k	KND	Tail spin
+1777	DGF 1+2	(Special) (TJ)(FLE)		a				
+1743	DGF 3+4	h!, ( (Sky))(throw)	22,18	20~21 (30~)	Throw	Throw	Throw	
+1738	DGF f+2	h(DGF)		18?a	-?	KND	SCD	Homing, Tail spin
+	DGF d+3+4	(Special) (TC)(IND)		a				
+1596	BT 1	h	21	15 RBT	-6	+5	+5	
+1722	BT 1, 2	h, m	21,24	15 RBT	-5	+5	hKZD	
+1597	BT 1, 3	h, h	21,33	15	-7	KND	KND	
+	BT 2	h	24	16	-4	+13kg	SCD	Tail spin
+	BT 2, d/b+2	h, m	24,10	16 RC	-5~-4	+6~+7	+6~+7	
+1608	BT 3	m (TJ)	27	24~25 RBT	-3~-2	KND	KND	
+1666	BT d/b or d or d/f+1	l (TC)	27	17 RC	-13	+3	KND	
+	BT u+2+3	!	60	50~51 RBT	CS	CS	CS	
+	2+3 (to NSS)	(NSS)		50~51				
+	NSS 2+3	(Special)		50~51				
+1584	NSS 1	h	9	10	+1	+8	+8	
+1592	NSS 1, 2	h, m	9,10	10	-13~-12	-2~-1	-2~-1	
+	NSS 1, 2, 1	h, m, m	9,10,8	10	-12	-1	-1	
+	NSS 2	h	13	10	-1	+5	+8	
+	NSS 2, 1	h, hh	13,6,13	10	-12	KND	KND	
+	NSS 1+4 or FC+1+2	m, (Special)	28	8~9	-16~-15	CS	CS	
+	NSS 4~1	m, (Special)	28	8~9 (9~)	-16~-15	CS	CS	
+	NSS 1+2+3	h	33	22	-18	KND	KND	
+1613	NSS f+1+2	m (TC)	33	16~17 RC	-13~-12	+4~+5	KND	
+	NSS f+3+4	m	27	21~25?	-14~-10?	KND	KND	Power crush
+	NSS d/f+3	m	13	17~18 RC	-4~-3	+4~+5	+4~+5	
+	NSS d/f+3, 1	m, m	13,16	17~18	-5	+5 OC	KND	
+	NSS d+1	m	20	24~25	-7~-6 OC	0~+1 OC	KND	
+	NSS d+1+4	(Special)		24~25				
+	NSS d+2, 1	m (TC), h	16,22	24~25	–	+k		Tail spin
+	NSS d/b+1	Sm (TC)	6	11 RC	-5	+6	+6	
+	NSS b+2	m	16	14	-9	+2	+2	
+	NSS b+2, 2	m, h	16,24	14	-10	0	KND	
+	NSS u/b+1+2	!	67	51	CS	CS	CS	
+	NSS u/b+1+2, 1	h!	54	20(21~)	KND	KND	KND	
+	NSS u/b+1+2, 1+2	h	20	18~19 (37~)	-15~-14	-4~-3	CS	
+1731	NSS u+1+2	l (TJ), (IND)	24	27 Air	+4 OC	+20 OC	+20 OC	
+	NSS u/f+3+4, b+1, 4, d+1	m (TJ), h, m (TJ), m	27,10,20,20	27	-7~-6 OC	0~+1 OC	KND	
+	NSS b, B+1+4	!	54	65~70 (66~)	KND	KND	KND	
+	NSS b, B+1+4, B (Cancel)	(Special), m	28	47(48~)	-15	CS	CS	
+	NSS f, F+1+4	(Special)		RBT				
+	NSS qcf+1	m (TJ)	40	53~55 (53~)	-8~-6 OC	KND	KND	
+1721	NSS WS+2, 1	m, h	21,21	53~55 (53~) RBT	-6	+5	+5	
+1722	NSS WS+2, 1, 2	m, h, m	21,21,24	53~55 (53~) RBT	-5	+5	FS(+10 GB) 18	
+1597	NSS WS+2, 1, 3	m, h, h	21,21,33	53~55 (53~)	-7	KND	KND	
+1829	NSS FC+d/b, b+1 FC+D/F+1	l	16	25~26 (26~)	-14~-13?	KND	KND	
+1830	NSS FC+d/b, b+1, 2	l, l	16,27	25~26 (26~)	-20	+14	+14	
+1674	NSS FC+D/F+3	l		18?(19?~)	-19?	KND	KND	
+	NSS BT d/b or d or d/f+1	l (TC)	20	17 RC	-13	+3	KND	
+	NSS IND 1	m (TJ)(INS)	20	48~51	-8~-5 OC	KND	KND	
+	NSS d+1+2 or d+3+4 (to IND)	(IND)		48~51				
+	NSS u/f+1+2	(Special) (TJ)		RC				
+1905	NSS KIN 1	m	20	16~17	-8~-7 OC	KND	KND	
