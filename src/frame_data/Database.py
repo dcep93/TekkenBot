@@ -32,6 +32,13 @@ class Characters(enum.Enum):
     kuma = '[Kuma]'
     lars = '[Lars]'
     law = '[LAW]'
+    lee = '[LEE]'
+    leo = '[Eleonor]'
+    lucky_chloe = '[Chloe]'
+    master_raven = '[FRV]'
+    miguel = '[Miguel]'
+    nina = '[NINA]'
+    panda = '[PANDA]'
 
 db_field_to_col = {
     'move_id': DataColumns.DataColumns.move_id,
