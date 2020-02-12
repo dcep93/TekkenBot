@@ -29,6 +29,7 @@ class Characters(enum.Enum):
     jack = '[Jack]'
     josie = '[JOSIE]'
     king = '[KING]'
+    kuma = '[Kuma]'
 
 db_field_to_col = {
     'move_id': DataColumns.DataColumns.move_id,
