@@ -47,17 +47,23 @@ class MoveNode:
             self.name = str(self.move_id)
 
 class MovelistParser:
+    cached_movelists = {}
+
     def __init__(self, movelist_bytes, movelist_pointer):
         header_length = 0x2e8
-        char_name_address = self.header_line(1, movelist_bytes, movelist_pointer)
-        developer_name_address = self.header_line(2, movelist_bytes, movelist_pointer)
+        char_name_address = header_line(1, movelist_bytes, movelist_pointer)
+        developer_name_address = header_line(2, movelist_bytes, movelist_pointer)
 
         self.char_name = movelist_bytes[char_name_address:developer_name_address].strip(b'\00').decode('utf-8')
-        print("Parsing movelist for {}".format(self.char_name))
 
+        if self.char_name in self.cached_movelists:
+            self.names, self.can_be_done_from_neutral, self.move_id_to_input, self.movelist_names = self.cached_movelists[self.char_name]
+            return
+
+        print("Parsing movelist for {}".format(self.char_name))
         unknown_regions = {}
         for i in range(42, 91, 2):
-            unknown_regions[i] = self.header_line(i, movelist_bytes, movelist_pointer)
+            unknown_regions[i] = header_line(i, movelist_bytes, movelist_pointer)
 
         names_double = movelist_bytes[header_length:unknown_regions[42]].split(b'\00')[4:]
         self.names = []
@@ -122,10 +128,7 @@ class MovelistParser:
 
         self.movelist_names = movelist_bytes[0x2E8:200000].split(b'\00')
 
-    @staticmethod
-    def header_line(line, movelist_bytes, movelist_pointer):
-        header_bytes = movelist_bytes[line * 8:(line+1) * 8]
-        return struct.unpack('<Q', header_bytes)[0] - movelist_pointer
+        self.cached_movelists[self.char_name] = (self.names, self.can_be_done_from_neutral, self.move_id_to_input, self.movelist_names)
 
     def can_be_done_from_neutral(self, move_id):
         if move_id in self.can_move_be_done_from_neutral:
@@ -163,3 +166,7 @@ class MovelistParser:
             return string, last_move_was_empty_cancel
         else:
             return "N/A", False
+
+def header_line(line, movelist_bytes, movelist_pointer):
+    header_bytes = movelist_bytes[line * 8:(line+1) * 8]
+    return struct.unpack('<Q', header_bytes)[0] - movelist_pointer
