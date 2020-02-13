@@ -39,12 +39,18 @@ class Characters(enum.Enum):
     miguel = '[Miguel]'
     nina = '[NINA]'
     panda = '[PANDA]'
+<<<<<<< HEAD
     shaheen = '[SHAHEEN]'
     steve = '[Steve_Fox]'
     xiaoyu = '[Lin_Xiaoyu]'
     yoshimitsu = '[YOSHIMITSU]'
     eliza = '[Vampire]'
     geese = '[Geese_Howard]'
+=======
+    noctis = '[Noctis]'
+    anna = '[ANNA]'
+    lei = '[Lei_Wulong]'
+>>>>>>> cdcdf1fc750dd977644c9d89e38f9d5fc789928e
 
 db_field_to_col = {
     'move_id': DataColumns.DataColumns.move_id,
