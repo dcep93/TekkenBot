@@ -18,19 +18,17 @@ Created by roguelike2d. Maintained by the community.
 ### Code
 
 -   [x] The main purpose of this project was to simplify the code so that other devs can more easily iterate or fork
+-   [x] I'll watch the github issues tab for improvements/bug fixes when they're posted
 
 ### Frame Data
 
 -   [x] Characters' frame data is imported from rbnorway - when that move is detected, its data is shown instead of reading game state
 -   [x] When an unknown move is performed, its data is remembered so that next time there are fewer 'unknown' values
--   [x] Shows data for whiffed moves too
-
-### Taking Requests
-
--   [x] I'll watch the github issues tab for improvements/bug fixes when they're posted
+-   [x] Remaining opponent health is displayed so you don't have to guess what will kill them
 
 ### TODO
 
--   [ ] Finish transcribing moves for remaining cast
 -   [ ] Throws - how to break and importing from rbnorway
 -   [ ] What do do about moves that have more than one hit for a single input
+-   [ ] Package into exe
+-   [ ] Fix punish column
