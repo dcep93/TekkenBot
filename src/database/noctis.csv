@@ -1,106 +1,106 @@
 move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes
-""	in rage d+1+2	m	55	20 pc	-32	throw	throw	rage art
-""	in rage f+2+3	m	10,30	18	+2	throw	throw	rage drive
-""	1	h	7	10	+1	+8	+8	
-""	1, 2	h,h	7,8	10	-2	+6	+6	nc from 1st hit
-""	1, 2, 2	h,h,h	7,8,12	10	-11	+1	+1	nc from 1st hit
-""	1, 2, 1+2	h,h,m	7,8,23	10	-9	KND	KND	Tail spin
-""	1, 2, 3 or 4	h,h, (Special)	7,8	js	-26	-18	-18	
-""	2	m	9	15	-12	-6	-6	
-""	2, 2	m,m	9,13	15	-9	+6	+6	nc from 1st hit
-""	2, 2, 2	m,m,h	9,13,7	15	-8	-2	-2	
-""	2, 2, 2, 2	m,m,h,h	9,13,7,7	15	-7	+7	+7	nc from 3rd hit
-""	2, 2, 2, 2, 2	m,m,h,y,m	9,13,7,7,15	15	-14	KND	KND	nc from 3rd hit
-""	2, 2, f+2	m,m,m	9,13,23	15	-14	+5	Tail Spin	Tail spin
-""	2, 2, b+2	m, m, m(throw)	9,9,5,(20)	15 js	-11	throw	throw	
-""	3	h	15	14	-7	-1	-1	
-""	4	h	15	12	-8	+3	+3	
-""	4,2	h,m	15,15	12	-14	-1	-1	
-""	1+2	h,m	17,24	18	-14	KND	Tail Spin	Homing, Tail Spin
-""	1+2~B	h	17	18	-9	-3	-3	Homing
-""	f+2	m	8(,25)	20 js	-9	throw	throw	
-""	f+3	m	14	16	-9	+9	+9	
-""	f+3, 2	m,m	14,5(,20)	16	-11	throw	throw	
-""	f+4	m	13	17	-8	+8	+8	
-""	f+4, 2	m,m	13,21	17	-11	KND	KND	Tail spin
-""	f+1+2	m	24	16	-19	KND	KND	
-""	f+1+4	m	20	23	-13	KND	KND	Power Crush
-""	d/f+1	m	10	13	-1	+7	+7	
-""	d/f+1, 4	m,h	10,20	13 js	-5	KND	KND	Tail Spion
-""	d/f+2	m	20	15	-20	JG	JG	
-""	d/f+3	m	9	16	-13	-2	-2	
-""	d/f+3, 1	m,h	9,7	16	-10	-3	-3	
-""	d/f+4	m	12	14	-7	+4	+4	
-""	d/f+4, 2	m,h	12,17	14	-2	+8	+8	
-""	d/f+4, 2, 4	m,h,h	12,17,20	14 js	-5	KND	KND	Tail Spin
-""	d/f+4, 2, 2	m,h,m	12,17,21	14 js	-8	JG	JG	
-""	d/f+1+2	m	27	25	-9	KND	KND	Tail Spin
-""	d+1	m,m	10,10	17	-3	+4	+4	
-""	d+2	l	15	20	-15	0	0	
-""	d+2, 2	l,h	15,23	20	-9	+10	KND	Tail Spin
-""	d or d/b+3	l	13 cs	16	-13	-2	-2	
-""	d+4	l	9	19	-31	-9	-9	
-""	d+4, 1	l,h	9(13),20	19	-12	+4	+4	
-""	d+4 ,1, 1+2	l,h,m	9(13),20,25(28)	19	-18s	KND	KND	
-""	d/b+1	m	10	15	-6	+3	+3	
-""	d/b+1, 1+2	m,m,m	10,7,10	15	-5	+6	+6	
-""	d/b+1~F	m	7	15	-6	0	0	
-""	d/b+2	l	20	24	-19	KND	KND	
-""	d/b+4	l	9	17	-12	-1	-1	
-""	d/b+1+2	m	25	25	-16	JG	JG	
-""	d/b+1+2*	m	28	46	+2	JG	JG	
-""	b+1	h	10	12	-11	0	0	
-""	b+1, 2	h,h	10,21	12	-9	+7	+7	
-""	b+2	m	13	15	-9	+6	+6	
-""	b+2 when hit 1+2	m, throw	13,7,17	15	~	+6	+6	
-""	b+3	h	14	14	-12	-1	-1	
-""	b+3, 1	h,m	14,23	14	-14	KND	KND	
-""	b+3~B	h, (special)	14	14	-8	+3	+3	
-""	b+4	h	17	18	-7	+7	+7	
-""	b+4, 1+2	h,m	17,27	20	-13	KND	JG	
-""	b+1+4	m	20	26	-9	+4	+4	KND with Punch parry
-""	b+2+3	m!	50	69	KND	KND	KND	
-""	u/b or u or u/f+1	h	17	14	-4	+8	KND	
-""	u/b or u or u/f+2	m	21	30 js9~	-8	JG	JG	
-""	u/b or u or u/f+3	m(,m)	11(,23)	17 js9~	-13	JG	JG	
-""	u/b or u or u/f+3, u	m(,m)	11(,23)	17 js9~	-13	JG	JG	
-""	u/b or u or u/f+4	h	20	19 js9~	-3	KND	KND	Homing, Tail Spin
-""	u/b,b	special	js10~					
-""	u/b or u or u/f	special	js9~					
-""	During jump 1	m	7	9	-23	-16	-16	
-""	During jump 2	m	14	10	-22	-15	-15	
-""	(When hit in air) 2, 2	m,m	14,14					
-""	(When hit in air) 2, 2, 2	m,m,m	14,14,23					Tail spin
-""	(During jump) 3	m	10	10	-22	-15	-15	
-""	(During jump) 4	m	12	12	-21	-14	-14	
-""	(During jump) 1+2	m	27	41 js9~	+5	KND	KND	
-""	f, f+4	m	15(,14,21)	19	-14	throw	throw	
-""	f, f+1+2	m	20	15	-9	+10	KND	Tail Spin, Homing
-""	f, f+3+4	h	50	30 js14~	-8	KND	KND	
-""	f, f, f+1+2 or wr+1+2	m	25	23 js3~	+11	JG	JG	
-""	FC+1	sm	5	10 cs	-5	+6	+6	
-""	FC+2	sm	8	11 cs	-9	+5	+5	
-""	FC+3	l	12 cs	16	-17	-3	-3	
-""	FC+4	l	10	12 cs	-15	-4	-4	
-""	WS+1	m	10	13	-8	+6	+6	
-""	WS+1, 2	m,m	10,23	13	-13	+2	KND	
-""	ws+2	m	15	15	-9	-3	-3	
-""	ws+2, 2	m,m	13,23	15	-14	+5	Tail Spin	Tail spin
-""	ws+3	m	12	14	-7	+9	+9	
-""	ws+3,2	m,m	12,5(,20)	14	-11	throw	throw	
-""	ws+4	m	15	11	-6	+5	+5	
-""	FC+d/f+1	m	25	16	-9	KND	KND	
-""	FC+d/f+2	l	17	20 cs	-13	+4s	+13g	Homing
-""	1+2+3+4							
-""	1+3+4							
-""	SS+2	m	21	18	0	5s	KND	
-""	BT 1	h	15	8	-8	+3	+3	
-""	BT 2	m	16	20	-9	KND	KND	
-""	BT 3 or 4	h	25	10	-8	KND	KND	
-""	BT d+1 or d+2	sm	10	10	-2	+9	+9	
-""	BT d+3 or d+4	l	12	10	-11	+3	+3	
-""	f+3+4			cs				
-""	f+3+4, 1	m	24	18	-13	KND	KND	Power crush, Wall bounce
-""	f+3+4, 3+4	l	17	20 cs	-20	KND	KND	
-""	In rage d+1+2	m	55	20	-32	throw	throw	
-""	In rage f+2+3	m	10(,30)	18	+2	throw	throw	
+2005	in rage d+1+2	m	55	20 pc	-32	throw	throw	rage art
+1554	in rage f+2+3	m	10,30	18	+2	throw	throw	rage drive
+	1	h	7	10	+1	+8	+8	
+	1, 2	h,h	7,8	10	-2	+6	+6	nc from 1st hit
+	1, 2, 2	h,h,h	7,8,12	10	-11	+1	+1	nc from 1st hit
+	1, 2, 1+2	h,h,m	7,8,23	10	-9	KND	KND	Tail spin
+	1, 2, 3 or 4	h,h, (Special)	7,8	js	-26	-18	-18	
+	2	m	9	15	-12	-6	-6	
+	2, 2	m,m	9,13	15	-9	+6	+6	nc from 1st hit
+	2, 2, 2	m,m,h	9,13,7	15	-8	-2	-2	
+	2, 2, 2, 2	m,m,h,h	9,13,7,7	15	-7	+7	+7	nc from 3rd hit
+	2, 2, 2, 2, 2	m,m,h,y,m	9,13,7,7,15	15	-14	KND	KND	nc from 3rd hit
+	2, 2, f+2	m,m,m	9,13,23	15	-14	+5	Tail Spin	Tail spin
+	2, 2, b+2	m, m, m(throw)	9,9,5,(20)	15 js	-11	throw	throw	
+	3	h	15	14	-7	-1	-1	
+	4	h	15	12	-8	+3	+3	
+	4,2	h,m	15,15	12	-14	-1	-1	
+1502	1+2	h,m	17,24	18	-14	KND	Tail Spin	Homing, Tail Spin
+1501	1+2~B	h	17	18	-9	-3	-3	Homing
+1539	f+2	m	8(,25)	20 js	-9	throw	throw	
+1572	f+3	m	14	16	-9	+9	+9	
+1650	f+3, 2	m,m	14,5(,20)	16	-11	throw	throw	
+1573	f+4	m	13	17	-8	+8	+8	
+1574	f+4, 2	m,m	13,21	17	-11	KND	KND	Tail spin
+1552	f+1+2	m	24	16	-19	KND	KND	
+	f+1+4	m	20	23	-13	KND	KND	Power Crush
+1624	d/f+1	m	10	13	-1	+7	+7	
+1625	d/f+1, 4	m,h	10,20	13 js	-5	KND	KND	Tail Spion
+1626	d/f+2	m	20	15	-20	JG	JG	
+	d/f+3	m	9	16	-13	-2	-2	
+	d/f+3, 1	m,h	9,7	16	-10	-3	-3	
+1630	d/f+4	m	12	14	-7	+4	+4	
+1632	d/f+4, 2	m,h	12,17	14	-2	+8	+8	
+1635	d/f+4, 2, 4	m,h,h	12,17,20	14 js	-5	KND	KND	Tail Spin
+1634	d/f+4, 2, 2	m,h,m	12,17,21	14 js	-8	JG	JG	
+1628	d/f+1+2	m	27	25	-9	KND	KND	Tail Spin
+1612	d+1	m,m	10,10	17	-3	+4	+4	
+1614	d+2	l	15	20	-15	0	0	
+1615	d+2, 2	l,h	15,23	20	-9	+10	KND	Tail Spin
+	d or d/b+3	l	13 cs	16	-13	-2	-2	
+1617	d+4	l	9	19	-31	-9	-9	
+1618	d+4, 1	l,h	9(13),20	19	-12	+4	+4	
+1621	d+4 ,1, 1+2	l,h,m	9(13),20,25(28)	19	-18s	KND	KND	
+1636	d/b+1	m	10	15	-6	+3	+3	
+1638	d/b+1, 1+2	m,m,m	10,7,10	15	-5	+6	+6	
+	d/b+1~F	m	7	15	-6	0	0	
+1640	d/b+2	l	20	24	-19	KND	KND	
+1643	d/b+4	l	9	17	-12	-1	-1	
+1642	d/b+1+2	m	25	25	-16	JG	JG	
+1641	d/b+1+2*	m	28	46	+2	JG	JG	
+1583	b+1	h	10	12	-11	0	0	
+1584	b+1, 2	h,h	10,21	12	-9	+7	+7	
+1585	b+2	m	13	15	-9	+6	+6	
+	b+2 when hit 1+2	m, throw	13,7,17	15	~	+6	+6	
+1595	b+3	h	14	14	-12	-1	-1	
+1596	b+3, 1	h,m	14,23	14	-14	KND	KND	
+	b+3~B	h, (special)	14	14	-8	+3	+3	
+1598	b+4	h	17	18	-7	+7	+7	
+1599	b+4, 1+2	h,m	17,27	20	-13	KND	JG	
+1592	b+1+4	m	20	26	-9	+4	+4	KND with Punch parry
+1476	b+2+3	m!	50	69	KND	KND	KND	
+1470	u/b or u or u/f+1	h	17	14	-4	+8	KND	
+1475	u/b or u or u/f+2	m	21	30 js9~	-8	JG	JG	
+1483	u/b or u or u/f+3	m(,m)	11(,23)	17 js9~	-13	JG	JG	
+1482	u/b or u or u/f+3, u	m(,m)	11(,23)	17 js9~	-13	JG	JG	
+1486	u/b or u or u/f+4	h	20	19 js9~	-3	KND	KND	Homing, Tail Spin
+	u/b,b	special	js10~					
+	u/b or u or u/f	special	js9~					
+1471	During jump 1	m	7	9	-23	-16	-16	
+1460	During jump 2	m	14	10	-22	-15	-15	
+1464	(When hit in air) 2, 2	m,m	14,14					
+1465	(When hit in air) 2, 2, 2	m,m,m	14,14,23					Tail spin
+1478	(During jump) 3	m	10	10	-22	-15	-15	
+1487	(During jump) 4	m	12	12	-21	-14	-14	
+1466	(During jump) 1+2	m	27	41 js9~	+5	KND	KND	
+1566	f, f+4	m	15(,14,21)	19	-14	throw	throw	
+1565	f, f+1+2	m	20	15	-9	+10	KND	Tail Spin, Homing
+1569	f, f+3+4	h	50	30 js14~	-8	KND	KND	
+1663	f, f, f+1+2 or wr+1+2	m	25	23 js3~	+11	JG	JG	
+	FC+1	sm	5	10 cs	-5	+6	+6	
+	FC+2	sm	8	11 cs	-9	+5	+5	
+	FC+3	l	12 cs	16	-17	-3	-3	
+	FC+4	l	10	12 cs	-15	-4	-4	
+1645	WS+1	m	10	13	-8	+6	+6	
+1646	WS+1, 2	m,m	10,23	13	-13	+2	KND	
+1647	ws+2	m	15	15	-9	-3	-3	
+1648	ws+2, 2	m,m	13,23	15	-14	+5	Tail Spin	Tail spin
+1649	ws+3	m	12	14	-7	+9	+9	
+1650	ws+3,2	m,m	12,5(,20)	14	-11	throw	throw	
+	ws+4	m	15	11	-6	+5	+5	
+1609	FC+d/f+1	m	25	16	-9	KND	KND	
+1610	FC+d/f+2	l	17	20 cs	-13	+4s	+13g	Homing
+	1+2+3+4							
+	1+3+4							
+1477	SS+2	m	21	18	0	5s	KND	
+	BT 1	h	15	8	-8	+3	+3	
+1529	BT 2	m	16	20	-9	KND	KND	
+	BT 3 or 4	h	25	10	-8	KND	KND	
+	BT d+1 or d+2	sm	10	10	-2	+9	+9	
+	BT d+3 or d+4	l	12	10	-11	+3	+3	
+	f+3+4			cs				
+1581	f+3+4, 1	m	24	18	-13	KND	KND	Power crush, Wall bounce
+1578	f+3+4, 3+4	l	17	20 cs	-20	KND	KND	
+	In rage d+1+2	m	55	20	-32	throw	throw	
+	In rage f+2+3	m	10(,30)	18	+2	throw	throw	
