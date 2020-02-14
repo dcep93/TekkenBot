@@ -69,13 +69,13 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	WS+4	m	18	11~12	-6~-5	+5~+6	+5~+6	
 1699	SS+4	l	20	20~21s (29~)	-12~-11	+6~+7s	KND	
 	From special move	(STB)		20~21 (29~)				
-1596	STB f+1+2	m	10	16	-18	-7	-7	
+	STB f+1+2	m	10	16	-18	-7	-7	
 1598	STB f+1+2, 1+2	m, m	10,20	16	-9	SPD	SPD	
 1674	STB d+1	m	16	17~18	-9~-8	+2~+3	+2~+3	
 1676	STB d+1, 2	m, m	16,23	17~18	+8~+9	KND	KND	Tail spin
-1679	STB d+2	l (TC)	11	20s cs7~	-12	-1	-1	
+	STB d+2	l (TC)	11	20s cs7~	-12	-1	-1	
 1685	STB d+2, 2	l, l	11,15	cs1~	-12~-11	KND	KND	
 1648	STB d/b+1+2	m, !	20,20	20,55	CS	CS	CS	
 1667	STB b+4	m	10	17	-14	-3	-3	
-1660	STB b+4, 3	m, h	10,14	17	-15~-14	-4~-3	-4~-3	Homing
+	STB b+4, 3	m, h	10,14	17	-15~-14	-4~-3	-4~-3	Homing
 1661	STB b+4, 3, 2	m, h, m (TJ)	10,14,35	js1~31	-1~0	JG	JG	

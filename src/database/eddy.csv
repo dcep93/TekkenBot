@@ -12,7 +12,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1750	3, 4	h, m	17,23	js48~	-4~-2	KND	KND	Tail spin
 1785	3~4	ll (TC), (RLX)	10,10	29~30,37 (29~) cs7~ar8~	-24	KND	KND	
 1780	3~4 (First hit only)	l (TC), (RLX)	10	29~30 (29~) cs7~ar8~	-24	-25~-24	-25~-24	
-1583	3~4B	ll (TC), (HSP)	10,10	29~30,37 a(29~) cs7~ar8~		KND	KND	
+	3~4B	ll (TC), (HSP)	10,10	29~30,37 a(29~) cs7~ar8~		KND	KND	
 1848	3~4, 3	ll (TC), m, (RLX)	10,10,21	29~30,37 (29~) 7~8~a	-14~-13	Launch	Launch	
 1763	3~4, 4	ll (TC), l (TC)	10,10,15	s cs1~	-7~-5	+9~+11	+9~+11	
 1787	3~4, 3+4	ll (TC), m	10,10,18	js12~	-17~-10	+2~+9(s)	KND	
@@ -120,7 +120,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1643	WS+3 or d, f+3	m	15	19~24 (19~) js17~	-13~-8	Launch (JG?)	Launch (JG?)	
 1645	WS+4	m	15	11~14	-3~0	+8~+11	+8~+11	
 1604	FC+d/b or d+1+2	m (TC)	11	19~21	-14~-12	+2~+4	+4~+6	
-1607	FC+d/b or d+1+2, 1+2	m (TC), m	11,12	19~21	-14~-12	KND	KND	
+	FC+d/b or d+1+2, 1+2	m (TC), m	11,12	19~21	-14~-12	KND	KND	
 	WS+3+4 FC+3+4	m (TJ)	18	22~27a	-17~-12	+2~+7(s)	KND	
 	WS+3+4B FC+3+4B	m, (HSP)	18	22~27a	-21~-16	-2~+3 (s)	KND	
 	WS+3+4D FC+3+4D	m, (RLX)	18	22~27a	-8~-3	+11~+16 (s)	KND	
@@ -133,7 +133,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	SS 3, D (Cancel)	(Special) (TC)(RLX)		25~26 (26~) 4~13 14~				
 	SS 3, B (Cancel)	(Special) (TC)(HSP)		25~26 (26~) 4~13 14~				
 	SS 3n, B	m (TC), (HSP)	17	25~26 (26~) cs4~13 ar14~	-21~-20	-10~-9	KND	
-1819	SS 3n, B, 3+4	m (TC), m, (HSP)	17,20	25~26 (26~) 4~13 14~a	-9	Launch (JG?)	Launch (JG?)	
+	SS 3n, B, 3+4	m (TC), m, (HSP)	17,20	25~26 (26~) 4~13 14~a	-9	Launch (JG?)	Launch (JG?)	
 1727	SS 4	ll (TC)	10,7	21~22, 33~34 (22~) cs3~	-1~0	+4~+5	+4~+5	
 1722	SS 4 (First hit only)	l (TC)	10	21~24 (22~) cs3~	-12~-9	-2~+1	-2~+1	
 	SS 4 (Second hit only)	l (TC)	7	30~36 (31~) cs1~	-4~+2	+2~+8	+12~+18	
@@ -169,7 +169,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1672	HSP f+1	h	7	21	+1	+8	+8	
 1679	HSP f+3+4	m (TJ)	20	18~28	-12~-2	KND	KND	
 	HSP D	(Special) (TC), (HSP)		18~28				
-1819	HSP D, 3+4	(Special) (TC), m, (HSP)	20	cs1~15 Air(26~)	-9	Launch	Launch	
+	HSP D, 3+4	(Special) (TC), m, (HSP)	20	cs1~15 Air(26~)	-9	Launch	Launch	
 1706	HSP b+3	l (TC), (RLX)	15	22	-14	+7	KND	
 	HSP u or d	(HSP)		RC				
 	HSP u or d 3 or 4	(Special), l (TC)(HSP)	25	36s(46~)	-45	KND	KND	

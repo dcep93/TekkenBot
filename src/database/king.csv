@@ -116,7 +116,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	3+4, 3 (three spins)	m (TJ)	34	22~23 (106~) js14~	-1~0	KND	KND	
 	3+4, 3 (four spins)	m (TJ)	34	22~23 (138~) js14~	-1~0	KND	KND	
 	3+4, 3 (five spins)	m (TJ)	34	22~23 (170~) js14~	-1~0	KND	KND	
-1763	3+4, 3, 2+3 (Close)	m (TJ), (throw)	20,15	d js10~	-17~-13s	KND	KND	
+	3+4, 3, 2+3 (Close)	m (TJ), (throw)	20,15	d js10~	-17~-13s	KND	KND	
 	3+4, 3, 2+3	m (TJ)	20	10~d	-12~+5s	-15~+2s	-15~+2s	
 1597	3+4, 4 (one spin)	h	40	17~18 (41~)	+8~+9	KND	KND	Tail spin
 	3+4, 4 (two spins)	h!	42	17~18 (73~)	KND	KND	KND	Tail spin

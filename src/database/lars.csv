@@ -29,9 +29,9 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1612	f+4, 1, 2, 1	m, m, m, m	12,8,8,20	17	-14~-13	ED	ED	" "
 1594	f+1+2	m	20	15~16	-13~-12	CS	CS	" "
 1582	f+1+4	m	28	13	-18	ED	ED	" "
-1671	d/f+1	m	14	13	-1	+5	+5	" "
-1672	d/f+2	m	15	16~17	-8	+3~-4a	+3~-4a	" "
-1676	d/f+2, 1	m, h	15,20	16	-7~-6	KND (KND)	KND	Tail spin
+1670	d/f+1	m	14	13	-1	+5	+5	" "
+1671	d/f+2	m	15	16~17	-8	+3~-4a	+3~-4a	" "
+1672	d/f+2, 1	m, h	15,20	16	-7~-6	KND (KND)	KND	Tail spin
 1676	d/f+3	m	15	16	-7	+3	+3	" "
 	d/f+3, D	m, (DEN)	15	16	-4(-8)	+6	+6	" "
 1678	d/f+3, 3	m, m	15,24	16a	-15~-14	KND	KND	" "
@@ -41,7 +41,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	d+2, D	m	17	18~19	0~+1s	+8~+9s	KND	" "
 1659	d+3	l	8	15	-14	-3	-3	" "
 1661	d+3, 1	l, hh	8,4,10	15	-7	+4	+4	" "
-1659	d+1+2	l (TC)	25	24~25s cs20~	-20~-19	KND	KND	" "
+1658	d+1+2	l (TC)	25	24~25s cs20~	-20~-19	KND	KND	" "
 1651	d/b+1	l (TC)	9	17s cs6~	-12	-1	-1	" "
 1653	d/b+1, 3	l (TC), h	9,10	17 6~	-12	-1	-1	" "
 	d/b+1, 3, D	l (TC), h	9,10	17 6~s	-12	-1	-1	" "
@@ -104,7 +104,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1600	DEN 1, 2	h, h	14,20	11~12 (26~)	-6~-5	KND	KND	" "
 1605	DEN 2	m?	19	17~19 (32~)	-7~-5	+7~+9	CS	" "
 1607	DEN 3	m	25	27~30 (42~)	+4~+7	KND	KND	Wall bounce
-1716	DEN 4, 3	l, m	14,20	21	-16	+3	+3	Same as f, F+4, 3
+	DEN 4, 3	l, m	14,20	21	-16	+3	+3	Same as f, F+4, 3
 1606	DEN 1+2	h	20	12~13s (28~)	-10~-9	KND	KND	Tail spin
 	DEN 2+3	h(Throw)	20,20	12(27~)	" "	Throw(KND)	" "	" "
 	DEN 2+3 (Opponent in air)	Air throw	23,8	12(27~)	" "	Throw(KND)	" "	" "

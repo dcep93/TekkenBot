@@ -90,7 +90,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1676	WS+3	m	21	18~20	-9~-7	KND	KND	Homing, Tail spin
 	WS+4	m	20	11~12	-6~-5	+5~+6	+5~+6	
 1675	WS+1+2	m	16	19~21	-17~-15	Launch (JG?)	Launch (JG?)	
-1755	WS+1+2, 1+2	m, m	16,27	19~21	-22~-19s	KND	KND	
+	WS+1+2, 1+2	m, m	16,27	19~21	-22~-19s	KND	KND	
 1705	WS+f+1	m	12	17~18s	-6~-5	+5~+6	+5~+6	
 1737	WS+f+1, 2	m, m	12,12(7)	17~18s	-8~-7	+3~+4	+3~+4	
 1714	WS+f+1, 2, f+1	m, m, h	12,12,12	17~18	-10~-8	+1~+3	+1~+3	
@@ -99,19 +99,19 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1629	FC+d/b or d+1	l (TC)	12	19~21s cs1~	-8~-6	+2~+4	+2~+4	
 1709	FC+d/b or d+1, 1	l (TC), l (TC)	12,8	s cs1~	+1~+3	+12~+14g	+12~+14	
 1731	FC+d/b or d+1, 1, 1	l (TC), l (TC), m	12,8,12	1~s	-12~-11	-1~0	-1~0	
-1737	FC+d/b or d+1, 1, 1, 2	l (TC), l (TC), m, m	12,8,12,12	1~s	-8~-7	+3~+4	+3~+4	
-1714	FC+d/b or d+1, 1, 1, 2, 1	l (TC), l (TC), m, m, h	12,8,12,12,12	1~	-10~-8	+1~+3	+1~+3	
-1712	FC+d/b or d+1, 1, 1, 2, d/f+1	l (TC), l (TC), m, m, m	12,8,12,12,15	1~s	-1~0	+10~+11	+10~+11	
-1715	FC+d/b or d+1, 1, 1, 2, d+1	l (TC), l (TC), m, m, l (TC)	12,8,12,12,8	s cs10~	-10~-8	0~+2	0~+2	
+	FC+d/b or d+1, 1, 1, 2	l (TC), l (TC), m, m	12,8,12,12	1~s	-8~-7	+3~+4	+3~+4	
+	FC+d/b or d+1, 1, 1, 2, 1	l (TC), l (TC), m, m, h	12,8,12,12,12	1~	-10~-8	+1~+3	+1~+3	
+	FC+d/b or d+1, 1, 1, 2, d/f+1	l (TC), l (TC), m, m, m	12,8,12,12,15	1~s	-1~0	+10~+11	+10~+11	
+	FC+d/b or d+1, 1, 1, 2, d+1	l (TC), l (TC), m, m, l (TC)	12,8,12,12,8	s cs10~	-10~-8	0~+2	0~+2	
 1727	FC+d/f+1	m	8	24~25	-22~-21	-12~-11s	-12~-11s	
 1743	FC+d/f+1, 2	m, m	8,12	24~25	-22~-21	-12~-11s	-12~-11s	
 1729	FC+d/f+1, 2, 1	m, m, m	8,12,12	24~25	-11~-10	CS	CS	
 1730	FC+d/f+1, 2, 1, 2	m, m, m, h	8,12,12,45	24~25	+21	KND	KND	
 1639	FC+d/f+2	m	12	18~19s	-13~-12	-2~-1	-2~-1	
 	FC+d/f+2, n+1	m, h	12,12	18~19	-10~-8	+1~+3	+1~+3	
-1710	FC+d/f+2, d/f+1	m, m	12,9	18~19s	-4~-3	+7~+8	+7~+8	
+	FC+d/f+2, d/f+1	m, m	12,9	18~19s	-4~-3	+7~+8	+7~+8	
 1715	FC+d/f+2, d+1	m, l (TC)	12,8	s cs10~	-10~-8	0~+2	0~+2	
-1739	FC+d/f+2, d/f+1, 2	m, m, m	12,9,10	10~	-11~-10	0~+1 (Launch (JG?))	0~+1	
+	FC+d/f+2, d/f+1, 2	m, m, m	12,9,10	10~	-11~-10	0~+1 (Launch (JG?))	0~+1	
 1776	SS+1+2	m	23	22(31~)	-9s	KND	KND	
 1799	Face down Grounded 1+2	l?	15	14~17ad	-17~-14	KND	KND	
 1800	Face up Grounded 1+2	m?	21	16~18ad	-18~-16	KND	KND	

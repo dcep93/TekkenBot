@@ -114,10 +114,10 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1761	WS+1+2, 1+2	m, m	14,15	20~21	-16~-15	KND	KND	
 1762	WS+1+2, 1+2, 1+2	m, m, l?	14,15,20	20~21	-23~-22	KND	KND	
 1723	WS+f+1	m	15	17~18s	-6~-5	+5~+6	+5~+6	
-1747	WS+f+1, 2	m, m	15,12	17~18s	-8~-7	+3~+4	+3~+4	
-1733	WS+f+1, 2, 1	m, m, h	15,12,23	17~18	-4~-3	KND	KND	Tail spin
-1731	WS+f+1, 2, d/f+1	m, m, m	15,12,12	17~18s	-2~-1	+9~+10 (Launch (JG?))	+9~+10	
-1734	WS+f+1, 2, d+1	m, m, l (TC)	15,12,8	s cs10~	-11~-9	0~+2	0~+2	
+	WS+f+1, 2	m, m	15,12	17~18s	-8~-7	+3~+4	+3~+4	
+	WS+f+1, 2, 1	m, m, h	15,12,23	17~18	-4~-3	KND	KND	Tail spin
+	WS+f+1, 2, d/f+1	m, m, m	15,12,12	17~18s	-2~-1	+9~+10 (Launch (JG?))	+9~+10	
+	WS+f+1, 2, d+1	m, m, l (TC)	15,12,8	s cs10~	-11~-9	0~+2	0~+2	
 1652	FC+d+1	l (TC)	10	19~21s cs1~	-8~-6	+3~+5	+3~+5	
 1728	FC+d+1, 1	l (TC), l (TC)	10,8	s cs1~	-2~0	+7~+9	+9~+11	
 1740	FC+d+1, 1, 1	l (TC), l (TC), m	10,8,12	1~s	-12~-11	-1~0	-1~0	
@@ -131,7 +131,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1738	FC+d/f+1, 2, 1	m, m, m	5,8,11	23	-11	CS	CS	
 1739	FC+d/f+1, 2, 1, 1	m, m, m, h	5,8,11,30	23	+21~+22	+13~+14b	+13~+14b	
 1661	FC+d/f+2	m	12	18~19s	-13~-12	-2~-1	-2~-1	
-1733	FC+d/f+2, D/F+1	m, m	12,10	18~19s	-4~-3	+7~+8	+7~+8	
+	FC+d/f+2, D/F+1	m, m	12,10	18~19s	-4~-3	+7~+8	+7~+8	
 1729	FC+d/f+2, D/F+1, 2	m, m, m	12,10,10	18~19s	-8~-7	+3~+4 (Launch (JG?))	+3~+4	
 1749	FC+d/f+2, 1	m, h	12,23	18~19	-4~-3	KND	KND	Tail spin
 	FC+d/f+2, d+1	m, l (TC)	12,8	s cs10~	-11~-9	0~+2	0~+2	

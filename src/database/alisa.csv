@@ -160,7 +160,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	DES d+2, *	l x 5 or 6	5*5or6	26,,,	-12~-11	+4~+5	+4~+5	
 1803	DES b+2	m	17	18~20	-12~-10	0~+2	CS	
 1805	DES b+2, 1	m, m, Sm x 4	17,8,5*4	18~20	-8s	KND	KND	
-1682	DES b+3+4 or b, b or u/b, b	(Special) (TJ)		a				
+	DES b+3+4 or b, b or u/b, b	(Special) (TJ)		a				
 	DES u or d+3+4	(Special) (TJ)						
 1727	DES u or d+3+4, 1	(Special) (TJ), m	25	20~21 (44~)	-13	KND	KND	Wall bounce
 1970	DES d/f+1+2	m, (DES)	25	18	-13	+8k	+8k	Power Crush

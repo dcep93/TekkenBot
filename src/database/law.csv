@@ -14,13 +14,13 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1816	1, 2, 2, 1+2	h, m, m	7,8,10,21	10	-13~-10	KND	KND	
 1586	1, 2, 3	h, h, m	7,8,10	10a	-6~-5	+5~+6 (KND)	KND	
 	1, 2, u/f+3	h, h, (Special) (TJ)	7,8	10a,s	-23	-16	-16	
-1838	1, 2, u/f+3, 4	h, h, (Special) (TJ), m	7,8,20	10,	-9~-8	Launch (JG?)	Launch (JG?)	
+	1, 2, u/f+3, 4	h, h, (Special) (TJ), m	7,8,20	10,	-9~-8	Launch (JG?)	Launch (JG?)	
 1603	2	h	8	10	0	+6	+6	
 	f+2	h	10	12	0	+6	+6	
-1814	2, 2	h, m	8,10	12	-8	+4	+4	
-1815	2, 2, 2	h, m, h	8,10,10	12	-9	+4	+4	
+	2, 2	h, m	8,10	12	-8	+4	+4	
+	2, 2, 2	h, m, h	8,10,10	12	-9	+4	+4	
 	2, 2, 2, b, f	h, m, h, (DSS)	8,10,10	12	-4	+9	+9	
-1816	2, 2, 1+2	h, m, m	8,10,21	12	-13~-10	KND	KND	
+	2, 2, 1+2	h, m, m	8,10,21	12	-13~-10	KND	KND	
 1607	2, b+2	h, h	8,8	12b	-4	+7	+7	
 1608	2, b+2, 1	h, h, h	8,8,8	12	-3~-2	+3~+4	+3~+4	
 1609	2, b+2, 1, 2	h, h, h, m	8,8,8,21	12	-3s	KND	KND	
@@ -104,7 +104,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1838	u/b or u or U/F+3, 4	(Special), m	20	10~11 (44~45)	-9~-8	Launch (JG?)	Launch (JG?)	
 	U/B+4 or FC+u/b+4	m (TJ)	15	18~28s js9~	-17~-7	-6~+4	-6~+4	
 	U+4 or FC+u+4	m (TJ)	18	18~28s js9~	-17~-7	Launch (JG?)	Launch (JG?)	
-1542	U/F+4 or FC+u/f+4	m (TJ)	23	18~28s js9~	-17~-7	Launch (JG?)	Launch (JG?)	
+1784	U/F+4 or FC+u/f+4	m (TJ)	23	18~28s js9~	-17~-7	Launch (JG?)	Launch (JG?)	
 1823	u/b or u or U/F+4, 3	m (TJ), m (TJ)	22,22	s js9~34, js43~	-18~-15	Launch (JG?)	Launch (JG?)	
 1869	f, F+2	m	12	14~16 (15~)	-7~-5	+7~+9	+7~+9	
 1870	f, F+2, 1	m, h	12,12	14~16 (15~)	-4~-3	+2~+3	+2~+3	
@@ -156,7 +156,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	Grounded face up D+1+2+3+4	(Special)		14~15 (88~)				
 	d+1+2 (to DSS)	(DSS)		1~				
 1588	DSS 1	h	14	12~13 (13~)	-11~-10	CS	CS	
-1591	DSS 1, f+1	h, m	14,25	12~13 (13~)	-14~-12	KND	KND	
+	DSS 1, f+1	h, m	14,25	12~13 (13~)	-14~-12	KND	KND	
 1592	DSS 1, 4	h, h (TJ)	14,30	js14~	+7g	KND	KND	
 2291	DSS 2	h	20	14~15 (15~)	-4~-3	KND	KND	
 1599	DSS 3	h	30	19~21 (21~)	-3~-1	KND	KND	Homing, Tail spin
@@ -174,16 +174,16 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1773	TFS-success 2	h	12	22		+27g(KND)	+27g(KND)	
 1840	TFS-success 3	m	22	25		KND(KND)	KND(KND)	
 1839	TFS-success 4	l	15	23		KND	+19s	
-1588	TFS-whiff 1	h	14	12~13 (79~)	-11~-10	CS	CS	
-1591	TFS-whiff 1, f+1	h, m	14,25	12~13 (79~)	-14~-12	KND	KND	
-1592	TFS-whiff 1, 4	h, h (TJ)	14,30	js14~	+7g	KND	KND	
+	TFS-whiff 1	h	14	12~13 (79~)	-11~-10	CS	CS	
+	TFS-whiff 1, f+1	h, m	14,25	12~13 (79~)	-14~-12	KND	KND	
+	TFS-whiff 1, 4	h, h (TJ)	14,30	js14~	+7g	KND	KND	
 1811	TFS-whiff 2	m	28	16~17 (86~)	-20~-19	Launch (JG?)	Launch (JG?)	
-1599	TFS-whiff 3	h	28	19~21 (88~)	-3~-1	KND	KND	Homing, Tail spin
-1829	TFS-whiff 4	l	19	24~5 (91~)	-14~-13	+5~+6s	KND	
-1593	TFS-whiff 1+2	h	30	19(84~) pc8~18	-10	KND	KND	Power crush
+	TFS-whiff 3	h	28	19~21 (88~)	-3~-1	KND	KND	Homing, Tail spin
+	TFS-whiff 4	l	19	24~5 (91~)	-14~-13	+5~+6s	KND	
+	TFS-whiff 1+2	h	30	19(84~) pc8~18	-10	KND	KND	Power crush
 1810	TFS-whiff f+1	m	25	17~19 (87~)	-14~-12	KND	KND	
-1597	TFS-whiff f+3	m	30(45)	20~23 (91~) pc8~19	-17~-14	KND	KND (KND)	Power crush, Wall bounce
-1767	TFS-whiff f+4	h (TJ)	40	20~28a (85~) js9~	+7g	KND	KND	
+	TFS-whiff f+3	m	30(45)	20~23 (91~) pc8~19	-17~-14	KND	KND (KND)	Power crush, Wall bounce
+	TFS-whiff f+4	h (TJ)	40	20~28a (85~) js9~	+7g	KND	KND	
 	TFS-whiff , ,			20~28 (85~) 9~				
 	BT 1	h	7	10	+1	+8	+8	
 1615	BT 2	m	17	15~19	-14~-10	-1~+3	CS	

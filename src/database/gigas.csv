@@ -47,7 +47,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1679	d/b+4	l (TC)	8	14s cs4~	-13	-2	+3	
 1677	d/b+1+2	m	35	29~32	-8~-5	KND	KND	
 1570	b+1	m	20	20~22	-15~-13	Launch	Launch	
-1652	b+2	m	20	20	-13	KND	KND	
+	b+2	m	20	20	-13	KND	KND	
 	b+2, F	m, (GOL)	20	20	-18	KND	KND	
 	b+2*	m	40	41~42	+15g	KND	KND	
 	b+2*, F	m, (GOL)	40	41~42	+18	KND	KND	
@@ -67,12 +67,12 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1709	f, F+4	m	17	17(18~)	-8	+3	+3	
 1710	f, F+4, 2	m, m	17,25	17(18~)	-13~-12	Launch	Launch	
 1609	f, F+1+2	m	20	17(18~)	-16	CS	CS	Homing
-1611	f, F+1+2, 1+2	m, h	20,20	17(18~)	-1~0	KND	KND	
+	f, F+1+2, 1+2	m, h	20,20	17(18~)	-1~0	KND	KND	
 1708	f, f, f+2	m	30	21~24 (24~)	+7~+10g	KND	KND	
 1989	WS+1	m	17	11~12	-7~-6	+5~+6	+5~+6	
 1716	WS+2	m	19	15~16	-5~-4	+4~+5	+4~+5	
 1719	WS+2, 3	m, m	19,24	15~16	-13	KND	KND	
-1713	WS+2, 4	m, m	19,20	15~16	-14	KND	KND	
+	WS+2, 4	m, m	19,20	15~16	-14	KND	KND	
 	WS+2, 4, F	m, m, (GOL)	19,20	15~16	-27	KND	KND	
 	WS+2, 4*	m, m	19,40	15~16	+27g	KND	KND	
 	WS+2, 4*, F	m, m, (GOL)	19,40	15~16	+19	KND	KND	
