@@ -6,7 +6,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1765	1, 2, 3	h, h, l (TC)	7,12,10	cs10~	-13	-2	KND	
 1767	1, 2, 4	h, h, m (TJ)	7,12,20	js21~	-9~-4	KND	KND	
 1582	2	h	8	10	0	+8	+8	
-1765	2, 3	h, l (TC)	8,10	cs10~	-13	-2	KND	
+	2, 3	h, l (TC)	8,10	cs10~	-13	-2	KND	
 1584	2, 4	h, h	8,20	10~	-2~+2	KND	KND	Tail spin
 1592	3	m	12	15~16b	-11~-10	-3~-2	-3~-2	
 1593	3, 1	m, m	12,20	15~16	-13~-12	KND	KND	Wall bounce
@@ -101,7 +101,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1737	WS+3, 4	m, m	20,25	js27~43	+4~+7s	KND	KND	
 1739	WS+4	m	18	11~12	-8~-7	KND	KND	
 1750	FC+d/f+1	m	25	14~15	-9~-8	KND	KND	
-1648	FC+d/f+3 or d, D/F+3	l (TJ), (TC)	19	23~32 cs18~	-18~-9	-2~+7	KND	
+	FC+d/f+3 or d, D/F+3	l (TJ), (TC)	19	23~32 cs18~	-18~-9	-2~+7	KND	
 1749	SS+3	m	20	18~19 (27~)	-9~-8	KND	KND	
 1747	SS+1+2	m	21	19~20 (28~)	-2~-1	KND	CS	
 ""	qcf or From certain moves	(Special)		RC				

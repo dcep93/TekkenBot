@@ -1,7 +1,7 @@
 move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes
 1970	in rage 1, 1, b or f+3, 2	m(Throw)	55	16 pc1~		Throw(KND)	Throw(KND)	Rage art
 1492,1493,1495	1 or f+1	h	7	10	+1	+8	+8	
-1509	1, 1	h, h	7,7	10	-3	+4	+4	
+1494	1, 1	h, h	7,7	10	-3	+4	+4	
 1509	1, 2	h, m	7,20	10	-17~-16	KND	KND	
 1513	2 or f+2	Sm	15	15~16	-9~-8	0~+1	0~+1	
 1559	3 or b+3	h	14	15	-8	+3	+3	
@@ -89,7 +89,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1953	qcb+3+4	Sm x 4	6,6,6,20	10,24,39,44 js10~	-22	KND	KND	Tail spin
 1449	Jump qcf+1+2	Sm, Sm	10,10	10,23 js1~	+3~	+7~	+7~	
 1443	Jump qcb+3+4	Sm	10	13~ js1~	-4~+9	KND	KND	
-1539	TPORT(f+3+4) qcf+1+2	m (TJ), Sm x 2(TPORT)	20,10,10	js1~	-5~-1	+5~+9	+5~+9	
+	TPORT(f+3+4) qcf+1+2	m (TJ), Sm x 2(TPORT)	20,10,10	js1~	-5~-1	+5~+9	+5~+9	
 1545	TPORT(f+3+4) qcb+3+4	m (TJ), Sm x 3(TPORT)	20,6,6,20	js1~	-15	KND	KND	
 	TPORT(f+3+4) qcb+3+4 (Third hit miss)	m (TJ), Sm x 2(TPORT)	20,6,6	js1~	-25	KND	KND	
 	TPORT(f+3+4) qcb+3+4 (second and third hit miss)	m (TJ), Sm(TPORT)	20,6	1~	-35	KND	KND	

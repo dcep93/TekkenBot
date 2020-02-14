@@ -64,7 +64,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1646	WS+2	m	25	16~17	-18~-17	CS	CS	Homing
 1650	WS+3	m	24	21~23	-5~-3	KND	KND	Homing, Tail spin
 1651	WS+4	m	13	11~12	-3~-2	+8~+9	+8~+9	
-1676	WS+4, 4	m, m	13,16	11~12	-15~-14	-4~-3s	-4~-3s	
+	WS+4, 4	m, m	13,16	11~12	-15~-14	-4~-3s	-4~-3s	
 1654	FC+d/f+3+4	m (TC)	24	23s cs1~ ar13~	-11s	KND	KND	
 1744	SS+3	m	23	23(32~)	-7	CS	CS	
 1742	SS+1+2	h	25	16~17 (25~)	-6~-5	KND	KND	Tail spin
@@ -87,22 +87,22 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 2106	in rage u/b+1+2 (to DVK)	m (DVK)		20 pc5~	-6	KND	KND	
 ""	DVK u/b+1+2	(Special)		16(19~)				
 2108	DVK 1+2	h!	40	42~	KND	KND	KND	
-2106	DVK 3+4	! (TJ)	30	69a~	KND	KND	KND	
+2113	DVK 3+4	! (TJ)	30	69a~	KND	KND	KND	
 2115	DVK 3+4, 3+4	(Special) (TJ), ! (TJ)	30	113a~	KND	KND	KND	
 1624	DVK f+4	m	20	19~20	+4~+5s	+7~+8s (+15~+16)	KND	
 1610	DVK f+1+2	m?	21	22~23	-9~-8	CS	CS	
 1667	DVK d/f+1	m	11	15~16	-7~-6	+9~+10	+9~+10	
-1667	DVK d/f+1, 2	m, m	11,11	15~16	-12~-11	Launch (JG?)	Launch (JG?)	
-1670	DVK u or u/f+1+2	(Sky)!	26	20~32	KND	KND	KND	
+1670	DVK d/f+1, 2	m, m	11,11	15~16	-12~-11	Launch (JG?)	Launch (JG?)	
+2109	DVK u or u/f+1+2	(Sky)!	26	20~32	KND	KND	KND	
 1605	DVK f, F+2	m	20, 15	16(17~)	-12	Throw(CS)	Throw(CS)	
-1720	DVK f, n, d, d/f+1	m	30	22~24 (25~) ar22~	-16~-14	Launch	Launch	
+	DVK f, n, d, d/f+1	m	30	22~24 (25~) ar22~	-16~-14	Launch	Launch	
 ""	DVK f, n, d, d/f+1 When hit U/F	m, (throw)	30,15	22~24 (25~) ar22~	-16~-14	Throw(KND)	Throw(KND)	
 ""	DVK f, n, d, D/F+2	m	23	11~12 (15~)	-10~-9	Launch (JG?)	Launch (JG?)	
 1731	DVK f, n, d, d/f+2	m	23	11~12 (14~)	-6~-5	Launch (JG?)	Launch (JG?)	
 1734	DVK f, n, d, d/f+4	l	15	16(19~)	-23	-3s (KND)	KND	
-1738	DVK f, n, d, d/f+4, 1	l, m	15,27	16(19~)	-16	KND	KND	
+	DVK f, n, d, d/f+4, 1	l, m	15,27	16(19~)	-16	KND	KND	
 ""	DVK f, n, d, d/f+4 , 1, f, n, d, d/f+1	l, m, m	15,27,20	ar22~	-17~-15	Launch	Launch	
 ""	DVK f, n, d, d/f+4 , 1, f, n, d, d/f+1 When hit U/F	l, m, (throw)	15,27,20,15	ar22~	-17~-15	Throw(KND)	Throw(KND)	
-1737	DVK f, n, d, d/f+4, 4	l, l	15,12	22~	-23	KND	KND	
+	DVK f, n, d, d/f+4, 4	l, l	15,12	22~	-23	KND	KND	
 1741	DVK SS+2	m	25	17~18 (26~)	-22~-21	Launch	Launch	
 2111	DVK d+1+2 (Opponent Down)	l(On grounded opponent)	20	22~30	-16~-8	KND	KND	

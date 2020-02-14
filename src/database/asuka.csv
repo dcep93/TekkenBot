@@ -21,7 +21,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 ""	4	h	18	11	-7	+7	Launch (JG?)	
 1598	3~4	l (TC)	22	26~28s (27~) cs6~	-26	KND	KND	Homing
 1595	1+2	m	21	16~17	-9~-8	CS	CS	
-1694	3+4	mm (TJ)	10,21	23,30~32 js5~	-6~-4	KND	KND	
+1684	3+4	mm (TJ)	10,21	23,30~32 js5~	-6~-4	KND	KND	
 	3+4, (d/b, d or d/f)	mm (TJ)	10,21	23, 30~32s	-6~-4	KND	KND	
 1742	1+4 (First hit only)	l	5	14	-19	-8	-8	
 1743	1+4	lh	5,8	14,31	-3(-19s)	+9	+9	
@@ -29,7 +29,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1699	1+4, 2, 1	lh, h, h	5,8,10,12	14,31	-2	+9	+9	
 1741	1+4, 2, 4	lh, h, m	5,8,10,23	14,31	-9	+4	KND	
 1731	1+4, 2, d+4	lh, h, l	5,8,10,15	cs10~	-23	KND	KND	
-1704	1+4, 3	lh, m	5,8,24	10~	-2~0	KND	KND	Tail spin
+	1+4, 3	lh, m	5,8,24	10~	-2~0	KND	KND	Tail spin
 ""	1+4, 3, b (Cancel)	lh	5,8	10~	-20(37s)	-9	-9	
 1773	2+3	h(Absorbs 1 h/m hit)	21	28~29 (7~)	0~+1	KND	KND	
 1660	f+2	m	20	17~18	-18~-17	Launch (JG?)	Launch (JG?)	
@@ -113,4 +113,4 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1728	d/b+4, 4, 4	l (TC), l (TC), l (TC)(LCT)	18,20,21	cs1~	-7~-5	+4~+6	KND	
 ""	d/b+4, 4, 4, D	l (TC), l (TC), l (TC)(LCT)	18,20,21	s cs1~	-11~-9	0~+2	KND	
 1715	LCT 3	h(LCT)	21	1~	-3	Launch	Launch	
-1743	LCT 1+4	lh(LCT)	5,8	1~	-3(-19s)	+9	+9	
+	LCT 1+4	lh(LCT)	5,8	1~	-3(-19s)	+9	+9	

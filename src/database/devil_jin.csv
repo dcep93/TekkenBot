@@ -79,9 +79,9 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1692	f, F+3, 1, 2	m, h, h	16,11,21	17~19 (18~)	-4~-1	KND	KND	Homing, Tail spin
 1695	f, F+3, 1, 3	m, h, l	16,11,13	17~19 (18~)	-13	+3s	+3s	
 1696	f, F+3, 1, 4	m, h, m	16,11,20	17~19 (18~)	-9~-8	KND	CS	
-1601	f, F+3, 1, d/b+1+2	m, h, (Special)	21,14	17~19 (18~)	+4~+5	+10~+11	+10~+11	
+	f, F+3, 1, d/b+1+2	m, h, (Special)	21,14	17~19 (18~)	+4~+5	+10~+11	+10~+11	
 1587	f, F+4	h	32	17~18 (18~)	+5~+6	KND	KND	Homing, Tail spin
-1691	f, F+3+4	mm (TJ)	10,23	27~28, 41~42 (28~) js10~	-13~-12s	KND	KND	
+1591	f, F+3+4	mm (TJ)	10,23	27~28, 41~42 (28~) js10~	-13~-12s	KND	KND	
 1662	b, f+2	m	12	15~17 (15~)	-9~-7	-1~+1	FS(+6~+8) 19~21	
 1664	b, f+2, 1	m, m	12,12	15~17 (15~)	-10~-9	+1~+2	+1~+2	
 1666	b, f+2, 1, 2	m, m, m	12,12,24	15~17 (15~)	-8~-7	KND	KND	

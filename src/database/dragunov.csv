@@ -108,7 +108,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1785	SS+2, 3	m, h(, (throw))	16,17(,20)	20~21 (29~)	-9	+5	Throw(KND)	
 1794	SS+2, 1+2	m, hm	16,8,12	20~21 (29~)	-4~-3	+2~+3s	+2~+3s (+8~+9s)	
 1795	SS+2, 1+2, 4	m, hm, h	16,8,12,28	20~21 (29~)	-10~-9	CS	CS	
-1681	SS+2, 1+2, 1+2	m, hm, m(Throw)	16,8,12,5	20~21 (29~)		Throw(KND)		
+	SS+2, 1+2, 1+2	m, hm, m(Throw)	16,8,12,5	20~21 (29~)		Throw(KND)		
 ""	SS+2, 1+2, 1+2, 1 or 2 or 3 or 4 (Cancel)	m, hm, (Special)	16,8,12	20~21 (29~) Air	-51~-50	-45~-44s	-45~-44s (-39~-38s)	
 ""	SS+3+4	(Special) (TC)		s				
 1610	BT d+3	m	20	16	-11	KND	KND	

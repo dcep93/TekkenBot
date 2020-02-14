@@ -45,7 +45,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1688	d/b+1+2	mm?	10,20	21~22, 38~39	-13~-12	+5~+6	+5~+6	
 1637	b+1	h	14	15~16	-11~-10	-5~-4	-5~-4	Homing
 1638	b+1, 2	h, h	14,20	15~16	-9	+15kg	CS	Tail spin
-1589	b+1, 2~1+2	h, m	14,25	15~16	-6~-5	KND	KND	
+	b+1, 2~1+2	h, m	14,25	15~16	-6~-5	KND	KND	
 ""	b+1, 2~1+2 u or d	h, (Special)	14	15~16	-19~-18	-13~-12	-13~-12	
 1639	b+2	m	20	22~23	-2~-1	KND	KND	Wall bounce
 1645	b+3	h	14	14~16	-4~-2	+7~+9	+7~+9	
