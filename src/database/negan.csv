@@ -11,7 +11,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1592	1, 2, 2	h, h, m	7,9,22	10	+4	JG	JG	
 1593	1, 2, 4	h, h, h	7,9,13	10	-9	+1	KND	
 1598	1, 4	h, h	7,17	10	-6	+3	+3	
-1683	1, 4, 2	h, h, m	7,17,20	10	-5	+6s	KND	
+	1, 4, 2	h, h, m	7,17,20	10	-5	+6s	KND	
 1603	2	h	9	11	-8	+3	+3	
 1606	2, 1	h, h	9,12	11	-7	+4	+4	
 1607	2, 1, 4	h, h, l	9,12,15		-12	+3s	KND	
@@ -85,7 +85,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1759	WS+2	m	20	15	-16	KND	KND	
 1758	WS+2*	m (INT)	20		-16	KND	KND	
 1762	WS+3	m	13	14	-7	+9	+9	
-1669	WS+3, 2	m, m	13,20		-19	KND	KND	
+	WS+3, 2	m, m	13,20		-19	KND	KND	
 	WS+4	m	18	11	-6	+5	+5	
 1761	FC+d/f+2	l (TC)	19	20	-13	+3s	KND	
 1647,1648	SS+2	h	23	20	-8	KND	KND	Tail spin

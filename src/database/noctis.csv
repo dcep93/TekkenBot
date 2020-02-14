@@ -87,7 +87,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1647	ws+2	m	15	15	-9	-3	-3	
 1648	ws+2, 2	m,m	13,23	15	-14	+5	Tail Spin	Tail spin
 1649	ws+3	m	12	14	-7	+9	+9	
-1650	ws+3,2	m,m	12,5(,20)	14	-11	throw	throw	
+	ws+3,2	m,m	12,5(,20)	14	-11	throw	throw	
 	ws+4	m	15	11	-6	+5	+5	
 1609	FC+d/f+1	m	25	16	-9	KND	KND	
 1610	FC+d/f+2	l	17	20 cs	-13	+4s	+13g	Homing

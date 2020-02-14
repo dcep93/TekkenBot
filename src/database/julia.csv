@@ -56,10 +56,10 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1694	d+2, 3	sm, m	8,14		-10	+1	+1	
 1696	d+3	l	10	13	-12	-1	+4s	
 1697	d+4	l (TC)	12	20 cs6	-16	-2	-2	
-1752	d+4, 1	l, m	12,21		-14	JG	JG	
-1760	d+4, 1~2	l, m	12,20		-9	KND	KND	
-1698	d+4, 4	l, h	12,23		-6	KND	KND	
-1771	d+4, d+4	l, l (TC)	12,10		-19	-8	-8	
+	d+4, 1	l, m	12,21		-14	JG	JG	
+	d+4, 1~2	l, m	12,20		-9	KND	KND	
+	d+4, 4	l, h	12,23		-6	KND	KND	
+	d+4, d+4	l, l (TC)	12,10		-19	-8	-8	
 1695	d+1+2	m	27	16	-14	KND	KND	
 1720	d/b+1	m (TC)	17	19 cs6~15	-12	+5	KND	
 1722	d/b+2	m	13	15	-10	+1	+1	
@@ -107,7 +107,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	FC+3	l (TC)	12	16	-17	-3	-3	
 	FC+4	l (TC)	10	12	-15	-4	-4	
 1727	WS+1	m	15	15	-13	JG	JG	
-1760	WS+1~2	m	20	32	-9	KND	KND	
+	WS+1~2	m	20	32	-9	KND	KND	
 1728	WS+2	m	11	18	-17	-9	-6	
 	WS+2, 3 or 4	m (CES)	11		+2	+10	+13	
 1731	WS+2, 1	m, h	11,20		-4	KND	KND	

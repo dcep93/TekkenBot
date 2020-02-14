@@ -95,7 +95,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1737	WS+f+1, 2	m, m	12,12(7)	17~18s	-8~-7	+3~+4	+3~+4	
 1714	WS+f+1, 2, f+1	m, m, h	12,12,12	17~18	-10~-8	+1~+3	+1~+3	
 1712	WS+f+1, 2, d/f+1	m, m, m	12,12,15	17~18s	-1~0	+10~+11 (Launch (JG?))	+10~+11	
-1715	WS+f+1, 2, d+1	m, m, l (TC)	12,12,8	s cs10~	-10~-8	0~+2	0~+2	
+	WS+f+1, 2, d+1	m, m, l (TC)	12,12,8	s cs10~	-10~-8	0~+2	0~+2	
 1629	FC+d/b or d+1	l (TC)	12	19~21s cs1~	-8~-6	+2~+4	+2~+4	
 1709	FC+d/b or d+1, 1	l (TC), l (TC)	12,8	s cs1~	+1~+3	+12~+14g	+12~+14	
 1731	FC+d/b or d+1, 1, 1	l (TC), l (TC), m	12,8,12	1~s	-12~-11	-1~0	-1~0	

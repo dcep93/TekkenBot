@@ -228,7 +228,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	d+3+4 (to IND)	(Special) (TC)(IND)		Air				
 	IND n (to INS)	(Special) (TC)(INS)		Air				
 1963	INS 1	! (TJ)(INS)	20	53	0 OC	0 OC	0 OC	
--1858	INS 2	m(INS)	9	39 RC	-9~-8	+2~+3	+2~+3	
+--1858	INS 2	m(INS)	9	39 RC	-9~-8	+2~+3	+2~+3	
 1941	INS 3	m (TJ)(INS)	20	32~38	-31~-25	KND	KND	
 	INS 3, 3+4	m (TJ), m (TJ)(INS)	20,27	32~38	-13	Launch	Launch	
 	INS 4	l (TC)(INS)	20	18?s	-21	+3? OC	KND	

@@ -48,7 +48,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	f, F+4, 2, qcf+2	m (TJ), m, Sm(DW)	10,10,20	1~	-13~+17	-5~+25	-5~+25	
 	f, F+4, 2, qcf+1, f or d/f+3+4	m (TJ), m, Sm, (MG)	10,10,20	1~	+2	KND	KND	Press down to recover crouching
 	f, F+4, 2, qcf+2, f or d/f+3+4	m (TJ), m, Sm, (MG)	10,10,20	1~	+2~+32	+10~+40	+10~+40	Press down to recover crouching
-1709	f, F+4, 2, qcf+1+2	m (TJ), m, SmSm	10,10,20,20	1~	+5	KND(KND)	KND(KND)	Press down to recover crouching
+	f, F+4, 2, qcf+1+2	m (TJ), m, SmSm	10,10,20,20	1~	+5	KND(KND)	KND(KND)	Press down to recover crouching
 1686	f, F+1+2	mh (TJ)l	5,6,20	18,31,47 (19~) js25~40	-14	KND	KND	
 	f+3+4			33 (ex MG)				
 	f+3+4, D			30s (ex MG)				
@@ -79,7 +79,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1674	MG 4	l	20	18~25 (33~) cs10~	-24~-17	KND	KND	
 1658	MG 1+2	! (TJ)	30	51~52a (66~) js21~50	KND	KND	KND	
 1659	EX MG 1+2	! (TJ)	30	41~42a js16	KND	KND	KND	
-1707	qcf+1	Sm	20	28~48 (28~)	-9~+11	KND	KND	
+	qcf+1	Sm	20	28~48 (28~)	-9~+11	KND	KND	
 1708	qcf+2	Sm	20	25~55 (25~)	-13~+17	-5~+25	-5~+25	
 1934	f, d, d/f+1	Sm	12	16a(16~)	-22 (12~8a)	Launch	Launch	
 1941	f, d, d/f+2	Sm x 3	9,9,9	13,22,31a (13~)	-36 (19~8a)	Launch	Launch	

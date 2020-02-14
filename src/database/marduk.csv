@@ -35,10 +35,10 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1659	d/f+3, 1, 2	m, h, h	13, 7, 10		-1	+5	+5	
 	d/f+3, 1, 2, 3+4	m, h, h (special)	13, 7, 10		-3	+3	+3	
 	d/f+3, 1, 2, 3+4, 3+4	m, h, h (special)	13, 7, 10		-2	+4	+4	
-1565	d/f+3, 1, 2, 3	m, h, h, m	13, 7, 10, 12		-16	-5	-5	
-1566	d/f+3, 1, 2, 3, 1+2	m, h, h, m, h	13, 7, 10, 12		0	+4s	+4s	
-1564	d/f+3, 1, 2, f+1	m, h, h, h,	13, 7, 10, 12, 28		+4	+6	KND	
-1578	d/f+3, 1, d+2	m, h, m	13, 7, 13		-9	+7	+7	
+	d/f+3, 1, 2, 3	m, h, h, m	13, 7, 10, 12		-16	-5	-5	
+	d/f+3, 1, 2, 3, 1+2	m, h, h, m, h	13, 7, 10, 12		0	+4s	+4s	
+	d/f+3, 1, 2, f+1	m, h, h, h,	13, 7, 10, 12, 28		+4	+6	KND	
+	d/f+3, 1, d+2	m, h, m	13, 7, 13		-9	+7	+7	
 1662	d/f+3, 1+2	m, h	13, 28		0s	+4s	+4s	
 1660	d/f+3, d/f+1	m, m	13, 10		-12	JG	JG	
 1661	d/f+3, d/f+1, 2	m, m, h	13, 10, 20		-6	KND	KND	

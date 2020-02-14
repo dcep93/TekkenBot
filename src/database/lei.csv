@@ -112,15 +112,15 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	f, N, 1, 2, 1, u or d	m, m, m (Special)	9,9,9	12	-11	2	2	
 1683	f, N, 1, 2, 1, 2	m, m, m, m	9,9,9,9	12	-14	1	1	
 	f, N, 1, 2, 1, 2, u or d	m, m, m, m (Special)	9,9,9,9	12	-13	2	2	
-1686	f, N, 1, 2, 1, 2, 4	m, m, m, m, m	9,9,9,9,12	12	-9	KND	KND	
+	f, N, 1, 2, 1, 2, 4	m, m, m, m, m	9,9,9,9,12	12	-9	KND	KND	
 	f, N, 1, 2, 1, 2, 4, u or d	m, m, m, m, m (Special)	9,9,9,9,12	12	-11	KND	KND	
-1685	f, N, 1, 2, 1, 2, 3	m, m, m, m, l	9,9,9,9,12	12	-17	-6	KND	
+	f, N, 1, 2, 1, 2, 3	m, m, m, m, l	9,9,9,9,12	12	-17	-6	KND	
 1689	f, N, 2	h	10	12	2	7	7	
 1692	f, N, 2, 1	h, m	10,12		0	2	2	
 1695	f, N, 2, 1, 2	h, m, m	10,-,21		-17	KND	JG	
 1696	f, N, 2, 1, 2, 1	h, m, m, m	10,-,21,25		5	KND	KND	
 1705	f, N, 3	h	30	15	3	KND	KND	Tail spin
-1714	f, N, 4	h	18	10	-11	0	0	
+	f, N, 4	h	18	10	-11	0	0	
 1719	f, N, 4, 1	h, m	18,12(5)		-1	5	5	
 	f, N, 4, 1, F	h, m (Special)	18,12(5)		-3	3	3	
 1717	f, N, 4, 1, 2	h, m, m	18,12,8		-10	-4	-4	
@@ -284,7 +284,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1905	PHX 2	m	23	18	-12	KND	KND	Tail spint, Power crush
 1909	PHX 3	h	28	14	-14	-4	-2	Tail spin
 	PHX 3, B	h (PHX)	28		-6	4	6	
-1639	PHX 3, 3	h, l (BT)	28,17		-13	KND	KND	
+	PHX 3, 3	h, l (BT)	28,17		-13	KND	KND	
 1914	PHX 4	l (SNA)	19	25	-14	2	+12kg	
 	PHX 1+2	(DRU)						
 1915	PHX f+4	m! (TJ)	45	65	KND	KND	KND	
@@ -310,7 +310,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	SNA 2, F	m (DGN)	15		-5	+6s	+6s	
 1940	SNA 2, 2	m, m	15, 10		-12	0	-1	
 	SNA 2, 2, F	m, m (DGN)	15, 10		-4	7	7	
-1942	SNA 2, 2, 2	m, m, l (TC)	15,10,15		-17	-1	-1	
+	SNA 2, 2, 2	m, m, l (TC)	15,10,15		-17	-1	-1	
 	SNA 2, 2, 2, F	m, m, l (PAN)	15,10,15		-14	2	2	
 1944	SNA 3	m (TC) (RLX)	30	28 cs4	-7	JG	JG	
 	SNA 3, d	m (TC) (grounded)	30		-9	JG	JG	

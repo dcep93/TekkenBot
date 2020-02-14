@@ -18,7 +18,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1586	3, 4	h, h	22,20	16	-8	+3	+3	
 1620	3, 4, 3	h, h, h	22,20,25	16	-12	KND	KND	
 	3, 4, 3, 4, ,	h, h, h, h, ,	22,20,25,20,,	16	-8	+3	+3	
-1621	3, 4, 4	h, h, m	22,20,17	16	-12~-10 OC	KND	KND	
+	3, 4, 4	h, h, m	22,20,17	16	-12~-10 OC	KND	KND	
 1587	4 or f+4	h	20	15~16	-8~-7	+3~+4	+3~+4	
 1621	4, 4	h, m	20,18	15~16	-12~-10 OC	KND	KND	
 	4, 3	h, h	20,25	15~16	-12	KND	KND	

@@ -104,7 +104,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1838	u/b or u or U/F+3, 4	(Special), m	20	10~11 (44~45)	-9~-8	Launch (JG?)	Launch (JG?)	
 	U/B+4 or FC+u/b+4	m (TJ)	15	18~28s js9~	-17~-7	-6~+4	-6~+4	
 	U+4 or FC+u+4	m (TJ)	18	18~28s js9~	-17~-7	Launch (JG?)	Launch (JG?)	
-1784	U/F+4 or FC+u/f+4	m (TJ)	23	18~28s js9~	-17~-7	Launch (JG?)	Launch (JG?)	
+	U/F+4 or FC+u/f+4	m (TJ)	23	18~28s js9~	-17~-7	Launch (JG?)	Launch (JG?)	
 1823	u/b or u or U/F+4, 3	m (TJ), m (TJ)	22,22	s js9~34, js43~	-18~-15	Launch (JG?)	Launch (JG?)	
 1869	f, F+2	m	12	14~16 (15~)	-7~-5	+7~+9	+7~+9	
 1870	f, F+2, 1	m, h	12,12	14~16 (15~)	-4~-3	+2~+3	+2~+3	

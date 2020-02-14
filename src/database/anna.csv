@@ -7,7 +7,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1577	1, 2, 1, 4	h, h, h, h	7,10,6,18	10	+7	JG	JG	
 1694	1, 2, 1, d+4	h, h, h, l	7,10,6,12	10 cs	-13	-2	-2	
 1691	1, 2, 3	h, h, l	10 cs	7,10,10	-14	-3	-3	
-1693	1, 2, 4	h, h, h	7,10,22	10	-6	KND	KND	Tail spin
+	1, 2, 4	h, h, h	7,10,22	10	-6	KND	KND	Tail spin
 	1, 4	h, l	7,12	10 cs	-13	-2	-2	
 1578	2	h	10	10	+1	+7	+7	
 1579	2, 1	h, h	10,6	10	-3	+4	+4	
@@ -49,23 +49,23 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	d/f+3, 1, 4, 2, u or b	m, h, h, h (SS)	13,10,20,12		-5	6	6	
 1649	d/f+3, 1, 4, 2, 3	m, h, h, h, h	13,10,20,12,20		0	KND	KND	
 1542	d/f+3, 1, 4, 2, u/f+3	m, h, h, h, m	13,10,20,12,22		-3	KND	KND	
-1648	d/f+3, 1, 4, 2, 1+2	m, h, h, h, m	13,10,20,12,21		-18	KND	KND	
+1651	d/f+3, 1, 4, 2, 1+2	m, h, h, h, m	13,10,20,12,21		-18	KND	KND	
 1652	d/f+3, 2	m, h	13,12		0	+1	+11	
 	d/f+3, 2, D/F	m, h (CD)	13,12		-1	0	10	
 	d/f+3, 2, u or b	m, h (SS)	13,12		-1	0	10	
-1579	d/f+3, 2, 1	m, h, h	13,12,6		-3	4	4	
-1577	d/f+3, 2, 1, 4	m, h, h, h	13,12,6,18		7	JG	JG	
+	d/f+3, 2, 1	m, h, h	13,12,6		-3	4	4	
+	d/f+3, 2, 1, 4	m, h, h, h	13,12,6,18		7	JG	JG	
 	d/f+3, 2, 1, d+4	m, h, h, l (TC)	13,12,6,12		-13	-2	-2	
 	d/f+3, 2, 3	m, h, h	13,12,15		-10	1	1	
-1693	d/f+3, 2, 4	m, h, h	13,12,22		-6	KND	KND	Tail spin
+	d/f+3, 2, 4	m, h, h	13,12,22		-6	KND	KND	Tail spin
 	d/f+3, 2, d+3	m, h, l (TC)	13,12,10		-14	-3	-3	
 1655	d/f+3, 3	m, h	13,6		-14	-3	-3	
-1656	d/f+3, 3, 3	m, h, h	13,6,8		-11	0	0	
-1657	d/f+3, 3, 3, 1	m, h, h, h	13,6,8,14		-9	15	15	
+	d/f+3, 3, 3	m, h, h	13,6,8		-11	0	0	
+	d/f+3, 3, 3, 1	m, h, h, h	13,6,8,14		-9	15	15	
 	d/f+3, 3, 3, 3	m, h, h, h	13,6,8,20		-6	KND	KND	Tail spin
 1659	d/f+3, 4	m, h	13,20		-6	KND	KND	Tail spin
 1660	d/f+4	l	14	16	-16	+5s	KND	
-1649	d/f+1+2 or CJM d/f+1+2	m	0	16	1	5	19	
+1640	d/f+1+2 or CJM d/f+1+2	m	0	16	1	5	19	
 1616	d+1	sm	5	10 cs4	-5	6	6	
 1695	d+1 or FC+1, 4	sm, m	5,10		-11	0	0	
 1618	d+2	m	17	16	-1s	+5s	KND	
@@ -109,7 +109,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1558	u/f+4, 3	h (TJ), l	20, 10		-17	-6	-6	
 1559	u/f+4, 3, 4	h (TJ), l, h	20,10,14		-6	5	JG	
 	u/f+4, 3, 4, u or b	h (TJ), l, h (SS)	20, 10		-7	4	4	
-1753	U/B+4	m	15	18	-18	-12	-12	
+1754	U/B+4	m	15	18	-18	-12	-12	
 	U/B+4, D	m (TJ)	15		-19	-13	-13	
 	U+4	m (TJ)	18	18	-18	JG	JG	
 	U+4, D	m (TJ)	18		-19	JG	JG	

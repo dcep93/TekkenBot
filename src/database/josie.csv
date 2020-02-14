@@ -5,7 +5,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1716	1, 2	h, h	7,8	10	-1	+7	+7	
 1717	1, 2, 2	h, h, h	7,8,10	10	-13	+9	+9	
 1727	1, 2, 3	h, h, m	7,8,18	10	-11	+5	KND	
-1731	1, 2, 4	h, h, h, (SWS)	7,8,22	10	+11	+21g	Launch (JG?)	
+	1, 2, 4	h, h, h, (SWS)	7,8,22	10	+11	+21g	Launch (JG?)	
 1740	1, 2, d+4	h, h, l	7,8,13	10	-16	-5	-5	
 1741	1, 2, d+4, 4	h, h, l, h	7,8,13,25	10	-4~-3	KND	KND	Tail spin
 1729	1, 4	h, h	7,10	10	-4	+7	+7	
