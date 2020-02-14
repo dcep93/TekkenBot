@@ -20,8 +20,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1580	2, 1, 1	h, h, m	10,8,18	10s	-12~-11	+3~+4	KND	
 1577	2, 1, 3	h, h, h	10,8,24	10	-4~-2	KND	Tail spin (3rd hit)	Tail spin
 1578	2, 1, 4	h, h, l (TC)	10,8,18	cs16~	-16~-14	0~+2	+10~+12	
-1690	2, 2	h, m	10,14	16~	-13~-12	-2~-1	-2~-1	
-1748	2, 2, 3	h, m, h	10,14,23	16~	-3~-1	KND	KND	Tail spin
+	2, 2	h, m	10,14	16~	-13~-12	-2~-1	-2~-1	
+	2, 2, 3	h, m, h	10,14,23	16~	-3~-1	KND	KND	Tail spin
 	2, 2, 3, 4	h, m, h, (HMS)	10,14,23	16~	-9~-7	KND	KND	Tail spin
 1585	3	m	16	14	-8	+7	+7	
 	3, 4	m, (HMS)	16	14	-8	+3	+3	
@@ -62,7 +62,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1759	d/f+4	m	16	13~14	-9~-8	+2~+3	+2~+3	
 	d/f+4, 3	m, (HMS)	16	13~14	-9~-8	+2~+3	+2~+3	
 1611	d/f+1+2	m	18	20~21	-9~-8	-2~-1	-2~-1	
-1748	d/f+1+2, 3	m, h	18,23	20~21	-3~-1	KND	KND	Tail spin
+	d/f+1+2, 3	m, h	18,23	20~21	-3~-1	KND	KND	Tail spin
 	d/f+1+2, 3, 4	m, h, (HMS)	18,23	20~21	-9~-7	KND	KND	Tail spin
 1658	d+2	m	18	18~19	-6~-5	+8~+9	+8~+9	
 1644	d+3	l (TC)	17	16s cs6~	-17	-3	KND	
@@ -70,7 +70,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1648	d+4	l	7	12	-13	-14	-2	
 1728	d+4, n+4	l, h	7,16	12	-9	+2	Launch (JG?)	
 	d+4, n+4~3j	l, h! (TJ)	7,60	12a	KND	KND	KND	
-1648	D+4, 4	l, l	7,8	12	-15	-16	-4	
+	D+4, 4	l, l	7,8	12	-15	-16	-4	
 1732	D+4, 4, 4	l, l, l	7,8,5	12	-15	-16	-4	
 1733	D+4, 4, 4, 4	l, l, l, m	7,8,5,21	12	-20~-19	KND	KND	
 1734	D+4, 4, 4, 4, 3	l, l, l, m, (HMS)	7,8,5,21	12	-11~-10	KND	KND	

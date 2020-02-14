@@ -11,7 +11,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1870	2, 4	h, h	10,17	6~	-12~-10	+10~+12kg	KND	Tail spin
 1635	3	m	12	14~15	-8~-7	+3~+4	+3~+4	
 1636	3, 3	m, h	12,12	14~15	-8~-7	+3~+4	+3~+4	
-1644	3, 3, 4	m, h, h	12,10,20	14~15a	-9	KND	KND	
+1639	3, 3, 4	m, h, h	12,10,20	14~15a	-9	KND	KND	
 	3, 3, 4, b (Cancel)	m, h, (Special)	12,10	14~15ab	-16~-15	-8~-7	-5~-4	
 1643	4	h	17	12	-8	+3	JG	
 1644	4, 1	h, h	17,12	12b	-2~-1	+5~+6	+5~+6	
@@ -61,10 +61,10 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1735	b+4, b+4	m, m	11,24	14~15b	+1~+6s	+2~+7s	KND	
 1736	b+4, (b+4, 3)	m, l (TC)	11,11	cs13~	-11	0	0	
 1741	b+4, (b+4, 3), 4	m, l (TC), l (TC)	11,11,9	cs1~	-11~-10	0~+1	KND	
-1862	b+4, (b+4, 3), 4, 2	m, l (TC), l (TC), m	11,11,9,21	1~	-13	CS	KND	
+	b+4, (b+4, 3), 4, 2	m, l (TC), l (TC), m	11,11,9,21	1~	-13	CS	KND	
 1739	b+4, (b+4, 3), f+4	m, l (TC), l (TC)	11,11,12	cs1~	-11~-10	0~+1	KND	
-1862	b+4, (b+4, 3), f+4, 2	m, l (TC), l (TC), m	11,11,12,21	1~	-13	CS	KND	
-1852	b+4, (b+4, 3), f+4~3	m, l (TC), m (TJ)	11,11,22	js2~	-6~-3	KND	KND	
+	b+4, (b+4, 3), f+4, 2	m, l (TC), l (TC), m	11,11,12,21	1~	-13	CS	KND	
+	b+4, (b+4, 3), f+4~3	m, l (TC), m (TJ)	11,11,22	js2~	-6~-3	KND	KND	
 	b+4, (b+4, 3), f+4, U	m, l (TC), (Special) (TJ)	11,11	js2?~	-58~-57	-47~-46	KND	
 1737	b+4, (b+4, 3), 3+4	m, l (TC), m	11,11,15	2?~	-25~-21	KND	KND	
 1932	b+1+2	m	28	31~32	-10~-9	+1~+2	+1~+2	
@@ -77,7 +77,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1549	u/b or u+3, 4	h (TJ), h (TJ)	25,37	js27~	+8~+9y	KND	KND	
 1546	u/b or u+3, d+3	h (TJ), l (TC)	25,18	cs14~	-15~-14	KND	KND	
 	u/b or u+3, D+3	m, l, (Special)	25,18	cs14~	-29~-28	KND	KND	
-1852	u/b or u+3, d+3, 3	h (TJ), l (TC), m (TJ)	25,18,22	js1~	-6~-3	KND	KND	
+	u/b or u+3, d+3, 3	h (TJ), l (TC), m (TJ)	25,18,22	js1~	-6~-3	KND	KND	
 	u/b or u+3, d+3, U	h (TJ), l (TC), (Special) (TJ)	33,24	js1~	-35~-34	KND	KND	
 1544	u/f+3	m (TJ)	20	29~30 js9~	-4~-3	0~+1s	KND	
 	u/b or u+4	m (TJ)	13	19~23 js8~	-5~-1	KND	KND	
@@ -87,8 +87,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1861	u/f+3+4, 4	m (TJ), l (TC)	20,9	cs1~	-14~-13	-3~-2	KND	
 1862	u/f+3+4, 4, 2	m (TJ), l (TC), m	20,9,21	1~	-13	CS	KND	
 1859	u/f+3+4, f+4	m (TJ), l (TC)	20,12	cs1~	-14~-13	-3~-2	KND	
-1862	u/f+3+4, f+4, 2	m (TJ), l (TC), m	20,12,21	1~	-13	CS	KND	
-1852	u/f+3+4, f+4~3	m (TJ), m (TJ)	20,22	js1~	-6~-3	KND	KND	
+	u/f+3+4, f+4, 2	m (TJ), l (TC), m	20,12,21	1~	-13	CS	KND	
+	u/f+3+4, f+4~3	m (TJ), m (TJ)	20,22	js1~	-6~-3	KND	KND	
 	u/f+3+4, f+4, U	m (TJ), (Special) (TJ)	20	js1~	-53~-52	-42~-41	KND	
 1856	u/f+3+4, 3+4	m (TJ), m	20,15	1~(s)	-26~-22	KND	KND	
 1662	f, F+2	m	26	16~17 (17~)	-13~-12	KND	KND	
@@ -126,7 +126,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1611	BT 2, 2	h, m	13,15	10	-9~-8	+2~+3	+2~+3	
 1623	BT 3	h	10	10	-11	0	0	
 1624	BT 3, 4	h, m	10,17	10	-0~+2	+1~+3	+6~+8s	
-1852	BT 3, 4, 3	h, m, m	10,10,22	js1~	-6~-3	KND	KND	
+	BT 3, 4, 3	h, m, m	10,10,22	js1~	-6~-3	KND	KND	
 1628	BT 3, 4, 4	h, m, m (TJ)	10,10,21	b js12~	-9~-7	KND	KND	
 	BT 3, 4, 4, F	h, m, m (TJ), (PHR)	10,10,21	12~a	-36~-34	KND	KND	
 	BT 3, 4, U	h, m, (Special) (TJ)	10,10	js1~	-23~-22	-23~-22	-12~-11s	
@@ -138,7 +138,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1725	BT f+2	m	13	17~18	-5~-4	+6~+7	+6~+7	
 1729	BT f+2, 3	m, m	13,17	17~18	-12~-11	KND	KND	
 1731	BT f+2, 4	m, h	13,15	17~18	-7~-6	+4~+5	+4~+5	
-1831	BT f+2, 4, 2	m, h, h (TJ)	13,15,20	js1~	-9~-8	KND	KND	Tail spin
+	BT f+2, 4, 2	m, h, h (TJ)	13,15,20	js1~	-9~-8	KND	KND	Tail spin
 	BT f+2, 4, U	m, h, (Special) (TJ)	13,15	js1~	-18~-17	-7~-6	-7~-6	
 1646	BT f+3	m	17	13	-8	+3	KND	
 	BT f+3, b	m(BT)	17	13b	-11	0	KND	
