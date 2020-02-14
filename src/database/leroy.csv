@@ -2,9 +2,9 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 ""	In rage d/f+1+2 or HMT d/f+1+2	m (throw)	55	20	-22	throw	throw	Rage Art
 ""	In rage f+1+2	mmm	10,5,25	15	+2	KND	KND	Rage Drive
 ""	1	h	7	10	+1	+8	+8	
-""	1, 1	h, m	7,7	10 (18~19)	-7	+4	+4	
-""	1, 1, 1+2	h, m, hhhh	7,7,12	10 (19~20)	-10	+1	+1	
-""	1, 1, 1+2, 1	h, m, hhhh, m	7.7.12,20	10 (23~24)	-16	KND	KND	
+""	1, 1	h, m	7,7	10 (18~19)	-9	+2	+2	
+""	1, 1, 1+2	h, m, hhhh	7,7,12	10 (19~20)	-13	-2	-2	
+""	1, 1, 1+2, 1	h, m, hhhh, m	7.7.12,15	10 (23~24)	-16	KND	KND	
 ""	1, 2	h, h	7,9	10 (12)	-1	+5	+5	
 ""	1, 2, 1	h, h, h	7,9,17	10 (27~28)	-6	+8	+8	
 ""	1, 2, 3	h, h, h (TJ)	7,8,21	10 (23~24)	-6	KND	KND	Tail spin
@@ -20,7 +20,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 ""	4, 4	h, m	15, 13	12 (15~16)	-13	+3	+3	
 ""	1+2	hhh	9,3,3	14	-6	0	0	
 ""	1+2, 1+2	hhhhhh	9,3,3,3,3,3	14	-9	0	0	
-""	1+2, 1+2, 1	hhhhhh, m	9,3,3,3,3,3,32	14	-17	KND	KND	
+""	1+2, 1+2, 1	hhhhhh, m	9,3,3,3,3,3,27	14	-17	KND	KND	
 ""	2+3	l	16	100	-26	+16	0	
 ""	f+2	h	15	14	-9	+2	+2	Homing
 ""	f+2, 3	h, m	15, 15	14 (18)	-10	+2	+2	
@@ -49,12 +49,12 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 ""	d+1, 2, 4	sm (TC), m, m (HMT)	5,8,11	10	-9	+3	+3	
 ""	d+2	l (TC)	15	15 cs6	-12	-1	+4s	
 ""	d+2, 4	l (TC), l (TC)	15,17	15	-11	0	KND	
-""	d+3	l	14	16	-13	-2	-2	
+""	d+3	l	10	16	-13	-2	-2	
 ""	d+3, 2	l, h	14,10	16	-3	+8	+8	
 ""	d+4	l	9	14	-12	-1	-1	
 ""	d+4, 4	l, m	9,16	14	-11	+1	+1	
-""	d+1+2	m	21	17	0s	+6s	Launch	
-""	d/b+1	m (TC)	15	16 cs7	-9	+1	+1	
+""	d+1+2	m	21	17	-4	+6s	Launch	
+""	d/b+1	m (TC)	12	16 cs7	-9	+1	+1	
 ""	d/b+1, 3	m (TC), h	15,20	16	9	+8	+8	
 ""	d/b+1, 1+2	m (TC), m	15,25	16	-9	KND	KND	
 ""	d/b+2	sm (TC)	8	11 cs4	-4	+7	+7	
@@ -62,10 +62,10 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 ""	d/b+3, 1+2	l, m	12,29	18	-16	KND	KND	
 ""	d/b+4	l (TC)	15	17 cs6	-14	-3s	KND	
 ""	d/b+1+2	m	25	32	-11	KND	KND	
-""	b+1	h	17(,30)	11	-6	+6	throw	
+""	b+1	h	17(,25)	11	-6	+6	throw	
 ""	b+3	h	23	18	-6	KND	KND	Tail spin
 ""	b+4	m (TJ)	21	17 js9	-8	+11k	+11k	Tali spin, Homing
-""	b+1+2	m	20	12	-5	+6	KND	
+""	b+1+2	m	17	12	-9	+2	KND	
 ""	u/b or u+1	m (TJ)	12	18 js9	-12	-1	-1	
 ""	u/f+1	h	16	-9	+5	+5		
 ""	u/b or u or u/f+2	m (TJ)	25	24 js9	+1	KND	KND	Wall Bounce
@@ -78,10 +78,10 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 ""	u/f, N, 4	m (TJ)	25	23 js9	-11	Launch	Launch	
 ""	f, F+2	m	8	14	-11	0	0	
 ""	f, F+2, 2	m, m	8,20	14	-13	KND	KND	
-""	f, F+3	h (TJ)	23	18 js11	+1	KND	KND	Tail spin
+""	f, F+3	h (TJ)	23	18 js11	-2	KND	KND	Tail spin
 ""	f, F+4	m (HMT)	16	16	-4	+9	+9	
 ""	f, F+4, 2	m, m	16,21	16	-14	KND	Launch	
-""	f, F+1+2	m	28	17	-9	KND	KND	
+""	f, F+1+2	m	25	17	-9	KND	KND	
 ""	f, f, f+3	m (TJ)	30	24 js3	+7g	KND	KND	
 ""	FC d/b+1	sm (TC)	5	10	-5	+6	+6	
 ""	FC d/b or d+2	sm (TC)	8	11	-4	+7	+7	
@@ -89,15 +89,15 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 ""	FC 4	l (TC)	10	12	-15	-4	-4	
 ""	WS+1	m	14	13	-7	+4	+4	
 ""	WS+1, 4	m, m (HMT)	14,16	13	-6	+6	+6	
-""	WS+2	mmm	10,3,12	15	-14	JG	JG	
+""	WS+2	mmm	8,3,12	15	-14	JG	JG	
 ""	WS+3	m	17	14	-7	+7	+7	
 ""	WS+4	m	16	11	-6	+5	+5	
 ""	FC d/f+4	l (TC)	14	15	-13	-2	+3s	
 ""	FC d/f+4, 1	l (TC), m	14,15	15	-13	Launch	Launch	
 ""	SS+4	l	16	18	-12	+4s	+12	
-""	(Opponent down) d/b+2	l	15	17	-16	-5	-5	
+""	(Opponent down) d/b+2	l	13	17	-16	-5	-5	
 ""	(Opponent down) d/b+2, 1+2	l, lll	15,5,5,15	17	-13	-2	-2	
-""	d/f+2+3	mmm	10,10,25	22	+8	Launch	Launch	Once per match
+""	d/f+2+3	mmm	10,10,15	22	+8	Launch	Launch	Once per match
 ""	1+3+4	(special)		115				
 ""	1+2+3+4	(special)		60				
 ""	(back agains wall) b, b, u/b	m	21	35	+1	KND	KND	
