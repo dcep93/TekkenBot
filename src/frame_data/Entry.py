@@ -13,7 +13,8 @@ def build(game_state, is_p1):
     entry[DataColumns.DataColumns.move_name] = game_state.get_current_move_name(is_p1)
     entry[DataColumns.DataColumns.punish] = game_state.get(not is_p1, 1).stun_state == MoveInfoEnums.StunStates.BEING_PUNISHED
 
-    entry[DataColumns.DataColumns.health] = MAX_HEALTH - game_state.get(not is_p1).damage_taken
+    remainings = [MAX_HEALTH - game_state.get(i).damage_taken for i in [True, False]]
+    entry[DataColumns.DataColumns.health] = '%d/%d' % remainings
 
     loaded = Database.load(entry)
     if not loaded:
