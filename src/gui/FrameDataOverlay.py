@@ -6,6 +6,13 @@ class FrameDataOverlay(Overlay.Overlay):
     unknown = '??'
     col_max_length = 10
     max_lines = 6
+    sizes = {
+        DataColumns.DataColumns.cmd: 18,
+        DataColumns.DataColumns.startup: 14,
+        DataColumns.DataColumns.block: 12,
+        DataColumns.DataColumns.normal: 12,
+        DataColumns.DataColumns.counter: 12,
+    }
 
     def __init__(self, master, state):
         super().__init__(master, state, (1400, 128))
@@ -130,7 +137,7 @@ class FrameDataOverlay(Overlay.Overlay):
         else:
             value = self.unknown
 
-        size = self.col_max_length
+        size = self.sizes[col] if col in self.sizes else self.col_max_length
         diff = size - len(value)
         if diff <= 0:
             return value[:size]

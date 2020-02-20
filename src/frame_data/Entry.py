@@ -14,7 +14,7 @@ def build(game_state, is_p1):
     entry[DataColumns.DataColumns.punish] = game_state.get(not is_p1, 1).stun_state == MoveInfoEnums.StunStates.BEING_PUNISHED
 
     remainings = [MAX_HEALTH - game_state.get(i).damage_taken for i in [True, False]]
-    entry[DataColumns.DataColumns.health] = '%d/%d' % remainings
+    entry[DataColumns.DataColumns.health] = '%d/%d' % tuple(remainings)
 
     loaded = Database.load(entry)
     if not loaded:
