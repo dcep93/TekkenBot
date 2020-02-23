@@ -71,7 +71,7 @@ class Overlay:
             if tekken_rect is not None:
                 x = (tekken_rect.right + tekken_rect.left) / 2  - self.toplevel.winfo_width() / 2
                 if self.is_overlay_on_bottom:
-                    y = tekken_rect.bottom - self.toplevel.winfo_height()
+                    y = tekken_rect.bottom - 20
                 else:
                     y = tekken_rect.top
                 geometry = '+%d+%d' % (x, y)

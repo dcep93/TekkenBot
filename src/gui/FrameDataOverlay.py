@@ -12,6 +12,7 @@ class FrameDataOverlay(Overlay.Overlay):
         DataColumns.DataColumns.block: 12,
         DataColumns.DataColumns.normal: 12,
         DataColumns.DataColumns.counter: 12,
+        DataColumns.DataColumns.punish: 20
     }
 
     def __init__(self, master, state):

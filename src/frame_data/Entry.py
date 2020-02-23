@@ -11,7 +11,7 @@ def build(game_state, is_p1):
     entry[DataColumns.DataColumns.char_name] = game_state.get(is_p1).movelist_parser.char_name
     
     entry[DataColumns.DataColumns.move_name] = game_state.get_current_move_name(is_p1)
-    entry[DataColumns.DataColumns.punish] = game_state.get(not is_p1, 1).stun_state == MoveInfoEnums.StunStates.BEING_PUNISHED
+    entry[DataColumns.DataColumns.punish] = game_state.get(not is_p1, 1).is_being_juggled()
 
     remainings = [MAX_HEALTH - game_state.get(i).damage_taken for i in [True, False]]
     entry[DataColumns.DataColumns.health] = '%d/%d' % tuple(remainings)

@@ -66,7 +66,7 @@ class PlayerSnapshot:
         return self.attack_type == MoveInfoEnums.AttackType.THROW
 
     def is_being_juggled(self):
-        return self.simple_state == MoveInfoEnums.SimpleMoveStates.KNOCKDOWN
+        return self.hit_outcome == MoveInfoEnums.HitOutcome.JUGGLE
 
     def is_being_knocked_down(self):
         return self.simple_state == MoveInfoEnums.SimpleMoveStates.KNOCKDOWN
