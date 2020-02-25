@@ -106,7 +106,7 @@ def populate_database():
     for character in Characters:
         char_name = character.value
         file_name = character.name
-        path = Path.path('export/database/%s.csv' % file_name)
+        path = Path.path('./database/%s.csv' % file_name)
         with open(path) as csvfile:
             reader = csv.reader(csvfile, delimiter='\t')
             data = [i for i in reader]
