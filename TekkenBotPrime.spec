@@ -30,4 +30,4 @@ exe = EXE(pyz,
           upx=True,
           upx_exclude=[],
           runtime_tmpdir=None,
-          console=True , icon='src\\export\\assets\\tekken_bot_close.ico')
+          console=False , icon='src\\export\\assets\\tekken_bot_close.ico')
