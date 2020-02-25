@@ -97,7 +97,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.grid_rowconfigure(2, weight=1)
         self.grid_columnconfigure(0, weight=1)
 
-        self.geometry('1440x420')
+        self.geometry('2056x420')
 
     def add_checkbox(self, menu, enum, display_string, default_value, button_command):
         var = t_tkinter.BooleanVar()
