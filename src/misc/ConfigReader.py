@@ -18,7 +18,7 @@ class ConfigReader:
 
     @staticmethod
     def get_path(filename):
-        return Path.path('config/%s.ini' % filename)
+        return Path.path('export/config/%s.ini' % filename)
 
     def get_property(self, enum_item, default_value):
         section = enum_item.__class__.__name__
