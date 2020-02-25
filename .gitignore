@@ -1,6 +1,7 @@
 /build
 /dist
 /venv
+.DS_STORE
 
 *.pyc
 *.pkl
