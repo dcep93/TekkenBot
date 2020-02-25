@@ -1,3 +1,7 @@
+import sys
+
+sys.path.append('src')
+
 from gui import TekkenBotPrime
 from misc import Flags
 
