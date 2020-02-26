@@ -1,6 +1,6 @@
 # TekkenBot
 
-AI and tools for playing and understanding Tekken 7.
+GUI to study frame data while in game.
 
 Created by roguelike2d. Maintained by the community.
 
@@ -30,5 +30,5 @@ Created by roguelike2d. Maintained by the community.
 
 -   [ ] Throws - how to break and importing from rbnorway
 -   [ ] What do do about moves that have more than one hit for a single input
--   [ ] Package into exe
--   [ ] Fix punish column
+-   [ ] Multiple active frames
+-   [ ] In combo
