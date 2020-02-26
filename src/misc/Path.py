@@ -1,8 +1,7 @@
 import os
 import sys
 
-__dir__ = os.path.dirname(sys.argv[0])
-__path__ = os.path.join(__dir__, 'export')
+__path__ = 'assets'
 
 def path(rel_path):
     return os.path.join(__path__, rel_path)

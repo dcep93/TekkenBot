@@ -8,7 +8,7 @@ class Windows:
         try:
             from ctypes import wintypes
         except ValueError:
-            self.valid = False
+            self.__class__.valid = False
             return
 
         self.wintypes = wintypes
