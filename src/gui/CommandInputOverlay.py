@@ -33,7 +33,7 @@ class CommandInputOverlay(Overlay.Overlay):
 
         self.step = self.w / self.length
         for i in range(self.length):
-            self.canvas.create_text(i * self.step + (self.step / 2), 8, text=str(i), fill='snow')
+            self.canvas.create_text(i * self.step + (self.step / 2), 8, text=str(i+1), fill='snow')
             self.canvas.create_line(i * self.step, 0, i * self.step, self.h, fill="red")
 
     def update_state(self):
