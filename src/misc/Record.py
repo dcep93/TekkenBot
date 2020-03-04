@@ -28,10 +28,9 @@ attack_string_to_hex = {
     '4': 0x25
 }
 
-class Recording:
+class Recorder:
     history = None
     moves_per_line = 10
-    pressed = []
 
     @classmethod
     def record(cls, input_state):
@@ -84,26 +83,24 @@ class Recording:
                 moves.append(move)
         return moves
 
-    @classmethod
-    def replay_move(cls, move):
+    @staticmethod
+    def move_to_hexes(move):
         parts = move.split('_')
         direction_string, attack_string = parts
         direction_code = InputDirectionCodes[direction_string]
         direction_hexes = direction_code_to_hexes[direction_code]
         attack_hexes = [attack_string_to_hex[a] for a in attack_string]
         hex_key_codes = direction_hexes + attack_hexes
-        to_release = [i for i in cls.pressed if i not in hex_key_codes]
-        to_press = [i for i in hex_key_codes if i not in cls.pressed]
-        for hex_key_code in to_release:
-            Windows.release_key(hex_key_code)
-        for hex_key_code in to_press:
-            Windows.press_key(hex_key_code)
-        cls.pressed = hex_key_codes
+        return hex_key_codes
 
 class Replayer:
     def __init__(self, moves, master):
         self.moves = moves
         self.master = master
+        self.pressed = []
+
+        self.i = None
+        self.start = None
 
     def replay(self):
         if self.master.tekken_state.game_reader.is_foreground_pid():
@@ -138,38 +135,51 @@ class Replayer:
             self.finish()
             return
         move = self.moves[self.i]
-        Recording.replay_move(move)
+        self.replay_move(move)
         self.i += 1
         self.replay_next_move()
 
     def finish(self):
-        for hex_key_code in Recording.pressed:
+        for hex_key_code in self.pressed:
             Windows.release_key(hex_key_code)
-        Recording.pressed = []
+        self.pressed = []
         print("done")
+
+    def replay_move(self, move):
+        hex_key_codes = Recorder.move_to_hexes(move)
+        to_release = [i for i in self.pressed if i not in hex_key_codes]
+        to_press = [i for i in hex_key_codes if i not in self.pressed]
+        for hex_key_code in to_release:
+            Windows.release_key(hex_key_code)
+        for hex_key_code in to_press:
+            Windows.press_key(hex_key_code)
+        self.pressed = hex_key_codes
 
 def record_start():
     print("starting recording")
-    Recording.history = []
+    Recorder.history = []
 
 def record_end():
-    if Recording.history is None:
+    if Recorder.history is None:
         print("recording not active")
         return
     print("ending recording")
-    recording_str = Recording.to_string()
-    path = Path.path('./record/recording.txt')
+    recording_str = Recorder.to_string()
+    path = get_path()
     with open(path, 'w') as fh:
         fh.write(recording_str)
-    Recording.history = None
+    Recorder.history = None
 
 def record_if_activated(tekken_state):
-    if Recording.history is not None:
+    if Recorder.history is not None:
         input_state = tekken_state.get_input_state()
-        Recording.record(input_state)
+        Recorder.record(input_state)
+
+def get_path():
+    return Path.path('./record/recording.txt')
 
 def replay(master):
-    path = Path.path('./record/recording.txt')
+    path = get_path()
     if not os.path.isfile(path):
         print("recording not found")
         return
@@ -177,7 +187,7 @@ def replay(master):
         contents = fh.read()
     raw_string = contents.replace('\n', ' ')
     compacted_moves = raw_string.split(' ')
-    moves = Recording.loads_moves(compacted_moves)
+    moves = Recorder.loads_moves(compacted_moves)
     if not Windows.valid:
         print("not windows?")
         return
