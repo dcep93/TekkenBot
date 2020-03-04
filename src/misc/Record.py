@@ -1,3 +1,4 @@
+from . import Path
 from game_parser.MoveInfoEnums import InputDirectionCodes, InputAttackCodes
 
 class Recording:
@@ -46,10 +47,15 @@ class Recording:
 
 
 def record_start():
+    print("starting recording")
     Recording.history = []
 
 def record_end():
-    print(Recording.to_string())
+    print("ending recording")
+    recording_str = Recording.to_string()
+    path = Path.path('./record/recording.txt')
+    with open(path, 'w') as fh:
+        fh.write(recording_str)
     Recording.history = None
 
 def record_if_activated(tekken_state):
