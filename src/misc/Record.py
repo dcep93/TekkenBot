@@ -30,7 +30,8 @@ attack_string_to_hex = {
 
 class Recording:
     history = None
-    moves_per_line = 30
+    moves_per_line = 10
+    pressed = []
 
     @classmethod
     def record(cls, input_state):
@@ -83,7 +84,6 @@ class Recording:
                 moves.append(move)
         return moves
 
-    pressed = []
     @classmethod
     def replay_move(cls, move):
         parts = move.split('_')
@@ -99,6 +99,54 @@ class Recording:
         for hex_key_code in to_press:
             Windows.press_key(hex_key_code)
         cls.pressed = hex_key_codes
+
+class Replayer:
+    def __init__(self, moves, master):
+        self.moves = moves
+        self.master = master
+
+    def replay(self):
+        if self.master.tekken_state.game_reader.is_foreground_pid():
+            self.replay_moves()
+        else:
+            self.master.after(100, self.replay)
+
+    def replay_moves(self):
+        print("replaying")
+        self.start = time.time()
+        self.i = 0
+        self.replay_next_move()
+
+    def replay_next_move(self):
+        if self.i == len(self.moves):
+            self.finish()
+            return
+        
+        target = self.i * seconds_per_frame
+        actual = time.time() - self.start
+        diff = target - actual
+        if diff > 0:
+            diff_ms = int(diff * 1000)
+            self.master.after(diff_ms, self.actually_replay_next_move)
+        else:
+            self.actually_replay_next_move()
+
+    def actually_replay_next_move(self):
+        # quit if tekken is not foreground
+        if not self.master.tekken_state.game_reader.is_foreground_pid():
+            print('lost focus')
+            self.finish()
+            return
+        move = self.moves[self.i]
+        Recording.replay_move(move)
+        self.i += 1
+        self.replay_next_move()
+
+    def finish(self):
+        for hex_key_code in Recording.pressed:
+            Windows.release_key(hex_key_code)
+        Recording.pressed = []
+        print("done")
 
 def record_start():
     print("starting recording")
@@ -120,7 +168,7 @@ def record_if_activated(tekken_state):
         input_state = tekken_state.get_input_state()
         Recording.record(input_state)
 
-def replay(game_reader):
+def replay(master):
     path = Path.path('./record/recording.txt')
     if not os.path.isfile(path):
         print("recording not found")
@@ -134,25 +182,5 @@ def replay(game_reader):
         print("not windows?")
         return
     print('waiting for tekken focus')
-    while True:
-        if game_reader.is_foreground_pid():
-            break
-        time.sleep(1)
-    print("replaying")
-    start = time.time()
-    for i, move in enumerate(moves):
-        # quit if tekken is not foreground
-        if not game_reader.is_foreground_pid():
-            print('lost focus')
-            return
-        target = i * seconds_per_frame
-        actual = time.time() - start
-        diff = target - actual
-        if diff > 0:
-            time.sleep(diff)
-
-        Recording.replay_move(move)
-    for hex_key_code in Recording.pressed:
-        Windows.release_key(hex_key_code)
-    Recording.pressed = []
-    print("done")
+    replayer = Replayer(moves, master)
+    replayer.replay()
