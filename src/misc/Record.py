@@ -4,7 +4,29 @@ import time
 from . import Path
 from game_parser.MoveInfoEnums import InputDirectionCodes, InputAttackCodes
 
+from misc.Windows import w as Windows
+
 seconds_per_frame = 1/60.
+
+direction_code_to_hexes = {
+    InputDirectionCodes.NULL: [],
+    InputDirectionCodes.N: [],
+    InputDirectionCodes.u: [0x11],
+    InputDirectionCodes.ub: [0x11, 0x1E],
+    InputDirectionCodes.uf: [0x11, 0x20],
+    InputDirectionCodes.f: [0x20],
+    InputDirectionCodes.b: [0x1E],
+    InputDirectionCodes.d: [0x1F],
+    InputDirectionCodes.df: [0x1F, 0x20],
+    InputDirectionCodes.db: [0x1F, 0x1E],
+}
+
+attack_string_to_hex = {
+    '1': 0x16,
+    '2': 0x17,
+    '3': 0x24,
+    '4': 0x25
+}
 
 class Recording:
     history = None
@@ -61,10 +83,22 @@ class Recording:
                 moves.append(move)
         return moves
 
+    pressed = []
     @classmethod
     def replay_move(cls, move):
         parts = move.split('_')
         direction_string, attack_string = parts
+        direction_code = InputDirectionCodes[direction_string]
+        direction_hexes = direction_code_to_hexes[direction_code]
+        attack_hexes = [attack_string_to_hex[a] for a in attack_string]
+        hex_key_codes = direction_hexes + attack_hexes
+        to_release = [i for i in cls.pressed if i not in hex_key_codes]
+        to_press = [i for i in hex_key_codes if i not in cls.pressed]
+        for hex_key_code in to_release:
+            Windows.release_key(hex_key_code)
+        for hex_key_code in to_press:
+            Windows.press_key(hex_key_code)
+        cls.pressed = hex_key_codes
 
 def record_start():
     print("starting recording")
@@ -96,6 +130,9 @@ def replay(game_reader):
     raw_string = contents.replace('\n', ' ')
     compacted_moves = raw_string.split(' ')
     moves = Recording.loads_moves(compacted_moves)
+    if not Windows.valid:
+        print("not windows?")
+        return
     print('waiting for tekken focus')
     while True:
         if game_reader.is_foreground_pid():
@@ -106,6 +143,7 @@ def replay(game_reader):
     for i, move in enumerate(moves):
         # quit if tekken is not foreground
         if not game_reader.is_foreground_pid():
+            print('lost focus')
             return
         target = i * seconds_per_frame
         actual = time.time() - start
@@ -114,3 +152,7 @@ def replay(game_reader):
             time.sleep(diff)
 
         Recording.replay_move(move)
+    for hex_key_code in Recording.pressed:
+        Windows.release_key(hex_key_code)
+    Recording.pressed = []
+    print("done")
