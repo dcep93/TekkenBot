@@ -5,7 +5,7 @@ import sys
 from . import Overlay, CommandInputOverlay, FrameDataOverlay, t_tkinter
 from frame_data import DataColumns, Generator
 from game_parser import GameState
-from misc import ConfigReader, Flags, Path
+from misc import ConfigReader, Flags, Path, Record
 
 class TekkenBotPrime(t_tkinter.Tk):
     def __init__(self):
@@ -62,11 +62,14 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.configure_grid()
 
     def add_menu_cascade(self):
-        tekken_bot_menu = t_tkinter.Menu(self.menu)
+        tekken_bot_menu = t_tkinter.Menu(self.menu, tearoff=False)
+        tekken_bot_menu.add_command(label="start record", command=Record.record_start)
+        tekken_bot_menu.add_command(label="end record", command=Record.record_end)
+        tekken_bot_menu.add_command(label="replay", command=Record.replay)
         self.menu.add_cascade(label="Tekken Bot", menu=tekken_bot_menu)
 
     def add_columns_cascade(self):
-        column_menu = t_tkinter.Menu(self.menu)
+        column_menu = t_tkinter.Menu(self.menu, tearoff=False)
         all_checked = self.tekken_config.get_all(DataColumns.DataColumns, True)
         for col in DataColumns.DataColumns:
             checked = all_checked[col]
@@ -75,7 +78,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.menu.add_cascade(label='Columns', menu=column_menu)
 
     def add_display_cascade(self):
-        display_menu = t_tkinter.Menu(self.menu)
+        display_menu = t_tkinter.Menu(self.menu, tearoff=False)
         all_checked = self.tekken_config.get_all(Overlay.DisplaySettings, None)
         for setting in Overlay.DisplaySettings:
             checked = all_checked[setting]
@@ -83,7 +86,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.menu.add_cascade(label="Display", menu=display_menu)
 
     def add_mode_cascade(self):
-        overlay_mode_menu = t_tkinter.Menu(self.menu)
+        overlay_mode_menu = t_tkinter.Menu(self.menu, tearoff=False)
         self.overlay_var = t_tkinter.StringVar()
         for mode in OverlayMode:
             label = mode.value
@@ -141,6 +144,7 @@ class TekkenBotPrime(t_tkinter.Tk):
             self.overlay.update_location()
             if successful_update:
                 self.overlay.update_state()
+                Record.record_if_activated(self.tekken_state)
 
         elapsed_ms = after - now
         wait_ms = self.tekken_state.game_reader.get_update_wait_ms(elapsed_ms)

@@ -37,10 +37,7 @@ class CommandInputOverlay(Overlay.Overlay):
             self.canvas.create_line(i * self.step, 0, i * self.step, self.h, fill="red")
 
     def update_state(self):
-        last_state = self.state.state_log[-1]
-        player = last_state.p1 if last_state.is_player_player_one else last_state.p2
-
-        input_state = player.get_input_state()
+        input_state = self.state.get_input_state()
 
         if self.last_n_were_same(input_state):
             color = 'white'

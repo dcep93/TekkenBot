@@ -114,3 +114,8 @@ class GameState:
                 if previous_player is not None and previous_player.move_timer != player.move_timer:
                     return True
         return False
+
+    def get_input_state(self):
+        last_state = self.state_log[-1]
+        player = last_state.p1 if last_state.is_player_player_one else last_state.p2
+        return player.get_input_state()
