@@ -12,7 +12,6 @@ class FrameDataOverlay(Overlay.Overlay):
         DataColumns.DataColumns.block: 12,
         DataColumns.DataColumns.normal: 12,
         DataColumns.DataColumns.counter: 12,
-        DataColumns.DataColumns.punish: 20
     }
 
     def __init__(self, master, state):
@@ -150,16 +149,10 @@ class FrameDataOverlay(Overlay.Overlay):
         values = [self.get_value(entry, col) for col in DataColumns.DataColumns if self.columns_to_print[col]]
         return '|'.join(values)
 
-    def get_scroll_index(self):
-        for entry in self.entries[1:]:
-            if not entry[DataColumns.DataColumns.punish]:
-                return 0
-        return 1
-
     def scroll(self):
         offset = 2
         while len(self.entries) >= self.max_lines:
-            index = self.get_scroll_index()
+            index = 0
             self.entries.pop(index)
             start = "%0.1f" % (index + offset)
             end = "%0.1f" % (index + offset + 1)

@@ -12,5 +12,4 @@ class DataColumns(enum.Enum):
     normal = 'frame advantage on hit'
     counter = 'frame advantage on counter hit'
     fa = 'frame advantage right now'
-    punish = 'hit is a punish'
     health = 'remaining health'
