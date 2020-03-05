@@ -1,3 +1,4 @@
+import enum
 import os
 import time
 
@@ -28,16 +29,40 @@ attack_string_to_hex = {
     '4': 0x25
 }
 
+@enum.unique
+class RecordingState(enum.Enum):
+    OFF = 0
+    SINGLE = 1
+    BOTH = 2
+
 class Recorder:
     history = None
     moves_per_line = 10
+    state = RecordingState.OFF
 
     @classmethod
-    def record(cls, input_state):
+    def record(cls, tekken_state):
+        input_state = cls.get_input_state(tekken_state)
         if cls.last_move_was(input_state):
             cls.history[-1][-1] += 1
         else:
             cls.history.append([input_state, 1])
+
+    @classmethod
+    def get_input_state(cls, tekken_state):
+        last_state = self.state.state_log[-1]
+        if last_state.is_player_player_one:
+            player = last_state.p1
+            opp = last_state.p2
+        else:
+            player = last_state.p2
+            opp = last_state.p1
+        player_input_state = player.get_input_state()
+        opp_input_state = opp.get_input_state()
+        if cls.state == RecordingState.SINGLE:
+            return player_input_state
+        else:
+            return (player_input_state, opp_input_state)
 
     @classmethod
     def last_move_was(cls, input_state):
@@ -62,7 +87,12 @@ class Recorder:
             return '%s(%d)' % (raw_move, count)
 
     @classmethod
-    def get_raw_move(cls, input_state):
+    def get_raw_move(cls, input_state, recursive=False):
+        if not recursive and cls.RecordingState == RecordingState.BOTH:
+            input_states = [cls.get_raw_move(i, True) for i in input_state]
+            if input_states[1] == 'N_':
+                return input_states[0]
+            return '/'.join(input_states)
         direction_code, attack_code, _ = input_state
         direction_string = direction_code.name
         attack_string = attack_code.name.replace('x', '').replace('N', '')
@@ -83,8 +113,13 @@ class Recorder:
                 moves.append(move)
         return moves
 
-    @staticmethod
-    def move_to_hexes(move):
+    @classmethod
+    def move_to_hexes(cls, move, p1=True):
+        if '/' in move:
+            p1_move, p2_move = move.split('/')
+            p1_codes = cls.move_to_hexes(p1_move, True)
+            p2_codes = cls.move_to_hexes(p2_move, False)
+            return p1_codes + p2_codes
         parts = move.split('_')
         direction_string, attack_string = parts
         direction_code = InputDirectionCodes[direction_string]
@@ -112,9 +147,9 @@ class Replayer:
         print("replaying")
         self.start = time.time()
         self.i = 0
-        self.replay_next_move()
+        self.handle_next_move()
 
-    def replay_next_move(self):
+    def handle_next_move(self):
         if self.i == len(self.moves):
             self.finish()
             return
@@ -124,11 +159,11 @@ class Replayer:
         diff = target - actual
         if diff > 0:
             diff_ms = int(diff * 1000)
-            self.master.after(diff_ms, self.actually_replay_next_move)
+            self.master.after(diff_ms, self.replay_next_move)
         else:
-            self.actually_replay_next_move()
+            self.replay_next_move()
 
-    def actually_replay_next_move(self):
+    def replay_next_move(self):
         # quit if tekken is not foreground
         if not self.master.tekken_state.game_reader.is_foreground_pid():
             print('lost focus')
@@ -137,7 +172,7 @@ class Replayer:
         move = self.moves[self.i]
         self.replay_move(move)
         self.i += 1
-        self.replay_next_move()
+        self.handle_next_move()
 
     def finish(self):
         for hex_key_code in self.pressed:
@@ -155,15 +190,22 @@ class Replayer:
             Windows.press_key(hex_key_code)
         self.pressed = hex_key_codes
 
-def record_start():
-    print("starting recording")
+def record_single():
+    print("starting recording single")
+    Recorder.state = RecordingState.SINGLE
+    Recorder.history = []
+
+def record_both():
+    print("starting recording both")
+    Recorder.state = RecordingState.BOTH
     Recorder.history = []
 
 def record_end():
-    if Recorder.history is None:
+    if Recorder.state == RecordingState.OFF:
         print("recording not active")
         return
     print("ending recording")
+    Recorder.state = RecordingState.OFF
     recording_str = Recorder.to_string()
     path = get_path()
     with open(path, 'w') as fh:
@@ -171,9 +213,8 @@ def record_end():
     Recorder.history = None
 
 def record_if_activated(tekken_state):
-    if Recorder.history is not None:
-        input_state = tekken_state.get_input_state()
-        Recorder.record(input_state)
+    if Recorder.state != RecordingState.OFF:
+        Recorder.record(tekken_state)
 
 def get_path():
     return Path.path('./record/recording.txt')
