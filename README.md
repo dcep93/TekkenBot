@@ -26,9 +26,12 @@ Created by roguelike2d. Maintained by the community.
 -   [x] When an unknown move is performed, its data is remembered so that next time there are fewer 'unknown' values
 -   [x] Remaining opponent health is displayed so you don't have to guess what will kill them
 
+### Record/Replay
+
+-   [x] Record and replay feature built. Intended for combo construction/hypothetical scenario validation. Could potentially be used for cheating, but would need a nefarious coder to implement, as the current iteration requires mouse moving and such.
+
 ### TODO
 
 -   [ ] Throws - how to break and importing from rbnorway
 -   [ ] What do do about moves that have more than one hit for a single input
 -   [ ] Multiple active frames
--   [ ] In combo
