@@ -9,30 +9,18 @@ from misc.Windows import w as Windows
 
 seconds_per_frame = 1/60.
 
-direction_code_to_hexes = {
+direction_string_to_hexes = {
     True: {
-        InputDirectionCodes.NULL: [],
-        InputDirectionCodes.N: [],
-        InputDirectionCodes.u: [0x11],
-        InputDirectionCodes.ub: [0x11, 0x1E],
-        InputDirectionCodes.uf: [0x11, 0x20],
-        InputDirectionCodes.f: [0x20],
-        InputDirectionCodes.b: [0x1E],
-        InputDirectionCodes.d: [0x1F],
-        InputDirectionCodes.df: [0x1F, 0x20],
-        InputDirectionCodes.db: [0x1F, 0x1E],
+        'u': 0x11,
+        'f': 0x20,
+        'b': 0x1E,
+        'd': 0x1F,
     },
     False: {
-        InputDirectionCodes.NULL: [],
-        InputDirectionCodes.N: [],
-        InputDirectionCodes.u: [0xc8],
-        InputDirectionCodes.ub: [0xc8, 0xCB],
-        InputDirectionCodes.uf: [0xc8, 0x20],
-        InputDirectionCodes.f: [0x20],
-        InputDirectionCodes.b: [0xCB],
-        InputDirectionCodes.d: [0xd0],
-        InputDirectionCodes.df: [0xd0, 0x20],
-        InputDirectionCodes.db: [0xd0, 0xCB],
+        'u': 0xc8,
+        'f': 0x20,
+        'b': 0xCB,
+        'd': 0xd0,
     }
 }
 
@@ -152,8 +140,10 @@ class Recorder:
             return p1_codes + p2_codes
         parts = move.split('_')
         direction_string, attack_string = parts
-        direction_code = InputDirectionCodes[direction_string]
-        direction_hexes = direction_code_to_hexes[p1][direction_code]
+        if direction_string in ['NULL', 'N']:
+            direction_hexes = []
+        else:
+            direction_hexes = [direction_string_to_hexes[p1][d] for d in direction_string]
         attack_hexes = [attack_string_to_hex[p1][a] for a in attack_string]
         hex_key_codes = direction_hexes + attack_hexes
         return hex_key_codes
