@@ -64,7 +64,7 @@ class TekkenBotPrime(t_tkinter.Tk):
 
     def add_menu_cascade(self):
         tekken_bot_menu = t_tkinter.Menu(self.menu, tearoff=False)
-        Globals.master = self
+        Globals.Globals.master = self
         tekken_bot_menu.add_command(label="record single", command=Record.record_single)
         tekken_bot_menu.add_command(label="record both", command=Record.record_both)
         tekken_bot_menu.add_command(label="end recording", command=Record.record_end)

@@ -1,8 +1,11 @@
 import os
+import time
 
 from misc import Globals
 from misc.Windows import w as Windows
-from . import Record
+from . import Record, Shared
+
+seconds_per_frame = 1/60.
 
 def replay():
     path = Shared.get_path()
@@ -31,10 +34,10 @@ class Replayer:
     start = None
 
 def wait_for_focus_and_replay_moves():
-    if Globals.is_foreground_pid():
+    if Globals.Globals.is_foreground_pid():
         replay_moves()
     else:
-        Globals.master.after(100, wait_for_focus_and_replay_moves)
+        Globals.Globals.master.after(100, wait_for_focus_and_replay_moves)
 
 def replay_moves():
     print("replaying")
@@ -45,7 +48,7 @@ def replay_moves():
 def handle_next_move():
     if Replayer.i == len(Replayer.moves):
         one_frame_ms = int(1000 * seconds_per_frame)
-        Globals.master.after(one_frame_ms, finish)
+        Globals.Globals.master.after(one_frame_ms, finish)
         return
 
     if move_is_side_switch():
@@ -59,17 +62,17 @@ def handle_next_move():
     diff = target - actual
     if diff > 0:
         diff_ms = int(diff * 1000)
-        Globals.master.after(diff_ms, replay_next_move)
+        Globals.Globals.master.after(diff_ms, replay_next_move)
     else:
         replay_next_move()
 
 def move_is_side_switch():
     move = Replayer.moves[Replayer.i]
-    return move == SIDE_SWITCH
+    return move == Record.SIDE_SWITCH
 
 def replay_next_move():
     # quit if tekken is not foreground
-    if not Globals.is_foreground_pid():
+    if not Globals.Globals.is_foreground_pid():
         print('lost focus')
         finish()
         return
