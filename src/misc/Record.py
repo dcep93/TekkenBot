@@ -157,7 +157,7 @@ class Recorder:
         if direction_string in ['NULL', 'N']:
             direction_hexes = []
         else:
-            if reverse ^ p1:
+            if reverse ^ (not p1):
                 direction_string = direction_string.replace('b', 'F').replace('f', 'B').replace('F', 'f').replace('B', 'b')
             direction_hexes = [direction_string_to_hexes[p1][d] for d in direction_string]
         attack_hexes = [attack_string_to_hex[p1][a] for a in attack_string]
@@ -187,7 +187,8 @@ class Replayer:
 
     def handle_next_move(self):
         if self.i == len(self.moves):
-            self.finish()
+            one_frame_ms = int(1000 * seconds_per_frame)
+            Master.master.after(one_frame_ms, self.finish)
             return
 
         if self.move_is_side_switch():
