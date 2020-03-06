@@ -157,7 +157,7 @@ class Recorder:
         if direction_string in ['NULL', 'N']:
             direction_hexes = []
         else:
-            if reverse:
+            if reverse ^ p1:
                 direction_string = direction_string.replace('b', 'F').replace('f', 'B').replace('F', 'f').replace('B', 'b')
             direction_hexes = [direction_string_to_hexes[p1][d] for d in direction_string]
         attack_hexes = [attack_string_to_hex[p1][a] for a in attack_string]
