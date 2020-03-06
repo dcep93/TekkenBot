@@ -29,7 +29,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.init_config()
         self.init_view()
 
-        self.tekken_state = GameState.GameState()
+        Globals.Globals.tekken_state = GameState.GameState()
 
         self.init_frame_data()
 
@@ -130,7 +130,7 @@ class TekkenBotPrime(t_tkinter.Tk):
     def start_overlay(self):
         overlay = overlay_mode_to_overlay[self.mode]
         if overlay is not None:
-            self.overlay = overlay(self, self.tekken_state)
+            self.overlay = overlay()
             self.overlay.hide()
 
     def reboot_overlay(self):
@@ -140,17 +140,17 @@ class TekkenBotPrime(t_tkinter.Tk):
     def update(self):
         now = time.time()
         self.last_update = now
-        successful_update = self.tekken_state.update()
+        successful_update = Globals.Globals.tekken_state.update()
         after = time.time()
 
         if self.overlay is not None:
             self.overlay.update_location()
             if successful_update:
                 self.overlay.update_state()
-                Record.record_if_activated(self.tekken_state)
+                Record.record_if_activated()
 
         elapsed_ms = after - now
-        wait_ms = self.tekken_state.game_reader.get_update_wait_ms(elapsed_ms)
+        wait_ms = Globals.Globals.game_reader.get_update_wait_ms(elapsed_ms)
         if wait_ms >= 0:
             self.after(wait_ms, self.update)
 

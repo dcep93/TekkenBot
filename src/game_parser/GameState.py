@@ -1,15 +1,16 @@
 from . import GameReader
 from game_parser import ScriptedGame
-from misc import Flags
+from misc import Flags, Globals
 
 class GameState:
     def __init__(self):
         if Flags.Flags.pickle_dest is not None:
-            self.game_reader = ScriptedGame.Recorder(Flags.Flags.pickle_dest)
+            game_reader = ScriptedGame.Recorder(Flags.Flags.pickle_dest)
         elif Flags.Flags.pickle_src is not None:
-            self.game_reader = ScriptedGame.Reader(Flags.Flags.pickle_src)
+            game_reader = ScriptedGame.Reader(Flags.Flags.pickle_src)
         else:
-            self.game_reader = GameReader.GameReader()
+            game_reader = GameReader.GameReader()
+        Globals.Globals.game_reader = game_reader
 
         self.state_log = []
 
@@ -20,7 +21,7 @@ class GameState:
         return state.p1 if is_p1 else state.p2
 
     def update(self):
-        game_data = self.game_reader.get_updated_state(0)
+        game_data = Globals.Globals.game_reader.get_updated_state(0)
 
         if game_data is not None:
             # we don't run perfectly in sync, if we get back the same frame, throw it away
@@ -30,7 +31,7 @@ class GameState:
                     missed_states = min(7, frames_lost)
 
                     for i in range(missed_states):
-                        dropped_state = self.game_reader.get_updated_state(missed_states - i)
+                        dropped_state = Globals.Globals.game_reader.get_updated_state(missed_states - i)
                         self.append_gamedata(dropped_state)
 
                 self.append_gamedata(game_data)

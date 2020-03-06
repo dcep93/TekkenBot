@@ -1,5 +1,6 @@
 from . import Overlay, t_tkinter
 from game_parser.MoveInfoEnums import InputDirectionCodes
+from misc import Globals
 
 symbol_map = {
     InputDirectionCodes.u : '↑',
@@ -19,8 +20,8 @@ class CommandInputOverlay(Overlay.Overlay):
     input_tag = "inputs"
     silence_after_n = 10
 
-    def __init__(self, master, state):
-        super().__init__(master, state, (1200, 86))
+    def __init__(self):
+        super().__init__((1200, 86))
 
         self.stored_inputs = []
 
@@ -37,7 +38,7 @@ class CommandInputOverlay(Overlay.Overlay):
             self.canvas.create_line(i * self.step, 0, i * self.step, self.h, fill="red")
 
     def update_state(self):
-        last_state = self.state.state_log[-1]
+        last_state = Globals.Globals.tekken_state.state_log[-1]
         player = last_state.p1 if last_state.is_player_player_one else last_state.p2
         input_state = player.get_input_state()
 

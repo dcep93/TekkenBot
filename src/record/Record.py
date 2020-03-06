@@ -25,9 +25,9 @@ def record_end():
     with open(path, 'w') as fh:
         fh.write(recording_string)
 
-def record_if_activated(tekken_state):
+def record_if_activated():
     if Recorder.state != RecordingState.OFF:
-        record_state(tekken_state)
+        record_state()
 
 SIDE_SWITCH = 'SIDE_SWITCH'
 moves_per_line = 10
@@ -86,8 +86,8 @@ def check_for_side_switch(last_state):
         Recorder.reverse = facing
         Recorder.history.append(SIDE_SWITCH)
 
-def get_input_state(tekken_state):
-    last_state = tekken_state.state_log[-1]
+def get_input_state():
+    last_state = Globals.Globals.tekken_state.state_log[-1]
     check_for_side_switch(last_state)
     if last_state.is_player_player_one:
         player = last_state.p1
@@ -160,9 +160,9 @@ def move_to_hexes(move, reverse, p1=True):
     hex_key_codes = direction_hexes + attack_hexes
     return hex_key_codes
 
-def record_state(tekken_state):
-    if Globals.Globals.get_reader().is_foreground_pid():
-        input_state = get_input_state(tekken_state)
+def record_state():
+    if Globals.Globals.game_reader.is_foreground_pid():
+        input_state = get_input_state()
         if last_move_was(input_state):
             Recorder.history[-1][-1] += 1
         else:

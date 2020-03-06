@@ -1,6 +1,6 @@
 from . import Overlay, t_tkinter
 from frame_data import DataColumns, Entry
-from misc import Flags
+from misc import Flags, Globals
 
 class FrameDataOverlay(Overlay.Overlay):
     unknown = '??'
@@ -14,8 +14,8 @@ class FrameDataOverlay(Overlay.Overlay):
         DataColumns.DataColumns.counter: 12,
     }
 
-    def __init__(self, master, state):
-        super().__init__(master, state, (1400, 128))
+    def __init__(self):
+        super().__init__((1400, 128))
 
         self.listeners = [PlayerListener(i, self.print_f) for i in [True, False]]
         self.entries = []
@@ -25,7 +25,7 @@ class FrameDataOverlay(Overlay.Overlay):
 
     def update_state(self):
         for listener in self.listeners:
-            listener.update(self.state)
+            listener.update()
 
     def init_tkinter(self):
         self.style = t_tkinter.Style()
@@ -56,7 +56,7 @@ class FrameDataOverlay(Overlay.Overlay):
         self.text.tag_config("p2", foreground=Overlay.ColorSchemeEnum.p2_text.value)
 
         self.text.delete("1.0", "end")
-        self.set_columns_to_print(self.master.tekken_config.get_all(DataColumns.DataColumns, True))
+        self.set_columns_to_print(Globals.Globals.master.tekken_config.get_all(DataColumns.DataColumns, True))
 
     def print_f(self, is_p1, entry):
         self.scroll()
@@ -106,8 +106,8 @@ class FrameDataOverlay(Overlay.Overlay):
     def update_column_to_print(self, enum, value):
         self.columns_to_print[enum] = value
         self.populate_column_names()
-        self.master.tekken_config.set_property(enum, value)
-        self.master.tekken_config.write()
+        Globals.Globals.master.tekken_config.set_property(enum, value)
+        Globals.Globals.master.tekken_config.write()
 
     @staticmethod
     def get_background(fa):
@@ -182,8 +182,8 @@ class PlayerListener:
         self.is_p1 = is_p1
         self.print_f = print_f
 
-    def update(self, game_state):
+    def update(self):
         # ignore the fact that some moves have multiple active frames
-        if game_state.is_starting_attack(self.is_p1):
-            entry = Entry.build(game_state, self.is_p1)
+        if Globals.Globals.tekken_state.is_starting_attack(self.is_p1):
+            entry = Entry.build(self.is_p1)
             self.print_f(self.is_p1, entry)

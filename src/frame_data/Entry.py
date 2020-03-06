@@ -1,10 +1,12 @@
 from . import Database
 from . import DataColumns
 from game_parser import MoveInfoEnums
+from misc import Globals
 
 MAX_HEALTH = 170
 
-def build(game_state, is_p1):
+def build(is_p1):
+    game_state = Globals.Globals.tekken_state
     entry = {}
     entry[DataColumns.DataColumns.fa] = get_fa(game_state, is_p1)
     entry[DataColumns.DataColumns.move_id] = game_state.get(is_p1, 1).move_id

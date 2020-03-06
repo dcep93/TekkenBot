@@ -2,7 +2,7 @@ import abc
 import enum
 
 from . import t_tkinter
-from misc import ConfigReader, Path
+from misc import ConfigReader, Globals, Path
 from misc.Windows import w as Windows
 
 @enum.unique
@@ -26,11 +26,9 @@ class ColorSchemeEnum(enum.Enum):
     advantage_text = 'black'
 
 class Overlay:
-    def __init__(self, master, state, xy_size):
+    def __init__(self, xy_size):
         window_name = self.get_name()
         print("Launching {}".format(window_name))
-        self.master = master
-        self.state = state
 
         self.set_config()
 
@@ -58,7 +56,7 @@ class Overlay:
         return self.__class__.__name__
 
     def set_config(self):
-        g = self.master.tekken_config.get_property
+        g = Globals.Globals.master.tekken_config.get_property
         self.is_draggable_window = g(DisplaySettings.overlay_as_draggable_window, False)
         self.is_minimize_on_lost_focus = g(DisplaySettings.only_appears_when_Tekken_7_has_focus, True)
         self.is_overlay_on_bottom = g(DisplaySettings.overlay_on_bottom, True)
@@ -67,7 +65,7 @@ class Overlay:
         if not Windows.valid:
             return
         if not self.is_draggable_window:
-            tekken_rect = self.state.game_reader.get_window_rect()
+            tekken_rect = Globals.Globals.game_reader.get_window_rect()
             if tekken_rect is not None:
                 x = (tekken_rect.right + tekken_rect.left) / 2  - self.toplevel.winfo_width() / 2
                 if self.is_overlay_on_bottom:
