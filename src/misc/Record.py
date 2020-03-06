@@ -150,7 +150,7 @@ class Recorder:
             direction_hexes = []
         else:
             if reverse:
-                direction_string.replace('b', 'F').replace('f', 'B').replace('F', 'f').replace('B', 'b')
+                direction_string = direction_string.replace('b', 'F').replace('f', 'B').replace('F', 'f').replace('B', 'b')
             direction_hexes = [direction_string_to_hexes[p1][d] for d in direction_string]
         attack_hexes = [attack_string_to_hex[p1][a] for a in attack_string]
         hex_key_codes = direction_hexes + attack_hexes
