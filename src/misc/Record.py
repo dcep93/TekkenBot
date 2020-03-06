@@ -186,6 +186,7 @@ class Replayer:
             self.reverse = not self.reverse
             self.i += 1
             self.handle_next_move()
+            return
         
         target = self.i * seconds_per_frame
         actual = time.time() - self.start
