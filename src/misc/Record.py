@@ -63,21 +63,21 @@ class Recorder:
         self.reverse = False
 
     def record(self, tekken_state):
-        if self.is_side_switch(tekken_state):
-            self.history.append(SIDE_SWITCH)
         input_state = self.get_input_state(tekken_state)
         if self.last_move_was(input_state):
             self.history[-1][-1] += 1
         else:
             self.history.append([input_state, 1])
 
-    @staticmethod
-    def is_side_switch(self, tekken_state):
-        # todo build
-        return False
+    def check_for_side_switch(self, last_state):
+        facing = bool(last_state.facing_bool)
+        if self.reverse != facing:
+            self.reverse = facing
+            self.history.append(SIDE_SWITCH)
 
     def get_input_state(self, tekken_state):
         last_state = tekken_state.state_log[-1]
+        self.check_for_side_switch(last_state)
         if last_state.is_player_player_one:
             player = last_state.p1
             opp = last_state.p2
@@ -219,7 +219,7 @@ class Replayer:
         print("done")
 
     def replay_move(self, move):
-        hex_key_codes = Recorder.move_to_hexes(move, self.reverse)
+        hex_key_codes = recorder.move_to_hexes(move, self.reverse)
         to_release = [i for i in self.pressed if i not in hex_key_codes]
         to_press = [i for i in hex_key_codes if i not in self.pressed]
         for hex_key_code in to_release:
@@ -228,31 +228,32 @@ class Replayer:
             Windows.press_key(hex_key_code)
         self.pressed = hex_key_codes
 
+recorder = Recorder()
 def record_single():
     print("starting recording single")
-    Recorder.state = RecordingState.SINGLE
-    Recorder.history = []
+    recorder.state = RecordingState.SINGLE
+    recorder.history = []
 
 def record_both():
     print("starting recording both")
-    Recorder.state = RecordingState.BOTH
-    Recorder.history = []
+    recorder.state = RecordingState.BOTH
+    recorder.history = []
 
 def record_end():
-    if Recorder.state == RecordingState.OFF:
+    if recorder.state == RecordingState.OFF:
         print("recording not active")
         return
     print("ending recording")
-    recording_str = Recorder.to_string()
-    Recorder.state = RecordingState.OFF
+    recording_str = recorder.to_string()
+    recorder.state = RecordingState.OFF
     path = get_path()
     with open(path, 'w') as fh:
         fh.write(recording_str)
-    Recorder.history = None
+    recorder.history = None
 
 def record_if_activated(tekken_state):
-    if Recorder.state != RecordingState.OFF:
-        Recorder.record(tekken_state)
+    if recorder.state != RecordingState.OFF:
+        recorder.record(tekken_state)
 
 def get_path():
     return Path.path('./record/recording.txt')
