@@ -78,7 +78,7 @@ class Recorder:
                 self.history.append([input_state, 1])
 
     def check_for_side_switch(self, last_state):
-        facing = bool(last_state.facing_bool)
+        facing = bool(last_state.facing_bool) ^ (not last_state.is_player_player_one)
         if self.reverse != facing:
             self.reverse = facing
             self.history.append(SIDE_SWITCH)
