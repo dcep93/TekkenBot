@@ -5,7 +5,8 @@ import sys
 from . import Overlay, CommandInputOverlay, FrameDataOverlay, t_tkinter
 from frame_data import DataColumns, Generator
 from game_parser import GameState
-from misc import ConfigReader, Flags, Path, Record
+from misc import ConfigReader, Flags, Globals, Path
+from record import Record, Replay
 
 class TekkenBotPrime(t_tkinter.Tk):
     def __init__(self):
@@ -63,11 +64,11 @@ class TekkenBotPrime(t_tkinter.Tk):
 
     def add_menu_cascade(self):
         tekken_bot_menu = t_tkinter.Menu(self.menu, tearoff=False)
-        Record.Master.master = self
+        Globals.master = self
         tekken_bot_menu.add_command(label="record single", command=Record.record_single)
         tekken_bot_menu.add_command(label="record both", command=Record.record_both)
         tekken_bot_menu.add_command(label="end recording", command=Record.record_end)
-        tekken_bot_menu.add_command(label="replay", command=Record.replay)
+        tekken_bot_menu.add_command(label="replay", command=Replay.replay)
         self.menu.add_cascade(label="Tekken Bot", menu=tekken_bot_menu)
 
     def add_columns_cascade(self):

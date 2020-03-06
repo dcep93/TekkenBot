@@ -134,7 +134,6 @@ class Windows:
         x = Input( ctypes.c_ulong(1), ii_ )
         ctypes.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
 
-SendInput = ctypes.windll.user32.SendInput
 # C struct redefinitions
 PUL = ctypes.POINTER(ctypes.c_ulong)
 class KeyBdInput(ctypes.Structure):
