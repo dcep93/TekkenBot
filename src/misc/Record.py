@@ -10,23 +10,45 @@ from misc.Windows import w as Windows
 seconds_per_frame = 1/60.
 
 direction_code_to_hexes = {
-    InputDirectionCodes.NULL: [],
-    InputDirectionCodes.N: [],
-    InputDirectionCodes.u: [0x11],
-    InputDirectionCodes.ub: [0x11, 0x1E],
-    InputDirectionCodes.uf: [0x11, 0x20],
-    InputDirectionCodes.f: [0x20],
-    InputDirectionCodes.b: [0x1E],
-    InputDirectionCodes.d: [0x1F],
-    InputDirectionCodes.df: [0x1F, 0x20],
-    InputDirectionCodes.db: [0x1F, 0x1E],
+    True: {
+        InputDirectionCodes.NULL: [],
+        InputDirectionCodes.N: [],
+        InputDirectionCodes.u: [0x11],
+        InputDirectionCodes.ub: [0x11, 0x1E],
+        InputDirectionCodes.uf: [0x11, 0x20],
+        InputDirectionCodes.f: [0x20],
+        InputDirectionCodes.b: [0x1E],
+        InputDirectionCodes.d: [0x1F],
+        InputDirectionCodes.df: [0x1F, 0x20],
+        InputDirectionCodes.db: [0x1F, 0x1E],
+    },
+    False: {
+        InputDirectionCodes.NULL: [],
+        InputDirectionCodes.N: [],
+        InputDirectionCodes.u: [0xc8],
+        InputDirectionCodes.ub: [0xc8, 0xCB],
+        InputDirectionCodes.uf: [0xc8, 0x20],
+        InputDirectionCodes.f: [0x20],
+        InputDirectionCodes.b: [0xCB],
+        InputDirectionCodes.d: [0xd0],
+        InputDirectionCodes.df: [0xd0, 0x20],
+        InputDirectionCodes.db: [0xd0, 0xCB],
+    }
 }
 
 attack_string_to_hex = {
-    '1': 0x16,
-    '2': 0x17,
-    '3': 0x24,
-    '4': 0x25
+    True: {
+        '1': 0x16,
+        '2': 0x17,
+        '3': 0x24,
+        '4': 0x25,
+    },
+    False: {
+        '1': 0x47,
+        '2': 0x48,
+        '3': 0x4b,
+        '4': 0x4c,
+    }
 }
 
 @enum.unique
@@ -34,6 +56,14 @@ class RecordingState(enum.Enum):
     OFF = 0
     SINGLE = 1
     BOTH = 2
+
+class BothInputState:
+    def __init__(self, *input_states):
+        self.input_states = input_states
+
+    def __eq__(self, other):
+        return isinstance(other, BothInputState) and self.input_states == other.input_states
+
 
 class Recorder:
     history = None
@@ -50,7 +80,7 @@ class Recorder:
 
     @classmethod
     def get_input_state(cls, tekken_state):
-        last_state = self.state.state_log[-1]
+        last_state = tekken_state.state_log[-1]
         if last_state.is_player_player_one:
             player = last_state.p1
             opp = last_state.p2
@@ -62,7 +92,7 @@ class Recorder:
         if cls.state == RecordingState.SINGLE:
             return player_input_state
         else:
-            return (player_input_state, opp_input_state)
+            return BothInputState(player_input_state, opp_input_state)
 
     @classmethod
     def last_move_was(cls, input_state):
@@ -87,9 +117,9 @@ class Recorder:
             return '%s(%d)' % (raw_move, count)
 
     @classmethod
-    def get_raw_move(cls, input_state, recursive=False):
-        if not recursive and cls.RecordingState == RecordingState.BOTH:
-            input_states = [cls.get_raw_move(i, True) for i in input_state]
+    def get_raw_move(cls, input_state):
+        if isinstance(input_state, BothInputState):
+            input_states = [cls.get_raw_move(i) for i in input_state.input_states]
             if input_states[1] == 'N_':
                 return input_states[0]
             return '/'.join(input_states)
@@ -123,8 +153,8 @@ class Recorder:
         parts = move.split('_')
         direction_string, attack_string = parts
         direction_code = InputDirectionCodes[direction_string]
-        direction_hexes = direction_code_to_hexes[direction_code]
-        attack_hexes = [attack_string_to_hex[a] for a in attack_string]
+        direction_hexes = direction_code_to_hexes[p1][direction_code]
+        attack_hexes = [attack_string_to_hex[p1][a] for a in attack_string]
         hex_key_codes = direction_hexes + attack_hexes
         return hex_key_codes
 
@@ -205,8 +235,8 @@ def record_end():
         print("recording not active")
         return
     print("ending recording")
-    Recorder.state = RecordingState.OFF
     recording_str = Recorder.to_string()
+    Recorder.state = RecordingState.OFF
     path = get_path()
     with open(path, 'w') as fh:
         fh.write(recording_str)

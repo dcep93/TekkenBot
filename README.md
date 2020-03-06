@@ -29,9 +29,10 @@ Created by roguelike2d. Maintained by the community.
 ### Record/Replay
 
 -   [x] Record and replay feature built. Intended for combo construction/hypothetical scenario validation. Could potentially be used for cheating, but would need a nefarious coder to implement, as the current iteration requires mouse moving and such.
+-   [x] Recording works for both players to allow easy creation, editing, and sharing of TAS duels.
 
 ### TODO
 
 -   [ ] Throws - how to break and importing from rbnorway
--   [ ] What do do about moves that have more than one hit for a single input
+-   [ ] What to do about moves that have more than one hit for a single input
 -   [ ] Multiple active frames
