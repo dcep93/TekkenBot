@@ -161,7 +161,7 @@ def move_to_hexes(move, reverse, p1=True):
     return hex_key_codes
 
 def record_state(tekken_state):
-    if Globals.Globals.is_foreground_pid():
+    if Globals.Globals.get_reader().is_foreground_pid():
         input_state = get_input_state(tekken_state)
         if last_move_was(input_state):
             Recorder.history[-1][-1] += 1

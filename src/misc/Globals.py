@@ -1,8 +1,16 @@
-# todo this should be used everywhere
-
 class Globals:
     master = None
+    tekken_state = None
+    game_reader = None
 
     @classmethod
-    def is_foreground_pid(cls):
-        return cls.master.tekken_state.game_reader.is_foreground_pid()
+    def get_master(cls):
+        return self.master
+
+    @classmethod
+    def get_state(cls):
+        return cls.tekken_state
+
+    @classmethod
+    def get_reader(cls):
+        return cls.game_reader

@@ -34,7 +34,7 @@ class Replayer:
     start = None
 
 def wait_for_focus_and_replay_moves():
-    if Globals.Globals.is_foreground_pid():
+    if Globals.Globals.get_reader().is_foreground_pid():
         replay_moves()
     else:
         Globals.Globals.master.after(100, wait_for_focus_and_replay_moves)
@@ -72,7 +72,7 @@ def move_is_side_switch():
 
 def replay_next_move():
     # quit if tekken is not foreground
-    if not Globals.Globals.is_foreground_pid():
+    if not Globals.Globals.get_reader().is_foreground_pid():
         print('lost focus')
         finish()
         return
