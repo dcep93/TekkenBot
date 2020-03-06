@@ -8,6 +8,7 @@ from game_parser.MoveInfoEnums import InputDirectionCodes, InputAttackCodes
 from misc.Windows import w as Windows
 
 seconds_per_frame = 1/60.
+SIDE_SWITCH = 'SIDE_SWITCH'
 
 direction_string_to_hexes = {
     True: {
@@ -52,19 +53,27 @@ class BothInputState:
     def __eq__(self, other):
         return isinstance(other, BothInputState) and self.input_states == other.input_states
 
-
+# todo instance methods
 class Recorder:
     history = None
     moves_per_line = 10
     state = RecordingState.OFF
+    reverse = False
 
     @classmethod
     def record(cls, tekken_state):
+        if cls.is_side_switch(tekken_state):
+            cls.history.append(SIDE_SWITCH)
         input_state = cls.get_input_state(tekken_state)
         if cls.last_move_was(input_state):
             cls.history[-1][-1] += 1
         else:
             cls.history.append([input_state, 1])
+
+    @classmethod
+    def is_side_switch(cls, tekken_state):
+        # todo build
+        return False
 
     @classmethod
     def get_input_state(cls, tekken_state):
@@ -97,6 +106,8 @@ class Recorder:
 
     @classmethod
     def get_move(cls, item):
+        if item == SIDE_SWITCH:
+            return item
         input_state, count = item
         raw_move = cls.get_raw_move(input_state)
         if count == 1:
@@ -132,17 +143,19 @@ class Recorder:
         return moves
 
     @classmethod
-    def move_to_hexes(cls, move, p1=True):
+    def move_to_hexes(cls, move, reverse, p1=True):
         if '/' in move:
             p1_move, p2_move = move.split('/')
-            p1_codes = cls.move_to_hexes(p1_move, True)
-            p2_codes = cls.move_to_hexes(p2_move, False)
+            p1_codes = cls.move_to_hexes(p1_move, reverse, True)
+            p2_codes = cls.move_to_hexes(p2_move, reverse, False)
             return p1_codes + p2_codes
         parts = move.split('_')
         direction_string, attack_string = parts
         if direction_string in ['NULL', 'N']:
             direction_hexes = []
         else:
+            if reverse:
+                direction_string.replace('b', 'F').replace('f', 'B').replace('F', 'f').replace('B', 'b')
             direction_hexes = [direction_string_to_hexes[p1][d] for d in direction_string]
         attack_hexes = [attack_string_to_hex[p1][a] for a in attack_string]
         hex_key_codes = direction_hexes + attack_hexes
@@ -153,6 +166,7 @@ class Replayer:
         self.moves = moves
         self.master = master
         self.pressed = []
+        self.reverse = False
 
         self.i = None
         self.start = None
@@ -173,6 +187,11 @@ class Replayer:
         if self.i == len(self.moves):
             self.finish()
             return
+
+        if self.move_is_side_switch():
+            self.reverse = not self.reverse
+            self.i += 1
+            self.handle_next_move()
         
         target = self.i * seconds_per_frame
         actual = time.time() - self.start
@@ -182,6 +201,10 @@ class Replayer:
             self.master.after(diff_ms, self.replay_next_move)
         else:
             self.replay_next_move()
+
+    def move_is_side_switch(self):
+        move = self.moves[self.i]
+        return move == SIDE_SWITCH
 
     def replay_next_move(self):
         # quit if tekken is not foreground
@@ -201,7 +224,7 @@ class Replayer:
         print("done")
 
     def replay_move(self, move):
-        hex_key_codes = Recorder.move_to_hexes(move)
+        hex_key_codes = Recorder.move_to_hexes(move, self.reverse)
         to_release = [i for i in self.pressed if i not in hex_key_codes]
         to_press = [i for i in hex_key_codes if i not in self.pressed]
         for hex_key_code in to_release:
