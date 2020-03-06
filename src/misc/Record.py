@@ -53,7 +53,6 @@ class BothInputState:
     def __eq__(self, other):
         return isinstance(other, BothInputState) and self.input_states == other.input_states
 
-# todo instance methods
 class Recorder:
     moves_per_line = 10
 
