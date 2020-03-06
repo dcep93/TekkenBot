@@ -53,6 +53,14 @@ class BothInputState:
     def __eq__(self, other):
         return isinstance(other, BothInputState) and self.input_states == other.input_states
 
+class Master:
+    master = None
+
+    @classmethod
+    def is_foreground_pid(cls):
+        return cls.master.tekken_state.game_reader.is_foreground_pid()
+
+# todo no instances
 class Recorder:
     moves_per_line = 10
 
@@ -62,11 +70,12 @@ class Recorder:
         self.reverse = False
 
     def record(self, tekken_state):
-        input_state = self.get_input_state(tekken_state)
-        if self.last_move_was(input_state):
-            self.history[-1][-1] += 1
-        else:
-            self.history.append([input_state, 1])
+        if Master.is_foreground_pid():
+            input_state = self.get_input_state(tekken_state)
+            if self.last_move_was(input_state):
+                self.history[-1][-1] += 1
+            else:
+                self.history.append([input_state, 1])
 
     def check_for_side_switch(self, last_state):
         facing = bool(last_state.facing_bool)
@@ -156,9 +165,8 @@ class Recorder:
         return hex_key_codes
 
 class Replayer:
-    def __init__(self, moves, master):
+    def __init__(self, moves):
         self.moves = moves
-        self.master = master
         self.pressed = []
         self.reverse = False
 
@@ -166,10 +174,10 @@ class Replayer:
         self.start = None
 
     def replay(self):
-        if self.master.tekken_state.game_reader.is_foreground_pid():
+        if Master.is_foreground_pid():
             self.replay_moves()
         else:
-            self.master.after(100, self.replay)
+            Master.master.after(100, self.replay)
 
     def replay_moves(self):
         print("replaying")
@@ -193,7 +201,7 @@ class Replayer:
         diff = target - actual
         if diff > 0:
             diff_ms = int(diff * 1000)
-            self.master.after(diff_ms, self.replay_next_move)
+            Master.master.after(diff_ms, self.replay_next_move)
         else:
             self.replay_next_move()
 
@@ -203,7 +211,7 @@ class Replayer:
 
     def replay_next_move(self):
         # quit if tekken is not foreground
-        if not self.master.tekken_state.game_reader.is_foreground_pid():
+        if not Master.is_foreground_pid():
             print('lost focus')
             self.finish()
             return
@@ -240,9 +248,6 @@ def record_both():
     recorder.history = []
 
 def record_end():
-    if recorder.state == RecordingState.OFF:
-        print("recording not active")
-        return
     print("ending recording")
     recording_str = recorder.to_string()
     recorder.state = RecordingState.OFF
@@ -258,7 +263,7 @@ def record_if_activated(tekken_state):
 def get_path():
     return Path.path('./record/recording.txt')
 
-def replay(master):
+def replay():
     path = get_path()
     if not os.path.isfile(path):
         print("recording not found")
@@ -272,5 +277,5 @@ def replay(master):
         print("not windows?")
         return
     print('waiting for tekken focus')
-    replayer = Replayer(moves, master)
+    replayer = Replayer(moves)
     replayer.replay()

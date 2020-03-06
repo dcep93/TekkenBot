@@ -63,10 +63,11 @@ class TekkenBotPrime(t_tkinter.Tk):
 
     def add_menu_cascade(self):
         tekken_bot_menu = t_tkinter.Menu(self.menu, tearoff=False)
+        Record.Master.master = self
         tekken_bot_menu.add_command(label="record single", command=Record.record_single)
         tekken_bot_menu.add_command(label="record both", command=Record.record_both)
-        tekken_bot_menu.add_command(label="end record", command=Record.record_end)
-        tekken_bot_menu.add_command(label="replay", command=lambda: Record.replay(self))
+        tekken_bot_menu.add_command(label="end recording", command=Record.record_end)
+        tekken_bot_menu.add_command(label="replay", command=Record.replay)
         self.menu.add_cascade(label="Tekken Bot", menu=tekken_bot_menu)
 
     def add_columns_cascade(self):
