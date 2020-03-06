@@ -55,28 +55,28 @@ class BothInputState:
 
 # todo instance methods
 class Recorder:
-    history = None
     moves_per_line = 10
-    state = RecordingState.OFF
-    reverse = False
 
-    @classmethod
-    def record(cls, tekken_state):
-        if cls.is_side_switch(tekken_state):
-            cls.history.append(SIDE_SWITCH)
-        input_state = cls.get_input_state(tekken_state)
-        if cls.last_move_was(input_state):
-            cls.history[-1][-1] += 1
+    def __init__(self):
+        self.history = None
+        self.state = RecordingState.OFF
+        self.reverse = False
+
+    def record(self, tekken_state):
+        if self.is_side_switch(tekken_state):
+            self.history.append(SIDE_SWITCH)
+        input_state = self.get_input_state(tekken_state)
+        if self.last_move_was(input_state):
+            self.history[-1][-1] += 1
         else:
-            cls.history.append([input_state, 1])
+            self.history.append([input_state, 1])
 
-    @classmethod
-    def is_side_switch(cls, tekken_state):
+    @staticmethod
+    def is_side_switch(self, tekken_state):
         # todo build
         return False
 
-    @classmethod
-    def get_input_state(cls, tekken_state):
+    def get_input_state(self, tekken_state):
         last_state = tekken_state.state_log[-1]
         if last_state.is_player_player_one:
             player = last_state.p1
@@ -86,39 +86,35 @@ class Recorder:
             opp = last_state.p1
         player_input_state = player.get_input_state()
         opp_input_state = opp.get_input_state()
-        if cls.state == RecordingState.SINGLE:
+        if self.state == RecordingState.SINGLE:
             return player_input_state
         else:
             return BothInputState(player_input_state, opp_input_state)
 
-    @classmethod
-    def last_move_was(cls, input_state):
-        if len(cls.history) == 0:
+    def last_move_was(self, input_state):
+        if len(self.history) == 0:
             return False
-        return cls.history[-1][0] == input_state
+        return self.history[-1][0] == input_state
 
-    @classmethod
-    def to_string(cls):
-        moves = [cls.get_move(i) for i in cls.history]
-        chunks = [moves[i:i+cls.moves_per_line] for i in range(0, len(moves), cls.moves_per_line)]
+    def to_string(self):
+        moves = [self.get_move(i) for i in self.history]
+        chunks = [moves[i:i+self.moves_per_line] for i in range(0, len(moves), self.moves_per_line)]
         lines = [' '.join(i) for i in chunks]
         return '\n'.join(lines)
 
-    @classmethod
-    def get_move(cls, item):
+    def get_move(self, item):
         if item == SIDE_SWITCH:
             return item
         input_state, count = item
-        raw_move = cls.get_raw_move(input_state)
+        raw_move = self.get_raw_move(input_state)
         if count == 1:
             return raw_move
         else:
             return '%s(%d)' % (raw_move, count)
 
-    @classmethod
-    def get_raw_move(cls, input_state):
+    def get_raw_move(self, input_state):
         if isinstance(input_state, BothInputState):
-            input_states = [cls.get_raw_move(i) for i in input_state.input_states]
+            input_states = [self.get_raw_move(i) for i in input_state.input_states]
             if input_states[1] == 'N_':
                 return input_states[0]
             return '/'.join(input_states)
@@ -127,8 +123,8 @@ class Recorder:
         attack_string = attack_code.name.replace('x', '').replace('N', '')
         return '%s_%s' % (direction_string, attack_string)
 
-    @classmethod
-    def loads_moves(cls, compacted_moves):
+    @staticmethod
+    def loads_moves(compacted_moves):
         moves = []
         for compacted_move in compacted_moves:
             parts = compacted_move.split('(')
@@ -142,12 +138,11 @@ class Recorder:
                 moves.append(move)
         return moves
 
-    @classmethod
-    def move_to_hexes(cls, move, reverse, p1=True):
+    def move_to_hexes(self, move, reverse, p1=True):
         if '/' in move:
             p1_move, p2_move = move.split('/')
-            p1_codes = cls.move_to_hexes(p1_move, reverse, True)
-            p2_codes = cls.move_to_hexes(p2_move, reverse, False)
+            p1_codes = self.move_to_hexes(p1_move, reverse, True)
+            p2_codes = self.move_to_hexes(p2_move, reverse, False)
             return p1_codes + p2_codes
         parts = move.split('_')
         direction_string, attack_string = parts
