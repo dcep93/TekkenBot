@@ -35,4 +35,4 @@ Created by roguelike2d. Maintained by the community.
 
 -   [ ] Throws - how to break and importing from rbnorway
 -   [ ] What to do about moves that have more than one hit for a single input
--   [ ] Multiple active frames
+-   [ ] What to do about moves with multiple active frames
