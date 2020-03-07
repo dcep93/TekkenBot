@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['main.py'],
-             pathex=['C:\\Users\\User\\code\\TekkenBot'],
+             pathex=['C:\\Users\\Daniel\\TekkenBot'],
              binaries=[],
              datas=[],
              hiddenimports=[],
@@ -30,4 +30,4 @@ exe = EXE(pyz,
           upx=True,
           upx_exclude=[],
           runtime_tmpdir=None,
-          console=False , icon='assets\\img\\tekken_bot_close.ico')
+          console=True , icon='assets\\img\\tekken_bot_close.ico')
