@@ -16,6 +16,7 @@ class PlayerSnapshot:
         self.recovery = d['PlayerDataAddress.recovery']
         self.char_id = d['PlayerDataAddress.char_id']
         self.throw_flag = d['PlayerDataAddress.throw_flag']
+        self.throw_tech = MoveInfoEnums.ThrowTechs(d['PlayerDataAddress.throw_tech'])
         self.rage_flag = d['PlayerDataAddress.rage_flag']
         self.input_counter = d['PlayerDataAddress.input_counter']
         self.input_direction = MoveInfoEnums.InputDirectionCodes(d['PlayerDataAddress.input_direction'])
