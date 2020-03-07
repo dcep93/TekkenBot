@@ -25,6 +25,7 @@ Created by roguelike2d. Maintained by the community.
 -   [x] Characters' frame data is imported from rbnorway - when that move is detected, its data is shown instead of reading game state
 -   [x] When an unknown move is performed, its data is remembered so that next time there are fewer 'unknown' values
 -   [x] Remaining opponent health is displayed so you don't have to guess what will kill them
+-   [x] Throw breaks!
 
 ### Record/Replay
 
@@ -33,6 +34,5 @@ Created by roguelike2d. Maintained by the community.
 
 ### TODO
 
--   [ ] Throws - how to break and importing from rbnorway
 -   [ ] What to do about moves that have more than one hit for a single input
 -   [ ] Multiple active frames
