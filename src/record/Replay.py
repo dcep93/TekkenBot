@@ -49,7 +49,7 @@ def replay_moves():
     Replayer.switch_count = 0
     handle_next_move()
 
-    listen_for_q()
+    listen_for_click()
 
 def handle_next_move():
     if Replayer.i == len(Replayer.moves):
@@ -105,13 +105,8 @@ def replay_move(move):
         Windows.press_key(hex_key_code)
     Replayer.pressed = hex_key_codes
 
-def listen_for_q():
-    print('listening', Replayer.listening)
+def listen_for_click():
     if Replayer.listening:
         return
-    Globals.Globals.master.overlay.toplevel.bind("<KeyPress>", replay_if_q)
+    Globals.Globals.master.overlay.toplevel.bind("<Button-1>", lambda e: wait_for_focus_and_replay_moves())
     Replayer.listening = True
-
-def replay_if_q(e):
-    if e.char == 'q' and Replayer.i is None and Globals.Globals.game_reader.is_foreground_pid():
-        replay_moves()
