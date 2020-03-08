@@ -6,6 +6,7 @@ from misc.Windows import w as Windows
 from . import Record, Shared
 
 seconds_per_frame = 1/60. + 1/600. # fuzz
+one_frame_ms = int(1000 * seconds_per_frame)
 
 def replay():
     path = Shared.get_path()
@@ -53,7 +54,6 @@ def replay_moves():
 
 def handle_next_move():
     if Replayer.i == len(Replayer.moves):
-        one_frame_ms = int(1000 * seconds_per_frame)
         Globals.Globals.master.after(one_frame_ms, finish)
         return
 
@@ -108,5 +108,5 @@ def replay_move(move):
 def listen_for_click():
     if Replayer.listening:
         return
-    Globals.Globals.master.overlay.toplevel.bind("<Button-1>", lambda e: replay())
+    Globals.Globals.master.overlay.toplevel.bind("<Button-1>", lambda e: Globals.Globals.master.after(5*one_frame_ms, replay))
     Replayer.listening = True

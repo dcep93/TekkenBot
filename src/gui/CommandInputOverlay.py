@@ -18,7 +18,7 @@ symbol_map = {
 class CommandInputOverlay(Overlay.Overlay):
     length = 60
     input_tag = "inputs"
-    silence_after_n = 10
+    silence_after_n = 30
 
     def __init__(self):
         super().__init__((1200, 86))
