@@ -32,6 +32,7 @@ class Replayer:
 
     i = None
     start = None
+    switch_count = None
 
 def wait_for_focus_and_replay_moves():
     if Globals.Globals.game_reader.is_foreground_pid():
@@ -43,6 +44,7 @@ def replay_moves():
     print("replaying")
     Replayer.start = time.time()
     Replayer.i = 0
+    Replayer.switch_count = 0
     handle_next_move()
 
 def handle_next_move():
@@ -54,10 +56,11 @@ def handle_next_move():
     if move_is_side_switch():
         Replayer.reverse = not Replayer.reverse
         Replayer.i += 1
+        Replayer.switch_count += 1
         handle_next_move()
         return
     
-    target = Replayer.i * seconds_per_frame
+    target = (Replayer.i-Replayer.switch_count) * seconds_per_frame
     actual = time.time() - Replayer.start
     diff = target - actual
     if diff > 0:
