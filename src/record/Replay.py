@@ -5,7 +5,7 @@ from misc import Globals
 from misc.Windows import w as Windows
 from . import Record, Shared
 
-seconds_per_frame = 1/60.
+seconds_per_frame = 1/60. + 1/600. # fuzz
 
 def replay():
     path = Shared.get_path()
