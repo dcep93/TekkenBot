@@ -5,7 +5,7 @@ from misc import Globals
 from misc.Windows import w as Windows
 from . import Record, Shared
 
-seconds_per_frame = 1/60. + 1/600. # fuzz
+seconds_per_frame = 1/60.
 one_frame_ms = int(1000 * seconds_per_frame)
 
 def replay():
