@@ -148,6 +148,7 @@ def move_to_hexes(move, reverse, p1=True):
         p1_codes = move_to_hexes(p1_move, reverse, True)
         p2_codes = move_to_hexes(p2_move, reverse, False)
         return p1_codes + p2_codes
+    move.replace('_', '')
     direction_string = ''.join([i for i in move if i not in '1234'])
     attack_string = move[len(direction_string):]
     if direction_string in ['NULL', 'N']:
