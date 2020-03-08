@@ -108,5 +108,5 @@ def replay_move(move):
 def listen_for_click():
     if Replayer.listening:
         return
-    Globals.Globals.master.overlay.toplevel.bind("<Button-1>", lambda e: wait_for_focus_and_replay_moves())
+    Globals.Globals.master.overlay.toplevel.bind("<Button-1>", lambda e: replay())
     Replayer.listening = True
