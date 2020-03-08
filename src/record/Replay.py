@@ -34,6 +34,8 @@ class Replayer:
     start = None
     switch_count = None
 
+    listening = False
+
 def wait_for_focus_and_replay_moves():
     if Globals.Globals.game_reader.is_foreground_pid():
         replay_moves()
@@ -46,6 +48,8 @@ def replay_moves():
     Replayer.i = 0
     Replayer.switch_count = 0
     handle_next_move()
+
+    listen_for_q()
 
 def handle_next_move():
     if Replayer.i == len(Replayer.moves):
@@ -88,6 +92,7 @@ def finish():
     for hex_key_code in Replayer.pressed:
         Windows.release_key(hex_key_code)
     Replayer.pressed = []
+    Replayer.i = None
     print("done")
 
 def replay_move(move):
@@ -99,3 +104,14 @@ def replay_move(move):
     for hex_key_code in to_press:
         Windows.press_key(hex_key_code)
     Replayer.pressed = hex_key_codes
+
+def listen_for_q():
+    print('listening', Replayer.listening)
+    if Replayer.listening:
+        return
+    Globals.Globals.master.overlay.toplevel.bind("<KeyPress>", replay_if_q)
+    Replayer.listening = True
+
+def replay_if_q(e):
+    if e.char == 'q' and Replayer.i is None and Globals.Globals.game_reader.is_foreground_pid():
+        replay_moves()
