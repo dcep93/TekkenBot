@@ -62,8 +62,8 @@ class FrameDataOverlay(Overlay.Overlay):
         self.set_columns_to_print(Globals.Globals.master.tekken_config.get_all(DataColumns.DataColumns, True))
 
     def print_f(self, is_p1, entry):
-        entry[DataColumns.DataColumns.time] = Globals.Globals.tekken_state.state_log[-1].frame_count
         self.scroll()
+        entry[DataColumns.DataColumns.time] = self.get_time()
 
         self.entries.append(entry)
 
@@ -138,6 +138,17 @@ class FrameDataOverlay(Overlay.Overlay):
     def get_prefix(is_p1):
         player_name = "p1" if is_p1 else "p2"
         return "%s: " % player_name
+
+    def get_time(self):
+        now = Globals.Globals.tekken_state.state_log[-1].frame_count
+        if len(self.entries) > 0:
+            prev_raw = self.entries[-1][DataColumns.DataColumns.time]
+            parts = prev_raw.split('/')
+            prev = int(parts[0])
+        else:
+            prev = 0
+        diff = now - prev
+        return '%d/%3d' % (now, diff)
 
     def get_value(self, entry, col):
         if col in entry:
