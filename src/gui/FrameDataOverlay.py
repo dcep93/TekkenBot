@@ -60,7 +60,7 @@ class FrameDataOverlay(Overlay.Overlay):
         self.set_columns_to_print(Globals.Globals.master.tekken_config.get_all(DataColumns.DataColumns, True))
 
     def print_f(self, is_p1, entry):
-        entry[DataColumns.DataColumns.time] = Globals.Globals.tekken_state.time
+        entry[DataColumns.DataColumns.time] = Globals.Globals.tekken_state.state_log[-1].frame_count
         self.scroll()
 
         self.entries.append(entry)

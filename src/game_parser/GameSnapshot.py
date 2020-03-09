@@ -49,8 +49,6 @@ class PlayerSnapshot:
 
         self.character_name = MoveInfoEnums.CharacterCodes(d['PlayerDataAddress.char_id']).name
 
-        self.time = None
-
     def get_input_state(self):
         return (self.input_direction, self.input_button, self.rage_button_flag)
 

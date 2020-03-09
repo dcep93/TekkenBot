@@ -42,8 +42,6 @@ class GameState:
         return False
 
     def append_gamedata(self, game_data):
-        game_data.time = GameState.time
-        GameState.time += 1
         self.state_log.append(game_data)
 
         obj = None # for debugging
