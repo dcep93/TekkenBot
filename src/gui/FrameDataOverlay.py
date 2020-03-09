@@ -200,11 +200,10 @@ class PlayerListener:
             entry = Entry.build(self.is_p1)
             self.print_f(self.is_p1, entry)
         else:
-            throw_break = self.get_throw_break()
-            if throw_break:
-                throw_break_string = throw_break.name.replace('x', '')
+            throw_break_string = self.get_throw_break()
+            if throw_break_string:
                 entry = {
-                    DataColumns.DataColumns.cmd: '%s break' % throw_break_string,
+                    DataColumns.DataColumns.cmd: throw_break_string,
                 }
                 self.print_f(self.is_p1, entry)
             elif self.just_lost_health():
@@ -215,6 +214,7 @@ class PlayerListener:
 
 
     def get_throw_break(self):
+        frames_to_break = 19
         state = Globals.Globals.tekken_state.get(not self.is_p1)
         throw_tech = state.throw_tech
         if throw_tech == MoveInfoEnums.ThrowTechs.NONE:
@@ -230,7 +230,9 @@ class PlayerListener:
             if state.throw_tech == MoveInfoEnums.ThrowTechs.NONE:
                 relevant = current_buttons.replace('x3', '').replace('x4', '')
                 throw_break = MoveInfoEnums.InputAttackCodes[relevant]
-                return throw_break
+                break_string = throw_break.name.replace('x', '')
+                throw_break_string = '%s break: %d/%d' % (break_string, i-1, frames_to_break)
+                return throw_break_string
             buttons = state.get_input_state()[1].name
             if '1' in buttons or '2' in buttons:
                 return False
