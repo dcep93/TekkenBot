@@ -1,6 +1,7 @@
 from . import GameReader
 from game_parser import ScriptedGame
 from misc import Flags, Globals
+from record import Record
 
 class GameState:
     time = 0
@@ -23,7 +24,7 @@ class GameState:
         state = self.state_log[-1-frames_ago]
         return state.p1 if is_p1 else state.p2
 
-    def update(self):
+    def update(self, overlay):
         game_data = Globals.Globals.game_reader.get_updated_state(0)
 
         if game_data is not None:
@@ -35,19 +36,20 @@ class GameState:
 
                     for i in range(missed_states):
                         dropped_state = Globals.Globals.game_reader.get_updated_state(missed_states - i)
-                        self.append_gamedata(dropped_state)
+                        self.track_gamedata(dropped_state, overlay)
 
-                self.append_gamedata(game_data)
-                return True
-        return False
+                self.track_gamedata(game_data, overlay)
 
-    def append_gamedata(self, game_data):
+    def track_gamedata(self, game_data, overlay):
         self.state_log.append(game_data)
 
-        obj = None # for debugging
+        obj = game_data.frame_count # for debugging
         if obj != self.obj:
             print(obj)
             self.obj = obj
+
+        overlay.update_state()
+        Record.record_if_activated()
 
         if len(self.state_log) > 300:
             self.state_log.pop(0)

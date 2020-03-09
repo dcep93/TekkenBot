@@ -134,14 +134,11 @@ class TekkenBotPrime(t_tkinter.Tk):
     def update(self):
         now = time.time()
         self.last_update = now
-        successful_update = Globals.Globals.tekken_state.update()
+        Globals.Globals.tekken_state.update(self.overlay)
         after = time.time()
 
         if self.overlay is not None:
             self.overlay.update_location()
-            if successful_update:
-                self.overlay.update_state()
-                Record.record_if_activated()
 
         elapsed_ms = after - now
         wait_ms = Globals.Globals.game_reader.get_update_wait_ms(elapsed_ms)
