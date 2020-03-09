@@ -118,7 +118,7 @@ class FrameDataOverlay(Overlay.Overlay):
     def get_background(fa):
         try:
             fa = int(fa)
-        except TypeError:
+        except (ValueError, TypeError):
             return Overlay.ColorSchemeEnum.advantage_plus.value
         if fa <= -14:
             return Overlay.ColorSchemeEnum.advantage_very_punishible.value
@@ -200,6 +200,12 @@ class PlayerListener:
                     DataColumns.DataColumns.cmd: '%s break' % throw_break_string,
                 }
                 self.print_f(self.is_p1, entry)
+            elif self.just_lost_health():
+                entry = {
+                    DataColumns.DataColumns.health: Entry.get_remaining_health_string(Globals.Globals.tekken_state),
+                }
+                self.print_f(self.is_p1, entry)
+
 
     def get_throw_break(self):
         state = Globals.Globals.tekken_state.get(not self.is_p1)
@@ -222,3 +228,10 @@ class PlayerListener:
             if '1' in buttons or '2' in buttons:
                 return False
             i += 1
+
+    def just_lost_health(self):
+        last_state = Globals.Globals.tekken_state.get(self.is_p1, 1)
+        if last_state is None:
+            return False
+        current_state = Globals.Globals.tekken_state.get(self.is_p1)
+        return current_state.damage_taken != last_state.damage_taken

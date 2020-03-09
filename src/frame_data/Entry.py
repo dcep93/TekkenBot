@@ -14,8 +14,7 @@ def build(is_p1):
     
     entry[DataColumns.DataColumns.move_name] = game_state.get_current_move_name(is_p1)
 
-    remainings = [MAX_HEALTH - game_state.get(i).damage_taken for i in [True, False]]
-    entry[DataColumns.DataColumns.health] = '%d/%d' % tuple(remainings)
+    entry[DataColumns.DataColumns.health] = get_remaining_health_string(game_state)
 
     loaded = Database.load(entry)
     if not loaded:
@@ -63,3 +62,7 @@ def get_fa(game_state, is_p1):
         if raw_fa > 0:
             raw_fa_str = "+%s" % raw_fa_str
         return raw_fa_str
+
+def get_remaining_health_string(game_state):
+    remainings = [MAX_HEALTH - game_state.get(i).damage_taken for i in [True, False]]
+    return '%d/%d' % tuple(remainings)
