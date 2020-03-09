@@ -38,12 +38,16 @@ class Replayer:
     listening = False
 
 def wait_for_focus_and_replay_moves():
+    if Replayer.i is not None:
+        return
     if Globals.Globals.game_reader.is_foreground_pid():
         replay_moves()
     else:
         Globals.Globals.master.after(100, wait_for_focus_and_replay_moves)
 
 def replay_moves():
+    if Replayer.i is not None:
+        return
     print("replaying")
     Replayer.start = time.time()
     Replayer.i = 0
