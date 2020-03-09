@@ -8,6 +8,7 @@ from misc import Flags
 
 class Recorder(GameReader.GameReader):
     def __init__(self):
+        super().__init__()
         self.reset()
         self.active = False
 
@@ -30,7 +31,7 @@ class Recorder(GameReader.GameReader):
         else:
             self.all_datas[-1][1].append(game_data)
 
-    def dump(self, pickle_dest):
+    def dump(self):
         self.active = False
         print('writing', self.num_datas, len(self.all_datas))
         with open(Flags.Flags.pickle_dest, 'wb') as fh:
