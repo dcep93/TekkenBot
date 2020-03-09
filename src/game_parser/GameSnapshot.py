@@ -15,6 +15,7 @@ class PlayerSnapshot:
         self.move_timer = d['PlayerDataAddress.move_timer']
         self.recovery = d['PlayerDataAddress.recovery']
         self.char_id = d['PlayerDataAddress.char_id']
+        self.distance = d['PlayerDataAddress.distance']
         self.throw_flag = d['PlayerDataAddress.throw_flag']
         self.throw_tech = MoveInfoEnums.ThrowTechs(d['PlayerDataAddress.throw_tech'])
         self.rage_flag = d['PlayerDataAddress.rage_flag']

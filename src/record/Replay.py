@@ -15,8 +15,8 @@ def replay():
         return
     with open(path) as fh:
         contents = fh.read()
-    raw_string = contents.replace('\n', ' ')
-    compacted_moves = raw_string.split(' ')
+    lines = [line for line in contents.split('\n') if not line.startswith('#')]
+    compacted_moves = ' '.join(lines).split(' ')
     moves = Record.loads_moves(compacted_moves)
     if not Windows.valid:
         print("not windows?")
@@ -49,6 +49,7 @@ def replay_moves():
     if Replayer.i is not None:
         return
     print("replaying")
+    time.sleep(0.01)
     Replayer.start = time.time()
     Replayer.i = 0
     Replayer.switch_count = 0
@@ -96,8 +97,8 @@ def finish():
     for hex_key_code in Replayer.pressed:
         Windows.release_key(hex_key_code)
     Replayer.pressed = []
+    print("done", Replayer.i - Replayer.switch_count)
     Replayer.i = None
-    print("done")
 
 def replay_move(move):
     hex_key_codes = Record.move_to_hexes(move, Replayer.reverse)
