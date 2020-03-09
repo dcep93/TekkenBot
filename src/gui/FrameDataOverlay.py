@@ -237,8 +237,8 @@ class PlayerListener:
             i += 1
 
     def just_lost_health(self):
-        last_state = Globals.Globals.tekken_state.get(self.is_p1, 2)
+        last_state = Globals.Globals.tekken_state.get(self.is_p1, 1)
         if last_state is None:
             return False
-        current_state = Globals.Globals.tekken_state.get(self.is_p1, 1)
+        current_state = Globals.Globals.tekken_state.get(self.is_p1)
         return current_state.damage_taken != last_state.damage_taken
