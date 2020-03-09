@@ -14,13 +14,16 @@ def build(is_p1):
     
     entry[DataColumns.DataColumns.move_name] = game_state.get_current_move_name(is_p1)
 
-    remainings = [MAX_HEALTH - game_state.get(i).damage_taken for i in [True, False]]
-    entry[DataColumns.DataColumns.health] = '%d/%d' % tuple(remainings)
+    entry[DataColumns.DataColumns.health] = get_remaining_health_string(game_state)
 
     loaded = Database.load(entry)
     if not loaded:
         entry = build_frame_data_entry(entry, game_state, is_p1)
         Database.record(entry)
+
+    throw_tech = game_state.get(not is_p1).throw_tech
+    if throw_tech != MoveInfoEnums.ThrowTechs.NONE:
+        entry[DataColumns.DataColumns.hit_type] = throw_tech.name
 
     return entry
 
@@ -59,3 +62,7 @@ def get_fa(game_state, is_p1):
         if raw_fa > 0:
             raw_fa_str = "+%s" % raw_fa_str
         return raw_fa_str
+
+def get_remaining_health_string(game_state):
+    remainings = [MAX_HEALTH - game_state.get(i).damage_taken for i in [True, False]]
+    return '%d/%d' % tuple(remainings)

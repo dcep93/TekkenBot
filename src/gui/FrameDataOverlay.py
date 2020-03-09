@@ -1,5 +1,6 @@
 from . import Overlay, t_tkinter
 from frame_data import DataColumns, Entry
+from game_parser import MoveInfoEnums
 from misc import Flags, Globals
 
 class FrameDataOverlay(Overlay.Overlay):
@@ -59,15 +60,20 @@ class FrameDataOverlay(Overlay.Overlay):
         self.set_columns_to_print(Globals.Globals.master.tekken_config.get_all(DataColumns.DataColumns, True))
 
     def print_f(self, is_p1, entry):
+        entry[DataColumns.DataColumns.time] = Globals.Globals.tekken_state.time
         self.scroll()
 
         self.entries.append(entry)
-        fa = entry[DataColumns.DataColumns.fa]
 
-        background = self.get_background(fa)
-        self.style.configure('.', background=background)
+        fa = None
+        if DataColumns.DataColumns.fa in entry:
+            fa = entry[DataColumns.DataColumns.fa]
 
-        self.fa_var.set(fa)
+            background = self.get_background(fa)
+            self.style.configure('.', background=background)
+
+            self.fa_var.set(fa)
+
         text_tag = 'p1' if is_p1 else 'p2'
 
         out = self.get_frame_data_string(entry)
@@ -113,7 +119,7 @@ class FrameDataOverlay(Overlay.Overlay):
     def get_background(fa):
         try:
             fa = int(fa)
-        except ValueError:
+        except (ValueError, TypeError):
             return Overlay.ColorSchemeEnum.advantage_plus.value
         if fa <= -14:
             return Overlay.ColorSchemeEnum.advantage_very_punishible.value
@@ -150,13 +156,19 @@ class FrameDataOverlay(Overlay.Overlay):
         return '|'.join(values)
 
     def scroll(self):
-        offset = 2
+        if len(self.entries) > 0:
+            if DataColumns.DataColumns.char_name not in self.entries[-1]:
+                self.pop_entry(len(self.entries) - 1)
+                return
         while len(self.entries) >= self.max_lines:
-            index = 0
-            self.entries.pop(index)
-            start = "%0.1f" % (index + offset)
-            end = "%0.1f" % (index + offset + 1)
-            self.text.delete(start, end)
+            self.pop_entry(0)
+
+    def pop_entry(self, index):
+        offset = 2
+        self.entries.pop(index)
+        start = "%0.1f" % (index + offset)
+        end = "%0.1f" % (index + offset + 1)
+        self.text.delete(start, end)
 
     def populate_column_names(self):
         columns_entry = {col:col.name for col in DataColumns.DataColumns}
@@ -187,3 +199,48 @@ class PlayerListener:
         if Globals.Globals.tekken_state.is_starting_attack(self.is_p1):
             entry = Entry.build(self.is_p1)
             self.print_f(self.is_p1, entry)
+        else:
+            throw_break_string = self.get_throw_break()
+            if throw_break_string:
+                entry = {
+                    DataColumns.DataColumns.cmd: throw_break_string,
+                }
+                self.print_f(self.is_p1, entry)
+            elif self.just_lost_health():
+                entry = {
+                    DataColumns.DataColumns.health: Entry.get_remaining_health_string(Globals.Globals.tekken_state),
+                }
+                self.print_f(self.is_p1, entry)
+
+
+    def get_throw_break(self):
+        frames_to_break = 19
+        state = Globals.Globals.tekken_state.get(not self.is_p1)
+        throw_tech = state.throw_tech
+        if throw_tech == MoveInfoEnums.ThrowTechs.NONE:
+            return False
+        
+        current_buttons = state.get_input_state()[1].name
+        if '1' not in current_buttons and '2' not in current_buttons:
+            return False
+
+        i = 1
+        while True:
+            state = Globals.Globals.tekken_state.get(not self.is_p1, i)
+            if state.throw_tech == MoveInfoEnums.ThrowTechs.NONE:
+                relevant = current_buttons.replace('x3', '').replace('x4', '')
+                throw_break = MoveInfoEnums.InputAttackCodes[relevant]
+                break_string = throw_break.name.replace('x', '')
+                throw_break_string = '%s break: %d/%d' % (break_string, i-1, frames_to_break)
+                return throw_break_string
+            buttons = state.get_input_state()[1].name
+            if '1' in buttons or '2' in buttons:
+                return False
+            i += 1
+
+    def just_lost_health(self):
+        last_state = Globals.Globals.tekken_state.get(self.is_p1, 1)
+        if last_state is None:
+            return False
+        current_state = Globals.Globals.tekken_state.get(self.is_p1)
+        return current_state.damage_taken != last_state.damage_taken

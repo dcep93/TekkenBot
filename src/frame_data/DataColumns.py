@@ -2,6 +2,7 @@ import enum
 
 @enum.unique
 class DataColumns(enum.Enum):
+    time = 'time'
     cmd = 'input command'
     char_name = 'character name'
     move_id = 'internal move id number'

@@ -20,6 +20,7 @@ def record_end():
     Recorder.state = RecordingState.OFF
 
     recording_string = get_recording_string()
+    print(recording_string)
     Recorder.history = None
     path = Shared.get_path()
     with open(path, 'w') as fh:
@@ -126,7 +127,9 @@ def get_raw_move(input_state):
     direction_code, attack_code, _ = input_state
     direction_string = direction_code.name
     attack_string = attack_code.name.replace('x', '').replace('N', '')
-    return '%s_%s' % (direction_string, attack_string)
+    if direction_string == 'N' and attack_string != '':
+        return attack_string
+    return '%s%s' % (direction_string, attack_string)
 
 def loads_moves(compacted_moves):
     moves = []
@@ -148,8 +151,9 @@ def move_to_hexes(move, reverse, p1=True):
         p1_codes = move_to_hexes(p1_move, reverse, True)
         p2_codes = move_to_hexes(p2_move, reverse, False)
         return p1_codes + p2_codes
-    parts = move.split('_')
-    direction_string, attack_string = parts
+    move.replace('_', '')
+    direction_string = ''.join([i for i in move if i not in '1234'])
+    attack_string = move[len(direction_string):]
     if direction_string in ['NULL', 'N']:
         direction_hexes = []
     else:
@@ -169,7 +173,40 @@ def record_state():
             Recorder.history.append([input_state, 1])
 
 def get_recording_string():
+    strip_neutrals()
     moves = [get_move(i) for i in Recorder.history]
+    if len(moves) == 0:
+        return ''
     chunks = [moves[i:i+moves_per_line] for i in range(0, len(moves), moves_per_line)]
     lines = [' '.join(i) for i in chunks]
-    return '\n'.join(lines)
+    moves_string = '\n'.join(lines)
+
+    distance = get_distance()
+    count = sum([i[1] for i in Recorder.history])
+    quotient = distance / count
+    comment = '%f / %d = %f' % (distance, count, quotient)
+    return '%s\n# %s\n' % (moves_string, comment)
+
+def strip_neutrals():
+    strip_neutrals_helper(0, 1)
+    strip_neutrals_helper(-1, -1)
+
+def strip_neutrals_helper(index, step):
+    while True:
+        if abs(index) > len(Recorder.history):
+            return
+        val = Recorder.history[index]
+        if val == SIDE_SWITCH:
+            index += step
+        else:
+            move_string = get_move(val)
+            if move_string == 'N' or move_string.startswith('N('):
+                Recorder.history.pop(index)
+            else:
+                return
+
+
+def get_distance():
+    raw_distance = Globals.Globals.tekken_state.get(True).distance
+    normalized = (raw_distance - 1148262975) / 4500000
+    return normalized - 2

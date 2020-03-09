@@ -15,7 +15,9 @@ class PlayerSnapshot:
         self.move_timer = d['PlayerDataAddress.move_timer']
         self.recovery = d['PlayerDataAddress.recovery']
         self.char_id = d['PlayerDataAddress.char_id']
+        self.distance = d['PlayerDataAddress.distance']
         self.throw_flag = d['PlayerDataAddress.throw_flag']
+        self.throw_tech = MoveInfoEnums.ThrowTechs(d['PlayerDataAddress.throw_tech'])
         self.rage_flag = d['PlayerDataAddress.rage_flag']
         self.input_counter = d['PlayerDataAddress.input_counter']
         self.input_direction = MoveInfoEnums.InputDirectionCodes(d['PlayerDataAddress.input_direction'])
@@ -46,6 +48,8 @@ class PlayerSnapshot:
         self.movelist_parser = d['movelist_parser']
 
         self.character_name = MoveInfoEnums.CharacterCodes(d['PlayerDataAddress.char_id']).name
+
+        self.time = None
 
     def get_input_state(self):
         return (self.input_direction, self.input_button, self.rage_button_flag)
