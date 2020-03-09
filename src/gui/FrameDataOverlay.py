@@ -146,8 +146,8 @@ class FrameDataOverlay(Overlay.Overlay):
             parts = prev_raw.split('/')
             prev = int(parts[0])
         else:
-            prev = 0
-        diff = now - prev
+            prev = now
+        diff = max(now - prev, 0)
         return '%d/%3d' % (now, diff)
 
     def get_value(self, entry, col):
@@ -238,6 +238,8 @@ class PlayerListener:
         if '1' not in current_buttons and '2' not in current_buttons:
             return False
 
+        correct = state.throw_tech.name
+
         i = 1
         while True:
             state = Globals.Globals.tekken_state.get(not self.is_p1, i)
@@ -245,7 +247,7 @@ class PlayerListener:
                 relevant = current_buttons.replace('x3', '').replace('x4', '')
                 throw_break = MoveInfoEnums.InputAttackCodes[relevant]
                 break_string = throw_break.name.replace('x', '')
-                throw_break_string = '%s break: %d/%d' % (break_string, i-1, frames_to_break)
+                throw_break_string = 'br: %s/%s %d/%d' % (break_string, correct, i-1, frames_to_break)
                 return throw_break_string
             buttons = state.get_input_state()[1].name
             if '1' in buttons or '2' in buttons:
