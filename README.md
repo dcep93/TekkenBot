@@ -38,5 +38,6 @@ Created by roguelike2d. Maintained by the community.
 
 -   [ ] Just always include both overlays
 -   [ ] Buttons instead of menu for record/replay
--   [ ] Correct throw break timings for command throws
+-   [ ] Correct throw break timings for command throws instead of always 19
 -   [ ] Make options file work/persist
+-   [ ] Make replays not occasionally drop frames
