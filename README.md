@@ -36,5 +36,5 @@ Created by roguelike2d. Maintained by the community.
 
 ### TODO
 
--   [ ] What to do about moves that have more than one hit for a single input
--   [ ] What to do about moves with multiple active frames
+-   [ ] Just always include both overlays
+-   [ ] Buttons instead of menu for record/replay
