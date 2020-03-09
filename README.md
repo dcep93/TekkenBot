@@ -39,3 +39,4 @@ Created by roguelike2d. Maintained by the community.
 -   [ ] Just always include both overlays
 -   [ ] Buttons instead of menu for record/replay
 -   [ ] Correct throw break timings for command throws
+-   [ ] Make options file work/persist
