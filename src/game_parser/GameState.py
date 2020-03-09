@@ -43,7 +43,7 @@ class GameState:
     def track_gamedata(self, game_data, overlay):
         self.state_log.append(game_data)
 
-        obj = game_data.frame_count # for debugging
+        obj = None # for debugging
         if obj != self.obj:
             print(obj)
             self.obj = obj
