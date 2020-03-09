@@ -1,6 +1,7 @@
 import os
 import time
 
+from frame_data import DataColumns
 from misc import Globals
 from misc.Windows import w as Windows
 from . import Record, Shared
@@ -113,5 +114,11 @@ def replay_move(move):
 def listen_for_click():
     if Replayer.listening:
         return
-    Globals.Globals.master.overlay.toplevel.bind("<Button-1>", lambda e: Globals.Globals.master.after(5*one_frame_ms, replay))
+    Globals.Globals.master.overlay.toplevel.bind("<Button-1>", handle_click)
     Replayer.listening = True
+
+def handle_click(e):
+    Globals.Globals.master.after(5*one_frame_ms, replay)
+    Globals.Globals.master.overlay.print_f(True, {
+        DataColumns.DataColumns.cmd: 'REPLAY'
+    })
