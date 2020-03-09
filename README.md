@@ -25,12 +25,14 @@ Created by roguelike2d. Maintained by the community.
 -   [x] Characters' frame data is imported from rbnorway - when that move is detected, its data is shown instead of reading game state
 -   [x] When an unknown move is performed, its data is remembered so that next time there are fewer 'unknown' values
 -   [x] Remaining opponent health is displayed so you don't have to guess what will kill them
--   [x] Throw breaks!
+-   [x] Tells you what break a throw is, along with what and when the user attempted to break, even if the break is late.
+-   [x] Includes the relative frame numbers to compare precisely events happened.
 
 ### Record/Replay
 
 -   [x] Record and replay feature built. Intended for combo construction/hypothetical scenario validation. Could potentially be used for cheating, but would need a nefarious coder to implement, as the current iteration requires mouse moving and such.
 -   [x] Recording works for both players to allow easy creation, editing, and sharing of TAS duels.
+-   [x] Shows the distance from 2.00 the player is after the recording finishes. Can be used for kbd practice.
 
 ### TODO
 
