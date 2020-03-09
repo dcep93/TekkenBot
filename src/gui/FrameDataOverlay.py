@@ -209,6 +209,7 @@ class PlayerListener:
             elif self.just_lost_health():
                 entry = {
                     DataColumns.DataColumns.health: Entry.get_remaining_health_string(Globals.Globals.tekken_state),
+                    DataColumns.DataColumns.cmd: 'DMG',
                 }
                 self.print_f(self.is_p1, entry)
 

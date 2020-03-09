@@ -214,7 +214,6 @@ def strip_neutrals_helper(index, step):
             else:
                 return
 
-
 def get_distance():
     raw_distance = Globals.Globals.tekken_state.get(True).distance
     normalized = (raw_distance - 1148262975) / 4500000
