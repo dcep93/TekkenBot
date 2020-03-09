@@ -3,6 +3,8 @@ from frame_data import DataColumns, Entry
 from game_parser import MoveInfoEnums
 from misc import Flags, Globals
 
+DAMAGE_CMD = 'DMG'
+
 class FrameDataOverlay(Overlay.Overlay):
     unknown = '??'
     col_max_length = 10
@@ -157,9 +159,9 @@ class FrameDataOverlay(Overlay.Overlay):
 
     def scroll(self):
         if len(self.entries) > 0:
-            if DataColumns.DataColumns.char_name not in self.entries[-1]:
+            if self.entries[-1][DataColumns.DataColumns.cmd] == DAMAGE_CMD:
                 self.pop_entry(len(self.entries) - 1)
-                return
+
         while len(self.entries) >= self.max_lines:
             self.pop_entry(0)
 
@@ -209,7 +211,7 @@ class PlayerListener:
             elif self.just_lost_health():
                 entry = {
                     DataColumns.DataColumns.health: Entry.get_remaining_health_string(Globals.Globals.tekken_state),
-                    DataColumns.DataColumns.cmd: 'DMG',
+                    DataColumns.DataColumns.cmd: DAMAGE_CMD,
                 }
                 self.print_f(self.is_p1, entry)
 
