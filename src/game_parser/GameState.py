@@ -54,22 +54,6 @@ class GameState:
         if len(self.state_log) > 300:
             self.state_log.pop(0)
 
-    def get_current_move_name(self, is_p1):
-        player = self.get(is_p1)
-        move_id = player.move_id
-        if move_id > 30000:
-            return 'Universal_{}'.format(move_id)
-        if player.movelist_parser is not None:
-            movelist_names = player.movelist_parser.movelist_names
-            index = (move_id * 2) + 4
-            if index < len(movelist_names):
-                move = movelist_names[index]
-                try:
-                    return move.decode('utf-8')
-                except:
-                    pass
-        return "ERROR"
-
     def get_current_move_string(self, is_p1):
         parser = self.get(is_p1).movelist_parser
         if parser is not None:

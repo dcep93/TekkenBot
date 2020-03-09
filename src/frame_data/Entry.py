@@ -12,8 +12,6 @@ def build(is_p1):
     entry[DataColumns.DataColumns.move_id] = game_state.get(is_p1, 1).move_id
     entry[DataColumns.DataColumns.char_name] = game_state.get(is_p1).movelist_parser.char_name
     
-    entry[DataColumns.DataColumns.move_name] = game_state.get_current_move_name(is_p1)
-
     entry[DataColumns.DataColumns.health] = get_remaining_health_string(game_state)
 
     loaded = Database.load(entry)
