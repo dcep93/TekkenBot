@@ -4,6 +4,7 @@ from misc import Flags, Globals
 
 class GameState:
     time = 0
+    obj = None
 
     def __init__(self):
         if Flags.Flags.pickle_dest is not None:
@@ -44,6 +45,11 @@ class GameState:
         game_data.time = GameState.time
         GameState.time += 1
         self.state_log.append(game_data)
+
+        obj = None # for debugging
+        if obj != self.obj:
+            print(obj)
+            self.obj = obj
 
         if len(self.state_log) > 300:
             self.state_log.pop(0)
