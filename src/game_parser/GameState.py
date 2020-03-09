@@ -3,6 +3,8 @@ from game_parser import ScriptedGame
 from misc import Flags, Globals
 
 class GameState:
+    time = 0
+
     def __init__(self):
         if Flags.Flags.pickle_dest is not None:
             game_reader = ScriptedGame.Recorder(Flags.Flags.pickle_dest)
@@ -39,6 +41,8 @@ class GameState:
         return False
 
     def append_gamedata(self, game_data):
+        game_data.time = GameState.time
+        GameState.time += 1
         self.state_log.append(game_data)
 
         if len(self.state_log) > 300:

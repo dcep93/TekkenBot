@@ -60,6 +60,7 @@ class FrameDataOverlay(Overlay.Overlay):
         self.set_columns_to_print(Globals.Globals.master.tekken_config.get_all(DataColumns.DataColumns, True))
 
     def print_f(self, is_p1, entry):
+        entry[DataColumns.DataColumns.time] = Globals.Globals.tekken_state.time
         self.scroll()
 
         self.entries.append(entry)
@@ -155,13 +156,19 @@ class FrameDataOverlay(Overlay.Overlay):
         return '|'.join(values)
 
     def scroll(self):
-        offset = 2
+        if len(self.entries) > 0:
+            if DataColumns.DataColumns.char_name not in self.entries[-1]:
+                self.pop_entry(len(self.entries) - 1)
+                return
         while len(self.entries) >= self.max_lines:
-            index = 0
-            self.entries.pop(index)
-            start = "%0.1f" % (index + offset)
-            end = "%0.1f" % (index + offset + 1)
-            self.text.delete(start, end)
+            self.pop_entry(0)
+
+    def pop_entry(self, index):
+        offset = 2
+        self.entries.pop(index)
+        start = "%0.1f" % (index + offset)
+        end = "%0.1f" % (index + offset + 1)
+        self.text.delete(start, end)
 
     def populate_column_names(self):
         columns_entry = {col:col.name for col in DataColumns.DataColumns}
@@ -230,8 +237,8 @@ class PlayerListener:
             i += 1
 
     def just_lost_health(self):
-        last_state = Globals.Globals.tekken_state.get(self.is_p1, 1)
+        last_state = Globals.Globals.tekken_state.get(self.is_p1, 2)
         if last_state is None:
             return False
-        current_state = Globals.Globals.tekken_state.get(self.is_p1)
+        current_state = Globals.Globals.tekken_state.get(self.is_p1, 1)
         return current_state.damage_taken != last_state.damage_taken
