@@ -3,7 +3,7 @@ import time
 import sys
 
 from . import Overlay, CommandInputOverlay, FrameDataOverlay, t_tkinter
-from frame_data import DataColumns, Generator
+from frame_data import DataColumns
 from game_parser import GameState
 from misc import ConfigReader, Flags, Globals, Path
 from record import Record, Replay
@@ -11,12 +11,6 @@ from record import Record, Replay
 class TekkenBotPrime(t_tkinter.Tk):
     def __init__(self):
         super().__init__()
-
-        if Flags.Flags.generate_pkl is not None:
-            if Flags.Flags.generate_wait_s is None:
-                Generator.Generator.build_csv()
-                sys.exit(0)
-            Generator.Generator(self).record()
 
         print("Tekken Bot Starting...")
 

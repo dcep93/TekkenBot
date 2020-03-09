@@ -1,19 +1,24 @@
 import enum
 
+from game_parser import ScriptedGame
 from game_parser.MoveInfoEnums import InputDirectionCodes, InputAttackCodes
 from misc import Globals
 from misc.Windows import w as Windows
 from . import Shared
 
 def record_single():
-    print("starting recording single")
-    Recorder.state = RecordingState.SINGLE
-    Recorder.history = []
+    record_start(RecordingState.SINGLE)
 
 def record_both():
-    print("starting recording both")
-    Recorder.state = RecordingState.BOTH
+    record_start(RecordingState.BOTH)
+
+def record_start(state):
+    print("starting recording %s" % state.name)
+    Recorder.state = state
     Recorder.history = []
+    reader = Globals.Globals.game_reader
+    if isinstance(reader, ScriptedGame.Recorder):
+        reader.reset()
 
 def record_end():
     print("ending recording")
@@ -25,6 +30,10 @@ def record_end():
     path = Shared.get_path()
     with open(path, 'w') as fh:
         fh.write(recording_string)
+
+    reader = Globals.Globals.game_reader
+    if isinstance(reader, ScriptedGame.Recorder):
+        reader.dump()
 
 def record_if_activated():
     if Recorder.state != RecordingState.OFF:

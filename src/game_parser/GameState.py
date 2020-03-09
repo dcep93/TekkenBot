@@ -7,9 +7,9 @@ class GameState:
 
     def __init__(self):
         if Flags.Flags.pickle_dest is not None:
-            game_reader = ScriptedGame.Recorder(Flags.Flags.pickle_dest)
+            game_reader = ScriptedGame.Recorder()
         elif Flags.Flags.pickle_src is not None:
-            game_reader = ScriptedGame.Reader(Flags.Flags.pickle_src)
+            game_reader = ScriptedGame.Reader()
         else:
             game_reader = GameReader.GameReader()
         Globals.Globals.game_reader = game_reader

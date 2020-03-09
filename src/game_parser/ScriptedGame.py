@@ -7,14 +7,14 @@ from . import GameReader
 from misc import Flags
 
 class Recorder(GameReader.GameReader):
-    all_datas = []
-    num_datas = 0
-    active = True
+    def __init__(self):
+        self.reset()
+        self.active = False
 
-    def __init__(self, pickle_dest):
-        print("recording to %s" % pickle_dest)
-        super().__init__()
-        signal.signal(signal.SIGINT, lambda _, __: self.save_and_quit(pickle_dest))
+    def reset(self):
+        self.all_datas = []
+        self.num_datas = 0
+        self.active = True
 
     def get_updated_state(self, rollback_frame):
         game_data = super().get_updated_state(rollback_frame)
@@ -22,58 +22,52 @@ class Recorder(GameReader.GameReader):
             self.record_data(rollback_frame == 0, game_data)
         return game_data
 
-    @classmethod
-    def record_data(cls, new_update, game_data):
-        cls.num_datas += 1
+    def record_data(self, new_update, game_data):
+        self.num_datas += 1
         if new_update:
             now = time.time()
-            cls.all_datas.append((now, [game_data]))
+            self.all_datas.append((now, [game_data]))
         else:
-            cls.all_datas[-1][1].append(game_data)
+            self.all_datas[-1][1].append(game_data)
 
-    @classmethod
-    def save_and_quit(cls, pickle_dest):
-        cls.active = False
-        print('writing', cls.num_datas, len(cls.all_datas))
-        with open(pickle_dest, 'wb') as fh:
-            pickle.dump(cls.all_datas, fh)
-        sys.exit(1)
+    def dump(self, pickle_dest):
+        self.active = False
+        print('writing', self.num_datas, len(self.all_datas))
+        with open(Flags.Flags.pickle_dest, 'wb') as fh:
+            pickle.dump(self.all_datas, fh)
+        self.reset()
 
 class Reader(GameReader.GameReader):
-    def __init__(self, pickle_src):
-        print("loading from %s" % pickle_src)
+    def __init__(self):
+        print('loading')
         super().__init__()
 
-        cls = self.__class__
-        with open(pickle_src, 'rb') as fh:
-            cls.all_datas = pickle.load(fh)
+        with open(Flags.Flags.pickle_src, 'rb') as fh:
+            self.all_datas = pickle.load(fh)
 
-        if not cls.all_datas:
+        if not self.all_datas:
             print("no data in pickle")
             sys.exit(1)
 
-        cls.offset = time.time() - cls.load()
+        self.offset = time.time() - self.load()
 
-    @classmethod
-    def load(cls):
-        timestamp, cls.datas = cls.all_datas.pop(0)
+    def load(self):
+        timestamp, self.datas = self.all_datas.pop(0)
         return timestamp
 
-    @classmethod
-    def get_update_wait_ms(cls, _):
-        if len(cls.all_datas) == 0:
+    def get_update_wait_ms(self, _):
+        if len(self.all_datas) == 0:
             print("done with pickle")
             if Flags.Flags.fast:
                 sys.exit()
             return -1
 
-        next_timestamp = cls.load()
+        next_timestamp = self.load()
         if Flags.Flags.fast:
             return 0
-        wait_s = next_timestamp + cls.offset - time.time()
+        wait_s = next_timestamp + self.offset - time.time()
         wait_ms = max(int(wait_s * 1000), 0)
         return wait_ms
 
-    @classmethod
-    def get_updated_state(cls, _):
-        return cls.datas.pop(0)
+    def get_updated_state(self, _):
+        return self.datas.pop(0)
