@@ -16,7 +16,6 @@ def record_start(state):
     print("starting recording %s" % state.name)
     Recorder.state = state
     Recorder.history = []
-    Recorder.reverse = False
     reader = Globals.Globals.game_reader
     if isinstance(reader, ScriptedGame.Recorder):
         reader.reset()
@@ -40,38 +39,7 @@ def record_if_activated():
     if Recorder.state != RecordingState.OFF:
         record_state()
 
-SIDE_SWITCH = 'SIDE_SWITCH'
 moves_per_line = 10
-
-direction_string_to_hexes = {
-    True: {
-        'u': 0x11,
-        'f': 0x20,
-        'b': 0x1E,
-        'd': 0x1F,
-    },
-    False: {
-        'u': 0xc8,
-        'f': 0x20,
-        'b': 0xCB,
-        'd': 0xd0,
-    }
-}
-
-attack_string_to_hex = {
-    True: {
-        '1': 0x16,
-        '2': 0x17,
-        '3': 0x24,
-        '4': 0x25,
-    },
-    False: {
-        '1': 0x47,
-        '2': 0x48,
-        '3': 0x4b,
-        '4': 0x4c,
-    }
-}
 
 @enum.unique
 class RecordingState(enum.Enum):
@@ -89,17 +57,9 @@ class BothInputState:
 class Recorder:
     state = RecordingState.OFF
     history = None
-    reverse = None
-
-def check_for_side_switch(last_state):
-    facing = bool(last_state.facing_bool) ^ (not last_state.is_player_player_one)
-    if Recorder.reverse != facing:
-        Recorder.reverse = facing
-        Recorder.history.append(SIDE_SWITCH)
 
 def get_input_state():
     last_state = Globals.Globals.tekken_state.state_log[-1]
-    check_for_side_switch(last_state)
     if last_state.is_player_player_one:
         player = last_state.p1
         opp = last_state.p2
@@ -119,8 +79,6 @@ def last_move_was(input_state):
     return Recorder.history[-1][0] == input_state
 
 def get_move(item):
-    if item == SIDE_SWITCH:
-        return item
     input_state, count = item
     raw_move = get_raw_move(input_state)
     if count == 1:
@@ -141,41 +99,6 @@ def get_raw_move(input_state):
         return attack_string
     return '%s%s' % (direction_string, attack_string)
 
-def loads_moves(compacted_moves):
-    moves = []
-    for compacted_move in compacted_moves:
-        if compacted_move == SIDE_SWITCH:
-            moves.append(compacted_move)
-        else:
-            parts = compacted_move.split('(')
-            move = parts[0]
-            if len(parts) == 1:
-                count = 1
-            else:
-                count_str = parts[1].split(')')[0]
-                count = int(count_str)
-            moves.append((move, count))
-    return moves
-
-def move_to_hexes(move, reverse, p1=True):
-    if '/' in move:
-        p1_move, p2_move = move.split('/')
-        p1_codes = move_to_hexes(p1_move, reverse, True)
-        p2_codes = move_to_hexes(p2_move, reverse, False)
-        return p1_codes + p2_codes
-    move.replace('_', '')
-    direction_string = ''.join([i for i in move if i not in '1234'])
-    attack_string = move[len(direction_string):]
-    if direction_string in ['NULL', 'N']:
-        direction_hexes = []
-    else:
-        if reverse ^ (not p1):
-            direction_string = direction_string.replace('b', 'F').replace('f', 'B').replace('F', 'f').replace('B', 'b')
-        direction_hexes = [direction_string_to_hexes[p1][d] for d in direction_string]
-    attack_hexes = [attack_string_to_hex[p1][a] for a in attack_string]
-    hex_key_codes = direction_hexes + attack_hexes
-    return hex_key_codes
-
 def record_state():
     if Globals.Globals.game_reader.is_foreground_pid():
         input_state = get_input_state()
@@ -194,7 +117,7 @@ def get_recording_string():
     moves_string = '\n'.join(lines)
 
     distance = get_distance()
-    count = sum([i[1] for i in Recorder.history if i != SIDE_SWITCH])
+    count = sum([i[1] for i in Recorder.history])
     quotient = distance / count
     comment = '%f / %d = %f' % (distance, count, quotient)
     return '%s\n# %s\n' % (moves_string, comment)
@@ -208,14 +131,11 @@ def strip_neutrals_helper(index, step):
         if abs(index) > len(Recorder.history):
             return
         val = Recorder.history[index]
-        if val == SIDE_SWITCH:
-            index += step
+        move_string = get_move(val)
+        if move_string == 'N' or move_string.startswith('N('):
+            Recorder.history.pop(index)
         else:
-            move_string = get_move(val)
-            if move_string == 'N' or move_string.startswith('N('):
-                Recorder.history.pop(index)
-            else:
-                return
+            return
 
 def get_distance():
     raw_distance = Globals.Globals.tekken_state.get(True).distance
