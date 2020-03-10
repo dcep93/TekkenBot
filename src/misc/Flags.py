@@ -3,7 +3,8 @@ import sys
 class Flags:
     pickle_src = None
     pickle_dest = None
-    fast = None
+    fast = False
+    no_movelist = False
 
 def handle():
     temp_argv = []
@@ -17,6 +18,8 @@ def handle():
             Flags.pickle_dest = pickle_dest
         elif arg == '--fast':
             Flags.fast = True
+        elif arg == '--no-movelist':
+            Flags.no_movelist = True
         else:
             temp_argv.append(arg)
     sys.argv = temp_argv

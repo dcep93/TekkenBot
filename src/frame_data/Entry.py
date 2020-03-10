@@ -10,7 +10,9 @@ def build(is_p1):
     entry = {}
     entry[DataColumns.DataColumns.fa] = get_fa(game_state, is_p1)
     entry[DataColumns.DataColumns.move_id] = game_state.get(is_p1, 1).move_id
-    entry[DataColumns.DataColumns.char_name] = game_state.get(is_p1).movelist_parser.char_name
+
+    movelist_parser = game_state.get(is_p1).movelist_parser
+    entry[DataColumns.DataColumns.char_name] = movelist_parser.char_name if movelist_parser is not None else game_state.get(is_p1).char_id
     
     entry[DataColumns.DataColumns.health] = get_remaining_health_string(game_state)
 

@@ -4,7 +4,7 @@ import struct
 
 from . import GameSnapshot, MoveInfoEnums
 from game_parser import MovelistParser
-from misc import ConfigReader
+from misc import ConfigReader, Flags
 from misc.Windows import w as Windows
 
 game_string = 'TekkenGame-Win64-Shipping.exe'
@@ -249,14 +249,15 @@ class GameReader:
         p2_dict['movelist_parser'] = self.p2_movelist_parser
 
     def reacquire_names(self, process_handle):
-        opponent_side = self.get_value_at_end_of_pointer_trail(process_handle, "OPPONENT_SIDE", False)
-        self.is_player_player_one = (opponent_side == 1)
+        if not Flags.Flags.no_movelist:
+            opponent_side = self.get_value_at_end_of_pointer_trail(process_handle, "OPPONENT_SIDE", False)
+            self.is_player_player_one = (opponent_side == 1)
 
-        p1_movelist_block, p1_movelist_address = self.populate_movelists(process_handle, "P1_Movelist")
-        p2_movelist_block, p2_movelist_address = self.populate_movelists(process_handle, "P2_Movelist")
+            p1_movelist_block, p1_movelist_address = self.populate_movelists(process_handle, "P1_Movelist")
+            p2_movelist_block, p2_movelist_address = self.populate_movelists(process_handle, "P2_Movelist")
 
-        self.p1_movelist_parser = MovelistParser.MovelistParser(p1_movelist_block, p1_movelist_address)
-        self.p2_movelist_parser = MovelistParser.MovelistParser(p2_movelist_block, p2_movelist_address)
+            self.p1_movelist_parser = MovelistParser.MovelistParser(p1_movelist_block, p1_movelist_address)
+            self.p2_movelist_parser = MovelistParser.MovelistParser(p2_movelist_block, p2_movelist_address)
 
         self.acquire_state = AcquireState.has_everything
         print("acquired movelist")
