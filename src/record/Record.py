@@ -16,6 +16,7 @@ def record_start(state):
     print("starting recording %s" % state.name)
     Recorder.state = state
     Recorder.history = []
+    Recorder.reverse = False
     reader = Globals.Globals.game_reader
     if isinstance(reader, ScriptedGame.Recorder):
         reader.reset()
@@ -88,7 +89,7 @@ class BothInputState:
 class Recorder:
     state = RecordingState.OFF
     history = None
-    reverse = False
+    reverse = None
 
 def check_for_side_switch(last_state):
     facing = bool(last_state.facing_bool) ^ (not last_state.is_player_player_one)
