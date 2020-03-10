@@ -16,7 +16,6 @@ def record_start(state):
     print("starting recording %s" % state.name)
     Recorder.state = state
     Recorder.history = []
-    Recorder.count = 0
     reader = Globals.Globals.game_reader
     if isinstance(reader, ScriptedGame.Recorder):
         reader.reset()
@@ -89,7 +88,6 @@ class BothInputState:
 class Recorder:
     state = RecordingState.OFF
     history = None
-    count = None
     reverse = False
 
 def check_for_side_switch(last_state):
@@ -176,7 +174,6 @@ def move_to_hexes(move, reverse, p1=True):
 
 def record_state():
     if Globals.Globals.game_reader.is_foreground_pid():
-        Recorder.count += 1
         input_state = get_input_state()
         if last_move_was(input_state):
             Recorder.history[-1][-1] += 1
@@ -193,8 +190,9 @@ def get_recording_string():
     moves_string = '\n'.join(lines)
 
     distance = get_distance()
-    quotient = distance / Recorder.count
-    comment = '%f / %d = %f' % (distance, Recorder.count, quotient)
+    count = sum([i[1] for i in Recorder.history])
+    quotient = distance / count
+    comment = '%f / %d = %f' % (distance, count, quotient)
     return '%s\n# %s\n' % (moves_string, comment)
 
 def strip_neutrals():
