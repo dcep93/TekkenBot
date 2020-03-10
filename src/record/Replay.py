@@ -83,11 +83,6 @@ def move_is_side_switch():
     return move == Record.SIDE_SWITCH
 
 def replay_next_move():
-    # quit if tekken is not foreground
-    if not Globals.Globals.game_reader.is_foreground_pid():
-        print('lost focus')
-        finish()
-        return
     move, count = Replayer.moves[Replayer.i]
     replay_move(move)
     Replayer.i += 1
@@ -105,6 +100,13 @@ def replay_move(move):
     hex_key_codes = Record.move_to_hexes(move, Replayer.reverse)
     to_release = [i for i in Replayer.pressed if i not in hex_key_codes]
     to_press = [i for i in hex_key_codes if i not in Replayer.pressed]
+    
+    # quit if tekken is not foreground
+    if not Globals.Globals.game_reader.is_foreground_pid():
+        print('lost focus')
+        finish()
+        return
+
     for hex_key_code in to_release:
         Windows.release_key(hex_key_code)
     for hex_key_code in to_press:
