@@ -17,10 +17,10 @@ direction_string_to_hexes = {
         'd': 0x1F,
     },
     False: {
-        'u': 0xc8,
-        'f': 0x20,
+        'u': 0xC8,
+        'f': 0xCD,
         'b': 0xCB,
-        'd': 0xd0,
+        'd': 0xD0,
     }
 }
 
