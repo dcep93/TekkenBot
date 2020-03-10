@@ -243,7 +243,7 @@ class PlayerListener:
         i = 1
         while True:
             state = Globals.Globals.tekken_state.get(not self.is_p1, i)
-            if state.throw_tech == MoveInfoEnums.ThrowTechs.NONE:
+            if state == None or state.throw_tech == MoveInfoEnums.ThrowTechs.NONE:
                 relevant = current_buttons.replace('x3', '').replace('x4', '')
                 throw_break = MoveInfoEnums.InputAttackCodes[relevant]
                 break_string = throw_break.name.replace('x', '')
