@@ -16,9 +16,10 @@ def replay():
         return
     with open(path) as fh:
         contents = fh.read()
-    lines = [line for line in contents.split('\n') if not line.startswith('#')]
+    lines = [line.split('#')[0].strip() for line in contents.split('\n')]
     compacted_moves = ' '.join(lines).split(' ')
-    moves = Record.loads_moves(compacted_moves)
+
+    moves = Record.loads_moves([i for i in compacted_moves if i != ''])
     if not Windows.valid:
         print("not windows?")
         return
