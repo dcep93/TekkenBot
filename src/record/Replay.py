@@ -25,13 +25,14 @@ def replay():
         return
     print('waiting for tekken focus')
     Replayer.moves = moves
+    Replayer.reverse = False
     wait_for_focus_and_replay_moves()
 
 
 class Replayer:
     moves = None
+    reverse = None
     pressed = []
-    reverse = False
 
     i = None
     start = None
