@@ -143,14 +143,17 @@ def get_raw_move(input_state):
 def loads_moves(compacted_moves):
     moves = []
     for compacted_move in compacted_moves:
-        parts = compacted_move.split('(')
-        move = parts[0]
-        if len(parts) == 1:
-            count = 1
+        if compacted_move == SIDE_SWITCH:
+            moves.append(compacted_move)
         else:
-            count_str = parts[1].split(')')[0]
-            count = int(count_str)
-        moves.append((move, count))
+            parts = compacted_move.split('(')
+            move = parts[0]
+            if len(parts) == 1:
+                count = 1
+            else:
+                count_str = parts[1].split(')')[0]
+                count = int(count_str)
+            moves.append((move, count))
     return moves
 
 def move_to_hexes(move, reverse, p1=True):
@@ -190,7 +193,7 @@ def get_recording_string():
     moves_string = '\n'.join(lines)
 
     distance = get_distance()
-    count = sum([i[1] for i in Recorder.history])
+    count = sum([i[1] for i in Recorder.history if i != SIDE_SWITCH])
     quotient = distance / count
     comment = '%f / %d = %f' % (distance, count, quotient)
     return '%s\n# %s\n' % (moves_string, comment)
