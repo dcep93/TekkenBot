@@ -59,16 +59,6 @@ def replay_moves():
     listen_for_click()
 
 def handle_next_move():
-    if Replayer.i == len(Replayer.moves):
-        Globals.Globals.master.after(one_frame_ms, finish)
-        return
-
-    if move_is_side_switch():
-        Replayer.reverse = not Replayer.reverse
-        Replayer.i += 1
-        handle_next_move()
-        return
-    
     target = Replayer.count * seconds_per_frame
     actual = time.time() - Replayer.start
     diff = target - actual
@@ -84,11 +74,22 @@ def move_is_side_switch():
     return move == Record.SIDE_SWITCH
 
 def replay_next_move():
+    if Replayer.i == len(Replayer.moves):
+        Globals.Globals.master.after(one_frame_ms, finish)
+        return
+
+    if move_is_side_switch():
+        Replayer.reverse = not Replayer.reverse
+        Replayer.i += 1
+        handle_next_move()
+        return
+
     move, count = Replayer.moves[Replayer.i]
     print_diff(move, count)
-    replay_move(move)
+    if count > 0:
+        replay_move(move)
+        Replayer.count += count
     Replayer.i += 1
-    Replayer.count += count
     handle_next_move()
 
 def finish():
