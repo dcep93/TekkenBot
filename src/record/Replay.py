@@ -85,6 +85,7 @@ def move_is_side_switch():
 
 def replay_next_move():
     move, count = Replayer.moves[Replayer.i]
+    print_diff(move, count)
     replay_move(move)
     Replayer.i += 1
     Replayer.count += count
@@ -96,6 +97,12 @@ def finish():
     Replayer.pressed = []
     print("done", Replayer.count)
     Replayer.i = None
+
+def print_diff(move, count):
+    target = Replayer.count * seconds_per_frame
+    actual = time.time() - Replayer.start
+    diff = (target - actual)*60
+    print(move, count, diff)
 
 def replay_move(move):
     hex_key_codes = Record.move_to_hexes(move, Replayer.reverse)
