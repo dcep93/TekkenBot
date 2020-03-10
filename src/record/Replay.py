@@ -34,7 +34,7 @@ class Replayer:
 
     i = None
     start = None
-    switch_count = None
+    count = None
 
     listening = False
 
@@ -53,7 +53,7 @@ def replay_moves():
     time.sleep(0.01)
     Replayer.start = time.time()
     Replayer.i = 0
-    Replayer.switch_count = 0
+    Replayer.count = 0
     handle_next_move()
 
     listen_for_click()
@@ -66,11 +66,10 @@ def handle_next_move():
     if move_is_side_switch():
         Replayer.reverse = not Replayer.reverse
         Replayer.i += 1
-        Replayer.switch_count += 1
         handle_next_move()
         return
     
-    target = (Replayer.i-Replayer.switch_count) * seconds_per_frame
+    target = Replayer.count * seconds_per_frame
     actual = time.time() - Replayer.start
     diff = target - actual
     if diff > 0:
@@ -89,16 +88,17 @@ def replay_next_move():
         print('lost focus')
         finish()
         return
-    move = Replayer.moves[Replayer.i]
+    move, count = Replayer.moves[Replayer.i]
     replay_move(move)
     Replayer.i += 1
+    Replayer.count += count
     handle_next_move()
 
 def finish():
     for hex_key_code in Replayer.pressed:
         Windows.release_key(hex_key_code)
     Replayer.pressed = []
-    print("done", Replayer.i - Replayer.switch_count)
+    print("done", Replayer.count)
     Replayer.i = None
 
 def replay_move(move):

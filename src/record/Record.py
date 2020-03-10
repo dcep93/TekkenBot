@@ -150,8 +150,7 @@ def loads_moves(compacted_moves):
         else:
             count_str = parts[1].split(')')[0]
             count = int(count_str)
-        for i in range(count):
-            moves.append(move)
+        moves.append((move, count))
     return moves
 
 def move_to_hexes(move, reverse, p1=True):
