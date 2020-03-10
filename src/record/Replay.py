@@ -76,6 +76,7 @@ def handle_next_move():
         diff_ms = int(diff * 1000)
         Globals.Globals.master.after(diff_ms, replay_next_move)
     else:
+        Replayer.start -= diff
         replay_next_move()
 
 def move_is_side_switch():
