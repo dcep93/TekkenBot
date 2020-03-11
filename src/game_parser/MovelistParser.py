@@ -118,11 +118,12 @@ class MovelistParser:
             candidates = value
 
             if len(candidates) > 0:
-                direction = sorted(candidates, key=lambda c: (sort_directions[c[0]], sort_presses[c[2]]), reverse=True)[0][0]
+                direction = max(candidates, key=lambda c: (sort_directions[c[0]], sort_presses[c[2]]))[0]
 
-                button = sorted(candidates, key=lambda c: (sort_presses[c[2]], collections.Counter(candidates)[c], sort_attacks[c[1]]), reverse=True)[0][1]
+                counter = collections.Counter(candidates)
+                button = max(candidates, key=lambda c: (sort_presses[c[2]], counter[c], sort_attacks[c[1]]))[1]
 
-                press = sorted(candidates, key=lambda c: sort_presses[c[2]], reverse=True)[0][2]
+                press = max(candidates, key=lambda c: sort_presses[c[2]])[2]
 
                 if not (direction.isdigit() and button == 'NULL' and press == 'NULL'):
                     self.move_id_to_input[move_id] = (direction, button, press)
