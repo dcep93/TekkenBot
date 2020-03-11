@@ -47,13 +47,6 @@ class RecordingState(enum.Enum):
     SINGLE = 1
     BOTH = 2
 
-class BothInputState:
-    def __init__(self, *input_states):
-        self.input_states = input_states
-
-    def __eq__(self, other):
-        return isinstance(other, BothInputState) and self.input_states == other.input_states
-
 class Recorder:
     state = RecordingState.OFF
     history = None
@@ -71,7 +64,7 @@ def get_input_state():
     if Recorder.state == RecordingState.SINGLE:
         return player_input_state
     else:
-        return BothInputState(player_input_state, opp_input_state)
+        return (player_input_state, opp_input_state)
 
 def last_move_was(input_state):
     if len(Recorder.history) == 0:
@@ -87,10 +80,10 @@ def get_move(item):
         return '%s(%d)' % (raw_move, count)
 
 def get_raw_move(input_state):
-    if isinstance(input_state, BothInputState):
-        if input_state.input_states[1] == 'N':
-            return input_state.input_states[0]
-        return '/'.join(input_state.input_states)
+    if isinstance(input_state, tuple):
+        if input_state[1] == 'N':
+            return input_state[0]
+        return '/'.join(input_state)
     return input_state
 
 def record_state():
