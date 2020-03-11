@@ -91,17 +91,18 @@ class GameState:
                 if done:
                     break
 
-            clean_input_array = reversed([a for a in input_array if len(a) > 0])
-            return ','.join(clean_input_array)
-        else:
-            i = 1
-            while True:
-                state = self.get(is_p1, i)
-                if state is None:
-                    return "N/A"
-                if state.move_id != move_id:
-                    return state.get_input_as_string()
-                i += 1
+            clean_input_array = tuple(reversed([a for a in input_array if len(a) > 0]))
+            if clean_input_array != ("N/A",):
+                return ','.join(clean_input_array)
+
+        i = 1
+        while True:
+            state = self.get(is_p1, i)
+            if state is None:
+                return "N/A"
+            if state.move_id != move_id:
+                return state.get_input_as_string()
+            i += 1
 
     def was_just_floated(self, is_p1):
         player = self.get(is_p1, 1)

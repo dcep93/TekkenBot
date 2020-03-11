@@ -124,7 +124,8 @@ class MovelistParser:
 
                 press = sorted(candidates, key=lambda c: sort_presses[c[2]], reverse=True)[0][2]
 
-                self.move_id_to_input[move_id] = (direction, button, press)
+                if not (direction.isdigit() and button == 'NULL' and press == 'NULL'):
+                    self.move_id_to_input[move_id] = (direction, button, press)
 
         self.movelist_names = movelist_bytes[0x2E8:200000].split(b'\00')
 
