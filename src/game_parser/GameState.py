@@ -36,7 +36,8 @@ class GameState:
 
                     for i in range(missed_states):
                         dropped_state = Globals.Globals.game_reader.get_updated_state(missed_states - i)
-                        self.track_gamedata(dropped_state, overlay)
+                        if dropped_state is not None:
+                            self.track_gamedata(dropped_state, overlay)
 
                 self.track_gamedata(game_data, overlay)
 

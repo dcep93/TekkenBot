@@ -136,6 +136,7 @@ class GameReader:
             try:
                 return self.get_game_snapshot(rollback_frame, process_handle)
             finally:
+                print('closing handle')
                 Windows.close_handle(process_handle)
 
         return None
