@@ -66,8 +66,8 @@ def get_input_state():
     else:
         player = last_state.p2
         opp = last_state.p1
-    player_input_state = player.get_input_state()
-    opp_input_state = opp.get_input_state()
+    player_input_state = player.get_input_as_string()
+    opp_input_state = opp.get_input_as_string()
     if Recorder.state == RecordingState.SINGLE:
         return player_input_state
     else:
@@ -88,16 +88,10 @@ def get_move(item):
 
 def get_raw_move(input_state):
     if isinstance(input_state, BothInputState):
-        input_states = [get_raw_move(i) for i in input_state.input_states]
-        if input_states[1] == 'N_':
-            return input_states[0]
-        return '/'.join(input_states)
-    direction_code, attack_code, _ = input_state
-    direction_string = direction_code.name
-    attack_string = attack_code.name.replace('x', '').replace('N', '')
-    if direction_string == 'N' and attack_string != '':
-        return attack_string
-    return '%s%s' % (direction_string, attack_string)
+        if input_state.input_states[1] == 'N':
+            return input_state.input_states[0]
+        return '/'.join(input_state.input_states)
+    return input_state
 
 def record_state():
     if Globals.Globals.game_reader.is_foreground_pid():

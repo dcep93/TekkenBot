@@ -100,7 +100,7 @@ class GameState:
                 if state is None:
                     return "N/A"
                 if state.move_id != move_id:
-                    return state.input_button.name
+                    return state.get_input_as_string()
                 i += 1
 
     def was_just_floated(self, is_p1):

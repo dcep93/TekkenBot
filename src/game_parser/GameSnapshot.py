@@ -52,6 +52,16 @@ class PlayerSnapshot:
     def get_input_state(self):
         return (self.input_direction, self.input_button, self.rage_button_flag)
 
+    def get_input_as_string(self):
+        input_state = self.get_input_state()
+
+        direction_code, attack_code, _ = input_state
+        direction_string = direction_code.name
+        attack_string = attack_code.name.replace('x', '').replace('N', '')
+        if direction_string == 'N' and attack_string != '':
+            return attack_string
+        return '%s%s' % (direction_string, attack_string)
+
     def is_blocking(self):
         return self.complex_state == MoveInfoEnums.ComplexMoveStates.BLOCK
 
