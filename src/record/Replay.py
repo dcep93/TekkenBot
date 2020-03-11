@@ -40,16 +40,9 @@ attack_string_to_hex = {
 }
 
 def replay():
-    path = Shared.get_path()
-    if not os.path.isfile(path):
-        print("recording not found")
+    moves = get_moves_from_path(Shared.RAW_PATH)
+    if moves is None:
         return
-    with open(path) as fh:
-        contents = fh.read()
-    lines = [line.split('#')[0].strip() for line in contents.split('\n')]
-    compacted_moves = ' '.join(lines).split(' ')
-
-    moves = loads_moves([i for i in compacted_moves if i != ''])
     if not Windows.valid:
         print("not windows?")
         return
@@ -57,11 +50,49 @@ def replay():
     Replayer.moves = moves
     wait_for_focus_and_replay_moves()
 
-def loads_moves(compacted_moves):
+def get_moves_from_path(raw_path, swap=False):
+    path = Shared.get_path(raw_path)
+    if not os.path.isfile(path):
+        print("recording not found: %s" % path)
+        return None
+    with open(path) as fh:
+        contents = fh.read()
+    all_lines = contents.split('\n')
+
+    list_of_r_moves = []
+    while all_lines and all_lines[0].startswith('@'):
+        r_path = all_lines.pop(0)[1:].strip()
+        if r_path.startswith('@'):
+            r_path = r_path[1:]
+            sub_swap = True
+        else:
+            sub_swap = False
+        r_moves = get_moves_from_path(r_path, swap ^ sub_swap)
+        if r_moves is None:
+            return None
+        list_of_r_moves.append(r_moves)
+
+    lines = [line.split('#')[0].strip() for line in all_lines]
+    compacted_moves = ' '.join(lines).split(' ')
+
+    moves = loads_moves([i for i in compacted_moves if i != ''], swap)
+
+    while list_of_r_moves:
+        moves = combine(moves, list_of_r_moves.pop())
+
+    return moves
+
+def loads_moves(compacted_moves, swap):
     moves = []
     for compacted_move in compacted_moves:
         parts = compacted_move.split('(')
         move = parts[0]
+        if swap:
+            move_parts = (move + '/').split('/')
+            if move_parts[0] == '':
+                move = move_parts[1]
+            else:
+                move = '/'.join(move_parts[1::-1])
         if len(parts) == 1:
             count = 1
         else:
@@ -69,6 +100,45 @@ def loads_moves(compacted_moves):
             count = int(count_str)
         moves.append((move, count))
     return moves
+
+def combine(moves_1, moves_2):
+    out = []
+    moves_1 = list(moves_1)
+    moves_2 = list(moves_2)
+    while moves_1 and moves_2:
+        m1 = moves_1.pop(0)
+        m2 = moves_2.pop(0)
+        m1_parts = (m1[0]+'/').split('/')
+        m2_parts = (m2[0]+'/').split('/')
+
+        out_p1 = combine_move(m1_parts[0], m2_parts[0])
+        out_p2 = combine_move(m1_parts[1], m2_parts[1])
+
+        if out_p2 == 'N':
+            out_m = out_p1
+        else:
+            out_m = '%s/%s' % (out_p1, out_p2)
+        out_c = min(m1[1], m2[1])
+        out.append((out_m, out_c))
+
+        if out_c < m1[1]:
+            moves_1.insert(0, (m1[0], m1[1] - out_c))
+        elif out_c < m2[1]:
+            moves_2.insert(0, (m2[0], m2[1] - out_c))
+    return out + moves_1 + moves_2
+
+def combine_move(m1, m2):
+    if m2 == 'N':
+        return m1
+    if m1 == 'N':
+        return m2
+    d1, a1 = move_to_strings(m1)
+    d2, a2 = move_to_strings(m2)
+    d = ''.join(set(d1 + d2))
+    a = ''.join(set(a1 + a2))
+    if d == 'N':
+        return a
+    return d + a
 
 class Replayer:
     moves = None
@@ -162,9 +232,7 @@ def move_to_hexes(move, reverse, p1=True):
         p1_codes = move_to_hexes(p1_move, reverse, True)
         p2_codes = move_to_hexes(p2_move, reverse, False)
         return p1_codes + p2_codes
-    move.replace('_', '')
-    direction_string = ''.join([i for i in move if i not in '1234'])
-    attack_string = move[len(direction_string):]
+    direction_string, attack_string = move_to_strings(move)
     if direction_string in ['NULL', 'N']:
         direction_hexes = []
     else:
@@ -174,6 +242,12 @@ def move_to_hexes(move, reverse, p1=True):
     attack_hexes = [attack_string_to_hex[p1][a] for a in attack_string]
     hex_key_codes = direction_hexes + attack_hexes
     return hex_key_codes
+
+def move_to_strings(move):
+    move.replace('_', '')
+    direction_string = ''.join([i for i in move if i not in '1234'])
+    attack_string = move[len(direction_string):]
+    return direction_string, attack_string
 
 def listen_for_click():
     if Replayer.listening:
