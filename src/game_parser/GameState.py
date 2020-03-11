@@ -45,7 +45,7 @@ class GameState:
 
         obj = None # for debugging
         if obj != self.obj:
-            print(obj)
+            print(game_data.frame_count, obj)
             self.obj = obj
 
         overlay.update_state()
@@ -55,9 +55,10 @@ class GameState:
             self.state_log.pop(0)
 
     def get_current_move_string(self, is_p1):
+        move_id = self.get(is_p1, 1).move_id
+
         parser = self.get(is_p1).movelist_parser
         if parser is not None:
-            move_id = self.get(is_p1, 1).move_id
             previous_move_id = -1
 
             input_array = []
@@ -93,7 +94,14 @@ class GameState:
             clean_input_array = reversed([a for a in input_array if len(a) > 0])
             return ','.join(clean_input_array)
         else:
-            return 'N/A'
+            i = 1
+            while True:
+                state = self.get(is_p1, i)
+                if state is None:
+                    return "N/A"
+                if state.move_id != move_id:
+                    return state.input_button.name
+                i += 1
 
     def was_just_floated(self, is_p1):
         player = self.get(is_p1, 1)
