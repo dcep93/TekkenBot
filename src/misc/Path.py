@@ -1,5 +1,4 @@
 import os
-import sys
 
 __path__ = 'assets'
 

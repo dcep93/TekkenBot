@@ -153,10 +153,8 @@ def record(entry):
 histories = collections.defaultdict(History)
 database = {}
 
-def main():
+def try_to_populate_database():
     try:
         populate_database()
     except Exception as e:
         print(e)
-
-main()

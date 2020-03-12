@@ -1,9 +1,10 @@
 import enum
+import os
 import time
 import sys
 
 from . import Overlay, CommandInputOverlay, FrameDataOverlay, t_tkinter
-from frame_data import DataColumns
+from frame_data import Database, DataColumns
 from game_parser import GameState
 from misc import ConfigReader, Flags, Globals, Path
 from record import Record, Replay
@@ -22,6 +23,10 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.init_tk()
         self.init_config()
         self.init_view()
+
+        self.print_folder()
+
+        Database.try_to_populate_database()
 
         Globals.Globals.tekken_state = GameState.GameState()
 
@@ -164,6 +169,12 @@ class TekkenBotPrime(t_tkinter.Tk):
     def init_frame_data(self):
         self.overlay_var.set(OverlayMode.FrameData)
         self.changed_mode(OverlayMode.FrameData)
+
+    def print_folder(self):
+        main = os.path.abspath(sys.argv[0])
+        folder = os.path.basename(os.path.dirname(main))
+        if folder.startswith('Tekken'):
+            print(folder)
 
 class TextRedirector:
     def __init__(self, widget, stdout, tag="stdout"):
