@@ -159,4 +159,4 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	After TNT f+2, 1, 4, 2, 1, 4, 2	m, m, m, h, h, m (TJ), h	10,12,16,5,5,					
 	10,28	16~	+4	KND	KND			
 	After TNT f, F+2	h	44	13(14~) pc6~12	+4	KND	KND	Power crush
-	After TNT u/b+1+2, ,	mm	5,2～	15,27	–	KND	KND	
+	After TNT u/b+1+2, ,	mm	5,2~	15,27	–	KND	KND	

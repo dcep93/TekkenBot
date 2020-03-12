@@ -1,6 +1,6 @@
 move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes
-2433	in rage b+1+2	m		20?	–	KND	KND	
-	in rage u/b+1+4	Attack returned	20	6~	–	KND	KND	Rage drive
+2433	in rage b+1+2	m		20?	-	KND	KND	
+	in rage u/b+1+4	Attack returned	20	6~	-	KND	KND	Rage drive
 1611	1	h	9	10	+1	+8	+8	
 1583	1, 1	h, m	9,21	10	-8~-7	+4~+5s	KND	
 	1, 2	h, m	9,16	10	-9	-3	-3	
@@ -9,7 +9,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1589	2, 1	h, m	13,31	10	-9	KND	KND	Tail spin
 	2, 1, B (Cancel)	h, (Special)	13	10	-13	-7	-4	
 1585	2, 2	h, h	13,10	10	-1	+5	+5	
-	2, 2, 1+2	h, h, (KIN)	13,10	10	–	+	+	
+	2, 2, 1+2	h, h, (KIN)	13,10	10	-	+	+	
 1587	2, 3	h, h	13,28	10	-10	KND	KND	Tail spin
 1588	2, d+3	h, l (TC)	13,14	10 RC	-12	-1	-1	
 1602	3~4	mm (TJ)	16,21	17,28~29 (18~)	-6~-5	+3~+4?	+3~+4?	
@@ -44,7 +44,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1699	d/f+2	m	17	15~16	-7~-6	Launch (JG?)(+4a)	Launch (JG?)	
 1701	d/f+3	m	13	17~18 RC	-4~-3	+4~+5	+4~+5	
 1702	d/f+3, 1	m, m	13,27	17~18	-9~-8?	+3~+4?s	KND	
-	d/f+3, 1* (Cancel)	m, !	13,27～	17~18	0~+1 OC	0~+1 OC	KND	
+	d/f+3, 1* (Cancel)	m, !	13,27~	17~18	0~+1 OC	0~+1 OC	KND	
 1933	d/f+1+2	l (TC)	12	26 RC	-11	+4	+7	
 1935	d/f+1+2, 2	l (TC), m	16,27	26	-13	0	+6k	
 1752	d+1	m	20	24~25	-5~-4	0~+1 OC	KND	
@@ -271,7 +271,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	NSS d/f+3, 1	m, m	13,16	17~18	-5	+5 OC	KND	
 	NSS d+1	m	20	24~25	-7~-6 OC	0~+1 OC	KND	
 	NSS d+1+4	(Special)		24~25				
-	NSS d+2, 1	m (TC), h	16,22	24~25	–	+k		Tail spin
+	NSS d+2, 1	m (TC), h	16,22	24~25	-	+k		Tail spin
 	NSS d/b+1	Sm (TC)	6	11 RC	-5	+6	+6	
 	NSS b+2	m	16	14	-9	+2	+2	
 	NSS b+2, 2	m, h	16,24	14	-10	0	KND	

@@ -93,8 +93,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1765	u+4, 4	(Special) (TJ), h (TJ), (RLX)	27	30(30~) js1~	-3	KND	KND	
 1513	u/b+3+4	m (TJ)	15	22~23 js8~	-9~-8	+2~+3	+2~+3	
 	u+3+4	m (TJ)	15	20~23 js8~	-1~+2	KND	KND	
-	u/b+3+4, D	m (TJ), (RLX)	15	22~23 js8~	–	–	–	
-	u+3+4, D	m (TJ), (RLX)	15	20~23 js8~	–	KND	KND	
+	u/b+3+4, D	m (TJ), (RLX)	15	22~23 js8~	-	-	-	
+	u+3+4, D	m (TJ), (RLX)	15	20~23 js8~	-	KND	KND	
 1687	u/f+3	m (TJ)	25	26~28 js13~	-11~-9s	-9~-7s	-9~-7s	
 	u/f+3, D	m (TJ), (RLX)	25	26~27	-14~-13s	-12~-11s	-12~-11s	
 1717	u/f+3, 3	m (TJ), m	25,17	26~27	-23~-20	Launch (JG?)	Launch (JG?)	
@@ -137,7 +137,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1727	SS 4	ll (TC)	10,7	21~22, 33~34 (22~) cs3~	-1~0	+4~+5	+4~+5	
 1722	SS 4 (First hit only)	l (TC)	10	21~24 (22~) cs3~	-12~-9	-2~+1	-2~+1	
 	SS 4 (Second hit only)	l (TC)	7	30~36 (31~) cs1~	-4~+2	+2~+8	+12~+18	
-	SS 4, B	l (TC), (HSP)	10	21~24 (22~)	–	+	+	
+	SS 4, B	l (TC), (HSP)	10	21~24 (22~)	-	+	+	
 1698	SS 4, 3	l (TC), l (TC)	10,25	21~24 (22~)	-45	KND	KND	
 1842	SS 4, 3+4	l (TC), m	10,18	21~24 (22~)a	-17~-12	+2~+7(s)	KND	
 1833	SS 4~3	h (TJ)	50	34(36~)	-12	KND	KND	

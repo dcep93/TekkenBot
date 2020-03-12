@@ -45,7 +45,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1717	d/f+3 (Close)	m(, (throw))	16(,20)	17	-6	Throw(KND)	Throw(KND)	
 ""	d/f+3	m	16	17~20	-6~-3	+5~+8s	+10~+13s	
 ""	d/f+4	m	14	12	-9	+2	+2	
-""	d/f+1+2 or FC+d/f+1+2	(Special)(lReturns move)	20～	12(s)		Attack returned(KND)		
+""	d/f+1+2 or FC+d/f+1+2	(Special)(lReturns move)	20~	12(s)		Attack returned(KND)		
 1688	d+1	m	18	18~19	0~+1s	+7~+8s	KND	
 1695	d+2	l (TC)	17	18~19s cs6~	-13~-12	0	+13~+14g	
 1710	d+3	l	13	17~18	-14~-13	-3~-2	0~+1s	

@@ -75,7 +75,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1575	u/f+4	m (TJ)	13	15~16 js9~	-13~-12	Launch (JG?)	Launch (JG?)	
 	u or u/f+3+4	m (TJ)	26	24~27 js9~	0~+3s	+6~+9s	JG	
 1796	f, F+2	m	25	14~15 (15~)	-10~-9	KND	KND	
-1815	f, F+3	m (TJ)	20	26~29a (27~) js9~	–7~-4s	KND	KND	
+1815	f, F+3	m (TJ)	20	26~29a (27~) js9~	-7~-4s	KND	KND	
 	f, F+3, D	m (TJ), (BOK)	20	26~29a (27~) js9~	+1~+4s	KND	KND	
 1788	f, F+4	m	12	19~20a (20~) js17~	-13~-12	-2~-1a	-2~-1a	
 1791	f, F+4, 3	m, h	12,23	js1~	-14~-12	KND	KND	Tail spin

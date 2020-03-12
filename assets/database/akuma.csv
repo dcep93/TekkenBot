@@ -19,12 +19,12 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1560	f+3	m	16	17	-4	+7	+7	
 1963	f+4	h	20	16~17	-5~-4	KND	KND	Tail spin, Homing
 1557	f+1+2	mm	8,17	20,32	-8s	+7s	+7s	
-1556	f+1+2 (Second hit miss)	m	5	20	–	–	–	
+1556	f+1+2 (Second hit miss)	m	5	20	-	-	-	
 1539	f+3+4	m (TJ)(TPORT)	20	22~23a js9~	-9~-8	+2~+3	+2~+3	Homing
 1604,1605,1606	d/f+1	m	10	13~14	-4~-3	+7~+8	+7~+8	
 1607	d/f+1, 1	m, h	10,7	13~14	-3	+6	+6	
 1614	d/f+1, 2	m, mm	10,5,15	13~14	-13s	+7s	+7s	
-1613	d/f+1, 2 (Third hit miss)	m, m	10,5	13~14	–	–	–	
+1613	d/f+1, 2 (Third hit miss)	m, m	10,5	13~14	-	-	-	
 1524,1525,1528	d/f+2	m	10	16~17	-7~-6	+3~+4	+3~+4	
 1526	d/f+2, 1	m, m	10,10	16~17	-18~-17	Launch (JG?)	Launch (JG?)	
 1529,1530	d/f+2, 4	m, m	10,13	16~17	-11	0	0	

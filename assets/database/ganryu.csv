@@ -34,7 +34,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1717	TAI4,1	m,h	14,20	13~14	-9~-8	+10g~+11g	+10g~+11g	Tail spin
 1718	TAI1+2	m	15	26 (pc8~26)	-12	Throw(0)	Throw(0)	Power crush
 1712	TAI f+1+2	m	35	20~25	-24~-19	KND	KND	DOSUKOI CANNON
-	TAI d/f+1+2	parry	0	??	–	+16 (?)	–	Command low parry
+	TAI d/f+1+2	parry	0	??	-	+16 (?)	-	Command low parry
 1721	TAI b+1+2	!	40	50~59	KND	KND	KND	
 1713	TAI d/b+1+2	l	20	22~30	-24~-16	KND	KND	
 1613	f+2	m (TC)	14	14	-12	+1	CS	

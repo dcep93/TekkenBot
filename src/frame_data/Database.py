@@ -1,6 +1,7 @@
 import collections
 import csv
 import enum
+import traceback
 
 from . import DataColumns
 from misc import Path
@@ -107,7 +108,7 @@ def populate_database():
         char_name = character.value
         file_name = character.name
         path = Path.path('./database/%s.csv' % file_name)
-        with open(path) as csvfile:
+        with open(path, encoding='UTF-8') as csvfile:
             reader = csv.reader(csvfile, delimiter='\t')
             data = [i for i in reader]
             header = data[0]
@@ -157,4 +158,5 @@ def try_to_populate_database():
     try:
         populate_database()
     except Exception as e:
+        print(traceback.format_exc())
         print(e)

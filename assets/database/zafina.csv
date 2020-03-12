@@ -114,7 +114,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	BT 3 or 4	h	18	10	-8	KND	KND	
 	BT d+1 or d+2	sm (TC)	10	10	-2	+9	+9	
 	BT d+3 or d+4	l	12	10	-11	+3	+4	
-1792	d+1+2 or FC+d+1+2	(TRT)	–	–	–	–	–	
+1792	d+1+2 or FC+d+1+2	(TRT)	-	-	-	-	-	
 	TRT d/b			37				
 1781	TRT 1	l (TRT)	11	18	-11	5	KND	
 1782	TRT 2	m	24	34	-9	Launch	Launch	
@@ -126,8 +126,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	TRT 4, 3	m, m	18,15	26	-14	KND	KND	
 1790	TRT 1+2	m, m (TJ)	7,20	19 js7	-12s	KND	KND	Tail spin
 1783	TRT d+1+2	l (MNT)	20	25	-21	KND	KND	
-	3+4 or FC+d+3	(SCR)	–	–	–	–	–	
-	SCR d/b	–	–	19	–	–	–	
+	3+4 or FC+d+3	(SCR)	-	-	-	-	-	
+	SCR d/b	-	-	19	-	-	-	
 1746	SCR 1	h (SCR)	12	10	-2	+9	+9	
 1753	SCR 2	m (SCR)	17	14	-7	+7	KND	
 1754	SCR 2, 2	m, m	17,17	14	-10	+8s	KND	
