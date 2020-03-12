@@ -4,6 +4,8 @@ GUI to study frame data while in game.
 
 Created by roguelike2d. Maintained by the community.
 
+### Note: Do not move the exe to a different folder - it needs to be able to see the 'assets' directory.
+
 ## Related
 
 1. The original repository:
