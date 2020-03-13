@@ -134,6 +134,24 @@ class Windows:
         x = Input( ctypes.c_ulong(1), ii_ )
         ctypes.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
 
+    @staticmethod
+    def sleep(seconds):
+        # https://stackoverflow.com/a/11658115
+        # The kernel measures in 100 nanosecond intervals, so we must multiply .25 by 10000
+        delay = ctypes.c_longlong(seconds * 10000)
+        w.k32.SetWaitableTimer(w.timer(), ctypes.byref(delay), 0, ctypes.c_void_p(), ctypes.c_void_p(), False)
+        w.k32.WaitForSingleObject(w.timer(), 0xffffffff)
+
+    timer_ = None
+    @classmethod
+    def timer(cls):
+        if cls.timer_ == None:
+            # This sets the priority of the process to realtime--the same priority as the mouse pointer.
+            kernel32.SetThreadPriority(kernel32.GetCurrentThread(), 31)
+            # This creates a timer. This only needs to be done once.
+            cls.timer_ = kernel32.CreateWaitableTimerA(ctypes.c_void_p(), True, ctypes.c_void_p())
+        return self.timer_
+
 # C struct redefinitions
 PUL = ctypes.POINTER(ctypes.c_ulong)
 class KeyBdInput(ctypes.Structure):

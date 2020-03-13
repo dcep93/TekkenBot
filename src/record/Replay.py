@@ -8,6 +8,7 @@ from . import Record, Shared
 
 seconds_per_frame = 1/60.
 one_frame_ms = int(1000 * seconds_per_frame)
+imprecise_wait_cutoff_s = seconds_per_frame * 0.5
 
 direction_string_to_hexes = {
     True: {
@@ -172,12 +173,22 @@ def handle_next_move():
     target = Replayer.count * seconds_per_frame
     actual = time.time() - Replayer.start
     diff = target - actual
+    if diff > imprecise_wait_cutoff_s:
+        wait_s = diff - imprecise_wait_cutoff_s
+        wait_s = int(wait_s * 1000)
+        Globals.Globals.master.after(wait_s, replay_next_move)
+        return
     if diff > 0:
-        diff_ms = int(diff * 1000)
-        Globals.Globals.master.after(diff_ms, replay_next_move)
+        precise_wait(diff)
     else:
         Replayer.start -= diff
-        replay_next_move()
+    replay_next_move()
+
+def precise_wait(seconds):
+    if not Windows.valid:
+        time.sleep(seconds)
+        return
+    Windows.sleep(seconds)
 
 def replay_next_move():
     if Replayer.i == len(Replayer.moves):
