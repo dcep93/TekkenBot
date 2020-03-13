@@ -8,7 +8,7 @@ from . import Record, Shared
 
 seconds_per_frame = 1/60.
 one_frame_ms = int(1000 * seconds_per_frame)
-imprecise_wait_cutoff_s = seconds_per_frame * 0.5
+imprecise_wait_cutoff_s = seconds_per_frame * 1.5
 
 direction_string_to_hexes = {
     True: {
@@ -99,7 +99,13 @@ def loads_moves(compacted_moves, swap):
         else:
             count_str = parts[1].split(')')[0]
             count = int(count_str)
-        moves.append((move, count))
+        if move.startswith('+'):
+            r_path = move[1:]
+            r_moves = get_moves_from_path(r_path, swap)
+            for i in range(count):
+                moves += r_moves
+        else:
+            moves.append((move, count))
     return moves
 
 def combine(moves_1, moves_2):
@@ -170,17 +176,18 @@ def replay_moves():
     handle_next_move()
 
 def handle_next_move():
-    target = Replayer.count * seconds_per_frame
-    actual = time.time() - Replayer.start
-    diff = target - actual
+    diff = get_diff()
     if diff > imprecise_wait_cutoff_s:
         wait_s = diff - imprecise_wait_cutoff_s
-        wait_s = int(wait_s * 1000)
-        Globals.Globals.master.after(wait_s, replay_next_move)
+        wait_ms = int(wait_s * 1000)
+        print('slow sleep', wait_s)
+        Globals.Globals.master.after(wait_ms, replay_next_move)
         return
     if diff > 0:
+        print('fast sleep', diff)
         precise_wait(diff)
     else:
+        print('late', diff)
         Replayer.start -= diff
     replay_next_move()
 
@@ -196,7 +203,7 @@ def replay_next_move():
         return
 
     move, count = Replayer.moves[Replayer.i]
-    print_diff(move, count)
+    print(move, count, get_diff()*60)
     if count > 0:
         replay_move(move)
         Replayer.count += count
@@ -210,11 +217,10 @@ def finish():
     print("done", Replayer.count)
     Replayer.i = None
 
-def print_diff(move, count):
+def get_diff():
     target = Replayer.count * seconds_per_frame
     actual = time.time() - Replayer.start
-    diff = (target - actual)*60
-    print(move, count, diff)
+    return target - actual
 
 def replay_move(move):
     last_state = Globals.Globals.tekken_state.state_log[-1]
