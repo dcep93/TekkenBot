@@ -168,8 +168,6 @@ def replay_moves():
     Replayer.count = 0
     handle_next_move()
 
-    listen_for_click()
-
 def handle_next_move():
     target = Replayer.count * seconds_per_frame
     actual = time.time() - Replayer.start

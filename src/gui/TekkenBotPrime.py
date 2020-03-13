@@ -32,6 +32,8 @@ class TekkenBotPrime(t_tkinter.Tk):
 
         self.init_frame_data()
 
+        Replay.listen_for_click()
+
         self.update()
         self.update_restarter()
 
