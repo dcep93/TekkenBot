@@ -200,7 +200,8 @@ def replay_next_move():
     args = [move, count, "%0.6f" % get_diff()]
     Replayer.log.append(args)
     if count > 0:
-        replay_move(move)
+        if replay_move(move):
+            return
         Replayer.count += count
     Replayer.i += 1
     handle_next_move()
@@ -230,13 +231,14 @@ def replay_move(move):
     if not Globals.Globals.game_reader.is_foreground_pid():
         print('lost focus')
         finish()
-        return
+        return True
 
     for hex_key_code in to_release:
         Windows.release_key(hex_key_code)
     for hex_key_code in to_press:
         Windows.press_key(hex_key_code)
     Replayer.pressed = hex_key_codes
+    return False
 
 def move_to_hexes(move, reverse, p1=True):
     if '/' in move:
