@@ -8,7 +8,7 @@ from . import Record, Shared
 
 seconds_per_frame = 1/60.
 one_frame_ms = int(1000 * seconds_per_frame)
-imprecise_wait_cutoff_s = seconds_per_frame * 1.5
+imprecise_wait_cutoff_s = 0.1
 
 direction_string_to_hexes = {
     True: {
@@ -180,14 +180,11 @@ def handle_next_move():
     if diff > imprecise_wait_cutoff_s:
         wait_s = diff - imprecise_wait_cutoff_s
         wait_ms = int(wait_s * 1000)
-        print('slow sleep', wait_s)
-        Globals.Globals.master.after(wait_ms, replay_next_move)
+        Globals.Globals.master.after(wait_ms, handle_next_move)
         return
     if diff > 0:
-        print('fast sleep', diff)
         precise_wait(diff)
     else:
-        print('late', diff)
         Replayer.start -= diff
     replay_next_move()
 
