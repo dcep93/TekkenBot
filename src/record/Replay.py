@@ -9,6 +9,7 @@ from . import Record, Shared
 seconds_per_frame = 1/60.
 one_frame_ms = int(1000 * seconds_per_frame)
 imprecise_wait_cutoff_s = 0.1
+imprecise_wait_cutoff_buffer_s = 0.01
 
 direction_string_to_hexes = {
     True: {
@@ -154,6 +155,7 @@ class Replayer:
     i = None
     start = None
     count = None
+    log = []
 
     listening = False
 
@@ -177,22 +179,17 @@ def replay_moves():
 
 def handle_next_move():
     diff = get_diff()
-    if diff > imprecise_wait_cutoff_s:
+    if diff > imprecise_wait_cutoff_s + imprecise_wait_cutoff_buffer_s:
+        # get a bit closer because precise_wait is more expensive
         wait_s = diff - imprecise_wait_cutoff_s
         wait_ms = int(wait_s * 1000)
         Globals.Globals.master.after(wait_ms, handle_next_move)
         return
     if diff > 0:
-        precise_wait(diff)
+        Windows.sleep(diff)
     else:
         Replayer.start -= diff
     replay_next_move()
-
-def precise_wait(seconds):
-    if not Windows.valid:
-        time.sleep(seconds)
-        return
-    Windows.sleep(seconds)
 
 def replay_next_move():
     if Replayer.i == len(Replayer.moves):
@@ -200,8 +197,8 @@ def replay_next_move():
         return
 
     move, count = Replayer.moves[Replayer.i]
-    args = [move, count, "%0.4f" % get_diff()]
-    print(*args)
+    args = [move, count, "%0.6f" % get_diff()]
+    Replayer.log.append(args)
     if count > 0:
         replay_move(move)
         Replayer.count += count
@@ -213,6 +210,8 @@ def finish():
         Windows.release_key(hex_key_code)
     Replayer.pressed = []
     print("done", Replayer.count)
+    while Replayer.log:
+        print(*Replayer.log.pop(0))
     Replayer.i = None
 
 def get_diff():

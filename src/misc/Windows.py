@@ -1,6 +1,7 @@
 import ctypes
 import os.path
 import sys
+import time
 
 class Windows:
     valid = True
@@ -136,11 +137,25 @@ class Windows:
 
     @staticmethod
     def sleep(seconds):
-        # https://stackoverflow.com/a/11658115
-        # The kernel measures in 100 nanosecond intervals, so we must multiply .25 by 10000
-        delay = ctypes.c_longlong(int(seconds * 10000))
-        w.k32.SetWaitableTimer(w.timer(), ctypes.byref(delay), 0, ctypes.c_void_p(), ctypes.c_void_p(), False)
-        w.k32.WaitForSingleObject(w.timer(), 0xffffffff)
+        # SetWaitableTimer not working :(
+        w.dumb_sleep(seconds)
+        # # https://stackoverflow.com/a/11658115
+        # # The kernel measures in 100 nanosecond intervals, so we must multiply .25 by 10000
+        # delay = ctypes.c_longlong(int(seconds * 10000))
+        # w.k32.SetWaitableTimer(w.timer(), ctypes.byref(delay), 0, ctypes.c_void_p(), ctypes.c_void_p(), False)
+        # w.k32.WaitForSingleObject(w.timer(), 0xffffffff)
+
+    @staticmethod
+    def dumb_sleep(seconds):
+        before = time.time()
+        buffer_s = 0.0015
+        acceptable_early = 0.0005
+        time.sleep(seconds - buffer_s)
+        for _ in range(1000000):
+            early = seconds - (time.time() - before)
+            if early < acceptable_early:
+                # print(earlies, len(earlies))
+                return
 
     timer_ = None
     @classmethod
