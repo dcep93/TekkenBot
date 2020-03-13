@@ -200,7 +200,8 @@ def replay_next_move():
         return
 
     move, count = Replayer.moves[Replayer.i]
-    print(move, count, get_diff()*60)
+    args = [move, count, "%0.4f" % get_diff()]
+    print(*args)
     if count > 0:
         replay_move(move)
         Replayer.count += count
