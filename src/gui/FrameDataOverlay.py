@@ -2,6 +2,7 @@ from . import Overlay, t_tkinter
 from frame_data import DataColumns, Entry
 from game_parser import MoveInfoEnums
 from misc import Flags, Globals
+from record import Record, Replay
 
 DAMAGE_CMD = 'DMG'
 
@@ -43,6 +44,7 @@ class FrameDataOverlay(Overlay.Overlay):
         t_tkinter.Grid.columnconfigure(self.toplevel, 4, weight=0)
         t_tkinter.Grid.columnconfigure(self.toplevel, 5, weight=0)
         t_tkinter.Grid.columnconfigure(self.toplevel, 6, weight=0)
+        t_tkinter.Grid.columnconfigure(self.toplevel, 7, weight=0)
         t_tkinter.Grid.rowconfigure(self.toplevel, 0, weight=1)
         t_tkinter.Grid.rowconfigure(self.toplevel, 1, weight=0)
 
@@ -60,6 +62,16 @@ class FrameDataOverlay(Overlay.Overlay):
 
         self.text.delete("1.0", "end")
         self.set_columns_to_print(Globals.Globals.master.tekken_config.get_all(DataColumns.DataColumns, True))
+
+        self.add_buttons()
+
+    def add_buttons(self):
+        frame = t_tkinter.Frame(self.toplevel)
+        t_tkinter.tkinter.Button(frame, text="record single", command=Record.record_single).pack()
+        t_tkinter.tkinter.Button(frame, text="record both", command=Record.record_both).pack()
+        t_tkinter.tkinter.Button(frame, text="end recording", command=Record.record_end).pack()
+        t_tkinter.tkinter.Button(frame, text="replay", command=Replay.replay).pack()
+        frame.grid(row=0, column=6)
 
     def print_f(self, is_p1, entry):
         self.scroll()

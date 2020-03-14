@@ -7,7 +7,6 @@ from . import Overlay, CommandInputOverlay, FrameDataOverlay, t_tkinter
 from frame_data import Database, DataColumns
 from game_parser import GameState
 from misc import ConfigReader, Flags, Globals, Path
-from record import Record, Replay
 
 class TekkenBotPrime(t_tkinter.Tk):
     def __init__(self):
@@ -28,11 +27,10 @@ class TekkenBotPrime(t_tkinter.Tk):
 
         Database.try_to_populate_database()
 
+        Globals.Globals.master = self
         Globals.Globals.tekken_state = GameState.GameState()
 
         self.init_frame_data()
-
-        Replay.listen_for_click()
 
         self.update()
         self.update_restarter()
@@ -57,20 +55,10 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.tekken_config = ConfigReader.ConfigReader('tekken_bot')
 
     def init_view(self):
-        self.add_menu_cascade()
         self.add_columns_cascade()
         self.add_display_cascade()
         self.add_mode_cascade()
         self.configure_grid()
-
-    def add_menu_cascade(self):
-        tekken_bot_menu = t_tkinter.Menu(self.menu, tearoff=False)
-        Globals.Globals.master = self
-        tekken_bot_menu.add_command(label="record single", command=Record.record_single)
-        tekken_bot_menu.add_command(label="record both", command=Record.record_both)
-        tekken_bot_menu.add_command(label="end recording", command=Record.record_end)
-        tekken_bot_menu.add_command(label="replay", command=Replay.replay)
-        self.menu.add_cascade(label="Tekken Bot", menu=tekken_bot_menu)
 
     def add_columns_cascade(self):
         column_menu = t_tkinter.Menu(self.menu, tearoff=False)
