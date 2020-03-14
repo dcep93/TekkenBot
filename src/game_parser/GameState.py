@@ -120,3 +120,38 @@ class GameState:
                 if previous_player is not None and previous_player.move_timer != player.move_timer:
                     return True
         return False
+
+
+    def get_throw_break(self, is_p1):
+        frames_to_break = 19
+        state = self.get(not is_p1)
+        throw_tech = state.throw_tech
+        if throw_tech == MoveInfoEnums.ThrowTechs.NONE:
+            return False
+        
+        current_buttons = state.get_input_state()[1].name
+        if '1' not in current_buttons and '2' not in current_buttons:
+            return False
+
+        correct = state.throw_tech.name
+
+        i = 1
+        while True:
+            state = self.get(not is_p1, i)
+            if state == None or state.throw_tech == MoveInfoEnums.ThrowTechs.NONE:
+                relevant = current_buttons.replace('x3', '').replace('x4', '')
+                throw_break = MoveInfoEnums.InputAttackCodes[relevant]
+                break_string = throw_break.name.replace('x', '')
+                throw_break_string = 'br: %s/%s %d/%d' % (break_string, correct, i-1, frames_to_break)
+                return throw_break_string
+            buttons = state.get_input_state()[1].name
+            if '1' in buttons or '2' in buttons:
+                return False
+            i += 1
+
+    def just_lost_health(self, is_p1):
+        prev_state = self.get(not is_p1, 2)
+        if prev_state is None:
+            return False
+        next_state = self.get(not is_p1, 1)
+        return next_state.damage_taken != prev_state.damage_taken

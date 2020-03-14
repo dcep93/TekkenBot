@@ -20,7 +20,7 @@ class FrameDataOverlay(Overlay.Overlay):
     def __init__(self):
         super().__init__((1400, 128))
 
-        self.listeners = [PlayerListener(i, self.print_f) for i in [True, False]]
+        self.listeners = [PlayerListener(i) for i in [True, False]]
         self.entries = []
         self.columns_to_print = None
         self.column_names_string = None
@@ -203,60 +203,26 @@ class FrameDataOverlay(Overlay.Overlay):
         self.populate_column_names()
 
 class PlayerListener:
-    def __init__(self, is_p1, print_f):
+    def __init__(self, is_p1):
         self.is_p1 = is_p1
-        self.print_f = print_f
 
     def update(self):
         # ignore the fact that some moves have multiple active frames
+        state = Globals.Globals.tekken_state
+        print_f = Globals.Globals.master.overlay.print_f
         if Globals.Globals.tekken_state.is_starting_attack(self.is_p1):
             entry = Entry.build(self.is_p1)
-            self.print_f(self.is_p1, entry)
+            print_f(self.is_p1, entry)
         else:
-            throw_break_string = self.get_throw_break()
+            throw_break_string = state.get_throw_break(self.is_p1)
             if throw_break_string:
                 entry = {
                     DataColumns.DataColumns.cmd: throw_break_string,
                 }
-                self.print_f(self.is_p1, entry)
-            elif self.just_lost_health():
+                print_f(self.is_p1, entry)
+            elif state.just_lost_health(self.is_p1):
                 entry = {
                     DataColumns.DataColumns.health: Entry.get_remaining_health_string(Globals.Globals.tekken_state),
                     DataColumns.DataColumns.cmd: DAMAGE_CMD,
                 }
-                self.print_f(self.is_p1, entry)
-
-
-    def get_throw_break(self):
-        frames_to_break = 19
-        state = Globals.Globals.tekken_state.get(not self.is_p1)
-        throw_tech = state.throw_tech
-        if throw_tech == MoveInfoEnums.ThrowTechs.NONE:
-            return False
-        
-        current_buttons = state.get_input_state()[1].name
-        if '1' not in current_buttons and '2' not in current_buttons:
-            return False
-
-        correct = state.throw_tech.name
-
-        i = 1
-        while True:
-            state = Globals.Globals.tekken_state.get(not self.is_p1, i)
-            if state == None or state.throw_tech == MoveInfoEnums.ThrowTechs.NONE:
-                relevant = current_buttons.replace('x3', '').replace('x4', '')
-                throw_break = MoveInfoEnums.InputAttackCodes[relevant]
-                break_string = throw_break.name.replace('x', '')
-                throw_break_string = 'br: %s/%s %d/%d' % (break_string, correct, i-1, frames_to_break)
-                return throw_break_string
-            buttons = state.get_input_state()[1].name
-            if '1' in buttons or '2' in buttons:
-                return False
-            i += 1
-
-    def just_lost_health(self):
-        prev_state = Globals.Globals.tekken_state.get(not self.is_p1, 2)
-        if prev_state is None:
-            return False
-        next_state = Globals.Globals.tekken_state.get(not self.is_p1, 1)
-        return next_state.damage_taken != prev_state.damage_taken
+                print_f(self.is_p1, entry)
