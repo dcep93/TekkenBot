@@ -1,5 +1,5 @@
 from . import GameReader
-from game_parser import ScriptedGame
+from game_parser import MoveInfoEnums, ScriptedGame
 from misc import Flags, Globals
 from record import Record
 
