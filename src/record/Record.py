@@ -1,10 +1,9 @@
 import enum
 
+from . import Shared
 from game_parser import ScriptedGame
-from game_parser.MoveInfoEnums import InputDirectionCodes, InputAttackCodes
 from misc import Globals
 from misc.Windows import w as Windows
-from . import Shared
 
 def record_single():
     record_start(RecordingState.SINGLE)
@@ -18,7 +17,7 @@ def record_start(state):
     Recorder.history = []
     reader = Globals.Globals.game_reader
     if isinstance(reader, ScriptedGame.Recorder):
-        reader.reset()
+        reader.reset(True)
 
 def record_end():
     print("ending recording")
@@ -83,7 +82,10 @@ def get_raw_move(input_state):
     if isinstance(input_state, tuple):
         if input_state[1] == 'N':
             return input_state[0]
-        return '/'.join(input_state)
+        elif input_state[0] == 'N':
+            return '/%s' % input_state[1]
+        else:
+            return '/'.join(input_state)
     return input_state
 
 def record_state():
@@ -95,8 +97,14 @@ def record_state():
             Recorder.history.append([input_state, 1])
 
 def get_recording_string():
-    strip_neutrals()
+    count = sum([i[1] for i in Recorder.history])
     moves = [get_move(i) for i in Recorder.history]
+    if moves and moves[0].startswith('N'):
+        moves = moves[1:]
+        count -= Recorder.history[0][1]
+    if moves and moves[-1].startswith('N'):
+        moves = moves[:-1]
+        count -= Recorder.history[-1][1]
     if len(moves) == 0:
         return ''
     chunks = [moves[i:i+moves_per_line] for i in range(0, len(moves), moves_per_line)]
@@ -104,25 +112,9 @@ def get_recording_string():
     moves_string = '\n'.join(lines)
 
     distance = get_distance()
-    count = sum([i[1] for i in Recorder.history])
     quotient = distance / count
     comment = '%f / %d = %f' % (distance, count, quotient)
     return '%s\n# %s\n' % (moves_string, comment)
-
-def strip_neutrals():
-    strip_neutrals_helper(0, 1)
-    strip_neutrals_helper(-1, -1)
-
-def strip_neutrals_helper(index, step):
-    while True:
-        if abs(index) > len(Recorder.history):
-            return
-        val = Recorder.history[index]
-        move_string = get_move(val)
-        if move_string == 'N' or move_string.startswith('N('):
-            Recorder.history.pop(index)
-        else:
-            return
 
 def get_distance():
     raw_distance = Globals.Globals.game_log.get(True).distance

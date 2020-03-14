@@ -3,6 +3,7 @@ import os.path
 import sys
 import time
 
+# this is trash and could stand to be rewritten
 class Windows:
     valid = True
     def __init__(self):

@@ -15,10 +15,12 @@ if __name__ == "__main__":
     try:
         main()
     except Exception as e:
-        print(traceback.format_exc())
-        print(e)
         # todo test for exe
-        if not sys.__stdout__.isatty():
+        if sys.__stdout__.isatty():
+            raise e
+        else:
+            print(traceback.format_exc())
+            print(e)
             input()
 
 # pyinstaller seems to ignore second level imports

@@ -9,13 +9,13 @@ from misc import Flags
 class Recorder(GameReader.GameReader):
     def __init__(self):
         super().__init__()
-        self.reset()
-        self.active = False
+        self.reset(False)
 
-    def reset(self):
+    def reset(self, active=None):
+        if active is not None:
+            self.active = active
         self.all_datas = []
         self.num_datas = 0
-        self.active = True
 
     def get_updated_state(self, rollback_frame):
         game_data = super().get_updated_state(rollback_frame)

@@ -4,14 +4,12 @@ from gui import FrameDataOverlay
 from misc import Flags
 
 class Globals:
-    master = None
     game_log = None
     game_reader = None
     overlay = None
 
     @classmethod
-    def init(cls, master):
-        cls.master = master
+    def init(cls):
         cls.game_log = GameLog.GameLog()
 
         if Flags.Flags.pickle_dest is not None:

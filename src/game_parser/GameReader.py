@@ -7,6 +7,8 @@ from game_parser import MovelistParser
 from misc import ConfigReader, Flags
 from misc.Windows import w as Windows
 
+# I have no idea how this file works
+
 game_string = 'TekkenGame-Win64-Shipping.exe'
 
 class AddressType(enum.Enum):
@@ -254,9 +256,9 @@ class GameReader:
 
             self.p1_movelist_parser = MovelistParser.MovelistParser(p1_movelist_block, p1_movelist_address)
             self.p2_movelist_parser = MovelistParser.MovelistParser(p2_movelist_block, p2_movelist_address)
+            print("acquired movelists")
 
         self.acquire_state = AcquireState.has_everything
-        print("acquired movelist")
 
     def populate_movelists(self, process_handle, data_type):
         movelist_str = self.c["NonPlayerDataAddresses"][data_type]

@@ -4,7 +4,7 @@ import time
 from frame_data import DataColumns
 from misc import Globals
 from misc.Windows import w as Windows
-from . import Record, Shared
+from . import Shared
 
 seconds_per_frame = 1/60.
 one_frame_ms = int(1000 * seconds_per_frame)
@@ -160,13 +160,13 @@ class Replayer:
 def wait_for_focus_and_replay_moves():
     if Replayer.i is not None:
         return
-    Globals.Globals.master.overlay.print_f(True, {
+    Globals.Globals.overlay.print_f(True, {
         DataColumns.DataColumns.cmd: 'REPLAY'
     })
     if Globals.Globals.game_reader.is_foreground_pid():
         replay_moves()
     else:
-        Globals.Globals.master.after(100, wait_for_focus_and_replay_moves)
+        Globals.Globals.overlay.after(100, wait_for_focus_and_replay_moves)
 
 def replay_moves():
     if Replayer.i is not None:
@@ -184,7 +184,7 @@ def handle_next_move():
         # get a bit closer because precise_wait is more expensive
         wait_s = diff - imprecise_wait_cutoff_s
         wait_ms = int(wait_s * 1000)
-        Globals.Globals.master.after(wait_ms, handle_next_move)
+        Globals.Globals.overlay.after(wait_ms, handle_next_move)
         return
     if diff > 0:
         Windows.sleep(diff)
@@ -194,7 +194,7 @@ def handle_next_move():
 
 def replay_next_move():
     if Replayer.i == len(Replayer.moves):
-        Globals.Globals.master.after(one_frame_ms, finish)
+        Globals.Globals.overlay.after(one_frame_ms, finish)
         return
 
     move, count = Replayer.moves[Replayer.i]
