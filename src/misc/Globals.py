@@ -1,5 +1,5 @@
 from frame_data import Database
-from game_parser import GameLog, GameReader
+from game_parser import GameLog, GameReader, ScriptedGame
 from gui import FrameDataOverlay
 from misc import Flags
 
@@ -24,5 +24,5 @@ class Globals:
 
         cls.overlay = FrameDataOverlay.FrameDataOverlay()
 
-        Database.try_to_populate_database()
+        Database.populate_database()
 

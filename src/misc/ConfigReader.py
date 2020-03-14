@@ -5,20 +5,14 @@ from misc import Path
 
 class ConfigReader:
     def __init__(self, filename):
-        self.file_name = filename
-        self.path = self.get_path(filename)
+        path = Path.path('./config/%s.ini' % filename)
+        self.parse(path)
 
-        self.parse()
-
-    def parse(self):
+    def parse(self, path):
         self.parser = ConfigParser()
-        parsed = self.parser.read(self.path)
+        parsed = self.parser.read(path)
         if not parsed:
-            print('Error reading config data from %s. Using default values.' % self.path)
-
-    @staticmethod
-    def get_path(filename):
-        return Path.path('./config/%s.ini' % filename)
+            print('Error reading config data from %s.' % path)
 
     def get_property(self, enum_item, default_value):
         section = enum_item.__class__.__name__
@@ -63,38 +57,6 @@ class ReloadableConfig(ConfigReader):
             return defaultdict(lambda: defaultdict(int))
         else:
             return self.config[key]
-
-    @classmethod
-    def reload(cls):
-        for config in cls.configs:
-            config.reload_self()
-
-    def reload_self(self):
-        config_data = ConfigParser(inline_comment_prefixes=('#', ';'))
-        try:
-            config_data.read(self.path)
-        except:
-            print("Error reading config data from %s" % self.path)
-            return
-
-        for section, proxy in config_data.items():
-            if section == 'DEFAULT':
-                continue
-            if section not in self.config:
-                self.config[section] = CaseInsensitiveDict()
-            for key, value in proxy.items():
-                if ' ' not in value:
-                    try:
-                        # NonPlayerDataAddresses consists of space delimited lists of hex numbers
-                        # so just ignore strings with spaces in them
-                        if value.startswith('0x'):
-                            value = int(value, 16)
-                        else:
-                            value = int(value)
-                    except ValueError:
-                        pass
-
-                self.config[section][key] = value
 
 class CaseInsensitiveDict(dict):
     def __contains__(self, key):

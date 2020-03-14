@@ -1,5 +1,5 @@
 from . import GameReader
-from game_parser import MoveInfoEnums, ScriptedGame
+from game_parser import MoveInfoEnums
 from misc import Flags, Globals
 from record import Record
 
@@ -52,11 +52,11 @@ class GameLog:
 
         parser = self.get(is_p1).movelist_parser
         if parser is not None:
-            return self.deduce_move_string_from_parser(move_id, parser)
+            return self.deduce_move_string_from_parser(is_p1, move_id, parser)
         else:
-            return self.deduce_move_string_from_inputs(move_id)
+            return self.deduce_move_string_from_inputs(is_p1, move_id)
 
-    def deduce_move_string_from_inputs(self, move_id):
+    def deduce_move_string_from_inputs(self, is_p1, move_id):
         for i in range(1, len(self.state_log)):
             state = self.get(is_p1, i)
             if state is None:
@@ -66,7 +66,7 @@ class GameLog:
                 return '* %s' % input_string
         return "N/A"
 
-    def deduce_move_string_from_parser(self, move_id, parser):
+    def deduce_move_string_from_parser(self, is_p1, move_id, parser):
         previous_move_id = -1
 
         input_array = []

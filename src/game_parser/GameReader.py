@@ -26,8 +26,10 @@ class GameReader:
         self.pid = None
         self.module_address = 0
         self.is_player_player_one = True # default
-        self.c = ConfigReader.ReloadableConfig('memory_address')
+        self.c = ConfigReader.ConfigReader('memory_address')
         self.player_data_pointer_offset = self.c['MemoryAddressOffsets']['player_data_pointer_offset']
+        print(self.player_data_pointer_offset)
+        exit()
         self.p1_movelist_parser = None
         self.p2_movelist_parser = None
 

@@ -14,9 +14,6 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.init_tk()
         self.print_folder()
 
-        self.after(0, self.init_globals_and_start_loop)
-
-    def init_globals_and_start_loop(self):
         Globals.Globals.init(self)
         self.update()
 

@@ -1,4 +1,5 @@
 import sys
+import traceback
 
 sys.path.append('src')
 
@@ -11,7 +12,14 @@ def main():
     app.mainloop()
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        print(traceback.format_exc())
+        print(e)
+        # todo test for exe
+        if not sys.__stdout__.isatty():
+            input()
 
 # pyinstaller seems to ignore second level imports
 # dont need to call this function, just need

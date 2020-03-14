@@ -1,7 +1,6 @@
 import collections
 import csv
 import enum
-import traceback
 
 from . import DataColumns
 from misc import Path
@@ -153,10 +152,3 @@ def record(entry):
 
 histories = collections.defaultdict(History)
 database = {}
-
-def try_to_populate_database():
-    try:
-        populate_database()
-    except Exception as e:
-        print(traceback.format_exc())
-        print(e)
