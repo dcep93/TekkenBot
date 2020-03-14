@@ -8,14 +8,6 @@ class GameState:
     obj = None
 
     def __init__(self):
-        if Flags.Flags.pickle_dest is not None:
-            game_reader = ScriptedGame.Recorder()
-        elif Flags.Flags.pickle_src is not None:
-            game_reader = ScriptedGame.Reader()
-        else:
-            game_reader = GameReader.GameReader()
-        Globals.Globals.game_reader = game_reader
-
         self.state_log = []
 
     def get(self, is_p1, frames_ago=0):
@@ -24,7 +16,7 @@ class GameState:
         state = self.state_log[-1-frames_ago]
         return state.p1 if is_p1 else state.p2
 
-    def update(self, overlay):
+    def update(self):
         game_data = Globals.Globals.game_reader.get_updated_state(0)
 
         if game_data is not None:
@@ -37,11 +29,11 @@ class GameState:
                     for i in range(missed_states):
                         dropped_state = Globals.Globals.game_reader.get_updated_state(missed_states - i)
                         if dropped_state is not None:
-                            self.track_gamedata(dropped_state, overlay)
+                            self.track_gamedata(dropped_state)
 
-                self.track_gamedata(game_data, overlay)
+                self.track_gamedata(game_data)
 
-    def track_gamedata(self, game_data, overlay):
+    def track_gamedata(self, game_data):
         self.state_log.append(game_data)
 
         obj = None # for debugging
@@ -49,7 +41,7 @@ class GameState:
             print(game_data.frame_count, obj)
             self.obj = obj
 
-        overlay.update_state()
+        Globals.Globals.overlay.update_state()
         Record.record_if_activated()
 
         if len(self.state_log) > 300:

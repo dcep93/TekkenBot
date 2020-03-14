@@ -23,7 +23,6 @@ class FrameDataOverlay(Overlay.Overlay):
 
         self.listeners = [PlayerListener(i) for i in [True, False]]
         self.entries = []
-        self.columns_to_print = None
         self.column_names_string = None
         self.init_tkinter()
 
@@ -34,10 +33,11 @@ class FrameDataOverlay(Overlay.Overlay):
         for listener in self.listeners:
             listener.update()
         self.other.update_state()
+        self.update_location()
 
     def update_location(self):
-        super().update_location()
-        self.other.update_location()
+        super().update_location(True)
+        self.other.update_location(False)
 
     def init_tkinter(self):
         self.style = t_tkinter.Style()
@@ -69,9 +69,10 @@ class FrameDataOverlay(Overlay.Overlay):
         self.text.tag_config("p2", foreground=Overlay.ColorSchemeEnum.p2_text.value)
 
         self.text.delete("1.0", "end")
-        self.set_columns_to_print(Globals.Globals.master.tekken_config.get_all(DataColumns.DataColumns, True))
 
         self.add_buttons()
+
+        self.populate_column_names()
 
     def add_buttons(self):
         frame = t_tkinter.Frame(self.toplevel)
@@ -131,12 +132,6 @@ class FrameDataOverlay(Overlay.Overlay):
         textbox.configure(foreground=Overlay.ColorSchemeEnum.system_text.value)
         return textbox
 
-    def update_column_to_print(self, enum, value):
-        self.columns_to_print[enum] = value
-        self.populate_column_names()
-        Globals.Globals.master.tekken_config.set_property(enum, value)
-        Globals.Globals.master.tekken_config.write()
-
     @staticmethod
     def get_background(fa):
         try:
@@ -185,7 +180,7 @@ class FrameDataOverlay(Overlay.Overlay):
         return (' ' * before) + value + (' ' * after)
 
     def get_frame_data_string(self, entry):
-        values = [self.get_value(entry, col) for col in DataColumns.DataColumns if self.columns_to_print[col]]
+        values = [self.get_value(entry, col) for col in DataColumns.DataColumns]
         return '|'.join(values)
 
     def scroll(self):
@@ -218,10 +213,6 @@ class FrameDataOverlay(Overlay.Overlay):
         self.text.delete("1.0", "2.0")
         self.text.insert("1.0", string + '\n')
 
-    def set_columns_to_print(self, booleans_for_columns):
-        self.columns_to_print = booleans_for_columns
-        self.populate_column_names()
-
 class PlayerListener:
     def __init__(self, is_p1):
         self.is_p1 = is_p1
@@ -229,7 +220,7 @@ class PlayerListener:
     def update(self):
         # ignore the fact that some moves have multiple active frames
         state = Globals.Globals.tekken_state
-        print_f = Globals.Globals.master.overlay.print_f
+        print_f = Globals.Globals.overlay.print_f
         if Globals.Globals.tekken_state.is_starting_attack(self.is_p1):
             entry = Entry.build(self.is_p1)
             print_f(self.is_p1, entry)
