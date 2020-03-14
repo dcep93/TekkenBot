@@ -1,4 +1,4 @@
-from . import Overlay, t_tkinter
+from . import Overlay, CommandInputOverlay, t_tkinter
 from frame_data import DataColumns, Entry
 from game_parser import MoveInfoEnums
 from misc import Flags, Globals
@@ -27,9 +27,17 @@ class FrameDataOverlay(Overlay.Overlay):
         self.column_names_string = None
         self.init_tkinter()
 
+        self.other = CommandInputOverlay.CommandInputOverlay()
+        self.other.is_overlay_on_bottom = False
+
     def update_state(self):
         for listener in self.listeners:
             listener.update()
+        self.other.update_state()
+
+    def update_location(self):
+        super().update_location()
+        self.other.update_location()
 
     def init_tkinter(self):
         self.style = t_tkinter.Style()

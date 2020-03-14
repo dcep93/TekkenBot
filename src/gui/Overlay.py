@@ -58,20 +58,21 @@ class Overlay:
     def set_config(self):
         g = Globals.Globals.master.tekken_config.get_property
         self.is_draggable_window = g(DisplaySettings.overlay_as_draggable_window, False)
-        self.is_minimize_on_lost_focus = g(DisplaySettings.only_appears_when_Tekken_7_has_focus, True)
+        self.is_minimize_on_lost_focus = False#g(DisplaySettings.only_appears_when_Tekken_7_has_focus, True)
         self.is_overlay_on_bottom = g(DisplaySettings.overlay_on_bottom, True)
 
     def update_location(self):
         if not Windows.valid:
             return
+        padding = 20
         if not self.is_draggable_window:
             tekken_rect = Globals.Globals.game_reader.get_window_rect()
             if tekken_rect is not None:
                 x = (tekken_rect.right + tekken_rect.left) / 2  - self.toplevel.winfo_width() / 2
                 if self.is_overlay_on_bottom:
-                    y = tekken_rect.bottom - self.toplevel.winfo_height() - 20
+                    y = tekken_rect.bottom - self.toplevel.winfo_height() - padding
                 else:
-                    y = tekken_rect.top
+                    y = tekken_rect.top + padding + 20
                 geometry = '+%d+%d' % (x, y)
                 self.toplevel.geometry(geometry)
                 if not self.overlay_visible:
