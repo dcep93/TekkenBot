@@ -5,8 +5,8 @@ import sys
 
 from . import t_tkinter
 from frame_data import Database, DataColumns
-from game_parser import GameState
-from misc import ConfigReader, Flags, Globals, Path
+from game_parser import GameLog
+from misc import Flags, Globals, Path
 
 class TekkenBotPrime(t_tkinter.Tk):
     def __init__(self):
@@ -44,7 +44,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         now = time.time()
         self.last_update = now
         self.update_restarter()
-        Globals.Globals.tekken_state.update()
+        Globals.Globals.game_log.update()
         after = time.time()
 
         elapsed_ms = after - now

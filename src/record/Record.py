@@ -52,7 +52,7 @@ class Recorder:
     history = None
 
 def get_input_state():
-    last_state = Globals.Globals.tekken_state.state_log[-1]
+    last_state = Globals.Globals.game_log.state_log[-1]
     if last_state.is_player_player_one:
         player = last_state.p1
         opp = last_state.p2
@@ -125,6 +125,6 @@ def strip_neutrals_helper(index, step):
             return
 
 def get_distance():
-    raw_distance = Globals.Globals.tekken_state.get(True).distance
+    raw_distance = Globals.Globals.game_log.get(True).distance
     normalized = (raw_distance - 1148262975) / 4500000
     return normalized - 2

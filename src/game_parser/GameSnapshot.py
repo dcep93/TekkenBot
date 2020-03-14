@@ -86,14 +86,10 @@ class PlayerSnapshot:
     def get_frames_til_next_move(self):
         return self.recovery - self.move_timer
 
-    def is_able_to_act(self):
-        return self.is_cancelable
-
 class GameSnapshot:
-    def __init__(self, p1, p2, frame_count, timer_in_frames, facing_bool, is_player_player_one):
+    def __init__(self, p1, p2, frame_count, facing_bool, is_player_player_one):
         self.p1 = p1
         self.p2 = p2
         self.frame_count = frame_count
         self.facing_bool = facing_bool
-        self.timer_frames_remaining = timer_in_frames
         self.is_player_player_one = is_player_player_one

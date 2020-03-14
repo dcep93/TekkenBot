@@ -1,18 +1,16 @@
-from . import Database
-from . import DataColumns
+from . import Database, DataColumns
 from game_parser import MoveInfoEnums
 from misc import Globals
 
 MAX_HEALTH = 170
 
 def build(is_p1):
-    game_state = Globals.Globals.tekken_state
+    game_state = Globals.Globals.game_log
     entry = {}
     entry[DataColumns.DataColumns.fa] = get_fa(game_state, is_p1)
     entry[DataColumns.DataColumns.move_id] = game_state.get(is_p1, 1).move_id
 
-    movelist_parser = game_state.get(is_p1).movelist_parser
-    entry[DataColumns.DataColumns.char_name] = movelist_parser.char_name if movelist_parser is not None else game_state.get(is_p1).char_id
+    entry[DataColumns.DataColumns.char_name] = game_state.get(is_p1).character_name
     
     entry[DataColumns.DataColumns.health] = get_remaining_health_string(game_state)
 
@@ -27,7 +25,8 @@ def build(is_p1):
 
     return entry
 
-def build_frame_data_entry(entry, game_state, is_p1):
+def build_frame_data_entry(entry, is_p1):
+    game_state = Globals.Globals.game_log
     entry[DataColumns.DataColumns.startup] = game_state.get(is_p1).startup
     entry[DataColumns.DataColumns.hit_type] = MoveInfoEnums.AttackType(game_state.get(is_p1).attack_type).name + ("_THROW" if game_state.get(is_p1).is_attack_throw() else "")
     entry[DataColumns.DataColumns.cmd] = game_state.get_current_move_string(is_p1)

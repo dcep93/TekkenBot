@@ -3,7 +3,7 @@ from game_parser import MoveInfoEnums, ScriptedGame
 from misc import Flags, Globals
 from record import Record
 
-class GameState:
+class GameLog:
     time = 0
     obj = None
 
@@ -52,51 +52,56 @@ class GameState:
 
         parser = self.get(is_p1).movelist_parser
         if parser is not None:
-            previous_move_id = -1
+            return self.deduce_move_string_from_parser(move_id, parser)
+        else:
+            return self.deduce_move_string_from_inputs(move_id)
 
-            input_array = []
-
-            i = 1
-            done = False
-
-            while True:
-                next_move, last_move_was_empty_cancel = parser.input_for_move(move_id, previous_move_id)
-                next_move = str(next_move)
-
-                if last_move_was_empty_cancel:
-                    input_array[-1] = ''
-
-                input_array.append(next_move)
-
-                if parser.can_be_done_from_neutral(move_id):
-                    break
-
-                while True:
-                    old_player = self.get(is_p1, i)
-                    i += 1
-                    if old_player is None:
-                        done = True
-                        break
-                    if old_player.move_id != move_id:
-                        previous_move_id = move_id
-                        move_id = old_player.move_id
-                        break
-                if done:
-                    break
-
-            clean_input_array = tuple(reversed([a for a in input_array if len(a) > 0]))
-            if clean_input_array != ("N/A",):
-                return ','.join(clean_input_array)
-
-        i = 1
-        while True:
+    def deduce_move_string_from_inputs(self, move_id):
+        for i in range(1, len(self.state_log)):
             state = self.get(is_p1, i)
             if state is None:
-                return "N/A"
+                break
             if state.move_id != move_id:
                 input_string = state.get_input_as_string()
                 return '* %s' % input_string
-            i += 1
+        return "N/A"
+
+    def deduce_move_string_from_parser(self, move_id, parser):
+        previous_move_id = -1
+
+        input_array = []
+
+        i = 1
+        done = False
+
+        for _ in range(1000):
+            next_move, last_move_was_empty_cancel = parser.input_for_move(move_id, previous_move_id)
+            next_move = str(next_move)
+
+            if last_move_was_empty_cancel:
+                input_array[-1] = ''
+
+            input_array.append(next_move)
+
+            if parser.can_be_done_from_neutral(move_id):
+                break
+
+            for _ in range(1000):
+                old_player = self.get(is_p1, i)
+                i += 1
+                if old_player is None:
+                    done = True
+                    break
+                if old_player.move_id != move_id:
+                    previous_move_id = move_id
+                    move_id = old_player.move_id
+                    break
+            if done:
+                break
+
+        clean_input_array = tuple(reversed([a for a in input_array if len(a) > 0]))
+        if clean_input_array != ("N/A",):
+            return ','.join(clean_input_array)
 
     def was_just_floated(self, is_p1):
         player = self.get(is_p1, 1)
@@ -112,7 +117,6 @@ class GameState:
                 if previous_player is not None and previous_player.move_timer != player.move_timer:
                     return True
         return False
-
 
     def get_throw_break(self, is_p1):
         frames_to_break = 19

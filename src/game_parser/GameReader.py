@@ -25,7 +25,6 @@ class GameReader:
         self.acquire_state = AcquireState.need_pid
         self.pid = None
         self.module_address = 0
-        self.original_facing = None
         self.is_player_player_one = True # default
         self.c = ConfigReader.ReloadableConfig('memory_address')
         self.player_data_pointer_offset = self.c['MemoryAddressOffsets']['player_data_pointer_offset']
@@ -174,14 +173,11 @@ class GameReader:
         p2_snapshot = GameSnapshot.PlayerSnapshot(p2_dict)
 
         facing = self.get_value_from_data_block(player_data_frame, self.c['GameDataAddress']['facing'])
-        if self.original_facing is None and best_frame_count > 0:
-            self.original_facing = facing > 0
 
         if self.acquire_state == AcquireState.need_names and p1_snapshot.character_name != MoveInfoEnums.CharacterCodes.NOT_YET_LOADED.name and p2_snapshot.character_name != MoveInfoEnums.CharacterCodes.NOT_YET_LOADED.name:
             self.reacquire_names(process_handle)
 
-        timer_in_frames = self.get_value_from_data_block(player_data_frame, self.c['GameDataAddress']['timer_in_frames'])
-        return GameSnapshot.GameSnapshot(p1_snapshot, p2_snapshot, best_frame_count, timer_in_frames, facing, self.is_player_player_one)
+        return GameSnapshot.GameSnapshot(p1_snapshot, p2_snapshot, best_frame_count, facing, self.is_player_player_one)
 
     def reacquire_module(self):
         print("Trying to acquire Tekken library in pid: %s" % self.pid)

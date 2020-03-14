@@ -222,7 +222,7 @@ def get_diff():
     return target - actual
 
 def replay_move(move):
-    last_state = Globals.Globals.tekken_state.state_log[-1]
+    last_state = Globals.Globals.game_log.state_log[-1]
     reverse = bool(last_state.facing_bool) ^ (not last_state.is_player_player_one)
     hex_key_codes = move_to_hexes(move, reverse)
     to_release = [i for i in Replayer.pressed if i not in hex_key_codes]

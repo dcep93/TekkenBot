@@ -155,7 +155,7 @@ class FrameDataOverlay(Overlay.Overlay):
         return "%s: " % player_name
 
     def get_time(self):
-        now = Globals.Globals.tekken_state.state_log[-1].frame_count
+        now = Globals.Globals.game_log.state_log[-1].frame_count
         if len(self.entries) > 0:
             prev_raw = self.entries[-1][DataColumns.DataColumns.time]
             parts = prev_raw.split('/')
@@ -219,9 +219,9 @@ class PlayerListener:
 
     def update(self):
         # ignore the fact that some moves have multiple active frames
-        state = Globals.Globals.tekken_state
+        state = Globals.Globals.game_log
         print_f = Globals.Globals.overlay.print_f
-        if Globals.Globals.tekken_state.is_starting_attack(self.is_p1):
+        if state.is_starting_attack(self.is_p1):
             entry = Entry.build(self.is_p1)
             print_f(self.is_p1, entry)
         else:
@@ -233,7 +233,7 @@ class PlayerListener:
                 print_f(self.is_p1, entry)
             elif state.just_lost_health(self.is_p1):
                 entry = {
-                    DataColumns.DataColumns.health: Entry.get_remaining_health_string(Globals.Globals.tekken_state),
+                    DataColumns.DataColumns.health: Entry.get_remaining_health_string(),
                     DataColumns.DataColumns.cmd: DAMAGE_CMD,
                 }
                 print_f(self.is_p1, entry)
