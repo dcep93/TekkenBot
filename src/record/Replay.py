@@ -1,15 +1,17 @@
 import os
 import time
 
+from . import Shared
 from frame_data import DataColumns
 from misc import Globals
 from misc.Windows import w as Windows
-from . import Shared
 
 seconds_per_frame = 1/60.
-one_frame_ms = int(1000 * seconds_per_frame)
-imprecise_wait_cutoff_s = 0.1
-imprecise_wait_cutoff_buffer_s = 0.01
+# if need to wait more than imprecise_wait_cutoff_s, sleep until
+# imprecise_wait_cutoff_buffer_s is remaining
+# either way, use more expensive Windows.sleep until time is correct
+imprecise_wait_cutoff_s = seconds_per_frame * 2
+imprecise_wait_cutoff_buffer_s = seconds_per_frame * 0.8
 
 direction_string_to_hexes = {
     True: {
@@ -45,6 +47,9 @@ def replay():
     moves = get_moves_from_path(Shared.RAW_PATH)
     if moves is None:
         return
+    Globals.Globals.overlay.print_f(True, {
+        DataColumns.DataColumns.cmd: 'REPLAY'
+    })
     if not Windows.valid:
         print("not windows?")
         return
@@ -76,8 +81,8 @@ def get_moves_from_path(raw_path, swap=False):
 
     lines = [line.split('#')[0].strip() for line in all_lines]
     compacted_moves = ' '.join(lines).split(' ')
-
-    moves = loads_moves([i for i in compacted_moves if i != ''], swap)
+    filtered_moves = [i for i in compacted_moves if i != '']
+    moves = loads_moves(filtered_moves, swap)
 
     while list_of_r_moves:
         moves = combine(moves, list_of_r_moves.pop())
@@ -160,9 +165,6 @@ class Replayer:
 def wait_for_focus_and_replay_moves():
     if Replayer.i is not None:
         return
-    Globals.Globals.overlay.print_f(True, {
-        DataColumns.DataColumns.cmd: 'REPLAY'
-    })
     if Globals.Globals.game_reader.is_foreground_pid():
         replay_moves()
     else:
@@ -180,9 +182,9 @@ def replay_moves():
 
 def handle_next_move():
     diff = get_diff()
-    if diff > imprecise_wait_cutoff_s + imprecise_wait_cutoff_buffer_s:
+    if diff > imprecise_wait_cutoff_s:
         # get a bit closer because precise_wait is more expensive
-        wait_s = diff - imprecise_wait_cutoff_s
+        wait_s = diff - imprecise_wait_cutoff_s + imprecise_wait_cutoff_buffer_s
         wait_ms = int(wait_s * 1000)
         Globals.Globals.overlay.after(wait_ms, handle_next_move)
         return
@@ -194,6 +196,7 @@ def handle_next_move():
 
 def replay_next_move():
     if Replayer.i == len(Replayer.moves):
+        one_frame_ms = int(1000 * seconds_per_frame)
         Globals.Globals.overlay.after(one_frame_ms, finish)
         return
 
@@ -208,13 +211,18 @@ def replay_next_move():
     handle_next_move()
 
 def finish():
-    for hex_key_code in Replayer.pressed:
+    all_hexes = get_all_hexes()
+    for hex_key_code in all_hexes:
         Windows.release_key(hex_key_code)
     Replayer.pressed = []
     print("done", Replayer.count)
     while Replayer.log:
         print(*Replayer.log.pop(0))
     Replayer.i = None
+
+def get_all_hexes():
+    move = 'udbf1234/udbf1234'
+    return move_to_hexes(move)
 
 def get_diff():
     target = Replayer.count * seconds_per_frame
