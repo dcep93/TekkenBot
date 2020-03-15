@@ -57,11 +57,9 @@ class Reader(GameReader.GameReader):
 
     def get_update_wait_ms(self, _):
         if len(self.all_datas) == 0:
-            message = "done with pickle"
+            print("done with pickle")
             if Flags.Flags.fast:
-                raise Exception(message)
-            else:
-                print(message)
+                sys.exit(0)
             return -1
 
         next_timestamp = self.load()
