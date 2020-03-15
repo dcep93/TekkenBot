@@ -104,7 +104,7 @@ class Windows:
                     break
                 count *= 2
             else:
-                sys.exit("Call to enum_processes failed")
+                raise Exception("Call to enum_processes failed")
 
         num_values = int(bytes_returned.value / ctypes.sizeof(w.wintypes.DWORD))
         for index in range(num_values):

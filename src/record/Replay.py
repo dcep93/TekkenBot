@@ -50,9 +50,6 @@ def replay():
     Globals.Globals.overlay.print_f(True, {
         DataColumns.DataColumns.cmd: 'REPLAY'
     })
-    if not Windows.valid:
-        print("not windows?")
-        return
     print('waiting for tekken focus')
     Replayer.moves = moves
     wait_for_focus_and_replay_moves()
@@ -162,13 +159,16 @@ class Replayer:
     count = None
     log = []
 
+def is_foreground_pid():
+    return not Windows.valid or Globals.Globals.game_reader.is_foreground_pid()
+
 def wait_for_focus_and_replay_moves():
     if Replayer.i is not None:
         return
-    if Globals.Globals.game_reader.is_foreground_pid():
+    if is_foreground_pid():
         replay_moves()
     else:
-        Globals.Globals.overlay.after(100, wait_for_focus_and_replay_moves)
+        Globals.Globals.overlay.toplevel.after(100, wait_for_focus_and_replay_moves)
 
 def replay_moves():
     if Replayer.i is not None:
@@ -186,7 +186,7 @@ def handle_next_move():
         # get a bit closer because precise_wait is more expensive
         wait_s = diff - imprecise_wait_cutoff_s + imprecise_wait_cutoff_buffer_s
         wait_ms = int(wait_s * 1000)
-        Globals.Globals.overlay.after(wait_ms, handle_next_move)
+        Globals.Globals.overlay.toplevel.after(wait_ms, handle_next_move)
         return
     if diff > 0:
         Windows.sleep(diff)
@@ -197,7 +197,7 @@ def handle_next_move():
 def replay_next_move():
     if Replayer.i == len(Replayer.moves):
         one_frame_ms = int(1000 * seconds_per_frame)
-        Globals.Globals.overlay.after(one_frame_ms, finish)
+        Globals.Globals.overlay.toplevel.after(one_frame_ms, finish)
         return
 
     move, count = Replayer.moves[Replayer.i]
@@ -212,8 +212,9 @@ def replay_next_move():
 
 def finish():
     all_hexes = get_all_hexes()
-    for hex_key_code in all_hexes:
-        Windows.release_key(hex_key_code)
+    if Windows.valid:
+        for hex_key_code in all_hexes:
+            Windows.release_key(hex_key_code)
     Replayer.pressed = []
     print("done", Replayer.count)
     while Replayer.log:
@@ -221,9 +222,14 @@ def finish():
     Replayer.i = None
 
 def get_all_hexes():
-    move = 'udbf1234/udbf1234'
+    direction_string = ''.join(direction_string_to_hexes[True].keys())
+    attack_string = ''.join(attack_string_to_hex[True].keys())
+    p1_move = direction_string + attack_string
+    move = '%s/%s' % (p1_move, p1_move)
     return move_to_hexes(move)
 
+# negative number means late
+# positive means early
 def get_diff():
     target = Replayer.count * seconds_per_frame
     actual = time.time() - Replayer.start
@@ -237,19 +243,20 @@ def replay_move(move):
     to_press = [i for i in hex_key_codes if i not in Replayer.pressed]
     
     # quit if tekken is not foreground
-    if not Globals.Globals.game_reader.is_foreground_pid():
+    if not is_foreground_pid():
         print('lost focus')
         finish()
         return True
 
-    for hex_key_code in to_release:
-        Windows.release_key(hex_key_code)
-    for hex_key_code in to_press:
-        Windows.press_key(hex_key_code)
+    if Windows.valid:
+        for hex_key_code in to_release:
+            Windows.release_key(hex_key_code)
+        for hex_key_code in to_press:
+            Windows.press_key(hex_key_code)
     Replayer.pressed = hex_key_codes
     return False
 
-def move_to_hexes(move, reverse, p1=True):
+def move_to_hexes(move, reverse=False, p1=True):
     if '/' in move:
         p1_move, p2_move = move.split('/')
         p1_codes = move_to_hexes(p1_move, reverse, True)

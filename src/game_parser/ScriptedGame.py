@@ -47,8 +47,7 @@ class Reader(GameReader.GameReader):
             self.all_datas = pickle.load(fh)
 
         if not self.all_datas:
-            print("no data in pickle")
-            sys.exit(1)
+            raise Exception("no data in pickle")
 
         self.offset = time.time() - self.load()
 
@@ -58,9 +57,11 @@ class Reader(GameReader.GameReader):
 
     def get_update_wait_ms(self, _):
         if len(self.all_datas) == 0:
-            print("done with pickle")
+            message = "done with pickle"
             if Flags.Flags.fast:
-                sys.exit()
+                raise Exception(message)
+            else:
+                print(message)
             return -1
 
         next_timestamp = self.load()

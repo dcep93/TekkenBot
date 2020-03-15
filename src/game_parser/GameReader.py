@@ -117,10 +117,9 @@ class GameReader:
         return data in ('x', 'y', 'z', 'activebox_x', 'activebox_y', 'activebox_z')
 
     def get_updated_state(self, rollback_frame):
+        if not Windows.valid:
+            raise Exception("Not windows - cannot update state")
         if not self.has_working_pid():
-            if not Windows.valid:
-                print("not windows?")
-                return None
             self.pid = Windows.get_pid(game_string)
             if self.has_working_pid():
                 print("Tekken pid acquired: %s" % self.pid)
