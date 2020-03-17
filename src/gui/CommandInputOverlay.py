@@ -17,7 +17,7 @@ symbol_map = {
 class CommandInputOverlay(Overlay.Overlay):
     length = 60
     silence_after_n = 30
-    extra_padding = 20
+    extra_padding = 25
 
     w = 1200
     h = 86

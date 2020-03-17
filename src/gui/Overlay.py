@@ -20,7 +20,7 @@ class ColorSchemeEnum(enum.Enum):
     advantage_text = 'black'
 
 class Overlay:
-    padding = 20
+    padding = 15
 
     @abc.abstractmethod
     def update_state(self):
