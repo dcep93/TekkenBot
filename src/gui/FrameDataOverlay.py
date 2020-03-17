@@ -22,15 +22,14 @@ class FrameDataOverlay(Overlay.Overlay):
     def __init__(self):
         super().__init__()
 
-        self.listeners = [PlayerListener(i) for i in [True, False]]
         self.entries = []
         self.column_names_string = None
         self.init_tkinter()
         self.populate_column_names()
 
     def update_state(self):
-        for listener in self.listeners:
-            listener.update(self.print_f)
+        self.read_player_state(True)
+        self.read_player_state(False)
 
     def get_geometry(self, tekken_rect):
         x = (tekken_rect.right + tekken_rect.left) / 2  - self.toplevel.winfo_width() / 2
@@ -182,26 +181,22 @@ class FrameDataOverlay(Overlay.Overlay):
         self.text.delete("1.0", "2.0")
         self.text.insert("1.0", string + '\n')
 
-class PlayerListener:
-    def __init__(self, is_p1):
-        self.is_p1 = is_p1
-
-    def update(self, print_f):
+    def read_player_state(self, is_p1):
         # ignore the fact that some moves have multiple active frames
         state = Globals.Globals.game_log
-        if state.is_starting_attack(self.is_p1):
-            entry = Entry.build(self.is_p1)
-            print_f(self.is_p1, entry)
+        if state.is_starting_attack(is_p1):
+            entry = Entry.build(is_p1)
+            self.print_f(is_p1, entry)
         else:
-            throw_break_string = state.get_throw_break(self.is_p1)
+            throw_break_string = state.get_throw_break(is_p1)
             if throw_break_string:
                 entry = {
                     DataColumns.DataColumns.cmd: throw_break_string,
                 }
-                print_f(self.is_p1, entry)
-            elif state.just_lost_health(self.is_p1):
+                self.print_f(is_p1, entry)
+            elif state.just_lost_health(is_p1):
                 entry = {
                     DataColumns.DataColumns.health: Entry.get_remaining_health_string(),
                     DataColumns.DataColumns.cmd: DAMAGE_CMD,
                 }
-                print_f(self.is_p1, entry)
+                self.print_f(is_p1, entry)
