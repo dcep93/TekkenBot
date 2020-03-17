@@ -90,7 +90,7 @@ class FrameDataOverlay(Overlay.Overlay):
         return frame_advantage_var
 
     def create_textbox(self):
-        textbox = t_tkinter.Text(self.toplevel, font=("Courier New", 10), highlightthickness=0, pady=0, relief='flat')
+        textbox = t_tkinter.Text(self.toplevel, font=("Courier New", 12), highlightthickness=0, pady=0, relief='flat')
         textbox.pack(side=t_tkinter.LEFT)
         textbox.configure(background=self.background_color)
         textbox.configure(foreground=Overlay.ColorSchemeEnum.system_text.value)
@@ -98,10 +98,10 @@ class FrameDataOverlay(Overlay.Overlay):
 
     def add_buttons(self):
         frame = t_tkinter.Frame(self.toplevel)
-        t_tkinter.tkinter.Button(frame, text="record single", command=Record.record_single).pack()
-        t_tkinter.tkinter.Button(frame, text="record both", command=Record.record_both).pack()
-        t_tkinter.tkinter.Button(frame, text="end recording", command=Record.record_end).pack()
-        t_tkinter.tkinter.Button(frame, text="replay", command=Replay.replay).pack()
+        t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="record single", command=Record.record_single).pack(fill='x')
+        t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="record both", command=Record.record_both).pack(fill='x')
+        t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="end recording", command=Record.record_end).pack(fill='x')
+        t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="replay", command=Replay.replay).pack(fill='x')
         frame.pack(side=t_tkinter.LEFT)
 
     @staticmethod
