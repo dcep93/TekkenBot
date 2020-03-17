@@ -183,20 +183,20 @@ class FrameDataOverlay(Overlay.Overlay):
 
     def read_player_state(self, is_p1):
         # ignore the fact that some moves have multiple active frames
-        state = Globals.Globals.game_log
-        if state.is_starting_attack(is_p1):
+        game_log = Globals.Globals.game_log
+        if game_log.is_starting_attack(is_p1):
             entry = Entry.build(is_p1)
             self.print_f(is_p1, entry)
         else:
-            throw_break_string = state.get_throw_break(is_p1)
+            throw_break_string = game_log.get_throw_break(is_p1)
             if throw_break_string:
                 entry = {
                     DataColumns.DataColumns.cmd: throw_break_string,
                 }
                 self.print_f(is_p1, entry)
-            elif state.just_lost_health(is_p1):
+            elif game_log.just_lost_health(is_p1):
                 entry = {
-                    DataColumns.DataColumns.health: Entry.get_remaining_health_string(),
+                    DataColumns.DataColumns.health: Entry.get_remaining_health_string(game_log),
                     DataColumns.DataColumns.cmd: DAMAGE_CMD,
                 }
                 self.print_f(is_p1, entry)
