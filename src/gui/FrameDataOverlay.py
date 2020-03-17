@@ -43,13 +43,13 @@ class FrameDataOverlay(Overlay.Overlay):
         self.style.configure('.', foreground=Overlay.ColorSchemeEnum.advantage_text.value)
         self.style.configure('TFrame', background=self.tranparency_color)
 
-        self.create_padding_frame(0)
-        self.fa_var = self.create_frame_advantage_label(1)
-        self.create_padding_frame(2)
-        self.text = self.create_textbox(3)
-        self.create_padding_frame(4)
-        self.create_padding_frame(5)
-        self.add_buttons(6)
+        self.create_padding_frame()
+        self.fa_var = self.create_frame_advantage_label()
+        self.create_padding_frame()
+        self.text = self.create_textbox()
+        self.create_padding_frame()
+        self.create_padding_frame()
+        self.add_buttons()
 
         self.text.tag_config("p1", foreground=Overlay.ColorSchemeEnum.p1_text.value)
         self.text.tag_config("p2", foreground=Overlay.ColorSchemeEnum.p2_text.value)
@@ -77,31 +77,31 @@ class FrameDataOverlay(Overlay.Overlay):
         out += "\n"
         self.text.insert("end", out, text_tag)
 
-    def create_padding_frame(self, col):
+    def create_padding_frame(self):
         padding = t_tkinter.Frame(self.toplevel, width=10)
-        padding.grid(row=0, column=col, sticky=t_tkinter.NSEW)
+        padding.pack(side=t_tkinter.LEFT)
 
-    def create_frame_advantage_label(self, col):
+    def create_frame_advantage_label(self):
         frame_advantage_var = t_tkinter.StringVar()
         frame_advantage_label = t_tkinter.Label(self.toplevel, textvariable=frame_advantage_var,
             font=("Courier New", 44), width=4, anchor='c', borderwidth=1, relief='ridge')
-        frame_advantage_label.grid(row=0, column=col)
+        frame_advantage_label.pack(side=t_tkinter.LEFT)
         return frame_advantage_var
 
-    def create_textbox(self, col):
+    def create_textbox(self):
         textbox = t_tkinter.Text(self.toplevel, font=("Courier New", 10), highlightthickness=0, pady=0, relief='flat')
-        textbox.grid(row=0, column=col, sticky=t_tkinter.NSEW)
+        textbox.pack(side=t_tkinter.LEFT)
         textbox.configure(background=self.background_color)
         textbox.configure(foreground=Overlay.ColorSchemeEnum.system_text.value)
         return textbox
 
-    def add_buttons(self, col):
+    def add_buttons(self):
         frame = t_tkinter.Frame(self.toplevel)
         t_tkinter.tkinter.Button(frame, text="record single", command=Record.record_single).pack()
         t_tkinter.tkinter.Button(frame, text="record both", command=Record.record_both).pack()
         t_tkinter.tkinter.Button(frame, text="end recording", command=Record.record_end).pack()
         t_tkinter.tkinter.Button(frame, text="replay", command=Replay.replay).pack()
-        frame.grid(row=0, column=col)
+        frame.pack(side=t_tkinter.LEFT)
 
     @staticmethod
     def get_background(fa):
