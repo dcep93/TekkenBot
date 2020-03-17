@@ -41,7 +41,7 @@ class GameLog:
             print(game_data.frame_count, obj)
             self.obj = obj
 
-        Globals.Globals.overlay.update_state()
+        Globals.Globals.overlay_family.update()
         Record.record_if_activated()
 
         if len(self.state_log) > 300:

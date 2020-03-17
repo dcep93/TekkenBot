@@ -6,7 +6,7 @@ from misc import Flags
 class Globals:
     game_log = None
     game_reader = None
-    overlay = None
+    overlay_family = None
 
     @classmethod
     def init(cls):
@@ -20,7 +20,7 @@ class Globals:
             game_reader = GameReader.GameReader()
         cls.game_reader = game_reader
 
-        cls.overlay = OverlayFamily.OverlayFamily()
+        cls.overlay_family = OverlayFamily.OverlayFamily()
 
         Database.populate_database()
 

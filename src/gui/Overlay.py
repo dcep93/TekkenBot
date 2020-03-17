@@ -24,7 +24,7 @@ class Overlay:
         window_name = self.get_name()
         print("Launching {}".format(window_name))
 
-        self.overlay_visible = False
+        self.visible = False
         self.toplevel = t_tkinter.Toplevel()
 
         self.toplevel.wm_title(window_name)
@@ -46,7 +46,16 @@ class Overlay:
     def get_name(self):
         return self.__class__.__name__
 
-    def update_location(self, bottom):
+    def update(self):
+        self.update_state()
+        self.update_location()
+
+    @abc.abstractmethod
+    def update_state(self):
+        pass
+
+    def update_location(self):
+        bottom = True
         if not Windows.valid:
             return
         padding = 20
@@ -59,19 +68,15 @@ class Overlay:
                 y = tekken_rect.top + padding + 20
             geometry = '+%d+%d' % (x, y)
             self.toplevel.geometry(geometry)
-            if not self.overlay_visible:
+            if not self.visible:
                 self.show()
         else:
             self.hide()
 
-    @abc.abstractmethod
-    def update_state(self):
-        pass
+    def show(self):
+        self.toplevel.deiconify()
+        self.visible = True
 
     def hide(self):
         self.toplevel.withdraw()
-        self.overlay_visible = False
-
-    def show(self):
-        self.toplevel.deiconify()
-        self.overlay_visible = True
+        self.visible = False

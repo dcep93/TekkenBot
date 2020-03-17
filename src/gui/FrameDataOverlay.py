@@ -26,18 +26,9 @@ class FrameDataOverlay(Overlay.Overlay):
         self.column_names_string = None
         self.init_tkinter()
 
-        self.other = CommandInputOverlay.CommandInputOverlay()
-        self.other.is_overlay_on_bottom = False
-
     def update_state(self):
         for listener in self.listeners:
-            listener.update()
-        self.other.update_state()
-        self.update_location()
-
-    def update_location(self):
-        super().update_location(True)
-        self.other.update_location(False)
+            listener.update(self.print_f)
 
     def init_tkinter(self):
         self.style = t_tkinter.Style()
@@ -217,10 +208,9 @@ class PlayerListener:
     def __init__(self, is_p1):
         self.is_p1 = is_p1
 
-    def update(self):
+    def update(self, print_f):
         # ignore the fact that some moves have multiple active frames
         state = Globals.Globals.game_log
-        print_f = Globals.Globals.overlay.print_f
         if state.is_starting_attack(self.is_p1):
             entry = Entry.build(self.is_p1)
             print_f(self.is_p1, entry)
