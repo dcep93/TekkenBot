@@ -1,6 +1,7 @@
 import enum
 
 from . import Shared
+from frame_data import DataColumns
 from game_parser import ScriptedGame
 from misc.Windows import w as Windows
 
@@ -12,6 +13,10 @@ def record_both():
 
 def record_start(state):
     print("starting recording %s" % state.name)
+    Shared.Shared.frame_data_overlay.print_f({
+        DataColumns.DataColumns.cmd: 'RECORD',
+        DataColumns.DataColumns.char_name: state.name
+    })
     Recorder.state = state
     Recorder.history = []
     reader = Shared.Shared.game_reader
@@ -21,6 +26,10 @@ def record_start(state):
 def record_end():
     print("ending recording")
     Recorder.state = RecordingState.OFF
+    Shared.Shared.frame_data_overlay.print_f({
+        DataColumns.DataColumns.cmd: 'RECORD',
+        DataColumns.DataColumns.char_name: Recorder.state.name
+    })
 
     recording_string = get_recording_string()
     print(recording_string)
@@ -29,7 +38,7 @@ def record_end():
     with open(path, 'w') as fh:
         fh.write(recording_string)
 
-    reader = Shared.Shared.game_reader.game_reader
+    reader = Shared.Shared.game_reader
     if isinstance(reader, ScriptedGame.Recorder):
         reader.dump()
 
@@ -88,7 +97,7 @@ def get_raw_move(input_state):
     return input_state
 
 def record_state():
-    if Shared.Shared.game_reader.game_reader.is_foreground_pid():
+    if Shared.Shared.game_reader.is_foreground_pid():
         input_state = get_input_state()
         if last_move_was(input_state):
             Recorder.history[-1][-1] += 1
