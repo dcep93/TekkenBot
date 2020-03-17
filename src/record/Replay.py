@@ -4,7 +4,6 @@ import time
 from . import Shared
 from frame_data import DataColumns
 from gui import FrameDataOverlay
-from misc import Globals
 from misc.Windows import w as Windows
 
 seconds_per_frame = 1/60.
@@ -48,8 +47,7 @@ def replay():
     moves = get_moves_from_path(Shared.RAW_PATH)
     if moves is None:
         return
-    overlay = Globals.Globals.overlay_family.overlays[FrameDataOverlay.FrameDataOverlay]
-    overlay.print_f({
+    Shared.Shared.frame_data_overlay.print_f({
         DataColumns.DataColumns.cmd: 'REPLAY'
     })
     print('waiting for tekken focus')
@@ -162,7 +160,7 @@ class Replayer:
     log = []
 
 def is_foreground_pid():
-    return not Windows.valid or Globals.Globals.game_reader.is_foreground_pid()
+    return not Windows.valid or Shared.Shared.game_reader.is_foreground_pid()
 
 def wait_for_focus_and_replay_moves():
     if Replayer.i is not None:
@@ -170,7 +168,7 @@ def wait_for_focus_and_replay_moves():
     if is_foreground_pid():
         replay_moves()
     else:
-        Globals.Globals.after(100, wait_for_focus_and_replay_moves)
+        Shared.Shared.frame_data_overlay.toplevel.after(100, wait_for_focus_and_replay_moves)
 
 def replay_moves():
     if Replayer.i is not None:
@@ -188,7 +186,7 @@ def handle_next_move():
         # get a bit closer because precise_wait is more expensive
         wait_s = diff - imprecise_wait_cutoff_s + imprecise_wait_cutoff_buffer_s
         wait_ms = int(wait_s * 1000)
-        Globals.Globals.after(wait_ms, handle_next_move)
+        Shared.Shared.frame_data_overlay.toplevel.after(wait_ms, handle_next_move)
         return
     if diff > 0:
         Windows.sleep(diff)
@@ -199,7 +197,7 @@ def handle_next_move():
 def replay_next_move():
     if Replayer.i == len(Replayer.moves):
         one_frame_ms = int(1000 * seconds_per_frame)
-        Globals.Globals.after(one_frame_ms, finish)
+        Shared.Shared.frame_data_overlay.toplevel.after(one_frame_ms, finish)
         return
 
     move, count = Replayer.moves[Replayer.i]
@@ -238,7 +236,7 @@ def get_diff():
     return target - actual
 
 def replay_move(move):
-    last_state = Globals.Globals.game_log.state_log[-1]
+    last_state = Shared.Shared.game_log.state_log[-1]
     reverse = bool(last_state.facing_bool) ^ (not last_state.is_player_player_one)
     hex_key_codes = move_to_hexes(move, reverse)
     to_release = [i for i in Replayer.pressed if i not in hex_key_codes]

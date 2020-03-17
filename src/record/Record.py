@@ -2,7 +2,6 @@ import enum
 
 from . import Shared
 from game_parser import ScriptedGame
-from misc import Globals
 from misc.Windows import w as Windows
 
 def record_single():
@@ -15,7 +14,7 @@ def record_start(state):
     print("starting recording %s" % state.name)
     Recorder.state = state
     Recorder.history = []
-    reader = Globals.Globals.game_reader
+    reader = Shared.Shared.game_reader
     if isinstance(reader, ScriptedGame.Recorder):
         reader.reset(True)
 
@@ -30,7 +29,7 @@ def record_end():
     with open(path, 'w') as fh:
         fh.write(recording_string)
 
-    reader = Globals.Globals.game_reader
+    reader = Shared.Shared.game_reader.game_reader
     if isinstance(reader, ScriptedGame.Recorder):
         reader.dump()
 
@@ -51,7 +50,7 @@ class Recorder:
     history = None
 
 def get_input_state():
-    last_state = Globals.Globals.game_log.state_log[-1]
+    last_state = Shared.Shared.game_log.state_log[-1]
     if last_state.is_player_player_one:
         player = last_state.p1
         opp = last_state.p2
@@ -89,7 +88,7 @@ def get_raw_move(input_state):
     return input_state
 
 def record_state():
-    if Globals.Globals.game_reader.is_foreground_pid():
+    if Shared.Shared.game_reader.game_reader.is_foreground_pid():
         input_state = get_input_state()
         if last_move_was(input_state):
             Recorder.history[-1][-1] += 1
@@ -117,6 +116,6 @@ def get_recording_string():
     return '%s\n# %s\n' % (moves_string, comment)
 
 def get_distance():
-    raw_distance = Globals.Globals.game_log.get(True).distance
+    raw_distance = Shared.Shared.game_log.get(True).distance
     normalized = (raw_distance - 1148262975) / 4500000
     return normalized - 2

@@ -2,8 +2,11 @@ import os
 import time
 import sys
 
-from . import t_tkinter
-from misc import Globals, Path
+from . import t_tkinter, OverlayFamily
+from frame_data import Database
+from game_parser import GameLog, ScriptedGame
+from misc import Flags, Path
+from record import Shared
 
 class TekkenBotPrime(t_tkinter.Tk):
     def __init__(self):
@@ -11,7 +14,18 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.init_tk()
         self.print_folder()
 
-        Globals.Globals.init(self.after)
+        self.game_log = Shared.Shared.game_log = GameLog.GameLog()
+        if Flags.Flags.pickle_dest is not None:
+            game_reader = ScriptedGame.Recorder(Flags.Flags.pickle_dest)
+        elif Flags.Flags.pickle_src is not None:
+            game_reader = ScriptedGame.Reader(Flags.Flags.pickle_src, Flags.Flags.fast)
+        else:
+            game_reader = GameReader.GameReader()
+        self.game_reader = Shared.Shared.game_reader = game_reader
+        self.overlay_family = OverlayFamily.OverlayFamily()
+
+        Database.populate_database()
+
         self.update()
 
     def init_tk(self):
@@ -30,11 +44,11 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.geometry('1720x420')
 
     def update(self):
-        game_reader = Globals.Globals.game_reader
+        game_reader = self.game_reader
         now = time.time()
         self.last_update = now
         self.update_restarter()
-        Globals.Globals.game_log.update(game_reader, Globals.Globals.overlay_family)
+        self.game_log.update(game_reader, self.overlay_family)
         after = time.time()
 
         elapsed_ms = after - now

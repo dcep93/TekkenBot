@@ -2,7 +2,7 @@ from . import Overlay, CommandInputOverlay, t_tkinter
 from frame_data import DataColumns, Entry
 from game_parser import MoveInfoEnums
 from misc import Flags
-from record import Record, Replay
+from record import Record, Replay, Shared
 
 DAMAGE_CMD = 'DMG'
 
@@ -26,6 +26,8 @@ class FrameDataOverlay(Overlay.Overlay):
         self.column_names_string = None
         self.init_tkinter()
         self.populate_column_names()
+
+        Shared.Shared.frame_data_overlay = self
 
     def update_state(self, game_log):
         self.read_player_state(True, game_log)
