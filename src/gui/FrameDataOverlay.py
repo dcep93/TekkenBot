@@ -1,7 +1,7 @@
 from . import Overlay, CommandInputOverlay, t_tkinter
 from frame_data import DataColumns, Entry
 from game_parser import MoveInfoEnums
-from misc import Flags, Globals
+from misc import Flags
 from record import Record, Replay
 
 DAMAGE_CMD = 'DMG'
@@ -27,9 +27,9 @@ class FrameDataOverlay(Overlay.Overlay):
         self.init_tkinter()
         self.populate_column_names()
 
-    def update_state(self):
-        self.read_player_state(True)
-        self.read_player_state(False)
+    def update_state(self, game_log):
+        self.read_player_state(True, game_log)
+        self.read_player_state(False, game_log)
 
     def get_geometry(self, tekken_rect):
         x = (tekken_rect.right + tekken_rect.left) / 2  - self.toplevel.winfo_width() / 2
@@ -54,12 +54,11 @@ class FrameDataOverlay(Overlay.Overlay):
         self.text.tag_config("p1", foreground=Overlay.ColorSchemeEnum.p1_text.value)
         self.text.tag_config("p2", foreground=Overlay.ColorSchemeEnum.p2_text.value)
 
-    def print_f(self, is_p1, entry):
+    def print_f(self, entry, is_p1=None):
         if len(self.entries) == 0:
             print(self.column_names_string)
 
         self.scroll()
-        entry[DataColumns.DataColumns.time] = self.get_time()
 
         self.entries.append(entry)
 
@@ -122,11 +121,14 @@ class FrameDataOverlay(Overlay.Overlay):
 
     @staticmethod
     def get_prefix(is_p1):
-        player_name = "p1" if is_p1 else "p2"
+        if is_p1 is None:
+            player_name = '  '
+        else:
+            player_name = "p1" if is_p1 else "p2"
         return "%s: " % player_name
 
-    def get_time(self):
-        now = Globals.Globals.game_log.state_log[-1].frame_count
+    def get_time(self, game_log):
+        now = game_log.state_log[-1].frame_count
         prev = self.last_time if self.last_time is not None else 0
         self.last_time = now
         diff = max(now - prev, 0)
@@ -181,22 +183,22 @@ class FrameDataOverlay(Overlay.Overlay):
         self.text.delete("1.0", "2.0")
         self.text.insert("1.0", string + '\n')
 
-    def read_player_state(self, is_p1):
+    def read_player_state(self, is_p1, game_log):
         # ignore the fact that some moves have multiple active frames
-        game_log = Globals.Globals.game_log
         if game_log.is_starting_attack(is_p1):
-            entry = Entry.build(is_p1)
-            self.print_f(is_p1, entry)
+            entry = Entry.build(game_log, is_p1)
         else:
             throw_break_string = game_log.get_throw_break(is_p1)
             if throw_break_string:
                 entry = {
                     DataColumns.DataColumns.cmd: throw_break_string,
                 }
-                self.print_f(is_p1, entry)
             elif game_log.just_lost_health(is_p1):
                 entry = {
                     DataColumns.DataColumns.health: Entry.get_remaining_health_string(game_log),
                     DataColumns.DataColumns.cmd: DAMAGE_CMD,
                 }
-                self.print_f(is_p1, entry)
+            else:
+                return
+        entry[DataColumns.DataColumns.time] = self.get_time(game_log)
+        self.print_f(entry, is_p1)

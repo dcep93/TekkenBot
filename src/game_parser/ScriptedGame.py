@@ -17,18 +17,18 @@ class Recorder(GameReader.GameReader):
         self.num_datas = 0
 
     def get_updated_state(self, rollback_frame):
-        game_data = super().get_updated_state(rollback_frame)
+        game_snapshot = super().get_updated_state(rollback_frame)
         if self.active:
-            self.record_data(rollback_frame == 0, game_data)
-        return game_data
+            self.record_data(rollback_frame == 0, game_snapshot)
+        return game_snapshot
 
-    def record_data(self, new_update, game_data):
+    def record_data(self, new_update, game_snapshot):
         self.num_datas += 1
         if new_update:
             now = time.time()
-            self.all_datas.append((now, [game_data]))
+            self.all_datas.append((now, [game_snapshot]))
         else:
-            self.all_datas[-1][1].append(game_data)
+            self.all_datas[-1][1].append(game_snapshot)
 
     def dump(self):
         self.active = False

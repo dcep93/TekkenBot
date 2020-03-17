@@ -6,6 +6,6 @@ class OverlayFamily:
     def __init__(self):
         self.overlays = {mc: mc() for mc in member_classes}
 
-    def update(self):
+    def update(self, game_reader, game_log):
         for overlay in self.overlays.values():
-            overlay.update()
+            overlay.update(game_reader, game_log)

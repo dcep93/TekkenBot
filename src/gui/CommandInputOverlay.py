@@ -1,6 +1,5 @@
 from . import Overlay, t_tkinter
 from game_parser.MoveInfoEnums import InputDirectionCodes
-from misc import Globals
 
 symbol_map = {
     InputDirectionCodes.u : '↑',
@@ -27,8 +26,8 @@ class CommandInputOverlay(Overlay.Overlay):
         y = tekken_rect.top + self.padding
         return x, y
 
-    def update_state(self):
-        last_state = Globals.Globals.game_log.state_log[-1]
+    def update_state(self, game_log):
+        last_state = game_log.state_log[-1]
         time_d = last_state.frame_count % 100
         player = last_state.p1 if last_state.is_player_player_one else last_state.p2
         input_state = player.get_input_state()

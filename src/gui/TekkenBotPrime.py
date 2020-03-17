@@ -30,14 +30,15 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.geometry('1720x420')
 
     def update(self):
+        game_reader = Globals.Globals.game_reader
         now = time.time()
         self.last_update = now
         self.update_restarter()
-        Globals.Globals.game_log.update()
+        Globals.Globals.game_log.update(game_reader, Globals.Globals.overlay_family)
         after = time.time()
 
         elapsed_ms = after - now
-        wait_ms = Globals.Globals.game_reader.get_update_wait_ms(elapsed_ms)
+        wait_ms = game_reader.get_update_wait_ms(elapsed_ms)
         if wait_ms >= 0:
             self.after(wait_ms, self.update)
 

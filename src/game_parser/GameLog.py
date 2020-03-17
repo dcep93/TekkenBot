@@ -1,6 +1,6 @@
 from . import GameReader
 from game_parser import MoveInfoEnums
-from misc import Flags, Globals
+from misc import Flags
 from record import Record
 
 class GameLog:
@@ -16,33 +16,32 @@ class GameLog:
         state = self.state_log[-1-frames_ago]
         return state.p1 if is_p1 else state.p2
 
-    def update(self):
-        game_reader = Globals.Globals.game_reader
-        game_data = game_reader.get_updated_state(0)
+    def update(self, game_reader, overlay_family):
+        game_snapshot = game_reader.get_updated_state(0)
 
-        if game_data is not None:
+        if game_snapshot is not None:
             # we don't run perfectly in sync, if we get back the same frame, throw it away
-            if len(self.state_log) == 0 or game_data.frame_count != self.state_log[-1].frame_count:
+            if len(self.state_log) == 0 or game_snapshot.frame_count != self.state_log[-1].frame_count:
                 if len(self.state_log) > 0:
-                    frames_lost = game_data.frame_count - self.state_log[-1].frame_count - 1
+                    frames_lost = game_snapshot.frame_count - self.state_log[-1].frame_count - 1
                     missed_states = min(7, frames_lost)
 
                     for i in range(missed_states):
                         dropped_state = game_reader.get_updated_state(missed_states - i)
                         if dropped_state is not None:
-                            self.track_gamedata(dropped_state)
+                            self.track_gamedata(dropped_state, game_reader, overlay_family)
 
-                self.track_gamedata(game_data)
+                self.track_gamedata(game_snapshot, game_reader, overlay_family)
 
-    def track_gamedata(self, game_data):
-        self.state_log.append(game_data)
+    def track_gamedata(self, game_snapshot, game_reader, overlay_family):
+        self.state_log.append(game_snapshot)
 
         obj = None # for debugging
         if obj != self.obj:
-            print(game_data.frame_count, obj)
+            print(game_snapshot.frame_count, obj)
             self.obj = obj
 
-        Globals.Globals.overlay_family.update()
+        overlay_family.update(game_reader, self)
         Record.record_if_activated()
 
         if len(self.state_log) > 300:

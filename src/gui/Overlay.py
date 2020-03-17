@@ -2,7 +2,7 @@ import abc
 import enum
 
 from . import t_tkinter
-from misc import Globals, Path
+from misc import Path
 from misc.Windows import w as Windows
 
 @enum.unique
@@ -51,13 +51,13 @@ class Overlay:
     def get_name(self):
         return self.__class__.__name__
 
-    def update(self):
-        self.update_state()
-        self.update_location()
+    def update(self, game_reader, game_log):
+        self.update_state(game_log)
+        self.update_location(game_reader)
 
-    def update_location(self):
+    def update_location(self, game_reader):
         if Windows.valid:
-            tekken_rect = Globals.Globals.game_reader.get_window_rect()
+            tekken_rect = game_reader.get_window_rect()
         else:
             tekken_rect = FullscreenTekkenRect(self.toplevel)
         if tekken_rect is not None:

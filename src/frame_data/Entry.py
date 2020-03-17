@@ -1,11 +1,9 @@
 from . import Database, DataColumns
 from game_parser import MoveInfoEnums
-from misc import Globals
 
 MAX_HEALTH = 170
 
-def build(is_p1):
-    game_log = Globals.Globals.game_log
+def build(game_log, is_p1):
     entry = {}
     entry[DataColumns.DataColumns.fa] = get_fa(game_log, is_p1)
     entry[DataColumns.DataColumns.move_id] = game_log.get(is_p1, 1).move_id

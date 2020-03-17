@@ -49,7 +49,7 @@ def replay():
     if moves is None:
         return
     overlay = Globals.Globals.overlay_family.overlays[FrameDataOverlay.FrameDataOverlay]
-    overlay.print_f(True, {
+    overlay.print_f({
         DataColumns.DataColumns.cmd: 'REPLAY'
     })
     print('waiting for tekken focus')
