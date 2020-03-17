@@ -7,9 +7,12 @@ class Globals:
     game_log = None
     game_reader = None
     overlay_family = None
+    after = None
 
     @classmethod
-    def init(cls):
+    def init(cls, after):
+        cls.after = after
+
         cls.game_log = GameLog.GameLog()
 
         if Flags.Flags.pickle_dest is not None:

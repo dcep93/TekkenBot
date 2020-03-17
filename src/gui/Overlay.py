@@ -22,6 +22,14 @@ class ColorSchemeEnum(enum.Enum):
 class Overlay:
     padding = 40
 
+    @abc.abstractmethod
+    def update_state(self):
+        pass
+
+    @abc.abstractmethod
+    def get_geometry(self):
+        pass
+
     def __init__(self):
         self.visible = False
 
@@ -45,10 +53,6 @@ class Overlay:
     def update(self):
         self.update_state()
         self.update_location()
-
-    @abc.abstractmethod
-    def update_state(self):
-        pass
 
     def update_location(self):
         if Windows.valid:

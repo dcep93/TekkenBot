@@ -3,6 +3,7 @@ import time
 
 from . import Shared
 from frame_data import DataColumns
+from gui import FrameDataOverlay
 from misc import Globals
 from misc.Windows import w as Windows
 
@@ -47,7 +48,8 @@ def replay():
     moves = get_moves_from_path(Shared.RAW_PATH)
     if moves is None:
         return
-    Globals.Globals.overlay.print_f(True, {
+    overlay = Globals.Globals.overlay_family.overlays[FrameDataOverlay.FrameDataOverlay]
+    overlay.print_f(True, {
         DataColumns.DataColumns.cmd: 'REPLAY'
     })
     print('waiting for tekken focus')
@@ -168,7 +170,7 @@ def wait_for_focus_and_replay_moves():
     if is_foreground_pid():
         replay_moves()
     else:
-        Globals.Globals.overlay.toplevel.after(100, wait_for_focus_and_replay_moves)
+        Globals.Globals.after(100, wait_for_focus_and_replay_moves)
 
 def replay_moves():
     if Replayer.i is not None:
@@ -186,7 +188,7 @@ def handle_next_move():
         # get a bit closer because precise_wait is more expensive
         wait_s = diff - imprecise_wait_cutoff_s + imprecise_wait_cutoff_buffer_s
         wait_ms = int(wait_s * 1000)
-        Globals.Globals.overlay.toplevel.after(wait_ms, handle_next_move)
+        Globals.Globals.after(wait_ms, handle_next_move)
         return
     if diff > 0:
         Windows.sleep(diff)
@@ -197,7 +199,7 @@ def handle_next_move():
 def replay_next_move():
     if Replayer.i == len(Replayer.moves):
         one_frame_ms = int(1000 * seconds_per_frame)
-        Globals.Globals.overlay.toplevel.after(one_frame_ms, finish)
+        Globals.Globals.after(one_frame_ms, finish)
         return
 
     move, count = Replayer.moves[Replayer.i]

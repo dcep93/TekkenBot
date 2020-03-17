@@ -4,10 +4,8 @@ member_classes = [FrameDataOverlay.FrameDataOverlay, CommandInputOverlay.Command
 
 class OverlayFamily:
     def __init__(self):
-        self.overlays = []
-        for mc in member_classes:
-            self.overlays.append(mc())
+        self.overlays = {mc: mc() for mc in member_classes}
 
     def update(self):
-        for overlay in self.overlays:
+        for overlay in self.overlays.values():
             overlay.update()

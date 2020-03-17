@@ -11,7 +11,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.init_tk()
         self.print_folder()
 
-        Globals.Globals.init()
+        Globals.Globals.init(self.after)
         self.update()
 
     def init_tk(self):

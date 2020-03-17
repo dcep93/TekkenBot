@@ -28,23 +28,6 @@ class CommandInputOverlay(Overlay.Overlay):
         y = tekken_rect.top + self.padding
         return x, y
 
-    def __init__(self):
-        super().__init__()
-
-        self.stored_inputs = []
-
-        self.init_canvas()
-
-    def init_canvas(self):
-        self.canvas = t_tkinter.Canvas(self.toplevel, width=self.w, height=self.h, bg='black', highlightthickness=0, relief='flat')
-
-        self.canvas.pack()
-
-        self.step = self.w / self.length
-        for i in range(self.length):
-            self.canvas.create_text(i * self.step + (self.step / 2), 8, text=str(i+1), fill='snow')
-            self.canvas.create_line(i * self.step, 0, i * self.step, self.h, fill="red")
-
     def update_state(self):
         last_state = Globals.Globals.game_log.state_log[-1]
         player = last_state.p1 if last_state.is_player_player_one else last_state.p2
@@ -58,6 +41,22 @@ class CommandInputOverlay(Overlay.Overlay):
             color = self.color_from_cancel_booleans(player)
         self.update_input(input_state, color)
 
+    def __init__(self):
+        super().__init__()
+        self.stored_inputs = []
+        self.init_canvas()
+
+    def init_canvas(self):
+        self.canvas = t_tkinter.Canvas(self.toplevel, width=self.w, height=self.h, bg='black', highlightthickness=0, relief='flat')
+
+        self.canvas.pack()
+
+        self.step = self.w / self.length
+        for i in range(self.length):
+            self.canvas.create_text(i * self.step + (self.step / 2), 8, text=str(i+1), fill='snow')
+            self.canvas.create_line(i * self.step, 0, i * self.step, self.h, fill="red")
+
+    # todo revisit
     def last_n_were_same(self, input_state):
         if len(self.stored_inputs) < self.silence_after_n:
             return False
@@ -81,10 +80,11 @@ class CommandInputOverlay(Overlay.Overlay):
         return fill_color
 
     def update_input(self, input_state, cancel_color):
-        self.stored_inputs.append((input_state, cancel_color))
+        this_input = (input_state, cancel_color)
+        self.stored_inputs.append(this_input)
         if len(self.stored_inputs) >= self.length:
             self.stored_inputs = self.stored_inputs[-self.length:]
-            if input_state != self.stored_inputs[-2]:
+            if this_input != self.stored_inputs[-2]:
                 self.canvas.delete(self.input_tag)
                 for i, (stored_input, stored_cancel) in enumerate(self.stored_inputs):
                     self.update_canvas_with_input(i, stored_input, stored_cancel)
