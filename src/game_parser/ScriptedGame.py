@@ -1,14 +1,13 @@
 import pickle
-import signal
 import sys
 import time
 
 from . import GameReader
-from misc import Flags
 
 class Recorder(GameReader.GameReader):
-    def __init__(self):
+    def __init__(self, pickle_dest):
         super().__init__()
+        self.pickle_dest = pickle_dest
         self.reset(False)
 
     def reset(self, active=None):
@@ -34,16 +33,18 @@ class Recorder(GameReader.GameReader):
     def dump(self):
         self.active = False
         print('writing', self.num_datas, len(self.all_datas))
-        with open(Flags.Flags.pickle_dest, 'wb') as fh:
+        with open(self.pickle_dest, 'wb') as fh:
             pickle.dump(self.all_datas, fh)
         self.reset()
 
 class Reader(GameReader.GameReader):
-    def __init__(self):
-        print('loading')
+    def __init__(self, pickle_src, fast):
         super().__init__()
+        self.pickle_src = pickle_src
+        self.fast = fast
 
-        with open(Flags.Flags.pickle_src, 'rb') as fh:
+        print('loading', self.pickle_src, self.fast)
+        with open(self.pickle_src, 'rb') as fh:
             self.all_datas = pickle.load(fh)
 
         if not self.all_datas:
@@ -58,12 +59,12 @@ class Reader(GameReader.GameReader):
     def get_update_wait_ms(self, _):
         if len(self.all_datas) == 0:
             print("done with pickle")
-            if Flags.Flags.fast:
+            if self.fast:
                 sys.exit(0)
             return -1
 
         next_timestamp = self.load()
-        if Flags.Flags.fast:
+        if self.fast:
             return 0
         wait_s = next_timestamp + self.offset - time.time()
         wait_ms = max(int(wait_s * 1000), 0)

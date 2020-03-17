@@ -1,6 +1,6 @@
 from frame_data import Database
 from game_parser import GameLog, GameReader, ScriptedGame
-from gui import FrameDataOverlay
+from gui import OverlayFamily
 from misc import Flags
 
 class Globals:
@@ -13,14 +13,14 @@ class Globals:
         cls.game_log = GameLog.GameLog()
 
         if Flags.Flags.pickle_dest is not None:
-            game_reader = ScriptedGame.Recorder()
+            game_reader = ScriptedGame.Recorder(Flags.Flags.pickle_dest)
         elif Flags.Flags.pickle_src is not None:
-            game_reader = ScriptedGame.Reader()
+            game_reader = ScriptedGame.Reader(Flags.Flags.pickle_src, Flags.Flags.fast)
         else:
             game_reader = GameReader.GameReader()
         cls.game_reader = game_reader
 
-        cls.overlay = FrameDataOverlay.FrameDataOverlay()
+        cls.overlay = OverlayFamily.OverlayFamily()
 
         Database.populate_database()
 
