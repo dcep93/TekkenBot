@@ -1,12 +1,9 @@
-import enum
 import os
 import time
 import sys
 
 from . import t_tkinter
-from frame_data import Database, DataColumns
-from game_parser import GameLog
-from misc import Flags, Globals, Path
+from misc import Globals, Path
 
 class TekkenBotPrime(t_tkinter.Tk):
     def __init__(self):
@@ -21,9 +18,6 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.wm_title("dcep93/TekkenBot")
         self.iconbitmap(Path.path('./img/tekken_bot_close.ico'))
 
-        self.menu = t_tkinter.Menu(self)
-        self.configure(menu=self.menu)
-
         self.text = t_tkinter.Text(self, wrap="word")
         stdout = sys.stdout
         sys.stdout = TextRedirector(self.text, stdout, "stdout")
@@ -31,9 +25,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         sys.stderr = TextRedirector(self.text, stderr, "stderr")
         self.text.tag_configure("stderr", foreground="#b22222")
 
-        self.text.grid(row=2, column=0, columnspan=2, sticky=t_tkinter.NSEW)
-        self.grid_rowconfigure(2, weight=1)
-        self.grid_columnconfigure(0, weight=1)
+        self.text.pack(fill=t_tkinter.BOTH)
 
         self.geometry('1720x420')
 
