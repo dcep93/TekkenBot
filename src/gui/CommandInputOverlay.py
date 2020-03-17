@@ -17,7 +17,6 @@ symbol_map = {
 
 class CommandInputOverlay(Overlay.Overlay):
     length = 60
-    input_tag = "inputs"
     silence_after_n = 30
 
     w = 1200
@@ -36,7 +35,7 @@ class CommandInputOverlay(Overlay.Overlay):
 
         if self.last_n_were_same(input_state):
             color = 'white'
-            if self.stored_inputs[-1][1] == color:
+            if self.stored_inputs[-1][-1] == color:
                 return
         else:
             color = self.color_from_cancel_booleans(player)
@@ -63,9 +62,9 @@ class CommandInputOverlay(Overlay.Overlay):
         x = [x0 + int(i*step / num_xs) for i in range(num_xs)]
         self.canvas.create_line(x[0], 0, x[0], self.h, fill="red")
         time_id = self.canvas.create_text(x[2], 8, text=str(index+1), fill='snow')
-        dir_id = self.canvas.create_text(x[2], 30, fill='snow', font=("Consolas", 20), tag=self.input_tag)
-        atk_id = self.canvas.create_text(x[2], 55, fill='snow', font=("Consolas", 12), tag=self.input_tag)
-        cancel_id = self.canvas.create_rectangle(x[1], 70, x[3], self.h - 5, tag=self.input_tag)
+        dir_id = self.canvas.create_text(x[2], 30, fill='snow', font=("Consolas", 20))
+        atk_id = self.canvas.create_text(x[2], 55, fill='snow', font=("Consolas", 12))
+        cancel_id = self.canvas.create_rectangle(x[1], 70, x[3], self.h - 5)
         return {
             'time': time_id,
             'direction': dir_id,
@@ -73,12 +72,11 @@ class CommandInputOverlay(Overlay.Overlay):
             'cancel': cancel_id
         }
 
-    # todo revisit
     def last_n_were_same(self, input_state):
         if len(self.stored_inputs) < self.silence_after_n:
             return False
         for i in range(self.silence_after_n):
-            if self.stored_inputs[-i-1][0] != input_state:
+            if self.stored_inputs[-i-1][1] != input_state:
                 return False
         return True
 
