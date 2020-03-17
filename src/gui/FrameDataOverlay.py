@@ -7,9 +7,10 @@ from record import Record, Replay
 DAMAGE_CMD = 'DMG'
 
 class FrameDataOverlay(Overlay.Overlay):
-    unknown = '??'
-    col_max_length = 10
+    unknown = '???'
     max_lines = 6
+    last_time = None
+    col_max_length = 10
     sizes = {
         DataColumns.DataColumns.cmd: 18,
         DataColumns.DataColumns.startup: 14,
@@ -19,61 +20,45 @@ class FrameDataOverlay(Overlay.Overlay):
     }
 
     def __init__(self):
-        super().__init__((1400, 128))
+        super().__init__()
 
         self.listeners = [PlayerListener(i) for i in [True, False]]
         self.entries = []
         self.column_names_string = None
         self.init_tkinter()
+        self.populate_column_names()
 
     def update_state(self):
         for listener in self.listeners:
             listener.update(self.print_f)
+
+    def get_geometry(self, tekken_rect):
+        x = (tekken_rect.right + tekken_rect.left) / 2  - self.toplevel.winfo_width() / 2
+        y = tekken_rect.bottom - self.toplevel.winfo_height() - self.padding
+        return x,y
 
     def init_tkinter(self):
         self.style = t_tkinter.Style()
         self.style.theme_use('alt')
         self.style.configure('.', background=self.background_color)
         self.style.configure('.', foreground=Overlay.ColorSchemeEnum.advantage_text.value)
-
-        t_tkinter.Grid.columnconfigure(self.toplevel, 0, weight=0)
-        t_tkinter.Grid.columnconfigure(self.toplevel, 1, weight=0)
-        t_tkinter.Grid.columnconfigure(self.toplevel, 2, weight=0)
-        t_tkinter.Grid.columnconfigure(self.toplevel, 3, weight=1)
-        t_tkinter.Grid.columnconfigure(self.toplevel, 4, weight=0)
-        t_tkinter.Grid.columnconfigure(self.toplevel, 5, weight=0)
-        t_tkinter.Grid.columnconfigure(self.toplevel, 6, weight=0)
-        t_tkinter.Grid.columnconfigure(self.toplevel, 7, weight=0)
-        t_tkinter.Grid.rowconfigure(self.toplevel, 0, weight=1)
-        t_tkinter.Grid.rowconfigure(self.toplevel, 1, weight=0)
-
         self.style.configure('TFrame', background=self.tranparency_color)
+
+        self.create_padding_frame(0)
         self.fa_var = self.create_frame_advantage_label(1)
-
-        self.l_margin = self.create_padding_frame(0)
-        self.r_margin = self.create_padding_frame(5)
-        self.l_seperator = self.create_padding_frame(2)
-        self.r_seperator = self.create_padding_frame(4)
-
+        self.create_padding_frame(2)
         self.text = self.create_textbox(3)
+        self.create_padding_frame(4)
+        self.create_padding_frame(5)
+        self.add_buttons(6)
+
         self.text.tag_config("p1", foreground=Overlay.ColorSchemeEnum.p1_text.value)
         self.text.tag_config("p2", foreground=Overlay.ColorSchemeEnum.p2_text.value)
 
-        self.text.delete("1.0", "end")
-
-        self.add_buttons()
-
-        self.populate_column_names()
-
-    def add_buttons(self):
-        frame = t_tkinter.Frame(self.toplevel)
-        t_tkinter.tkinter.Button(frame, text="record single", command=Record.record_single).pack()
-        t_tkinter.tkinter.Button(frame, text="record both", command=Record.record_both).pack()
-        t_tkinter.tkinter.Button(frame, text="end recording", command=Record.record_end).pack()
-        t_tkinter.tkinter.Button(frame, text="replay", command=Replay.replay).pack()
-        frame.grid(row=0, column=6)
-
     def print_f(self, is_p1, entry):
+        if len(self.entries) == 0:
+            print(self.column_names_string)
+
         self.scroll()
         entry[DataColumns.DataColumns.time] = self.get_time()
 
@@ -82,32 +67,20 @@ class FrameDataOverlay(Overlay.Overlay):
         fa = None
         if DataColumns.DataColumns.fa in entry:
             fa = entry[DataColumns.DataColumns.fa]
-
             background = self.get_background(fa)
             self.style.configure('.', background=background)
-
             self.fa_var.set(fa)
 
         text_tag = 'p1' if is_p1 else 'p2'
-
-        out = self.get_frame_data_string(entry)
-        out = self.get_prefix(is_p1) + out
-
-        self.print_helper(out, fa)
+        out = self.get_prefix(is_p1) + self.get_frame_data_string(entry)
+        print("%s / %s" % (out, fa))
 
         out += "\n"
         self.text.insert("end", out, text_tag)
 
-    def print_helper(self, out, fa):
-        if self.column_names_string is not None:
-            print(self.column_names_string)
-            self.column_names_string = None
-        print("%s / %s" % (out, fa))
-
     def create_padding_frame(self, col):
         padding = t_tkinter.Frame(self.toplevel, width=10)
-        padding.grid(row=0, column=col, rowspan=2, sticky=t_tkinter.NSEW)
-        return padding
+        padding.grid(row=0, column=col, sticky=t_tkinter.NSEW)
 
     def create_frame_advantage_label(self, col):
         frame_advantage_var = t_tkinter.StringVar()
@@ -118,10 +91,18 @@ class FrameDataOverlay(Overlay.Overlay):
 
     def create_textbox(self, col):
         textbox = t_tkinter.Text(self.toplevel, font=("Courier New", 10), highlightthickness=0, pady=0, relief='flat')
-        textbox.grid(row=0, column=col, rowspan=2, sticky=t_tkinter.NSEW)
+        textbox.grid(row=0, column=col, sticky=t_tkinter.NSEW)
         textbox.configure(background=self.background_color)
         textbox.configure(foreground=Overlay.ColorSchemeEnum.system_text.value)
         return textbox
+
+    def add_buttons(self, col):
+        frame = t_tkinter.Frame(self.toplevel)
+        t_tkinter.tkinter.Button(frame, text="record single", command=Record.record_single).pack()
+        t_tkinter.tkinter.Button(frame, text="record both", command=Record.record_both).pack()
+        t_tkinter.tkinter.Button(frame, text="end recording", command=Record.record_end).pack()
+        t_tkinter.tkinter.Button(frame, text="replay", command=Replay.replay).pack()
+        frame.grid(row=0, column=col)
 
     @staticmethod
     def get_background(fa):
@@ -147,12 +128,8 @@ class FrameDataOverlay(Overlay.Overlay):
 
     def get_time(self):
         now = Globals.Globals.game_log.state_log[-1].frame_count
-        if len(self.entries) > 0:
-            prev_raw = self.entries[-1][DataColumns.DataColumns.time]
-            parts = prev_raw.split('/')
-            prev = int(parts[0])
-        else:
-            prev = now
+        prev = self.last_time if self.last_time is not None else 0
+        self.last_time = now
         diff = max(now - prev, 0)
         return '%d/%3d' % (now, diff)
 
@@ -197,6 +174,7 @@ class FrameDataOverlay(Overlay.Overlay):
         string = spaces + column_names
 
         self.column_names_string = string
+        self.entries = []
 
         self.text.config(width=len(string), height=self.max_lines+1)
         self.toplevel.geometry('')

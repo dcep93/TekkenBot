@@ -20,8 +20,16 @@ class CommandInputOverlay(Overlay.Overlay):
     input_tag = "inputs"
     silence_after_n = 30
 
+    w = 1200
+    h = 86
+
+    def get_geometry(self, tekken_rect):
+        x = (tekken_rect.right + tekken_rect.left) / 2  - self.toplevel.winfo_width() / 2
+        y = tekken_rect.top + self.padding
+        return x, y
+
     def __init__(self):
-        super().__init__((1200, 86))
+        super().__init__()
 
         self.stored_inputs = []
 

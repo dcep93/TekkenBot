@@ -20,28 +20,24 @@ class ColorSchemeEnum(enum.Enum):
     advantage_text = 'black'
 
 class Overlay:
-    def __init__(self, xy_size):
+    padding = 40
+
+    def __init__(self):
+        self.visible = False
+
         window_name = self.get_name()
         print("Launching {}".format(window_name))
 
-        self.visible = False
         self.toplevel = t_tkinter.Toplevel()
 
         self.toplevel.wm_title(window_name)
-
         self.toplevel.attributes("-topmost", True)
-
-        self.background_color = ColorSchemeEnum.background.value
-
-        self.tranparency_color = self.background_color
-        self.toplevel.configure(background=self.tranparency_color)
-
         self.toplevel.iconbitmap(Path.path('./img/tekken_bot_close.ico'))
         self.toplevel.overrideredirect(True)
 
-        self.w, self.h = xy_size
-
-        self.toplevel.geometry('%sx%s' % (self.w, self.h))
+        self.background_color = ColorSchemeEnum.background.value
+        self.tranparency_color = self.background_color
+        self.toplevel.configure(background=self.tranparency_color)
 
     def get_name(self):
         return self.__class__.__name__
@@ -55,17 +51,12 @@ class Overlay:
         pass
 
     def update_location(self):
-        bottom = True
-        if not Windows.valid:
-            return
-        padding = 20
-        tekken_rect = Globals.Globals.game_reader.get_window_rect()
+        if Windows.valid:
+            tekken_rect = Globals.Globals.game_reader.get_window_rect()
+        else:
+            tekken_rect = FullscreenTekkenRect(self.toplevel)
         if tekken_rect is not None:
-            x = (tekken_rect.right + tekken_rect.left) / 2  - self.toplevel.winfo_width() / 2
-            if bottom:
-                y = tekken_rect.bottom - self.toplevel.winfo_height() - padding
-            else:
-                y = tekken_rect.top + padding + 20
+            x, y = self.get_geometry(tekken_rect)
             geometry = '+%d+%d' % (x, y)
             self.toplevel.geometry(geometry)
             if not self.visible:
@@ -80,3 +71,10 @@ class Overlay:
     def hide(self):
         self.toplevel.withdraw()
         self.visible = False
+
+class FullscreenTekkenRect:
+    def __init__(self, toplevel):
+        self.left = 0
+        self.right = toplevel.winfo_screenwidth()
+        self.top = 0
+        self.bottom = toplevel.winfo_screenheight()
