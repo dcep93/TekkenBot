@@ -39,13 +39,14 @@ class Overlay:
         self.toplevel = t_tkinter.Toplevel()
 
         self.toplevel.wm_title(window_name)
-        self.toplevel.attributes("-topmost", True)
         self.toplevel.iconbitmap(Path.path('./img/tekken_bot_close.ico'))
         self.toplevel.overrideredirect(True)
 
         self.background_color = ColorSchemeEnum.background.value
         self.tranparency_color = self.background_color
         self.toplevel.configure(background=self.tranparency_color)
+
+        self.toplevel.attributes("-topmost", True)
 
     def get_name(self):
         return self.__class__.__name__

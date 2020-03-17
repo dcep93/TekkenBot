@@ -30,6 +30,7 @@ class CommandInputOverlay(Overlay.Overlay):
 
     def update_state(self):
         last_state = Globals.Globals.game_log.state_log[-1]
+        time_d = last_state.frame_count % 100
         player = last_state.p1 if last_state.is_player_player_one else last_state.p2
         input_state = player.get_input_state()
 
@@ -39,10 +40,12 @@ class CommandInputOverlay(Overlay.Overlay):
                 return
         else:
             color = self.color_from_cancel_booleans(player)
-        self.update_input(input_state, color)
+        self.update_input(time_d, input_state, color)
 
     def __init__(self):
         super().__init__()
+        self.text_ids = None
+
         self.stored_inputs = []
         self.init_canvas()
 
@@ -51,10 +54,24 @@ class CommandInputOverlay(Overlay.Overlay):
 
         self.canvas.pack()
 
-        self.step = self.w / self.length
-        for i in range(self.length):
-            self.canvas.create_text(i * self.step + (self.step / 2), 8, text=str(i+1), fill='snow')
-            self.canvas.create_line(i * self.step, 0, i * self.step, self.h, fill="red")
+        self.text_ids = [self.build_text_ids(i) for i in range(self.length)]
+
+    def build_text_ids(self, index):
+        step = self.w / self.length
+        num_xs = 4
+        x0 = index * step
+        x = [x0 + int(i*step / num_xs) for i in range(num_xs)]
+        self.canvas.create_line(x[0], 0, x[0], self.h, fill="red")
+        time_id = self.canvas.create_text(x[2], 8, text=str(index+1), fill='snow')
+        dir_id = self.canvas.create_text(x[2], 30, fill='snow', font=("Consolas", 20), tag=self.input_tag)
+        atk_id = self.canvas.create_text(x[2], 55, fill='snow', font=("Consolas", 12), tag=self.input_tag)
+        cancel_id = self.canvas.create_rectangle(x[1], 70, x[3], self.h - 5, tag=self.input_tag)
+        return {
+            'time': time_id,
+            'direction': dir_id,
+            'attack': atk_id,
+            'cancel': cancel_id
+        }
 
     # todo revisit
     def last_n_were_same(self, input_state):
@@ -79,21 +96,17 @@ class CommandInputOverlay(Overlay.Overlay):
             fill_color = 'firebrick1'
         return fill_color
 
-    def update_input(self, input_state, cancel_color):
-        this_input = (input_state, cancel_color)
-        self.stored_inputs.append(this_input)
+    def update_input(self, *args):
+        self.stored_inputs.append(args)
         if len(self.stored_inputs) >= self.length:
             self.stored_inputs = self.stored_inputs[-self.length:]
-            if this_input != self.stored_inputs[-2]:
-                self.canvas.delete(self.input_tag)
-                for i, (stored_input, stored_cancel) in enumerate(self.stored_inputs):
-                    self.update_canvas_with_input(i, stored_input, stored_cancel)
+            for i, old_args in enumerate(self.stored_inputs):
+                self.update_canvas_with_input(i, *old_args)
 
-    def update_canvas_with_input(self, i, stored_input, stored_cancel):
-        direction_code, attack_code, _ = stored_input
-        posn = i * self.step + (self.step / 2)
-        self.canvas.create_text(posn, 30, text=symbol_map[direction_code], fill='snow', font=("Consolas", 20), tag=self.input_tag)
-        self.canvas.create_text(posn, 55, text=attack_code.name.replace('x', '').replace('N', ''), fill='snow', font=("Consolas", 12), tag=self.input_tag)
-        x0 = i * self.step + 4
-        x1 = x0 + self.step - 8
-        self.canvas.create_rectangle(x0, 70, x1, self.h - 5, fill=stored_cancel, tag=self.input_tag)
+    def update_canvas_with_input(self, i, time_d, input_state, cancel):
+        ids = self.text_ids[i]
+        direction_code, attack_code, _ = input_state
+        self.canvas.itemconfig(ids['time'], text=time_d)
+        self.canvas.itemconfig(ids['direction'], text=symbol_map[direction_code])
+        self.canvas.itemconfig(ids['attack'], text=attack_code.name.replace('x', '').replace('N', ''))
+        self.canvas.itemconfig(ids['cancel'], fill=cancel)
