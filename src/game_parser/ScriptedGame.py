@@ -71,4 +71,6 @@ class Reader(GameReader.GameReader):
         return wait_ms
 
     def get_updated_state(self, _):
+        if len(self.datas) == 0:
+            return None
         return self.datas.pop(0)
