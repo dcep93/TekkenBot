@@ -90,7 +90,7 @@ class FrameDataOverlay(Overlay.Overlay):
         return frame_advantage_var
 
     def create_textbox(self):
-        textbox = t_tkinter.Text(self.toplevel, font=("Courier New", 12), highlightthickness=0, pady=0, relief='flat')
+        textbox = t_tkinter.Text(self.toplevel, font=("Courier New", 10), highlightthickness=0, pady=0, relief='flat')
         textbox.pack(side=t_tkinter.LEFT)
         textbox.configure(background=self.background_color)
         textbox.configure(foreground=Overlay.ColorSchemeEnum.system_text.value)

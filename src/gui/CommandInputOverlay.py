@@ -17,13 +17,14 @@ symbol_map = {
 class CommandInputOverlay(Overlay.Overlay):
     length = 60
     silence_after_n = 30
+    extra_padding = 20
 
     w = 1200
     h = 86
 
     def get_geometry(self, tekken_rect):
         x = (tekken_rect.right + tekken_rect.left) / 2  - self.toplevel.winfo_width() / 2
-        y = tekken_rect.top + self.padding
+        y = tekken_rect.top + self.padding + self.extra_padding
         return x, y
 
     def update_state(self, game_log):

@@ -20,7 +20,7 @@ class ColorSchemeEnum(enum.Enum):
     advantage_text = 'black'
 
 class Overlay:
-    padding = 40
+    padding = 20
 
     @abc.abstractmethod
     def update_state(self):
@@ -50,10 +50,6 @@ class Overlay:
 
     def get_name(self):
         return self.__class__.__name__
-
-    def update(self, game_reader, game_log):
-        self.update_state(game_log)
-        self.update_location(game_reader)
 
     def update_location(self, game_reader):
         if Windows.valid:

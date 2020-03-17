@@ -17,6 +17,7 @@ class GameLog:
         return state.p1 if is_p1 else state.p2
 
     def update(self, game_reader, overlay_family):
+        overlay_family.update_location(game_reader)
         game_snapshot = game_reader.get_updated_state(0)
 
         if game_snapshot is not None:
@@ -29,11 +30,11 @@ class GameLog:
                     for i in range(missed_states):
                         dropped_state = game_reader.get_updated_state(missed_states - i)
                         if dropped_state is not None:
-                            self.track_gamedata(dropped_state, game_reader, overlay_family)
+                            self.track_gamedata(dropped_state, overlay_family)
 
-                self.track_gamedata(game_snapshot, game_reader, overlay_family)
+                self.track_gamedata(game_snapshot, overlay_family)
 
-    def track_gamedata(self, game_snapshot, game_reader, overlay_family):
+    def track_gamedata(self, game_snapshot, overlay_family):
         self.state_log.append(game_snapshot)
 
         obj = None # for debugging
@@ -41,7 +42,7 @@ class GameLog:
             print(game_snapshot.frame_count, obj)
             self.obj = obj
 
-        overlay_family.update(game_reader, self)
+        overlay_family.update_state(self)
         Record.record_if_activated()
 
         if len(self.state_log) > 300:

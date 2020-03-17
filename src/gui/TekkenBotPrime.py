@@ -4,7 +4,7 @@ import sys
 
 from . import t_tkinter, OverlayFamily
 from frame_data import Database
-from game_parser import GameLog, ScriptedGame
+from game_parser import GameLog, GameReader, ScriptedGame
 from misc import Flags, Path
 from record import Shared
 

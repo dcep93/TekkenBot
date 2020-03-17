@@ -47,7 +47,7 @@ class PlayerSnapshot:
 
         self.movelist_parser = d['movelist_parser']
 
-        # self.character_name = MoveInfoEnums.CharacterCodes(d['PlayerDataAddress.char_id']).name
+        self.character_name = MoveInfoEnums.CharacterCodes(d['PlayerDataAddress.char_id']).name
 
     def get_input_state(self):
         return (self.input_direction, self.input_button, self.rage_button_flag)
