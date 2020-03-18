@@ -151,7 +151,9 @@ class Windows:
         before = time.time()
         buffer_s = 0.0015
         acceptable_early = 0.0005
-        time.sleep(seconds - buffer_s)
+        smaller_sleep = seconds - buffer_s
+        if smaller_sleep > 0:
+            time.sleep(smaller_sleep)
         for _ in range(1000000):
             early = seconds - (time.time() - before)
             if early < acceptable_early:
