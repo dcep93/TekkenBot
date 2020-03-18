@@ -118,9 +118,8 @@ class GameLog:
             cur_frame_count = self.state_log[-1].frame_count
             prev_frame_count = self.state_log[-2].frame_count
             dropped_frames = cur_frame_count - prev_frame_count - 1
-            # print(dropped_frames, cur_frame_count, prev_frame_count)
-            move_timer = player.move_timer + dropped_frames
-            if move_timer == player.startup:
+            diff = player.startup - player.move_timer - 1
+            if diff >= 0 and diff <= dropped_frames:
                 previous_player = self.get(is_p1, 2)
                 if previous_player is not None and previous_player.move_timer < player.move_timer:
                     return True
