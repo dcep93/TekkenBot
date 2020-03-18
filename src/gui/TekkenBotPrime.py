@@ -57,6 +57,8 @@ class TekkenBotPrime(t_tkinter.Tk):
             self.after(wait_ms, self.update)
 
     def update_restarter(self):
+        if Flags.Flags.pickle_src is not None:
+            return
         restart_seconds = 10
         if self.last_update + restart_seconds < time.time():
             print("something broke? restarting")

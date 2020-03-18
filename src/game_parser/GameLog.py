@@ -4,7 +4,6 @@ from misc import Flags
 from record import Record
 
 class GameLog:
-    time = 0
     obj = None
 
     def __init__(self):
@@ -35,6 +34,9 @@ class GameLog:
                 self.track_gamedata(game_snapshot, overlay_family)
 
     def track_gamedata(self, game_snapshot, overlay_family):
+        if len(self.state_log) > 0 and self.state_log[-1].frame_count == game_snapshot.frame_count:
+            return
+
         self.state_log.append(game_snapshot)
 
         obj = None # for debugging
@@ -113,9 +115,14 @@ class GameLog:
     def is_starting_attack(self, is_p1):
         player = self.get(is_p1, 1)
         if player is not None and player.startup != 0:
-            if player.startup != 0 and player.move_timer == player.startup:
+            cur_frame_count = self.state_log[-1].frame_count
+            prev_frame_count = self.state_log[-2].frame_count
+            dropped_frames = cur_frame_count - prev_frame_count - 1
+            # print(dropped_frames, cur_frame_count, prev_frame_count)
+            move_timer = player.move_timer + dropped_frames
+            if move_timer == player.startup:
                 previous_player = self.get(is_p1, 2)
-                if previous_player is not None and previous_player.move_timer != player.move_timer:
+                if previous_player is not None and previous_player.move_timer < player.move_timer:
                     return True
         return False
 
@@ -147,8 +154,8 @@ class GameLog:
             i += 1
 
     def just_lost_health(self, is_p1):
-        prev_state = self.get(not is_p1, 2)
+        prev_state = self.get(not is_p1, 1)
         if prev_state is None:
             return False
-        next_state = self.get(not is_p1, 1)
+        next_state = self.get(not is_p1, 0)
         return next_state.damage_taken != prev_state.damage_taken
