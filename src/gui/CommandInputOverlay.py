@@ -15,11 +15,11 @@ symbol_map = {
 }
 
 class CommandInputOverlay(Overlay.Overlay):
-    length = 60
+    length = 90
     silence_after_n = 30
     extra_padding = 25
 
-    w = 1200
+    w = 1800
     h = 86
 
     def get_geometry(self, tekken_rect):

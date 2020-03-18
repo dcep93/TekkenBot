@@ -155,7 +155,6 @@ class Windows:
         for _ in range(1000000):
             early = seconds - (time.time() - before)
             if early < acceptable_early:
-                # print(earlies, len(earlies))
                 return
 
     timer_ = None
