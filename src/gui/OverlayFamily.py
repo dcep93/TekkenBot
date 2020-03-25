@@ -1,6 +1,9 @@
 from . import CommandInputOverlay, FrameDataOverlay
 
-member_classes = [FrameDataOverlay.FrameDataOverlay, CommandInputOverlay.CommandInputOverlay]
+member_classes = [
+    FrameDataOverlay.FrameDataOverlay,
+    # CommandInputOverlay.CommandInputOverlay
+]
 
 class OverlayFamily:
     def __init__(self):
