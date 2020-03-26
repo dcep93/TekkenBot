@@ -223,6 +223,7 @@ class CharacterCodes(enum.Enum):
     ZAFINA = 51 # DLC
     GANRYU = 52 # DLC
     LEROY = 53 # DLC
+    FAKHUMRAM = 54 # DLC
 
     NOT_YET_LOADED = 75 #value when a match starts for (??) frames until char_id loads
 
