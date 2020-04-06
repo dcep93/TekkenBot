@@ -2,6 +2,9 @@ import collections
 import struct
 
 from . import MoveInfoEnums
+from misc import Path
+from frame_data import Database
+
 
 # I have no idea how this file works
 
@@ -76,6 +79,13 @@ class MovelistParser:
         move_nodes = []
         for i in range(0, len(move_nodes_raw), 40):
             move_nodes.append(MoveNode(move_nodes_raw[i:i+40], movelist_pointer, movelist_bytes, self.names))
+        data = {i.move_id:i.name for i in move_nodes}
+        char_name = Database.Characters(self.char_name).name
+        path = Path.path('./names/%s.csv' % char_name)
+        with open(path, 'w') as fh:
+            for i in data:
+                fh.write('%s\t%s\n' % (i, data[i]))
+        print(path, len(data))
 
         self.can_move_be_done_from_neutral = {}
 
