@@ -18,10 +18,6 @@ def build(game_log, is_p1):
         entry = build_frame_data_entry(game_log, entry, is_p1)
         Database.record(entry)
 
-    # throw_tech = game_log.get(not is_p1).throw_tech
-    # if throw_tech != MoveInfoEnums.ThrowTechs.NONE:
-    #     entry[DataColumns.DataColumns.hit_type] = throw_tech.name
-
     return entry
 
 def build_frame_data_entry(game_log, entry, is_p1):

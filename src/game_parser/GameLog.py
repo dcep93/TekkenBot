@@ -134,6 +134,8 @@ class GameLog:
         
         current_buttons = state.get_input_state()[1].name
         if '1' not in current_buttons and '2' not in current_buttons:
+            if self.get(not is_p1, 1).throw_tech != throw_tech:
+                return 'br: %s' % throw_tech.name
             return False
 
         correct = state.throw_tech.name
