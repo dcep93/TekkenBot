@@ -195,7 +195,7 @@ class FrameDataOverlay(Overlay.Overlay):
                 entry = {
                     DataColumns.DataColumns.cmd: throw_break_string,
                 }
-            elif game_log.just_lost_health(is_p1):
+            elif game_log.just_lost_health(not is_p1):
                 entry = {
                     DataColumns.DataColumns.health: Entry.get_remaining_health_string(game_log),
                     DataColumns.DataColumns.cmd: DAMAGE_CMD,
