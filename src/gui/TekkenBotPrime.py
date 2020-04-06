@@ -24,7 +24,8 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.game_reader = Shared.Shared.game_reader = game_reader
         self.overlay_family = OverlayFamily.OverlayFamily()
 
-        Database.populate_database()
+        # seems to be reset :(
+        # Database.populate_database()
 
         self.update()
 
