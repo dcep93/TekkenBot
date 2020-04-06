@@ -139,7 +139,7 @@ class GameLog:
         correct = state.throw_tech.name
 
         i = 1
-        while True:
+        for _ in range(1000):
             state = self.get(not is_p1, i)
             if state == None or state.throw_tech == MoveInfoEnums.ThrowTechs.NONE:
                 relevant = current_buttons.replace('x3', '').replace('x4', '')
@@ -151,6 +151,7 @@ class GameLog:
             if '1' in buttons or '2' in buttons:
                 return False
             i += 1
+        print("impossible a")
 
     def just_lost_health(self, is_p1):
         prev_state = self.get(not is_p1, 1)
