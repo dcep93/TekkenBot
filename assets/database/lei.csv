@@ -322,7 +322,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	DRG d+3+4	(RLX)						
 1970	DRG 2	m	18	17	4	KND	JG		5ryu_RP2
 	DRG 2, F	m (TGR)	18		3	KND	JG	
-1978	DRG 3	l (TC)	11	16 cs4	-15	+2s	+2s		5ryu_LK01
+1978	DRG 3	l (TC)	11	16 cs4	-13	+4	+4		5ryu_LK01
 	DRG 3, F	l (TC) (CRA)	11		-20	-3s	-3s	
 1722	DRG 4	h	18	10	-11	0	0		Re_cap00kA
 1973	DRG 1+2	hh	5, 20	18	-2	KND	KND	Tail spin	5ryu_tora_WP2

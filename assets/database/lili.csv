@@ -108,7 +108,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1760	qcf+1	m	16	15~16 (17~)	-12~-11	-1~0	-1~0		Mn_swan00H
 1761	qcf+1, 2	m, m	16,20	15~16 (17~)	-14~-13	KND	CS		Mn_nlook00
 	qcf+1, 2, B (Cancel)	m(BT)	16	15~16 (17~)b	-19~-18	-8~-7	-8~-7	
-1785	qcf+2	m	13	14~15 (16~)	-10~-9	0~+1	0~+1	Homing	Mn_syehijiE
+1785	qcf+2	m	13	14~15 (16~)	-9	0~+1	0~+1	Homing	Mn_syehijiE
 1790	qcf+2, 1	m, m	13,20	14~15 (16~)	-13~-12	KND	KND	
 1656	qcf+3	m	20	16~17 (18~)	-21~-20	Launch (JG?)	Launch (JG?)	
 	qcf+3, 4	m, m	20,25	16~17 (18~)a	+4~+7s	KND	KND	

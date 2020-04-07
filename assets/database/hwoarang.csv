@@ -87,7 +87,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1902	f, F+4	m(RFF)	22	17	-7	KND	KND		Hw_mmrk00
 1876	f, n, d, d/f+3	m, (LFS)	27	18	+4	KND	CS	Wall bounce	Hw_splk
 1875	f, n, d, d/f+4	m	18	16	-18	Launch(JG?)	Launch(JG?)	53	Hw_agerk
-1874	f, n, d/f+4	m	18	16	-10	Launch(JG?)	Launch(JG?)	47	Hw_agerkFAST
+1874	f, n, d/f+4	m	18	16	-8	Launch(JG?)	Launch(JG?)	47	Hw_agerkFAST
 1716	f, f, f+3	m (TJ)	30	22	6	KND	KND		Co_runlk00
 1904	f, f, f+4	h	28	18	+5	8b	8b		Hw_mmrk01
 1711	WS+3	m	20	14	-7	KND	KND		Hw_s_tlk
@@ -127,14 +127,14 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1822	RFF f+4~4	m	20	18	-13	Launch (JG?)	Launch (JG?)		Hw_sr_rk0FE
 1817	RFF f+3	h, (LFS)	21	14	12	23	23		Hw_sr_lk00F
 	RFF f+3, B	h(RFF)	21	14	-11	0	0	
-1661	RFF d/f+3	m(LFF)	25	20	-11	KND	KND	Homing, Tail spin	Hw_sr_3lk
+1661	RFF d/f+3	m(LFF)	25	20	-9	KND	KND	Homing, Tail spin	Hw_sr_3lk
 1824	RFF d/f+4	m	12	13	-7	+1	+1	39	Hw_sr_tsrkF
 	RFF d/f+4, b or f	m, (RFS)	12	13	+7	+15g	+15	
 	RFF d/f+4, d or u	m, (RFS)	12	13	+6	+14g	+14	
 1816	RFF d+4	l	19	19	-11	+5	+15g		Hw_sr_2rk00
 1808	RFF d/b+3	l (TC)	13	17F	-11	-3	+4		Hw_sr_lk00
 1871	RFF d/b+3, 3	l, h(LFF)	13,28	17 10~	-2	KND	KND	Tail spin	Hw_lspin00
-1806	RFF b+2	m	17	16	2	6s	KND		Hw_sr_4rp00
+1806	RFF b+2	m	17	16	4	6s	KND		Hw_sr_4rp00
 1826	RFF b+3	h(LFF)	20	13	-7	2	CS		Hw_kaelkB
 1899	RFF b+4	h (TC)(LFF)	27	18	-9	+13kg	+13kg	Tail spin	Hw_R_yokerk
 1856	RFF f, F+3	m (TJ)(LFF)	22	22	-6	KND	KND		Hw_mlkR00

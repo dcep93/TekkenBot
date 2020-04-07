@@ -96,7 +96,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1741	d+4, 1	l (TC), h	7(10),10	12 1~	0	+6	+11		Ni_srk_ural
 	d+4, 1, d or u (Cancel)	l (TC), (Special)	7(10)	12	-13(-15)	-2(-4)	-2(-4)	
 1708	d/b+2	m	20	24~25	-5~-4	KND	KND	Tail spin, Homing	Ni_mrp2
-1713	d/b+3	l	17	20	-13	+3s	KND		Ni_t_slkB
+1713	d/b+3	l	17	20	-13	+4	KND		Ni_t_slkB
 1714	d/b+4	l (TC)	5	16~17ad cs6~	-9~-8	+2~+3	+2~+3		Ni_k00
 1715	d/b+4, 3	l (TC), m	5,21	16~17 6~	-17~-16	Launch	Launch		Ni_k01
 1711	d/b+1+2	!	50	65	CS	CS	CS		Ni_swanA
@@ -161,7 +161,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	SS+1, B	m, (Special)	15	14~15 (23~)	+10~+11	+23~+24g	+23~+24g	
 1747	SS+1, 2	m, m	15,15	14~15 (23~)	-6~-4	0~+2	0~+2		Ni_koprp00
 1777	SS+2	m	15	13~14 (22~)	-14~-13	Launch (JG?)	Launch (JG?)		Ni_shorp00
-1796	SS+4	l (TC)	17	20(29~) cs6~	-15	+6s	YKU		Ni_sdsyrk00
+1796	SS+4	l (TC)	17	20(29~) cs6~	-14	+6s	YKU		Ni_sdsyrk00
 1761	SS+1+2	m	22	19(28~)	-11	KND	KND		Ni_sdtsuki
 1791	Opponent Down d+3+4	l(On grounded opponent)	16(20)	17~18	-17~-16	-8~-7s	-8~-7s		Ni_dwki2
 	qcf	(Special)		17~18				

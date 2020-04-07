@@ -63,7 +63,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1445	Forward jump Top of jump d+3	m (TJ)	14	13~ (34?~) js1~	-6~+1	+9s~+16s	+9s~+16s		jp2lk_00_chak
 1869	qcf+1 or qcf+2	Sm	12	19~	-13~	-5~	-5~	
 	qcf+1, 1+2, f, f	Sm	12	19~	+7?~	+15~	+15~	
-1885	hcb+1	Sm	12	28~	-9~	-1	-1	
+1885	hcb+1	Sm	12	28~	-12	-4	-4
 1898	hcb+2	Sm x 3	9,9,9	33~,41,49	-1~	KND	KND		Ry_ShadohB2
 1912	f, d, d/f+1	Sm	15	10a cs6~	-26	Launch (JG?)	Launch (JG?)		Ry_shoryu_cn
 	f, d, d/f+1, 1+2f, f	Sm	15	10a cs6~	+1	Launch (JG?)	Launch (JG?)	

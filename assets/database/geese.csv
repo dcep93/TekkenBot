@@ -55,7 +55,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	d/b or d+4, 1+2	l(MAX )	15	17~18 cs6or1~		+15~+16g	KND	
 1532	d+1+2	l	20	24~25s cs6~	-18~-17	KND	KND		My_t_sWP00
 1509	b+1	h	10	12~13	-7~-6	+4~+5	+4~+5		My_lp00B
-1510	b+1, 2	h, m	10,18	12~13	-7	+4	KND		My_4lprp
+1510	b+1, 2	h, m	10,18	12~13	-12	+1	KND		My_4lprp
 1511	b+2	m	23	24	+2	KND	KND		My_rp00B
 1514	b+3	m	11	14~15	-12~-11	-1~0	-1~0		My_lk00B
 1515	b+3, 2	m, m	11,15	14~15	-15~-14	KND	KND		My_lkrp00B

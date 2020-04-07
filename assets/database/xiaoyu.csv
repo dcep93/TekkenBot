@@ -49,7 +49,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	B+1	m	10	8~13	-12~-7	-1~+4	-1~+4	
 2057	b+2	m	13	15~16b	-6~-5	+5~+6	+5~+6	Homing	Fu_rp00B
 2058	b+2, 2	m, l?	13,10	15~16b	-8~-6	+3~+5	+3~+5		Fu_4rprp
-1634	b+3	h	22	18~19b	-4~-3	+7~+8s	KND		Fu_lk00B
+1634	b+3	h	22	18~19b	-2	+7~+8s	KND		Fu_lk00B
 1635	b+4	m	14	13~15	-11~-9	0~+2	0~+2		Fu_aokrk00
 1636	b+4, 4	m, h	14,17	13~15	-9~-8	+14kg	+14kg	Tail spin	Fu_aokrk01
 	u/b+3+4	m (TJ)	23	22~24 js18~	-17~-15	Launch (JG?)	Launch (JG?)	
@@ -134,7 +134,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1940	RDS 2, 2	h, m	9,12	12b	-7~-5	+4~+6	+4~+6		Fu_R_rp01
 1948	RDS 2, 2, 1	h, m, mmm	9,12,7,7,7	12s	-13~-7 (-18)	-2~+4s	-2~+4s		Fu_R_rp02HC
 	RDS 2, 2, 1, D	h, m, mmm, (AOP)	9,12,7,7,7	12	-13~-7 (-18)	-2~+4s	-2~+4s	
-1618	RDS 3	m (TJ)	25	18~19b js9~	-19~-18	KND	KND	Wall bounce	Fu_R_rklk00
+1618	RDS 3	m (TJ)	25	18~19b js9~	-14	KND	KND	Wall bounce	Fu_R_rklk00
 1621	RDS 4	m	17	13~15	-18~-16	Launch (JG?)	Launch (JG?)		Fu_R_rk00
 1606	RDS 1+2	mm	6,6	16~18, 23~24	-5~-4	+6~+7	+6~+7		Fu_R_lrp01R
 1608	RDS 1+2, 1+2	mm, mm	6,6,6,6	16~18, 23~24s	-11~-10	0~+1s	0~+1s		Fu_R_lrp03
