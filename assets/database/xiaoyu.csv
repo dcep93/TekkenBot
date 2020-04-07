@@ -1,190 +1,190 @@
-move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes
-2367	in rage b+1+2 or WS+b+1+2 or AOP b+1+2	m	55	20 pc8~17	-27	KND	KND	Rage art
-1657	in rage RDS d+3, 3+4	l, m, (Special)	7,10	js11~	-4~-3	KND	KND	Rage drive, Tail spin
-1623	1	h	7	10	+1	+8	+8	
-1589	1, 2	h, h	7,8	10	-1	+5	+5	
-1590	1, 2, 1	h, h, m	7,8,20	10	-9~-8	KND	KND	
-1827	1, D+2	h, m	7,10	10	-4~-1	+7~+10	+9~+12	
+move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes	Move Name
+2367	in rage b+1+2 or WS+b+1+2 or AOP b+1+2	m	55	20 pc8~17	-27	KND	KND	Rage art	Fu_RageArts02
+1657	in rage RDS d+3, 3+4	l, m, (Special)	7,10	js11~	-4~-3	KND	KND	Rage drive, Tail spin	Fu_R_clkrk_EX
+1623	1	h	7	10	+1	+8	+8		Fu_lp00F
+1589	1, 2	h, h	7,8	10	-1	+5	+5		Fu_lprpF
+1590	1, 2, 1	h, h, m	7,8,20	10	-9~-8	KND	KND		Fu_lprp_kasui
+1827	1, D+2	h, m	7,10	10	-4~-1	+7~+10	+9~+12		Fu_lpdrp00F
 	1, d+2	h, m(RDS)	7,10	10b	-3~0	+8~+11	+10~+13	
-1829	1, d+2, 1+2	h, m, m	7,10,24	10	-12~-10	CS	CS	
-1591	2	h	8	10	-2	+6	+6	
-1805	2, 1	h, m(RDS)	8,10	10b	-4	+7	+7	
+1829	1, d+2, 1+2	h, m, m	7,10,24	10	-12~-10	CS	CS		Fu_lpdrp01
+1591	2	h	8	10	-2	+6	+6		Fu_rp00
+1805	2, 1	h, m(RDS)	8,10	10b	-4	+7	+7		Fu_rpjou00
 	2, D/F+1	h, m	8,10	10	-4	+7	+7	
-1609	3	h	17	14~15	-11~-10	KND	KND	Tail spin
+1609	3	h	17	14~15	-11~-10	KND	KND	Tail spin	Fu_lk00
 	4	h	15	11	-9	+8	Launch (JG?)	
-1613	4~3	m (TJ)	23	23~25s (24~) js10~	-1~+1s	+3~+5s	KND	
+1613	4~3	m (TJ)	23	23~25s (24~) js10~	-1~+1s	+3~+5s	KND		Fu_abise_00
 	4~3, d+1+2	m (TJ), (Special)	23	23~25 (24~) js10~	0~+2s	+4~+6s	KND	
-1921	1+2	m	24	20~21	-7~-6	CS	CS	
+1921	1+2	m	24	20~21	-7~-6	CS	CS		Fu_Gheki
 	3+4 or u+3+4	(Special)(Absorbs 1 h/m hit)		2~10		(+5b)		
 	d+3+4	(Special)(Absorbs 1 h/m hit)		2~10		(+5b)		
-1624	f+2	m	12	16~17	-7~-6	+4~+5	+4~+5	
-1625	f+2, 1	m, h	12,14	16~17	-3	+8	+10	
-1626	f+2, 1, 4	m, h, m	12,14,20	16~17	-9~-8	KND	Tail spin	Tail spin
-1627	f+3	m	14	16~18	-9~-7	+2~+4	+2~+4	
-1628	f+3, 1	m, m	14,8	16~18b	-4~-2	+7~+9	+7~+9	
-1630	f+3, 1, 1+2	m, m, mm	14,8,6,20	16~18	-12~-11	+7~+8s	+7~+8s	
-1631	f+4	h	23	19~20	+1~+2	KND	KND	Tail spin, Homing
-1922	f+1+2	m	25	12~13	-16~-15	KND	KND	
+1624	f+2	m	12	16~17	-7~-6	+4~+5	+4~+5		Fu_rp00F
+1625	f+2, 1	m, h	12,14	16~17	-3	+8	+10		Fu_6rplp
+1626	f+2, 1, 4	m, h, m	12,14,20	16~17	-9~-8	KND	Tail spin	Tail spin	Fu_6rplprk
+1627	f+3	m	14	16~18	-9~-7	+2~+4	+2~+4		Fu_lk00F
+1628	f+3, 1	m, m	14,8	16~18b	-4~-2	+7~+9	+7~+9		Fu_lklp
+1630	f+3, 1, 1+2	m, m, mm	14,8,6,20	16~18	-12~-11	+7~+8s	+7~+8s		Fu_lklplrp01
+1631	f+4	h	23	19~20	+1~+2	KND	KND	Tail spin, Homing	Fu_seiou00
+1922	f+1+2	m	25	12~13	-16~-15	KND	KND		Fu_lrpF00
 	f+3+4	(Special)		s				
-1899	f+3+4, 3+4	(Special), mmm (TJ)	8,8,14	20~21, 28~29, 37~40s (46~) js23~	-10~-7	KND	KND	
-1897	f+3+4, 3+4 (second and third hit miss)	(Special), m	8	20~21 (46~)	-46	-35	-35	
+1899	f+3+4, 3+4	(Special), mmm (TJ)	8,8,14	20~21, 28~29, 37~40s (46~) js23~	-10~-7	KND	KND		Fu_zensenkyu03
+1897	f+3+4, 3+4 (second and third hit miss)	(Special), m	8	20~21 (46~)	-46	-35	-35		Fu_zensenkyu01
 	f+3+4, d+1+2	(Special), (AOP)		18~19 (44~)				
-1674	d/f+1	m (TC)(RDS)	11	14b cs6~13	-4	+7	+7	
+1674	d/f+1	m (TC)(RDS)	11	14b cs6~13	-4	+7	+7		Fu_jouho00
 	D/F+1	m (TC)	11	14 cs6~13	-4	+7	+7	
 	d/f+2	m	15	15	-6	+5a	+5a	
-1832	d/f+2~1	mm	8,12	15~16, 22~23 (15~16)	-13~-12	JG	JG	
+1832	d/f+2~1	mm	8,12	15~16, 22~23 (15~16)	-13~-12	JG	JG		Fu_rlupL00
 	d/f+2~1 (Second hit only)	m	12	22~23	-12~-11	Launch (JG?)	Launch (JG?)	
-1676	d/f+3	h	23	23~24 pc8~22	-8~-7	KND	KND	Power crush
+1676	d/f+3	h	23	23~24 pc8~22	-8~-7	KND	KND	Power crush	Fu_3lk
 	d/f+4	m	12	12	-4	+7	+7	
-1758	d+1	mmm	7,7,7	17~19, 21~23, 26~32s	-9~-3	+2~+8s	+2~+8s	
-1757	d+1 (Third hit miss, Second hit only)	mm	7,7	17~19, 21~23s	-14~-12	-3~-1s	-3~-1s	
+1758	d+1	mmm	7,7,7	17~19, 21~23, 26~32s	-9~-3	+2~+8s	+2~+8s		Fu_t_slp0HB
+1757	d+1 (Third hit miss, Second hit only)	mm	7,7	17~19, 21~23s	-14~-12	-3~-1s	-3~-1s		Fu_t_slp0HA
 	D+1	mmm, (AOP)	7,7,7	17~18, 21~23, 26~32s	-13~-7	-2~+4s	-2~+4s	
 	D+1 (Third hit miss, Second hit only)	mm, (Special)	7,7	17~18, 21~23a	-18~-16	-7~-5s	-7~-5s	
-1665	d+3	l (TC)	12	14s cs6~	-12	-3	+1	
-1666	d+3, 4	l (TC), h	12,21	14 6~	0~+1	KND	KND	
-1784	d/b+1	m	30	18	-9	KND	KND	
-1683	d/b+3	l(!)	0	15	+2	+2s	+12s	
-1684	d/b+4	l	12	18	-12	+7s	KND	
-2055	b+1	m(RDS)	10	8~13(b)		+1	+1	
+1665	d+3	l (TC)	12	14s cs6~	-12	-3	+1		Co_t_slk00
+1666	d+3, 4	l (TC), h	12,21	14 6~	0~+1	KND	KND		Wg_tessahi
+1784	d/b+1	m	30	18	-9	KND	KND		Fu_kasui
+1683	d/b+3	l(!)	0	15	+2	+2s	+12s		Fu_Anklk00
+1684	d/b+4	l	12	18	-12	+7s	KND		Fu_Fujin
+2055	b+1	m(RDS)	10	8~13(b)		+1	+1		Fu_TEST_L
 	B+1	m	10	8~13	-12~-7	-1~+4	-1~+4	
-2057	b+2	m	13	15~16b	-6~-5	+5~+6	+5~+6	Homing
-2058	b+2, 2	m, l?	13,10	15~16b	-8~-6	+3~+5	+3~+5	
-1634	b+3	h	22	18~19b	-4~-3	+7~+8s	KND	
-1635	b+4	m	14	13~15	-11~-9	0~+2	0~+2	
-1636	b+4, 4	m, h	14,17	13~15	-9~-8	+14kg	+14kg	Tail spin
+2057	b+2	m	13	15~16b	-6~-5	+5~+6	+5~+6	Homing	Fu_rp00B
+2058	b+2, 2	m, l?	13,10	15~16b	-8~-6	+3~+5	+3~+5		Fu_4rprp
+1634	b+3	h	22	18~19b	-4~-3	+7~+8s	KND		Fu_lk00B
+1635	b+4	m	14	13~15	-11~-9	0~+2	0~+2		Fu_aokrk00
+1636	b+4, 4	m, h	14,17	13~15	-9~-8	+14kg	+14kg	Tail spin	Fu_aokrk01
 	u/b+3+4	m (TJ)	23	22~24 js18~	-17~-15	Launch (JG?)	Launch (JG?)	
-1703	u/b+3+4, d+1+2	m (TJ), (AOP)	23	22~24 js18~	-19~-17	Launch (JG?)	Launch (JG?)	
-1766	u+1+2	mm	5,5	16~18, 22~24s	-11~-9	0~+2s	0~+2s	
-1807	u+1+2, 2	mm, m	5,5,12	16~18, 22~24	-12	-1	-1	
-1794	u+1+2, 2, 1	mm, m, m	5,5,12,20	16~18, 22~24	-12~-11	KND	KND	
+1703	u/b+3+4, d+1+2	m (TJ), (AOP)	23	22~24 js18~	-19~-17	Launch (JG?)	Launch (JG?)		Fu_samaso
+1766	u+1+2	mm	5,5	16~18, 22~24s	-11~-9	0~+2s	0~+2s		Fu_zenhekAB1R
+1807	u+1+2, 2	mm, m	5,5,12	16~18, 22~24	-12	-1	-1		Fu_kaoh00
+1794	u+1+2, 2, 1	mm, m, m	5,5,12,20	16~18, 22~24	-12~-11	KND	KND		Fu_kaokasui
 	u+1+2, 2, 1, b (Cancel)	mm, m, (RDS)	5,5,12	16~18, 22~24b	-19	-8	-8	
 	u+1+2, 3+4	mm	5,5	16~18, 22~24	-16~-14	-5~-3s	-5~-3s	
-1527	u or u/f+1	l (TJ), (AOP)	15	33~35 js9~23	-7~-5	+10~+12s	+10~+12s	
+1527	u or u/f+1	l (TJ), (AOP)	15	33~35 js9~23	-7~-5	+10~+12s	+10~+12s		Fu_89lp
 	u/b+3	m	11	16~17 js9~	-13~-12	-1~0	-1~0	
 	u+3	m	15	16~17 js9~	-13~-12	KND	Launch (JG?)	
-1537	u/f+3	m	13	16~17 js9~	-13~-12	Launch (JG?)	Launch (JG?)	
+1537	u/f+3	m	13	16~17 js9~	-13~-12	Launch (JG?)	Launch (JG?)		Fu_jplk00F
 	u+4	m (TJ)	20	23~26 js9~	-7~-4	+4~+7s	KND (+4~+7s)	
-1567	u/f+4	m (TJ)	23	23~26 js9~	-3~0	+8~+11s	KND	
+1567	u/f+4	m (TJ)	23	23~26 js9~	-3~0	+8~+11s	KND		Fu_jprk00F
 	u/f+4, D	m (TJ)	23	23~26s js9~	-7~-4	+4~+7s	KND	
-1568	u/f+4, d+1+2	m (TJ), (AOP)	23	23~26 js9~	-9~-6	+2~+5s	KND	
-1949	u/f+1+2	m (TJ)	23	26~27 js9~	+3~+4s	+7~+8s	KND	
+1568	u/f+4, d+1+2	m (TJ), (AOP)	23	23~26 js9~	-9~-6	+2~+5s	KND		Fu_jprk00FRv
+1949	u/f+1+2	m (TJ)	23	26~27 js9~	+3~+4s	+7~+8s	KND		Fu_Jump_RP01F
 	u/f+1+2, B	m (TJ)(RDS)	23	26~27b js9~	+3~+4s	+7~+8s	KND	
-1771	u/f+3+4	mmm (TJ)	8,10,12	16~17 ,27~28, 36~37(b) js9~	-3~-2	KND	KND	
-1770	u/f+3+4 (Third hit miss)	mm (TJ)	8,10	16~17 ,27~28(b) js9~	-21~-20			
-1774	f, F+1	m	19	15(16~)	-11	0s	0s	
+1771	u/f+3+4	mmm (TJ)	8,10,12	16~17 ,27~28, 36~37(b) js9~	-3~-2	KND	KND		Fu_jplrk02F
+1770	u/f+3+4 (Third hit miss)	mm (TJ)	8,10	16~17 ,27~28(b) js9~	-21~-20				Fu_jplrk01F
+1774	f, F+1	m	19	15(16~)	-11	0s	0s		Fu_ryuho00C_
 	f, F+1, D	m, (AOP)	19	15(16~)	-5	+6s	+6s	
-1780	f, F+1, 3	m, h	19,20	15(16~)	-1~0	KND	KND	
-1782	f, F+1, 4	m, m	19,20	15(16~)	-12~-11	KND	KND	
-1808	f, F+2	m	12	15(16~)	-5	+6	+6	
+1780	f, F+1, 3	m, h	19,20	15(16~)	-1~0	KND	KND		Fu_ryuho01v
+1782	f, F+1, 4	m, m	19,20	15(16~)	-12~-11	KND	KND		Fu_ryuhork
+1808	f, F+2	m	12	15(16~)	-5	+6	+6		Fu_kaoh02
 	f, F+2, 1	m, m	12,20	15(16~)	-12~-11	KND	KND	
 	f, F+2, 1, b (Cancel)	m, (RDS)	12	15b(16~)	-19	-8	-8	
-1837	f, F+3	m	13	14~15b (15~)	-5~-4	+6~+7	+7~+8y	
-1888	f, F+4	m (TJ)	25	24(25~) js9~20	+1	KND	KND	
+1837	f, F+3	m	13	14~15b (15~)	-5~-4	+6~+7	+7~+8y		Fu_rigoh00
+1888	f, F+4	m (TJ)	25	24(25~) js9~20	+1	KND	KND		Fu_totai00
 	f, F+4, When guarded4	m (TJ), (Special)		24(25~) 9~20	+5			
-1905	f, F+1+2	m	12	14~16 (15~)	-9~-7	+5~+7	+5~+7	
-1907	f, F+1+2, 1+2	m, m	12,21	14~16 (15~)	-8~-7	+5~+6s	KND	
-1920	f, F+3+4	m (TJ)	25	37~45   ~js9~	-5~+3	KND	KND				
-1694	f, f, f+3	m (TJ), (Special)	20	23~30 (26~) js3~	+7~+14g	KND	KND	
-1687	WS+1	m	10	13~14	-4~-3	+7~+8	+7~+8	
-1688	WS+1, 4	m, m	10,20	13~14	-10	+12kg	+12kg	
-1689	WS+2	m	17	13~15b	-4~-2	+7~+9	Launch (JG?)	
+1905	f, F+1+2	m	12	14~16 (15~)	-9~-7	+5~+7	+5~+7		Fu_sohek00
+1907	f, F+1+2, 1+2	m, m	12,21	14~16 (15~)	-8~-7	+5~+6s	KND		Fu_sohek01
+1920	f, F+3+4	m (TJ)	25	37~45   ~js9~	-5~+3	KND	KND					Fu_tensho00
+1694	f, f, f+3	m (TJ), (Special)	20	23~30 (26~) js3~	+7~+14g	KND	KND		Wn_runlk00
+1687	WS+1	m	10	13~14	-4~-3	+7~+8	+7~+8		Co_s_tlp00
+1688	WS+1, 4	m, m	10,20	13~14	-10	+12kg	+12kg		Co_s_tlprk
+1689	WS+2	m	17	13~15b	-4~-2	+7~+9	Launch (JG?)		Fu_s_trp00
 	WS+2, b or f	m	17	13~15	-6~-4	+5~+7	Launch (JG?)	
 	WS+2*	m	20	22b	-3	Launch (JG?)	Launch (JG?)	
 	WS+2*, b or f	m	20	22	-5	Launch (JG?)	Launch (JG?)	
-1690	WS+3	m	22	22~23	+3~+4s	+6~+7s (KND)	Launch	
-1691	WS+4	m	20	11~13	-10~-8	KND	KND	
+1690	WS+3	m	22	22~23	+3~+4s	+6~+7s (KND)	Launch		Fu_s_tlk
+1691	WS+4	m	20	11~13	-10~-8	KND	KND		Fu_s_trk00
 	WS+b+4 or QCB+4	h	20	14~16	-4~-2	+1~+3	CS	
-1643	FC+3	l (TC)	11	15~17s cs1~	-15~-13	-4~-2	-4~-2	
-1644	FC+3, 2	l (TC), h	11,6	15~17 1~b	0	+7	+7	
-1746	FC+3, 2, 1	l (TC), h, h	11,6,6	15~17 1~	-1	+6	+10	
-1877	FC+3, 2, 1, 4	l (TC), h, h, m	11,6,6,12	15~17 1~	-18~-16	Launch (JG?)	Launch (JG?)	
-1822	FC+d/f+2	l (TC)	10	19s cs1~	-17	-6	-6	
+1643	FC+3	l (TC)	11	15~17s cs1~	-15~-13	-4~-2	-4~-2		Fu_syalk00C
+1644	FC+3, 2	l (TC), h	11,6	15~17 1~b	0	+7	+7		Fu_lktnrp00
+1746	FC+3, 2, 1	l (TC), h, h	11,6,6	15~17 1~	-1	+6	+10		Fu_R_rplp11
+1877	FC+3, 2, 1, 4	l (TC), h, h, m	11,6,6,12	15~17 1~	-18~-16	Launch (JG?)	Launch (JG?)		Fu_R_lprk00
+1822	FC+d/f+2	l (TC)	10	19s cs1~	-17	-6	-6		Fu_senpo00
 	FC+d/f+2, D/F	l (TC)(RDS)	10	19bs cs1~	-8	+3	+3	
-1792	FC+d/f+2, 1	l (TC), l (TC)	10,14	s cs1~	-11	0	0	
+1792	FC+d/f+2, 1	l (TC), l (TC)	10,14	s cs1~	-11	0	0		Fu_senpoL0
 	FC+d/f+2, 1, D/F	l (TC), l (TC)(RDS)	10,14	bs cs1~	-8	+3	+3	
-1870	FC+d/f+4	l (TC), (AOP)	10	18~20 cs1~	-7~-5	+4~+6	+4~+6	
-1872	FC+d/f+4, 4	l (TC), l (TC)	10,10	s cs1~	-6~-4	+5~+7	+5~+7	
-1695	SS+3	l (TC)	23	27~28 (36~) cs6~	-23	KND	KND	Homing
-1696	SS+3, d+1+2	l (TC), (AOP)	23	27~28 (36~) cs6~		KND	KND	Homing
+1870	FC+d/f+4	l (TC), (AOP)	10	18~20 cs1~	-7~-5	+4~+6	+4~+6		Fu_sohtai00
+1872	FC+d/f+4, 4	l (TC), l (TC)	10,10	s cs1~	-6~-4	+5~+7	+5~+7		Fu_sohtai02
+1695	SS+3	l (TC)	23	27~28 (36~) cs6~	-23	KND	KND	Homing	Fu_kousou
+1696	SS+3, d+1+2	l (TC), (AOP)	23	27~28 (36~) cs6~		KND	KND	Homing	Fu_kousou_AB
 	SS+3, b (Cancel)	(RDS)		bs				
-1685	SS+4	l (TC)	19	18~19s (27~) cs6~	-13~-12	-2~-1	KND	
+1685	SS+4	l (TC)	19	18~19s (27~) cs6~	-13~-12	-2~-1	KND		Fu_geK00
 	1+3+4	(Special) (TJ)		18~19 (27~) 6~				
 	2+3+4	(Special)		18~19 (27~) 6~				
 	d/b+1+2 (SSR)	(HYP)		18~19 (27~) 6~				
 	u/b+1+2 (SSL)	(HYP)		18~19 (27~) 6~				
 	HYP 1+2	(HYP)		18~19 (27~) 6~				
 	HYP 1+4	(Special), Parry		18~19 (27~) 6~		+5		
-1812	HYP 2 (After on step)	m(HYP)	25	22(42)	-4	KND	KND	
+1812	HYP 2 (After on step)	m(HYP)	25	22(42)	-4	KND	KND		Fu_torp00A
 	HYP 2 (After two step)	m(HYP)	30	22(67)	+5	KND	KND	
 	HYP 2 (After three step)	m(HYP)	35	22(92)	+24	KND	KND	
-1722	HYP 4	h	20	14~16 (34,51,84)	-4~-2	+1~+3	CS	
-1720	HYP 3+4	h (TJ)	26	25~26a (45,70,95) js12~	+2~+3	KND	KND	
-1816	HYP 2+3 (After on step)	!?(HYP)	40	61(81)	KND	KND	KND	
+1722	HYP 4	h	20	14~16 (34,51,84)	-4~-2	+1~+3	CS		Fu_Cprk00E
+1720	HYP 3+4	h (TJ)	26	25~26a (45,70,95) js12~	+2~+3	KND	KND		Fu_Cplrk00
+1816	HYP 2+3 (After on step)	!?(HYP)	40	61(81)	KND	KND	KND		Fu_torp00sp
 	HYP 2+3 (After two step)	!?(HYP)	50	61(106)	KND	KND	KND	
 	HYP 2+3 (After three step)	!?(HYP)	60	61(131)	KND	KND	KND	
 	b+3+4	(RDS)		b				
 	FC+d/b+3+4	(Special)		b				
 	RDS u/f, f	(Special)						
 	RDS u/f, f, D/F	(Special)		s				
-1593	RDS 1	m	17	16~18	-5~-3	+4~+6	CS	
-1594	RDS 1, 4	m, h (TJ)	17,24	js12~	-6~-3	KND	Tail spin	Tail spin
-1603	RDS 2	h(RDS)	9	12b	0	+6	+6	
-1745	RDS 2, 1	h, h	9,8	12	-1	+6	+10	
-1878	RDS 2, 1, 4	h, h, m	9,8,15	12	-18~-16	Launch (JG?)	Launch (JG?)	
-1940	RDS 2, 2	h, m	9,12	12b	-7~-5	+4~+6	+4~+6	
-1948	RDS 2, 2, 1	h, m, mmm	9,12,7,7,7	12s	-13~-7 (-18)	-2~+4s	-2~+4s	
+1593	RDS 1	m	17	16~18	-5~-3	+4~+6	CS		Fu_R_lp00R
+1594	RDS 1, 4	m, h (TJ)	17,24	js12~	-6~-3	KND	Tail spin	Tail spin	Fu_R_lprk
+1603	RDS 2	h(RDS)	9	12b	0	+6	+6		Fu_R_rp00
+1745	RDS 2, 1	h, h	9,8	12	-1	+6	+10		Fu_R_rplp01
+1878	RDS 2, 1, 4	h, h, m	9,8,15	12	-18~-16	Launch (JG?)	Launch (JG?)		Fu_R_lprk10
+1940	RDS 2, 2	h, m	9,12	12b	-7~-5	+4~+6	+4~+6		Fu_R_rp01
+1948	RDS 2, 2, 1	h, m, mmm	9,12,7,7,7	12s	-13~-7 (-18)	-2~+4s	-2~+4s		Fu_R_rp02HC
 	RDS 2, 2, 1, D	h, m, mmm, (AOP)	9,12,7,7,7	12	-13~-7 (-18)	-2~+4s	-2~+4s	
-1618	RDS 3	m (TJ)	25	18~19b js9~	-19~-18	KND	KND	Wall bounce
-1621	RDS 4	m	17	13~15	-18~-16	Launch (JG?)	Launch (JG?)	
-1606	RDS 1+2	mm	6,6	16~18, 23~24	-5~-4	+6~+7	+6~+7	
-1608	RDS 1+2, 1+2	mm, mm	6,6,6,6	16~18, 23~24s	-11~-10	0~+1s	0~+1s	
+1618	RDS 3	m (TJ)	25	18~19b js9~	-19~-18	KND	KND	Wall bounce	Fu_R_rklk00
+1621	RDS 4	m	17	13~15	-18~-16	Launch (JG?)	Launch (JG?)		Fu_R_rk00
+1606	RDS 1+2	mm	6,6	16~18, 23~24	-5~-4	+6~+7	+6~+7		Fu_R_lrp01R
+1608	RDS 1+2, 1+2	mm, mm	6,6,6,6	16~18, 23~24s	-11~-10	0~+1s	0~+1s		Fu_R_lrp03
 	RDS 3+4 or u+3+4	(Special)		16~18, 23~24				
 	RDS d+3+4	(Special)		16~18, 23~24				
 	RDS 1+4	Parry(RDS)		1~		+5		
-2039	RDS f+1+2	m(h or m punch parry)	21	23	-8	+3(CS)	+5	
+2039	RDS f+1+2	m(h or m punch parry)	21	23	-8	+3(CS)	+5		Fu_sabakilrp00
 	RDS f+3+4	(Special)?(RDS)		b				
-1916	RDS f+3+4, 3+4	m(RDS)	23	12~13b (25~26) ar1~	-11~-10	Launch (JG?)	Launch (JG?)	
+1916	RDS f+3+4, 3+4	m(RDS)	23	12~13b (25~26) ar1~	-11~-10	Launch (JG?)	Launch (JG?)		Fu_bdkoulrk2
 	RDS b+3+4	(RDS)		b				
-1648	RDS d+3	l	10	16	-12	+7s	+7s	
-1652	RDS d+3, 4	l, h	10,20	16	-5~-4	KND	Tail spin	Tail spin
-1893	RDS d+4	l	21	24~26s cs8~	-26	KND	KND	
+1648	RDS d+3	l	10	16	-12	+7s	+7s		Fu_R_clk00
+1652	RDS d+3, 4	l, h	10,20	16	-5~-4	KND	Tail spin	Tail spin	Fu_R_clk00_RK
+1893	RDS d+4	l	21	24~26s cs8~	-26	KND	KND		Fu_R_lowrk
 	RDS d/b or d or d/f+1+2	(RDS)		24~26 8~				
 	RDS d+1+4	Low parry(RDS)		1~				
-1892	RDS d/b or d/f+4	l(!)(RDS)	0	15	+2	+2s	+12s	
-1857	RDS u or u/f+1	l (TJ), (Special)	22	33~35 js9~23	-7~-5	+12~+14s	+12~+14s	
-1867	RDS f, F+3	m (TJ)(RDS)	18	16b(17~) js3~15	-5	+6	KND	
-1911	RDS f, F+3+4	m (TJ)(, !(Throw))	25(,20)	39~51 (47~) js10~	-3~+9	KND(Throw)	KND(Throw)	
+1892	RDS d/b or d/f+4	l(!)(RDS)	0	15	+2	+2s	+12s		Fu_AnkBrk00
+1857	RDS u or u/f+1	l (TJ), (Special)	22	33~35 js9~23	-7~-5	+12~+14s	+12~+14s		Fu_bdrp00B
+1867	RDS f, F+3	m (TJ)(RDS)	18	16b(17~) js3~15	-5	+6	KND		Fu_bdlk00B
+1911	RDS f, F+3+4	m (TJ)(, !(Throw))	25(,20)	39~51 (47~) js10~	-3~+9	KND(Throw)	KND(Throw)		Fu_hien
 	RDS 1+3 or 2+4	h(Throw)(RDS)	35	12		Throw(KND)		
-1992	RDS f, F+1+3 or f, F+2+4	(Special) (TJ), h(Throw)(RDS)	35	31a(32~) js1~26		Throw(KND)		
+1992	RDS f, F+1+3 or f, F+2+4	(Special) (TJ), h(Throw)(RDS)	35	31a(32~) js1~26		Throw(KND)			ThrmvBxx_L0
 	d+1+2 or FC+1+2 RDS d+1+2	(Special) (TC)(AOP)		(cs1)				
-1799	AOP 1	m	11	18s	-5	+6	+6	
-1800	AOP 1, 2	m, h	11,15	18b	-6~-5	+7~+8	+7~+8	
-1824	AOP 2	m	10	13~14	-11~-10	0~+1	0~+1	
-1825	AOP 2, 1	m, m	10,20	13~14	-12~-11	KND	KND	
+1799	AOP 1	m	11	18s	-5	+6	+6		Fu_tocho00L
+1800	AOP 1, 2	m, h	11,15	18b	-6~-5	+7~+8	+7~+8		Fu_sp_lprp
+1824	AOP 2	m	10	13~14	-11~-10	0~+1	0~+1		Fu_tocho00
+1825	AOP 2, 1	m, m	10,20	13~14	-12~-11	KND	KND		Fu_tocho_2
 	AOP 2, 1, b (Cancel)	m(RDS)	10	13~14b	-14~-13	-3~-2	-3~-2	
-1786	AOP 3	l (TC)	19	25~30s cs1?~	-16~-11	0~+5	KND	
-1869	AOP 4	m	14	12~13	-4~-3	+7~+8	+7~+8	
-1909	AOP 4~3	l (TC)	25	23~25s (a)(23) cs5?~	-33	KND	KND	
-1903	AOP 1+2	m	25	19	-5	KND	KND	Wall bounce
-1996	AOP 1+3 or 2+4	(Special) (TC), h(Throw)	35	12(42)		Throw(KND)		
-1871	AOP f+4	l (TC), (Special)	10	18~20 cs1~	-7~-5	+4~+6	+4~+6	
+1786	AOP 3	l (TC)	19	25~30s cs1?~	-16~-11	0~+5	KND		Fu_Sp_lk00
+1869	AOP 4	m	14	12~13	-4~-3	+7~+8	+7~+8		Fu_Sp_rk00
+1909	AOP 4~3	l (TC)	25	23~25s (a)(23) cs5?~	-33	KND	KND		Fu_ohgi00
+1903	AOP 1+2	m	25	19	-5	KND	KND	Wall bounce	Fu_lrp00
+1996	AOP 1+3 or 2+4	(Special) (TC), h(Throw)	35	12(42)		Throw(KND)			Fu_ThrRmv_1
+1871	AOP f+4	l (TC), (Special)	10	18~20 cs1~	-7~-5	+4~+6	+4~+6		Fu_sohtai01
 	AOP f+4, 4	l (TC), l (TC)	10,10	s cs1~	-6~-4	+5~+7	+5~+7	
-1797	AOP d+1	l (TC)	13(,25)	19~21s cs1~	-12~-10	-1~+1	KND(Throw) +19	
-1904	AOP d+1+2	m	21	26 cs1~25	-8	Launch(JG?)	Launch(JG?)	
-1841	AOP u/b or u or u/f+3	m (TJ)	14	15~17 js10~	-17~-15	Launch (JG?)	Launch (JG?)	
-1954	AOP u/b or u or u/f+3, 1	m (TJ), m (TJ), (Special)	14,22	js1~22	-4~-3	+7~+8s	+7~+8s	
-1854	AOP u/b or u or u/f+3, 3	m (TJ), h (TJ)	14,25	js1~	-8	KND	KND	
-1886	AOP u/b or u or u/f+3, 4	m (TJ), m	14,19	js1~12	-14~-12	-3~-1	+22g(KND)	
-1873	AOP u or u/f+4	m (TJ)	12	16~26s js8~	-10~0	+1~+11	+1~+11	
-1876	AOP u or u/f+4, B	m (TJ)(RDS)	12	16~26b js8~	-15~-5	-4~+6	-4~+6	
+1797	AOP d+1	l (TC)	13(,25)	19~21s cs1~	-12~-10	-1~+1	KND(Throw) +19		Fu_harai00
+1904	AOP d+1+2	m	21	26 cs1~25	-8	Launch(JG?)	Launch(JG?)		Fu_kyuho00
+1841	AOP u/b or u or u/f+3	m (TJ)	14	15~17 js10~	-17~-15	Launch (JG?)	Launch (JG?)		Fu_spjplkF0
+1954	AOP u/b or u or u/f+3, 1	m (TJ), m (TJ), (Special)	14,22	js1~22	-4~-3	+7~+8s	+7~+8s		Fu_jplkF_lp
+1854	AOP u/b or u or u/f+3, 3	m (TJ), h (TJ)	14,25	js1~	-8	KND	KND		Fu_spjplkF3
+1886	AOP u/b or u or u/f+3, 4	m (TJ), m	14,19	js1~12	-14~-12	-3~-1	+22g(KND)		Fu_rnjprkF3
+1873	AOP u or u/f+4	m (TJ)	12	16~26s js8~	-10~0	+1~+11	+1~+11		Fu_spjprk00
+1876	AOP u or u/f+4, B	m (TJ)(RDS)	12	16~26b js8~	-15~-5	-4~+6	-4~+6		Fu_spjprk01
 	AOP u or u/f+4, d+1+2	m (TJ), (Special)	12	16~26 js8~	-12~-2	-1~+9	-1~+9	
 	AOP u or u/f+4, 4	m (TJ), m (TJ)	12,12	s js18~	-12~0	-1~+11	-1~+11	
 	AOP u/b or u or U/F	(Special) (TJ)		js9~				
-1846	AOP u/b or u or u/f, n+3	m (TJ)	30	12~16 (28~30) js1~	-23~-19	+6~+10b	+6~+10b	
+1846	AOP u/b or u or u/f, n+3	m (TJ)	30	12~16 (28~30) js1~	-23~-19	+6~+10b	+6~+10b		Fu_spjplkF1
 	AOP u/b or u or u/f, n+3, d+1+2	m (TJ), (Special)	30	12~16 (28~30) js1~	-10~-8	+19~+21b	+19~+21b	
-1880	AOP u/b or u or u/f, n+4	m (TJ)	25	8~9 (23~24) js1~	-8~-7	KND	KND	
+1880	AOP u/b or u or u/f, n+4	m (TJ)	25	8~9 (23~24) js1~	-8~-7	KND	KND		Fu_spjprkF2
 	AOP u/b or u or u/f(When landing)4	m (TJ)	25	9~10 (40~41) js1~5	-10~-9	+1~+2	+1~+2	
-1851	AOP u/b or u or u/f(When landing)3	l (TC)	19	15~16s (46~47) js1~6 cs7~	-18~-17	KND	KND	
+1851	AOP u/b or u or u/f(When landing)3	l (TC)	19	15~16s (46~47) js1~6 cs7~	-18~-17	KND	KND		Fu_spjplkF2
 	AOP d/b or b or d/f or f	(Special)		15~16 (46~47) 1~6 7~				
 	AOP b, b or f, f	(Special)		15~16 (46~47) 1~6 7~				
 	AOP d	(Special)		15~16 (46~47) 1~6 7~				

@@ -1,81 +1,81 @@
-move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes
-2022	in rage d/f+1+2	m	55	20 pc8~17	-22	KND	KND	Rage art
-1663	in rage b+4, 2, f	m, m, (STB)	11,21	20 8~17	+7	TKMD	TKMD	Rage drive
-1590	1	h	7	10	+1	+8	+8	
-1591	1, 2	h, h	7,12	10	-1~0	+6~+7	+6~+7	
-1592	1, 3	h, l	7,11	10	-12	-1	-1	
-1593	2	h	10	12	-3	+3	+3	
-1594	2, 1	h, m	10,13	12	-6	+5	+5	
-1595	2, 1, 2	h, m, m	10,13,25	12	-13~-11	KND	Tail spin	Tail spin
+move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes	Move Name
+2022	in rage d/f+1+2	m	55	20 pc8~17	-22	KND	KND	Rage art	It_RageArts02
+1663	in rage b+4, 2, f	m, m, (STB)	11,21	20 8~17	+7	TKMD	TKMD	Rage drive	It_4rkrp_EXrv
+1590	1	h	7	10	+1	+8	+8		It_lp00F
+1591	1, 2	h, h	7,12	10	-1~0	+6~+7	+6~+7		It_lprpF
+1592	1, 3	h, l	7,11	10	-12	-1	-1		It_lplkF
+1593	2	h	10	12	-3	+3	+3		It_rp00
+1594	2, 1	h, m	10,13	12	-6	+5	+5		It_6rplp
+1595	2, 1, 2	h, m, m	10,13,25	12	-13~-11	KND	Tail spin	Tail spin	It_6rplprp
 	3	h	21	12	-6	-1	JG	
-1584	4	h	15	12	-8	+3	KND	
-1585	4, 3	h, h (TJ)	15,13	js17~	-5~-4	+15kg	Tail spin	Homing, Tail spin
+1584	4	h	15	12	-8	+3	KND		It_rk00_R
+1585	4, 3	h, h (TJ)	15,13	js17~	-5~-4	+15kg	Tail spin	Homing, Tail spin	It_rklk
 	1+2	m	20	17	-14	+2s	+2s	
-1613	1+2 When hit 1+2	m, (throw)	20,20	17		0		
+1613	1+2 When hit 1+2	m, (throw)	20,20	17		0			It_zan_na
 	1+2 When hit 1+2 When hit , b or f+2	m, (throw), (throw), (STB)	20,20,18	17		Throw(KND)	Throw(KND)	
 	3+4	m (TJ), ?	20	24~26s js13~	-10~-8	KND	KND	
-1570	f+2	h	9	12	0	+6	+6	
-1572	f+2, 1	h, m	9,12	12	-10~-9	+6~+7s	+6~+7s	
-1573	f+2, 1, 1+2	h, m, m	9,12,25	12	-18~-17	KND	KND	
-1574	f+2, 2	h, m(, (Special))(STB)	9,24	12	-26	CS	CS	Tail spin
-1596	f+3	h (TJ)	27	18 js9~	-5	+15k	Tail spin	Homing, Tail spin
-1597	f+4	m	23	22~23	+4s	+4s	KND	
-1604	f+1+2	m	10	16	-18	-7	-7	
-1605	f+1+2, 1+2	m, m	10,20	16	-14	KND	KND	
-1765	f+3+4	h	25	17~18	+2~+3	KND	KND	Homing
-1712	d/f+1	m	10	15~16	-2~-1	+9~+10	+9~+10	
-1713	d/f+1, 2	m, m	10,13	15~16	-15~-14	JG	JG	
-1715	d/f+2	m	19	14	-13	+5	KND	
-1727	d/f+3	m	14	14	-7	+4	+4	
-1732	d/f+3, 1	m, m	14,20	14	-12	KND	KND	
-1733	d/f+3, 2	m, h	14,10	14	-2	+4	+4	
+1570	f+2	h	9	12	0	+6	+6		It_rp00F2
+1572	f+2, 1	h, m	9,12	12	-10~-9	+6~+7s	+6~+7s		It_rplp
+1573	f+2, 1, 1+2	h, m, m	9,12,25	12	-18~-17	KND	KND		It_rplplrp
+1574	f+2, 2	h, m(, (Special))(STB)	9,24	12	-26	CS	CS	Tail spin	It_rprp
+1596	f+3	h (TJ)	27	18 js9~	-5	+15k	Tail spin	Homing, Tail spin	It_6lk
+1597	f+4	m	23	22~23	+4s	+4s	KND		It_rk00F
+1604	f+1+2	m	10	16	-18	-7	-7		It_lrp
+1605	f+1+2, 1+2	m, m	10,20	16	-14	KND	KND		It_lrp2n
+1765	f+3+4	h	25	17~18	+2~+3	KND	KND	Homing	It_6lrk
+1712	d/f+1	m	10	15~16	-2~-1	+9~+10	+9~+10		It_t_slpF
+1713	d/f+1, 2	m, m	10,13	15~16	-15~-14	JG	JG		It_3lprp
+1715	d/f+2	m	19	14	-13	+5	KND		It_t_srpF
+1727	d/f+3	m	14	14	-7	+4	+4		It_t_slkF
+1732	d/f+3, 1	m, m	14,20	14	-12	KND	KND		It_3lklp
+1733	d/f+3, 2	m, h	14,10	14	-2	+4	+4		It_3lkrp
 	d/f+4	m	14	13	-8	+3	+3	
-1681	d+1	m	16	17~18	-8~-7	+2~+3	+2~+3	
-1687	d+2	l (TC)	11	20s cs7~	-12	-1	-1	
-1629	d+1+2 or BT 1+2	m	28	13~14	-18~-17	KND	KND	
-1634	d/b+2 or FC+d/b or d+2	Sm	8	11s cs4~	-4	+7	+7	
-1637	d/b+2, 1	Sm, m	8,12	s cs1~	-13(s)	+3	+3	
-1741	d/b+3	l (TC)	23	24~25s cs6~	-17~-16	+1~+2s	KND	
-1705	d/b+4	l	7	15	-13	-2	-2	
-1706	d/b+4, 3	l, h	7,10	15	-11	0	0	
-1649	d/b+1+2	m, m	20,20	21	-4	KND	KND	
-1599	b+1	m	25	18	-5	KND	KND	Tail spin, Homing
-1694	b+2	h (STB)	30	14~15	-9~-8	KND	KND	
-1738	b+3	m	16	13	-4	+7	+7	
-1739	b+3, 3	m, m	21	13	-12	+7	JG	
-1676	b+4	m	10	17	-14	-3	-3	
-1661	b+4, 1	m, h	10,18	17	-8	+13k	KND	Tail spin
+1681	d+1	m	16	17~18	-8~-7	+2~+3	+2~+3		It_2lp
+1687	d+2	l (TC)	11	20s cs7~	-12	-1	-1		It_2rp
+1629	d+1+2 or BT 1+2	m	28	13~14	-18~-17	KND	KND		It_Shoulder
+1634	d/b+2 or FC+d/b or d+2	Sm	8	11s cs4~	-4	+7	+7		Co_syarp00
+1637	d/b+2, 1	Sm, m	8,12	s cs1~	-13(s)	+3	+3		It_s_rplp
+1741	d/b+3	l (TC)	23	24~25s cs6~	-17~-16	+1~+2s	KND		It_t_slk00B
+1705	d/b+4	l	7	15	-13	-2	-2		It_t_srk00
+1706	d/b+4, 3	l, h	7,10	15	-11	0	0		It_1rklk
+1649	d/b+1+2	m, m	20,20	21	-4	KND	KND		It_quetzal2n
+1599	b+1	m	25	18	-5	KND	KND	Tail spin, Homing	It_4lp
+1694	b+2	h (STB)	30	14~15	-9~-8	KND	KND		It_4rp
+1738	b+3	m	16	13	-4	+7	+7		It_4lk
+1739	b+3, 3	m, m	21	13	-12	+7	JG		It_4lklk
+1676	b+4	m	10	17	-14	-3	-3		It_4rklpy
+1661	b+4, 1	m, h	10,18	17	-8	+13k	KND	Tail spin	It_4rkrp
 	b+4, 2	m, m (STB)	10,20	17	-12	KND	KND	
-1668	b+4, 3	m, h	10,14	17	-12~-11	-4~-3	+1~+2	Homing
-1670	b+4, 3, 2	m, h (TJ)	10,14,20	17	-13~-12	KND	KND	
-1601	b+1+2	m	25	22~23 pc8~21	-13~-12	KND	KND	Power crush
-1587	b+3+4	m	24	29~30	-14~-13	KND	KND	Wall bounce, Homing
-2008	b+2+3	!	60	72	TKMD	TKMD	TKMD	
-1773	u/b or u or u/f+2	m (TJ)	25	25 js9~24	-9	KND	KND	
+1668	b+4, 3	m, h	10,14	17	-12~-11	-4~-3	+1~+2	Homing	It_4rklk
+1670	b+4, 3, 2	m, h (TJ)	10,14,20	17	-13~-12	KND	KND		It_4rklkrpn
+1601	b+1+2	m	25	22~23 pc8~21	-13~-12	KND	KND	Power crush	It_spam
+1587	b+3+4	m	24	29~30	-14~-13	KND	KND	Wall bounce, Homing	It_4lrk00
+2008	b+2+3	!	60	72	TKMD	TKMD	TKMD		It_1lrp
+1773	u/b or u or u/f+2	m (TJ)	25	25 js9~24	-9	KND	KND		It_chest
 	u/b+3	m (TJ)	20	23~24 js9~	+2~+3s	+7~+8s	JG	
 	u+3	m (TJ)	21	23~24 js9~	+2~+3s	+7~+8s	JG	
-1538	u/f+3	m (TJ)	22	23~24 js9~	+2~+3s	+7~+8s	JG	
-1678	u/b or u or u/f+4	m (TJ)	13	15~17 js9~	-13~-11	Launch (JG?)	Launch (JG?)	
-1764	u/f+3+4	mm	10,14	20,33~34 2js21~	-11~-10	KND	KND	
-1755	f, F+2 or FC+d/f+2	m	14	14~16 (15~)	-18~-16	-7~-5	-7~-5	
-1756	f, F+2, 2 or FC+d/f+2, 2	m, h (STB)	14,20	14~16 (15~)	-2~-1	KND	KND	
-1758	f, F+2, 1+2 or FC+d/f+2, 1+2	m, m	14,20	14~16 (15~)	-13~-12	KND	KND	Wall bounce
-1767	f, F+4	m (TJ)	20	15~17 (16~) js11~	-5~-3	KND	KND	
-1761	f, f, f+2	h (STB)	40	13~16 (16~) js3~	+7~+10g	KND	KND	
-1742	WS+1	m	12	12~13	-4~-3	+7~+8	+7~+8	
-1743	WS+1, 1	m, h	12,15	12~13	-12	+9	+9	
-1770	WS+2	m(, (Special))(STB)	20	15~16	-14~-13	Launch (JG?)	Launch (JG?)	
-1748	WS+3	m	20	16	-8	KND	KND	
+1538	u/f+3	m (TJ)	22	23~24 js9~	+2~+3s	+7~+8s	JG		pol_sjk00F
+1678	u/b or u or u/f+4	m (TJ)	13	15~17 js9~	-13~-11	Launch (JG?)	Launch (JG?)		It_keriage
+1764	u/f+3+4	mm	10,14	20,33~34 2js21~	-11~-10	KND	KND		It_9lrk2
+1755	f, F+2 or FC+d/f+2	m	14	14~16 (15~)	-18~-16	-7~-5	-7~-5		It_66rp
+1756	f, F+2, 2 or FC+d/f+2, 2	m, h (STB)	14,20	14~16 (15~)	-2~-1	KND	KND		It_66rprp
+1758	f, F+2, 1+2 or FC+d/f+2, 1+2	m, m	14,20	14~16 (15~)	-13~-12	KND	KND	Wall bounce	It_66rplrp
+1767	f, F+4	m (TJ)	20	15~17 (16~) js11~	-5~-3	KND	KND		It_66rk
+1761	f, f, f+2	h (STB)	40	13~16 (16~) js3~	+7~+10g	KND	KND		It_RUN_rp00
+1742	WS+1	m	12	12~13	-4~-3	+7~+8	+7~+8		It_s_tlp00
+1743	WS+1, 1	m, h	12,15	12~13	-12	+9	+9		It_s_tlplp
+1770	WS+2	m(, (Special))(STB)	20	15~16	-14~-13	Launch (JG?)	Launch (JG?)		It_s_trp00
+1748	WS+3	m	20	16	-8	KND	KND		Co_s_tlk00
 	WS+4	m	18	11~12	-6~-5	+5~+6	+5~+6	
-1707	SS+4	l	20	20~21s (29~)	-12~-11	+6~+7s	KND	
+1707	SS+4	l	20	20~21s (29~)	-12~-11	+6~+7s	KND		It_siderk00
 	From special move	(STB)		20~21 (29~)				
 	STB f+1+2	m	10	16	-18	-7	-7	
-1606	STB f+1+2, 1+2	m, m	10,20	16	-9	SPD	SPD	
-1682	STB d+1	m	16	17~18	-9~-8	+2~+3	+2~+3	
-1684	STB d+1, 2	m, m	16,23	17~18	+8~+9	KND	KND	Tail spin
+1606	STB f+1+2, 1+2	m, m	10,20	16	-9	SPD	SPD		It_lrp2
+1682	STB d+1	m	16	17~18	-9~-8	+2~+3	+2~+3		It_2lp_2
+1684	STB d+1, 2	m, m	16,23	17~18	+8~+9	KND	KND	Tail spin	It_2lprp2
 	STB d+2	l (TC)	11	20s cs7~	-12	-1	-1	
-1693	STB d+2, 2	l, l	11,15	cs1~	-12~-11	KND	KND	
-1656	STB d/b+1+2	m, !	20,20	20,55	CS	CS	CS	
-1675	STB b+4	m	10	17	-14	-3	-3	
+1693	STB d+2, 2	l, l	11,15	cs1~	-12~-11	KND	KND		It_2rprp
+1656	STB d/b+1+2	m, !	20,20	20,55	CS	CS	CS		It_quetzal2
+1675	STB b+4	m	10	17	-14	-3	-3		It_4rklky
 	STB b+4, 3	m, h	10,14	17	-15~-14	-4~-3	-4~-3	Homing
-1669	STB b+4, 3, 2	m, h, m (TJ)	10,14,35	js1~31	-1~0	JG	JG	
+1669	STB b+4, 3, 2	m, h, m (TJ)	10,14,35	js1~31	-1~0	JG	JG		It_4rklkrp

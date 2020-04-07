@@ -1,108 +1,108 @@
-move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes
-2126	in rage d/f+1+2	m	55	20 pc8~17	-22	KND	KND	Rage art
+move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes	Move Name
+2126	in rage d/f+1+2	m	55	20 pc8~17	-22	KND	KND	Rage art	Kz_RageArts_nRv
 	in rage f, n, d, d/f+1+4	m	45	18~19 (21~) cs1~	+5~+6	Launch	Launch	Rage drive
-1726	in rage f, n, d, d/f+1+4, u/f (Only when hit )	m, (throw), (DVK)	45,12	18(21~) cs1~		Throw(KND)	Throw(KND)	Rage drive
-1605	1	h	7	10	+1	+8	+8	
-1581	1, 1	h, h	7,6	10	-1	+8	+8	
-1582	1, 1, 2	h, h, m	7,6,12	10	-17	KND	KND	
-1584	1, 2	h, h	7,8	10	-1	+7	+7	
-1585	1, 2, 2	h, h, h	7,8,12	10	-12	+4	+4	
-1587	1, 2, 4	h, h, l	7,8,18	10	-14~-13	-3~-2	0~+1s	
-1588	1, 2, 4, 3	h, h, l, m	7,8,18,25	10	-2	KND	CS	
-1589	2	h	12	12	-3	+8	+8	
-1590	2, 2	h, m	12,24	12	-10~-9	+6~+7	CS	Tail spin
-1595	3 or 3+4	h	14	14	-8	+4	+4	
-1596	3, 1	h, h	14,7	14	-1	+7	+7	
-1597	3, 1, 4	h, h, m	14,7,17	14	-6~-5	+8~+9	CS	
-1598	4	h	18	12	-9	+2	CS	
-1600	(u/f)4~3	mm (TJ)	18,25	31~33, 35~37d (31~) js10~	-11~-9	KND	KND	
-1592	1+2	mm	5,20	12,28	-14	KND	KND	
-1610	f+2	m	25	20 pc8~19	-12	KND	KND	Power crush
-1629	f+3	m	22	19~20	-13~-12	+5~+6	+23g(KND)	
-1631	f+4	m	20	19~20	+4~+5s	+7~+8s	KND	
-1621	f+1+2	m	20	25	-9	KND	KND	Wall bounce
-1672	d/f+1	m	11	15~16	-7~-6	+9~+10	+9~+10	
-1673	d/f+1, 2	m, m	11,20	15~16s	-13s	KND	KND	
-1677	d/f+1, 4	m, h	11,20	15~16	-4~-3	+17~+18kg	+17~+18kg	Tail spin
-1676	d/f+1, f+2	m, m	11,22	15~16	-12	KND	KND	
-1679	d/f+2	m	22	14	-12	+5	CS(13)	Homing
-1680	d/f+3	m	13	18~19	-7~-6	+9~+10	+9~+10	
-1681	d/f+3, 2	m, m	13,15	18~19	-11	+5	+5	
-1682	d/f+3, 2, 1	m, m, m	13,15,21	18~19	-18	KND	+24	
-1683	d/f+4	m	10	13~14	-9~-8	+2~+3	+2~+3	
-1684	d/f+4, 4	m, m	10,16	13~14	-15~-14	-4~-3s	-4~-3s	
-1694	d+1+2	l (TC)	20	25s cs6~	-14	+1s	KND	
-1685	d/b+2	m	20	20s	-9s	KND	KND	
-1687	d/b+3	l (TC)	14	19~20s	-12~-11	-1~0	+7~+8s	
-1688	d/b+4	l	18	20~21	-12~-11	+4~+5	+17g	
-1633	b+1	h	13	11~12	-10~-9	+1~+2	+1~+2	
-1634	b+1, 2	h, m	13,20	11~12	-14	KND	KND	
-1637	b+2	m	12	14~15	-8~-7	+4~+5	+4~+5	
-1638	b+2,1	m,m	12,20	14~15	-14~-13	KND	KND	
-1640	b+2, 4	m, h	12,12	14~15	-3	+8	+8	
-1642	b+2, 4, 1	m, h, m	12,12,22	14~15	-14~-12	KND	KND	
-1644	b+3	h	15	18~19	-8~-7	+3~+4	+3~+4	
-1646	b+3, 1	h, h	15,10	18~19	0	+6	+6	
-1648	b+3, 1, 4	h, h, l	15,10,10	18~19	-10~-9	+7~+8	+7~+8	
-1650	b+3, 1, 4, 1	h, h, l, m	15,10,10,15	18~19	-14	KND	KND	
-1651	b+3, 1, 4, 3	h, h, l, l	15,10,10,12	18~19	-13	+1	+1	
-1624	b+4	h	20	17~18	-5~-4	+16~+17kg	KND	Tail spin, Homing
-1643	b+1+2	m	21	22	-12	+5	CS(13)	
-1635	b+1+4	!	25	43~44 ar43~	Launch	Launch	Launch	
-1636	B+1+4	!	60	63~64 ar63~	Launch	Launch	Launch	
-1527	u or u/f+3	m (TJ)	25	19~20 js9~	-9~-8	KND	KND	
-1560	u or u/f+4	m (TJ)	16	25~27 js9~	-12~-10	-1~+1	-1~+1	
-1563	u/f+4, 4	m (TJ), l	16,12	25~27 9~	-23	KND	KND	
-1558	u/f+4, 4, 4	m (TJ), l, l	16,12,10	25~27 9~	-23	KND	KND	
-1559	u/f+4, 4, 4, 4	m (TJ), l, l, m	16,12,10,20	25~27 9~	-17	KND	KND	
-1612	f, F+2	h	30	13(14~)	-11	KND	KND	
-1630	f, F+3	m	25	20~22 (21~)	-3~-1s	KND	KND	
-1623	f, F+4	m	22	17~18 (18~)	-9~-8	+5~+6	bKZD	
-1701	f, f, f+3 or WR+3	m (TJ)	30	22~25a (25~) js3~	+9~+12g	KND	KND	
-1652	WS+1	m	10	13~14	-5~-4	+5~+6	+5~+6	
-1653	WS+1, 2	m, m	10,12	13~14	-12~-11	Launch (JG?)	Launch (JG?)	
-1654	WS+2	m	25	16~17	-18~-17	CS	CS	Homing
-1658	WS+3	m	24	21~23	-5~-3	KND	KND	Homing, Tail spin
-1659	WS+4	m	13	11~12	-3~-2	+8~+9	+8~+9	
+1726	in rage f, n, d, d/f+1+4, u/f (Only when hit )	m, (throw), (DVK)	45,12	18(21~) cs1~		Throw(KND)	Throw(KND)	Rage drive	Kz_dslp_EX
+1605	1	h	7	10	+1	+8	+8		Kz_lp00F
+1581	1, 1	h, h	7,6	10	-1	+8	+8		Kz_lpf
+1582	1, 1, 2	h, h, m	7,6,12	10	-17	KND	KND		Kz_rp1
+1584	1, 2	h, h	7,8	10	-1	+7	+7		Kz_lprpF
+1585	1, 2, 2	h, h, h	7,8,12	10	-12	+4	+4		Kz_rprp01
+1587	1, 2, 4	h, h, l	7,8,18	10	-14~-13	-3~-2	0~+1s		Kz_rprkcom
+1588	1, 2, 4, 3	h, h, l, m	7,8,18,25	10	-2	KND	CS		Kz_rprklk
+1589	2	h	12	12	-3	+8	+8		Kz_rp00
+1590	2, 2	h, m	12,24	12	-10~-9	+6~+7	CS	Tail spin	Kz_rprp
+1595	3 or 3+4	h	14	14	-8	+4	+4		Kz_lk00
+1596	3, 1	h, h	14,7	14	-1	+7	+7		Kz_lklp
+1597	3, 1, 4	h, h, m	14,7,17	14	-6~-5	+8~+9	CS		Kz_lklp_hiza
+1598	4	h	18	12	-9	+2	CS		Kz_rk00
+1600	(u/f)4~3	mm (TJ)	18,25	31~33, 35~37d (31~) js10~	-11~-9	KND	KND		Kz_hasai2
+1592	1+2	mm	5,20	12,28	-14	KND	KND		Kz_lprpcom2
+1610	f+2	m	25	20 pc8~19	-12	KND	KND	Power crush	Kz_tukirpsp
+1629	f+3	m	22	19~20	-13~-12	+5~+6	+23g(KND)		Kz_6lk
+1631	f+4	m	20	19~20	+4~+5s	+7~+8s	KND		Kz_mrk
+1621	f+1+2	m	20	25	-9	KND	KND	Wall bounce	Kz_vipLP
+1672	d/f+1	m	11	15~16	-7~-6	+9~+10	+9~+10		Kz_bodylp00
+1673	d/f+1, 2	m, m	11,20	15~16s	-13s	KND	KND		Kz_3lprp
+1677	d/f+1, 4	m, h	11,20	15~16	-4~-3	+17~+18kg	+17~+18kg	Tail spin	Kz_t_slp_RK
+1676	d/f+1, f+2	m, m	11,22	15~16	-12	KND	KND		Kz_bdyTuki
+1679	d/f+2	m	22	14	-12	+5	CS(13)	Homing	Kz_majin_00
+1680	d/f+3	m	13	18~19	-7~-6	+9~+10	+9~+10		Co_t_slkF
+1681	d/f+3, 2	m, m	13,15	18~19	-11	+5	+5		Kz_hizabody
+1682	d/f+3, 2, 1	m, m, m	13,15,21	18~19	-18	KND	+24		Kz_3lkrplp
+1683	d/f+4	m	10	13~14	-9~-8	+2~+3	+2~+3		Kz_k00
+1684	d/f+4, 4	m, m	10,16	13~14	-15~-14	-4~-3s	-4~-3s		Kz_syrrk
+1694	d+1+2	l (TC)	20	25s cs6~	-14	+1s	KND		Kz_SpinRP
+1685	d/b+2	m	20	20s	-9s	KND	KND		Kz_syutou
+1687	d/b+3	l (TC)	14	19~20s	-12~-11	-1~0	+7~+8s		Kz_t_slk00
+1688	d/b+4	l	18	20~21	-12~-11	+4~+5	+17g		Kz_orosi
+1633	b+1	h	13	11~12	-10~-9	+1~+2	+1~+2		Kz_uralp
+1634	b+1, 2	h, m	13,20	11~12	-14	KND	KND		Kz_4lprp
+1637	b+2	m	12	14~15	-8~-7	+4~+5	+4~+5		Kz_hizicom1
+1638	b+2,1	m,m	12,20	14~15	-14~-13	KND	KND		Kz_4rplp
+1640	b+2, 4	m, h	12,12	14~15	-3	+8	+8		Kz_hizicom2
+1642	b+2, 4, 1	m, h, m	12,12,22	14~15	-14~-12	KND	KND		Kz_hizicom3
+1644	b+3	h	15	18~19	-8~-7	+3~+4	+3~+4		Kz_Naru00
+1646	b+3, 1	h, h	15,10	18~19	0	+6	+6		Kz_Naru01
+1648	b+3, 1, 4	h, h, l	15,10,10	18~19	-10~-9	+7~+8	+7~+8		Kz_Naru02
+1650	b+3, 1, 4, 1	h, h, l, m	15,10,10,15	18~19	-14	KND	KND		Kz_Naru032
+1651	b+3, 1, 4, 3	h, h, l, l	15,10,10,12	18~19	-13	+1	+1		Kz_Naru04
+1624	b+4	h	20	17~18	-5~-4	+16~+17kg	KND	Tail spin, Homing	Kz_keriage0
+1643	b+1+2	m	21	22	-12	+5	CS(13)		Kz_Luraken
+1635	b+1+4	!	25	43~44 ar43~	Launch	Launch	Launch		Kz_kazup00
+1636	B+1+4	!	60	63~64 ar63~	Launch	Launch	Launch		Kz_kazup00E
+1527	u or u/f+3	m (TJ)	25	19~20 js9~	-9~-8	KND	KND		Kz_jplk00F
+1560	u or u/f+4	m (TJ)	16	25~27 js9~	-12~-10	-1~+1	-1~+1		Kz_jprk00F
+1563	u/f+4, 4	m (TJ), l	16,12	25~27 9~	-23	KND	KND		Kz_sjk01G
+1558	u/f+4, 4, 4	m (TJ), l, l	16,12,10	25~27 9~	-23	KND	KND		Kz_sjk02hG
+1559	u/f+4, 4, 4, 4	m (TJ), l, l, m	16,12,10,20	25~27 9~	-17	KND	KND		Kz_sjk03h
+1612	f, F+2	h	30	13(14~)	-11	KND	KND		Kz_mach
+1630	f, F+3	m	25	20~22 (21~)	-3~-1s	KND	KND		Kz_kakat
+1623	f, F+4	m	22	17~18 (18~)	-9~-8	+5~+6	bKZD		Kz_66rk
+1701	f, f, f+3 or WR+3	m (TJ)	30	22~25a (25~) js3~	+9~+12g	KND	KND		Co_runlk00
+1652	WS+1	m	10	13~14	-5~-4	+5~+6	+5~+6		Kz_s_tlp00
+1653	WS+1, 2	m, m	10,12	13~14	-12~-11	Launch (JG?)	Launch (JG?)		Kz_m_p02
+1654	WS+2	m	25	16~17	-18~-17	CS	CS	Homing	Kz_up03
+1658	WS+3	m	24	21~23	-5~-3	KND	KND	Homing, Tail spin	Kz_s_tlk00
+1659	WS+4	m	13	11~12	-3~-2	+8~+9	+8~+9		Kz_s_trk
 	WS+4, 4	m, m	13,16	11~12	-15~-14	-4~-3s	-4~-3s	
-1662	FC+d/f+3+4	m (TC)	24	23s cs1~ ar13~	-11s	KND	KND	
-1752	SS+3	m	23	23(32~)	-7	CS	CS	
-1750	SS+1+2	h	25	16~17 (25~)	-6~-5	KND	KND	Tail spin
-1699	Opponent Down d+3+4	On grounded opponent(l)	20	23	-12	-1	-1	
+1662	FC+d/f+3+4	m (TC)	24	23s cs1~ ar13~	-11s	KND	KND		Kz_crh_kick00
+1752	SS+3	m	23	23(32~)	-7	CS	CS		ThrmvLB2_00
+1750	SS+1+2	h	25	16~17 (25~)	-6~-5	KND	KND	Tail spin	Kz_kgtk_r
+1699	Opponent Down d+3+4	On grounded opponent(l)	20	23	-12	-1	-1		Kz_dwfumi
 	Odd frame f, n (SSL)	(Special)		23				
 	Even frame f, n (SSR)	(Special)		23				
-1735	f, n, D/F+2	h	20	11~12 (14~)	-10~-9	Launch (JG?)	Launch (JG?)	
-1733	f, n, d/f+2	h	23	11~12 (13~)	+5~+6	Launch (JG?)	Launch (JG?)	
-1728	f, n, d/f+1	m	30	22~24 (24~) ar22~	-16~-14	Launch	Launch	
-1741	f, n, d/f+3	h (TJ)	40	18~27 (20~) js10~	-9~0	KND	KND	
-1743	f, n, d/f+4	l	15	16(18~)	-23	-3s (KND)	KND	
-1746	f, n, d, D/F	(Special)		16(18~)				
+1735	f, n, D/F+2	h	20	11~12 (14~)	-10~-9	Launch (JG?)	Launch (JG?)		Kz_shoryu_hit
+1733	f, n, d/f+2	h	23	11~12 (13~)	+5~+6	Launch (JG?)	Launch (JG?)		Kz_shoryu_S
+1728	f, n, d/f+1	m	30	22~24 (24~) ar22~	-16~-14	Launch	Launch		Kz_dslp
+1741	f, n, d/f+3	h (TJ)	40	18~27 (20~) js10~	-9~0	KND	KND		Kz_m_k00
+1743	f, n, d/f+4	l	15	16(18~)	-23	-3s (KND)	KND		Kz_m_k00G
+1746	f, n, d, D/F	(Special)		16(18~)					Kz_narakudslp
 	f, n, d, D/F+2	h	23	11~12 (15~)	-10~-9	Launch (JG?)	Launch (JG?)	
 	f, n, d, d/f+2	h	23	11~12 (14~)	+5~+6	Launch (JG?)	Launch (JG?)	
 	f, n, d, d/f+1	m?	30	22~24 (25~) ar22~	-16~-14	Launch	Launch	
 	f, n, d, d/f+3	h (TJ)	40	18~27 (21~) js10~	-9~0	KND	KND	
-1744	f, n, d, d/f+4	l	15	16(19~)	-23	-3s (KND)	KND	
-1745	f, n, d, d/f+4, 4	l, l	15,12	16(19~)	-23	KND	KND	
+1744	f, n, d, d/f+4	l	15	16(19~)	-23	-3s (KND)	KND		Kz_m_k01
+1745	f, n, d, d/f+4, 4	l, l	15,12	16(19~)	-23	KND	KND		Kz_naraku_up
 	f, n, d, d/f+4, 1	l, m	15,27	16(19~)	-16	KND	KND	
-2114	in rage u/b+1+2 (to DVK)	m (DVK)		20 pc5~	-6	KND	KND	
+2114	in rage u/b+1+2 (to DVK)	m (DVK)		20 pc5~	-6	KND	KND		Kz_Transform2
 	DVK u/b+1+2	(Special)		16(19~)				
-2116	DVK 1+2	h!	40	42~	KND	KND	KND	
-2121	DVK 3+4	! (TJ)	30	69a~	KND	KND	KND	
-2123	DVK 3+4, 3+4	(Special) (TJ), ! (TJ)	30	113a~	KND	KND	KND	
-1632	DVK f+4	m	20	19~20	+4~+5s	+7~+8s (+15~+16)	KND	
-1618	DVK f+1+2	m?	21	22~23	-9~-8	CS	CS	
-1675	DVK d/f+1	m	11	15~16	-7~-6	+9~+10	+9~+10	
-1678	DVK d/f+1, 2	m, m	11,11	15~16	-12~-11	Launch (JG?)	Launch (JG?)	
-2117	DVK u or u/f+1+2	(Sky)!	26	20~32	KND	KND	KND	
-1613	DVK f, F+2	m	20, 15	16(17~)	-12	Throw(CS)	Throw(CS)	
+2116	DVK 1+2	h!	40	42~	KND	KND	KND		Kz_Beam01
+2121	DVK 3+4	! (TJ)	30	69a~	KND	KND	KND		Kz_Wing01
+2123	DVK 3+4, 3+4	(Special) (TJ), ! (TJ)	30	113a~	KND	KND	KND		Kz_RageArts00
+1632	DVK f+4	m	20	19~20	+4~+5s	+7~+8s (+15~+16)	KND		Kz_mrk_S
+1618	DVK f+1+2	m?	21	22~23	-9~-8	CS	CS		Kz_vipLP_Dv
+1675	DVK d/f+1	m	11	15~16	-7~-6	+9~+10	+9~+10		Kz_bodylp_DVL
+1678	DVK d/f+1, 2	m, m	11,11	15~16	-12~-11	Launch (JG?)	Launch (JG?)		Kz_DoubleUpper
+2117	DVK u or u/f+1+2	(Sky)!	26	20~32	KND	KND	KND		Kz_Beam01_7CS
+1613	DVK f, F+2	m	20, 15	16(17~)	-12	Throw(CS)	Throw(CS)		Kz_mach2
 	DVK f, n, d, d/f+1	m	30	22~24 (25~) ar22~	-16~-14	Launch	Launch	
 	DVK f, n, d, d/f+1 When hit U/F	m, (throw)	30,15	22~24 (25~) ar22~	-16~-14	Throw(KND)	Throw(KND)	
 	DVK f, n, d, D/F+2	m	23	11~12 (15~)	-10~-9	Launch (JG?)	Launch (JG?)	
-1739	DVK f, n, d, d/f+2	m	23	11~12 (14~)	-6~-5	Launch (JG?)	Launch (JG?)	
-1742	DVK f, n, d, d/f+4	l	15	16(19~)	-23	-3s (KND)	KND	
+1739	DVK f, n, d, d/f+2	m	23	11~12 (14~)	-6~-5	Launch (JG?)	Launch (JG?)		Kz_shoryu_dvlSG
+1742	DVK f, n, d, d/f+4	l	15	16(19~)	-23	-3s (KND)	KND		Kz_m_k00Gup
 	DVK f, n, d, d/f+4, 1	l, m	15,27	16(19~)	-16	KND	KND	
 	DVK f, n, d, d/f+4 , 1, f, n, d, d/f+1	l, m, m	15,27,20	ar22~	-17~-15	Launch	Launch	
 	DVK f, n, d, d/f+4 , 1, f, n, d, d/f+1 When hit U/F	l, m, (throw)	15,27,20,15	ar22~	-17~-15	Throw(KND)	Throw(KND)	
 	DVK f, n, d, d/f+4, 4	l, l	15,12	22~	-23	KND	KND	
-1749	DVK SS+2	m	25	17~18 (26~)	-22~-21	Launch	Launch	
-2119	DVK d+1+2 (Opponent Down)	l(On grounded opponent)	20	22~30	-16~-8	KND	KND	
+1749	DVK SS+2	m	25	17~18 (26~)	-22~-21	Launch	Launch		Kz_kgtk_l
+2119	DVK d+1+2 (Opponent Down)	l(On grounded opponent)	20	22~30	-16~-8	KND	KND		Kz_Beam02_7CS

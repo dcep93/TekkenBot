@@ -55,7 +55,7 @@ class Characters(enum.Enum):
     zafina = '[ZAFINA]'
     ganryu = '[GANRYU]'
     leroy = '[NSB]'
-    fahkumram = '[NSC]'
+    # fahkumram = '[NSC]'
 
 db_field_to_col = {
     'move_id': DataColumns.DataColumns.move_id,
@@ -111,9 +111,9 @@ def populate_database():
         with open(path, encoding='UTF-8') as csvfile:
             reader = csv.reader(csvfile, delimiter='\t')
             data = list(reader)
-            header = data[0]
-            for move in data[1:]:
-                populate_move(char_name, header, move)
+        header = data[0]
+        for move in data[1:]:
+            populate_move(char_name, header, move)
 
 def populate_move(char_name, header, move):
     entry = {}
