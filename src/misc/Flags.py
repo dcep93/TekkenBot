@@ -20,6 +20,9 @@ def handle():
             Flags.fast = True
         elif arg == '--no-movelist':
             Flags.no_movelist = True
+        elif arg.startswith('-'):
+            print('Flag not recognized', arg)
+            exit()
         else:
             temp_argv.append(arg)
     sys.argv = temp_argv
