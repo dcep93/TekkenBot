@@ -57,5 +57,5 @@ def get_fa(game_log, is_p1):
         return raw_fa_str
 
 def get_remaining_health_string(game_log):
-    remainings = [MAX_HEALTH - game_log.get(i).damage_taken for i in [True, False]]
+    remainings = [MAX_HEALTH - game_log.get(i).damage_taken for i in [False, True]]
     return '%d/%d' % tuple(remainings)
