@@ -105,7 +105,6 @@ def key(entry):
 
 def populate_database():
     for character in Characters:
-        char_name = character.value
         file_name = character.name
         path = Path.path('./database/%s.csv' % file_name)
         with open(path, encoding='UTF-8') as csvfile:
@@ -113,7 +112,7 @@ def populate_database():
             data = list(reader)
         header = data[0]
         for move in data[1:]:
-            populate_move(char_name, header, move)
+            populate_move(file_name, header, move)
 
 def populate_move(char_name, header, move):
     entry = {}
