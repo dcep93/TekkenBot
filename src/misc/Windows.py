@@ -94,7 +94,7 @@ class Windows:
         process_name_in_bytes = str.encode(process_name)
         pid = None
         count = 32
-        for _ in range(1000):
+        for _ in range(10000):
             process_ids = (w.wintypes.DWORD*count)()
             cb = ctypes.sizeof(process_ids)
             bytes_returned = w.wintypes.DWORD()
@@ -105,7 +105,6 @@ class Windows:
                 count *= 2
             else:
                 raise Exception("Call to enum_processes failed")
-        print("impossible b")
 
         num_values = int(bytes_returned.value / ctypes.sizeof(w.wintypes.DWORD))
         for index in range(num_values):
