@@ -9,7 +9,7 @@ def build(game_log, is_p1):
     entry[DataColumns.DataColumns.move_id] = game_log.get(is_p1, 1).move_id
  
     movelist_parser = game_log.get(is_p1).movelist_parser
-    entry[DataColumns.DataColumns.char_name] = movelist_parser.char_name if movelist_parser is not None else game_state.get(is_p1).char_id
+    entry[DataColumns.DataColumns.char_name] = movelist_parser.char_name if movelist_parser is not None else game_log.get(is_p1).char_id
     
     entry[DataColumns.DataColumns.health] = get_remaining_health_string(game_log)
 
@@ -57,5 +57,5 @@ def get_fa(game_log, is_p1):
         return raw_fa_str
 
 def get_remaining_health_string(game_log):
-    remainings = [MAX_HEALTH - game_log.get(i).damage_taken for i in [False, True]]
+    remainings = [MAX_HEALTH - game_log.get(i).damage_taken for i in [True, False]]
     return '%d/%d' % tuple(remainings)

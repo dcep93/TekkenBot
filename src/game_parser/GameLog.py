@@ -157,8 +157,8 @@ class GameLog:
         print("impossible a")
 
     def just_lost_health(self, is_p1):
-        prev_state = self.get(not is_p1, 1)
+        prev_state = self.get(is_p1, 1)
         if prev_state is None:
             return False
-        next_state = self.get(not is_p1, 0)
+        next_state = self.get(is_p1, 0)
         return next_state.damage_taken != prev_state.damage_taken
