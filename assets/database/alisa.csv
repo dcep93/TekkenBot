@@ -4,7 +4,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1964	in rage f+2+3, 3+4	m (TJ)m, (SBT)	12,25	16~17 ,36~37	+5~+6	SPD	SPD	Rage art, Tail spin	Aa_66RPLK_EX
 	in rage f+2+3, f+3+4	m (TJ)m, (DBT)	12,25	16~17 ,36~37	+5~+6	SPD	SPD	Rage art, Tail spin
 1603	1	h	7	10	+1	+8	+8		Aa_lp00F
-1605	1, 1	h, h	7,18	10	-3	+5	KND		Aa_lplp_R
+1604	1, 1	h, h	7,18	10	-3	+5	KND		Aa_lplp_R
 	1, 1, 1+2	h, h, (DES)	7,18	10	-3	+5	KND	
 1612	1, 2	h, h	7,10	10	-2	+4	+9		Aa_lprp
 1614	1, 2, 2	h, h, l	7,10,17	10	-11~-10	+2~+3	KND		Aa_lprprp
@@ -99,7 +99,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1907	f, f, f+3, 4	m (TJ), m (TJ)	15,20	js1~	-7~-5	KMED	KMED	Tail spin	Aa_runlk2
 66	WR+1+2	m (TJ)	24	18~36 js5~	-3~+15	KND	KND		Co_jpRrk00_
 1875	WS+1	m	12	13~14	-12~-11	-1~0	-1~0		Aa_s_tlp00
-1877	WS+1, 2	m, h	12,9	13~14	-5~-4	+6~+7	+6~+7		Aa_stlprpchain
+1876	WS+1, 2	m, h	12,9	13~14	-5~-4	+6~+7	+6~+7		Aa_stlprpchain
 1878	WS+1, 2, 3	m, h, m	12,9,23	13~14	-10~-9	Launch	Launch		Aa_stlprplk
 1880	WS+1, 2, 3, 1+2	m, h, m, (DES)	12,9,23	13~14	-10~-9	Launch	Launch		Aa_stlprplk_chain
 1882	WS+2	m	24	17~18	-13~-12	Launch	Launch		Aa_s_trp
