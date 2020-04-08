@@ -27,6 +27,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         Database.populate_database()
 
         self.update()
+        self.update_restarter()
 
     def init_tk(self):
         self.wm_title("dcep93/TekkenBot")
@@ -47,7 +48,6 @@ class TekkenBotPrime(t_tkinter.Tk):
         game_reader = self.game_reader
         now = time.time()
         self.last_update = now
-        self.update_restarter()
         self.game_log.update(game_reader, self.overlay_family)
         after = time.time()
 
