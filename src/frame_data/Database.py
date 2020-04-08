@@ -55,7 +55,7 @@ class Characters(enum.Enum):
     zafina = '[ZAFINA]'
     ganryu = '[GANRYU]'
     leroy = '[NSB]'
-    # fahkumram = '[NSC]'
+    fahkumram = '[NSC]'
 
 db_field_to_col = {
     'move_id': DataColumns.DataColumns.move_id,
