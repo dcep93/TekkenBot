@@ -1,4 +1,5 @@
 import pickle
+import signal
 import sys
 import time
 
@@ -9,6 +10,7 @@ class Recorder(GameReader.GameReader):
         super().__init__()
         self.pickle_dest = pickle_dest
         self.reset(False)
+        signal.signal(signal.SIGINT, lambda _,__: self.save_and_quit())
 
     def reset(self, active=None):
         if active is not None:
@@ -36,6 +38,10 @@ class Recorder(GameReader.GameReader):
         with open(self.pickle_dest, 'wb') as fh:
             pickle.dump(self.all_datas, fh)
         self.reset()
+
+    def save_and_quit(self):
+        self.dump()
+        sys.exit(0)
 
 class Reader(GameReader.GameReader):
     def __init__(self, pickle_src, fast):
