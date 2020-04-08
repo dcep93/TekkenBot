@@ -104,7 +104,8 @@ class GameLog:
 
         clean_input_array = tuple(reversed([a for a in input_array if len(a) > 0]))
         if clean_input_array != ("N/A",):
-            return ','.join(clean_input_array)
+            string = ','.join(clean_input_array)
+            return '$ %s' % string
 
     def was_just_floated(self, is_p1):
         player = self.get(is_p1, 1)
