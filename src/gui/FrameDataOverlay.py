@@ -193,6 +193,7 @@ class FrameDataOverlay(Overlay.Overlay):
             throw_break_string = game_log.get_throw_break(is_p1)
             if throw_break_string:
                 entry = {
+                    DataColumns.DataColumns.move_id: game_log.get(is_p1).move_id,
                     DataColumns.DataColumns.cmd: throw_break_string,
                 }
             elif game_log.just_lost_health(not is_p1):

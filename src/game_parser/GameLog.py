@@ -134,8 +134,9 @@ class GameLog:
             return False
         
         current_buttons = state.get_input_state()[1].name
+        move_id = self.get(is_p1).move_id
         if '1' not in current_buttons and '2' not in current_buttons:
-            if self.get(not is_p1, 1).throw_tech != throw_tech:
+            if self.get(is_p1, 1) is None or move_id != self.get(is_p1, 1).move_id:
                 return 'br: %s' % throw_tech.name
             return False
 
@@ -144,7 +145,7 @@ class GameLog:
         i = 1
         for _ in range(1000):
             state = self.get(not is_p1, i)
-            if state == None or state.throw_tech == MoveInfoEnums.ThrowTechs.NONE:
+            if state == None or move_id != self.get(is_p1, i).move_id:
                 relevant = current_buttons.replace('x3', '').replace('x4', '')
                 throw_break = MoveInfoEnums.InputAttackCodes[relevant]
                 break_string = throw_break.name.replace('x', '')
