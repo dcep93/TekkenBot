@@ -18,6 +18,9 @@ def build(game_log, is_p1):
         entry = build_frame_data_entry(game_log, entry, is_p1)
         Database.record(entry)
 
+    if not game_log.get(not is_p1).is_blocking():
+        del entry[DataColumns.DataColumns.fa]
+
     return entry
 
 def build_frame_data_entry(game_log, entry, is_p1):
