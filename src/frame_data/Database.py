@@ -118,6 +118,7 @@ def populate_move(char_name, header, move):
     entry = {}
     entry[DataColumns.DataColumns.char_name] = char_name
     for i, db_field in enumerate(header):
+        if i >= len(move): break
         if db_field in db_field_to_col:
             col = db_field_to_col[db_field]
             val = move[i]
