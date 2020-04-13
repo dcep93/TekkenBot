@@ -114,14 +114,15 @@ class GameLog:
         return player.is_jump
 
     def is_starting_attack(self, is_p1):
-        player = self.get(is_p1, 1)
+        before = 2
+        player = self.get(is_p1, before)
         if player is not None and player.startup != 0:
             cur_frame_count = self.state_log[-1].frame_count
             prev_frame_count = self.state_log[-2].frame_count
             dropped_frames = cur_frame_count - prev_frame_count - 1
             diff = player.startup - player.move_timer - 1
             if diff >= 0 and diff <= dropped_frames:
-                previous_player = self.get(is_p1, 2)
+                previous_player = self.get(is_p1, before + 1)
                 if previous_player is not None and previous_player.move_timer < player.move_timer:
                     return True
         return False
@@ -133,23 +134,25 @@ class GameLog:
         if throw_tech == MoveInfoEnums.ThrowTechs.NONE:
             return False
         
-        current_buttons = state.get_input_state()[1].name
-        move_id = self.get(is_p1).move_id
+        prev_state = self.get(is_p1, 2)
+        move_id = prev_state.move_id
+        if prev_state is None: return False
+        current_buttons = self.get(not is_p1, 1).get_input_state()[1].name
         if '1' not in current_buttons and '2' not in current_buttons:
-            if self.get(is_p1, 1) is None or move_id != self.get(is_p1, 1).move_id:
+            if move_id != self.get(is_p1, 1).move_id:
                 return 'br: %s' % throw_tech.name
             return False
 
         correct = state.throw_tech.name
 
-        i = 1
+        i = 2
         for _ in range(1000):
             state = self.get(not is_p1, i)
             if state == None or move_id != self.get(is_p1, i).move_id:
                 relevant = current_buttons.replace('x3', '').replace('x4', '')
                 throw_break = MoveInfoEnums.InputAttackCodes[relevant]
                 break_string = throw_break.name.replace('x', '')
-                throw_break_string = 'br: %s/%s %d/%d' % (break_string, correct, i-1, frames_to_break)
+                throw_break_string = 'br: %s/%s %d/%d' % (break_string, correct, i-2, frames_to_break)
                 return throw_break_string
             buttons = state.get_input_state()[1].name
             if '1' in buttons or '2' in buttons:
@@ -158,8 +161,8 @@ class GameLog:
         print("impossible a")
 
     def just_lost_health(self, is_p1):
-        prev_state = self.get(is_p1, 1)
+        prev_state = self.get(is_p1, 2)
         if prev_state is None:
             return False
-        next_state = self.get(is_p1, 0)
+        next_state = self.get(is_p1, 1)
         return next_state.damage_taken != prev_state.damage_taken
