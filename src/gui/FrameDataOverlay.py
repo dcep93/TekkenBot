@@ -64,12 +64,15 @@ class FrameDataOverlay(Overlay.Overlay):
 
         self.entries.append(entry)
 
-        fa = None
         if DataColumns.DataColumns.fa in entry:
             fa = entry[DataColumns.DataColumns.fa]
             background = self.get_background(fa)
             self.style.configure('.', background=background)
             self.fa_var.set(fa)
+        else:
+            fa = None
+            self.style.configure('.', background=self.background_color)
+            self.fa_var.set("")
 
         text_tag = 'p1' if is_p1 else 'p2'
         out = self.get_prefix(is_p1) + self.get_frame_data_string(entry)
