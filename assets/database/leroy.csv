@@ -32,22 +32,22 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1659	f+4, 4	m, h (TJ)	14,24	16	-6	KND	KND	Tail spin	Nb_rk00F2
 	f+3+4			108				
 1664	f+3+4, F	m!	80	56	KND	KND	KND		Nb_WK00F_Fire
-1694	d/f+1	m	14	13	-1	+5	+5		Nb_t_slpF
+1694	d/f+1	m	14	13	-3	+3	+3		Nb_t_slpF
 1695	d/f+1, 1	m, h	14,9	13	-1	+5	+5		Nb_t_slpF_RP
-1696	d/f+1, 4	m, m (HMT)	14,16	13	-6	+6	+6		Nb_t_slpF_RK
+1696	d/f+1, 4	m, m (HMT)	14,16	13	-9	+3	+3		Nb_t_slpF_RK
 1697	d/f+2	m	7	15	-6	+6	+6		Nb_t_srpF
 1699	d/f+2, 1+2	m, hm	7,5,10	15	-18	Launch	Launch		Nb_t_srpF3
 1706	d/f+3	m	14	16	-11	0	0		Nb_t_slkFy
 1707	d/f+3, 1	m, h	14,12	16	0	+6	+6		Nb_t_slkF2
 1708	d/f+3, 1, 1+2	m, h, m	14,12,25	16	-13	KND	KND		Nb_t_slkF3
 	d/f+3, 1, 4	m, h, l	14,12,7	16	-18	-7	-7	
-1709	d/f+4	m (HMT)	16	13	-6	+6	+6		Nb_t_srkF
-1710	d/f+4, 3	m, m	16,17	13	-9	+7	KND		Nb_t_srkF_LK
+1709	d/f+4	m (HMT)	14	13	-6	+6	+6		Nb_t_srkF
+1710	d/f+4, 3	m, m	14,14	13	-9	+7	KND		Nb_t_srkF_LK
 1703	d/f+1+2	m	23	24	-14	KND	KND	Wall Bounce, Power Crush	Nb_t_sWPF
 1684	d+1	sm (TC)	5	10	-5	+6	+6		Nb_t_slp00
 1685	d+1, 2	sm (TC), m	5,8	10	-10	-1	-1		Nb_t_slp00rp
 1686	d+1, 2, 4	sm (TC), m, m (HMT)	5,8,11	10	-9	+3	+3		Nb_t_slp00rprk
-1687	d+2	l (TC)	15	15 cs6	-12	-1	+4s		Nb_t_srp00
+1687	d+2	l (TC)	15	15 cs6	-15	-4	+4s		Nb_t_srp00
 1688	d+2, 4	l (TC), l (TC)	15,17	15	-11	0	KND		Nb_t_srp_RK
 1689	d+3	l	10	16	-13	-2	-2		Nb_t_slk00
 1690	d+3, 2	l, h	14,10	16	-3	+8	+8		Nb_t_slk00rp

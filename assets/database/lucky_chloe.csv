@@ -10,7 +10,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1588	1, 2, 2	h, m, m	7,12,20	10	-4~-3	+4~+5s	KND		Dc_lprprp
 1598	1, 2, 1+2	h, m, hh	7,12,12,20	10	-2~-1	+13kg	KND(+13kg)	Homing	Dc_lprplrp2
 1602	2	h	10	12	-4	+7	+7		Dc_rp00
-1603	2, 2	h, h	10,15 (20)	12	-12	+4	+4	KND after proper timing	Dc_rprp
+1603	2, 2	h, h	10,15 (23)	12	-12	+4	+4	KND after proper timing	Dc_rprp
 1605	2:3	h, l, (TWISTL)	12,14	12	-11	+7s	+7s		Dc_rplk
 1617	3	m	14	15	-7	+4	+4		Dc_lk00
 	3,B	m	14	15	-7	+4	+4	
@@ -40,7 +40,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1698	d/f+3, 3	m, m	15,15	14	-14~-13	+7k	+7k	Tail spin	Dc_3lklk
 1703	d/f+4	l (TJ)	19	25 js6~23	-12	+7s	KND		Dc_t_srkF
 1670	d+2	m	17	16	0	0	KND		Dc_t_srp00
-1681	d+3+4 or d/b+3+4	lll	10,5,5	23~24, 33~34, 47s cs6~ar6~	-13	-2	-2		Dc_2lrk3
+1681	d+3+4 or d/b+3+4	lll	5,5,5	23~24, 33~34, 47s cs6~ar6~	-13	-2	-2		Dc_2lrk3
 1686	d+3+4, 3+4	lll, ll	10,5,5,7,7	s cs1~ ar1~	-13~-12	0~+1s	0~+1s		Dc_2lrk5
 1687	d+3+4:d+3+4	lll, hml	10,5,5,7,7,7	1~ 1~a,b	-34	-21s	-21s		Dc_2lrk5lrk
 	d+3+4:d+3+4, F	lll, hml, (Special)	10,5,5,7,7,7	1~ 1~,a	-57	-44s	-44s	

@@ -76,7 +76,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1683	MG 3	h	12	16~17 (31~)	-10~-9	KND	KND	Homing	Vp_6rklk
 1681	MG 3, 3	h, m	12,24	16~17 (31~)	-13	KND	KND	<	Vp_66lklk
 1684	MG 3, 4	h, h (TJ)	12,21	js5~	-7~-6	KND	KND	Tail spin	Vp_6rklkrk
-1682	MG 4	l	20	18~25 (33~) cs10~	-24~-17	KND	KND		Vp_6rkrk
+1682	MG 4	l	15	18~25 (33~) cs10~	-24~-17	KND	KND		Vp_6rkrk
 1666	MG 1+2	! (TJ)	30	51~52a (66~) js21~50	KND	KND	KND		Vp_9lrp3
 1667	EX MG 1+2	! (TJ)	30	41~42a js16	KND	KND	KND		Vp_9lrp2
 	qcf+1	Sm	20	28~48 (28~)	-9~+11	KND	KND	
