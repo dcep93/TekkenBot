@@ -5,7 +5,7 @@ class Flags:
     pickle_dest = None
     fast = False
     no_movelist = False
-    refresh = False
+    update_movelist = False
 
 def handle():
     temp_argv = []
@@ -21,8 +21,8 @@ def handle():
             Flags.fast = True
         elif arg == '--no-movelist':
             Flags.no_movelist = True
-        elif arg == '--refresh':
-            Flags.refresh = True
+        elif arg == '--update':
+            Flags.update_movelist = True
         elif arg.startswith('-'):
             print('Flag not recognized', arg)
             exit()

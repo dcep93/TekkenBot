@@ -110,6 +110,7 @@ def populate_database():
         with open(path, encoding='UTF-8') as csvfile:
             reader = csv.reader(csvfile, delimiter='\t')
             data = list(reader)
+            raw_moves[character] = data
         header = data[0]
         for move in data[1:]:
             populate_move(file_name, header, move)
@@ -153,3 +154,4 @@ def record(entry):
 
 histories = collections.defaultdict(History)
 database = {}
+raw_moves = {}

@@ -3,8 +3,9 @@ import struct
 
 from . import MoveInfoEnums
 from misc import Path
+from misc import Flags
 from frame_data import Database
-
+from frame_data import UpdateMovelist
 
 # I have no idea how this file works
 
@@ -136,6 +137,9 @@ class MovelistParser:
         self.movelist_names = movelist_bytes[0x2E8:200000].split(b'\00')
 
         self.cached_movelists[self.char_name] = (self.names, self.can_be_done_from_neutral, self.move_id_to_input, self.movelist_names)
+
+        if Flags.Flags.update_movelist:
+            UpdateMovelist.update(self.char_name, move_nodes)
 
     def can_be_done_from_neutral(self, move_id):
         if move_id in self.can_move_be_done_from_neutral:
