@@ -45,8 +45,8 @@ class FrameDataOverlay(Overlay.Overlay):
         self.style.configure('.', foreground=Overlay.ColorSchemeEnum.advantage_text.value)
         self.style.configure('TFrame', background=self.tranparency_color)
 
-        self.create_padding_frame()
-        self.fa_var = self.create_frame_advantage_label()
+        # self.create_padding_frame()
+        # self.fa_var = self.create_frame_advantage_label()
         self.create_padding_frame()
         self.text = self.create_textbox()
         self.create_padding_frame()
@@ -64,19 +64,19 @@ class FrameDataOverlay(Overlay.Overlay):
 
         self.entries.append(entry)
 
-        if DataColumns.DataColumns.fa in entry:
-            fa = entry[DataColumns.DataColumns.fa]
-            background = self.get_background(fa)
-            self.style.configure('.', background=background)
-            self.fa_var.set(fa)
-        else:
-            fa = None
-            self.style.configure('.', background=self.background_color)
-            self.fa_var.set("")
+        # if DataColumns.DataColumns.fa in entry:
+        #     fa = entry[DataColumns.DataColumns.fa]
+        #     background = self.get_background(fa)
+        #     self.style.configure('.', background=background)
+        #     self.fa_var.set(fa)
+        # else:
+        #     fa = None
+        #     self.style.configure('.', background=self.background_color)
+        #     self.fa_var.set("")
 
         text_tag = 'p1' if is_p1 else 'p2'
         out = self.get_prefix(is_p1) + self.get_frame_data_string(entry)
-        print("%s / %s" % (out, fa))
+        print(out)
 
         out += "\n"
         self.text.insert("end", out, text_tag)
@@ -154,7 +154,7 @@ class FrameDataOverlay(Overlay.Overlay):
         return (' ' * before) + value + (' ' * after)
 
     def get_frame_data_string(self, entry):
-        values = [self.get_value(entry, col) for col in DataColumns.DataColumns]
+        values = [self.get_value(entry, col) for col in DataColumns.DataColumns if col is not DataColumns.DataColumns.fa]
         return '|'.join(values)
 
     def scroll(self):

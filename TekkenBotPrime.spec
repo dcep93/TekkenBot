@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['main.py'],
-             pathex=['C:\\Users\\User\\code\\TekkenBot'],
+             pathex=['C:\\Users\\dcep9\\code\\TekkenBot'],
              binaries=[],
              datas=[],
              hiddenimports=[],

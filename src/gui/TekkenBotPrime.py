@@ -48,13 +48,17 @@ class TekkenBotPrime(t_tkinter.Tk):
         game_reader = self.game_reader
         now = time.time()
         self.last_update = now
-        self.game_log.update(game_reader, self.overlay_family)
-        after = time.time()
+        try:
+            self.game_log.update(game_reader, self.overlay_family)
+        except:
+            pass
+        finally:
+            after = time.time()
 
-        elapsed_ms = after - now
-        wait_ms = game_reader.get_update_wait_ms(elapsed_ms)
-        if wait_ms >= 0:
-            self.after(wait_ms, self.update)
+            elapsed_ms = after - now
+            wait_ms = game_reader.get_update_wait_ms(elapsed_ms)
+            if wait_ms >= 0:
+                self.after(wait_ms, self.update)
 
     def update_restarter(self):
         if Flags.Flags.pickle_src is not None:

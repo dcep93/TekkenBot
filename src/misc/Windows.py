@@ -13,6 +13,8 @@ class Windows:
             self.__class__.valid = False
             return
 
+        ctypes.windll.shcore.SetProcessDpiAwareness(1)
+
         self.wintypes = wintypes
         self.k32 = ctypes.windll.kernel32
 

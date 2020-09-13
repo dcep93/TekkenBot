@@ -1,6 +1,12 @@
 import enum
 
-class AttackType(enum.Enum):
+class safeEnum(enum.Enum):
+    @classmethod
+    def _missing_(cls, value):
+        print('_missing_', cls, value)
+        return cls(0)
+
+class AttackType(safeEnum):
     ANTIAIR_ONLY = 11 #Doesn't hit characters on the ground? Very rare, appears on Alisa's chainsaw stance f+2
     THROW = 10  #this is only the attack type *during* the throw animation
     LOW_UNBLOCKABLE = 9 #Yoshimitsu's 10 hit combo 2 has one
@@ -14,7 +20,7 @@ class AttackType(enum.Enum):
     LOW = 1
     NA = 0 #This move is not an attack
 
-class SimpleMoveStates(enum.Enum):
+class SimpleMoveStates(safeEnum):
     UNINITIALIZED = 0
 
     STANDING_FORWARD = 1
@@ -52,7 +58,7 @@ class SimpleMoveStates(enum.Enum):
     AIRBORNE_26 = 26 #Eliza. Chloe
     FLY = 27 #Devil Jin 3+4
 
-class ComplexMoveStates(enum.Enum):  #These are tracking states>
+class ComplexMoveStates(safeEnum):  #These are tracking states>
     F_MINUS = 0 # this doubles as the nothing state and an attack_starting state. #occurs on kazuya's hellsweep
 
     S_PLUS = 1 #homing
@@ -83,7 +89,7 @@ class ComplexMoveStates(enum.Enum):  #These are tracking states>
 
     UNKN = 999999 #used to indicate a non standard tracking move
 
-class ThrowTechs(enum.Enum):
+class ThrowTechs(safeEnum):
     NONE = 0
     TE1 = 1 #both 1 and 2 seem to sometimes include normal throws that can be broken with either
     TE2 = 2

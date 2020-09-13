@@ -21,7 +21,8 @@ if __name__ == "__main__":
         else:
             print(traceback.format_exc())
             print(e)
-            input()
+            print("died")
+        input()
 
 # pyinstaller seems to ignore second level imports
 # dont need to call this function, just need

@@ -33,7 +33,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	4, 3~4	h,m	14,20	12	-5	KDN	KDN		
 	4, 3~4*h,m	14,25	+14g	12	Launch	Launch			
 	4, 4	h,l	14,18(,20)	12	-16	-5	Throw		
-1598	3+4	m	27	18	-9	KDN	KDN			Nc_WK00
+1598	3+4	m	20	18	-9	KDN	KDN			Nc_WK00
 1599	f+2	h	13	12~13	-8~-7	+3~+4	+3~+4			Nc_rp00F
 1600	f+2, 1	h,h	13,20	12~14	-12	KDN	KDN			Nc_6rplp
 1607	f+3	m	18	17	-4	7	7			Nc_6lk
@@ -55,7 +55,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1697	d/f+2	m	10	15	-7	4	4			Co_t_srpF
 1698	d/f+2, 1	m,m	10,22	15	-13s	KDN	KDN			Nc_3rplp
 1700	d/f+2, 3	m,h	10,11	15	-11	KDN	KDN			Nc_3rplk
-1702	d/f+3	l	19	20	-12	-1	-1			Nc_t_slkF
+1702	d/f+3	l	15	20	-12	-1	-1			Nc_t_slkF
 1703	d/f+4	m	15	16	-8	8	8			Co_t_srkF
 1704	d/f+4, 3	m,h	15,20	16		-9	KDN	KDN		Nc_3rklk
 1705	d/f+4, 3~3	m,m	15,20	16		+1s	KDN	KDN		Nc_3rklklk
