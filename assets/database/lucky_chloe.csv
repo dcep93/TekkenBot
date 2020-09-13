@@ -106,7 +106,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	BT d+4, 4	l (TC), m?, (SCT)	18,15	19 4~	-1	+3	+12	
 1626	BT d+3+4	l	20	23 cs4~	-18	KND	KND		Dc_R_2lrk
 1631	BT 3+4	m (TJ)	20	28~32 js15~	-3~+1	+4~+8s	KND		Dc_R_lrk00_R
-1762	BT 3+4, 4	m, m	20,20	js17~	-16~-14s	KND	KND	
+	BT 3+4, 4	m, m	20,20	js17~	-16~-14s	KND	KND	
 	BT f+3+4	(Special)?		b ar1~				
 1640	BT f+3+4, 3+4	(Special), mm, (Special)	17,20	24,37					Dc_bdashlrkb
 	~ar1~	-45	CS	CS				
