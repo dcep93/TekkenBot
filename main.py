@@ -5,9 +5,13 @@ sys.path.append('src')
 
 from gui import TekkenBotPrime
 from misc import Flags
+from frame_data import Refresh
 
 def main():
     Flags.handle()
+    if Flags.Flags.refresh:
+        Refresh.refresh()
+        exit()
     app = TekkenBotPrime.TekkenBotPrime()
     app.mainloop()
 
