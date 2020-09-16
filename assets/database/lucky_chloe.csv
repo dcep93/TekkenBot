@@ -26,7 +26,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	f+4, b	m (TJ)	14	27b				
 	~js9,10,13~	-4	+9s	+9s				
 1806	f+4, 4	m (TJ), m (TJ)	14,10	js15~	-13	KND	KND		Dc_rkrk
-1806	f+4, 4, b	m (TJ), m (TJ)	14,10	b js15~	-9	KND	KND	
+	f+4, 4, b	m (TJ), m (TJ)	14,10	b js15~	-9	KND	KND	
 1826	f+1+2	h	32	27~29	+7~+9	KND	KND	Wall Bounce	Dc_6lrp
 1649	f+3+4	mml	14,11,12	29~30a, 37~38, 70~73 js19~	-11~-8	+8~+11s (KND)	+8~+11s (KND)		Dc_3lrkBfumi
 	f+3+4, b	mml	14,11	29~30a, 37~38, js19~	-4~-3	KND	KND	
