@@ -1,52 +1,52 @@
 move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes	Move Name
-2182	in rage d/b+1+2	m	55	20 pc8~17	-22	KND	KND	Rage art	Sm_RageArts02
-2195	in rage d/f1+4	m	19,24	23~24	-6	KND	KND	Rage drive	Sm_RD02_EX
-1613	1	h	10	12	+3	+9	+11		Sm_lp00F
-1614	1, 2	h, h	10,10	12	-1	+7	+10		Sm_lprp00
-1615	1, 2, 1	h, h, h	10,10,8	12	-1	+7	+10		Sm_rplp00
-1616	1, 2, 1, 2	h, h, h, h	10,10,8,5	12	-1	+7	+10		Sm_lprp01
-1617	1, 2, 1, 2, 1	h, h, h, h, h	10,10,8,5,5	12	-1	+7	+10		Sm_rplp01
-1618	1, 2, 1, 2, 1, 2	h, h, h, h, h, h	10,10,8,5,5,5	12	-18	-7	-7		Sm_lprp02
-1619	1, 2, 1, 2, 1, 2, 1	h, h, h, h, h, h, h	10,10,8,5,5,5,5	12	-18	-7	-7				Sm_rplp02
-1620	1, 2, 1, 2, 1, 2, 1, 2	h, h, h, h, h, h, h, h	10,10,8,5,5,5,5,5	12	-18	-7	-7				Sm_lprp03
-1583	2	h	12	12	+1	+7	+9		Sm_rp00
-1585	2, 1	h, h	12,12	12	-3	+8	+8	Jails	Sm_rplp
-1587	2, 1, 2	h, h, m	16,16,27	14	-11~-10 OC	Launch	Launch		Sm_rplprp
+2159	in rage d/b+1+2	m	55	20 pc8~17	-22	KND	KND	Rage art	Sm_RageArts02
+2172	in rage d/f1+4	m	19,24	23~24	-6	KND	KND	Rage drive	Sm_RD02_EX
+1588	1	h	10	12	+3	+9	+11		Sm_lp00F
+1589	1, 2	h, h	10,10	12	-1	+7	+10		Sm_lprp00
+1590	1, 2, 1	h, h, h	10,10,8	12	-1	+7	+10		Sm_rplp00
+1591	1, 2, 1, 2	h, h, h, h	10,10,8,5	12	-1	+7	+10		Sm_lprp01
+1592	1, 2, 1, 2, 1	h, h, h, h, h	10,10,8,5,5	12	-1	+7	+10		Sm_rplp01
+1593	1, 2, 1, 2, 1, 2	h, h, h, h, h, h	10,10,8,5,5,5	12	-18	-7	-7		Sm_lprp02
+1594	1, 2, 1, 2, 1, 2, 1	h, h, h, h, h, h, h	10,10,8,5,5,5,5	12	-18	-7	-7				Sm_rplp02
+1595	1, 2, 1, 2, 1, 2, 1, 2	h, h, h, h, h, h, h, h	10,10,8,5,5,5,5,5	12	-18	-7	-7				Sm_lprp03
+1558	2	h	12	12	+1	+7	+9		Sm_rp00
+1560	2, 1	h, h	12,12	12	-3	+8	+8	Jails	Sm_rplp
+1562	2, 1, 2	h, h, m	16,16,27	14	-11~-10 OC	Launch	Launch		Sm_rplprp
 	2, 1, 3+4	h, h	12,12	12	+1	+12	+12	Ends in TAI
-1584	2, 4	h, l	12,14	12	-12	-1	-1		Sm_rprk
-1593	3	h	22	16	-8	KND	KND		Km_lk00
-1594	3, 4	h, h	22,20	16	-8	+3	+3		Sm_double_00
-1628	3, 4, 3	h, h, h	22,20,25	16	-12	KND	KND		Sm_lk002
+1559	2, 4	h, l	12,14	12	-12	-1	-1		Sm_rprk
+1568	3	h	22	16	-8	KND	KND		Km_lk00
+1569	3, 4	h, h	22,20	16	-8	+3	+3		Sm_double_00
+1603	3, 4, 3	h, h, h	22,20,25	16	-12	KND	KND		Sm_lk002
 	3, 4, 3, 4, ,	h, h, h, h, ,	22,20,25,20,,	16	-8	+3	+3	
 	3, 4, 4	h, h, m	22,20,17	16	-12~-10 OC	KND	KND	
-1595	4 or f+4	h	20	15~16	-8~-7	+3~+4	+3~+4		Km_rk00
-1629	4, 4	h, m	20,18	15~16	-12~-10 OC	KND	KND		Sm_rk02
+1570	4 or f+4	h	20	15~16	-8~-7	+3~+4	+3~+4		Km_rk00
+1604	4, 4	h, m	20,18	15~16	-12~-10 OC	KND	KND		Sm_rk02
 	4, 3	h, h	20,25	15~16	-12	KND	KND	
 	4, 3, 4	h, h, h	20,25,20	15~16	-8	+3	+3	
 	4, 3, 4, 3, ,	h, h, h, h, ,	20,25,20,25,,	15~16	-12	KND	KND	
-1590	1+2	m	19	19~20	-12~-11	+8~+9 OC	Launch		Sm_lrp
-1591	1+2, 1+2	m, m	19,22	19~20	-13~-12	Launch	Launch		Sm_lrp2
+1565	1+2	m	19	19~20	-12~-11	+8~+9 OC	Launch		Sm_lrp
+1566	1+2, 1+2	m, m	19,22	19~20	-13~-12	Launch	Launch		Sm_lrp2
 	1+2, 3+4	m	19	19~20	-3~-2	+17	Launch	
-1728	TAI1	h	17	11	-3	+8	CS		Sm_kmlp
-1731	TAI2	h	20	14~15	-9	KND	CS	Homing, tail spin	Sm_harite00
-1722	TAI3	l	24	20~21	-12~-11	+9~+10	+9~+10		Sm_kmlk
-1724	TAI4	m	14	13~14	-14	-3	CS		Sm_kmrk
-1725	TAI4,1	m,h	14,20	13~14	-9~-8	+10g~+11g	+10g~+11g	Tail spin	Sm_kmrklp
-1726	TAI1+2	m	15	26 (pc8~26)	-12	Throw(0)	Throw(0)	Power crush	Sm_kmtukami
-1720	TAI f+1+2	m	35	20~25	-24~-19	KND	KND	DOSUKOI CANNON	Sm_divinghead
+1704	TAI1	h	17	11	-3	+8	CS		Sm_kmlp
+1707	TAI2	h	20	14~15	-9	KND	CS	Homing, tail spin	Sm_harite00
+1698	TAI3	l	24	20~21	-12~-11	+9~+10	+9~+10		Sm_kmlk
+1700	TAI4	m	14	13~14	-14	-3	CS		Sm_kmrk
+1701	TAI4,1	m,h	14,20	13~14	-9~-8	+10g~+11g	+10g~+11g	Tail spin	Sm_kmrklp
+1702	TAI1+2	m	15	26 (pc8~26)	-12	Throw(0)	Throw(0)	Power crush	Sm_kmtukami
+1696	TAI f+1+2	m	35	20~25	-24~-19	KND	KND	DOSUKOI CANNON	Sm_divinghead
 	TAI d/f+1+2	parry	0	??	-	+16 (?)	-	Command low parry
-1729	TAI b+1+2	!	40	50~59	KND	KND	KND		Sm_kamasi00_Old
-1721	TAI d/b+1+2	l	20	22~30	-24~-16	KND	KND		Sm_harasuberi
-1621	f+2	m (TC)	14	14	-12	+1	CS		Sm_rp00F
-1622	f+2~1	h	16	16(17~)	+4	+12	+12		Sm_neko_00
-1625	f+3	h	25	18	-6	KND	KND		Sm_lk00F
-1623	f+1+2	h	30	14	-12	KND	KND		Sm_SPharite
-1631	f+3+4	m	28	23~24 pc8~24	-13~-12	KND	KND	Power crush	Sm_kamasi01
-1699	d/f+1	m	12	13~14	-5~-4	+6~+7	+6~+7		Sm_t_slpF
-1700	d/f+1, 4	m, m	12,12	13~14	-13	-2	-2		Sm_slp_rk00
-1701	d/f+1, 4, 1	m, m, h	12,12,10	13~14	-6	+8	+8		Sm_slp_rk02
-1703	d/f+2	m	16	16~17	-11~-10	Launch (JG?)	Launch (JG?)		Sm_t_srpF
-1704	d/f+2, 1	m, h	17,10	16~17	-7	+4	+4		Sm_ruplp00
+1705	TAI b+1+2	!	40	50~59	KND	KND	KND		Sm_kamasi00_Old
+1697	TAI d/b+1+2	l	20	22~30	-24~-16	KND	KND		Sm_harasuberi
+1596	f+2	m (TC)	14	14	-12	+1	CS		Sm_rp00F
+1597	f+2~1	h	16	16(17~)	+4	+12	+12		Sm_neko_00
+1600	f+3	h	25	18	-6	KND	KND		Sm_lk00F
+1598	f+1+2	h	30	14	-12	KND	KND		Sm_SPharite
+1606	f+3+4	m	28	23~24 pc8~24	-13~-12	KND	KND	Power crush	Sm_kamasi01
+1674	d/f+1	m	12	13~14	-5~-4	+6~+7	+6~+7		Sm_t_slpF
+1675	d/f+1, 4	m, m	12,12	13~14	-13	-2	-2		Sm_slp_rk00
+1676	d/f+1, 4, 1	m, m, h	12,12,10	13~14	-6	+8	+8		Sm_slp_rk02
+1678	d/f+2	m	16	16~17	-11~-10	Launch (JG?)	Launch (JG?)		Sm_t_srpF
+1679	d/f+2, 1	m, h	17,10	16~17	-7	+4	+4		Sm_ruplp00
 	d/f+2, 1, 2	m, h, h	17,10,10	16~17	-1	+7	+10	
 	d/f+2, 1, 2, 1	m, h, h, h	17,10,10,8	16~17	-1	+7	+10	
 	d/f+2, 1, 2, 1, 2	m, h, h, h, h	17,10,10,8,5	16~17	-1	+7	+10	
@@ -54,82 +54,82 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	d/f+2, 1, 2, 1, 2, 1, 2	m, h, h, h, h, h, h	17,10,10,8,5,5,5	16~17	-18	-7	-7			
 	d/f+2, 1, 2, 1, 2, 1, 2, 1	m, h, h, h, h, h, h, h	17,10,10,8,5,5,5,5	16~17	-18	-7	-7			
 	d/f+2, 1, 2, 1, 2, 1, 2, 1, 2	m, h, h, h, h, h, h, h, h	17,10,10,8,5,5,5,5,5	16~17	-18	-7	-7			
-1710	d/f+3	l	17	16~17	-12~-11	+5~+6 OC	+5~+6 OC		Sm_t_slkF
-1711	d/f+4	m	14	15	-30	-19	-19		Sm_t_srkF
-1712	d/f+4, 1	m, h	14,13	15	-9	-3	-3		Sm_3rklp_00
-1713	d/f+4, 1, 2	m, h, m	14,13,20	15	-14~-13	KND	KND		Sm_3rklprp
-1708	d/f+1+2	mm	10,10	20,37	-7	+4	+4		Sm_com_02
-1709	d/f+1+2, 1	mm, m	10,10,21	20,37	-16~-15	KND	KND		Sm_com_03
-1705	d/f+2+3	l (TC)	20	22~23 RC	-15~-14	KND	KND		Sm_lwhari00
-1674	d+1	m	22	25~26	+3~+4 OC	+7~+8 OC	Launch		Sm_t_slp00
+1685	d/f+3	l	17	16~17	-12~-11	+5~+6 OC	+5~+6 OC		Sm_t_slkF
+1686	d/f+4	m	14	15	-30	-19	-19		Sm_t_srkF
+1687	d/f+4, 1	m, h	14,13	15	-9	-3	-3		Sm_3rklp_00
+1688	d/f+4, 1, 2	m, h, m	14,13,20	15	-14~-13	KND	KND		Sm_3rklprp
+1683	d/f+1+2	mm	10,10	20,37	-7	+4	+4		Sm_com_02
+1684	d/f+1+2, 1	mm, m	10,10,21	20,37	-16~-15	KND	KND		Sm_com_03
+1680	d/f+2+3	l (TC)	20	22~23 RC	-15~-14	KND	KND		Sm_lwhari00
+1649	d+1	m	22	25~26	+3~+4 OC	+7~+8 OC	Launch		Sm_t_slp00
 	d+1, 3+4	m, (Special) (TC)	22	25~26	+5~+6 OC	+9~+10 OC	Launch	
-1676	d+2	l (TC)	15	29	-14	-3	-3		Sm_t_srp00
-1682,1683,1684	d+2, 2, ,,	l (TC), , ,	15,10,,,	29	-17	-11	-11		Sm_kabuki00
+1651	d+2	l (TC)	15	29	-14	-3	-3		Sm_t_srp00
+1657	d+2, 2, ,,	l (TC), , ,	15,10,,,	29	-17	-11	-11		Sm_kabuki00
 	d+2, 1	l (TC), m	15,12	29 RC	-7	-1	+1	
-1697	d+4	l	18	21	-14	-3	Launch		Co_t_srk00
-1685	d+1+2	m	29	16	+1	+1	Throw(0)		Sm_okuri00
-1695	d+1+4	m	35	44	-25 OC	KND	KND		Sm_SHIKO
+1672	d+4	l	18	21	-14	-3	Launch		Co_t_srk00
+1660	d+1+2	m	29	16	+1	+1	Throw(0)		Sm_okuri00
+1670	d+1+4	m	35	44	-25 OC	KND	KND		Sm_SHIKO
 	d+1+4* (Short hold)	m	40	55	-25 OC	KND	KND	
 	d+1+4* (Long hold)	m	50	93	-25 OC	KND	KND	
-1696	d+1+4* (Very long hold)	!	67	90	KND	KND	KND		Sm_SHIKOMAX
-1715	d/b+2	l (TC)	16	29	-22	Launch	Launch		Sm_t_srpB
-1634	b+1	h	18	20~21	-6~-4	+5~+7	+5~+7	Homing	Sm_lp00B
-1635	b+1, 1	h, h	18,15	20~21	-6~-5	0~+1	+6~+7OB		Sm_lp01B
-1636	b+1, 1, 1	h, h, m	18,15,20	20~21	+2~+4 OC	KND	KND		Sm_lp02
+1671	d+1+4* (Very long hold)	!	67	90	KND	KND	KND		Sm_SHIKOMAX
+1690	d/b+2	l (TC)	16	29	-22	Launch	Launch		Sm_t_srpB
+1609	b+1	h	18	20~21	-6~-4	+5~+7	+5~+7	Homing	Sm_lp00B
+1610	b+1, 1	h, h	18,15	20~21	-6~-5	0~+1	+6~+7OB		Sm_lp01B
+1611	b+1, 1, 1	h, h, m	18,15,20	20~21	+2~+4 OC	KND	KND		Sm_lp02
 	b+1, 1, 1, 3+4	h, h, m	18,15,20	20~21	+3~+5 OC	KND	KND	
-1647	b+1~2	mmmm	2,2,2,21	14(14)	-14	KND	KND		Sm_hyakuFinish
+1622	b+1~2	mmmm	2,2,2,21	14(14)	-14	KND	KND		Sm_hyakuFinish
 	b+1~2 (1,2,1,2,1,2)	mmmm	2,2,2,2,2,2,2,21	14(14)	-14	KND	KND	
-1649	b+2	m	12	15 RC	-18	-7	-7		Sm_tsuppari
-1650	b+2, 1	m, m	12,13	15 RC	-5	+1	+3		Sm_tsuppari2
-1652	b+2, 1, 2	m, m, m	12,13,22	15	-12	KND	KND		Sm_tsupparimid
-1653	b+2, 1, d+2	m, m, l (TC)	12,13,20	15	-22	KND	KND		Sm_tsupparilo
-1596	b+4	m	14	15	-10	+1	+8		Sm_rk00B
-1597	b+4, 1	m, m	14,24	15	-7	KND	KND		Sm_midklp2
-1657	b+1+2	h	19	10~11	-13~-12	KND	ATD		Sm_zutuki
-1530	u/b or u or u/f+1	m (TJ)	15	18~19	-6~-5	+5~+6 (+12 OC)	+5~+6 (+12 OC)		Sm_jplp00F
-1515	u/f+2	m	17	21	-8	+5	+5	Homing	Sm_RPmawari
-1516	u/f+2, 1+2	m, m	17,22	21	-14	KND	CS		Sm_kurutsuki
-1567	u/f+1+2	m (TJ)	28	18~23	-10~-5	-2~+3 (SH)	-2~+3 (SH)		Sm_flyb00
+1624	b+2	m	12	15 RC	-18	-7	-7		Sm_tsuppari
+1625	b+2, 1	m, m	12,13	15 RC	-5	+1	+3		Sm_tsuppari2
+1627	b+2, 1, 2	m, m, m	12,13,22	15	-12	KND	KND		Sm_tsupparimid
+1628	b+2, 1, d+2	m, m, l (TC)	12,13,20	15	-22	KND	KND		Sm_tsupparilo
+1571	b+4	m	14	15	-10	+1	+8		Sm_rk00B
+1572	b+4, 1	m, m	14,24	15	-7	KND	KND		Sm_midklp2
+1632	b+1+2	h	19	10~11	-13~-12	KND	ATD		Sm_zutuki
+1505	u/b or u or u/f+1	m (TJ)	15	18~19	-6~-5	+5~+6 (+12 OC)	+5~+6 (+12 OC)		Sm_jplp00F
+1489	u/f+2	m	17	21	-8	+5	+5	Homing	Sm_RPmawari
+1490	u/f+2, 1+2	m, m	17,22	21	-14	KND	CS		Sm_kurutsuki
+1542	u/f+1+2	m (TJ)	28	18~23	-10~-5	-2~+3 (SH)	-2~+3 (SH)		Sm_flyb00
 	u/f+1+2, 3+4	m (TJ)	28	18~23 RC	-2~+3	+6~+11 (SH)	+6~+11 (SH)	
-1761	f, F+2	m	18	17~18 (18~)	-9~-8	+5~+6	Throw(0)		Sm_thr_RP
-1626	f, F+3	m	25	25~26 (26~)	+4~+5OC	KND	KND		Sm_dssiko
-1630	f, F+4	m	24	17~18 RG (18~)	-24~-23	KND	KND		Sm_keriage00
-1624	f, F+1+2	h	15	13(14~)	-8	CS	CS		Sm_66WP
-1633	f, F+3+4	m (TJ)	50	39~41 RG (40~)	+7~+9	KND	KND		Sm_drop_00
-1648	b, f+1	m	24	30~32 (30~)	-14~-12	+9~+11OB	+9~+11OB		Sm_yokelp
-1655	b, f+2	m (TC)	22	32~33 (32~)	+5~+6	Launch	Launch		Sm_soltrp00
-1774	b, d/b, d, D/F+1	m	23	26~27 (30~)	-18~-17	Launch(JG?)	Launch(JG?)		Sm_splp00
-1760	b, d/b, d, D/F+2	m	45	22 RC(26~)	-6~-5	KND	KND	Wall bounce	Sm_p00
-1752	f, f, f+1+2 or 2+4+1+2	m	35	24(27~)	+9	+32 GB	+32 GB		Sm_runpush
-1737	WS+1	m	12	13~14	-3~-2	+8~+9	+8~+9		Sm_s_tlp00
-1738	WS+1, 2	m, l (TC)	12,19	13~14	-13	+0 OC	+0 OC		Sm_stlprp
-1743	WS+2	m	17	16~17	-13~-12	Launch	Launch		Sm_s_trp00
-1746	WS+1+2	m	14	19~20	-14~-13	Launch	Launch		Sm_stlrp
-1747	WS+1+2, 1+2	m, m	14,17	19~20	-11~-10 OC	+23~+24 GB	KND		Sm_tslrlrp
-1658	FC+d+1	l (TC)	10	19~20 RC	-8~-7	+2~+3	+2~+3		Sm_syalp00
-2020	FC+d+1, 1	l (TC), l (TC)	10,8	19~20 RC	-5	+6	+6		Sm_sy_lp01
-2021	FC+d+1, 1, 1	l (TC), l (TC), m	10,8,12	19~20 RC	-14	-3	-3		Km_sylu02
-1678	FC+d+1, 1, 1, 2	l (TC), l (TC), m, m	10,8,12,12	19~20 RC	-19	-8	-8		Km_tslprpA
-1680	FC+d+1, 1, 1, 2, 1	l (TC), l (TC), m, m, h	10,8,12,12,12	19~20	-6	+14OB	+14OB		Km_tsrplpH
-1679	FC+d+1, 1, 1, 2, d/f+1	l (TC), l (TC), m, m, m	10,8,12,12,15	19~20 RC	-2	+8	+8		Km_tsrplpB
-1681	FC+d+1, 1, 1, 2, d+1	l (TC), l (TC), m, m, l (TC)	10,8,12,12,8	19~20 RC	-11	-1	-1		Km_tsrplpL
-1667	FC+d/f+1	m	9	17~19 RC	-9~-7	+2~+4	+2~+4		Sm_syalp00F
-1668	FC+d/f+1, 2	m, m	9,12	17~19 RC	-8~-7	+2~+3	+2~+3		Sm_sylprp00
-1669	FC+d/f+1, 2, 1	m, m, m	9,12,12	17~19 RC	-8	+8	KND		Sm_syrplp01
-1670	FC+d/f+2	m	20	14~15	-12~-11	Tail spin	Tail spin	Tail spin	Sm_syarp00F
+1735	f, F+2	m	18	17~18 (18~)	-9~-8	+5~+6	Throw(0)		Sm_thr_RP
+1601	f, F+3	m	25	25~26 (26~)	+4~+5OC	KND	KND		Sm_dssiko
+1605	f, F+4	m	24	17~18 RG (18~)	-24~-23	KND	KND		Sm_keriage00
+1599	f, F+1+2	h	15	13(14~)	-8	CS	CS		Sm_66WP
+1608	f, F+3+4	m (TJ)	50	39~41 RG (40~)	+7~+9	KND	KND		Sm_drop_00
+1623	b, f+1	m	24	30~32 (30~)	-14~-12	+9~+11OB	+9~+11OB		Sm_yokelp
+1630	b, f+2	m (TC)	22	32~33 (32~)	+5~+6	Launch	Launch		Sm_soltrp00
+1748	b, d/b, d, D/F+1	m	23	26~27 (30~)	-18~-17	Launch(JG?)	Launch(JG?)		Sm_splp00
+1734	b, d/b, d, D/F+2	m	45	22 RC(26~)	-6~-5	KND	KND	Wall bounce	Sm_p00
+1726	f, f, f+1+2 or 2+4+1+2	m	35	24(27~)	+9	+32 GB	+32 GB		Sm_runpush
+1714	WS+1	m	12	13~14	-3~-2	+8~+9	+8~+9		Sm_s_tlp00
+1715	WS+1, 2	m, l (TC)	12,19	13~14	-13	+0 OC	+0 OC		Sm_stlprp
+1717	WS+2	m	17	16~17	-13~-12	Launch	Launch		Sm_s_trp00
+1720	WS+1+2	m	14	19~20	-14~-13	Launch	Launch		Sm_stlrp
+1721	WS+1+2, 1+2	m, m	14,17	19~20	-11~-10 OC	+23~+24 GB	KND		Sm_tslrlrp
+1633	FC+d+1	l (TC)	10	19~20 RC	-8~-7	+2~+3	+2~+3		Sm_syalp00
+1997	FC+d+1, 1	l (TC), l (TC)	10,8	19~20 RC	-5	+6	+6		Sm_sy_lp01
+1998	FC+d+1, 1, 1	l (TC), l (TC), m	10,8,12	19~20 RC	-14	-3	-3		Km_sylu02
+1653	FC+d+1, 1, 1, 2	l (TC), l (TC), m, m	10,8,12,12	19~20 RC	-19	-8	-8		Km_tslprpA
+1655	FC+d+1, 1, 1, 2, 1	l (TC), l (TC), m, m, h	10,8,12,12,12	19~20	-6	+14OB	+14OB		Km_tsrplpH
+1654	FC+d+1, 1, 1, 2, d/f+1	l (TC), l (TC), m, m, m	10,8,12,12,15	19~20 RC	-2	+8	+8		Km_tsrplpB
+1656	FC+d+1, 1, 1, 2, d+1	l (TC), l (TC), m, m, l (TC)	10,8,12,12,8	19~20 RC	-11	-1	-1		Km_tsrplpL
+1642	FC+d/f+1	m	9	17~19 RC	-9~-7	+2~+4	+2~+4		Sm_syalp00F
+1643	FC+d/f+1, 2	m, m	9,12	17~19 RC	-8~-7	+2~+3	+2~+3		Sm_sylprp00
+1644	FC+d/f+1, 2, 1	m, m, m	9,12,12	17~19 RC	-8	+8	KND		Sm_syrplp01
+1645	FC+d/f+2	m	20	14~15	-12~-11	Tail spin	Tail spin	Tail spin	Sm_syarp00F
 	FC+d or d/f+1+2	l (TC)	24	23~24s	-23~-22	KND	KND	
-1776	SS+1	h	25	17~19 (26~)	-9~-7	Launch	Launch		Sm_superLP
-1788	BT 1+2	m (TJ)	51	30~43 RG	-2~+11	KND	KND		Sm_motare_00
+1750	SS+1	h	25	17~19 (26~)	-9~-7	Launch	Launch		Sm_superLP
+1762	BT 1+2	m (TJ)	51	30~43 RG	-2~+11	KND	KND		Sm_motare_00
 	1+2+3+4	(Special)		30~43				
 	3+4 (to SIT)	(Special) (TC)(SIT)		(3F~ Air)				
-1571	u/b or u or u/f+3+4	m (TJ), (Special) (TC)	23	34~39	+13~+18 OC	KND	KND		Sm_sjplrkF
+1546	u/b or u or u/f+3+4	m (TJ), (Special) (TC)	23	34~39	+13~+18 OC	KND	KND		Sm_sjplrkF
 	u/b or u or u/f+3+4 (After stance ends)	m (TJ), (Special) (TC)	23	34~39	-32~-27 OC	KND	KND	
-1759	Grounded face up 1+2	m, (Special) (TC)	12	25~27	+5~+7 OC	+16~+18	+16~+18		Sm_oklrp
+1733	Grounded face up 1+2	m, (Special) (TC)	12	25~27	+5~+7 OC	+16~+18	+16~+18		Sm_oklrp
 	Grounded face up 1+2 (After stance ends)	m, (Special) (TC)	12	25~27	-19~-17 OC	-9~-7	-9~-7	
-1604	SIT1	m	30	27(47~)	-4	KND	CS(17)		Sm_shiriL
-1606	SIT2	l (TC)	11	19 RC(39~)	-17	Launch	Launch		Sm_shiriR
-1789	SIT1+2	m (TJ)	38	30~43 RG (50~)	-2~+11	KND	KND		Sm_sitmotare
-1792	SIT3+4	l (TC)	22	25~58 RG (45~)	-29~+4	KND	KND		Sm_maruta00
+1579	SIT1	m	30	27(47~)	-4	KND	CS(17)		Sm_shiriL
+1581	SIT2	l (TC)	11	19 RC(39~)	-17	Launch	Launch		Sm_shiriR
+1763	SIT1+2	m (TJ)	38	30~43 RG (50~)	-2~+11	KND	KND		Sm_sitmotare
+1766	SIT3+4	l (TC)	22	25~58 RG (45~)	-29~+4	KND	KND		Sm_maruta00
 	SITd	(Special) (TC)		RC				
 	SIT d, f	(Special)(Absorbs 1 h/m hit)						
 	SIT d, f, 1+2	m	15	26 (pc8~26)	-12	Throw(0)	Throw(0)	Power crush

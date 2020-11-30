@@ -1,126 +1,126 @@
 move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes	Move Name
-2181	in rage d+1+2	m	55	20 pc8~17	-22	KND	KND	Rage art	Cn_RageArts_nRv
-1824	in rage f, f, f+1+2	m	30	15~16 (18~)	+5s	Launch	Launch	Rage art	Cn_runrp00_EX
-1829	in rage f, f, f+1+2 , d/b+1+2	m, m(Throw)	30,5	15~16 (18~)	中Throw(KND)	中Throw(KND)	中Throw(KND)	Rage art	Cn_runrp00_EX_tac
-1633	1	h	7	10	+1	+8	+8		Cn_lp00F
-1589	1, 1	h, h	7,8	10	-4	+7	+7		Cn_lplp
-1590	1, 1, 3	h, h, m	7,8,22	10	-9~-8	KND	KND		Cn_lplplk
-1594	1, 2	h, m	7,8	10	-9	+2	+2		Cn_lprpF
-1596	1, 2, 1	h, m, m	7,8,20	10	-14~-13	KND	uKZD		Cn_lprplp
-1592	1, 3	h, h	7,14	10	-7~-6	+1~+2	+9~+10		Cn_lplk
-1593	1, 3, 2	h, h, m	7,14,20	10	-12~-11	KND	KND		Cn_lplkrp
+2157	in rage d+1+2	m	55	20 pc8~17	-22	KND	KND	Rage art	Cn_RageArts_nRv
+1799	in rage f, f, f+1+2	m	30	15~16 (18~)	+5s	Launch	Launch	Rage art	Cn_runrp00_EX
+1804	in rage f, f, f+1+2 , d/b+1+2	m, m(Throw)	30,5	15~16 (18~)	中Throw(KND)	中Throw(KND)	中Throw(KND)	Rage art	Cn_runrp00_EX_tac
+1607	1	h	7	10	+1	+8	+8		Cn_lp00F
+1563	1, 1	h, h	7,8	10	-4	+7	+7		Cn_lplp
+1564	1, 1, 3	h, h, m	7,8,22	10	-9~-8	KND	KND		Cn_lplplk
+1568	1, 2	h, m	7,8	10	-9	+2	+2		Cn_lprpF
+1570	1, 2, 1	h, m, m	7,8,20	10	-14~-13	KND	uKZD		Cn_lprplp
+1566	1, 3	h, h	7,14	10	-7~-6	+1~+2	+9~+10		Cn_lplk
+1567	1, 3, 2	h, h, m	7,14,20	10	-12~-11	KND	KND		Cn_lplkrp
 	1, 3, 2~1+2	h, h, h(Throw)	7,14,35	10		Throw(KND)		
 	1, 3, 2~1+2 B (Cancel)	h, h, (Special)	7,14	10	-32~-31	-24~-23	-16~-15	
-1597	2	h	10	10	0	+9	+9		Cn_rp00
-1598	2, 1	h, h	10,8	10	-2	+6	+6		Cn_rp_lp
-1599	2, 1, 3	h, h, h	10,8,24	10	-9~-8	KND	KND		Cn_rplplk
-1600	2, 1, 4	h, h, l	10,8,14	10	-12	+3s	+3s		Cn_rplprk
-1611	3	m	10	15~16	-9~-8	+2~+3	+2~+3		Cn_lk00
-1612	3, 1	m, h	10,8	15~16	-2~-1	+7~+8	+7~+8		Cn_lklp
+1571	2	h	10	10	0	+9	+9		Cn_rp00
+1572	2, 1	h, h	10,8	10	-2	+6	+6		Cn_rp_lp
+1573	2, 1, 3	h, h, h	10,8,24	10	-9~-8	KND	KND		Cn_rplplk
+1574	2, 1, 4	h, h, l	10,8,14	10	-12	+3s	+3s		Cn_rplprk
+1585	3	m	10	15~16	-9~-8	+2~+3	+2~+3		Cn_lk00
+1586	3, 1	m, h	10,8	15~16	-2~-1	+7~+8	+7~+8		Cn_lklp
 	3, 1, df	m, h	10,8	15~16	0	+8	+8	
-1617	3, 1, 2	m, h, m	10,8,24	15~16	-12~-10	KND	KND		Cn_lklprp
-1615	3, 1, 4	m, h, h	10,8,27	15~16	-9	KND	KND		Cn_lklprk
-1623	4	h	15	12	-9	-1	+7		Cn_rk00
-1627	4, 1	h, h	15,12	12	-6~-5	+8~+9	+8~+9		Cn_rklp
-1629	4, 3	h, m	15,20	12	-12~-11	KND	KND		Cn_rkkkt
-1628	4, 4	h, m (TJ)	15,25	s js22~	+3~+4	KND	KND	Tail spin	Cn_rkrk
-2176	1+2	m	25	21~22 pc8~20	-14	KND	TUKD	Power crush	Cn_spamarm
-1566	3+4	h (TJ)	25	25~26d js13~	-14~-13	CS	CS		Cn_Flyk
+1591	3, 1, 2	m, h, m	10,8,24	15~16	-12~-10	KND	KND		Cn_lklprp
+1589	3, 1, 4	m, h, h	10,8,27	15~16	-9	KND	KND		Cn_lklprk
+1597	4	h	15	12	-9	-1	+7		Cn_rk00
+1601	4, 1	h, h	15,12	12	-6~-5	+8~+9	+8~+9		Cn_rklp
+1603	4, 3	h, m	15,20	12	-12~-11	KND	KND		Cn_rkkkt
+1602	4, 4	h, m (TJ)	15,25	s js22~	+3~+4	KND	KND	Tail spin	Cn_rkrk
+2152	1+2	m	25	21~22 pc8~20	-14	KND	TUKD	Power crush	Cn_spamarm
+1540	3+4	h (TJ)	25	25~26d js13~	-14~-13	CS	CS		Cn_Flyk
 	3+4, Any button	h (TJ), (Special)	25	25~26s js13~	-24~-23g	CS	CS	
-1634	f+2	h	16	19~20	-8~-7	+3~+4	+8~+9		Cn_rp00F
-1637	f+2, 4	h, m	16,24	19~20	-7~-6	KND	uKZD		Cn_ElKnee
-1639	f+3	m	11	20	-6	+2	+2		Cn_lk00F
+1608	f+2	h	16	19~20	-8~-7	+3~+4	+8~+9		Cn_rp00F
+1611	f+2, 4	h, m	16,24	19~20	-7~-6	KND	uKZD		Cn_ElKnee
+1613	f+3	m	11	20	-6	+2	+2		Cn_lk00F
 	f+3, D/F	m, (Special)	11	20	-1	+7	+7	
-1641	f+3, 2	m, h	11,20	20	-9~-8	KND	KND	Tail spin	Cn_6lkrp
-1642	f+3, 3	m, m(, (throw))	11,14(,20)	20	-12	Throw(KND)	Throw(KND)		Co_kakatoN
+1615	f+3, 2	m, h	11,20	20	-9~-8	KND	KND	Tail spin	Cn_6lkrp
+1616	f+3, 3	m, m(, (throw))	11,14(,20)	20	-12	Throw(KND)	Throw(KND)		Co_kakatoN
 	f+3, 3	m, m	11,14	20	-12~-9	-1~+2s	+4~+7s	
-1644	f+4	h	16	14~15	-7~-6	+4~+5	+4~+5		Cn_rk00F
-1646	f+4, 4	h, h	16,14	14~15	-11~-10	0~+1	Launch (JG?)		Cn_6rk6rk
-1647	f+4, 4, 3	h, h, h	16,14,20	14~15	-5~-4	KND	KND		Cn_6rk6rklk
-1645	f+4, d+4	h, l	16,12	14~15	-12	+3s	+3s		Cn_6rk2rk
-1638	f+1+2	h	20	17~18	-9~-8	KND	KND	Tail spin	Cn_lrpf00
-1722	d/f+1	m	13	13	-2	+7	+7		Cn_t_slpF
-1723	d/f+1, 4	m, h	13,23	13	-7~-6	KND	KND		Cn_t_slpF_rk
-1724	d/f+2	m	14	15~16	-12~-11	Launch (JG?)	Launch (JG?)		Cn_t_srpF
-1725	d/f+3 (Close)	m(, (throw))	16(,20)	17	-6	Throw(KND)	Throw(KND)		Co_t_slkF
+1618	f+4	h	16	14~15	-7~-6	+4~+5	+4~+5		Cn_rk00F
+1620	f+4, 4	h, h	16,14	14~15	-11~-10	0~+1	Launch (JG?)		Cn_6rk6rk
+1621	f+4, 4, 3	h, h, h	16,14,20	14~15	-5~-4	KND	KND		Cn_6rk6rklk
+1619	f+4, d+4	h, l	16,12	14~15	-12	+3s	+3s		Cn_6rk2rk
+1612	f+1+2	h	20	17~18	-9~-8	KND	KND	Tail spin	Cn_lrpf00
+1696	d/f+1	m	13	13	-2	+7	+7		Cn_t_slpF
+1697	d/f+1, 4	m, h	13,23	13	-7~-6	KND	KND		Cn_t_slpF_rk
+1698	d/f+2	m	14	15~16	-12~-11	Launch (JG?)	Launch (JG?)		Cn_t_srpF
+1699	d/f+3 (Close)	m(, (throw))	16(,20)	17	-6	Throw(KND)	Throw(KND)		Co_t_slkF
 	d/f+3	m	16	17~20	-6~-3	+5~+8s	+10~+13s	
 	d/f+4	m	14	12	-9	+2	+2	
 	d/f+1+2 or FC+d/f+1+2	(Special)(lReturns move)	20~	12(s)		Attack returned(KND)		
-1696	d+1	m	18	18~19	0~+1s	+7~+8s	KND		Cn_t_slp00
-1703	d+2	l (TC)	17	18~19s cs6~	-13~-12	0	+13~+14g		Cn_lowknife
-1718	d+3	l	13	17~18	-14~-13	-3~-2	0~+1s		Co_t_slk00
-1836	d+3, 4	l, m	13,18	17~18	-11	+5	+23g(KND)		Cn_maegeri
-1815	d+4	l	12	15~16	-15~-14	-9~-8	-4~-3		Cn_t_srk
-1817	d+4, 1	l, h	12,8	15~16	-11~-10	+5~+6	+5~+6		Cn_lohoura
-1818	d+4, 1, 3	l, h, h	12,8,21	15~16	-16~-15	KND	KND		Cn_LHBKcombo
-1819	d+4, 4	l, h	12,23	15~16	-15~-14	KND	KND		Cn_2rkrk
-1702	d/b+2	m	12	14~15	-7~-6	+4~+5	+4~+5		Cn_t_srp00rv
-1811	d/b+2, 1	m, m	12,10	14~15	-10~-9	+1~+2	+3~+4		Cn_Knife2
-1812	d/b+2, 1, 2	m, m, m	12,10,20	14~15	-14	uKZD	uKZD		Cn_Knife3
-1758	d/b+3 (Close)	l (TC)	21	27 cs6~	-26?	KND	Throw(KND)		Cn_t_slk00B
+1670	d+1	m	18	18~19	0~+1s	+7~+8s	KND		Cn_t_slp00
+1677	d+2	l (TC)	17	18~19s cs6~	-13~-12	0	+13~+14g		Cn_lowknife
+1692	d+3	l	13	17~18	-14~-13	-3~-2	0~+1s		Co_t_slk00
+1811	d+3, 4	l, m	13,18	17~18	-11	+5	+23g(KND)		Cn_maegeri
+1790	d+4	l	12	15~16	-15~-14	-9~-8	-4~-3		Cn_t_srk
+1792	d+4, 1	l, h	12,8	15~16	-11~-10	+5~+6	+5~+6		Cn_lohoura
+1793	d+4, 1, 3	l, h, h	12,8,21	15~16	-16~-15	KND	KND		Cn_LHBKcombo
+1794	d+4, 4	l, h	12,23	15~16	-15~-14	KND	KND		Cn_2rkrk
+1676	d/b+2	m	12	14~15	-7~-6	+4~+5	+4~+5		Cn_t_srp00rv
+1786	d/b+2, 1	m, m	12,10	14~15	-10~-9	+1~+2	+3~+4		Cn_Knife2
+1787	d/b+2, 1, 2	m, m, m	12,10,20	14~15	-14	uKZD	uKZD		Cn_Knife3
+1733	d/b+3 (Close)	l (TC)	21	27 cs6~	-26?	KND	Throw(KND)		Cn_t_slk00B
 	d/b+3	l (TC)	14	27 cs6~	-26?	-5?	KND	
-1760	d/b+3~1+2	l(Throw)	45	38		Throw(KND)			Cn_suimenCtukami
-1648	b+1	m	14	17	-10	+1	+1		Cn_lp00B
-1649	b+1, 2	m, m	14,18	17	-13~-12	+9~+10k	KND	Tail spin	Cn_harai
-1651	b+2	m	14	15s	-3	+8	+8		Cn_spfk
-1656	b+2, 1	m, h	14,11	15	-5~-3	+6~+8	+6~+8		Cn_spfkura
-1591	b+2, 1, 3	m, h, l (TC)	14,11,24(,30)	cs15~	-26	KND	Throw(KND)		Cn_uralow
+1735	d/b+3~1+2	l(Throw)	45	38		Throw(KND)			Cn_suimenCtukami
+1622	b+1	m	14	17	-10	+1	+1		Cn_lp00B
+1623	b+1, 2	m, m	14,18	17	-13~-12	+9~+10k	KND	Tail spin	Cn_harai
+1625	b+2	m	14	15s	-3	+8	+8		Cn_spfk
+1630	b+2, 1	m, h	14,11	15	-5~-3	+6~+8	+6~+8		Cn_spfkura
+1565	b+2, 1, 3	m, h, l (TC)	14,11,24(,30)	cs15~	-26	KND	Throw(KND)		Cn_uralow
 	b+2, 1, 3 (Far)	m, h, l (TC)	14,11,16	cs15~	-26	-7~-5	KND	
 	b+2, 1, 3~1+2 (Cancel)	m, h, l(Throw)	14,11,45	15~		Throw(KND)		
 	b+2, 1, 3~1+2, d (Cancel)	m, h, (Special)	14,11	15~s	-36~-34	-25~-23	-25~-23	
-1728	b+3	h	17	14~15	-9~-8	+11~+12kg	+11~+12kg	Homing, Tail spin	Cn_agohiza
-1744	b+4	m	15	15	-4	+7	+7		Cn_rk00B
-1746	b+4, 2	m, m	15,15	15	-7	+4s	+5s		Cn_Kinteki2
+1702	b+3	h	17	14~15	-9~-8	+11~+12kg	+11~+12kg	Homing, Tail spin	Cn_agohiza
+1719	b+4	m	15	15	-4	+7	+7		Cn_rk00B
+1721	b+4, 2	m, m	15,15	15	-7	+4s	+5s		Cn_Kinteki2
 	b+4, 2, D	m, m	15,15	15s	-7	+4s	+5s	
-1705	b+4, 2, 1	m, m, h	15,15,17	15	+1~+2	+5~+6	+5~+6		Cn_tettuiear
-1689	b+4, 2, 1+2	m, m, m(Throw)	15,15,5	15		Throw(KND)			Cn_alttac01
+1679	b+4, 2, 1	m, m, h	15,15,17	15	+1~+2	+5~+6	+5~+6		Cn_tettuiear
+1663	b+4, 2, 1+2	m, m, m(Throw)	15,15,5	15		Throw(KND)			Cn_alttac01
 	b+4, 2, 1+2, 1 or 2 or 3 or 4 (Cancel)	m, m, (Special)	15,15	15a	-50	-39s	-38s	
-1749	b+4, 3	m, h	15,22	15	-9~-8	KND	KND	Tail spin	Cn_kinlmk
-1805	b+1+2	m	26	22~23	+6~+7	KND	KND		Cn_Whammer
-1754	b+3+4	h(Absorbs 1 h/m hit)	22	28~29 (7~15)	-2~-1	KND	KND		Cn_RollK
-1791	b+2+3	!	60	63~64	KND	KND	KND		Cn_SPrussian
-1525	u/b+2	h	18	20	-5	+9	CS		sJUMP_rp03B
-1507	u/f+1	h	20	15	-9	KND	KND		Cn_blind
-1524	u or u/f+2	m (TJ)	20	30~31 js9~29	-5~-4	KND	KND		Cn_9RP
+1724	b+4, 3	m, h	15,22	15	-9~-8	KND	KND	Tail spin	Cn_kinlmk
+1780	b+1+2	m	26	22~23	+6~+7	KND	KND		Cn_Whammer
+1729	b+3+4	h(Absorbs 1 h/m hit)	22	28~29 (7~15)	-2~-1	KND	KND		Cn_RollK
+1766	b+2+3	!	60	63~64	KND	KND	KND		Cn_SPrussian
+1499	u/b+2	h	18	20	-5	+9	CS		sJUMP_rp03B
+1481	u/f+1	h	20	15	-9	KND	KND		Cn_blind
+1498	u or u/f+2	m (TJ)	20	30~31 js9~29	-5~-4	KND	KND		Cn_9RP
 	u/f+3	m (TJ)	16	17~21	-7~-3	KND	KND	
 	u/b+4	m (TJ)	21	22~23 js9~	-17~-16	KND	KND	
 	u+4	m (TJ)	21	22~23 js9~	-13~-12	KND	KND	
-1548	u/f+4	m (TJ)	21	22~23 js9~	-9~-8	KND	KND		Cn_jprk00F
-1562	u/f+3+4	h(Throw)?, (TJ)	42	38~42(d)					Cn_tobikani
+1522	u/f+4	m (TJ)	21	22~23 js9~	-9~-8	KND	KND		Cn_jprk00F
+1536	u/f+3+4	h(Throw)?, (TJ)	42	38~42(d)					Cn_tobikani
 	~js20~		Throw(KND)					
-1706	f, F+2	m	20	15~16 (16~)	-12~-11	KND	KND		Cn_russianhook
-1707	f, F+2~1+2	h(Throw)	35	43~44		Throw(KND)			Cn_urakenN
-1833	f, F+3	h	35	21~23 (22~)	+3~+5	KND	KND	Homing, Tail spin	Cn_ki00
-1835	f, F+4	m	21	26~28as (27~)	-1~+1	+3~+5s	KND		Cn_abise
-1806	qcb+2	m	23	26~27 (26~)	-15~-14	Launch (JG?)	Launch (JG?)		Cn_sakehizi
-1823	f, f, f+2	m	25	15~17 (18~)	+6~+8	KND	TFU		Cn_runrp00
-1788	f, f, f+4	m(, (throw))	25(,25)	20~21 (23~)	-7~-6	Throw(KND)	Throw(KND)		Cn_runrk00
-1820	WR+3	l(, (throw))	20(,20)	17 cs12~ ar10~	-15	Throw(KND)	Throw(KND)		Cn_runlk00
+1680	f, F+2	m	20	15~16 (16~)	-12~-11	KND	KND		Cn_russianhook
+1681	f, F+2~1+2	h(Throw)	35	43~44		Throw(KND)			Cn_urakenN
+1808	f, F+3	h	35	21~23 (22~)	+3~+5	KND	KND	Homing, Tail spin	Cn_ki00
+1810	f, F+4	m	21	26~28as (27~)	-1~+1	+3~+5s	KND		Cn_abise
+1781	qcb+2	m	23	26~27 (26~)	-15~-14	Launch (JG?)	Launch (JG?)		Cn_sakehizi
+1798	f, f, f+2	m	25	15~17 (18~)	+6~+8	KND	TFU		Cn_runrp00
+1763	f, f, f+4	m(, (throw))	25(,25)	20~21 (23~)	-7~-6	Throw(KND)	Throw(KND)		Cn_runrk00
+1795	WR+3	l(, (throw))	20(,20)	17 cs12~ ar10~	-15	Throw(KND)	Throw(KND)		Cn_runlk00
 	WR+3 (Far)	l	20	17~18 cs12~ ar10~	-15~-14	KND	KND	
-1765	WS+1	m	12	12~13	-3~-2	+4~+5	+4~+5		Co_s_tlp00
-1766	WS+1, 2	m, h	12,18	12~13	-7~-6	+10~+11kg	KND	Tail spin	Co_s_tlp_rp
-1767	WS+1, 3	m, m	12,20	12~13	-13~-12	KND	KND	Wall bounce	Co_s_tlp_lk
-1837	WS+2	m	15	15~16	-12~-11	Launch (JG?)	Launch (JG?)		Cn_sidrp
-1770	WS+3	m	21	16~17	-9~-8	KND	KND	Wall bounce	Co_s_tlk00
+1740	WS+1	m	12	12~13	-3~-2	+4~+5	+4~+5		Co_s_tlp00
+1741	WS+1, 2	m, h	12,18	12~13	-7~-6	+10~+11kg	KND	Tail spin	Co_s_tlp_rp
+1742	WS+1, 3	m, m	12,20	12~13	-13~-12	KND	KND	Wall bounce	Co_s_tlp_lk
+1812	WS+2	m	15	15~16	-12~-11	Launch (JG?)	Launch (JG?)		Cn_sidrp
+1745	WS+3	m	21	16~17	-9~-8	KND	KND	Wall bounce	Co_s_tlk00
 	WS+4	m	15	11~12	-5~-4	+6~+7	+6~+7	
-1690	WS+1+2	m	28	12~13	-14~-13	KND	KND		Cn_tackle
-1792	SS+2	m	16	20~21 (29~)	-10~-9	-4~-3	+1~+2		Cn_sdhzlp00
-1793	SS+2, 3	m, h(, (throw))	16,17(,20)	20~21 (29~)	-9	+5	Throw(KND)		Cn_DSwinghi
-1802	SS+2, 1+2	m, hm	16,8,12	20~21 (29~)	-4~-3	+2~+3s	+2~+3s (+8~+9s)		Cn_DSwing03
-1803	SS+2, 1+2, 4	m, hm, h	16,8,12,28	20~21 (29~)	-10~-9	CS	CS		Cn_DSHK
+1664	WS+1+2	m	28	12~13	-14~-13	KND	KND		Cn_tackle
+1767	SS+2	m	16	20~21 (29~)	-10~-9	-4~-3	+1~+2		Cn_sdhzlp00
+1768	SS+2, 3	m, h(, (throw))	16,17(,20)	20~21 (29~)	-9	+5	Throw(KND)		Cn_DSwinghi
+1777	SS+2, 1+2	m, hm	16,8,12	20~21 (29~)	-4~-3	+2~+3s	+2~+3s (+8~+9s)		Cn_DSwing03
+1778	SS+2, 1+2, 4	m, hm, h	16,8,12,28	20~21 (29~)	-10~-9	CS	CS		Cn_DSHK
 	SS+2, 1+2, 1+2	m, hm, m(Throw)	16,8,12,5	20~21 (29~)		Throw(KND)		
 	SS+2, 1+2, 1+2, 1 or 2 or 3 or 4 (Cancel)	m, hm, (Special)	16,8,12	20~21 (29~) Air	-51~-50	-45~-44s	-45~-44s (-39~-38s)	
 	SS+3+4	(Special) (TC)		s				
-1618	BT d+3	m	20	16	-11	KND	KND		Cn_BLKick
+1592	BT d+3	m	20	16	-11	KND	KND		Cn_BLKick
 	Face down Grounded 1+2	(Special)		s(b)				
-1839	Face down Grounded 1+2, 1+2	(Special), m(Throw)	5	30		Throw(KND)			Cn_hohukutac
-1720	Opponent Down d+3+4	On grounded opponent(l)	19	24	-11	0	0		Cn_humi
+1814	Face down Grounded 1+2, 1+2	(Special), m(Throw)	5	30		Throw(KND)			Cn_hohukutac
+1694	Opponent Down d+3+4	On grounded opponent(l)	19	24	-11	0	0		Cn_humi
 	qcf	(Special)		24				
-1807	qcf+1	h	20	15~16 (17~)	-3~-2	CS	CS		Cn_hadohLP
-1808	qcf+2	m	25	18~19 (20~)	-14	Launch (JG?)	Launch (JG?)		Cn_hadoh03
-1771	qcf+3	l (TC)	17(,20)	17s(19~) cs12~ ar10~	-15	-6	Throw(KND)		Cn_hadohlk
+1782	qcf+1	h	20	15~16 (17~)	-3~-2	CS	CS		Cn_hadohLP
+1783	qcf+2	m	25	18~19 (20~)	-14	Launch (JG?)	Launch (JG?)		Cn_hadoh03
+1746	qcf+3	l (TC)	17(,20)	17s(19~) cs12~ ar10~	-15	-6	Throw(KND)		Cn_hadohlk
 	qcf+3 (Far)	l (TC)	17	17~18s (19~) cs12~ ar10~	-14~-13	-5~-4	KND	
-1777	qcf+4	m	23,(10)	17~18 (19~)	-10~-9	Throw(KND)	Throw(KND)		Cn_hadohhiza
+1752	qcf+4	m	23,(10)	17~18 (19~)	-10~-9	Throw(KND)	Throw(KND)		Cn_hadohhiza
 	qcf+4 When hit 1, 3, 4, 2	Chained	25,10,20	17~18 (19~)		Throw(KND)		
 	qcf+4 When hit 2, 4, 3, 1	Chained	25,10,20	17~18 (19~)		Throw(KND)		
 	qcf+1+2	m	28	12~13 (14~)	-15~-14	KND	KND	

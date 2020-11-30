@@ -1,203 +1,203 @@
 move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes		Move Name
-2287	in rage 1+2 or WS+1+2	h	55	13 pc8~	-3	KND	KND	Rage art		Uk_RageArts02
+2265	in rage 1+2 or WS+1+2	h	55	13 pc8~	-3	KND	KND	Rage art		Uk_RageArts02
 	in rage d/f+3+4	(Special), (Special) (TC)		13 8~				Rage drive	
-1747	in rage d/f+2+3	m, m	14,21	14	+7	JG	JG	Rage drive		Uk_wolf_02_EX
+1721	in rage d/f+2+3	m, m	14,21	14	+7	JG	JG	Rage drive		Uk_wolf_02_EX
 	in rage D/f+2+3	m, m (DUK)	14,21	14	+15g	JG	JG	Rage drive	
-1903	in rage d/f+3+4, 1+2	(Special), m x 5	10*4,19	15,(35~) cs1~	+1 (wl+7)	KND	KND	Rage art		Uk_hizilu_EX
-1725	1	h	7	10	+1	+8	+8			Uk_lp00F
-1638	1, 1	h, h	7,7	10	-3	+3	+3			Uk_lp02
+1874	in rage d/f+3+4, 1+2	(Special), m x 5	10*4,19	15,(35~) cs1~	+1 (wl+7)	KND	KND	Rage art		Uk_hizilu_EX
+1703	1	h	7	10	+1	+8	+8			Uk_lp00F
+1616	1, 1	h, h	7,7	10	-3	+3	+3			Uk_lp02
 	1, 1, 3 or 4 to Weave	h, h, (Special)	7,7	10	-6	0	0		
-1644	1, 1, 2	h, h, h	7,7,15	10	-7~-6	+4~+5	+4~+5			Uk_lprp02
+1622	1, 1, 2	h, h, h	7,7,15	10	-7~-6	+4~+5	+4~+5			Uk_lprp02
 	1, 1, 2, f+3 or f+4	h, h, h (DUK)	7,7,15	10	-3	+8	+8		
 	1, 1, 2, 3 or 4 to Weave	h, h, h, (Special)	7,7,15	10	-3	+8	+8		
 	1, 1, 2, b+3 or b+4 to Sway	h, h, h, (Sway)	7,7,15	10	-5	+6	+6		
-1633	1, 1, d+1	h, h, m	7,7,15	10	-6	0	+5			Uk_lp01
+1611	1, 1, d+1	h, h, m	7,7,15	10	-6	0	+5			Uk_lp01
 	1, 1, d+1, B	h, h, m, (FLK)	7,7,15	10	0	+6	+11		
 	1, 1, d+1, B, d/b (Cancel)	h, h, m, (FLK)	7,7,15	10s	-2	+4	+9		
-1649	1, 2	h, h	7,10	10	-2	+6	+6			Uk_lprpF
+1627	1, 2	h, h	7,10	10	-2	+6	+6			Uk_lprpF
 	1, 2, 3 or 4 to Weave	h, h, (Special)	7,10	10	-4	+4	+4		
-1658	1, 2, 1	h, h, h	7,10,15	10	-3	+3	+3			Uk_123
+1636	1, 2, 1	h, h, h	7,10,15	10	-3	+3	+3			Uk_123
 	1, 2, 1, F	h, h, h, (Special)	7,10,15	10	-2	+4	+4		
 	1, 2, 1, B	h, h, h, (FLK)	7,10,15	10	-1	+5	+5		
 	1, 2, 1, B, d/b (Cancel)	h, h, h, (FLK)	7,10,15	10s	-3	+3	+3		
 	1, 2, 1, 3 or 4 to Weave	h, h, h, (Special)	7,10,15	10	-6	0	0		
-1669	1, 2, 1, 2	h, h, h, m	7,10,15,15	10	-10~-9	KND	KND			Uk_123_U4
+1647	1, 2, 1, 2	h, h, h, m	7,10,15,15	10	-10~-9	KND	KND			Uk_123_U4
 	1, 2, 1, 2	h, h, h, m, (Special)	7,10,15,15	10	-6~-5	KND	KND		
-1667	1, 2, 1, d+2	h, h, h, l (TC)	7,10,15,19	cs10~	-12~-11	+1~+2s	KND			Uk_123_L4
+1645	1, 2, 1, d+2	h, h, h, l (TC)	7,10,15,19	cs10~	-12~-11	+1~+2s	KND			Uk_123_L4
 	1, 2, 1, d+2, d	h, h, h, l (TC)	7,10,15,19	s cs10~	-12~-11	+1~+2s	KND		
 	1, d+1	h, m	7,15	10~	-6	0	+5		
 	1, d+1, B	h, m, (FLK)	7,15	10~	0	+6	+11		
 	1, d+1, B, d/b (Cancel)	h, m, (FLK)	7,15	10~ RC	-2	+4	+9		
-1670	2	h	12	12	-1	+5	+5			Uk_rp00
-1671	2, 1	h, h	12,14	12	-5	+6	+6			Uk_rplp
+1648	2	h	12	12	-1	+5	+5			Uk_rp00
+1649	2, 1	h, h	12,14	12	-5	+6	+6			Uk_rplp
 	2, 1, F	h, h, (Special)	12,14	12	+3	+14 GB	+14		
 	2, 1, B	h, h, (FLK)	12,14	12	+3	+14 GB	+14		
 	2, 1, B, d/b (Cancel)	h, h, (FLK)	12,14	12 RC	+2	+13 GB	+13		
-1673	2, 1, 2	h, h, m	12,14,22	12	-11	KND	KND			Uk_rplprp
-1732	f+2	m?	11	21~22	-6~-5	+5~+6	+5~+6			Uk_new6RPLPR
-1733	f+2, 1	m, h	11,12	21~22	-5	-1	-1			Uk_new6RPLP
+1651	2, 1, 2	h, h, m	12,14,22	12	-11	KND	KND			Uk_rplprp
+1706	f+2	m?	11	21~22	-6~-5	+5~+6	+5~+6			Uk_new6RPLPR
+1707	f+2, 1	m, h	11,12	21~22	-5	-1	-1			Uk_new6RPLP
 	f+2, 1, F	m, h, (Special)	11,12	21~22	0	+4	+4		
 	f+2, 1, B	m, h, (FLK)	11,12	21~22	+1	+5	+5		
 	f+2, 1, B, d/b (Cancel)	m, h, (FLK)	11,12	21~22 RC	0	+4	+4		
-1675	f+2, 1~2	m, m	11,20	21	-9	KND	KND			Uk_rp_body2
+1653	f+2, 1~2	m, m	11,20	21	-9	KND	KND			Uk_rp_body2
 	f+1+2	mh	10,12	15~16, 23~25	-14~-12	-3~-1	-3~-1		
 	f+1+2, 2	mh, m	10,12,20	15~16, 23~25	-13~-12	KND	KND		
-1838	d/f+1	m	12	13~14	-2~-1	+5~+6	+5~+6			Uk_t_slpF
+1810	d/f+1	m	12	13~14	-2~-1	+5~+6	+5~+6			Uk_t_slpF
 	d/f+1, 3 or 4 to Weave	m, (Special)	12	13~14	-7~-6	0~+1	0~+1		
-1843	d/f+1, 2	m, h	12,13	13~14	-6	+3	+5			Uk_t_slp_rp
+1815	d/f+1, 2	m, h	12,13	13~14	-6	+3	+5			Uk_t_slp_rp
 	d/f+1, 2, 3 or 4 to Weave (Cancel)	m, (Special)	12	13~14	-16~-15	-9~-8	-9~-8		
-1849	d/f+1, 2~1	m, h	12,20	13~14	-2~-1	+2~+3	CS			Uk_slp_rp_c
+1821	d/f+1, 2~1	m, h	12,20	13~14	-2~-1	+2~+3	CS			Uk_slp_rp_c
 	d/f+12~1 B	m, h, (FLK)	12,20	13~14	0~+1	+4~+5	CS		
-1848	d/f+1, 2~2	m, m	12,20	13~14	-9	KND	KND			Uk_slp_rp_b
-1681	d/f+1, 2~f+1+2	m, hh	12,8,12	13~14	-3	0	0(+3)			Uk_rp_set2b
+1820	d/f+1, 2~2	m, m	12,20	13~14	-9	KND	KND			Uk_slp_rp_b
+1659	d/f+1, 2~f+1+2	m, hh	12,8,12	13~14	-3	0	0(+3)			Uk_rp_set2b
 	d/f+1, 2~f+1+2 , 3 or 4 to Weave	m, hh, (Special)	12,8,12	13~14	-4	-1	-1(+2)		
-1852	d/f+2	m	18	16~17	-11~-10	+6~+7	CS	Homing		Uk_t_srpF
+1824	d/f+2	m	18	16~17	-11~-10	+6~+7	CS	Homing		Uk_t_srpF
 	d/f+2, 3 or 4 to Weave	m, (Special)	18	16~17	-7~-6	+10~+11	CS	Homing	
-1743	d/f+1+2	mm	14,21	14,24~25	-12~-11	KND	KND			Uk_wolf_02
-1742	d/f+1+2 (Second hit miss)	m	14	14	-23	-12s	-12s			Uk_wolf_01
-1850	d+1	l (TC)	14	16s cs6~	-13	0	0			Uk_Torpedo00
-1823	d+2	l (TC)	13	17 cs6~	-18	-5	-5			Uk_t_srp00
-1825	d+2, 1	l (TC), m	13,8	17 6~	-11~-10	-5~-4	0~+1			Uk_t_srp01
+1717	d/f+1+2	mm	14,21	14,24~25	-12~-11	KND	KND			Uk_wolf_02
+1716	d/f+1+2 (Second hit miss)	m	14	14	-23	-12s	-12s			Uk_wolf_01
+1822	d+1	l (TC)	14	16s cs6~	-13	0	0			Uk_Torpedo00
+1796	d+2	l (TC)	13	17 cs6~	-18	-5	-5			Uk_t_srp00
+1798	d+2, 1	l (TC), m	13,8	17 6~	-11~-10	-5~-4	0~+1			Uk_t_srp01
 	d+2, 1, 3 or 4 to Weave	l (TC), m, (Special)	13,8	17 6~	-6~-5	0~+1	+5~+6		
 	d+2, 1, 2	l (TC), m, h	13,8,17	17 6~	-2~-1	KND	CS		
-1828	d+2~n+1	m	15	29~30	-4~-3	+7~+8	+7~+8			Uk_t_srp03
+1800	d+2~n+1	m	15	29~30	-4~-3	+7~+8	+7~+8			Uk_t_srp03
 	d+2~n+1, 3 or 4 to Weave	m, (Special)	15	29~30	-6~-5	+5~+6	+5~+6		
-1826	d+2~n+1, f+2	m, h	15,17	29~30	-2~-1	KND	CS			Uk_t_srp02
-1881	d+2~n+1 , 2	m, m	15,20	29~30	-13~-12	+3~+4s	KND			Uk_s_tlp02B
-1829	d/b+2 or FC+d/b+2	l (TC)	21	26~27 cs6or1~	-12~-11	+1~+2s	KND			Uk_lowrp_01
+1799	d+2~n+1, f+2	m, h	15,17	29~30	-2~-1	KND	CS			Uk_t_srp02
+1852	d+2~n+1 , 2	m, m	15,20	29~30	-13~-12	+3~+4s	KND			Uk_s_tlp02B
+1801	d/b+2 or FC+d/b+2	l (TC)	21	26~27 cs6or1~	-12~-11	+1~+2s	KND			Uk_lowrp_01
 	d/b+2, d/b or D	l (TC)	21	26~27s cs6or1~	-12~-11	+1~+2s	KND		
-1869	d/b+3	l	10	16	-15	+1	+1			Uk_t_slk00B
-1870	d/b+3, 2	l, h	10,16	16	-7~-6	KND	KND			Uk_lk_rp00
-1740	d/b+1+2	m	21	36~37 pc8~35	-18~-17	+24~+25	+24~+25	Power crush		Uk_midlp
-1808	b+1	h	17	13~14	-14~-13	+2~+3	CS			Uk_left_hook
+1841	d/b+3	l	10	16	-15	+1	+1			Uk_t_slk00B
+1842	d/b+3, 2	l, h	10,16	16	-7~-6	KND	KND			Uk_lk_rp00
+1714	d/b+1+2	m	21	36~37 pc8~35	-18~-17	+24~+25	+24~+25	Power crush		Uk_midlp
+1781	b+1	h	17	13~14	-14~-13	+2~+3	CS			Uk_left_hook
 	b+1, B	h, (FLK)	17	13~14	-1~0	+9~+10	CS		
 	b+1, B, d/b (Cancel)	h, (FLK)	17	13~14s	-3~-2	+7~+8	CS		
-1813	b+1, 2	h, h	17,9	13	-5	+19k	+19k			Uk_lhook_hrp2
+1786	b+1, 2	h, h	17,9	13	-5	+19k	+19k			Uk_lhook_hrp2
 	b+1, 2, F	h, h, (PAB)	17,10	13~14	-6~-5	+5~+6	+5~+6		
-1815	b+1, d+2	h, l (TC)	17,10	cs12~	-12~-10	+1~+1	-1~+1			Uk_lhook_rp
+1788	b+1, d+2	h, l (TC)	17,10	cs12~	-12~-10	+1~+1	-1~+1			Uk_lhook_rp
 	b+1, d+2, f	h, l (TC), (PAB)	17,10	12~	-10~-8	+1~+3	+1~+3		
-1816	b+1, d+2, 1	h, l (TC), m	17,10,20	12~	-9~-7	KND	KND			Uk_lhook_rplp
-1676	b+2	m?	20	17~18	-13~-12	CS	CS			Uk_rp00B
+1789	b+1, d+2, 1	h, l (TC), m	17,10,20	12~	-9~-7	KND	KND			Uk_lhook_rplp
+1654	b+2	m?	20	17~18	-13~-12	CS	CS			Uk_rp00B
 	b+1+2	Absorbs 1 h/m hit		2~					
 	When parry successful 1	m	30	14~16	-12~-10	CS	Launch		
-1584	u/f+1	m (TJ)	18	19~21 js9~	-6~-4	+5~+7	+5~+7			Uk_jplp00F
-1601	u or u/f+2	m (TJ)	20	22~25 js9~	-14~-11	KND	KND			Uk_jprp00F
-1612	u or u/f+3	l (TJ)	20	36~37 js9~35	-12~-11	+9~+10	+9~+10			Uk_sjk00F
+1562	u/f+1	m (TJ)	18	19~21 js9~	-6~-4	+5~+7	+5~+7			Uk_jplp00F
+1579	u or u/f+2	m (TJ)	20	22~25 js9~	-14~-11	KND	KND			Uk_jprp00F
+1590	u or u/f+3	l (TJ)	20	36~37 js9~35	-12~-11	+9~+10	+9~+10			Uk_sjk00F
 	u or u/f+3, 2	l (TJ), h	20,16	36~37 9~35	-7~-6	KND	KND		
-1615	u or u/f+4	m (TJ)	20	23~24 js9~	-14~-13	Launch (JG?)	Launch (JG?)			Uk_jprk00F
-1938	f, F+2	m	24	14~17 (15~)	-13~-10s	KND	KND			Uk_dragon_rp
-1943	qcf+1	m	21	16(16~)	-10	KND	KND			Uk_hizilu
+1593	u or u/f+4	m (TJ)	20	23~24 js9~	-14~-13	Launch (JG?)	Launch (JG?)			Uk_jprk00F
+1907	f, F+2	m	24	14~17 (15~)	-13~-10s	KND	KND			Uk_dragon_rp
+1912	qcf+1	m	21	16(16~)	-10	KND	KND			Uk_hizilu
 	qcf+1, B	m, (FLK)	21	16(16~)	-3	KND	KND		
 	qcf+1, B, d/b (Cancel)	m, (FLK)	21	16s(16~)	-4	KND	KND		
-1945	qcf+2	l	18	19	-19	+2	+2			Uk_236RP
+1914	qcf+2	l	18	19	-19	+2	+2			Uk_236RP
 	qcf+2 f	l (PAB)	18	19	-19	+2	+2		
-1944	qcb, f+2+3	!	70	66~69 (66~)	KND	KND	KND			Uk_guard_00
-1531	f, f, f+2	m (TJ)	30	20~24 (23~) js9~	+9~+13g	KND	KND			Uk_RUN_rp00
-1532	WR+1	l (TC)	23	16(49~) cs6~	-12	KND	KND			Uk_RUN_lp00
-1874	WS+1	m	12	11~12	-3~-2	+3~+4	+8~+9			Uk_s_tlp00
-1876	WS+1, 1	m, h	12,7	11~12	-3	+3	+3			Uk_s_tlp01
+1913	qcb, f+2+3	!	70	66~69 (66~)	KND	KND	KND			Uk_guard_00
+1509	f, f, f+2	m (TJ)	30	20~24 (23~) js9~	+9~+13g	KND	KND			Uk_RUN_rp00
+1510	WR+1	l (TC)	23	16(49~) cs6~	-12	KND	KND			Uk_RUN_lp00
+1845	WS+1	m	12	11~12	-3~-2	+3~+4	+8~+9			Uk_s_tlp00
+1847	WS+1, 1	m, h	12,7	11~12	-3	+3	+3			Uk_s_tlp01
 	WS+1, 1,	m, h, (Special)	12,7	11~12	-6	0	0		
-1879	WS+1, 2	m, m	12,20	11~12	-13~-12	+3~+4s	KND			Uk_s_tlp02
-2003	WS+2	m	17	14~16	-7~-5	+4~+6a	Launch (JG?)			Uk_sidrp
+1850	WS+1, 2	m, m	12,20	11~12	-13~-12	+3~+4s	KND			Uk_s_tlp02
+1969	WS+2	m	17	14~16	-7~-5	+4~+6a	Launch (JG?)			Uk_sidrp
 	WS+2, 3 or 4 to Weave	m, (Special)	17	14~16	-7~-5	+4~+6a	Launch (JG?)		
 	FC+d/f+1	l (TC), (PAB)	12	15~16 cs1~	-12~-11	+2~+3	+2~+3		
-1873	FC+d/f+2	m?	20	18~19	-15~-14	Launch	Launch			Uk_s_tlrp
-1821	Opponent Down d+1+2	l(On grounded opponent)	12	17	-11	+2	+2			Uk_downp_00
+1844	FC+d/f+2	m?	20	18~19	-15~-14	Launch	Launch			Uk_s_tlrp
+1794	Opponent Down d+1+2	l(On grounded opponent)	12	17	-11	+2	+2			Uk_downp_00
 	2+3+4	(Special)		17					
 	3 (to LWV)	(LWV)		17					
-1993	LWV 1	m	14	15(23~)	-10	+1	+1			Uk_Lbodyh
-1634	LWV 1, 1	m, m	14,22	15(23~)	-13~-11	KND	KND			Uk_lp02gazel
+1959	LWV 1	m	14	15(23~)	-10	+1	+1			Uk_Lbodyh
+1612	LWV 1, 1	m, m	14,22	15(23~)	-13~-11	KND	KND			Uk_lp02gazel
 	LWV 1, B	m, (FLK)	14	15(23~)	-3	+8	+8		
 	LWV 1, B, d/b (Cancel)	m, (FLK)	14	15(23~)	-4	+7	+7		
-2010	LWV 1, f+1	m, m	14,9	15(23~)	-3	+3	+3			Uk_lwlbody02R
-2011	LWV 1, f+1, 1	m, m, h	14,9,8	15(23~)	+3	+7	CS			Uk_lwlbody03
+1976	LWV 1, f+1	m, m	14,9	15(23~)	-3	+3	+3			Uk_lwlbody02R
+1977	LWV 1, f+1, 1	m, m, h	14,9,8	15(23~)	+3	+7	CS			Uk_lwlbody03
 	LWV 1, f+1, 1, B	m, m, h, (FLK)	14,9,8	15(23~)	+4	+8	CS		
 	LWV 1, f+1, 1, B, d/b (Cancel)	m, m, h, (FLK)	14,9,8	15(23~)s	+2	+6	CS		
-1696	LWV 2	m	13	14~16 (22~)	-5~-3	+4~+6	+4~+6			Uk_L_wavetac
+1674	LWV 2	m	13	14~16 (22~)	-5~-3	+4~+6	+4~+6			Uk_L_wavetac
 	LWV 2, f	m, (Special)	13	14~16 (22~)	-1~+1	+8~+10	+8~+10		
-1697	LWV 2, 1	m, m	13,21	14~16 (22~)	-8	+4s	KND			Uk_LtacLp
+1675	LWV 2, 1	m, m	13,21	14~16 (22~)	-8	+4s	KND			Uk_LtacLp
 	4 (to RWV)	(RWV)		14~16 (22~)					
-1700	RWV 1	m	13	14~16 (22~)	-5~-3	+4~+6	+4~+6			Uk_R_wavetac
+1678	RWV 1	m	13	14~16 (22~)	-5~-3	+4~+6	+4~+6			Uk_R_wavetac
 	RWV 1, f	m, (Special)	13	14~16 (22~)	-1~+1	+8~+10	+8~+10		
-1701	RWV 1, 2	m, m	13,15	14~16 (22~)	-13~-11	Launch (JG?)	Launch (JG?)			Uk_tacUpper
-1991	RWV 2	m	22	15~16 (23~)	-13~-12	KND	KND	Wallbounce		Uk_right_b
+1679	RWV 1, 2	m, m	13,15	14~16 (22~)	-13~-11	Launch (JG?)	Launch (JG?)			Uk_tacUpper
+1957	RWV 2	m	22	15~16 (23~)	-13~-12	KND	KND	Wallbounce		Uk_right_b
 	3+4 (to ALB)	(ALB)		15~16 (23~)					
 	3+4, F	(PAB)		15~16 (23~)					
-1927	ALB 2	m	22	23~24	-8~-7	KND	KND			Uk_turn_rp_02
-1926	ALB d+2	l (TC)	17	21(34) cs6~	-12	+1s	KND			Uk_low_rp
+1896	ALB 2	m	22	23~24	-8~-7	KND	KND			Uk_turn_rp_02
+1895	ALB d+2	l (TC)	17	21(34) cs6~	-12	+1s	KND			Uk_low_rp
 	ALB U	(Special)		21(34) 6~					
 	ALB D	(Special)		21(34) 6~					
 	3+4, d or u, F (two spins)	(PAB)		21(34) 6~					
-1936	ALB d or U 1 (two spins)	m	34	12~13 (49~50)	-8~-7	KND	KND			Uk_turnlp_00
-1937	ALB d or U d+1 (two spins)	l (TC)	30	22~23 (58~59) cs6~	-12~-11	KND	KND			Uk_turnhook_L
+1905	ALB d or U 1 (two spins)	m	34	12~13 (49~50)	-8~-7	KND	KND			Uk_turnlp_00
+1906	ALB d or U d+1 (two spins)	l (TC)	30	22~23 (58~59) cs6~	-12~-11	KND	KND			Uk_turnhook_L
 	f+3 or f+4 FC+d/f+3 or d/f+4 (to DCK)	(Special) (TC)(DCK)		22~23 (58~59) 6~					
-1953	DCK 1	m	17	19~20 (25~)	-7~-6	CS (10)	Launch			Uk_gazel
-1722	DCK 2	m	15	19~21 (25~)	-14~-12	Launch (JG?)	Launch (JG?)			Uk_step_RP
-1960	DCK 1+2	m	3	16(22~)	-6	0	0			Uk_rash_01
-1962	DCK 1+2, 1	m, m	3,3	16(22~)	-9	+2	+2			Uk_rash_02
-1964	DCK 1+2, 1, 2	m, m, m	3,3,3	16(22~)	-9	-3	-3			Uk_rash_03
-1965	DCK 1+2, 1, 2, 1	m, m, m, m	3,3,3,3	16(22~)	-9	+2	+2			Uk_rash_04
-1966	DCK 1+2, 1, 2, 1, 2	m, m, m, m, m	3,3,3,3,3	16(22~)	-9	-3	-3			Uk_rash_05
-1967	DCK 1+2, 1, 2, 1, 2, 1	m, m, m, m, m, m	3,3,3,3,3,3	16(22~)	-9	+2	+2			Uk_rash_06
-1968	DCK 1+2, 1, 2, 1, 2, 1, 2	m, m, m, m, m, m, m	3,3,3,3,3,3,3	16(22~)	-9	-3	-3					Uk_rash_07
-1969	DCK 1+2, 1, 2, 1, 2, 1, 2, 1	m, m, m, m, m, m, m, m	3,3,3,3,3,3,3,3	16(22~)	-9	+2	+2					Uk_rash_08
-1970	DCK 1+2, 1, 2, 1, 2, 1, 2, 1, 2	m, m, m, m, m, m, m, m, m	3,3,3,3,3,3,3,3,3	16(22~)	-10	-4	-4					Uk_rash_09
-1971	DCK 1+2, 1, 2, 1, 2, 1, 2, 1, 2, 1	m, m, m, m, m, m, m, m, m, m	3,3,3,3,3,3,3,3,3,12	16(22~)	-12	Launch	Launch					Uk_rash_10
-1972	DCK f+2	h	21	15~16 (21~)	-7~-6	KND	CS	Tail spin		Uk_Eagle
+1921	DCK 1	m	17	19~20 (25~)	-7~-6	CS (10)	Launch			Uk_gazel
+1700	DCK 2	m	15	19~21 (25~)	-14~-12	Launch (JG?)	Launch (JG?)			Uk_step_RP
+1928	DCK 1+2	m	3	16(22~)	-6	0	0			Uk_rash_01
+1930	DCK 1+2, 1	m, m	3,3	16(22~)	-9	+2	+2			Uk_rash_02
+1932	DCK 1+2, 1, 2	m, m, m	3,3,3	16(22~)	-9	-3	-3			Uk_rash_03
+1933	DCK 1+2, 1, 2, 1	m, m, m, m	3,3,3,3	16(22~)	-9	+2	+2			Uk_rash_04
+1934	DCK 1+2, 1, 2, 1, 2	m, m, m, m, m	3,3,3,3,3	16(22~)	-9	-3	-3			Uk_rash_05
+1935	DCK 1+2, 1, 2, 1, 2, 1	m, m, m, m, m, m	3,3,3,3,3,3	16(22~)	-9	+2	+2			Uk_rash_06
+1936	DCK 1+2, 1, 2, 1, 2, 1, 2	m, m, m, m, m, m, m	3,3,3,3,3,3,3	16(22~)	-9	-3	-3					Uk_rash_07
+1937	DCK 1+2, 1, 2, 1, 2, 1, 2, 1	m, m, m, m, m, m, m, m	3,3,3,3,3,3,3,3	16(22~)	-9	+2	+2					Uk_rash_08
+1938	DCK 1+2, 1, 2, 1, 2, 1, 2, 1, 2	m, m, m, m, m, m, m, m, m	3,3,3,3,3,3,3,3,3	16(22~)	-10	-4	-4					Uk_rash_09
+1939	DCK 1+2, 1, 2, 1, 2, 1, 2, 1, 2, 1	m, m, m, m, m, m, m, m, m, m	3,3,3,3,3,3,3,3,3,12	16(22~)	-12	Launch	Launch					Uk_rash_10
+1940	DCK f+2	h	21	15~16 (21~)	-7~-6	KND	CS	Tail spin		Uk_Eagle
 	DCK f+2, 3 or 4 to Weave	h, (Special)	21	15~16 (21~)	+1~+2	KND	CS	Tail spin	
 	f+3, F* or f+4, F* (to Ext DCK)	(Special) (TC)(Ext DCK)		15~16 (21~)					
-1954	Ext DCK 1	m	21	19~20 (50~)	-7~-6	KND	Launch			Uk_gazel2
-1723	Ext DCK 2	m	21	19~21 (50~)	-14~-12	Launch	Launch			Uk_step_RP2
-1973	Ext DCK f+2	h	28	15~16 (46~)	+5~+6	CS	CS	Tail spin		Uk_Eagle2
+1922	Ext DCK 1	m	21	19~20 (50~)	-7~-6	KND	Launch			Uk_gazel2
+1701	Ext DCK 2	m	21	19~21 (50~)	-14~-12	Launch	Launch			Uk_step_RP2
+1941	Ext DCK f+2	h	28	15~16 (46~)	+5~+6	CS	CS	Tail spin		Uk_Eagle2
 	Ext DCK f+2, 3 or 4 to Weave	h, (Special)	28	15~16 (46~)	+9~+10 (+15~+16)	CS	CS	Tail spin	
 	Ext DCK 1+2, ,,	m, , ,	3,,,	16(47~)	-6	0	0		
 	f+3+4 (to PAB)	(PAB)		16(47~)					
 	PAB F	(PAB)		16(47~)					
 	PAB d/b (Cancel)	(Special) (TC)		s					
-1781	PAB 1	h(PAB)	10	12~13 (13~)	-2~-1	+9~+10	+9~+10			Uk_pkb_lp00R
-1783	PAB 1, 2	h, h	10,14	12~13 (13~)	0~+1	+8~+9	+8~+9			Uk_pkb_lprp
-1784	PAB 1, 2, 1	h, h, m, (PAB)	10,14,21	12~13 (13~)	-13~-11	+8~+10s	Launch (3rd hit)			Uk_pkb_rplp
-1790	PAB 2 or u/b+2	h(Absorbs 1 h/m hit), (PAB)	19(31)	14(15~)	-3	+2(KND)	CS	Homing		Uk_pkbrp00
-2017	PAB 1+2	h(Throw)	45	11(12~)		Throw(KND)				Thrmv_B1_00
-1791	PAB f+2	m?, (PAB)	18	18~19 (19~)	-13~-12	KND	KND			Uk_pkbrp01
-1792	PAB f+2, 1	m, m	18,25	18~19 (19~)	+1~+2	KND	KND			Uk_pkb6rplp
-1796	PAB f+1+2	h, (PAB)	5	15~16 (16~)	+6~+7	+4~+5	+4~+5			Uk_pkb_lrp
-1785	PAB d/f+1	m(PAB)	12	15~16 (16~)	-9~-8	+2~+3	+2~+3			Uk_pkblp03
-1787	PAB d/f+1, 1	m, m(PAB)	10,14	15~16 (16~)	-10~-9	+1~+2	+1~+2			Uk_pkblp02
-1788	PAB d/f+1, 1, 2	m, m, m(PAB)	10,14,12	15~16 (16~)	-11	-3	-3			Uk_pkbdemp01
-1789	PAB d/f+1, 1, 2, 1	m, m, m, m	10,14,12,20	15~16 (16~)	-13	KND	KND			Uk_pkbdemp02
-1786	PAB d/f+1, 2	m, h	10,20	15~16 (16~)	-6~-5	KND	KND	Tail spin		Uk_pkbUpHook
-1794	PAB d/f+2	m, (PAB)	16	16~17 (17~)	-10~-9	Launch (JG?)	Launch (JG?)			Uk_pkbrp02
-1773	PAB d+1	l (TC), (PAB)	12	15~16 (16~) cs6~	-12~-11	+2~+3	+2~+3			Uk_pkblowlp
-1774	PAB d+2	l (TC)	25	28~29s (29~) cs6~	-12~-11	+7~+8	KND			Uk_pkblowrp
-2004	PAB b+1	m	15	17~18 (18~)	-19~-18	-6~-5	-6~-5			Uk_lpBody01
-2006	PAB b+1, 1	m, h	15,10	17~18 (18~)	-7~-6	-1~0	-1~0			Uk_lpBody02
-2007	PAB b+1, 1, 2	m, h, m	15,10,12	17~18 (18~)	-11~-9	-5~-3	-5~-3			Uk_lpBody03
-2008	PAB b+1, 1, 2, 1	m, h, m, m	15,10,12,21	17~18 (18~)	-10	KND	KND			Uk_lpBody04
+1755	PAB 1	h(PAB)	10	12~13 (13~)	-2~-1	+9~+10	+9~+10			Uk_pkb_lp00R
+1757	PAB 1, 2	h, h	10,14	12~13 (13~)	0~+1	+8~+9	+8~+9			Uk_pkb_lprp
+1758	PAB 1, 2, 1	h, h, m, (PAB)	10,14,21	12~13 (13~)	-13~-11	+8~+10s	Launch (3rd hit)			Uk_pkb_rplp
+1764	PAB 2 or u/b+2	h(Absorbs 1 h/m hit), (PAB)	19(31)	14(15~)	-3	+2(KND)	CS	Homing		Uk_pkbrp00
+1983	PAB 1+2	h(Throw)	45	11(12~)		Throw(KND)				Thrmv_B1_00
+1765	PAB f+2	m?, (PAB)	18	18~19 (19~)	-13~-12	KND	KND			Uk_pkbrp01
+1766	PAB f+2, 1	m, m	18,25	18~19 (19~)	+1~+2	KND	KND			Uk_pkb6rplp
+1770	PAB f+1+2	h, (PAB)	5	15~16 (16~)	+6~+7	+4~+5	+4~+5			Uk_pkb_lrp
+1759	PAB d/f+1	m(PAB)	12	15~16 (16~)	-9~-8	+2~+3	+2~+3			Uk_pkblp03
+1761	PAB d/f+1, 1	m, m(PAB)	10,14	15~16 (16~)	-10~-9	+1~+2	+1~+2			Uk_pkblp02
+1762	PAB d/f+1, 1, 2	m, m, m(PAB)	10,14,12	15~16 (16~)	-11	-3	-3			Uk_pkbdemp01
+1763	PAB d/f+1, 1, 2, 1	m, m, m, m	10,14,12,20	15~16 (16~)	-13	KND	KND			Uk_pkbdemp02
+1760	PAB d/f+1, 2	m, h	10,20	15~16 (16~)	-6~-5	KND	KND	Tail spin		Uk_pkbUpHook
+1768	PAB d/f+2	m, (PAB)	16	16~17 (17~)	-10~-9	Launch (JG?)	Launch (JG?)			Uk_pkbrp02
+1747	PAB d+1	l (TC), (PAB)	12	15~16 (16~) cs6~	-12~-11	+2~+3	+2~+3			Uk_pkblowlp
+1748	PAB d+2	l (TC)	25	28~29s (29~) cs6~	-12~-11	+7~+8	KND			Uk_pkblowrp
+1970	PAB b+1	m	15	17~18 (18~)	-19~-18	-6~-5	-6~-5			Uk_lpBody01
+1972	PAB b+1, 1	m, h	15,10	17~18 (18~)	-7~-6	-1~0	-1~0			Uk_lpBody02
+1973	PAB b+1, 1, 2	m, h, m	15,10,12	17~18 (18~)	-11~-9	-5~-3	-5~-3			Uk_lpBody03
+1974	PAB b+1, 1, 2, 1	m, h, m, m	15,10,12,21	17~18 (18~)	-10	KND	KND			Uk_lpBody04
 	PAB b+1, 1, 2, 1, B	m, h, m, m, (FLK)	15,10,12,21	17~18 (18~)	-3	KND	KND		
-1795	PAB b+2	m(SWY)	25	28~29 (29~)	-14~-13	KND	KND	Wall bounce		Uk_pkb_4rp
-1771	PAB u or u/f+2	m (TJ)	23	17~19a (18~) js9~	-15~-13	Launch	Launch			Uk_pkb_jprpF
+1769	PAB b+2	m(SWY)	25	28~29 (29~)	-14~-13	KND	KND	Wall bounce		Uk_pkb_4rp
+1745	PAB u or u/f+2	m (TJ)	23	17~19a (18~) js9~	-15~-13	Launch	Launch			Uk_pkb_jprpF
 	b+3 or b+4 (to SWY)	(Special) (TC)(SWY)		17~19 (18~) 9~					
-1717	SWY 1	m	26	16~17 (22~)	-1~0s	+6~+7s	KND			Uk_sway_lp
-1715	SWY 2	m (TC)	30	17~18 (27~) cs1~	-18~-17	CS	CS			Uk_sway_rp
-1942	SWY 1+2 or +d, b, f, u direction	h(Throw)	0	10(20~)		Throw(+1)				Uk_CThmv_2
+1695	SWY 1	m	26	16~17 (22~)	-1~0s	+6~+7s	KND			Uk_sway_lp
+1693	SWY 2	m (TC)	30	17~18 (27~) cs1~	-18~-17	CS	CS			Uk_sway_rp
+1911	SWY 1+2 or +d, b, f, u direction	h(Throw)	0	10(20~)		Throw(+1)				Uk_CThmv_2
 	b+3+4 (to FLIK)	(FLIK)		10(20~)					
 	b+3+4, 3 or 4 to Weave	(Special)		10(20~)					
-1496	FLIK 1	h	14	12(17~)	-4	+7	+7			Uk_flklp01H
+1475	FLIK 1	h	14	12(17~)	-4	+7	+7			Uk_flklp01H
 	FLIK 1, b+3+4 (One to three hits)	h, (ALB)	14	12	+14	+25g	+25g		
-1508	FLIK 1, 1	h, h	14,8	12	-8	+1	+1			Uk_flklp02H
-1514	FLIK 1, 1, 1	h, h, h	14,8,8	12	-9	0	0			Uk_flk03_rpH
-1517	FLIK 1, 1, 1, 2	h, h, h, m	14,8,8,22	12	-7	KND	KND			Uk_flk03_rp
+1487	FLIK 1, 1	h, h	14,8	12	-8	+1	+1			Uk_flklp02H
+1493	FLIK 1, 1, 1	h, h, h	14,8,8	12	-9	0	0			Uk_flk03_rpH
+1496	FLIK 1, 1, 1, 2	h, h, h, m	14,8,8,22	12	-7	KND	KND			Uk_flk03_rp
 	FLIK 1, B	h, (FLK)	14	12	-1	+10	+10		
 	FLIK 1, B , d/b (Cancel)	h, (FLK)	14	12s	-3	+8	+8		
 	FLIK 1, 1, B	h, h, (FLK)	14,8	12	-3	+5	+5		
 	FLIK 1, 1, B, d/b (Cancel)	h, h, (FLK)	14,8	12s	-5	+3	+3		
 	FLIK 1, 1, 1, B	h, h, h, (FLK)	14,8,8	12	-4	+4	+4		
 	FLIK 1, 1, 1, B, d/b (Cancel)	h, h, h, (FLK)	14,8,8	12s	-6	+2	+2		
-1520	FLIK 1, f+1	h, m	14,17	12	-5	0s(+9s)	KND			Uk_flk_CF
-1518	FLIK 1, d or u+1	h, h	14,23	12	0~+2	+18	Tail spin	Tail spin		Uk_flk_F
-1525	FLIK 2	m	21	18~19 (23~)	-5	KND	Launch			Uk_flk_CR
-1941	FLIK 1+2	h(Throw)	40	12(17~)		Throw(KND)				Uk_CThmv
-1526	FLIK b+2	h	27	14~15 (19~) pc8~13	-9	KND	KND	Power crush		Uk_flkrp
+1498	FLIK 1, f+1	h, m	14,17	12	-5	0s(+9s)	KND			Uk_flk_CF
+1497	FLIK 1, d or u+1	h, h	14,23	12	0~+2	+18	Tail spin	Tail spin		Uk_flk_F
+1503	FLIK 2	m	21	18~19 (23~)	-5	KND	Launch			Uk_flk_CR
+1910	FLIK 1+2	h(Throw)	40	12(17~)		Throw(KND)				Uk_CThmv
+1504	FLIK b+2	h	27	14~15 (19~) pc8~13	-9	KND	KND	Power crush		Uk_flkrp
 	FLIK f+3+4	(PAB)		14~15 (19~) 8~13					
 	FLIK b+1+2	Absorbs 1 h/m hit		2~					

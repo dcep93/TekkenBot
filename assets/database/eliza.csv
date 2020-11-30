@@ -1,99 +1,99 @@
 move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes	Move Name
-1984	in rage b+3+4	m (TJ)	55	20 js13~17 pc8~17	-22	KND	KND	Rage art	Vp_RageArts02
-1528	1 or BT 1 or 2	h	7	10	+1	+8	+8		Vp_lp00
-1534	1, 1	h, h	7,7	10	-3	+4	+4		Vp_lplp
-1540	1, 2	h, h	7,10	10	-1	+5	+5		Vp_lprp
-1541	1, 2, 3	h, h, m (TJ)	7,10,20	js19~	-22~-21	Launch	Launch		Vp_lprplk
-1554	1, 2, 4	h, h, h	7,10,20	19~	-4~-3	KND	KND	Tail spin	Vp_rprk
-1547	2 or f+2	h	9	14	-3	+8	+8		Jn_rp00
-1548	2, 2	h, m	9,15	14	-12	+2	+2		Vp_rprp
+1960	in rage b+3+4	m (TJ)	55	20 js13~17 pc8~17	-22	KND	KND	Rage art	Vp_RageArts02
+1501	1 or BT 1 or 2	h	7	10	+1	+8	+8		Vp_lp00
+1507	1, 1	h, h	7,7	10	-3	+4	+4		Vp_lplp
+1513	1, 2	h, h	7,10	10	-1	+5	+5		Vp_lprp
+1514	1, 2, 3	h, h, m (TJ)	7,10,20	js19~	-22~-21	Launch	Launch		Vp_lprplk
+1527	1, 2, 4	h, h, h	7,10,20	19~	-4~-3	KND	KND	Tail spin	Vp_rprk
+1520	2 or f+2	h	9	14	-3	+8	+8		Jn_rp00
+1521	2, 2	h, m	9,15	14	-12	+2	+2		Vp_rprp
 	3	h	12	13	-8	+8	+8	
-1571	4 or BT 3 or 4	h	21	13	-5	KND	KND	Homing, Tail spin	Vp_rk00
-1703	1+2	m	26	13~14	-17~-16	KND	KND		Vp_ketuzan
-1971	3+4	l (TJ)	20	33~34a js9~23 cs23~	-27	KND	KND	Homing	Vp_lrk
-1570	f+3	m	17	16~17	-9~-8	0~+1	+25g(KND)		Vp_6lk
-1706	f+1+2	m	21	25 pc8~24	-13	KND	CS	Homing, Power crush	Vp_lrp
-1623	d/f+1	m	12	13	-3	+3	+3		Vp_t_slpF
-1625	d/f+1, 2	m, m	12,17	13	-13	-2	KND		Vp_3lprp
-1624	d/f+1, 4	m, h	12,14	13	-9	+2	+2		Vp_3lprk
-1582	d/f+2	m	10	16~17	-9~-8	+2~+3	+2~+3		Vp_t_srpF
-1589	d/f+2, 3	m, m (TJ)	10,10	js14~	-18~-17	Launch	Launch		Vp_3rplk
-1626	d/f+3	m (TJ)	24	25~26 js9~	-6~-5	KND	KND	Homing, Wall bounce	Vp_t_slkF
+1544	4 or BT 3 or 4	h	21	13	-5	KND	KND	Homing, Tail spin	Vp_rk00
+1674	1+2	m	26	13~14	-17~-16	KND	KND		Vp_ketuzan
+1947	3+4	l (TJ)	20	33~34a js9~23 cs23~	-27	KND	KND	Homing	Vp_lrk
+1543	f+3	m	17	16~17	-9~-8	0~+1	+25g(KND)		Vp_6lk
+1677	f+1+2	m	21	25 pc8~24	-13	KND	CS	Homing, Power crush	Vp_lrp
+1594	d/f+1	m	12	13	-3	+3	+3		Vp_t_slpF
+1596	d/f+1, 2	m, m	12,17	13	-13	-2	KND		Vp_3lprp
+1595	d/f+1, 4	m, h	12,14	13	-9	+2	+2		Vp_3lprk
+1555	d/f+2	m	10	16~17	-9~-8	+2~+3	+2~+3		Vp_t_srpF
+1562	d/f+2, 3	m, m (TJ)	10,10	js14~	-18~-17	Launch	Launch		Vp_3rplk
+1597	d/f+3	m (TJ)	24	25~26 js9~	-6~-5	KND	KND	Homing, Wall bounce	Vp_t_slkF
 	d/f+4	m	16	12	-8	+3	+3	
-1613	d/b or d+1 or FC+1 or BT d+1 or d+2	Sm	5	10s cs4or1~	-5	+6	+6	+3 on hit from side or behind	Jn_t_slp00
-1655	d/b or d+2 or FC+2	Sm (TC)	8	12s cs4or1~	-7	+4	+4		Co_t_srp00
-1614	d/b or d+3 or FC+3 (Close)	l (TC)	10	15s cs4or1~	-16	-5	-5		Vp_t_slk00
+1584	d/b or d+1 or FC+1 or BT d+1 or d+2	Sm	5	10s cs4or1~	-5	+6	+6	+3 on hit from side or behind	Jn_t_slp00
+1625	d/b or d+2 or FC+2	Sm (TC)	8	12s cs4or1~	-7	+4	+4		Co_t_srp00
+1585	d/b or d+3 or FC+3 (Close)	l (TC)	10	15s cs4or1~	-16	-5	-5		Vp_t_slk00
 	d/b or d+3 or FC+3	l (TC)	7	15s cs4or1~	-16	-5	-5	
-1618	d/b or d+4 or FC+4 or BT d+3 or d+4	l (TC)	17	20~21s cs6or1~	-27	+5~+6s	KND		Co_t_srk00
+1589	d/b or d+4 or FC+4 or BT d+3 or d+4	l (TC)	17	20~21s cs6or1~	-27	+5~+6s	KND		Co_t_srk00
 	d+1+2 or FC+d/b or d+1+2 Grounded face up d+1+2	(Special) (TC)		20~21 61~				
 	d/b+1+2	! (TJ)	30	51~52 js21~50	KND	KND	KND	
-1661	b+1	m	13	14	-8	+3	+3		Vp_4lp
-1667	b+1, 2	m, m	13,13	14a	-13~-11	Launch (JG?)	Launch (JG?)		Vp_4lprp
-1668	b+1, 2, 4	m, m, m (TJ)	13,13,23	js1~	-13~-12s	KND	KND		Vp_4lprprk
-1555	b+2	h	10	11	-4	+2	+2		Vp_4rp
-1556	b+2, 3	h, m	10,15	11	-9~-8	+3~+4	uKZD		Vp_4rplk
-1673	b+3	h	12	16	-9	+2	+2		Vp_4lk
-1674	b+3, 1	h, h	12,20	16	-4~-3	+15~+16kg	+15~+16kg	Tail spin	Vp_4lklp
-1676	b+3, 4	h, m	12,20	16	-14~-13	KND	KND		Vp_4lkrk
-1572	b+4	Sm	12	15	-14	-2	-2		Vp_rk00B
-1701	b+1+2	hm	5,20	27~28,37~38	-13~-12	KND	KND		Vp_4lrp2
+1631	b+1	m	13	14	-8	+3	+3		Vp_4lp
+1637	b+1, 2	m, m	13,13	14a	-13~-11	Launch (JG?)	Launch (JG?)		Vp_4lprp
+1638	b+1, 2, 4	m, m, m (TJ)	13,13,23	js1~	-13~-12s	KND	KND		Vp_4lprprk
+1528	b+2	h	10	11	-4	+2	+2		Vp_4rp
+1529	b+2, 3	h, m	10,15	11	-9~-8	+3~+4	uKZD		Vp_4rplk
+1643	b+3	h	12	16	-9	+2	+2		Vp_4lk
+1644	b+3, 1	h, h	12,20	16	-4~-3	+15~+16kg	+15~+16kg	Tail spin	Vp_4lklp
+1646	b+3, 4	h, m	12,20	16	-14~-13	KND	KND		Vp_4lkrk
+1545	b+4	Sm	12	15	-14	-2	-2		Vp_rk00B
+1672	b+1+2	hm	5,20	27~28,37~38	-13~-12	KND	KND		Vp_4lrp2
 	f, F+2 When hit , b	m	25	14(15~)	-9	KND	KND	
 	f, f+2 When hit or MG 2 When hit	(Special)		14(15~)				
 	f, F+3	h	12	16~17 (17~)	-10~-9	KND	KND	Homing
 	f, F+3, 3	h, m	12,24	16~17 (17~)	-13	KND	KND	Homing
 	f, F+3, 4	h, h (TJ)	12,21	js5~	-7~-6	KND	KND	Tail spin
-1521	f, F+4	m (TJ)	10	15~16 (16~) js12~	-16~-15	-5~-4	-5~-4		Jn_jprk00F
-1522	f, F+4, 2	m (TJ), m	10,10	js1~	-14~-13	-6~-5 (BU)	-6~-5 (BU)		Vp_9rkrp
-1716	f, F+4, 2, qcf+1	m (TJ), m, Sm(DW)	10,10,20	1~	-10~+10	KND	KND		Vp_energyA
+1494	f, F+4	m (TJ)	10	15~16 (16~) js12~	-16~-15	-5~-4	-5~-4		Jn_jprk00F
+1495	f, F+4, 2	m (TJ), m	10,10	js1~	-14~-13	-6~-5 (BU)	-6~-5 (BU)		Vp_9rkrp
+1687	f, F+4, 2, qcf+1	m (TJ), m, Sm(DW)	10,10,20	1~	-10~+10	KND	KND		Vp_energyA
 	f, F+4, 2, qcf+2	m (TJ), m, Sm(DW)	10,10,20	1~	-13~+17	-5~+25	-5~+25	
 	f, F+4, 2, qcf+1, f or d/f+3+4	m (TJ), m, Sm, (MG)	10,10,20	1~	+2	KND	KND	Press down to recover crouching
 	f, F+4, 2, qcf+2, f or d/f+3+4	m (TJ), m, Sm, (MG)	10,10,20	1~	+2~+32	+10~+40	+10~+40	Press down to recover crouching
 	f, F+4, 2, qcf+1+2	m (TJ), m, SmSm	10,10,20,20	1~	+5	KND(KND)	KND(KND)	Press down to recover crouching
-1699	f, F+1+2	mh (TJ)l	5,6,20	18,31,47 (19~) js25~40	-14	KND	KND		Vp_66lrp3
+1669	f, F+1+2	mh (TJ)l	5,6,20	18,31,47 (19~) js25~40	-14	KND	KND		Vp_66lrp3
 	f+3+4			33 (ex MG)				
 	f+3+4, D			30s (ex MG)				
-1653	f, f, f+1 or WR+1	h	30	18~20 (21~)	+6~+8	KND	KND	Tail spin	Vp_runlp00
-1652	f, f, f+3 or WR+3	m	27	24~28a (27~) js3~	0~+4	KND	KND		Vp_runlk00
-1656	WS+1	m	10	14	-7	+4	+4		Co_s_tlp00
-1632	WS+2	m	18	15~16a	-9~-8	KND	JG		Vp_s_trp
-1648	WS+3	m (TJ)	20	15~16a js15~	-22~-21	Launch (JG?)	Launch (JG?)		Jn_s_tlk
+1624	f, f, f+1 or WR+1	h	30	18~20 (21~)	+6~+8	KND	KND	Tail spin	Vp_runlp00
+1623	f, f, f+3 or WR+3	m	27	24~28a (27~) js3~	0~+4	KND	KND		Vp_runlk00
+1626	WS+1	m	10	14	-7	+4	+4		Co_s_tlp00
+1603	WS+2	m	18	15~16a	-9~-8	KND	JG		Vp_s_trp
+1619	WS+3	m (TJ)	20	15~16a js15~	-22~-21	Launch (JG?)	Launch (JG?)		Jn_s_tlk
 	WS+4	m	15	11~12	-5~-4	+6~+7	+6~+7	
 	FC+D (One second)			11~12				
-1475	Jump 1 BT u or u/f+1	m	10	7a(12~) js1~	-25~0	-15~+10	-15~+10		Vp_jplp
-1483	Jump 2 BT u or u/f+2	m	15	9a(12~) js1~	-17~+8	-7~+18	-7~+18		Vp_jprp
-1489	Jump 3 BT u or u/f+3	m	10	7a(12~) js1~	-25~0	-15~+10	-15~+10		Vp_jplk
-1492	Jump 4 BT u or u/f+4	m	15	9a(14~) js1~	-18~+7	-8~+17	-8~+17		Vp_jprk
+1449	Jump 1 BT u or u/f+1	m	10	7a(12~) js1~	-25~0	-15~+10	-15~+10		Vp_jplp
+1456	Jump 2 BT u or u/f+2	m	15	9a(12~) js1~	-17~+8	-7~+18	-7~+18		Vp_jprp
+1462	Jump 3 BT u or u/f+3	m	10	7a(12~) js1~	-25~0	-15~+10	-15~+10		Vp_jplk
+1465	Jump 4 BT u or u/f+4	m	15	9a(14~) js1~	-18~+7	-8~+17	-8~+17		Vp_jprk
 	Grounded face up 1+2	(Special) (TC)		9(14~) 1~				
 	2+3+4	(Special)		9(14~) 1~				
 	f+4	(MG)		9(14~) 1~				Press down to recover crouching
-1681	MG 1	h	11	10(25~)	-4	+2	+2		Vp_shoryulp
-1682	MG 1, 2	h, h	11,12	10(25~)	-8	+1	+1		Vp_shoryulprp
-1708	MG 1, 2, 1+2	h, h, m	11,12,21	10(25~)	-13~-12	KND	KND		Vp_lrp_sp
-1691	MG 2	m (DS)	25	14(29~)	-9	KND	KND		Jn_6rkrp
+1651	MG 1	h	11	10(25~)	-4	+2	+2		Vp_shoryulp
+1652	MG 1, 2	h, h	11,12	10(25~)	-8	+1	+1		Vp_shoryulprp
+1679	MG 1, 2, 1+2	h, h, m	11,12,21	10(25~)	-13~-12	KND	KND		Vp_lrp_sp
+1662	MG 2	m (DS)	25	14(29~)	-9	KND	KND		Jn_6rkrp
 	MG 2, b	m	25	14(29~)	-9	KND	KND	
-1690	EX MG 2	m (DS)	25	14(29~)	-9	KND	KND	Wall bounce	Jn_6rkrpEX
+1661	EX MG 2	m (DS)	25	14(29~)	-9	KND	KND	Wall bounce	Jn_6rkrpEX
 	EX MG 2, b	m	25	14(29~)	-9	KND	KND	Wall bounce
-1688	MG 3	h	12	16~17 (31~)	-10~-9	KND	KND	Homing	Vp_6rklk
-1685	MG 3, 3	h, m	12,24	16~17 (31~)	-13	KND	KND	<	Vp_66lklk
-1689	MG 3, 4	h, h (TJ)	12,21	js5~	-7~-6	KND	KND	Tail spin	Vp_6rklkrk
-1687	MG 4	l	15	18~25 (33~) cs10~	-24~-17	KND	KND		Vp_6rkrk
-1670	MG 1+2	! (TJ)	30	51~52a (66~) js21~50	KND	KND	KND		Vp_9lrp3
-1671	EX MG 1+2	! (TJ)	30	41~42a js16	KND	KND	KND		Vp_9lrp2
+1659	MG 3	h	12	16~17 (31~)	-10~-9	KND	KND	Homing	Vp_6rklk
+1656	MG 3, 3	h, m	12,24	16~17 (31~)	-13	KND	KND	<	Vp_66lklk
+1660	MG 3, 4	h, h (TJ)	12,21	js5~	-7~-6	KND	KND	Tail spin	Vp_6rklkrk
+1658	MG 4	l	15	18~25 (33~) cs10~	-24~-17	KND	KND		Vp_6rkrk
+1640	MG 1+2	! (TJ)	30	51~52a (66~) js21~50	KND	KND	KND		Vp_9lrp3
+1641	EX MG 1+2	! (TJ)	30	41~42a js16	KND	KND	KND		Vp_9lrp2
 	qcf+1	Sm	20	28~48 (28~)	-9~+11	KND	KND	
-1717	qcf+2	Sm	20	25~55 (25~)	-13~+17	-5~+25	-5~+25		Vp_energyB
-1943	f, d, d/f+1	Sm	12	16a(16~)	-22 (12~8a)	Launch	Launch		Vp_shoryu
-1950	f, d, d/f+2	Sm x 3	9,9,9	13,22,31a (13~)	-36 (19~8a)	Launch	Launch		Vp_shoryuB3
-1962	qcb+1	Sm	20	20~21 (20~)	-11~-10	+11kg	KND	Tail spin	Vp_214A
-1963	qcb+2	Sm	22	20~21 (20~)	-13~-12	+2~+3	CS		Vp_214B
-1957	qcb+3	m (TJ)	20	27~36a (27~) js9~	-13~-4	KND	JG		Vp_shoryuC
-1958	qcb+4	m (TJ)	15	26~33a (26~) js9~	-1~+6	+9~+16s	+9~+16s		Vp_shoryuD
-1973	Jump qcb+3	m (TJ)	20	13~a (~) js1~	-14~-5	KND	JG		Vp_jp214lk_2
-1976	Jump qcb+4	m (TJ)	15	13~a(~) js1~	-1~+6	+9~+16s	+9~+16s		Vp_jp214rk_2
+1688	qcf+2	Sm	20	25~55 (25~)	-13~+17	-5~+25	-5~+25		Vp_energyB
+1919	f, d, d/f+1	Sm	12	16a(16~)	-22 (12~8a)	Launch	Launch		Vp_shoryu
+1926	f, d, d/f+2	Sm x 3	9,9,9	13,22,31a (13~)	-36 (19~8a)	Launch	Launch		Vp_shoryuB3
+1938	qcb+1	Sm	20	20~21 (20~)	-11~-10	+11kg	KND	Tail spin	Vp_214A
+1939	qcb+2	Sm	22	20~21 (20~)	-13~-12	+2~+3	CS		Vp_214B
+1933	qcb+3	m (TJ)	20	27~36a (27~) js9~	-13~-4	KND	JG		Vp_shoryuC
+1934	qcb+4	m (TJ)	15	26~33a (26~) js9~	-1~+6	+9~+16s	+9~+16s		Vp_shoryuD
+1949	Jump qcb+3	m (TJ)	20	13~a (~) js1~	-14~-5	KND	JG		Vp_jp214lk_2
+1952	Jump qcb+4	m (TJ)	15	13~a(~) js1~	-1~+6	+9~+16s	+9~+16s		Vp_jp214rk_2
 	qcf+1, f or d/f+3+4	Sm (MG)	20	13~(~) 1~	+2~	KND	KND	Press down to recover crouching
 	qcf+2, f or d/f+3+4	Sm (MG)	20	13~(~) 1~	+2~+32	+10~+40	+10~+40	Hold down to recover crouching
-1718	qcf+1+2	SmSm	10,10	24,53~ (24~)	+10g	KND(KND)	KND(KND)	Press down to recover crouching	Vp_energySP
-1941	f, d, d/f+1+2	Sm x 5	5,5,9,9,9	11,,,a (11~)	-34	Launch	Launch		Vp_shoryuAB4
-1966	qcb+1+2	SmSm	5,20	15,37(15~)	-13~-12	+12kg	KND		Vp_214ABEX2
-1961	qcb+3+4	m (TJ), m	5,15	25~32a ,49~50 (26~) js9~	-9~-8	KND	KND		Vp_shoryuCDEX2
-1981	Jump qcb+3+4	m (TJ), m	5,15	10~a, 35~36 (~) js1~	-9~-8	KND	KND		Vp_jp214wk_chak
-1937	Two meter bars qcf, qcf+1+2	Sm	15	15	-7	Launch	Launch		Vp_hadohAB
+1689	qcf+1+2	SmSm	10,10	24,53~ (24~)	+10g	KND(KND)	KND(KND)	Press down to recover crouching	Vp_energySP
+1917	f, d, d/f+1+2	Sm x 5	5,5,9,9,9	11,,,a (11~)	-34	Launch	Launch		Vp_shoryuAB4
+1942	qcb+1+2	SmSm	5,20	15,37(15~)	-13~-12	+12kg	KND		Vp_214ABEX2
+1937	qcb+3+4	m (TJ), m	5,15	25~32a ,49~50 (26~) js9~	-9~-8	KND	KND		Vp_shoryuCDEX2
+1957	Jump qcb+3+4	m (TJ), m	5,15	10~a, 35~36 (~) js1~	-9~-8	KND	KND		Vp_jp214wk_chak
+1911	Two meter bars qcf, qcf+1+2	Sm	15	15	-7	Launch	Launch		Vp_hadohAB

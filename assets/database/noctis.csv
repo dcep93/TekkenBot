@@ -1,6 +1,6 @@
 move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes	Move Name
-2013	in rage d+1+2	m	55	20 pc	-32	throw	throw	rage art	Mz_RageArts02
-1562	in rage f+2+3	m	10,30	18	+2	throw	throw	rage drive	Mz_WPF2_EX
+2002	in rage d+1+2	m	55	20 pc	-32	throw	throw	rage art	Mz_RageArts02
+1535	in rage f+2+3	m	10,30	18	+2	throw	throw	rage drive	Mz_WPF2_EX
 	1	h	7	10	+1	+8	+8	
 	1, 2	h,h	7,8	10	-2	+6	+6	nc from 1st hit
 	1, 2, 2	h,h,h	7,8,12	10	-11	+1	+1	nc from 1st hit
@@ -16,91 +16,91 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	3	h	15	14	-7	-1	-1	
 	4	h	15	12	-8	+3	+3	
 	4,2	h,m	15,15	12	-14	-1	-1	
-1510	1+2	h,m	17,24	18	-14	KND	Tail Spin	Homing, Tail Spin	Mz_WP01
-1509	1+2~B	h	17	18	-9	-3	-3	Homing	Mz_WP00
-1547	f+2	m	8(,25)	20 js	-9	throw	throw		Mz_rp00F
-1580	f+3	m	14	16	-9	+9	+9		Mz_lk00F
-1658	f+3, 2	m,m	14,5(,20)	16	-11	throw	throw		Mz_s_tlk01
-1581	f+4	m	13	17	-8	+8	+8		Mz_rk00F
-1582	f+4, 2	m,m	13,21	17	-11	KND	KND	Tail spin	Mz_rk01F
-1560	f+1+2	m	24	16	-19	KND	KND		Mz_Spear
+1483	1+2	h,m	17,24	18	-14	KND	Tail Spin	Homing, Tail Spin	Mz_WP01
+1482	1+2~B	h	17	18	-9	-3	-3	Homing	Mz_WP00
+1520	f+2	m	8(,25)	20 js	-9	throw	throw		Mz_rp00F
+1553	f+3	m	14	16	-9	+9	+9		Mz_lk00F
+1643	f+3, 2	m,m	14,5(,20)	16	-11	throw	throw		Mz_s_tlk01
+1554	f+4	m	13	17	-8	+8	+8		Mz_rk00F
+1555	f+4, 2	m,m	13,21	17	-11	KND	KND	Tail spin	Mz_rk01F
+1533	f+1+2	m	24	16	-19	KND	KND		Mz_Spear
 	f+1+4	m	20	23	-13	KND	KND	Power Crush
-1632	d/f+1	m	10	13	-1	+7	+7		Mz_t_slpF
+1605	d/f+1	m	10	13	-1	+7	+7		Mz_t_slpF
 1633	d/f+1, 4	m,h	10,20	13 js	-5	KND	KND	Tail Spion	Mz_t_slpF2
-1634	d/f+2	m	20	15	-20	JG	JG		Mz_t_srpF
+1617	d/f+2	m	20	15	-20	JG	JG		Mz_t_srpF
 	d/f+3	m	9	16	-13	-2	-2	
 	d/f+3, 1	m,h	9,7	16	-10	-3	-3	
-1638	d/f+4	m	12	14	-7	+4	+4		Mz_t_srk00F
-1640	d/f+4, 2	m,h	12,17	14	-2	+8	+8		Mz_t_srk02Fy
-1643	d/f+4, 2, 4	m,h,h	12,17,20	14 js	-5	KND	KND	Tail Spin	Mz_t_srk03F
-1642	d/f+4, 2, 2	m,h,m	12,17,21	14 js	-8	JG	JG		Mz_t_srk02F
-1636	d/f+1+2	m	27	25	-9	KND	KND	Tail Spin	Mz_t_sWPF
-1620	d+1	m,m	10,10	17	-3	+4	+4		Mz_t_slp01
-1622	d+2	l	15	20	-15	0	0		Mz_t_srp00y
-1623	d+2, 2	l,h	15,23	20	-9	+10	KND	Tail Spin	Mz_t_srp01
+1621	d/f+4	m	12	14	-7	+4	+4		Mz_t_srk00F
+1624	d/f+4, 2	m,h	12,17	14	-2	+8	+8		Mz_t_srk02Fy
+1628	d/f+4, 2, 4	m,h,h	12,17,20	14 js	-5	KND	KND	Tail Spin	Mz_t_srk03F
+1627	d/f+4, 2, 2	m,h,m	12,17,21	14 js	-8	JG	JG		Mz_t_srk02F
+1619	d/f+1+2	m	27	25	-9	KND	KND	Tail Spin	Mz_t_sWPF
+1593	d+1	m,m	10,10	17	-3	+4	+4		Mz_t_slp01
+1595	d+2	l	15	20	-15	0	0		Mz_t_srp00y
+1596	d+2, 2	l,h	15,23	20	-9	+10	KND	Tail Spin	Mz_t_srp01
 	d or d/b+3	l	13 cs	16	-13	-2	-2	
-1625	d+4	l	9	19	-31	-9	-9		Mz_t_srk00y
-1626	d+4, 1	l,h	9(13),20	19	-12	+4	+4		Mz_t_srk01
-1629	d+4 ,1, 1+2	l,h,m	9(13),20,25(28)	19	-18s	KND	KND		Mz_t_srk02
-1644	d/b+1	m	10	15	-6	+3	+3		Mz_t_slp00B
-1646	d/b+1, 1+2	m,m,m	10,7,10	15	-5	+6	+6		Mz_t_slp02B
+1598	d+4	l	9	19	-31	-9	-9		Mz_t_srk00y
+1599	d+4, 1	l,h	9(13),20	19	-12	+4	+4		Mz_t_srk01
+1602	d+4 ,1, 1+2	l,h,m	9(13),20,25(28)	19	-18s	KND	KND		Mz_t_srk02
+1629	d/b+1	m	10	15	-6	+3	+3		Mz_t_slp00B
+1631	d/b+1, 1+2	m,m,m	10,7,10	15	-5	+6	+6		Mz_t_slp02B
 	d/b+1~F	m	7	15	-6	0	0	
-1648	d/b+2	l	20	24	-19	KND	KND		Mz_t_srp00B
-1651	d/b+4	l	9	17	-12	-1	-1		Mz_t_slk00B
-1650	d/b+1+2	m	25	25	-16	JG	JG		Mz_t_sWPB_E
-1649	d/b+1+2*	m	28	46	+2	JG	JG		Mz_t_sWPB
-1591	b+1	h	10	12	-11	0	0		Mz_lp00B
-1592	b+1, 2	h,h	10,21	12	-9	+7	+7		Mz_lp00B2
-1593	b+2	m	13	15	-9	+6	+6		Mz_rp00B
+1633	d/b+2	l	20	24	-19	KND	KND		Mz_t_srp00B
+1636	d/b+4	l	9	17	-12	-1	-1		Mz_t_slk00B
+1635	d/b+1+2	m	25	25	-16	JG	JG		Mz_t_sWPB_E
+1634	d/b+1+2*	m	28	46	+2	JG	JG		Mz_t_sWPB
+1564	b+1	h	10	12	-11	0	0		Mz_lp00B
+1565	b+1, 2	h,h	10,21	12	-9	+7	+7		Mz_lp00B2
+1566	b+2	m	13	15	-9	+6	+6		Mz_rp00B
 	b+2 when hit 1+2	m, throw	13,7,17	15	~	+6	+6	
-1603	b+3	h	14	14	-12	-1	-1		Mz_lk00B
-1604	b+3, 1	h,m	14,23	14	-14	KND	KND		Mz_lk01B
+1576	b+3	h	14	14	-12	-1	-1		Mz_lk00B
+1577	b+3, 1	h,m	14,23	14	-14	KND	KND		Mz_lk01B
 	b+3~B	h, (special)	14	14	-8	+3	+3	
-1606	b+4	h	17	18	-7	+7	+7		Mz_rk00B
-1607	b+4, 1+2	h,m	17,27	20	-13	KND	JG		Mz_rk01B
-1600	b+1+4	m	20	26	-9	+4	+4	KND with Punch parry	Mz_Shield2Atk
-1484	b+2+3	m!	50	69	KND	KND	KND		Mz_Father
-1478	u/b or u or u/f+1	h	17	14	-4	+8	KND		Mz_9LP
-1483	u/b or u or u/f+2	m	21	30 js9~	-8	JG	JG		Mz_9RP
-1491	u/b or u or u/f+3	m(,m)	11(,23)	17 js9~	-13	JG	JG		Mz_9LK2
-1490	u/b or u or u/f+3, u	m(,m)	11(,23)	17 js9~	-13	JG	JG		Mz_9LK
-1494	u/b or u or u/f+4	h	20	19 js9~	-3	KND	KND	Homing, Tail Spin	Mz_9RK
+1579	b+4	h	17	18	-7	+7	+7		Mz_rk00B
+1580	b+4, 1+2	h,m	17,27	20	-13	KND	JG		Mz_rk01B
+1573	b+1+4	m	20	26	-9	+4	+4	KND with Punch parry	Mz_Shield2Atk
+1457	b+2+3	m!	50	69	KND	KND	KND		Mz_Father
+1451	u/b or u or u/f+1	h	17	14	-4	+8	KND		Mz_9LP
+1456	u/b or u or u/f+2	m	21	30 js9~	-8	JG	JG		Mz_9RP
+1464	u/b or u or u/f+3	m(,m)	11(,23)	17 js9~	-13	JG	JG		Mz_9LK2
+1463	u/b or u or u/f+3, u	m(,m)	11(,23)	17 js9~	-13	JG	JG		Mz_9LK
+1467	u/b or u or u/f+4	h	20	19 js9~	-3	KND	KND	Homing, Tail Spin	Mz_9RK
 	u/b,b	special	js10~					
 	u/b or u or u/f	special	js9~					
-1479	During jump 1	m	7	9	-23	-16	-16		Mz_jplp00
-1468	During jump 2	m	14	10	-22	-15	-15		Mz_jprp01
-1472	(When hit in air) 2, 2	m,m	14,14						Mz_jprp02
-1473	(When hit in air) 2, 2, 2	m,m,m	14,14,23					Tail spin	Mz_jprp03
-1486	(During jump) 3	m	10	10	-22	-15	-15		Mz_jplk00
-1495	(During jump) 4	m	12	12	-21	-14	-14		Mz_jprk00
-1474	(During jump) 1+2	m	27	41 js9~	+5	KND	KND		Mz_jpWPF
-1574	f, f+4	m	15(,14,21)	19	-14	throw	throw		Mz_66RK
-1573	f, f+1+2	m	20	15	-9	+10	KND	Tail Spin, Homing	Mz_66WP
-1577	f, f+3+4	h	50	30 js14~	-8	KND	KND		Mz_66WK
-1671	f, f, f+1+2 or wr+1+2	m	25	23 js3~	+11	JG	JG		Mz_runWP
+1452	During jump 1	m	7	9	-23	-16	-16		Mz_jplp00
+1442	During jump 2	m	14	10	-22	-15	-15		Mz_jprp01
+1446	(When hit in air) 2, 2	m,m	14,14						Mz_jprp02
+1447	(When hit in air) 2, 2, 2	m,m,m	14,14,23					Tail spin	Mz_jprp03
+1459	(During jump) 3	m	10	10	-22	-15	-15		Mz_jplk00
+1468	(During jump) 4	m	12	12	-21	-14	-14		Mz_jprk00
+1448	(During jump) 1+2	m	27	41 js9~	+5	KND	KND		Mz_jpWPF
+1547	f, f+4	m	15(,14,21)	19	-14	throw	throw		Mz_66RK
+1546	f, f+1+2	m	20	15	-9	+10	KND	Tail Spin, Homing	Mz_66WP
+1550	f, f+3+4	h	50	30 js14~	-8	KND	KND		Mz_66WK
+1656	f, f, f+1+2 or wr+1+2	m	25	23 js3~	+11	JG	JG		Mz_runWP
 	FC+1	sm	5	10 cs	-5	+6	+6	
 	FC+2	sm	8	11 cs	-9	+5	+5	
 	FC+3	l	12 cs	16	-17	-3	-3	
 	FC+4	l	10	12 cs	-15	-4	-4	
-1653	WS+1	m	10	13	-8	+6	+6		Mz_s_tlp00
-1654	WS+1, 2	m,m	10,23	13	-13	+2	KND		Mz_s_tlp01
-1655	ws+2	m	15	15	-9	-3	-3		Mz_s_trp00
-1656	ws+2, 2	m,m	13,23	15	-14	+5	Tail Spin	Tail spin	Mz_s_trp01
-1657	ws+3	m	12	14	-7	+9	+9		Mz_s_tlk00
+1638	WS+1	m	10	13	-8	+6	+6		Mz_s_tlp00
+1639	WS+1, 2	m,m	10,23	13	-13	+2	KND		Mz_s_tlp01
+1640	ws+2	m	15	15	-9	-3	-3		Mz_s_trp00
+1641	ws+2, 2	m,m	13,23	15	-14	+5	Tail Spin	Tail spin	Mz_s_trp01
+1642	ws+3	m	12	14	-7	+9	+9		Mz_s_tlk00
 	ws+3,2	m,m	12,5(,20)	14	-11	throw	throw	
 	ws+4	m	15	11	-6	+5	+5	
-1617	FC+d/f+1	m	25	16	-9	KND	KND		Mz_Shield3
-1618	FC+d/f+2	l	17	20 cs	-13	+4s	+13g	Homing	Mz_Sya3rp00
+1590	FC+d/f+1	m	25	16	-9	KND	KND		Mz_Shield3
+1591	FC+d/f+2	l	17	20 cs	-13	+4s	+13g	Homing	Mz_Sya3rp00
 	1+2+3+4							
 	1+3+4							
-1485	SS+2	m	21	18	0	5s	KND		Mz_yokoRP
+1458	SS+2	m	21	18	0	5s	KND		Mz_yokoRP
 	BT 1	h	15	8	-8	+3	+3	
-1537	BT 2	m	16	20	-9	KND	KND		Mz_R_rp00
+1510	BT 2	m	16	20	-9	KND	KND		Mz_R_rp00
 	BT 3 or 4	h	25	10	-8	KND	KND	
 	BT d+1 or d+2	sm	10	10	-2	+9	+9	
 	BT d+3 or d+4	l	12	10	-11	+3	+3	
 	f+3+4			cs				
-1589	f+3+4, 1	m	24	18	-13	KND	KND	Power crush, Wall bounce	Mz_WKF_Shield
-1586	f+3+4, 3+4	l	17	20 cs	-20	KND	KND		Mz_WKF_WK
+1562	f+3+4, 1	m	24	18	-13	KND	KND	Power crush, Wall bounce	Mz_WKF_Shield
+1559	f+3+4, 3+4	l	17	20 cs	-20	KND	KND		Mz_WKF_WK
 	In rage d+1+2	m	55	20	-32	throw	throw	
 	In rage f+2+3	m	10(,30)	18	+2	throw	throw	
