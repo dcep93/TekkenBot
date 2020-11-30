@@ -62,6 +62,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1629	WS+1	m	10	13~14	-5~-4	+5~+6	+5~+6		Kz_s_tlp00
 1630	WS+1, 2	m, m	10,12	13~14	-12~-11	Launch (JG?)	Launch (JG?)		Kz_m_p02
 1631	WS+2	m	25	16~17	-18~-17	CS	CS	Homing	Kz_up03
+1634	WS+1+2	m	12	12~13	-2~-1	+9~+10	+9~+10
 1635	WS+3	m	24	21~23	-5~-3	KND	KND	Homing, Tail spin	Kz_s_tlk00
 1636	WS+4	m	13	11~12	-3~-2	+8~+9	+8~+9		Kz_s_trk
 	WS+4, 4	m, m	13,16	11~12	-15~-14	-4~-3s	-4~-3s	

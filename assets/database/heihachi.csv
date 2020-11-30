@@ -49,6 +49,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	b+1, 2~1+2 u or d	h, (Special)	14	15~16	-19~-18	-13~-12	-13~-12	
 1622	b+2	m	20	22~23	-2~-1	KND	KND	Wall bounce	He_rp00B
 1632	b+3	h	14	14~16	-4~-2	+7~+9	+7~+9		He_lk01B
+1633	b+3, 2
 1634	b+3, 3	h, m	14,25	14~16	-12~-8s	KND	KND		He_lk02B
 1635	b+4	m	20	18~20	-9~-7	KND	KND	Homing, Tail spin	He_rk00B
 1625	b+1+2	m	17	19~20	-9~-8	+2~+3	+2~+3		He_yamazuki

@@ -193,3 +193,4 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1938	RFS b+3	m(LFF)	21	16	-10	JG	JG		Hw_jnblkAR
 1620	RFS b+4	m (TJ)(LFF)	23	20 pc8~19 js15~	-12	+14kg	+14kg	Homing, Tail spin, Power crush	Hw_RFmidrk
 	RFS f or b or u or d	(Special)		20~22 8~19 15~				
+1947	RFS u/f+4

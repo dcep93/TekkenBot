@@ -17,6 +17,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	3+4, 3+4, 3+4, 3+4	! (TJ)	80	184~190 js1~	KND	KND	KND	
 	3+4, 3+4, 3+4, 3+4 , 3+4	! (TJ)	100	214~220 js1~	KND	KND	KND	
 1573	f+1	m	13	14~15	-6~-5	+5~+6	+5~+6		Pj_lp00F
+1574	f+1, 1
 1575	f+1, 2	m, h	13,13	14~15	-6~-5	+5~+6	+5~+6		Jc_6LPRP
 1576	f+1, 2, 1	m, h, ( (Sky))!							Jc_6LPRPLP
 	f+1, 2, 1*	m, h, ( (Sky))!						

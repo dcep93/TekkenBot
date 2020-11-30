@@ -85,6 +85,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1765	b, f+2	m	15	15~16 (15~)	-7~-6	+4~+5	FS (+11~+12g) 24~25		Jz_karate01_R_A
 1769	b, f+2, 1	m, h	15,10	15~16 (15~)	-5	+6	+6		Jz_karate02
 1771	b, f+2, 1, 2	m, h, m	15,10,20	15~16 (15~)	-5~-4	KND	KND		Jz_karate03
+1772	b, f+2, 1, d/f+2	m, h, m	15,10,28~29	28 (15~)	-14	Launch	Launch
 1767	b, f+2, 3	m, m	15,17	15~16 (15~)	-12	+6	CS		Jz_karatekick
 	b, f+2, 3, f	m, m, (CDS)	15,17	15~16 (15~)	-1	+17g	CS	
 1738	WS+1	m	10	13~14	-6~-5	+5~+6	+5~+6		kaz_up02

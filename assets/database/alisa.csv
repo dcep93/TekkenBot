@@ -143,6 +143,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	SBT 2, 1+2	m, (DES)	25	16~27 (41~) js1~	-8~+3	KND	KND	
 1983	SBT 3	l	17	16~20s (41~) js1~cs9~	-14~-10	+4~+8s	KND		Aa_steLK
 1986	SBT 4	m	22(,5)	18~19 (43~) js1~	-27~-26	Launch	Launch		Aa_steRK
+1987	SBT 1+2
 	d+1+2 or From special move (to DES)	(DES)		18~19 (43~) 1~				
 	DES b or F	(DES)		18~19 (43~) 1~				
 	DES d+1+2 or D/B (Cancel)	(DES)		18~19 (43~) 1~				

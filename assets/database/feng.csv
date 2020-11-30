@@ -43,6 +43,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1764	d/f+2, 2	m, m	15,21	20	-6~-5	KND	KND	Wall bounce	Ta_sunkei1
 1765	d/f+3	m	21	18~19	-7~-6	Launch	Launch		Ta_sokuteki
 1766	d/f+4	m	14	15	-6	+5	+5		Ta_t_srkF
+1767	d/f+4,3
 1768	d/f+4,2	m	14,15	15	-11	+1	+1		Ta_3rkrp
 1769	d/f+4,2,1+2	m	14,12,23	15	-19	KND	KND		Ta_3rkrplrp
 1771	d/f+3+4	m	23	23~27	-8~-4	KND	KND	Homing, Tail spin	Ta_CircleKick

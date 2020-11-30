@@ -135,3 +135,4 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1724	f, n, d, D/F+1+2	m	24	20~23 (24~)	-5~-2s	KND	KND		Kg_shoryu_B
 	f, n, d, D/F+2+3	h(Throw)	25	12		Throw(KND)		
 	f, n, d, D/F+1+4	h(Throw)	20	12		Throw(KND)
+1602 b+3	h	23	16~18	-10	KND	KND	

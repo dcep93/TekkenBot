@@ -117,6 +117,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1837	KNK 3, 4	m (TJ), m	13,27	20~21a	-12~-10	Launch	Launch		Un_kinkeiLKRK
 1839	KNK 4	l	18	20~21a	-12~-11	+4~+5	+10~+11		Un_kinkeiRK
 1827	KNK 1+2	m	20	24	-6	KND	Launch		Un_kinkeiWP
+1828	KNK 3+4
 	d+1+2 or FC+d/b or d+1+2	(Special) (TC)(BOK)		(s)				
 1798	BOK 1	m	14	13(33~) cs1~12	-4	+9	+9		Un_bokulprpy
 1802	BOK 1, 2	m, m	14,20	13(33~) 1~12	-14~-13	KND (JG?)	KND (JG?)		Un_bokulprp

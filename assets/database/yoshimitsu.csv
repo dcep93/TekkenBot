@@ -20,6 +20,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1589	4, 4	h, h	22,22	15	-4	-2	-2		Ym_k01
 1590	4, 4, 4	h, h, h	22,22,27	15	-4	KND	KND	Tail spin	Ym_k02
 1865	1+4 or WS+1+4	m	28	6	-15	CS	CS		Ym_vs_yos
+1866	KIN 1+4
 	4~1	m	28	6(7~)	-15	CS	CS	
 2018	1+2+3	m(!)	0	22~25	-8~-5	0~+3	+16~+19		Ym_sidlp00
 1597	f+2	h	24	17	-4	+13kg	SCD	Tail spin	Ym_rp00F
@@ -196,6 +197,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1884	KIN b+2	m	15	12(27~)	-9	+2	+2		Ym_kin4rp
 1885	KIN b+2,1	m	15,19	12(27~)	-12	Launch	Launch		Ym_kin4rplp
 1899	KIN b+1+2	!	30?	45?(?~)	CS	CS	CS		Ym_vs_Heli
+1881	KIN f+1
 	KIN u+1+2	(Special) (TJ)(KIN)		Air				
 	3+4 or BT 3+4 (to MED)	(Special)(Recover health)(MED)		RBT				
 	MED 3+4	(MED)		RBT				

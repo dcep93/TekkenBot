@@ -98,3 +98,4 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1745	qcb+3, 2, 3	l, m, m	14,20,22	18~19 (20~) 1~	-13	KND	Launch		Pl_senoulk
 1698	qcb+4	h	28	15~16 (17~)	+1~+2	KND	CS	Homing, Tail spin	Pl_Swrk
 1695	qcb+1+2	m?	22	18~19 (20~)	-14~-13	Launch	Launch		Pl_SwWP
+1776	f+2+3	m	21	20~21	-14~-13	KND	KND

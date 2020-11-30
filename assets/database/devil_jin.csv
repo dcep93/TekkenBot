@@ -119,3 +119,4 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1721	f, n, d, D/F+3	l (TC)	24	33~34 (37~) js5~28	-23~-22	KND	KND		Dj_sjk02
 1724	f, n, d, d/f+4	l	10	16(19~)	-23	KND	KND		Dj_sjk03h
 1725	f, n, d, d/f+4, 4	l, m	10,30	16(19~)	-16~-15	+4~+5s	KND		Dj_m_k00G_EX
+1648	b, f+2, 3

@@ -124,3 +124,4 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	qcf+4 When hit 1, 3, 4, 2	Chained	25,10,20	17~18 (19~)		Throw(KND)		
 	qcf+4 When hit 2, 4, 3, 1	Chained	25,10,20	17~18 (19~)		Throw(KND)		
 	qcf+1+2	m	28	12~13 (14~)	-15~-14	KND	KND	
+1718	d/f+3+4

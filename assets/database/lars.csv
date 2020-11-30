@@ -2,6 +2,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 2113	in rage 1+2	m	55	20 pc8~17	-22	KND	KND	Rage art	La_RageArts02
 1614	in rage SEN 1+2	m, (DEN)	27	12~13	+7~+8	KND	KND	Rage art	La_SentLP_EX
 	in rage SEN 1+2, b+2+3	m, !	27,33	12~13	KND	KND	KND	 
+2107	in rage DEN 3+4
 1546	1	h	7	10	+1	+8	+8	 	La_lp00
 1550	1, 1	h, m	7,10	10	-8~-7	0~+1	0~+1	 	La_lp02
 1551	1, 1, 1	h, m, m	7,10,15	10	-14~-13	KND	KND	 	La_lp03
@@ -97,6 +98,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1619	SEN 3	m	20	14~16 ar14~	-14~-12	Launch (JG?)	Launch (JG?)	 	La_Stormgear
 1593	SEN 4	h	27	20~21	-10~-9	Launch (Screw)	Launch (Screw)	Power crush, Tail spin	La_Sentrk
 1612	SEN d/f+1	m	20	14~15	0~+1s	+8~+9s	KND	 	La_SentLRP
+1596	SEN 3+4
 	f+3 or Form certain moves	(Special)	cs 4~10	14~15	 	 	 	 
 	DEN F	(SEN)	 	 	 	 	 	 
 1588	DEN 1	h	14	11~12 (26~)	-1~0	+8~+9	+8~+9	 	La_DentLPF

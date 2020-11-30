@@ -191,3 +191,4 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	AOP b+3+4	(Special)		b				
 	AOP f+3+4	(Special)		s				
 	AOP f+3+4, d+1+2	(Special) (TJ), (Special) (TC)(AOP)						
+1656 d/b+2	l(RDS)	13	18 cs6~	-8(RDS)	+5s	+18g

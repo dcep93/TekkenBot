@@ -161,7 +161,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1983	PAB 1+2	h(Throw)	45	11(12~)		Throw(KND)				Thrmv_B1_00
 1765	PAB f+2	m?, (PAB)	18	18~19 (19~)	-13~-12	KND	KND			Uk_pkbrp01
 1766	PAB f+2, 1	m, m	18,25	18~19 (19~)	+1~+2	KND	KND			Uk_pkb6rplp
-1770	PAB f+1+2	h, (PAB)	5	15~16 (16~)	+6~+7	+4~+5	+4~+5			Uk_pkb_lrp
+1771	PAB f+1+2
 1759	PAB d/f+1	m(PAB)	12	15~16 (16~)	-9~-8	+2~+3	+2~+3			Uk_pkblp03
 1761	PAB d/f+1, 1	m, m(PAB)	10,14	15~16 (16~)	-10~-9	+1~+2	+1~+2			Uk_pkblp02
 1762	PAB d/f+1, 1, 2	m, m, m(PAB)	10,14,12	15~16 (16~)	-11	-3	-3			Uk_pkbdemp01

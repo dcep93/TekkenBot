@@ -71,10 +71,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1827	d/b+4, 4	l (TC), m (TJ)	20,27	js26~	-9~-7	KND	KND		Lw_dklk0_3
 1830	d/b+1+2	!	90	78	KND	KND	KND		Lw_fungAtk
 	d/b+1+2, u, u (Cancel)	(DSS)		78				
-1712	d/b+3+4	m (TJ), m	25,25	19~20a ,51~52 js15~	-9~-2	Launch	Launch		Lw_ovhrkBKS
-1711	d/b+3+4 (Second hit miss)	m (TJ)	25	19~23 js15~	-41~-37	Launch	Launch		Lw_ovhrkBK
-	d/b+3+4 (First hit whiffs or blocked)	m	25	51~52	-9~-2	+2~+9s	+2~+9s	
-	D/B+3+4	m (TJ)	25	19~23d js15~	-27~-23	Launch	Launch	
+1714	d/b+3+4	m	23	21	-13	KND	KND	
 1654	b+1	m	12	14	-9	+2	+2		Lw_lp00B_C
 1804	b+1, b, f	m, (DSS)	12	14	-7	+4	+4		Lw_urarp00
 1806	b+1, 2	m, m	12,12	14	-14	0	0		Lw_urrprp00

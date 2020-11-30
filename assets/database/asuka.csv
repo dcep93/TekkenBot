@@ -114,3 +114,4 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	d/b+4, 4, 4, D	l (TC), l (TC), l (TC)(LCT)	18,20,21	s cs1~	-11~-9	0~+2	KND	
 1691	LCT 3	h(LCT)	21	1~	-3	Launch	Launch		Jn_mc03s
 	LCT 1+4	lh(LCT)	5,8	1~	-3(-19s)	+9	+9	
+1753	b+2+3
