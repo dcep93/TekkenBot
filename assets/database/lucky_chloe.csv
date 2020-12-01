@@ -71,7 +71,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1794	WS+1, 4	m, m?	10,10	14~15	-16	Launch	Launch		Dc_s_tlprk
 	WS+2	m	20	16	-13	Launch	Launch		
 1762	WS+3	m (TC)	25	15~16 cs1~	-12~-11	KND	JG		Dc_s_tlk
-1782	WS+4	m	15	11	-3	+8	+8		
+1763	WS+4	m	15	11	-3	+8	+8		
 1795	FC+d/f+1	l (TC)	15	18~19 cs1~	-14~-13	+4~+5s	KND		Dc_23lp
 1800	FC+d/f+2	m (TC)	18	21~22 cs1~20	-7~-6	+15~+16kg	+15~+16kg	Tail spin, Homing	Dc_23rp
 1764	FC+d/f+4	m	24	17~18	-17~-16	CS	CS		Dc_23rk

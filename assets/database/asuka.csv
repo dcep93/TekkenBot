@@ -29,7 +29,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1675	1+4, 2, 1	lh, h, h	5,8,10,12	14,31	-2	+9	+9		Jn_mc00n
 1717	1+4, 2, 4	lh, h, m	5,8,10,23	14,31	-9	+4	KND		Jn_cap10_C
 1707	1+4, 2, d+4	lh, h, l	5,8,10,15	cs10~	-23	KND	KND		Jn_cap10_CL
-1680	1+4, 3	lh, m	5,8,24	10~	-2~0	KND	KND	Tail spin	
+	1+4, 3	lh, m	5,8,24	10~	-2~0	KND	KND	Tail spin	
 	1+4, 3, b (Cancel)	lh	5,8	10~	-20(37s)	-9	-9		
 1749	2+3	h(Absorbs 1 h/m hit)	21	23~24 (7~)	0~+1	KND	KND		Jn_koushu0
 1637	f+2	m	20	17~18	-18~-17	Launch (JG?)	Launch (JG?)		jun_up03

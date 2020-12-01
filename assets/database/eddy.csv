@@ -75,7 +75,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1624	d/b+3+4, 4, 3	mm, h, h	12,12,12,25	30,41	-7	KND	KND		Cp_t_slrk03
 1568	b+1	m	16	14~15	-8~-7	+8~+9	+8~+9		Cp_lp00B
 1569	b+1, 4	m, m	16,10	ar16~	-23~-18	-12~-7	-12~-7		Cp_lk2Rv_7CS
-1579	b+2	m	14	14	-11	+3	+3		Cp_cntrk5
+1779	b+2	m	14	14	-11	+3	+3		Cp_cntrk5
 1578	b+2, 4	m, h	14,23	14	-9~-8	KND	KND	Tail spin	Cp_cntrk2E
 1780	b+2, 3	m, m	14,17	14	-7	+5	+5		
 1781	b+2, 3, 3	m, m, m	14,17,24	14	-14	KND	KND		

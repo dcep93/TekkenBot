@@ -114,7 +114,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	BT 3 or 4	h	18	10	-8	KND	KND		
 	BT d+1 or d+2	sm (TC)	10	10	-2	9	9		
 	BT d+3 or d+4	l	12	10	-11	3	4		
-1777	d+1+2 or FC+d+1+2	(TRT)	–	–	–	–	–		Qt_sidatk_l
+	d+1+2 or FC+d+1+2	(TRT)	–	–	–	–	–		Qt_sidatk_l
 	TRT d/b			37					
 1766	TRT 1	l (TRT)	13	18	-11	5	KND		Qt_kKAM_lp
 1767	TRT 2	m	24	34	-9	Launch	Launch		Qt_kKAM_rp
