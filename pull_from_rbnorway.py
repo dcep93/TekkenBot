@@ -6,7 +6,7 @@ import requests
 from bs4 import BeautifulSoup
 
 CONCURRENT_THREADS = 8
-
+COMMAND = 'Command'
 TO_SKIP = ['panda']
 
 database = os.path.join('assets', 'database')
@@ -59,6 +59,9 @@ def update(name, content):
         row.insert(0, move_id)
         row.append(move_name)
     extra = len(existing)
+    header = existing[COMMAND]
+    del existing[COMMAND]
+    content.insert(0, header)
     content += [existing[key] for key in sorted(existing.keys())]
     print(f'same: {same} updated: {updated} missing: {missing} extra: {extra} - {name}')
     write(name, content)
