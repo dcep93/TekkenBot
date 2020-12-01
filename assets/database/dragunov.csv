@@ -1,8 +1,8 @@
 move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes	Move Name
-2157	in rage d+1+2	m	55	20 pc8~17	-22	KND	KND	Rage art	Cn_RageArts_nRv
+2156	in rage d+1+2	m	55	20 pc8~17	-22	KND	KND	Rage art	Cn_RageArts_nRv
 1799	in rage f, f, f+1+2	m	30	15~16 (18~)	+5s	Launch	Launch	Rage art	Cn_runrp00_EX
 1804	in rage f, f, f+1+2 , d/b+1+2	m, m(Throw)	30,5	15~16 (18~)	中Throw(KND)	中Throw(KND)	中Throw(KND)	Rage art	Cn_runrp00_EX_tac
-1607	1	h	7	10	+1	+8	+8		Cn_lp00F
+1607,1562,1556	1	h	7	10	+1	+8	+8		Cn_lp00F
 1563	1, 1	h, h	7,8	10	-4	+7	+7		Cn_lplp
 1564	1, 1, 3	h, h, m	7,8,22	10	-9~-8	KND	KND		Cn_lplplk
 1568	1, 2	h, m	7,8	10	-9	+2	+2		Cn_lprpF
@@ -24,16 +24,16 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1601	4, 1	h, h	15,12	12	-6~-5	+8~+9	+8~+9		Cn_rklp
 1603	4, 3	h, m	15,20	12	-12~-11	KND	KND		Cn_rkkkt
 1602	4, 4	h, m (TJ)	15,23	s js22~	+3~+4	KND	KND	Tail spin	Cn_rkrk
-2152	1+2	m	25	21~22 pc8~20	-14	KND	TUKD	Power crush	Cn_spamarm
+2151	1+2	m	25	21~22 pc8~20	-14	KND	TUKD	Power crush	Cn_spamarm
 1540	3+4	h (TJ)	25	25~26d js13~	-14~-13	CS	CS		Cn_Flyk
 	3+4, Any button	h (TJ), (Special)	25	25~26s js13~	-24~-23g	CS	CS		
 1608	f+2	h	16	19~20	-8~-7	+3~+4	+8~+9		Cn_rp00F
 1611	f+2, 4	h, m	16,24	19~20	-7~-6	KND	uKZD		Cn_ElKnee
-1613	f+3	m	11	20	-6	+2	+2		Cn_lk00F
+1613,1614	f+3	m	11	20	-6	+2	+2		Cn_lk00F
 	f+3, D/F	m, (Special)	11	20	-1	+7	+7		
 1615	f+3, 2	m, h	11,20	20	-9~-8	KND	KND	Tail spin	Cn_6lkrp
 	f+3, 3	m, m(, (throw))	11,14(,20)	20	-12	Throw(KND)	Throw(KND)		
-	f+3, 3	m, m	11,14	20	-12~-9	-1~+2s	+4~+7s		
+1616	f+3, 3	m, m	11,14	20	-12~-9	-1~+2s	+4~+7s		
 1618	f+4	h	16	14~15	-7~-6	+4~+5	+4~+5		Cn_rk00F
 1620	f+4, 4	h, h	16,14	14~15	-11~-10	0~+1	Launch (JG?)		Cn_6rk6rk
 1621	f+4, 4, 3	h, h, h	16,14,20	14~15	-5~-4	KND	KND		Cn_6rk6rklk
@@ -70,7 +70,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	b+2, 1, 3~1+2 (Cancel)	m, h, l(Throw)	14,11,45	15~		Throw(KND)			
 	b+2, 1, 3~1+2, d (Cancel)	m, h, (Special)	14,11	15~s	-36~-34	-25~-23	-25~-23		
 1702	b+3	h	17	14~15	-9~-8	+11~+12kg	+11~+12kg	Homing, Tail spin	Cn_agohiza
-1719	b+4	m	15	15	-4	+7	+7		Cn_rk00B
+1719,1720	b+4	m	15	15	-4	+7	+7		Cn_rk00B
 1721	b+4, 2	m, m	15,15	15	-7	+4s	+5s		Cn_Kinteki2
 	b+4, 2, D	m, m	15,15	15s	-7	+4s	+5s		
 1679	b+4, 2, 1	m, m, h	15,15,17	15	+1~+2	+5~+6	+12~+13		Cn_tettuiear
@@ -106,7 +106,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1664	WS+1+2	m	28	12~13	-14~-13	KND	KND		Cn_tackle
 1767	SS+2	m	16	20~21 (29~)	-10~-9	-4~-3	+1~+2		Cn_sdhzlp00
 1768	SS+2, 3	m, h(, (throw))	16,17(,20)	20~21 (29~)	-9	+5	Throw(KND)		Cn_DSwinghi
-1777	SS+2, 1+2	m, hm	16,8,12	20~21 (29~)	-4~-3	+2~+3s	+2~+3s (+8~+9s)		Cn_DSwing03
+1777,1773	SS+2, 1+2	m, hm	16,8,12	20~21 (29~)	-4~-3	+2~+3s	+2~+3s (+8~+9s)		Cn_DSwing03
 1778	SS+2, 1+2, 4	m, hm, h	16,8,12,28	20~21 (29~)	-10~-9	CS	CS		Cn_DSHK
 	SS+2, 1+2, 1+2	m, hm, m(Throw)	16,8,12,5	20~21 (29~)		Throw(KND)			
 	SS+2, 1+2, 1+2, 1 or 2 or 3 or 4 (Cancel)	m, hm, (Special)	16,8,12	20~21 (29~) Air	-51~-50	-45~-44s	-45~-44s (-39~-38s)		
