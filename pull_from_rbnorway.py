@@ -33,7 +33,7 @@ def get_content(name):
     soup = BeautifulSoup(page.content, 'html.parser')
     table = soup.find('tbody')
     rows = table.find_all('tr')
-    return [[cell.text for cell in row.find_all('td')] for row in rows]
+    return [[cell.text.strip() for cell in row.find_all('td')] for row in rows]
 
 def update(name, content):
     existing = load(name)
@@ -41,7 +41,7 @@ def update(name, content):
     updated = 0
     missing = 0
     for row in content:
-        key = row[0]
+        key = normalize(row[0])
         if key not in existing:
             missing += 1
             move_id = ''
@@ -62,6 +62,8 @@ def update(name, content):
     header = existing[COMMAND]
     del existing[COMMAND]
     content.insert(0, header)
+    if existing:
+        content += [[]]
     content += [existing[key] for key in sorted(existing.keys())]
     print(f'same: {same} updated: {updated} missing: {missing} extra: {extra} - {name}')
     write(name, content)
@@ -70,7 +72,10 @@ def load(name):
     path = get_path(name)
     with open(path, encoding='UTF-8') as fh:
         reader = csv.reader(fh, delimiter='\t')
-        return {i[1]: i for i in reader}
+        return {normalize(i[1]): i for i in reader if i}
+
+def normalize(move):
+    return ', '.join([i.strip() for i in move.split(',')])
 
 def write(name, content):
     path = get_path(name)
