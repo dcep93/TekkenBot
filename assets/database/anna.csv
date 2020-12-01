@@ -167,8 +167,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	BT+d+3 or d+4	h	12	10	-11	3	3		
 	b+3 (to CJM)	(CJM)							
 	CJM d/f	(CD)							
-1742	CJM 1	h	14	11	-9	+14	+14		An_JudgmentUper
-	CJM 1	h	10	10	-13	-2	-2		
+	CJM 1	h	14	11	-9	+14	+14		
+1742	CJM 1	h	10	10	-13	-2	-2		
 1744	CJM 2, 1	h, m	10,12		-7	+4	+4		An_turnchop2
 1764	CJM 3	m	18	12	-12	3	KND		An_JudgmentKick_B
 1749	CJM 4	m (TC)	20	27 cs14	-29	KND	KND		An_suberuLow

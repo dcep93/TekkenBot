@@ -31,9 +31,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	4, 3, 4* (Very long hold)	h, m, m	15,12,25	12	-9~-8	KND	KND	Tail spin	
 1823	4, 3, f+4	h, m, h	15,12,18	12	-5~-4	+6~+7	KND		Bx_hico_RK
 1570	1+2	m	16	17~18	-7~-6	+6~+7	+5~+6b	Homing	Bx_lrp00
-	1+2, 1	m, h	16,16	17	-1	+6	+6		
+1572	1+2, 1	m, h	16,16	17	-1	+6	+6		
 1571	1+2, 2	m, m	16,20	17	-14	KND	KND		Bx_lrprp
-1572	1+2, 1	m, h	16,16	17	-1	+6	+6	
 1626	3+4	m	20	18	-13	CS	CS		Bx_lk2
 1628	f+2	m	10	15	-10	+1	+1		Bx_6rplpRs
 1631	f+2, 1	m, m	10,12	15	-10	+1	+1		Bx_6rplp

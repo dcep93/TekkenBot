@@ -31,9 +31,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1706	d/f+3, 2	m, h	14,10	14	-2	+4	+4		It_3lkrp
 	d/f+4	m	14	13	-8	+3	+3		
 1655	d+1	m	16	17~18	-8~-7	+2~+3	+2~+3		It_2lp
-1657	d+1, 2
 1661	d+2	l (TC)	11	20s cs7~	-12	-1	-1		It_2rp
-1662	d+2, 2
 1603	d+1+2 or BT 1+2	m	28	13~14	-18~-17	KND	KND		It_Shoulder
 1608	d/b+2 or FC+d/b or d+2	Sm	8	11s cs4~	-4	+7	+7		Co_syarp00
 1611	d/b+2, 1	Sm, m	8,12	s cs1~	-13(s)	+3	+3		It_s_rplp
@@ -84,3 +82,6 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	STB b+4, 3	m, h	10,14	17	-15~-14	-4~-3	-4~-3	Homing	
 1643	STB b+4, 3, 2	m, h, m (TJ)	10,14,38	js1~31	-1~0	JG	JG		It_4rklkrp
 1722	STB WS+1, 2	m, m	12,23	12~13	+8	KND	KND	Tail spin	
+
+1657	d+1, 2
+1662	d+2, 2
