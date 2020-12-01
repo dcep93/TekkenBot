@@ -1,7 +1,7 @@
 move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes	Move Name
 2224	in rage d/f+1+2	m	55	20 pc8~17	-22	KND	KND	Rage art	Ft_RageArts02
 1768	in rage f+2+3	m (TJ), m (TJ)	27,16	26~33a 86~87s (29~) 1js15~ 2js14~	+2~+3s	KND(KND)	KND(KND)	Rage drive	Ft_DPB_EX
-	in rage f+2+3, f	m (TJ), m (TJ), (Special) (TC)(BAL)	27,16s	26~33 86~87 (29~) 115~ 214~	+12~+13s	KND(KND)	KND(KND)	Rage art
+	in rage f+2+3, f	m (TJ), m (TJ), (Special) (TC)(BAL)	27,16s	26~33 86~87 (29~) 115~ 214~	+12~+13s	KND(KND)	KND(KND)	Rage art	
 1576	1	h	7	10	+1	+8	+8		Ft_lp00
 1567	1, 1	h, h	7,7	10	-1	+5	+5		Co_sjplp03F
 1578	1, 1, 2	h, h, h	7,7,12	10	-12	+3	+3		Ft_lp02
@@ -21,15 +21,15 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1627	4, 3, 3+4	h, m, m (TJ)	15,12,14	js17~	-5~0s	KND	KND		Ft_rk02
 1604	1+2	m	18	19~20	-13~-12s	0~+1s	0~+1s		Ft_WSwing
 1606	1+2, 1+2	m, m	18,20	19~20	-20~-19	KND	KND		Ft_WSwing2
-	1+2, F	m, (Special) (TC)(BAL)	18	19~20s	+4~+5s	+17~+18s	+17~+18s	
-	1+2, F (After stance ends)	m, (Special) (TC)(BAL)	18	19~20s	-19~-18s	-6~-5s	-6~-5s	
-	1+2, B	m, (Special) (TC)(BAL)	18	19~20s	-36~-35s	-23~-22s	-23~-22s	
+	1+2, F	m, (Special) (TC)(BAL)	18	19~20s	+4~+5s	+17~+18s	+17~+18s		
+	1+2, F (After stance ends)	m, (Special) (TC)(BAL)	18	19~20s	-19~-18s	-6~-5s	-6~-5s		
+	1+2, B	m, (Special) (TC)(BAL)	18	19~20s	-36~-35s	-23~-22s	-23~-22s		
 1630	f+2	h	12	12	-8	+3	+3		Ft_rp00F
 1631	f+2, 3	h, m	12,20	12	-15~-14	KND	KND		Ft_Frplk
 1636	f+3	m	18	21~27	-4~+2	0~+6s	+8~+14s		Ft_lk00F
 1637	f+3, 4	m, m	18,23	21~27	-11~-10	KND	CS		Ft_lk01F
 1638	f+4	h	20	16~17	-6~-5	KND	KND(Throw)	Homing, Tail spin	Ft_rk00F
-1633	f+1+2	m	25	15~19 pc8~14	-13~-9	KND	KND	Power crush	Ft_BodyAttack
+1633	f+1+2	m	23	15~19 pc8~14	-13~-9	KND	KND	Power crush	Ft_BodyAttack
 1712	d/f+1	m	13	14~15	-3~-2	+5~+6	+5~+6		Ft_t_slpF
 1715	d/f+1, 2	m, m	13,15	14~15	-10	+6	+6		Ft_t_slpF02
 1713	d/f+1, 1+2	m, m	13,25	14~15	-12	KND	KND		Ft_3lplp
@@ -43,11 +43,11 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1724	d/f+4	m	16	13~14	-9~-8	+2~+3	+2~+3		Ft_t_srkF
 1727	d/f+3+4	mm	6,6	18,28	-13	KND	KND		Ft_HorseKick2
 1729	d/f+3+4, 4	mm, m (TJ)	6,6,23	js17~	-4~-2	KND	KND	Tail spin	Ft_Jheel
-1693	d+1	m	18	18~19s	-11~-10	+5~+6s	KND		Ft_t_slp00
+1693	d+1	m	18	18~19s	-9~-8	+7~+8s	KND		Ft_t_slp00
 1694	d+2	m	12	15	-9	+2	+2		Ft_t_srp00
-1695	d+2, 1	m, m	12,14	15	-10~-9	+1~+2	+1~+2		Ft_t_srp02
-1696	d+2, 1, 2	m, m, m	12,14,18	15	-10~-8	+3~+5	+3~+5		Ft_t_srp03
-1697	d+2, 1, 2, 2	m, m, m, m	12,14,18,21	15	-21	KND	KND		Ft_t_srp04
+1695	d+2, 1	m, m	12,11	15	-9~-8	+1~+2	+2~+3		Ft_t_srp02
+1696	d+2, 1, 2	m, m, m	12,11,18	15	-13~-11	+3~+5	+3~+5		Ft_t_srp03
+1697	d+2, 1, 2, 2	m, m, m, m	12,11,18,21	15	-21	KND	KND		Ft_t_srp04
 1698	d+2, 3	m, m	12,21	15	-4	+9	CS		Ft_t_srp05
 1699	d+2, 4	m, m (TJ)	12,21	15a	-13	KND	KND		Ft_t_srp06
 1707	d+3	l (TC)	14	19s cs6~	-18~-17	-7~-6	-7~-6		Ft_t_slk
@@ -67,11 +67,11 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1737	d/b+4, 4, 3	l (TC), m, h	15,14,12	14~	-10	+3	+3		Ft_t_srkB4
 1738	d/b+4, 4, 3, 3	l (TC), m, h, m	15,14,12,18	14~	-12~-7	KND	KND		Ft_t_srkB5
 1739	d/b+4, 4, 4	l (TC), m, l	15,14,10	cs11~	-12~-10	-1~+1	-1~+1		Ft_t_srkB7
-	d/b+4, 4, 4, D	l (TC), m, l	15,14,10	s cs11~	-12~-10	-1~+1	-1~+1	
+	d/b+4, 4, 4, D	l (TC), m, l	15,14,10	s cs11~	-12~-10	-1~+1	-1~+1		
 1733	d/b+1+2	m?	16	18~19	-13~-12	Launch	Launch		Ft_Tekki
 1745	d/b+3+4	l	10	19	-31	+6	+6		Ft_AshiKari00
 1749	d/b+3+4, 4	l, l	10,18	19		+8s			Ft_AshiKari02H
-	d/b+3+4, 4 (Second hit only)	l	12	19	-28	-9s	KND	
+	d/b+3+4, 4 (Second hit only)	l	12	19	-28	-9s	KND		
 1655	b+1	m	15	17~19	-9~-7	+4~+6s	+4~+6s		Ft_lp00B
 1656	b+1, 2	m, m	15,16	17~19	-8~-7	+7~+8	+7~+8		Ft_lp01B
 1657	b+2	m	10	13~14	-5~-4	+6~+7	+6~+7		Ft_rp00B
@@ -85,21 +85,21 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1662	b+1+2	m	20	17~18	-9~-8	+8~+9s	+8~+9s		Ft_Zutuki
 1663	b+1+2, 1	m, m	20,10	17~18	-11	0	0		Ft_Zutuki02
 1664	b+1+2, 1, 2	m, m, h	20,10,20	17~18	-16	KND	KND		Ft_Zutuki03
-	b+3+4	(Special) (TC)		s				
+	b+3+4	(Special) (TC)		s					
 1533	u/b+3	mm (TJ)	14,20	15~16, 24~26 js13~	-15~-13	Launch	Launch		Ft_jplk01B
 1532	u/b+3 (First hit only)	m (TJ)	14	15~16 js13~	-24~-23	Launch (JG?)	Launch (JG?)		Ft_jplk00B
-	u/b+3 (Second hit only)	m (TJ)	20	24~26 js13~	-15~-13	Launch (JG?)	Launch (JG?)	
-	u+1+2	(Special) (TJ)		a				
-	u+1+2, F	(Special) (TJ), (Special) (TC)(BAL)		as				
-	u+1+2, B	(Special) (TJ), (Special) (TC)(BAL)		as				
+	u/b+3 (Second hit only)	m (TJ)	20	24~26 js13~	-15~-13	Launch (JG?)	Launch (JG?)		
+	u+1+2	(Special) (TJ)		a					
+	u+1+2, F	(Special) (TJ), (Special) (TC)(BAL)		as					
+	u+1+2, B	(Special) (TJ), (Special) (TC)(BAL)		as					
 1499	u+1+2, 1	(Special) (TJ), m (TJ)	21	11~13s (28~) js1~	-9	KND	KND	Wall bounce	Ft_spinA
 1709	u+3+4	m (TJ)	20	24~30s js13~	-4~+2s	+6+12s	KND		Ft_8lrk
-	u+3	m (TJ)	20	20 js9~	-13	KND	KND	
-1783	u/f+3	m (TJ)	20	20 js9~	-13	Launch (JG?)	Launch (JG?)		Ft_jplk00F
-1780	u or u/f+4
+	u+3	m (TJ)	20	20 js9~	-13	KND	KND		
+1783	u/f+3	m (TJ)	20	20 js9~	-13	Launch	Launch		Ft_jplk00F
+	u/f+4	h (TJ)	20	15 js9~	-9	Tail spin	Tail spin	Tail spin		
 1529	u/f+1+2	m (TJ)	15	16~18 js13~	-11~-9	-3~-1	-3~-1		Ft_Bison
-	u/f+1+2, f (BAL)	m (TJ) (BAL)	15	16~18 js13~	?	?	?	
-	u/f+1+2, B (REV BAL)	m (TJ) (REV BALL)	15	16~18 js13~	?	?	?	
+	u/f+1+2, f (BAL)	m (TJ) (BAL)	15	16~18 js13~	?	?	?		
+	u/f+1+2, B (REV BAL)	m (TJ) (REV BALL)	15	16~18 js13~	?	?	?		
 1530	u/f+1+2, 4	m (TJ), h (TJ)	15,20	js10~	-1~0	+14~+15kg	KND	Tail spin	Ft_Bison3
 1531	u/f+1+2, 1+2	m (TJ), m	15,25	10~	-17~-13	KND	KND		Ft_BodyAttack2
 1538	u/f+3+4	lh	10,12	21,31 2js24~	-15(-25s)	-4	-4		Ft_Taekwondo22_3
@@ -115,18 +115,18 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1674	b, B+3+4	m! (TJ)	60	72~74 (73~) js51~	KND	KND	KND		Ft_lrk00D_B
 1675	b, B+3+4, 2	m	25	15~16 (58~59)	-8~-7	KND	KND		Ft_Cancel_RP
 1665	b, B+2+3	h! (TJ)	32	48~50 (49~) js20~	KND	KND	KND	Tail spin	Ft_SpinHummer
-	Back against wall b, b, u/b	m	21	36 js5 pc8~24	+2	KND	KND	
+	Back against wall b, b, u/b	m	21	36 js5 pc8~24	+2	KND	KND		
 1765	f, f, F+3 or WR+3	m (TJ)	30	20~26 (23~) js3~	+9~+15g	KND	KND		Ft_runlk00
 1767	f, f, F+3+4 or WR+3+4	m (TJ)	27	26~36a (29~) js15~	+8~+18g	KND	KND		Ft_DPB2
 1751	WS+1	m	11	15~17	-11~-9	0~+2	0~+2		Ft_s_tlp00
 1752	WS+1, 2	m, h	11,20	15~17	-9~-8	KND	CS	Tail spin	Ft_s_tlp01
 1753	WS+1, 3	m, m	11,25	15~17	-13~-12	KND	KND		Ft_s_tlp02
 1755	WS+2	m	10	14	-7	+4	+4		Ft_s_trp012
-1757	WS+2, 1	m, m	10,12	14	-20~-17	Launch (JG?)	Launch (JG?)		Ft_s_trp02SP
+1757	WS+2, 1	m, m	10,14	14	-20~-17	Launch (JG?)	Launch (JG?)		Ft_s_trp02SP
 1756	WS+2, 2	m, m	10,20	14	-13s	+5s	KND		Ft_s_trp01
 1761	WS+3	h	17	17~18	-8~-7	KND	KND		Ft_s_tlk00
 1762	WS+3, 3+4	h, m (TJ)	17,28	js15~	-4~+4s	KND	KND		Ft_s_tlk01
-	WS+4	m	20	11~12	-6~-5	+5~+6	+5~+6	
+	WS+4	m	20	11~12	-6~-5	+5~+6	+5~+6		
 1760	WS+1+2	m	25	15~17	-9~-7	KND	Launch (JG?)		Ft_s_trpSP
 1686	FC+d/f+2	m	14	14	-8	+3	+3		Ft_cBackHand
 1687	FC+d/f+2, 1	m, m	14,12	14	-7	+4	+4		Ft_cBH2
@@ -135,23 +135,23 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1690	FC+d/f+2, 4, 1+2	m, l, m	14,12,25	15~	-13	KND	KND		Ft_cBH5
 1596	SS+1+2	m	24	15~16 (24~)	-5~-4s	KND	KND		Ft_LSideRP
 1681	BT d+2	m	17	15~16	-9~-8	KND	CS		Ft_R_crp00
-	1+2+3+4	(Special)		15~16				
-	1+2+3+4, 1+2	(Special) (TJ)		as				
+	1+2+3+4	(Special)		15~16					
+	1+2+3+4, 1+2	(Special) (TJ)		as					
 2221	1+2+3+4, 4	h! (TJ)	42	17~18a (72~) js4~15	KND	KND	KND		Ft_SUPER_4
-	f+3+4 (to BAL)	(Special) (TC)(BAL)		s				
+	f+3+4 (to BAL)	(Special) (TC)(BAL)		s					
 1643	BAL 1	m	17	18~19 (43~)	-8~-7	+6~+7	CS		Ft_Froll_LP
 1645	BAL 2	m	21	23~24s (48~)	-11~-10	KND	KND	Homing, Tail spin	Ft_Froll_RP
 1647	BAL 3	h	30	20~23s (45~) cs1~	+8~+11	SH	SH		Ft_Froll_LK
 1649	BAL 4	l	14	23~26s (48~) cs1~	-24~-21	KND	KND		Ft_Froll_RK
 1652	BAL 3+4	m (TJ)	28	29~33s (54~) js1~	-18~-14s	KND	KND		Ft_Froll_LRK
-	BAL 3+4, B	m (TJ), (Special)	28	29~33b (54~) js1~	-18~-14s	KND	KND	
-	f, n, d, D/F	(Special)		s				
-1608	f, n, d, d/f+1	h	25	13~14 (16~)	-2~-1	KND	KND	Tail spin	Ft_Stlp
+	BAL 3+4, B	m (TJ), (Special)	28	29~33b (54~) js1~	-18~-14s	KND	KND		
+	f, n, d, D/F	(Special)		s					
+1608	f, n, d, d/f+1	h	25	13~14 (16~)	-4~-3	Tail Spin	Tail spin	Tail spin	Ft_Stlp
 1609	f, n, d, d/f+2	m	24(,5)	16~17a (19~)	-23~-22	Launch	Launch		Ft_DragonUp
 1610	f, n, d, d/f+3	m (TJ)	14	16~17 (19~) js14~	-10~-9	KND	KND		Ft_Stlk
 1613	f, n, d, d/f+3, 2	m (TJ), h (TJ)	14,30	js1~	-3~-2s	KND	KND		Ft_Stlk02
 1611	f, n, d, d/f+3, 4	m (TJ), h (TJ)	14,17	js1~	-11	KND	KND	Tail spin	Ft_623lkrk
-1619	f, n, d, d/f+4	l	16	18~19s (21~)	-28	-1~0 (KND)	-1~0 (KND)		Ft_Strk00
+1619	f, n, d, d/f+4	l	16	18~19s (21~)	-28	-1~0 (KND)	Launch		Ft_Strk00
 1620	f, n, d, d/f+4, 1+2	l, m	16,25	18~19 (21~)	-17	KND	KND		Ft_StrkWP
 1635	f, n, d, d/f+1+2	m (TC)	25	15(18~)	-10	KND	KND	Wall bounce	Ft_Hadoh
-	f, n, d, d/f+1+2, *	m (TC)	35	24(27~)	-7	KND	KND	Wall bounce
+	f, n, d, d/f+1+2, *	m (TC)	35	24(27~)	-7	KND	KND	Wall bounce	

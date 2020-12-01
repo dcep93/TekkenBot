@@ -5,76 +5,78 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1667	1, 1	h, m	8,15	10	-7	+4	+4		jun_mc01
 1561	1, 2	h, m	8,9	10	-8~-7	+3~+4a	+3~+4a		Jn_lprpF
 1563	1, 2, 3	h, m, m	8,9,24	10	-2~0	KND	KND	Tail spin	jun_lprpc30H
-	1, 2, 3, *, n (two spins)	h, m, m	8,9,26	10	+6~+7	KND	KND	Tail spin
-	1, 2, 3, * (three spins)	h, m, !	8,9,28	10	KND	KND	KND	Tail spin
-	1, 2, 3, B (Cancel)	h, m	8,9	10	-18~-17	-7~-6a	-7~-6a	
+	1, 2, 3, *, n (two spins)	h, m, m	8,9,26	10	+6~+7	KND	KND	Tail spin	
+	1, 2, 3, * (three spins)	h, m, !	8,9,28	10	KND	KND	KND	Tail spin	
+	1, 2, 3, B (Cancel)	h, m	8,9	10	-18~-17	-7~-6a	-7~-6a		
 1564	1, 2, 4	h, m, m	8,9,20	10	-12~-11	KND	KND		Jn_lprprk
 1678	1, 3	h, l	8,10	10	-11	0	0		jun_lk01
 1692	1, 4	h, l (TC)(LCT)	8,14	cs6~	-11~-9	0~+2	+3~+5		jun_mc02n
 1565	2	h	9	12	-11	0	0		Jn_rp00
 1567	2, 1	h, h	9,10	12	-3~-2	+8~+9	+8~+9		Jn_rphiji
-1569	2, 1, 1+2	h, h, hh	9,10,8,20	12	-9~-8	KND	KND	Tail spin	Jn_kasane02
+1569	2, 1, 1+2	h, h, hh	9,10,8,20	12	-7~-5	KND	KND	Tail spin	Jn_kasane02
 1570	2, 1, d+1+2	h, h, m	9,10,23	12	-10s	+3s	JG		Jn_kasaneS
 1566	2, 3	h, m (TJ)	9,20	js18~	-19~-18	KND	KND		Jn_rpjpk
 1576	3	m	17	14	-7	+9	+9		Jn_lk00
 1577	3, 1	m, m?	17,17	14	-11~-10	+8	CS		Jn_lklp
-	4	h	18	11	-7	+7	Launch (JG?)	
+	4	h	18	11	-7	+7	Launch (JG?)		
 1578	3~4	l (TC)	22	26~28s (27~) cs6~	-26	KND	KND	Homing	Jn_lksrklow
 1575	1+2	m	21	16~17	-9~-8	CS	CS		Jn_akkrp00
 1660	3+4	mm (TJ)	10,21	23,30~32 js5~	-6~-4	KND	KND		jn_mc03stA
-	3+4, (d/b, d or d/f)	mm (TJ)	10,21	23, 30~32s	-6~-4	KND	KND	
+	3+4, (d/b, d or d/f)	mm (TJ)	10,21	23, 30~32s	-6~-4	KND	KND		
 1718	1+4 (First hit only)	l	5	14	-19	-8	-8		jn_cap10
 1719	1+4	lh	5,8	14,31	-3(-19s)	+9	+9		jn_cap10E
 1668	1+4, 2	lh, h	5,8,10	14,31	-2	+9	+9		Jn_cap10_B
 1675	1+4, 2, 1	lh, h, h	5,8,10,12	14,31	-2	+9	+9		Jn_mc00n
 1717	1+4, 2, 4	lh, h, m	5,8,10,23	14,31	-9	+4	KND		Jn_cap10_C
 1707	1+4, 2, d+4	lh, h, l	5,8,10,15	cs10~	-23	KND	KND		Jn_cap10_CL
-	1+4, 3	lh, m	5,8,24	10~	-2~0	KND	KND	Tail spin
-	1+4, 3, b (Cancel)	lh	5,8	10~	-20(37s)	-9	-9	
-1749	2+3	h(Absorbs 1 h/m hit)	21	28~29 (7~)	0~+1	KND	KND		Jn_koushu0
+	1+4, 3	lh, m	5,8,24	10~	-2~0	KND	KND	Tail spin	
+	1+4, 3, b (Cancel)	lh	5,8	10~	-20(37s)	-9	-9		
+1749	2+3	h(Absorbs 1 h/m hit)	21	23~24 (7~)	0~+1	KND	KND		Jn_koushu0
 1637	f+2	m	20	17~18	-18~-17	Launch (JG?)	Launch (JG?)		jun_up03
-	f+2, d/b or d or D/F (Cancel)	(Special)		s				
+	f+2, d/b or d or D/F (Cancel)	(Special)		s					
 1680	f+3	m	24	14~16 (31~33)	-2~0	KND	KND	Tail spin	jun_c30H
-	f+3, *, n (two spins)	m	26	12~13 (52~53)	+6~+7	KND	KND	Tail spin
+	f+3, *, n (two spins)	m	26	12~13 (52~53)	+6~+7	KND	KND	Tail spin	
 1686	f+3, * (three spins)	!	28	12~13 (70~71)	KND	KND	KND	Tail spin	jun_c30BH
 1693	f+4	h	21	19~21	+3~+5	KND	KND	Homing, Tail spin	jun_hk00
 1778	f+1+2	h	26	15~16 pc8~14	-9	KND	KND	Power crush, Wall bounce	Jn_sphizi
 1629	d/f+1	m	10	13~14	-3~-2	+8~+9	+8~+9		Jn_t_slpF
-1632	d/f+1, 2	m, h(, (throw))	10,13(,20)	13~14	-1	Throw(KND)	Throw(KND)		Jn_apasyou
+1632	d/f+1, 2	m, h(, (throw))	10,13(,25)	13~14	-1	Throw(KND)	Throw(KND)		Jn_apasyou
 1630	d/f+1, 4	m, m	10,22	13~14	-12~-11	KND	CS		Jn_apaK
 1588	d/f+2	m	14	15~16	-6~-5	Launch (JG?)(+5a)	Launch (JG?)		Jn_rp00F
 1640	d/f+3	m	22	20~21	-8~-7	KND	KND		Jn_t_slkF
-	d/f+4	m	16	12	-9	+2	+2	
+	d/f+4	m	16	12	-9	+2	+2		
 1617	d+2	m	18	18	-4s	+9s	KND		Jn_t_srp00
 1609	d+1+2 or FC+d/b or d+1+2	l (TC)	20	20 cs15~	-18	KND	KND		Jn_downp
 1621	d+3+4	lh (TJ)	5,20	14,24 js5~	-6(-25s)	Launch (JG?)	Launch (JG?)		jn_c20E
-1611	d/b+1	m (TC)	13	14 cs6~13	-9	+4	+9		Jn_t_slp00B
+1611	d/b+1	m (TC)	13	14 cs6~13	-9	+7	+7		Jn_t_slp00B
 1612	d/b+1, 2	m (TC), h	13,25	14	-9	KND	KND	Tail spin	Jn_1lprp
-1737	d/b+2	m	22	23~24 cs3~20	-11~-10	Launch	Launch		Jn_up04
+1737	d/b+2	m	22	20~21 cs3~20	-11~-10	Launch	Launch		Jn_up04
 1642	d/b+3	l	17	21	-12	+4s	+14g		Co_t_slk00B
 1758	b+1	l (TC)(, (throw))	17	29~30s cs6~	-10~-9	+6~+7	Throw(KND)		Jn_nagi00
+	b+1, d/b or d or D/F (Cancel)	(Special)		s					
 1738	b+2	m	12	15	-4s	+1s	+1s		Jn_rp01
 1744	b+2, 1	m, m	12,14	15	-7	+4	+4		Jn_rplp00
 1747	b+2, 4	m, l(LCT)	12,14	cs15~	-11~-9	0~+2	+3~+5		Jn_rprk00
 1740	b+2, 1+2	m, h	12,7	15~	-9	+2	+1		Jn_hizi00
-	b+2, 1+2, d (Cancel)	m	12	15~s	-6s	-1s	-1s	
+	b+2, 1+2, d (Cancel)	m	12	15~s	-6s	-1s	-1s		
 1743	b+2, 1+2, 4	m, h, m	12,7,20	15~	-13~-12	KND	KND	Tail spin	Jn_hiziKick
 1687	b+3	m (TJ)	15	16~17 js10~	-19~-18	Launch (JG?)	Launch (JG?)		Jn_blk00
 1677	b+3, 2	m, m?	15,20	16~17 10~	-20~-19	Launch (JG?)	Launch (JG?)		Jn_up03n
-	b+3, 2, (d/b, d or d/f) (Cancel)	m, (Special)?	15	16~17 10~s	-33~-32	Launch (JG?)	Launch (JG?)	
+	b+3, 2, (d/b, d or d/f) (Cancel)	m, (Special)?	15	16~17 10~s	-33~-32	Launch (JG?)	Launch (JG?)		
 1697	b+3, 4	m (TJ), l (TC)(LCT)	15,14	cs1~	-11~-9	0~+2	+3~+5		Jn_mc02n0
-1590	b+4	m	17	15~16	-8~-7	+8~+9	CS		Jn_rk00B
+1590	b+4	m	17	15~16	-7~-6	+8~+9	CS		Jn_rk00B
 1594	b+4, 2	m, m	17,12	15~16	-12~-11	+4~+5s	+4~+5s		Jn_hizaelb
 1595	b+4, 2, 3	m, m, m	17,12,21	15~16	-16~-13	KND	KND		Jn_4rkrplk
 1723	b+1+4	hl	15,8	12,29~30	-8~-7	+5~+6	+5~+6 +7~+8		Jn_Newhakuro
 1725	b+1+4 (First hit only, Second hit miss)	h	15	12	-25	-14	-14		Jn_Newhakuro2
 1735	b+1+4, 3	hl, l?	15,8,18	12	-13~-12	-2~-1	KND		Jn_Newhakuro3low
 1731	b+1+4, 4	hl, m	15,8,23	12	-14~-13	+5b	+5b	Tail spin	Jn_Newhakuro3mid
-1765	u/f+2	h (throw)	20(,20)	14	-7	Throw(KND)	Throw(KND)		Jn_ganmen
-	u/f+2 (No throw)	h	20	14	-7	+	+	
+1753	b+2+3	m(absorbs 1 h/m kick)	23	24~25 (4~)	-9	+6  (CS on parry)	+6		
+1765	u/f+2	h (throw)	20(,25)	14	-7	Throw(KND)	Throw(KND)		Jn_ganmen
+	u/f+2 (No throw)	h	20	14	-7	+	+		
 1517	u/b or u or u/f+3	m (TJ)	17	20~21 js11~	-3~-2	+8~+9	KND		Co_jplk00F
 1546	u/b+4	m (TJ)	25	20~21 js9~	-15~-14	Launch (JG?)	Launch (JG?)		Jn_jprk00F
-	u or u/f+4	m (TJ)	25	20~21 js9~	-13~-12	Launch (JG?)	Launch (JG?)	
+	u or u/f+4	m (TJ)	25	20~21 js9~	-13~-12	Launch (JG?)	Launch (JG?)		
 1670	f, F+1	m	30	23~24 (24~)	+4~+5	KND	KND		Jn_66lp
 1766	f, F+2	m	16	15~16 (16~)	-13~-12	-3~-2	-3~-2		Jn_66RP
 1769	f, F+2, 1	m, h	16,21	15~16 (16~)	-5~-4	KND	KND		Jn_66RPLP
@@ -82,20 +84,20 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1768	f, F+2, 1+2	m, m	16,25	15~16 (16~)	-13~-12	ED	ED		Jn_66RPWP
 1764	f, F+3	m	23	20~21s (21~)	-9~-8	+11k	KND	Tail Spin, Homing	Jn_66LK
 1763	f, F+4	h (TJ)	28	20~21 (21~) js6~	-3~-2	KND	KND	Tail spin	Jn_66RK
-	u/b, b	(Special) (TJ)		a				
+	u/b, b	(Special) (TJ)		a					
 1659	u/b, b, 3 or f, f, f+3	m (TJ)	32	24~28 (69~) js3~	0~+4	KND	KND		Wn_runlk00
 1745	WS+1	m	12	14	-7~-6	+4~+5	+4~+5		Jn_shikeiP
-1746	WS+1, 4	m, h	12,20	14	-12	KND	KND		Jn_shikeiK
+1746	WS+1, 4	m, h	12,20	14	-8	KND	KND		Jn_shikeiK
 1651	WS+2	m	18	13~14	-8~-7	+8~+9	+8~+9		Jn_s_trp
-	WS+2, 1	m, h	18,10	13~14	-2	+9	+9	
+	WS+2, 1	m, h	18,10	13~14	-2	+9	+9		
 1666	WS+3	m	20	18~19 js18~	-16~-15	JG	JG		Jn_s_tlk_
-	WS+4	m	15	11~12	-3~-2	+8~+9	+8~+9	
+	WS+4	m	15	11~12	-3~-2	+8~+9	+8~+9		
 1649	WS+1+2	m?	20	21	-2	+5	CS (17)		Jn_s_tlp00
-	WS+1+2, D (Cancel)	(Special)?		s				
-	FC+3+4 WS+3+4	mm (TJ)	10,10	21~22, 31~32 js5~22	-6~-5	+5~+6s	+5~+6s	
-	FC+3+4, D	mm (TJ)	10,10	21~22, 31~32s js5~22	-6~-5	+5~+6s	+5~+6s	
+	WS+1+2, D (Cancel)	(Special)?		s					
+	FC+3+4 WS+3+4	mm (TJ)	10,10	21~22, 31~32 js5~22	-6~-5	+5~+6s	+5~+6s		
+	FC+3+4, D	mm (TJ)	10,10	21~22, 31~32s js5~22	-6~-5	+5~+6s	+5~+6s		
 1714	FC+3+4, 3	mm (TJ), mm (TJ)	10,10,10,10	js21~	0~+1s	KND	KND		Jn_senshi05
-	FC+3+4, 3, D	mm (TJ), mm (TJ)	10,10,10,10	s js21~	0~+1s	KND	KND	
+	FC+3+4, 3, D	mm (TJ), mm (TJ)	10,10,10,10	s js21~	0~+1s	KND	KND		
 1757	FC+d/f+2	l (TC)	10	16~17s cs1~	-11~-10	0~+1	+18~+19		Jn_sukui00
 1606	FC+d/f+3	m	20	17 cs1~17	-9	KND	KND	Wall Bounce	Jn_ebigeri
 1772	SS+2	m	23	13~14 (22~)	-9~-8	KND(KND)	KND(KND)		Jn_mvrp00m
@@ -105,13 +107,12 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1676	f+1, 3, 1	m, m, h	17,17,12	20	-8	+3	+3		Jn_mc00n0
 1699	f+1, 4	m, lh (TJ)	17,5,20	js10~	-6(-25s)	Launch (JG?)	Launch (JG?)		Jn_c20nE
 1581	f+1, d+4	m, l (TC)	17,22	s cs6~	-26	KND	KND	Homing	Jn_kasumilow
-	f+1, d+4, D/B (Cancel)	m, (Special)	17	6~s	-26	-15	-15	
+	f+1, d+4, D/B (Cancel)	m, (Special)	17	6~s	-26	-15	-15		
 1647	d/b+4	l (TC)(LCT)	14	22~24 cs6~	-11~-9	0~+2	+3~+5		jun_mc02
-	d/b+4, D	l (TC)(LCT)	14	22~24s cs6~	-11~-9	0~+2	+3~+5	
+	d/b+4, D	l (TC)(LCT)	14	22~24s cs6~	-11~-9	0~+2	+3~+5		
 1703	d/b+4, 4	l (TC), l (TC)(LCT)	14,15	cs1~	-7~-5	+4~+6	KND		Jn_mc02d_R_D
-	d/b+4, 4, D	l (TC), l (TC)(LCT)	15,15	s cs1~	-11~-9	0~+2	KND	
+	d/b+4, 4, D	l (TC), l (TC)(LCT)	15,15	s cs1~	-11~-9	0~+2	KND		
 1704	d/b+4, 4, 4	l (TC), l (TC), l (TC)(LCT)	18,20,21	cs1~	-7~-5	+4~+6	KND		Jn_mc02dd
-	d/b+4, 4, 4, D	l (TC), l (TC), l (TC)(LCT)	18,20,21	s cs1~	-11~-9	0~+2	KND	
+	d/b+4, 4, 4, D	l (TC), l (TC), l (TC)(LCT)	18,20,21	s cs1~	-11~-9	0~+2	KND		
 1691	LCT 3	h(LCT)	21	1~	-3	Launch	Launch		Jn_mc03s
-	LCT 1+4	lh(LCT)	5,8	1~	-3(-19s)	+9	+9	
-1753	b+2+3
+	LCT 1+4	lh(LCT)	5,8	1~	-3(-19s)	+9	+9		

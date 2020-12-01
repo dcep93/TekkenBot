@@ -1,116 +1,114 @@
 move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes	Move Name
 2113	in rage 1+2	m	55	20 pc8~17	-22	KND	KND	Rage art	La_RageArts02
 1614	in rage SEN 1+2	m, (DEN)	27	12~13	+7~+8	KND	KND	Rage art	La_SentLP_EX
-	in rage SEN 1+2, b+2+3	m, !	27,33	12~13	KND	KND	KND	 
-2107	in rage DEN 3+4
-1546	1	h	7	10	+1	+8	+8	 	La_lp00
-1550	1, 1	h, m	7,10	10	-8~-7	0~+1	0~+1	 	La_lp02
-1551	1, 1, 1	h, m, m	7,10,15	10	-14~-13	KND	KND	 	La_lp03
-1549	1, 2	h, h	7,9	10	-1	+7	+7	 	La_lprp
-1553	1, 4	h, l	7,10	10	-12~-11	+1~+2	+1~+2	 	La_lprk
-1554	2	h	10	10	0	+8	+8	 	La_rp00
-1555	2, 1	h, m	10,7	10	-5~-4	+6~+7	+6~+7	 	La_rplp
-1556	2, 1, 3	h, m, m	10,10,20	10	-12~-11	KND	KND	 	La_rplp00
+	in rage SEN 1+2, b+2+3	m, !	27,33	12~13	KND	KND	KND		
+1546	1	h	7	10	+1	+8	+8		La_lp00
+1550	1, 1	h, m	7,10	10	-8~-7	0~+1	0~+1		La_lp02
+1551	1, 1, 1	h, m, m	7,10,15	10	-14~-13	KND	KND		La_lp03
+1549	1, 2	h, h	7,9	10	-1	+7	+7		La_lprp
+1553	1, 4	h, l	7,10	10	-12~-11	+1~+2	+1~+2		La_lprk
+1554	2	h	10	10	0	+8	+8		La_rp00
+1555	2, 1	h, m	10,7	10	-5~-4	+6~+7	+6~+7		La_rplp
+1556	2, 1, 3	h, m, m	10,10,20	10	-12~-11	KND	KND		La_rplp00
 1557	2, 1, 4	h, m, h	10,10,27	10	-7~-6	KND	KND	Tail spin	La_rplp01
-1560	3	h	16	15	-12	+5	+5	 	La_lk00
-	3, D	h	16	15s	-12	+5	+5	 
+1560	3	h	16	15	-12	+5	+5		La_lk00
+	3, D	h	16	15s	-12	+5	+5		
 1565	4	h	27	17~18	-7~-6	KND	KND	Tail spin	La_rk00
-1568	f+1	h	10	13	-5	+6	+6	 	La_lp00F
-1569	f+1, 2	h, m	10,11	13	-5	+6	+6	 	La_lp02F
-	f+1, 2, F	h, m (SEN)	10,11	13	-8	+3	+3	 
-1571	f+1, 2, 3	h, m, m	10,11,20	13	-9	KND	KND	 	La_lp03F
-	f+1, 2, 3, F	h, m, m, (DEN)	10,11,20	13	-12	KND	KND	 
-1576	f+2	h	10	12	-6	+3	+3	 	La_rp00F
-1577	f+2, 1	h, h, (SEN)	10,12	12	-5	+6	+6	 	La_6rplp
-	f+2, 1, F	h, h (SEN)	10,12	12	-6	+5	+5	 
-1580	f+2, 4	h, h	10,22	12	-12~-11	KND	KND	 	La_6rprk
-1600	f+4	m	12	17	-9	+7	+7	 	La_rk00F
-1601	f+4, 1	m, m	12,8	17	-9~-8	+2~+3	+2~+3	 	La_6rklp
-1602	f+4, 1, 2	m, m, m	12,8,8	17	-10	+2	+2	 	La_6rklprp
-1603	f+4, 1, 2, 1	m, m, m, m	12,8,8,20	17	-14~-13	ED	ED	 	La_6rklprplp
-1584	f+1+2	m	20	15~16	-13~-12	CS	CS	 	La_Xsyou
-1572	f+1+4	m	28	13	-18	ED	ED	 	La_Shoulder
-1662	d/f+1	m	14	13	-1	+5	+5	 	La_t_slpF
-1663	d/f+2	m	15	16~17	-8	+3~-4a	+3~-4a	 	La_t_srpF
+1568	f+1	h	10	13	-5	+6	+6		La_lp00F
+1569	f+1, 2	h, m	10,11	13	-5	+6	+6		La_lp02F
+	f+1, 2, F	h, m (SEN)	10,11	13	-8	+3	+3		
+1571	f+1, 2, 3	h, m, m	10,11,20	13	-9	KND	KND		La_lp03F
+	f+1, 2, 3, F	h, m, m, (DEN)	10,11,20	13	-12	KND	KND		
+1576	f+2	h	10	12	-6	+3	+3		La_rp00F
+1577	f+2, 1	h, h, (SEN)	10,12	12	-5	+6	+6		La_6rplp
+	f+2, 1, F	h, h (SEN)	10,12	12	-6	+5	+5		
+1580	f+2, 4	h, h	10,22	12	-12~-11	KND	KND		La_6rprk
+1600	f+4	m	12	17	-9	+7	+7		La_rk00F
+1601	f+4, 1	m, m	12,8	17	-9~-8	+2~+3	+2~+3		La_6rklp
+1602	f+4, 1, 2	m, m, m	12,8,8	17	-10	+2	+2		La_6rklprp
+1603	f+4, 1, 2, 1	m, m, m, m	12,8,8,20	17	-14~-13	ED	ED		La_6rklprplp
+1584	f+1+2	m	20	15~16	-13~-12	CS	CS		La_Xsyou
+1572	f+1+4	m	28	13	-18	ED	ED		La_Shoulder
+1662	d/f+1	m	14	13	-1	+5	+5		La_t_slpF
+1663	d/f+2	m	15	16~17	-8	+3~-4a	+3~-4a		La_t_srpF
 1664	d/f+2, 1	m, h	15,20	16	-7~-6	KND (KND)	KND	Tail spin	La_3rplp
-1669	d/f+3	m	15	16	-7	+3	+3	 	La_t_slkF
-	d/f+3, D	m, (DEN)	15	16	-4(-8)	+6	+6	 
-1671	d/f+3, 3	m, m	15,24	16a	-15~-14	KND	KND	 	La_t_slkF2
-	d/f+4	m	16	15~16	-8~-7	+2~+3	+2~+3	 
+1669	d/f+3	m	15	16	-7	+3	+3		La_t_slkF
+	d/f+3, D	m, (DEN)	15	16	-4(-8)	+6	+6		
+1671	d/f+3, 3	m, m	15,24	16a	-15~-14	KND	KND		La_t_slkF2
+	d/f+4	m	16	15~16	-8~-7	+2~+3	+2~+3		
 1666	d/f+1+2	m	25	25 pc8~24	-12	KND	KND	Power crush	La_t_slrpF
-1648	d+2	m	17	18~19	0~+1s	+8~+9s	KND	 	La_t_srp00
-	d+2, D	m	17	18~19	0~+1s	+8~+9s	KND	 
-1651	d+3	l	8	15	-14	-3	-3	 	La_t_slk00
-1653	d+3, 1	l, hh	8,4,10	15	-7	+4	+4	 	La_t_slklp2
-1650	d+1+2	l (TC)	25	24~25s cs20~	-20~-19	KND	KND	 	La_Wlow
-1643	d/b+1	l (TC)	9	17s cs6~	-12	-1	-1	 	La_t_slp00B
-1645	d/b+1, 3	l (TC), h	9,10	17 6~	-12	-1	-1	 	La_t_slp01B
-	d/b+1, 3, D	l (TC), h	9,10	17 6~s	-12	-1	-1	 
-1686	d/b+2	m	12	15	-8	+3	+3	 	La_t_srp00B
-	d/b+2, F	m, (SEN)	12	15	-5	+6	+6	 
-1688	d/b+2, 1	m, m	12,8	15	-8~-7	+6~+7	+6~+7	 	La_t_srpB01
-1690	d/b+2, 3	m, m	12,15	15	-13	0	+23g(KND)	 	La_t_srpB02
-	d/b+2, 3* (Very long hold)	m, m	12,25	15	+8	KND	KND	 
-1674	d/b+4	l (TC)	17	21~22s cs6~	-26	+5~+6s	KND	 	La_t_srkB
-1693	d/b+1+2	m?	18	26~27	-14~-13	+5~+6	CS	 	La_EscapeLP
+1648	d+2	m	17	18~19	0~+1s	+8~+9s	KND		La_t_srp00
+	d+2, D	m	17	18~19	0~+1s	+8~+9s	KND		
+1651	d+3	l	8	15	-14	-3	-3		La_t_slk00
+1653	d+3, 1	l, hh	8,4,10	15	-7	+4	+4		La_t_slklp2
+1650	d+1+2	l (TC)	25	24~25s cs20~	-20~-19	KND	KND		La_Wlow
+1643	d/b+1	l (TC)	9	17s cs6~	-12	-1	-1		La_t_slp00B
+1645	d/b+1, 3	l (TC), h	9,10	17 6~	-12	-1	-1		La_t_slp01B
+	d/b+1, 3, D	l (TC), h	9,10	17 6~s	-12	-1	-1		
+1686	d/b+2	m	12	15	-8	+3	+3		La_t_srp00B
+	d/b+2, F	m, (SEN)	12	15	-5	+6	+6		
+1688	d/b+2, 1	m, m	12,8	15	-8~-7	+6~+7	+6~+7		La_t_srpB01
+1690	d/b+2, 3	m, m	12,15	15	-13	0	+23g(KND)		La_t_srpB02
+	d/b+2, 3* (Very long hold)	m, m	12,25	15	+8	KND	KND		
+1674	d/b+4	l (TC)	17	21~22s cs6~	-26	+5~+6s	KND		La_t_srkB
+1693	d/b+1+2	m?	18	26~27	-14~-13	+5~+6	CS		La_EscapeLP
 1696	b+1	m	17	15~17	-9~-7	+4~+6	KND	Homing, Tail spin	La_lp00B
-1697	b+2	m	12	16	-7	+4	+4	 	La_rp00B
-1698	b+2, 1	m, m	12,17	16	-10	+4	KND	 	La_rp01B
-1700	b+2, 3	m, h	12,21	16	-8~-7	KND	KND	 	La_4rplk
-1623	b+3	m	14	17	-12	+4	+4	 	La_lk00B
-	b+3, F	m, (SEN)	14	17	-5	+11	+11	 
+1697	b+2	m	12	16	-7	+4	+4		La_rp00B
+1698	b+2, 1	m, m	12,17	16	-10	+4	KND		La_rp01B
+1700	b+2, 3	m, h	12,21	16	-8~-7	KND	KND		La_4rplk
+1623	b+3	m	14	17	-12	+4	+4		La_lk00B
+	b+3, F	m, (SEN)	14	17	-5	+11	+11		
 1625	b+3, 4	m, h	14,20	17	-8~-7	KND	KND	Tail spin	La_lk01B
-1626	b+4	m	23	15	-8	+8	Throw(KND)	 	La_rk00B
-	b+4(CH in front)	m, (throw)	27,23	15	 	 	Throw(KND)	 
+1626	b+4	m	23	15	-8	+8	Throw(KND)		La_rk00B
+	b+4(CH in front)	m, (throw)	27,23	15			Throw(KND)		
 1702	b+1+2	mm?	8,20	21~22, 31~32	-11~-10	+6k	+6k	Homing, Tail spin	La_RPsLP2
-1575	b+2+3	!	45	84~85	KND	KND	KND	 	La_ga_do_hunou2
-1498	u/b or u or u/f+3	m (TJ)(, m)	12(,14)	16~17s (,34) js12~	-26~-25 (13~6a)	Launch	Launch	 	La_jplk00Plus
-	u/b+4	m (TJ)	20	25~27 js9~	-9~-7	KND	KND	 
-1526	u or u/f+4	m (TJ)	20	25~27 js9~	-9~-7	KND	KND	 	La_jprk00F
-1704	f, F+2	m	20	21~22 (22~)	-13~-12	Launch	Launch	 	La_66RP
-	f, F+2 When hit f	m, (SEN)	20	21~22 (22~)	 	Launch	Launch	 
-1706	f, F+3	m	22	18~19 (19~)	-8~-7	KND	KND	 	La_66LK
-1708	f, F+4	l	14	21(22~)	-31	+5	+5	 	La_66RK01
-1709	f, F+4, 3	l, m	14,20	21(22~)	-16	+3	+3	 	La_66RK2
-1703	f, F+1+2	m	20	16~17 (17~)	-11~-10	KND	 	 	La_sphizi
-1712	f, F+3+4	ll	11,15	19~20 ,29~30 (20~) cs21~	-16~-15	0~+1s	 	 	La_Wsliding02
-1581	f, b+2	m	10	14(14~)	-12	0	0	 	La_Boltliner
-1582	f, b+2, 1	m, m	10,10	14(14~)	-18~-17	BU	BU	 	La_Boltliner2
-1685	f, f, f+3	m (TJ)	30	20~26 (23~) js3~	+8~+14g	KND	KND	 	La_runlk00
-1676	WS+1	m	16	15~16	-12~-11	Launch	Launch	 	La_s_tlp00
-	WS+1 When hit f	m, (SEN)	16	15~16	 	Launch	Launch	 
-1678	WS+2	m	13	13~14	-8~-7	+3~+4	+3~+4	 	La_s_trp
-	WS+2, F	m, (SEN)	13	13~14	-5~-4	+7~+8	+6~+7	 
-	WS+2, D	m, (DEN)	13	13~14	-12~-11	0~+1	-1~0	 
-1681	WS+2, 1	m, m	13,17	13~14	-12~-11s	+5~+6s	KND	 	La_s_trp2
-1682	WS+3	h	30	20	+7	KND	KND	 	La_s_tlk
-	WS+4	m	16	11~12	-6~-5	+5~+6	+5~+6	 
-1631	FC+d/f+2	m	19	16	-8	+5	KND	 	La_kien
-1633	FC+d/f+1+2	ll	10,14	18,31~32 cs1~	-12~-11	+1~+2	+1~+2	 	La_wpkiri2
-1563	SS+2	m	20	16~17 (25~)	-7~-6	KND	KND	 	La_sideRP00L
-1656	Opponent Down d+3+4	l	25	22~23	-14~-13	-3~-2	-3~-2	 	La_humi
-	Opponent Down d+3+4*, F	l (SEN)	20	22~23	-14~-13	-3~-2	-3~-2	 
-	1+2+3+4	(Special)	 	22~23	 	 	 	 
-2104	1+2+3+4, 2	m	20	16~17 (46~) js14~	-18~-17	Launch (JG?)	Launch (JG?)	 	La_riseing
-	SEN only from certain moves	(SEN)	 	16~17 (46~) 14~	 	 	 	 
-1613	SEN 1	m	27	12~13	-10~-9	KND	KND	 	La_SentLP
-1618	SEN 2	l	20	19~20s cs12~	-13~-12	+5~+6s	KND	 	La_SentRP
-1619	SEN 3	m	20	14~16 ar14~	-14~-12	Launch (JG?)	Launch (JG?)	 	La_Stormgear
+1575	b+2+3	!	45	84~85	KND	KND	KND		La_ga_do_hunou2
+1498	u/b or u or u/f+3	m (TJ)(, m)	12(,14)	16~17s (,34) js12~	-26~-25 (13~6a)	Launch	Launch		La_jplk00Plus
+	u/b+4	m (TJ)	20	25~27 js9~	-9~-7	KND	KND		
+1526	u or u/f+4	m (TJ)	20	25~27 js9~	-9~-7	KND	KND		La_jprk00F
+1704	f, F+2	m	20	21~22 (22~)	-13~-12	Launch	Launch		La_66RP
+	f, F+2 When hit f	m, (SEN)	20	21~22 (22~)		Launch	Launch		
+1706	f, F+3	m	22	18~19 (19~)	-8~-7	KND	KND		La_66LK
+1708	f, F+4	l	14	21(22~)	-31	+5	+5		La_66RK01
+1709	f, F+4, 3	l, m	14,20	21(22~)	-16	+3	+3		La_66RK2
+1703	f, F+1+2	m	20	16~17 (17~)	-11~-10	KND			La_sphizi
+1712	f, F+3+4	ll	11,15	19~20 ,29~30 (20~) cs21~	-16~-15	0~+1s			La_Wsliding02
+1581	f, b+2	m	10	14(14~)	-12	0	0		La_Boltliner
+1582	f, b+2, 1	m, m	10,10	14(14~)	-18~-17	BU	BU		La_Boltliner2
+1685	f, f, f+3	m (TJ)	30	20~26 (23~) js3~	+8~+14g	KND	KND		La_runlk00
+1676	WS+1	m	16	15~16	-12~-11	Launch	Launch		La_s_tlp00
+	WS+1 When hit f	m, (SEN)	16	15~16		Launch	Launch		
+1678	WS+2	m	13	13~14	-8~-7	+3~+4	+3~+4		La_s_trp
+	WS+2, F	m, (SEN)	13	13~14	-5~-4	+7~+8	+6~+7		
+	WS+2, D	m, (DEN)	13	13~14	-12~-11	0~+1	-1~0		
+1681	WS+2, 1	m, m	13,17	13~14	-12~-11s	+5~+6s	KND		La_s_trp2
+1682	WS+3	h	30	20	+7	KND	KND		La_s_tlk
+	WS+4	m	16	11~12	-6~-5	+5~+6	+5~+6		
+1631	FC+d/f+2	m	19	16	-8	+5	KND		La_kien
+1633	FC+d/f+1+2	ll	10,14	18,31~32 cs1~	-12~-11	+1~+2	+1~+2		La_wpkiri2
+1563	SS+2	m	20	16~17 (25~)	-7~-6	KND	KND		La_sideRP00L
+1656	Opponent Down d+3+4	l	25	22~23	-14~-13	-3~-2	-3~-2		La_humi
+	Opponent Down d+3+4*, F	l (SEN)	20	22~23	-14~-13	-3~-2	-3~-2		
+	1+2+3+4	(Special)		22~23					
+2104	1+2+3+4, 2	m	20	16~17 (46~) js14~	-18~-17	Launch (JG?)	Launch (JG?)		La_riseing
+	SEN only from certain moves	(SEN)		16~17 (46~) 14~					
+1613	SEN 1	m	27	12~13	-10~-9	KND	KND		La_SentLP
+1618	SEN 2	l	20	19~20s cs12~	-13~-12	+5~+6s	KND		La_SentRP
+1619	SEN 3	m	20	14~16 ar14~	-14~-12	Launch (JG?)	Launch (JG?)		La_Stormgear
 1593	SEN 4	h	27	20~21	-10~-9	Launch (Screw)	Launch (Screw)	Power crush, Tail spin	La_Sentrk
-1612	SEN d/f+1	m	20	14~15	0~+1s	+8~+9s	KND	 	La_SentLRP
-1596	SEN 3+4
-	f+3 or Form certain moves	(Special)	cs 4~10	14~15	 	 	 	 
-	DEN F	(SEN)	 	 	 	 	 	 
-1588	DEN 1	h	14	11~12 (26~)	-1~0	+8~+9	+8~+9	 	La_DentLPF
-1587	DEN 1, F	h, (SEN)	14	11~12 (26~)	-3~-2	+6~+7	+6~+7	 	La_DentLP
-1590	DEN 1, 2	h, h	14,20	11~12 (26~)	-6~-5	KND	KND	 	La_DentLP2
-1597	DEN 2	m?	19	17~19 (32~)	-7~-5	+7~+9	CS	 	La_DentRP
+1612	SEN d/f+1	m	20	14~15	0~+1s	+8~+9s	KND		La_SentLRP
+	f+3 or Form certain moves	(Special)	cs 4~10	14~15					
+	DEN F	(SEN)							
+1588	DEN 1	h	14	11~12 (26~)	-1~0	+8~+9	+8~+9		La_DentLPF
+1587	DEN 1, F	h, (SEN)	14	11~12 (26~)	-3~-2	+6~+7	+6~+7		La_DentLP
+1590	DEN 1, 2	h, h	14,20	11~12 (26~)	-6~-5	KND	KND		La_DentLP2
+1597	DEN 2	m?	19	17~19 (32~)	-7~-5	+7~+9	CS		La_DentRP
 1599	DEN 3	m	25	27~30 (42~)	+4~+7	KND	KND	Wall bounce	La_DentLK
-	DEN 4, 3	l, m	14,20	21	-16	+3	+3	Same as f, F+4, 3
+	DEN 4, 3	l, m	14,20	21	-16	+3	+3	Same as f, F+4, 3	
 1598	DEN 1+2	h	20	12~13s (28~)	-10~-9	KND	KND	Tail spin	La_DentWP
-	DEN 2+3	h(Throw)	20,20	12(27~)	 	Throw(KND)	 	 
-	DEN 2+3 (Opponent in air)	Air throw	23,8	12(27~)	 	Throw(KND)	 	 
-	u/b or u or u/f+3+4	(Special) (TJ)	 	lc,a	 	 	 	 
-1531	u/b or u or u/f+3+4*	h(Throw)	40(50)	9(25) js1~	 	Throw(KND)	 	 	La_jplrk00_Thr
-1532	u/f+3+4, 1	l	20	23~24s (53~) js1~10 cs20~	-13~-12	+3~+4s	KND	 	La_jplrk00_LP
+	DEN 2+3	h(Throw)	20,20	12(27~)		Throw(KND)			
+	DEN 2+3 (Opponent in air)	Air throw	23,8	12(27~)		Throw(KND)			
+	u/b or u or u/f+3+4	(Special) (TJ)		lc,a					
+1531	u/b or u or u/f+3+4*	h(Throw)	40(50)	9(25) js1~		Throw(KND)			La_jplrk00_Thr
+1532	u/f+3+4, 1	l	20	23~24s (53~) js1~10 cs20~	-13~-12	+3~+4s	KND		La_jplrk00_LP
 1533	u/f+3+4, 4	m	20(,20)	17~18 (37~) js1~	-8~-7	+8~+9s	Throw(KND)		La_jplrk00_RK

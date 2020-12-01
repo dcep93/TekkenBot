@@ -11,44 +11,44 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1580	3	m	14	15~16	-8~-7	+8~+9	+8~+9		Ka_lk00
 1581	3, 1	m, m	14,20	15~16	-13~-12	+8k	+8k	Tail spin	Ka_lklp
 1582	3, 2	m, h	14,15	15~16	-1~0s	KND	KND		Ka_lkrp
-	4	h	18	11~12	-9~-8	+5~+6	Launch (JG?)	
+	4	h	15	11~12	-9~-8	+5~+6	Launch (JG?)		
 1557	1+2	mm(, Sm)	3,7(,20)	12,21~22 (,44)	-14~-13	-8	-8		Ka_lrp_tora
-	1+2f	mm(, Sm)	3,7(,20)	12,21~22 (,44)	-14~-13	+9		
+	1+2f	mm(, Sm)	3,7(,20)	12,21~22 (,44)	-14~-13	+9	
 1940	2+3	Sm	10	22~54	-44~-12	KND	KND		Ka_Tora00
 1575	f+2	h	25	17~18 pc8~16	-9~-8	KND	KND	Power crush	Ka_6rp
 1584	f+3	m	13	18	-8	0	0		Ka_6lk
-	f+3, f	m, (Special) (TJ)	13	18a	+5	+18g	+18g	
+	f+3, f	m, (Special) (TJ)	13	18a	+5	+18g	+18g		
 1591	f+4	h	20	16~17	-8~-7	+11~+12kg	+11~+12kg	Tail spin, Homing	Ka_6rk
 1625	d/f+1	m	10	13~14	-3~-2	+6~+7	+6~+7		Ka_t_slpF
 1629	d/f+1, 2	m, m	10,21	13~14	-13s	KND	KND		Ka_3lprp
 1596	d/f+2	m?(, Sm)	20(,9)	18a(,38)	-24	Launch	Launch		Ka_t_srpF
 1631	d/f+3	m	14	14	-9	+2	+2		Ka_t_slkF
-	d/f+4	m	16	15	-5	+6	+6	
+	d/f+4	m	16	15	-5	+6	+6		
 1611	d+1	m	15	16~17	-9~-8	+2~+3	+5~+6s		Ka_2lp
 1614	d+1, 2	m, m	15,25	16~17	-13~-12	Throw	Throw		Ka_2lprp
-	d+4	l	10	16~17s cs4~	-13~-12	-2~-1	-2~-1	
-	d+3+4	l	7	12 cs4~	-13	-2	-2	
+	d+4	l	10	16~17s cs4~	-13~-12	-2~-1	-2~-1		
+	d+3+4	l	7	12 cs4~	-13	-2	-2		
 1675	d/b+2	l (TC)	18	23s cs6~	-14s	-3	+6s		Ka_1rp
 1676	d/b+2, 3	l, l	15,12	s cs1~	-14~-13s	0~+1	+6~+7s		Ka_1rplk
 1677	d/b+2, 3, 4	l, l, l (TC)	15,12,12	s cs1~	-14~-13s	+5~+6s	KND		Ka_1rplkrk
-1642	d/b+3	l	14	17	-14	+2s	+2s		Ka_1lk
-1655	d/b+4	l	17	20	-12	+4	+15g		Ka_1rk
-1616	d/b+1+2	m	20	24~25	-4~-3	KND	KND		Ka_1lrp
+1642	d/b+3	l	12	17	-14	+2s	+2s		Ka_1lk
+1655	d/b+4	l	17	20	-12	+4	+4		Ka_1rk
+1616	d/b+1+2	m	20	24~25	-4~-3	+7s	KND		Ka_1lrp
 1682	b+1	h	17	20	-16	-5	-5		Ka_4lp
 1683	b+1, 2	h, m	17,20	20	-9~-10	+7~+8	+7~+8		Ka_4lprp
 1574	b+2	m	12	15~16	-9~-8	+4~5	+4~5	Tail spin, Homing	Ka_4rp
 1587	b+3	m	16	16	-8	+3	+3		Ka_4rk
-	b+4	m?	20	19	-13	+9	CS	
-	b+1+2	Attack returned(, m, Sm)	0,30	50~51, 76 pc6~	-13	TKF(+17)	TKF(+17)	Power crush
-	b+3+4 or RSS B	(Special) (TJ)		a				
+	b+4	m?	20	19	-13	+9	CS		
+	b+1+2	Attack returned(, m, Sm)	5,30	45~46, 76 pc6~	-13	TKF(+17)	TKF(+17)	Power crush	
+	b+3+4 or RSS B	(Special) (TJ)		a					
 1695	u/b or u or u/f+2	h(, Sm)	12(,20)	14(,37)	-14	-8	-8		Ka_9rp_tora
-	u/b or u or u/f+2f	h(, Sm)	12(,20)	14(,37)	-14	+9	+9	
+	u/b or u or u/f+2f	h(, Sm)	12(,20)	14(,37)	-14	+9	+9		
 1484	u/f+3	m (TJ)	20	28~29a js9~	-12~-11	KND	KND		Ka_9lk2
-1486	u/f+3, 4	m (TJ), m (TJ)	20,12	js1~	-7~-6	KND	KND		Ka_9lkrk
+1486	u/f+3, 4	m (TJ), m (TJ)	20,12	js1~	0~-1	KND	KND		Ka_9lkrk
 1488	u/f+3, 4, 1	m (TJ), m (TJ), m	20,12,24	js1~24	-11~-6	-5~0s	-5~0s		Ka_9lkrklp
 1487	u/f+3, 4, 3	m (TJ), m (TJ), m	20,12,17	js1~29	-11~-10	+8~+9k	+8~+9k	Tail spin	Ka_9lkrklk
-	u/b+4	m	11	15~16 js9~	-15~-14	-4~-3	-4~-3	
-	u+4	m	15	15~16 js9~	-13~-12	KND	Launch (JG?)	
+	u/b+4	m	11	15~16 js9~	-15~-14	-4~-3	-4~-3		
+	u+4	m	15	15~16 js9~	-13~-12	KND	Launch (JG?)		
 1520	u/f+4	m	13	15~16 js13~	-13~-12	Launch (JG?)	Launch (JG?)		Ka_jprk00F
 1686	f, F+2	m(, (throw))	17(,20)	13(14~) ,67 pc6~12	-13	Throw(KND)	Throw(KND)	Power crush	Ka_66rp
 1592	f, F+4	m	21	20~21 (21~)	-7~-6	KND	KND		Ka_66rk
@@ -56,26 +56,26 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1570	b, f+2, 1	m, m	12,9	15~16 (15~)	-14~-13	-1~0	-1~0		Ka_46rplp
 1571	b, f+2, 1, 4	m, m, h	12,9,20	15~16 (15~)	-6~-5	+13kg	+13kg	Tail spin, Homing	Ka_46rplprk
 1572	b, f+2, 1, 1+2	m, m, m(, Sm)	12,9,13(,20)	15~16 (15~)	-14~-13	KND	KND		Ka_46rplplrp
-1670	f, f, f+2	m	24	15~16 (18~)	-4~-3	KND	KND		Ka_666rp
+1671	f, f, f+1	h	30	15~17 (18~)	+7~+9	KND	KND		
+1670	f, f, f+2	m	25	15~16 (18~)	-4~-3	KND	KND		Ka_666rp
 1680	WS+1	m	12	12~13	-4~-3	+7~+8	+7~+8		Ka_s_tlp00
 1681	WS+1, 2	m, m	12,23	12~13	-13~-12	KND	KND		Ka_s_tlprp
 1659	WS+2	m?	20	18~19	-12~-11	Launch (JG?)	Launch (JG?)		Ka_s_trp
-1666	WS+3	m	20	15~16	-11~-10	-8	-8		Ka_s_tlk_tora
-	WS+3f	m	20	15~16	-11~-10	-8	-8	
+1666	WS+3	m	20	14~15	-11~-10	-8	-8		Ka_s_tlk_tora
+	WS+3f	m	20	14~15	-11~-10	-8	-8		
 1667	WS+4	m	13	11~12	-3~-2	+8~+9	+8~+9		Ka_s_trk
 1668	WS+4, 4	m, h	13,16	11~12	-6~-5	+13~+14kg	+13~+14kg	Tail spin, Homing	Ka_s_trkrk
-	FC+d/b or d+4	l	10	16~17s cs1~	-15~-14	-4~-3	-4~-3	
-	FC+d/f+4	l	10	12 cs1~	-15	-4	-4	
+	FC+d/b or d+4	l	10	16~17s cs1~	-15~-14	-4~-3	-4~-3		
+	FC+d/f+4	l	10	12 cs1~	-15	-4	-4		
 1679	Opponent Down d+2	l(On grounded opponent)	16	17~18	-13~-12	-2~-1	-2~-1		Ka_dwp
-	2+3+4	(Special)		17~18				
-	f+3+4 or f, f+3+4 or b+3+4, f	(RSS) (TJ)		a				
+	2+3+4	(Special)		17~18					
+	f+3+4 or f, f+3+4 or b+3+4, f	(RSS) (TJ)		a					
 1952	RSS 1	m	25	19(35~) js1~10	-11	KND	KND	Wall bounce	Ka_6lrklp
 1954	RSS 2	h	20	15(28~) js1~8	-10	Launch (JG?)	Launch (JG?)		Ka_6lrkrp
-1962	RSS 3	m	20	23~27a (39~) js1~	-7~-3	+7s~+11s	+7s~+11s		Ka_6lrklk
+1962	RSS 3	m	20	23~27a (39~) js1~	-7~-3	+7s~+11s	KND		Ka_6lrklk
 1959	RSS 4	l	17	18(34~) js1~10	-31	+5s(KND)	+5s(KND)		Ka_6lrkrk2
 1961	RSS 4, 2	l, m	17,20	18(34~) 1~10	-16~-15	KND	KND		Ka_6lrkrkrp
-	RSS 1+2	m	20	22(38~) js1~8	+4	+8	KND	
-1967	RSS 3+4	m, m	8, 14	19	-15	Launch	Launch		Ka_renkan2
+	RSS 1+2	m	20	22(38~) js1~8	+4	+8	KND		
+1967	RSS 3+4	m, m	7, 20	19	-15	Launch	Launch		Ka_renkan2
 1957	RSS f+1+2	!	30	50(66~) js1~8	CS	CS	CS		Ka_6lrk6lrp
-	RSS 1+3	m(Throw), m	15	46(62~)		Throw(+8)		
-1671	f, f, f+1
+	RSS 1+3	m(Throw), m	15	46(62~)		Throw(+8)			

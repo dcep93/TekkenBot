@@ -7,61 +7,61 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1792	1, 1, 2, 1	h, m, m, m	7,21,5,5	10	-14~-13	-1~0	-1~0		Ta_10comb4
 1570	1, 2	h, h	7,9	10	-1	+7	+7		Ta_lprp
 1571	1, 2, 2	h, h, h	7,9,10	10	-13	+3	+3		Ta_lprprp
-	1, 2, 2, b	h, h, h	7,9,10	10b	-11	+5	+5	
+	1, 2, 2, b	h, h, h	7,9,10	10b	-11	+5	+5		
 1573	1, 3	h, h	7,17	10	-5~-4	+6~+7	Launch (JG?)		Ta_lplk
 1589	2	h	8	10	-3	+5	+5		Ta_rp00
 1593	2, 4	h, m	8,10	10	-12	-1	-1		Ta_rprk
 1594	2, 4, 1	h, m, m	8,10,20	js12~19	-13	KND	KND		Ta_syourinCom
-	2, 4, 1, b (Cancel)	h, m	8,10	12~19b	-13	-2	-2	
+	2, 4, 1, b (Cancel)	h, m	8,10	12~19b	-13	-2	-2		
 1615	3	h	15	16	-11	0	0		Ta_lk00
 1616	3, 3	h, h	15,18	16	-10	+1	+1		Ta_lk01
 1617	3, 3, 4	h, h, l	15,18,23	16b	-12~-11	KND	KND		Ta_lk02
-	3, 3, 4, b (Cancel)	h, h	15,18	16b	-13	-2	-2	
+	3, 3, 4, b (Cancel)	h, h	15,18	16b	-13	-2	-2		
 1623	4	h	17	11	-8	+3	KND		Ta_rk00
 1590	2~1	m	10	24~25 (24~)	-3~-2s	+8~+9s	+8~+9s		Ta_t_srpF
 1591	2~1, 1	m, m	10,20	24~25 (24~)	-13~-12	Launch	Launch		Ta_t_srpFup
 1619	3~4	m (TJ)	27	34~36 (35~) js20~	-7~-5s	KND	KND		Ta_senpu
-	3~4, b	m (TJ)	27	34~36b (35~) js20~	-2~-0s	KND	KND	
+	3~4, b	m (TJ)	27	34~36b (35~) js20~	-2~-0s	KND	KND		
 1621	3~4, 3	m (TJ), l	27,21	s cs6~	-26~-14	KND	KND		Ta_kousoutai2
 1624	4~3	m (TC)	25	27~36a (28~) js15~	-4~+5	+4~+13s	KND		Ta_hasai
-1583	1+2	m(Absorbs 1 h/m hit)	24	21~22 (2~7)	-13~-12	CS(KND)	CS		Ta_kaityuu
+1583	1+2	m(Absorbs 1 h/m hit)	24	21~22 (2~9)	-12	CS(KND)	CS		Ta_kaityuu
 1575	1+4	lh	7,10	21~22, 41~42	-31s	+6~+7	+6~+7		Ta_RKsLP2
-	1+4 (Second hit only)	h	10	41	-2~-1	+6~+7	+6~+7	
+	1+4 (Second hit only)	h	10	41	-2~-1	+6~+7	+6~+7		
 1713	f+2	m	12	16~17	-8~-7	+3~+4	FS (+10~+11g) 23~24		Ta_rp00FH
 1715	f+2, 1	m, m	12,10	16~17	-5	+6	+6		Ta_keiipon_Y
 1716	f+2, 1, 2	m, m, m	12,10,20	16~17	-19~-18	KND	KND		Ta_tetuzan3
 1717	f+3	m	10	21	-3	+9	+9		Ta_tukilk
 1722	f+3, 4	m, m (TJ)	10,20	js21~	-16~-15	Launch (JG?)	Launch (JG?)		Ta_tukilk2
 1724	f+4	h (TJ)	15	18~19	-9~-8	CS	CS		Ta_rk00F
-	f+4, B	h (TJ)	15	18~19b	-5~-4	CS	CS	
+	f+4, B	h (TJ)	15	18~19b	-5~-4	CS	CS		
 1729	f+4, 3	h (TJ), m	15,30	18~19	-10~-7	KND	KND		Ta_rk00F_2
-	f+4, 4 (Close)	h (TJ), l (TC)	15,22	cs10~	-12	KND	KND	
+	f+4, 4 (Close)	h (TJ), l (TC)	15,22	cs10~	-12	KND	KND		
 1730	f+4, 4	h (TJ), l (TC)	15,15	cs10~	-12~-10	-1~+1	KND		Ta_zensoutai2
 1803	f+1+2	h	28	19~20	-9~-8	KND	KND	Tail spin, Homing	Ta_6lrp
-	d/f+1	m	12	14	0	+6	+36g(m)	
+	d/f+1	m	12	14	0	+6	+36g(m)		
 1763	d/f+2	m	15	20	-9	+4	+4		Ta_shokinda
 1764	d/f+2, 2	m, m	15,21	20	-6~-5	KND	KND	Wall bounce	Ta_sunkei1
 1765	d/f+3	m	21	18~19	-7~-6	Launch	Launch		Ta_sokuteki
 1766	d/f+4	m	14	15	-6	+5	+5		Ta_t_srkF
-1767	d/f+4,3
 1768	d/f+4,2	m	14,15	15	-11	+1	+1		Ta_3rkrp
 1769	d/f+4,2,1+2	m	14,12,23	15	-19	KND	KND		Ta_3rkrplrp
+1767	d/f+4,3	m	14	18	15	-6	+13g	+13g	
 1771	d/f+3+4	m	23	23~27	-8~-4	KND	KND	Homing, Tail spin	Ta_CircleKick
 1753	d+2	l (TC)	17	20~21s cs6~	-12~-11	-1~0	KND		Ta_hebi
 1756	d+4	l	7	14~15	-11~-10	0~+1	0~+1		Ta_rakuyou
 1757	d+4, 1+2	l, m	7,22	14~15	-10	KND	KND		Ta_rakuyou_P
 1576	d/b+1	m	12	16	-12	+4	+4		Ta_t_slp00B
-1578	d/b+1, 2	m, m	12,18	16	-12~-11	+7~+8	KND		Ta_shokinda2
-	d/b+1, F	m, (STC)	12	16	-16	0	0	
-	d/b+1, F (After stance ends)	m, (STC)	12	16	-41	-25	-25	
-	d/b+1, B	m, (KNP)	12	16	-9	+7	+7	
-	d/b+1, B (After stance ends)	m, (KNP)	12	16	-35	-19	-19	
+1578	d/b+1, 2	m, m	12,18	16	-11	+7~+8	KND		Ta_shokinda2
+	d/b+1, F	m, (STC)	12	16	-16	0	0		
+	d/b+1, F (After stance ends)	m, (STC)	12	16	-41	-25	-25		
+	d/b+1, B	m, (KNP)	12	16	-9	+7	+7		
+	d/b+1, B (After stance ends)	m, (KNP)	12	16	-35	-19	-19		
 1577	d/b+1, 4	m, h	12,23	16	-2~-1	KND	KND	Tail spin	Ta_1lprk
 1601	d/b+2	l (TC)	10	20~21 cs6~	-11~-10	0~+1	0~+1		Ta_senkai
 1602	d/b+2, 2	l (TC), l (TC)	10,10	cs1~	-17~-15	KND	KND		Ta_senkai2
-	d/b+2, 2, b	l (TC)	10	20~21 cs6~	-15~-13	-4	-4	
+	d/b+2, 2, b	l (TC)	10	20~21 cs6~	-15~-13	-4	-4		
 1604	d/b+2, 2, 2	l (TC), l (TC), m	10,10,25	1~	-8~-7	KND	KND		Ta_senkai3
-1772	d/b+3	l (TC)	14	16~17s cs6~	-15~-14	+4~+5s	+4~+5s		Ta_tessa
+1772	d/b+3	l (TC)	14	16~17s cs6~	-15~-14	+4~+5s	KND (Throw)		Ta_tessa
 1759	d/b+4	l (TC)	20	30~32s cs6~	-26	KND	KND	Homing	Ta_t_srk00B
 1581	d/b+1+2	m	15	21~22	0~+1	+8~+9	+8~+9		Ta_housui
 1582	d/b+1+2, 2	m, l (TC)	15,15	s cs8~	-11~-10	0~+1	KND		Ta_hebi2
@@ -72,19 +72,19 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1736	b+2, 3, 4, 2	m, l, m, m	15,10,13,22	17	-6~-5s	+4~+5s	+4~+5s		Ta_combo4
 1737	b+3	m	12	23~24	-8~-7	+3~+4	+3~+4		Ta_lk00B
 1738	b+3, 3	m, h	12,15	23~24	-6	+3	CS		Ta_lk01B
-	B+3~4	(Special)		b				
+	B+3~4	(Special)		b					
 1811	b+4	m	14	12	-9	+2	+2		Ta_hikyaku
 1806	b+1+2	m	30	13~14	-19~-18	KND	KND		Ta_tetuzan4
 1600	u/b+2	mh	13,21	16,32~33	-10~-9	+9~+10	+9~+10		Ta_tuki2
 1599	u/b+2 (First hit only, Second hit miss)	m	13	16	-37	-26	-26		Ta_tuki
 1499	u/b+1+2	!	70	79	CS	CS	CS		Ta_a_tetsuzan
-	u+2	m (TJ)	30	38~40 js9~	+2~+4	KND	KND	
+	u+2	m (TJ)	30	38~40 js9~	+2~+4	KND	KND		
 1497	u/b or u or u/f+1	m (TJ)	12	18~19 js6~	-7~-6	+4~+5 (+12~+13)	+4~+5 (+12~+13)		Ta_jplp00F
 1515	u/f+2	m	18	18	-10	+3	CS		Ta_jprp03F
 1535	u/b or u or u/f+3	m (TJ)	22	21~23 js9~	-2~0	KND	KND		Ta_jplk00F
 1551	u/b+4	m (TJ)	11	15~17 js9~	-20~-18	-8~-6	-8~-6		Ta_jprk00F
-	u+4	m (TJ)	15	15~17 js9~	-13~-11	KND	Launch (JG?)	
-	u/f+4	m (TJ)	13	15~17 js9~	-13~-11	Launch (JG?)	Launch (JG?)	
+	u+4	m (TJ)	15	15~17 js9~	-13~-11	KND	Launch (JG?)		
+	u/f+4	m (TJ)	13	15~17 js9~	-13~-11	Launch (JG?)	Launch (JG?)		
 1448	u/f+3+4	mhh	10,10,10	24~26 tc6~23, 31~33, 37~38 js33~	-10~-9	Launch	Launch		Ta_step_RK03Y
 1446	u/f+3+4 (Third hit miss)	mh	10,10	24~26, 31~33 js33~	-16~-14	Launch	Launch		Ta_step_RK02Y
 1444	u/f+3+4 (second and third hit miss)	m	10	24~26 js33~	-28~-26	-17~-15	-17~-15		Ta_step_RK00Y
@@ -93,15 +93,15 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1622	f, F+3	m	30	32~33 (33~)	+8~+9s	+8~+9s	JG		Ta_66lk
 1625	f, F+4	m	13	19~20 (20~)	-15~-14	Launch (JG?)	Launch (JG?)		Ta_renkantai
 1626	f, F+4, 3	m, m	13,21	19~20 (20~)a	-14~-13	JG	JG		Ta_renkantai2
-	f, F+4, d3	m, m	13,21	19~20 (20~)	-14~-13	JG	JG	
+	f, F+4, d3	m, m	13,21	19~20 (20~)	-14~-13	JG	JG		
 1607	f, F+1+2	m	21	23~24 (24~) pc6~22	-12~-11	KND	KND	Power crush	Ta_ryoute
-	f, F+1+2* (Very long hold)	m	25	39~40 (40~) pc6~22	+3~+4	+14~+15	+14~+15	Power crush
-	b, f+1	m	25	25~26 (25~)	-15~-14	KND	CS	
-	f, f, f+3	m (TJ)	30	20~25a (23~) js5~	+6~+11g	KND	KND	
+	f, F+1+2* (Very long hold)	m	25	39~40 (40~) pc6~22	+3~+4	+14~+15	+14~+15	Power crush	
+	b, f+1	m	25	25~26 (25~)	-15~-14	KND	CS		
+	f, f, f+3	m (TJ)	30	20~25a (23~) js5~	+6~+11g	KND	KND		
 1779	WS+1	m	13	14	-1	+5	+5		Ta_renda
-1780	WS+1, 2	m, m	13,13	14	-10	+1	+1		Ta_renda2
-1781	WS+1, 2, 1	m, m, m	13,13,20	14	-12~-11	KND	KND		Ta_renda3
-1782	WS+2	m	17	15~16	-9~-8	KND	KND		Ta_s_trp00
+1780	WS+1, 2	m, m	13,13	13	-10	+1	+1		Ta_renda2
+1781	WS+1, 2, 1	m, m, m	13,13,20	13	-12~-11	KND	KND		Ta_renda3
+1782	WS+2	m	17	15~16	-7	+7	Launch		Ta_s_trp00
 1785	WS+3	m	16	15~16a	-12~-11	Launch (JG?)	Launch (JG?)		Ta_s_tlk
 1786	WS+4	m	18	11~12	-7~-6	+7~+8	+29g(m)		Ta_s_trk
 1783	WS+1+2	m(h or m punch parry)	20	23~24 (3~8)	-9~-8	KND(+16)	KND		Ta_Koboku00
@@ -109,19 +109,19 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1596	FC+d/f+2	m	25	18s	-14	CS	CS		Ta_golden
 1598	SS+2	h	18	15b(24~)	+3	+9	+9	Homing	Ta_renga
 1776	SS+3	h	12	18~19 (27~)	-13~-12	-2~-1	-2~-1		Ta_tora
-	SS+3, b	h	12	18~19b (27~)	-11~-10	0~+1	0~+1	
+	SS+3, b	h	12	18~19b (27~)	-11~-10	0~+1	0~+1		
 1778	SS+3, 2	h, m	12,20	18~19 (27~)b	-5~-4	CS	CS		Ta_senaka2
 1761	SS+4 (Close)	l	21	20~22 (29~) cs10~	-31	KND	KND		Ta_zensoutai
-	SS+4	l	14	20~22 (29~) cs10~	-31	-3~-1	KND	
+	SS+4	l	14	20~22 (29~) cs10~	-31	-3~-1	KND		
 1606	SS+1+2	m	21	22~23 (31~)	+1~+2	KND	KND		Ta_doon
-	Grounded face up 3+4	m	20	30~33 js28~	-5~-2	KND	KND	
+	Grounded face up 3+4	m	20	30~33 js28~	-5~-2	KND	KND		
 1758	Opponent Down d+3+4	On grounded opponent(l)	19	24~25	-13~-12	-2~-1	-2~-1		Ta_dowrk
-	1+3+4	(Special)		24~25				
-	1+2+3+4	(Special)		24~25				
-	1+2+3+4*	(Special)		24~25				
-	f+3+4	(STC)		(3~)				
-	f+3+4	Parry, m(STC)	21	3~	-17	KND	KND	
-	STC b	(KNP)		b				
+	1+3+4	(Special)		24~25					
+	1+2+3+4	(Special)		24~25					
+	1+2+3+4*	(Special)		24~25					
+	f+3+4	(STC)		(3~)					
+	f+3+4	Parry, m(STC)	21	3~	-17	KND	KND		
+	STC b	(KNP)		b					
 1678	STC 1	m	20	20~23 (40~)	-14~-11	KND	KND		Ta_houko
 1680	STC 2	m?	15	15~16 (35~)	-13~-12	Launch (JG?)	Launch (JG?)		Ta_FSTEP_RP
 1684	STC 3	h	30	20~21 (40~)	+8~+9	KND	KND		Ta_sasori
@@ -129,26 +129,26 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1681	STC 1+2	m	7	15~16 (35~)	-9~-8	+2~+3	+2~+3		Ta_uraken01
 1682	STC 1+2, 1	m, h	7,8	15~16 (35~)	-11	0	0		Ta_uraken02
 1683	STC 1+2, 1, 2	m, h, h	7,8,18	15~16 (35~)	-11	KND	KND		Ta_uraken03
-	b+3+4	(KNP)		15~16 (35~)				
-	KNP f	(Special)(Parry)(KNP)		15~16 (35~)				
+	b+3+4	(KNP)		15~16 (35~)					
+	KNP f	(Special)(Parry)(KNP)		15~16 (35~)					
 1640	KNP 1	l (TC)	22	20~21s (35~) cs15~	-13~-12	+8~+9s	KND		Ta_BSTEP_lp
 1641	KNP 2	h	20	14(29~)	-9	KND	KND		Ta_BSTEP_rp
 1642	KNP 3	m (TJ)	17	22~23a (37~) js15~	-12~-11	Launch (JG?)	Launch (JG?)		Ta_BSTEP_lk
 1643	KNP 4	m (TJ)	30	31~34as (46~) js15~	-7~-4	KND	KND		Ta_BSTEP_rk
 1644	KNP 4, 3+4	m (TJ), m	30,20	js38~	-3~-0	KND	KND		Ta_BSTEP_rk2
-	qcf	(Special)		s				
+	qcf	(Special)		s					
 1439	qcf+1	l (TC)	23	22~23 (24~) cs6~	-14~-13	+2~+3	KND		Ta_step_LP
 1440	qcf+2	m?	22	22~23 (24~)	-14~-13	Launch	Launch		Ta_step_RP
 1442	qcf+1+2	m	23	16~17 (18~)	+4~+5s	+8~+9s	KND		Ta_step_Zutuki
 1788	qcf+3+4	(STC)		16~17 (18~)					Ta_runki00
-	qcf, ,			16~17 (18~)				
-	B+3~4	(Special)		b				
+	qcf, ,			16~17 (18~)					
+	B+3~4	(Special)		b					
 1612	BT 1	h	12	12	-3	+14	+14		Ta_R_lp00
 1613	BT 2	m	12	16b	-6	+5	+5		Ta_R_rp00
 1614	BT 2, 2	m, m	12,17	16	-13~-11s	KND	KND		Ta_R_rprp00
-	BT 3	m	30	32~33	+8~+9s	+8~+9s	JG	
-	BT 4	h	18	10	-8	KND	KND	
+	BT 3	m	30	32~33	+8~+9s	+8~+9s	JG		
+	BT 4	h	18	10	-8	KND	KND		
 1609	BT 1+2	m	22	16~17b	-5~-4	CS	CS		Ta_senaka
 1749	BT d+3 (Close)	l (TC)	21	18~20s cs6~	-26	KND	KND		Ta_kousoutai3
-	BT d+3	l (TC)	14	18~20s cs6~	-26	-4~-2	KND	
+	BT d+3	l (TC)	14	18~20s cs6~	-26	-4~-2	KND		
 1820	BT 1+4 or 2+3	h(Throw)	50	13	Throw(KND)	Throw(KND)	Throw(KND)		ThrmvBB2_L1

@@ -5,7 +5,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	1, 1, 1+2	h, m (KAT)	7, 12	10	-7	4	4		
 1606	1, 1, 1	h, m, m (TJ)	7,12,21	10	-11	KND	KND	Tail spin	
 1607	1, 1, 2	h, m, m	7, 12, 24	10	-9	KND	KND		
-1613	1, 2, 4	h, m, m (TJ)	7, 12, 23	10	3	KND	KND		
+	1, 2, 4	h, m, m (TJ)	7, 12, 23	10	3	KND	KND		
 1609	1, 2	h, h	7, 8	10	-1	7	7		
 	1, 2, 2, B	h, h (BT)	7, 9	10	-16	-8	-8		
 1611	1, 2, 2	h, h, h	7,8,11	10	-12	4	4		
@@ -62,7 +62,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1740	d/b+3 x 4	l (TC) x 4	8,7,7,5	21 cs6~	-19	-7	-7		
 1741	d/b+3 x 5	l (TC) x 5	8,7,7,5,5,	22 cs6~	-19	-7	-7		
 1742	d/b+3 x 6	l (TC) x 6	8,7,7,5,5,5,	23 cs6~	-47	-35	-35		
-1743	d/b+3, 3, �, 4	l (TC), l(TC), �., m	8,7,�,15	24 cs6~	-8	KND	KND		
+	d/b+3, 3, …, 4	l (TC), l(TC), …., m	8,7,…,15	24 cs6~	-8	KND	KND		
 1744	d/b+4	l	11	17	-12	0	+8s		
 1736	d/b+1+2	m	25	27	-14	KND	KND	Wall bounce	
 1666	b+1	h	9	17	1	7	12		
@@ -72,7 +72,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1670	b+1 x 5	h x 5	9,10,11,12,13	17	5	6	11		
 1671	b+1 x 6	h x 6	9,10,11,12,13,14	17	-72	-71	-66		
 1674	d/b+3 (after b+1 (,1))	l (TC)	7	17	-20	-9	-9		
-	d/b+3, 3 (after b+1 (,1))	l (TC), l (TC)	7,5	17	-19	-7	-7		
+	d/b+3, 3 (after b+1  (,1))	l (TC), l (TC)	7,5	17	-19	-7	-7		
 	d/b+3, 3, 3 (after b+1 (,1))	l (TC), l(TC), l(TC)	7,5,5	17	-47	-35	-35		
 	d/b+3, 3, 4 (after b+1 (,1))	l (TC), l(TC), m	7,5,15	17	-8	KND	KND		
 1675	b+2	m	23	17 pc8~	-13	KND	KND		
@@ -96,7 +96,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1628	qcf+2	m	21	13	-12s	KND	KND		
 1638	qcf+1+2	m	27	20 js20~	-9	D	D		
 1754	f, f, f+2	h (throw)	20, (,10, 10)	15	0	throw	throw		
-1757	f, f, f+3	m	30	23 js3~	�0	KND	KND		
+1757	f, f, f+3	m	30	23 js3~	±0	KND	KND		
 1485	u/b or u or u/f+1	m	12	18 js9~	-12	-1	-1		
 1505	u/b or u+2	h	17	13	-7	5	throw		
 	u/b or u+2 (counter hit)	h	17,25	13			throw		
@@ -115,7 +115,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1536	MUS 4	m	30	13	-14	KND	KND		
 1559	u/f, N, 4	m	25	24 js9~	-14	KND	KND		
 	u/b,b	(special)		js10~	–				
-1758	u/b,b+3	m (TJ)	30	68	�0	KND	KND		
+1758	u/b,b+3	m (TJ)	30	68	±0	KND	KND		
 1685	FC 1	sm (TC)	5	10	-5	6	6		
 1687	FC 2	sm (TC)	8	11	-4	7	7		
 1692	FC 3	m (TC)	12	16	-17	-3	-3		

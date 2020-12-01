@@ -9,13 +9,13 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1532	1, 2, 3	h, h, m	7,8,25	10	+4~+6	KND	KND		Dj_kakatL
 1533	1, 2, 3, 4	h, h, m, m	7,8,25,30	10	0~+2	+11~+13s	+11~+13s		Dj_mrkS
 1534	1, 2, 4	h, h, m	7,8,10	10	-10	+4	+4		Dj_lprphiza
-	1, 2, 4~3	h, h, m (TJ)	7,8,21	js14~26	-7~-4s	KND	KND	
-	1, 2, 4~1	h, h, Sm, h	7,8,5,5	14~26	-4	+3	+3	
-	1, 2, 4~1 (First hit only)	h, h, Sm	7,8,5	14~26	-18~-17	-7~-6	-7~-6	
+	1, 2, 4~3	h, h, m (TJ)	7,8,21	js14~26	-7~-4s	KND	KND		
+	1, 2, 4~1	h, h, Sm, h	7,8,5,5	14~26	-4	+3	+3		
+	1, 2, 4~1 (First hit only)	h, h, Sm	7,8,5	14~26	-18~-17	-7~-6	-7~-6		
 1536	2	h	9	10	0	+9	+9		Dj_rp00
 1537	2, 2	h, h	10,20	10	-13	-2	-2		Dj_rprp00
-	3	h	16	14	-14	-3	-3	
-	4	h	21	16	-9	KND	CS	
+	3	h	16	14	-14	-3	-3		
+	4	h	21	16	-9	KND	CS		
 1543	4~3 or WS+4~3	m (TJ)	21	29~32 (30~) js14~26	-7~-4s	KND	KND		Dj_hasai
 1671	1+4	Sm, h	5,5	16~17,31	-4	+3	+3		Dj_cap03Y
 1667	1+4 (First hit only)	Sm	5,5	16~17	-18~-17	-7~-6	-7~-6		Dj_cap01
@@ -27,67 +27,68 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1567	f+3	h	30	21~23	-4~-2	KND	KND	Tail spin	Dj_spinlk
 1568	f+4	m	10	15~16	-12~-11	-1~0	-1~0		Dj_hiza_up
 1569	f+4, 3	m, m?	10,15	15~16a	-33~-32	Launch (JG?)	Launch (JG?)		Dj_6rklk
-	f+4, 3, U	m, m?, (Special) (TJ)(FLY)	10,15	15~16a	-14~-13	Launch (JG?)	Launch (JG?)	
+	f+4, 3, U	m, m?, (Special) (TJ)(FLY)	10,15	15~16a	-14~-13	Launch (JG?)	Launch (JG?)		
 1564	f+1+2	mm	12,25	17~18, 45~46	-12~-11	KND	KND	Wall bounce	Dj_WP01F
-	f+1+2, b	m	12	17~18	-18~-17	-8	-8	
+	f+1+2, b	m	12	17~18	-18~-17	-8	-8		
 1573	f+3+4	mm (TJ), ?	10,20	16~17, 31~32 js10~	-16~-15	KND	KND		Dj_WK01F
 1623	d/f+1	m	11	13	-3	+8	+8		Dj_t_slpF
 1624	d/f+1, 2	m, m	11,15	13	-8~-7	+3~+4	+3~+4		Dj_lusako
-	d/f+1, 2, f, f	m, m, (Special)	11,15	13	-6~-5	+5~+6	+5~+6	
-	d/f+2	m	15	15~16	-7~-6	+4~+5	Launch (JG?)	
-1629	d/f+3	m	10	16~17	-9~-8	+2~+3	+2~+3		Dj_t_slkF
-1630	d/f+3, 2	m, m	10,8	16~17	-13	-7	-7		Dj_3lkrp
-1631	d/f+3, 2, 4	m, m, m?	10,8,16	16~17a	-33~-32	Launch (JG?)	Launch (JG?)		Dj_3lkrprk
-	d/f+3, 2, 4, U	m, m, m?, (Special) (TJ)(FLY)	10,8,16	16~17a	-14~-13	Launch (JG?)	Launch (JG?)	
+	d/f+1, 2, f, f	m, m, (Special)	11,15	13	-6~-5	+5~+6	+5~+6		
+	d/f+2	m	15	15~16	-7~-6	+4~+5	Launch (JG?)		
+1629	d/f+3	m	12	16~17	-9~-8	+2~+3	+2~+3		Dj_t_slkF
+1630	d/f+3, 2	m, m	12,10	16~17	-13	-7	-7		Dj_3lkrp
+1631	d/f+3, 2, 4	m, m, m?	12,10,20	16~17a	-33~-32	Launch (JG?)	Launch (JG?)		Dj_3lkrprk
+	d/f+3, 2, 4, U	m, m, m?, (Special) (TJ)(FLY)	10,8,16	16~17a	-14~-13	Launch (JG?)	Launch (JG?)		
 1633	d/f+4	m	10	13~14	-9~-8	+2~+3	+2~+3		Dj_t_srkF
 1634	d/f+4, 4	m, m	10,16	13~14	-15~-14	-4~-3s	-4~-3s		Dj_syrrkB
 1628	d/f+1+2	m	21	20~21s	-4~-3	+7~+8s	KND		Dj_t_slrpF
 1609	d+1	m?	25	18~19 pc8~17	-14	KND	KND	Power crush	Dj_bodylp00
 1618	d+3	l	14	18~19	-12~-11	-1~0	+7~+8s		Dj_t_slk00
 1622	d+3+4	m, m (TJ)	5,20	15~16, 30~31 js16~	-15~-14	Launch (JG?)	Launch (JG?)		Dj_c20E
-1635	d/b+2	l (TC)	15	22~23s cs6~	-13~-12	+3~+4s	+3~+4s		Dj_gepan00
-	d/b+1+2	(Special)		22~23 6~				
+1635	d/b+2	l (TC)	15	22~23s cs6~	-13~-12	+3~+4s	KND		Dj_gepan00
+	d/b+1+2	(Special)		22~23 6~					
 1585	d/b*1+2 (Short)	m	15	15~17 (25~)	-6~-4	+7~+9	+7~+9		Dj_boost_Lv1
 1586	d/b*1+2 (Long)	m	25	13~15 (39~)	0~+2	+7~+9	+7~+9		Dj_boost_Lv2
 1587	d/b*1+2 (Very long)	m	42	11~13 (61~)	+7~+9	KND	KND		Dj_boost_Lv3
 1576	b+1	h	10	12	-6	+5	+5		Dj_uraken
 1577	b+1, 2	h, m	10,20	12	-14	KND	KND		Dj_uraken2
-	b+1, 2, B (Cancel)	h, (Special)	10	12	-18	-7	-7	
+	b+1, 2, B (Cancel)	h, (Special)	10	12	-18	-7	-7		
 1579	b+2	h	11	15~17	-13~-11	-2~0	-2~0		Dj_rp00B
-1580	b+2, 1	h, m	11,23	15~17	-16	knd	knd		Dj_4rpdslp
-	b+2, 1, uf	h, m	11,23, 15	15~17	-16	throw	throw	
+1580	b+2, 1	h, m	11,21	15~17	-16	knd	knd		Dj_4rpdslp
+	b+2, 1, uf	h, m	11,23, 15	15~17	-16	throw	throw		
 1581	b+2, 3	h, m	11,23	ar25~	-15~-13	KND	KND	Tail spin	Dj_4rplk
 1588	b+3	m	24	30~31	-16~-15	KND	KND		Dj_4lrk
 1589	b+4	m	20	17~18	-8~-7	+6~+7	uKZD		Dj_keriage0
-	When opponent attacks b+1+3 or b+2+4	Attack returned(, m)	30	3~(30)	-13	KND	KND	Power crush
+	When opponent attacks b+1+3 or b+2+4	Attack returned(, m)	30	3~(30)	-13	KND	KND	Power crush	
 1683	b+1+4	!	30	43~44 ar43~	Launch	Launch	Launch		Dj_kazup00
 1684	B+1+4	!	60	63~64 ar63~	Launch	Launch	Launch		Dj_kazup00E
 1601	u/b+1+2	h!	40	32~63	KND	KND	KND		Dj_beam_00
 1506	u+4	m (TJ)	22	20~21 js9~	-36~-35	Launch (JG?)	Launch (JG?)		Dj_jprk00
-	u+4, U	m (TJ), (Special) (TJ)(FLY)	22	20~21 js9~	-17~-16	Launch (JG?)	Launch (JG?)	
+	u+4, U	m (TJ), (Special) (TJ)(FLY)	22	20~21 js9~	-17~-16	Launch (JG?)	Launch (JG?)		
 1538	u/b or u or u/f+2	h	25	20~23	-4~-1	KND	KND	Homing, Tail spin	Dj_hichop00
 1682	u/f+3	m (TJ)	21	28~29 js9~	+3~+4s	+7~+8s	KND		Dj_4lk00
 1685	u/f+4	m (TJ)	21	18 js8~	-8	KND	KND		Dj_jprk00F
 1606	u or u/f+1+2	(Sky)!	26	20~32	KND	KND	KND		Dj_beam_01
 1656	u/b+2+4	m (TJ)	25	56~59 js8~54	+16~+19g	KND	KND		Dj_Mukurowarif
-	u+2+4	m (TJ)	30	56~59 js8~54	+16~+19g	KND	KND	
-	u/f+2+4	m (TJ)	35	56~59 js8~54	+16~+19g	KND	KND	
+	u+2+4	m (TJ)	30	56~59 js8~54	+16~+19g	KND	KND		
+	u/f+2+4	m (TJ)	35	56~59 js8~54	+16~+19g	KND	KND		
 1662	f, F+2	m	24	15~16 (16~)	-8~-7	KND	KND		Dj_gyakurp
 1675	f, F+3	m	16	17~19 (18~)	-12~-10	-6~-4	-6~-4		Dj_com_01
 1676	f, F+3, 1	m, h	16,11	17~19 (18~)	+1~+2	+7~+8	+7~+8		Dj_com_02
-	f, F+3, 1, f, f	m, h, (Special)	16,11	17~19 (18~)	-2~-1	+4~+5	+4~+5	
+	f, F+3, 1, f, f	m, h, (Special)	16,11	17~19 (18~)	-2~-1	+4~+5	+4~+5		
 1677	f, F+3, 1, 2	m, h, h	16,11,21	17~19 (18~)	-4~-1	KND	KND	Homing, Tail spin	Dj_66lklprp
 1680	f, F+3, 1, 3	m, h, l	16,11,13	17~19 (18~)	-13	+3s	+3s		Dj_com_03
 1681	f, F+3, 1, 4	m, h, m	16,11,20	17~19 (18~)	-9~-8	KND	CS		Dj_com_04
-	f, F+3, 1, d/b+1+2	m, h, (Special)	21,14	17~19 (18~)	+4~+5	+10~+11	+10~+11	
+	f, F+3, 1, d/b+1+2	m, h, (Special)	21,14	17~19 (18~)	+4~+5	+10~+11	+10~+11		
 1571	f, F+4	h	32	17~18 (18~)	+5~+6	KND	KND	Homing, Tail spin	Dj_66rk
 1575	f, F+3+4	mm (TJ)	10,23	27~28, 41~42 (28~) js10~	-13~-12s	KND	KND		Ag_WK01F
 1646	b, f+2	m	12	15~17 (15~)	-9~-7	-1~+1	FS(+6~+8) 19~21		Dj_up03
 1649	b, f+2, 1	m, m	12,12	15~17 (15~)	-10~-9	+1~+2	+1~+2		Dj_co01A
 1651	b, f+2, 1, 2	m, m, m	12,12,24	15~17 (15~)	-8~-7	KND	KND		Dj_co02A
 1652	b, f+2, 1, d/b or d or d/f+2	m, m, m	12,12,20	15~17 (15~)	-14~-13	Launch (JG?)	Launch (JG?)		Dj_co02
+1648	b, f+2, 3	m, h	12,21	15~17 (15~)	-9	KND	KND		
 1654	b, f+2, 1, 4	m, m, m (TJ)	12,12,21	js12~23	-8~-5s	KND	KND		Dj_co03
-	f, f, f+3 or WR+3 or f, n, d, d/f, U/F+3	m (TJ)	30	22~25 (25~) js3~	+9~+12g	KND	KND	
+	f, f, f+3 or WR+3 or f, n, d, d/f, U/F+3	m (TJ)	30	22~25 (25~) js3~	+9~+12g	KND	KND		
 1637	WS+1	m	12	13~14	-6~-5	+5~+6	+5~+6		Dj_up02
 1639	WS+1, 2	m, m	12,14	13~14	-7~-6	+4~+5	+4~+5		Dj_up02_2
 1638	WS+1, 4	m, h	12,23	13~14	-5~-4	KND	KND	Tail spin	Dj_uplprk
@@ -95,28 +96,27 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1642	WS+4	m	13	11~12	-3~-2	+8~+9	+8~+9		Dj_s_trk
 1643	WS+4, 4	m, m	13,16	11~12	-15~-14	-4~-3s	-4~-3s		Dj_syrrk
 1736	SS+2	m	25	17~18 (26~)	-22~-21	Launch	Launch		Dj_Meteor01
-1761	SS+2 U(When hit )	m, (throw)	25(,24,20)	17~18 (26~)		Throw(KND)		
+1761	SS+2 U(When hit )	m, (throw)	25(,24,20)	17~18 (26~)		Throw(KND)			
 1617	Opponent Down d+1+2	l(On grounded opponent)	20	22~30	-16~-8	KND	KND		Dj_beam_dw
-	Grounded face up u+3+4	(Special) (TJ)(FLY)		a				
-	1+2+3+4	(Special) (TJ)		a				
-	3+4 or From certain moves (to FLY)	(Special) (TJ)(FLY)		a(s)				
+	Grounded face up u+3+4	(Special) (TJ)(FLY)		a					
+	1+2+3+4	(Special) (TJ)		a					
+	3+4 or From certain moves (to FLY)	(Special) (TJ)(FLY)		a(s)					
 1549	FLY 1	h (TJ)	20	18~19 (58~) js1~15	-3~-2	KND	KND	Tail spin	Dj_AIR_P
 1550	FLY 2	h! (TJ)(, (throw))	20(,30)	36(76~) js1~		Throw(KND)			Dj_AIR_nage
-1551	FLY 3	m (TJ)	30	15~21a (55~) js1~ 輪廻~20F	-15~-9	KND	KND		Dj_AIR_kick
+1551	FLY 3	m (TJ)	30	15~21a (55~) js1~ è¼ªå»»~20F	-15~-9	KND	KND		Dj_AIR_kick
 1548	FLY 1+2	! (TJ)	30	50~100 (80~) js1~	KND	KND	KND		Dj_beam_03
 1555	FLY f+1+2	! (TJ)	30	123~163 (153~) js1~	KND	KND	KND		Dj_beam_05
-	f, n, d, D/F	(Special)		s				
-	f, n, d, d/f, U/F	(Special) (TJ)		a				
-	f, n, d, d/f, U/F+3	m (TJ)	30	22~25 (27~) js3~	+9~+12g	KND	KND	
+	f, n, d, D/F	(Special)		s					
+	f, n, d, d/f, U/F	(Special) (TJ)		a					
+	f, n, d, d/f, U/F+3	m (TJ)	30	22~25 (27~) js3~	+9~+12g	KND	KND		
 1712	f, n, d, d/f+1	m?	30	22~24a (25~) js22~	-16~-14	Launch	Launch		Dj_dslp
-	f, n, d, d/f+1, U/F	m, (throw)	30,15	22~23a (25~)		Throw(KND)	Throw(KND)	
+	f, n, d, d/f+1, U/F	m, (throw)	30,15	22~23a (25~)		Throw(KND)	Throw(KND)		
 1714	f, n, d, d/f+1, 3	m, m	30,15	js22~45	-14	KND	KND		Dj_dslpjplk
 1715	f, n, d, d/f+1, 4	m, l?	30,12	js22~45	-20~-18	KND	KND		Dj_dslpjprk
 1718	f, n, d, D/F+2	h	20	11~12 (15~)	-10~-9	Launch (JG?)	Launch (JG?)		Dj_shoryu_f2phit
 1716	f, n, d, d/f+2	h	23	11~15 (14~)	+5~+6	Launch (JG?)	Launch (JG?)		Dj_shoryu_S
-	f, n, d, D/F (Hold as long as possible)2	h	23	12~13 (34~)	-4~-3	+12~+13	+12~+13	
+	f, n, d, D/F (Hold as long as possible)2	h	23	12~13 (34~)	-4~-3	+12~+13	+12~+13		
 1722	f, n, d, d/f+3	m (TJ)	25	26~28 (29~) js5~	-8~-6s	KND	KND		Dj_m_k00
 1721	f, n, d, D/F+3	l (TC)	24	33~34 (37~) js5~28	-23~-22	KND	KND		Dj_sjk02
 1724	f, n, d, d/f+4	l	10	16(19~)	-23	KND	KND		Dj_sjk03h
-1725	f, n, d, d/f+4, 4	l, m	10,30	16(19~)	-16~-15	+4~+5s	KND		Dj_m_k00G_EX
-1648	b, f+2, 3
+1725	f, n, d, d/f+4, 4	l, m	10,28	16(19~)	-16~-15	+4~+5s	KND		Dj_m_k00G_EX
