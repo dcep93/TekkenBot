@@ -19,7 +19,7 @@ class Characters(enum.Enum):
     gigas = '[Gigas]'
     heihachi = '[HEIHACHI]'
     hwoarang = '[HWOARANG]'
-    jack = '[Jack]'
+    jack7 = '[Jack]'
     jin = '[JIN]'
     josie = '[JOSIE]'
     katarina = '[KATARINA]'
