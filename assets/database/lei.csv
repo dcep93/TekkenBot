@@ -34,7 +34,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1616	1+2	h	16	14	-7	2	JG		rei_p00
 1618	1+2, 1	h, h	16,12	14	-3	8	8		rei_p01
 1617	1+2, 2	h, m	16,21	14	-10	KND	JG		rei_p00b_1
-	f+2	h	11	12	0	6	6	
+1668	f+2	h	11	12	0	6	6	
+1669	f+2, 4
 1684	f+3	m	20	16	-12	-1	-1		Re_6Nlk
 1685	f+3, 1	m, h	20,12	16	-3	8	8		Re_6Nlklp
 1686	f+3, 1, 2	m, h, m	20,12,12	16	-12	JG	JG		Re_6lklprp
@@ -315,6 +316,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1928	SNA 3	m (TC) (RLX)	30	28 cs4	-7	JG	JG		5hebiLK_01
 	SNA 3, d	m (TC) (grounded)	30		-9	JG	JG	
 1929	SNA 4	l	13	15	-13	-2	-2		5hebiRK_01
+1930	SNA 4, 1
 1936	SNA 1+2	m	25	21	-10	KND	KND		5hebiLRP_01
 	3+4, 1	(DRG) m/h punch parry						
 	DRG u	(TGR)						

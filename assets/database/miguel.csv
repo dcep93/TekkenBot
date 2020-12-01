@@ -18,6 +18,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	1+2, d	m	20	19~20s	-7~-6	+4~+5s	+4~+5s	
 1705	1+2, 1+2	m, m	20,20	19~20	-14~-13	KND	KND	
 1642	f+2	h?	17	15	-3	+6	CS		Co_R_rk00R
+1648	f+2, 1
 1674	f+3	m	13	20~21	-6~-5	+6~+7s	+6~+7s		Mt_Shoulder
 1677	f+3, 4	m, m	13,12	20~21	-15	KND	KND		Mt_Guardhunou
 1839	f+4	m	15	17~18	-7~-6	+6~+7	+6~+7	Homing

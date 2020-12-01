@@ -78,3 +78,4 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1713	SNK 4,1	l, h	17, 20	16	-2	KND	KND	Tail Spin	Ab_sterklp
 1697	SNK 3+4	l	23	26(41~) cs6~	-19~-14	KND	KND	 	Ab_steprk
 1701	SNK 1+2	m(Throw)	30	27(42~)	Throw(KND)	Throw(KND)	Throw(KND)		Ab_steptac
+1553	b+2

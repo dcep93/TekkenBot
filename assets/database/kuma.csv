@@ -20,6 +20,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1579	f+2	h	11	13	-13	+3	+3		Km_rp00F
 1584	f+2, 1	h, h	11,20	13	-5	KND	KND	Tail spin	Km_6rplp
 1588	f+1+2	m	25	17~18	-12~-11	CS	CS		Km_lrpf00
+1589	f+1+2, 1+2
 1740	f+3+4	l	20	28sa cs6~	-23~-21	KND	KND		Km_WlowK
 1741	f+3+4, 1+2	l, m	20,30	cs1~	-16	KND	KND		WKONARA
 1685	d/f+1	m	6	15~16	-9~-8	+2~+3	+2~+3		Km_t_slpFE

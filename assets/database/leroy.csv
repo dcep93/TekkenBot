@@ -119,3 +119,5 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1593	HMT b+1	m	21	20	+4	+7s	Launch		Nb_WK_4LP
 1607	HMT b+4	l (TC)	17	20 cs8	-13	+4s	KND	Homing	Nb_WK_4RK
 	HTM u or d	(Special)		20				
+1498	u/b+2
+1626	qcf+2

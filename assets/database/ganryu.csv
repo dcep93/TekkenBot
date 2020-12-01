@@ -33,6 +33,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1700	TAI4	m	14	13~14	-14	-3	CS		Sm_kmrk
 1701	TAI4,1	m,h	14,20	13~14	-9~-8	+10g~+11g	+10g~+11g	Tail spin	Sm_kmrklp
 1702	TAI1+2	m	15	26 (pc8~26)	-12	Throw(0)	Throw(0)	Power crush	Sm_kmtukami
+1708	TAI f+2
 1696	TAI f+1+2	m	35	20~25	-24~-19	KND	KND	DOSUKOI CANNON	Sm_divinghead
 	TAI d/f+1+2	parry	0	??	-	+16 (?)	-	Command low parry
 1705	TAI b+1+2	!	40	50~59	KND	KND	KND		Sm_kamasi00_Old

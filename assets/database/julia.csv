@@ -93,6 +93,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1735	f, F+2	m	23	18	-13	KND	KND		Jl_Kosou
 1737	F, F+3	m	21	12	-14	KND	KND		Jl_66lk
 1769	f, F+1+2	m	27	13	-7	KND	KND	Wall bounce	Jl_yoohoo
+1739	f, F+4
 1742	d, d/f+1	m	14	12	-6	0	+5		Jl_ch_lp02
 	d, d/f+1, 3 or 4	m (CES)	14		+2	+8	+13	
 	d, d/f+1, 3 or 4 (no sequential move)	m (CES)	14		-8	-2	+3	

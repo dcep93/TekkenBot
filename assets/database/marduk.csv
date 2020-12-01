@@ -72,7 +72,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1613	b+3+4	h	30	18	-14	KND	KND	Wall bounce	Va_WK00B
 1605	b+2+3	m! (throw)	70	80	KND	KND	KND	b,b to cancel	Va_hrp00
 2094	b+2+3, 1+2	m (throw)	12(10)	100	mid throw	mid throw	mid throw		Va_hrpspear
-	u/b or u or u/f+1	m (TJ)	12	18	-12	-1	-1	
+1475	u/b or u or u/f+1	m (TJ)	12	18	-12	-1	-1	
+1476	u/f+1, 2
 	u/b or u or u/f+2	h	17	15	-12	+9	+9	
 1501	u/b or u or u/f+3	m (TJ)	25	20 js12	-2	KND	JG		Va_jplk00F
 	u/b+4	m (TJ)	14	23 js9	-16	KND	KND	

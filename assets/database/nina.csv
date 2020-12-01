@@ -102,6 +102,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1690	d/b+1+2	!	50	65	CS	CS	CS		Ni_swanA
 1696	d/b+3+4	m?	21	19~20	-17~-16	Launch (JG?)	Launch (JG?)		Ni_k02MAX
 1641	b+1	m	15	20~21	-16	CS	CS		Ni_lp00B
+1642	b+1, 4
 1645	b+2	h	12	12	-14	-3	-3		Ni_bintrp01
 1646	b+2, 2	h, h	12,16	12	-6~-5	+5~+6	+5~+6		Ni_bintrp2
 1648	b+2, 2, 2	h, h, h	12,14,20	12	-9~-8	+9~+10kg	KND		Ni_bintrp3

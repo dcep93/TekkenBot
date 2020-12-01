@@ -64,6 +64,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1738	f, f, f+2	h (STB)	40	13~16 (16~) js3~	+7~+10g	KND	KND		It_RUN_rp00
 1715	WS+1	m	12	12~13	-4~-3	+7~+8	+7~+8		It_s_tlp00
 1716	WS+1, 1	m, h	12,15	12~13	-12	+9	+9		It_s_tlplp
+1721	WS+1, 2
+1722	STB WS+1, 2
 1747	WS+2	m(, (Special))(STB)	20	15~16	-14~-13	Launch (JG?)	Launch (JG?)		It_s_trp00
 1723	WS+3	m	20	16	-8	KND	KND		Co_s_tlk00
 	WS+4	m	18	11~12	-6~-5	+5~+6	+5~+6	
@@ -79,3 +81,4 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1649	STB b+4	m	10	17	-14	-3	-3		It_4rklky
 	STB b+4, 3	m, h	10,14	17	-15~-14	-4~-3	-4~-3	Homing
 1643	STB b+4, 3, 2	m, h, m (TJ)	10,14,35	js1~31	-1~0	JG	JG		It_4rklkrp
+1735	f, f+1+2

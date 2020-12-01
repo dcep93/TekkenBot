@@ -192,3 +192,4 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1642	qcf+3, 3, 1	m, h, h	14,8,14		-9	15	15		An_lkUpper
 1643	qcf+3, 3, 4	m, h, h	14,8,20		-6	KND	KND	Tail spin	An_rk01
 1709	qcf+4	mm (TC)	12,12	18 cs5	-12	+6k	+6k		An_jetlee2
+1746	CJM 3+4

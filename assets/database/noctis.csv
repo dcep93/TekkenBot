@@ -26,6 +26,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1533	f+1+2	m	24	16	-19	KND	KND		Mz_Spear
 	f+1+4	m	20	23	-13	KND	KND	Power Crush
 1605	d/f+1	m	10	13	-1	+7	+7		Mz_t_slpF
+1606	d/f+1, 2
 1633	d/f+1, 4	m,h	10,20	13 js	-5	KND	KND	Tail Spion	Mz_t_slpF2
 1617	d/f+2	m	20	15	-20	JG	JG		Mz_t_srpF
 	d/f+3	m	9	16	-13	-2	-2	

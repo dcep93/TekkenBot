@@ -67,6 +67,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	2+3+4	(Special)		9(14~) 1~				
 	f+4	(MG)		9(14~) 1~				Press down to recover crouching
 1651	MG 1	h	11	10(25~)	-4	+2	+2		Vp_shoryulp
+1654	MG 1, 4
 1652	MG 1, 2	h, h	11,12	10(25~)	-8	+1	+1		Vp_shoryulprp
 1679	MG 1, 2, 1+2	h, h, m	11,12,21	10(25~)	-13~-12	KND	KND		Vp_lrp_sp
 1662	MG 2	m (DS)	25	14(29~)	-9	KND	KND		Jn_6rkrp

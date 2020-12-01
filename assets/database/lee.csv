@@ -121,6 +121,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1644	f, f, f+3 or WR+3	m	14	14~15 (17~) js9~	-9~-8	KND	KND		Le_ki01
 1645	f, f, f+3, 4	m, m	14,26	js1~	+3~+5	KND	KND		Le_ki01y
 	f, f, f+3, 4, 3+4	m, m, (HMS)	14,26	js1~	+4~+6	KND	KND	
+1632	WS+1
+1633	WS+1, 4
 1636	WS+2	m	12	14~16	-8~-6	+3~+5	+3~+5		Le_s_trprk
 1638	WS+2, 3	m, m	12,24	14~16	-13~-12	Launch	Launch		Le_s_trplk_H
 1637	WS+2, 4	m, h	12,23	14~16	-6~-5	+16~+17kg	+16~+17kg	Tail spin	Le_s_trplk

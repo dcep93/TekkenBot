@@ -47,6 +47,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	d+1+4 or d+2+3	l (special)		total 27				
 1822	d+1+4 or d+2+3, 1+2	m (TC) (throw)	18 (,15)	14	-19s	Throw	Throw		Ak_Tackle
 1829	d+1+4 or d+2+3, 2	l	20	19	-13	+5	KND		Ak_sabaki_P
+1830	d+1+4, 1
 1597	d/b+2	m	10	14	-11	0	0		Ak_t_srp00B
 1598	d/b+2, 3	m, m	10, 20		-13	+21	+21		Ak_t_srp01B
 1599	d/b+2, 4	m, h	10, 20		-9	+13k	KND	Tail spin	Ak_t_srp02B
