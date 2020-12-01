@@ -58,11 +58,11 @@ def update(name, content):
             move_name = idx(val, move_id_pos)
         row.insert(0, move_id)
         row.append(move_name)
-    extra = len(existing)
     header = existing[COMMAND]
     del existing[COMMAND]
     content.insert(0, header)
-    if existing:
+    extra = len(existing)
+    if extra:
         content += [[]]
     content += [existing[key] for key in sorted(existing.keys())]
     print(f'same: {same} updated: {updated} missing: {missing} extra: {extra} - {name}')
