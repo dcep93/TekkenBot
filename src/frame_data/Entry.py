@@ -1,7 +1,7 @@
 from . import Database, DataColumns
 from game_parser import MoveInfoEnums
 
-MAX_HEALTH = 170
+MAX_HEALTH = 175
 
 def build(game_log, is_p1):
     entry = {}
