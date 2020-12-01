@@ -110,7 +110,7 @@ def populate_database():
         path = Path.path('./database/%s.csv' % file_name)
         with open(path, encoding='UTF-8') as csvfile:
             reader = csv.reader(csvfile, delimiter='\t')
-            data = list(reader)
+            data = [i for i in reader if i]
             raw_moves[character] = data
         header = data[0]
         for move in data[1:]:
