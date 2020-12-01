@@ -1,5 +1,5 @@
 move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes	Move Name
-2123	In rage d/f+1+2 or HMT d/f+1+2	m (throw)	55	20	-22	throw	throw	Rage Art	Nb_RageArts02
+2123	In rage d/f+1+2 or HRM d/f+1+2	m (throw)	55	20	-22	throw	throw	Rage Art	Nb_RageArts02
 1629	In rage f+1+2	mmm	10,5,25	15	+2	KND	KND	Rage Drive	Nb_WP00F3_EX
 1609	1	h	7	10	+1	+8	+8		Nb_lp00F
 1610	1, 1	h, m	7,7	10 (18~19)	-9	+2	+2		Nb_lp00F2
@@ -34,19 +34,19 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1644	f+3+4, F	m!	80	56	KND	KND	KND		Nb_WK00F_Fire
 1674	d/f+1	m	14	13	-3	+3	+3		Nb_t_slpF
 1675	d/f+1, 1	m, h	14,9	13	-1	+5	+5		Nb_t_slpF_RP
-1676	d/f+1, 4	m, m (HMT)	14,16	13	-9	+3	+3		Nb_t_slpF_RK
+1676	d/f+1, 4	m, m (HRM)	14,16	13	-9	+3	+3		Nb_t_slpF_RK
 1677	d/f+2	m	7	15	-6	+6	+6		Nb_t_srpF
 1679	d/f+2, 1+2	m, hm	7,5,10	15	-18	Launch	Launch		Nb_t_srpF3
 1686	d/f+3	m	14	16	-11	0	0		Nb_t_slkFy
 1687	d/f+3, 1	m, h	14,12	16	0	+6	+6		Nb_t_slkF2
 1688	d/f+3, 1, 1+2	m, h, m	14,12,25	16	-13	KND	KND		Nb_t_slkF3
 	d/f+3, 1, 4	m, h, l	14,12,7	16	-18	-7	-7	
-1689	d/f+4	m (HMT)	14	13	-6	+6	+6		Nb_t_srkF
+1689	d/f+4	m (HRM)	14	13	-6	+6	+6		Nb_t_srkF
 1690	d/f+4, 3	m, m	14,14	13	-9	+7	KND		Nb_t_srkF_LK
 1683	d/f+1+2	m	23	24	-14	KND	KND	Wall Bounce, Power Crush	Nb_t_sWPF
 1664	d+1	sm (TC)	5	10	-5	+6	+6		Nb_t_slp00
 1665	d+1, 2	sm (TC), m	5,8	10	-10	-1	-1		Nb_t_slp00rp
-1666	d+1, 2, 4	sm (TC), m, m (HMT)	5,8,11	10	-9	+3	+3		Nb_t_slp00rprk
+1666	d+1, 2, 4	sm (TC), m, m (HRM)	5,8,11	10	-9	+3	+3		Nb_t_slp00rprk
 1667	d+2	l (TC)	15	15 cs6	-15	-4	+4s		Nb_t_srp00
 1668	d+2, 4	l (TC), l (TC)	15,17	15	-11	0	KND		Nb_t_srp_RK
 1669	d+3	l	10	16	-13	-2	-2		Nb_t_slk00
@@ -79,7 +79,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1624	f, F+2	m	8	14	-11	0	0		Nb_66RP
 1625	f, F+2, 2	m, m	8,20	14	-13	KND	KND		Nb_1inch
 1637	f, F+3	h (TJ)	23	18 js11	-2	KND	KND	Tail spin	Nb_66LK
-1640	f, F+4	m (HMT)	16	16	-4	+9	+9		Nb_66RK
+1640	f, F+4	m (HRM)	16	16	-4	+9	+9		Nb_66RK
 1641	f, F+4, 2	m, m	16,21	16	-14	KND	Launch		Nb_66RK_RP
 1710	f, F+1+2	m	25	17	-9	KND	KND		Nb_runDOooON
 1711	f, f, f+3	m (TJ)	30	24 js3	+7g	KND	KND		Nb_runlk00
@@ -88,7 +88,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	FC 3	l (TC)	12	16	-17	-3	-3	
 	FC 4	l (TC)	10	12	-15	-4	-4	
 1702	WS+1	m	14	13	-7	+4	+4		Nb_s_tlp00
-1703	WS+1, 4	m, m (HMT)	14,16	13	-6	+6	+6		Nb_s_tlp01
+1703	WS+1, 4	m, m (HRM)	14,16	13	-6	+6	+6		Nb_s_tlp01
 1704	WS+2	mmm	8,3,12	15	-14	JG	JG		Nb_s_trp00
 1707	WS+3	m	17	14	-7	+7	+7		Nb_s_tlk00
 	WS+4	m	16	11	-6	+5	+5	
@@ -104,20 +104,20 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	BT 1 or 2	h	18	10	-8	KND	KND	
 	BT d+1 or d+2	sm (TC)	10	10 cs1	-2	+9	+9	
 	BT d+3 or d+4	l (TC)	12	10 cs1	-11	+3	+3	
-	3+4	(HMT)						
-	HMT 3+4	(Cancel)		16				
-1589	HMT 1	m	17	24	-6	+4	KND		Nb_WK_LP
-1594	HMT 2	h	14	12	-6	+5	+5		Nb_WK_RP
-1595	HMT 2, 1	h, h	14,20	12	-4	KND	KND	Tail spin	Nb_WK_RPLP
-1600	HMT 3	l	8		-13	-2	-2		Nb_WK_LK
-1603	HMT 3, 4	l, m	8,16		-15	0	0		Nb_WK_LKRK
-1604	HMT 4	m (HMT)	13	11	-7	+7	+7		Nb_WK_RK
-1606	HMT 4, 1+2	m, mm	13,5,20	11	-14	KND	KND		Nb_WK_RK_WP2
-1599	HMT 1+2	mmm	5,5,20	15	-10	KND	KND	Wall bounce	Nb_WK_WP3
-1592	HMT f+1	h	17	14	0	+15k	KND	Tali spin	Nb_WK_6LP
-1608	HMT f+4	m (TJ)	25	26 js13	0	KND	KND		Nb_WK_6RK
-1593	HMT b+1	m	21	20	+4	+7s	Launch		Nb_WK_4LP
-1607	HMT b+4	l (TC)	17	20 cs8	-13	+4s	KND	Homing	Nb_WK_4RK
+	3+4	(HRM)						
+	HRM 3+4	(Cancel)		16				
+1589	HRM 1	m	17	24	-6	+4	KND		Nb_WK_LP
+1594	HRM 2	h	14	12	-6	+5	+5		Nb_WK_RP
+1595	HRM 2, 1	h, h	14,20	12	-4	KND	KND	Tail spin	Nb_WK_RPLP
+1600	HRM 3	l	8		-13	-2	-2		Nb_WK_LK
+1603	HRM 3, 4	l, m	8,16		-15	0	0		Nb_WK_LKRK
+1604	HRM 4	m (HRM)	13	11	-7	+7	+7		Nb_WK_RK
+1606	HRM 4, 1+2	m, mm	13,5,20	11	-14	KND	KND		Nb_WK_RK_WP2
+1599	HRM 1+2	mmm	5,5,20	15	-10	KND	KND	Wall bounce	Nb_WK_WP3
+1592	HRM f+1	h	17	14	0	+15k	KND	Tali spin	Nb_WK_6LP
+1608	HRM f+4	m (TJ)	25	26 js13	0	KND	KND		Nb_WK_6RK
+1593	HRM b+1	m	21	20	+4	+7s	Launch		Nb_WK_4LP
+1607	HRM b+4	l (TC)	17	20 cs8	-13	+4s	KND	Homing	Nb_WK_4RK
 	HTM u or d	(Special)		20				
 1498	u/b+2
 1626	qcf+2
