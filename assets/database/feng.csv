@@ -78,13 +78,13 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1600	u/b+2	mh	13,21	16,32~33	-10~-9	+9~+10	+9~+10		Ta_tuki2
 1599	u/b+2 (First hit only, Second hit miss)	m	13	16	-37	-26	-26		Ta_tuki
 1499	u/b+1+2	!	70	79	CS	CS	CS		Ta_a_tetsuzan
-	u+2	m (TJ)	30	38~40 js9~	+2~+4	KND	KND		
+1513	u+2	m (TJ)	30	38~40 js9~	+2~+4	KND	KND		
 1497	u/b or u or u/f+1	m (TJ)	12	18~19 js6~	-7~-6	+4~+5 (+12~+13)	+4~+5 (+12~+13)		Ta_jplp00F
 1515	u/f+2	m	18	18	-10	+3	CS		Ta_jprp03F
 1535	u/b or u or u/f+3	m (TJ)	22	21~23 js9~	-2~0	KND	KND		Ta_jplk00F
-1551	u/b+4	m (TJ)	11	15~17 js9~	-20~-18	-8~-6	-8~-6		Ta_jprk00F
+	u/b+4	m (TJ)	11	15~17 js9~	-20~-18	-8~-6	-8~-6		Ta_jprk00F
 	u+4	m (TJ)	15	15~17 js9~	-13~-11	KND	Launch (JG?)		
-	u/f+4	m (TJ)	13	15~17 js9~	-13~-11	Launch (JG?)	Launch (JG?)		
+1551	u/f+4	m (TJ)	13	15~17 js9~	-13~-11	Launch (JG?)	Launch (JG?)		
 1448	u/f+3+4	mhh	10,10,10	24~26 tc6~23, 31~33, 37~38 js33~	-10~-9	Launch	Launch		Ta_step_RK03Y
 1446	u/f+3+4 (Third hit miss)	mh	10,10	24~26, 31~33 js33~	-16~-14	Launch	Launch		Ta_step_RK02Y
 1444	u/f+3+4 (second and third hit miss)	m	10	24~26 js33~	-28~-26	-17~-15	-17~-15		Ta_step_RK00Y
@@ -96,8 +96,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	f, F+4, d3	m, m	13,21	19~20 (20~)	-14~-13	JG	JG		
 1607	f, F+1+2	m	21	23~24 (24~) pc6~22	-12~-11	KND	KND	Power crush	Ta_ryoute
 	f, F+1+2* (Very long hold)	m	25	39~40 (40~) pc6~22	+3~+4	+14~+15	+14~+15	Power crush	
-	b, f+1	m	25	25~26 (25~)	-15~-14	KND	CS		
-	f, f, f+3	m (TJ)	30	20~25a (23~) js5~	+6~+11g	KND	KND		
+1587	b, f+1	m	25	25~26 (25~)	-15~-14	KND	CS		
+1788	f, f, f+3	m (TJ)	30	20~25a (23~) js5~	+6~+11g	KND	KND		
 1779	WS+1	m	13	14	-1	+5	+5		Ta_renda
 1780	WS+1, 2	m, m	13,13	13	-10	+1	+1		Ta_renda2
 1781	WS+1, 2, 1	m, m, m	13,13,20	13	-12~-11	KND	KND		Ta_renda3
@@ -114,7 +114,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1761	SS+4 (Close)	l	21	20~22 (29~) cs10~	-31	KND	KND		Ta_zensoutai
 	SS+4	l	14	20~22 (29~) cs10~	-31	-3~-1	KND		
 1606	SS+1+2	m	21	22~23 (31~)	+1~+2	KND	KND		Ta_doon
-	Grounded face up 3+4	m	20	30~33 js28~	-5~-2	KND	KND		
+1812	Grounded face up 3+4	m	20	30~33 js28~	-5~-2	KND	KND		
 1758	Opponent Down d+3+4	On grounded opponent(l)	19	24~25	-13~-12	-2~-1	-2~-1		Ta_dowrk
 	1+3+4	(Special)		24~25					
 	1+2+3+4	(Special)		24~25					
@@ -140,7 +140,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1439	qcf+1	l (TC)	23	22~23 (24~) cs6~	-14~-13	+2~+3	KND		Ta_step_LP
 1440	qcf+2	m?	22	22~23 (24~)	-14~-13	Launch	Launch		Ta_step_RP
 1442	qcf+1+2	m	23	16~17 (18~)	+4~+5s	+8~+9s	KND		Ta_step_Zutuki
-1788	qcf+3+4	(STC)		16~17 (18~)					Ta_runki00
+	qcf+3+4	(STC)		16~17 (18~)					Ta_runki00
 	qcf, ,			16~17 (18~)					
 	B+3~4	(Special)		b					
 1612	BT 1	h	12	12	-3	+14	+14		Ta_R_lp00

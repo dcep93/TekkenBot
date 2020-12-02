@@ -1,5 +1,5 @@
 move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes	Move Name
-2324	in rage LFS or RFS d+3+4	m	55	20 pc8~17	-7	KND	KND	Rage art	Hw_RageArts00
+2326	in rage LFS or RFS d+3+4	m	55	20 pc8~17	-7	KND	KND	Rage art	Hw_RageArts00
 1650	in rage d+3+4	lm	7,10	12,28~29	-4	0	0	Rage drive	Hw_t_slklk00
 1652	in rage d+3+4, 4	lm, m (TJ)(RFF)	6,9,27	js14~	7s	JG	JG	Rage drive	Hw_slklklk00
 1518	in rage u/f+3, 4, 3+4	m (TJ), m, hh	16,15,17,27	28F	+4	KND	KND	Rage drive	Hw_rsk03_EX
@@ -25,7 +25,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1902	3, 3, 4	h, m, h, (RFS)	15,12,15	14	10g	20g	20		Hw_lk01rk00
 1671	3, 3, d/f or f+4	h, m, h	15,12,23	14	-1	KND	KND		Hw_3lkrk
 1924	3~4	mm (TJ)	11,21	22	-3	KND	KND		Hw_dk00E
-1592	4	h	14	11	-6	+5	+5		Hw_rk00
+1592,1593	4	h	14	11	-6	+5	+5		Hw_rk00
 1825	4, 3	h, m(LFF)	16,14	11	-6	+5	KND		Hw_rklk00
 	4, 3, f (Cancel)	h, (LFS)	14	11	-6	+5	+5		
 1869	4, 4	h, h, (RFS)	14,13	11	-1	+10g	+10		Hw_rkrk00
@@ -57,8 +57,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1663	d+4	l (TC)	7	19s cs6~	-17	-6	-6		Hw_t_srk
 1868	d+4, 4	l (TC), h	7,22	19 6~	-8	Launch (JG?)	Launch (JG?)		Hw_lrkrk00
 1656	d/b+3	l (TC)	12	19s cs4~	-13	0	+7		Hw_t_slkB
-1672	d/b+4	l	14	16	-12	-8	-1		Hw_t_srkB
-	d/b+4, f	l, (RFS)	12	16	-1	+3	+10		
+1673	d/b+4	l	14	16	-12	-8	-1		Hw_t_srkB
+1672	d/b+4, f	l, (RFS)	12	16	-1	+3	+10		
 1770	d/b+4, 4	l, h	12,21	16	-1	KND	KND	Tail spin	Hw_rkkktrk
 1679	d/b+3+4	!	40	61	KND	KND	KND		Hw_spkA
 	d/b+3+4, b, b (Cancel)	(LFS)		61					
@@ -116,7 +116,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1782	RFF 3	m(LFF)	13	16	-4	+7	+7		Hw_sr_midk
 1784	RFF 3, 4	m, h, (RFS)	13,16	16	10g	21g	21g		Hw_sr_midkrkF
 	RFF 3, 4f	m, h, (RFS)	13,16	16	-12	-1	-1		
-	RFF 3, F+4	m, h, (RFF)	13,16	16	-7	4	4		
+1786	RFF 3, F+4	m, h, (RFF)	13,16	16	-7	4	4		
 1915	RFF 3~4	h(LFF)	35	27	4	KND	KND	Homing, Tail spin, Power crush	Hw_swrbk00
 	RFF 4	h(RFF)	12	12	-8	+3	+3	39	
 	RFF 4, b or f	h, (RFS)	12	12	+7	+18g	+18g		

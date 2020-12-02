@@ -20,7 +20,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	2, 1, 3+4	h, h, (SG)	10,12	10	-4	+7	+7		
 1560	3	m	17	14~15	-9~-8	+2~+3	KND		Cz_lk00
 1562	4	m	20	16~17	-9~-8	+4~+5	KND		Cz_rk00
-1566	f+2	h	20	16~18	-9~-7	+7~+9	CS		Cz_rp00F_R_A
+1565,1566,1568	f+2	h	20	16~18	-9~-7	+7~+9	CS		Cz_rp00F_R_A
 1572	f+2, 1	h, h	20,17	16~18	-3~-2	+5~+6	+5~+6		Cz_6rplp
 1573	f+2, 1, 1	h, h, m	20,17,25	16~18	-12~-11	KMUD	KMUD		Cz_6rplplp
 1569	f+2, f+1	h, h	20,20	16~18	-9~-8	CS	CS	Tail spin	Cz_6rp6lp
@@ -74,7 +74,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	u/f+3	m (TJ)	17	20~22 js9~	-3~-1	+6~+8	Launch (JG?)		
 	u/f+4	m (TJ)	20	25~26 js9~	-13~-12	Launch (JG?)	Launch (JG?)		
 	u/f (On the way up) n+4	m (TJ)	25	23 js9~	-11	Launch (JG?)	Launch (JG?)		
-	u/f+1+2	m (TJ)	35	35~63d js18~	-19~+10	KND	KND		
+1652	u/f+1+2	m (TJ)	35	35~63d js18~	-19~+10	KND	KND		
 1522	u/f+3+4	m (TJ)	25	31~36 js6~	-3~+2s	+7~+12s	KND		Cz_9lrk
 1574	f, F+2	m	25	16~17	-8~-7	KND	KND		Cz_66rp
 1631	f, F+3	m	23	17(18~)	-9	+3	CS		Cz_66lk
@@ -98,15 +98,15 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1628	Face down Grounded 2	l?	20	22~24	-16~-14	+1~+3	KND		Cz_U_rp
 1627	Face down Grounded 1+2	m	30	35~36	0~+1	KND	KND		Cz_U_lrp
 	f+3+4 or From special move	(GOL)		35~36					
-	GOL 1 (After two steps)	m	25	26~27 (85~86)	-2~-1	KND	KND		
+1603	GOL 1 (After two steps)	m	25	26~27 (85~86)	-2~-1	KND	KND		
 	GOL 1 (After three steps)	m	40	26~27 (114~115)	-2~-1	KND	KND		
-	GOL 2 (After two steps)	h!	40	24~26 (83)	KND	KND	KND	Wall bounce	
+1601	GOL 2 (After two steps)	h!	40	24~26 (83)	KND	KND	KND	Wall bounce	
 	GOL 2 (After three steps)	h!	55	24~26 (112)	KND	KND	KND		
-	GOL 1+2 (After two steps)	m (TJ)	20	49~55a,d (105~) js36~	+4~+10	KND	KND		
+1605	GOL 1+2 (After two steps)	m (TJ)	20	49~55a,d (105~) js36~	+4~+10	KND	KND		
 	GOL 1+2 (After three steps)	m (TJ)	30	49~55a,d (136~) js36~	+4~+10	KND	KND		
 	d/b+3+4 (to SG)	(Special)(SG)	(TC)	49~55, (136~) 36~					
-	SG 1	m	25	15~16 (36~)	-13~-12	Launch (JG?)	Launch (JG?)		
-	SG 2	m	30	20~22 (41~)	0~+2	KND	KND		
-	SG 4	l	14	20~21 (41~)	-16~-15	0~+1	0~+1		
-	SG 4, 1	l, h	14, 20	20~21 (41~)	-1~-0	KND	Tail spin	Tail spin	
+1625	SG 1	m	25	15~16 (36~)	-13~-12	Launch (JG?)	Launch (JG?)		
+1624	SG 2	m	30	20~22 (41~)	0~+2	KND	KND		
+1622	SG 4	l	14	20~21 (41~)	-16~-15	0~+1	0~+1		
+1623	SG 4, 1	l, h	14, 20	20~21 (41~)	-1~-0	KND	Tail spin	Tail spin	
 	SG u/b	(Special) (TJ)		a					

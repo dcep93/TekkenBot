@@ -17,13 +17,14 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	3+4, 3+4, 3+4, 3+4	! (TJ)	80	184~190 js1~	KND	KND	KND		
 	3+4, 3+4, 3+4, 3+4 , 3+4	! (TJ)	100	214~220 js1~	KND	KND	KND		
 1573	f+1	m	13	14~15	-6~-5	+5~+6	+5~+6		Pj_lp00F
+1574	f+1, 1
 1575	f+1, 2	m, h	13,13	14~15	-6~-5	+5~+6	+5~+6		Jc_6LPRP
 1576	f+1, 2, 1	m, h, ( (Sky))!							Jc_6LPRPLP
 	f+1, 2, 1*	m, h, ( (Sky))!							
 1578	f+1, 2, 2	m, h, m	15,15,20	14~15	+6~+7	KND	KND		Jc_6LPRPRP
 	f+1, 2, 2*	m, h, m	13,13,30	14~15	-11	KND	KND		
 1581	f+2	h	17	10	-12	+5	KND		Jc_rp00F
-1596	f+3	m	14	20~21	-7~-6	+7~+8	+7~+8		Jc_6lkwpRv2
+1596,1595	f+3	m	14	20~21	-7~-6	+7~+8	+7~+8		Jc_6lkwpRv2
 1597	f+3,2	m, h	14,20	20~21	-9	KND	KND		Jc_6lkrp
 1601	f+3, 1+2	m, m	14,22	17~18	-11~-10s	KND	JG		Jc_6lkwp
 1785	f+4~1	h!	80	65(66~)	CS	CS	CS		Jc_katata
@@ -125,7 +126,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	FC+d+1, 1, 1, 2, 1	l (TC), l (TC), m, m, h	10,8,12,12,23	1~	-4~-3	KND	KND	Tail spin	
 	FC+d+1, 1, 1, 2, d/f+1	l (TC), l (TC), m, m, m	10,8,12,12,15	1~s	-2~-1	+9~+10	+9~+10		
 	FC+d+1, 1, 1, 2, d+1	l (TC), l (TC), m, m, l (TC)	10,8,12,12,8	s cs10~	-11~-9	0~+2	0~+2		
-	FC+d+1, 2	l (TC), m	10,24	10~s	-11	KND	KND		
+1755	FC+d+1, 2	l (TC), m	10,24	10~s	-11	KND	KND		
 1715	FC+d/f+1	m	5	23	-21	-11s	-11s		Km_halp00E
 1732	FC+d/f+1, 2	m, m	5,8	23	-21	-11s	-11s		Km_harp01CE
 1717	FC+d/f+1, 2, 1	m, m, m	5,8,11	23	-11	CS	CS		Km_halp02C
@@ -145,9 +146,9 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1760	SS+2	h	20	17~19 (26~)	+9~+11	KND	KND		Jc_RGUNrp00
 	d/b or d+3+4 (to SIT)	(SIT)		a					
 	SIT f or b	(Special)		a					
-	u/f+3+4	m (TJ), (SIT)	23	34~39 js8~	+13~+18s	KND	KND		
-	d+3+4, 3+4	(Special), m, (SIT)	35	54~59 (70~) js1~	+13~+18s	KND	KND		
-	u/f+3+4, 3+4	m, m, (SIT)	23,35	54~59	+13~+18s	KND	KND		
+1539	u/f+3+4	m (TJ), (SIT)	23	34~39 js8~	+13~+18s	KND	KND		
+1768	d+3+4, 3+4	(Special), m, (SIT)	35	54~59 (70~) js1~	+13~+18s	KND	KND		
+1768	u/f+3+4, 3+4	m, m, (SIT)	23,35	54~59	+13~+18s	KND	KND		
 1739	Grounded face up d+1+2	m, (SIT)	18	28~31 ar1~	+14~+17	KND	KND		Km_oklrp
 1724	SIT 1+2	m	21	24~25s cs1~ar1~	-44~-43	CS	CS		Jc_hpkani
 1720	SIT 1	l (TC)	10	19~21 cs1~ar1~	-48~46	-37~-35	-37~-35		Km_hplp00

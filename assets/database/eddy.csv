@@ -12,7 +12,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1739	3, 4	h, m	17,23	js48~	-4~-2	KND	KND	Tail spin	Cp_29lk01_7CS
 1774	3~4	ll (TC), (RLX)	10,10	29~30,37 (29~) cs7~ar8~	-24	KND	KND		Cp_oplrk00E_7CS
 1769	3~4 (First hit only)	l (TC), (RLX)	10	29~30 (29~) cs7~ar8~	-24	-25~-24	-25~-24		Cp_oplrk00_7CS
-	3~4B	ll (TC), (HSP)	10,10	29~30,37 a(29~) cs7~ar8~		KND	KND		
+1772	3~4B	ll (TC), (HSP)	10,10	29~30,37 a(29~) cs7~ar8~		KND	KND		
 1839	3~4, 3	ll (TC), m, (RLX)	10,10,21	29~30,37 (29~) 7~8~a	-14~-13	Launch	Launch		Cp_51rk34step
 1752	3~4, 4	ll (TC), l (TC)	10,10,15	s cs1~	-7~-5	+9~+11	+9~+11		Cp_lk51rk00
 1776	3~4, 3+4	ll (TC), m	10,10,18	js12~	-17~-10	+2~+9(s)	KND		Cp_oplrk25dk_7CS
@@ -24,7 +24,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1702	1+2~3	h, m	12,17	12,35	-23~-20	Launch (JG?)	Launch (JG?)		Cp_rp50lk00
 1552	3+4	m	20	36~40a cs4~19 js21~	-9~-5	KND	KND		Cp_16dk00
 	3+4, B (Cancel)	(Special) (TC)(HSP)		a cs4~					
-	3+4, 3 (Cancel)	m (TC), (Special)	15	35~37a cs4~	-1~+1	+9~+11	+9~+11		
+1697	3+4, 3 (Cancel)	m (TC), (Special)	15	35~37a cs4~	-1~+1	+9~+11	+9~+11		
 1558	f+2	h	11	12	-9	+2	+2		Cp_rp00F
 1654	f+2, 1	h, h	11,11	12	-9~-8	+2~+3	+2~+3		Cp_rplp00F
 1716	f+2, 1, 4	h, h, m	11,11,21	12	-14~-13	KND	Tail spin	Tail spin	Cp_02lprk_7CS
@@ -32,7 +32,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1561	f+3	m (HSP)	15	18~20a cs4~11	-3~-1	+7~+9	+7~+9		Cp_lk00F_7CS
 1562	f+4	m	10	23~28 ar16~	-23~-18	-12~-7	-12~-7		Cp_rk00F_7CS
 	f+4, B	m, (HSP)	10	23~25 ar16~	-1~+1	+10~+12g	+10~+12		
-1564	f+4, 3	m, m	10,17	ar1~	-11~-8	0~+3s	0~+3s		Cp_46rklkw00
+1563	f+4, 3	m, m	10,17	ar1~	-11~-8	0~+3s	0~+3s		Cp_46rklkw00
 1565	f+4, 3, 3+4	m, m, mm	10,17,7,21	ar21~	-14~-13	KND	KND		Cp_46rklkw01
 1831	f+4, 3+4	m, ll (TC), (Special)	10,10,10	cs2~ar1~	-24	KND	KND		Cp_rktmsk01
 1510	f+3+4	mm	14,16	17~18, 27~30 ar9~25	-4~-1	KND(KND)	KND(KND)		Cp_newsokuten2_7CS
@@ -76,15 +76,15 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1568	b+1	m	16	14~15	-8~-7	+8~+9	+8~+9		Cp_lp00B
 1569	b+1, 4	m, m	16,10	ar16~	-23~-18	-12~-7	-12~-7		Cp_lk2Rv_7CS
 1779	b+2	m	14	14	-11	+3	+3		Cp_cntrk5
-1578	b+2, 4	m, h	14,23	14	-9~-8	KND	KND	Tail spin	Cp_cntrk2E
+1782	b+2, 4	m, h	14,23	14	-9~-8	KND	KND	Tail spin	Cp_cntrk2E
 1780	b+2, 3	m, m	14,17	14	-7	+5	+5		
 1781	b+2, 3, 3	m, m, m	14,17,24	14	-14	KND	KND		
 1570	b+3	m	10	13	-8	+8	+8		Cp_lk00B
 1571	b+3, 3	m, m, (RLX)	10,21	ar~14	-14~-13	Launch	Launch		Cp_lkstepk
 1540	b+3, f	m, m	10,15	~14	-14	+2	+2		Cp_lk00Blk
-1724	b+4	h	17	20~23	-6~-3	+5~+8(KND)	CS(KND)		Cp_29rk00E
+1723,1724,1725,1726	b+4	h	17	20~23	-6~-3	+5~+8(KND)	CS(KND)		Cp_29rk00E
 1696	b+4, 3	h, l (TC)	17,12	20~23s	-21~-15	-12~-6	-12~-6		Cp_rk45lk00
-1729	b+4, 4	h, mm	17,7,17	20~23a	-9~-5	KND	KND		Cp_29lrk00E
+1728,1729	b+4, 4	h, mm	17,7,17	20~23a	-9~-5	KND	KND		Cp_29lrk00E
 	b+4, 4, D	h, mm, (RLX)	17,7,17	20~23a	-16	KND	KND		
 1832	b+4, 4, 3+4	h, mm, m (TJ)	17,7,17,12	20~23	-13~-10	-2~+1s	-2~+1s		Cp_3danlrk
 1847	b+1+2	m	24	22	-8	KND	KND		Cp_4lrp
@@ -101,8 +101,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	u/f+3, D	m (TJ), (RLX)	25	26~27	-14~-13s	-12~-11s	-12~-11s		
 1704	u/f+3, 3	m (TJ), m	25,17	26~27	-23~-20	Launch (JG?)	Launch (JG?)		Cp_lk50lk00
 1823	u/f+3, 3+4	m (TJ), l (TC), (RLX)	25,15	26~27a	-14	KND	KND		Cp_lk_dk00
-	u/f+4	m (TJ)	25	22~25 js7~	-8~-5	KND	KND		
-1500	u/b or u+1+2	h (TJ)	20	16~18 js9~	-3~-1s	KND	KND		Cp_jprk00
+1500	u/f+4	m (TJ)	25	22~25 js7~	-8~-5	KND	KND		
+	u/b or u+1+2	h (TJ)	20	16~18 js9~	-3~-1s	KND	KND		Cp_jprk00
 1844	u/f+1+2	h (TJ)	25	16~18(b) js9~	-3~-1s	KND	KND		Cp_jplrpF_7CS
 1505	u/f+3+4	mm (TJ)	10,20	17~18, 27 js14~	-10	KND	KND		Cp_lipwk01_7CS
 1783	f, F+2	m	19	18~19 (19~)	-4~-3	+6~+7	+6~+7	Homing	Cp_66rp
@@ -123,7 +123,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1632	WS+4	m	15	11~14	-3~0	+8~+11	+8~+11		Cp_s_trk00
 1591	FC+d/b or d+1+2	m (TC)	11	19~21	-14~-12	+2~+4	+4~+6		Cp_35head00
 	FC+d/b or d+1+2, 1+2	m (TC), m	11,14	19~21	-14~-12	KND	KND		
-	WS+3+4 FC+3+4	m (TJ)	18	22~27a	-17~-12	+2~+7(s)	KND		
+1587	WS+3+4 FC+3+4	m (TJ)	18	22~27a	-17~-12	+2~+7(s)	KND		
 	WS+3+4B FC+3+4B	m, (HSP)	18	22~27a	-21~-16	-2~+3 (s)	KND		
 	WS+3+4D FC+3+4D	m, (RLX)	18	22~27a	-8~-3	+11~+16 (s)	KND		
 1596	FC+d/f+4	l (TC), (RLX)	19	24	-26(16a)	+4	KND		Cp_syarkF
@@ -174,7 +174,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	HSP D, 3+4	(Special) (TC), m, (HSP)	20	cs1~15 Air(26~)	-9	Launch	Launch		
 1693	HSP b+3	l (TC), (RLX)	15	22	-14	+7	KND		Cp_Rv33lk00
 	HSP u or d	(HSP)		RC					
-	HSP u or d 3 or 4	(Special), l (TC)(HSP)	25	36s(46~)	-45	KND	KND		
+1706	HSP u or d 3 or 4	(Special), l (TC)(HSP)	25	36s(46~)	-45	KND	KND		
 1742	HSP u or d+3 or u or d+4	m, (HSP)	10	16~17 Air	-13~-12	-2~-1	KND		Cp_Rvsdlk00
 	HSP u or d+3, D or u or d+4, D	m, (RLX)	10	16~17 Air	-2~-1	+9~+10	KND		
 	d+3+4 or From certain moves (to RLX)	(RLX)		Air					

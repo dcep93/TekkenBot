@@ -2,7 +2,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 2100	in rage d/f+1+2	m	55	20~21 pc8~17 ar20~	-22	KND	KND	Rage art	Ba_RageArts02
 1749	in rage f, n, d, d/f+3+4	mm	10,24	14~15, 24~26 (17~) js12~	+8~+10	JB	JG	Rage drive	Ba_twohiza3_EX
 1544	1	h	7	10	+1	+8	+8		Mu_lp00
-1700	1, 2	h, h	7,8	10	-1	+7	+7		Mu_lprprp
+1700,1703,1704,1705	1, 2	h, h	7,8	10	-1	+7	+7		Mu_lprprp
 1701	1, 2, 2	h, h, h	7,8,10	10	-13	+9	+9		Mu_lprprp2
 1711	1, 2, 3	h, h, m	7,8,18	10	-11	+5	KND		Mu_rpmlk00
 	1, 2, 4	h, h, h, (SWS)	7,8,22	10	+11	+21g	Launch (JG?)		
@@ -10,7 +10,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1725	1, 2, d+4, 4	h, h, l, h	7,8,13,25	10	-4~-3	KND	KND	Tail spin	Mu_rp2rkrk
 1713	1, 4	h, h	7,10	10	-4	+7	+7		Ba_lprk00
 1714	1, 4, 3	h, h, m	7,10,12	10	-15	+1	+1		Mu_rklk00
-1551	2	h	8	12	+1	+7	+7		Mu_rplk00
+1551,1552,1553	2	h	8	12	+1	+7	+7		Mu_rplk00
 	2, 3	h, m	8,18	12	-11	+5	KND		
 1715	2, 4	h, h, (SWS)	8,22	12	+11	+21g	Launch (JG?)		Mu_rphrk00
 	2, d+4	h, l	8,13	12	-16	-5	-5		
