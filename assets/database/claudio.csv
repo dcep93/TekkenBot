@@ -12,7 +12,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1559	4, 3	h, h (TJ)	17,13	js17~	0~+1	+15kg	Tail spin	Homing, Tail spin	It_rklk
 	1+2	m	20	17	-14	+2s	+2s		
 1587	1+2 When hit 1+2	m, (throw)	20,20	17		0			It_zan_na
-	1+2 When hit 1+2 When hit , b or f+2	m, (throw), (throw), (STB)	20,20,18	17		Throw(KND)	Throw(KND)		
+	1+2 When hit 1+2 When hit, b or f+2	m, (throw), (throw), (STB)	20,20,18	17		Throw(KND)	Throw(KND)		
 1560	3+4	m (TJ), ?	20	24~26s js13~	-10~-8	KND	KND		
 1543,1544	f+2	h	9	12	0	+6	+6		It_rp00F2
 1546	f+2, 1	h, m	9,12	12	-10~-9	+6~+7s	+6~+7s		It_rplp

@@ -50,7 +50,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1566	d/b+4	h	23	20 cs6~	-13	Launch	Launch		Ab_1rk
 1652	d/b+1+2	!	40	64~65	CS	CS	CS		Ab_fung
 1610	b+1	m	20	19~20	+2~+3	+8~+9s	+8~+9s		Ab_4lp
-	b+1,d	m	20	19~20	+1~+2	+8~+9s	+8~+9s		
+	b+1, d	m	20	19~20	+1~+2	+8~+9s	+8~+9s		
 1553	b+2	m	17, CH(12, 10, 10)	15~16	-9~-8	+4~+5	KND (throw)		
 1674	b+3	m	20	18~19	0~+1s	+3~+4s	KND		Ab_4lk
 1582	b+4	m	20	17	-15	+4	KND		Ab_4rk
@@ -76,6 +76,6 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1696	SNK 3 (Close)	m (TJ)(, (throw))	13(,5,5)	20a(35~) js14~	-12	Throw(Launch)	Throw(Launch)		Ab_steplk
 	SNK 3	m (TJ)	13	20a(35~) js14~	-12	KND	KND		
 1708	SNK 4	l	17	16	-15	0	KND		Ab_sterk
-1713	SNK 4,1	l, h	17, 20	16	-2	KND	KND	Tail Spin	Ab_sterklp
+1713	SNK 4, 1	l, h	17, 20	16	-2	KND	KND	Tail Spin	Ab_sterklp
 1697	SNK 3+4	l	23	26(41~) cs6~	-19~-14	KND	Launch		Ab_steprk
 1701	SNK 1+2	m(Throw)	30	27(42~)	Throw(KND)	Throw(KND)	Throw(KND)		Ab_steptac

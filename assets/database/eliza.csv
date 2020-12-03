@@ -37,7 +37,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1646	b+3, 4	h, m	12,20	16	-14~-13	KND	KND		Vp_4lkrk
 1545	b+4	Sm	12	15	-14	-2	-2		Vp_rk00B
 1672	b+1+2	hm	5,20	27~28,37~38	-13~-12	KND	KND		Vp_4lrp2
-	f, F+2 When hit , b	m	25	14(15~)	-9	KND	KND		
+	f, F+2 When hit, b	m	25	14(15~)	-9	KND	KND		
 	f, f+2 When hit or MG 2 When hit	(Special)		14(15~)					
 	f, F+3	h	12	16~17 (17~)	-10~-9	KND	KND	Homing	
 	f, F+3, 3	h, m	12,24	16~17 (17~)	-13	KND	KND	Homing	

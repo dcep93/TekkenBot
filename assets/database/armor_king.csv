@@ -2,10 +2,10 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 2332	In rage b+3+4	m (throw)	55	20	-22	throw	throw	Rage art	Ak_RageArts02
 1677	In rage f, N, d, d/f+1+2	h!	0	20	+24g	+24g	+24g	Rage drive	
 1554	1	h	7	10	+1	+8	+8		Ak_lp00F
-1540	1,2	h, h	7,10		-1	+5	+5		Ak_lprpF
+1540	1, 2	h, h	7,10		-1	+5	+5		Ak_lprpF
 1541	1, 2, 1	h, h, m	7, 10, 17		-5	+1	+31g		Ak_rplu6
 1542	2	l	10	10	+1	+7	+7		Ak_rp00
-1543	2,1	l, m	10, 15		-1	+7	+7		Ak_rplu4t
+1543	2, 1	l, m	10, 15		-1	+7	+7		Ak_rplu4t
 	3	h	25	17	-14	KND	KND		
 	4	h	20	13	-5	+6	JG		
 1544	1+2	m	10	17	-10	0	0		Ak_TurnElbow
@@ -14,7 +14,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	1+2, 3	m, m	10, 17		-13	+8	KND		
 2215	3+4	m (TJ)	14	25 js11	-7	+3	+3		Ak_sokuten
 	3+4, 1	m, m (TJ) (throw)	14, 25(,5)		0	Throw	Throw		
-	3+4, 1	m, m (TJ)	14, 25		0	+2s	+2s		
+	3+4, 1*	m, m (TJ)	14, 25		0	+2s	+2s		
 2227	3+4, 2	m, m (TJ)	14, 25		-18	KND	KND		Ak_sokuelbow
 1700	1+4	m!	25	52	KND	KND	KND		Ak_EXC00_
 1555	f+2	m	12	15	-11	+2	+2		Ak_rp00F

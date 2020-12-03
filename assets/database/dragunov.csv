@@ -1,7 +1,7 @@
 move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes	Move Name
 2156	in rage d+1+2	m	55	20 pc8~17	-22	KND	KND	Rage art	Cn_RageArts_nRv
 1799	in rage f, f, f+1+2	m	30	15~16 (18~)	+5s	Launch	Launch	Rage art	Cn_runrp00_EX
-1804	in rage f, f, f+1+2 , d/b+1+2	m, m(Throw)	30,5	15~16 (18~)	中Throw(KND)	中Throw(KND)	中Throw(KND)	Rage art	Cn_runrp00_EX_tac
+1804	in rage f, f, f+1+2, d/b+1+2	m, m(Throw)	30,5	15~16 (18~)	中Throw(KND)	中Throw(KND)	中Throw(KND)	Rage art	Cn_runrp00_EX_tac
 1607,1562,1556	1	h	7	10	+1	+8	+8		Cn_lp00F
 1563	1, 1	h, h	7,8	10	-4	+7	+7		Cn_lplp
 1564	1, 1, 3	h, h, m	7,8,22	10	-9~-8	KND	KND		Cn_lplplk
@@ -32,8 +32,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1613,1614	f+3	m	11	20	-6	+2	+2		Cn_lk00F
 	f+3, D/F	m, (Special)	11	20	-1	+7	+7		
 1615	f+3, 2	m, h	11,20	20	-9~-8	KND	KND	Tail spin	Cn_6lkrp
-1616	f+3, 3	m, m(, (throw))	11,14(,20)	20	-12	Throw(KND)	Throw(KND)		
-	f+3, 3	m, m	11,14	20	-12~-9	-1~+2s	+4~+7s		
+	f+3, 3	m, m(, (throw))	11,14(,20)	20	-12	Throw(KND)	Throw(KND)		
+	f+3, 3*	m, m	11,14	20	-12~-9	-1~+2s	+4~+7s		
 1618	f+4	h	16	14~15	-7~-6	+4~+5	+4~+5		Cn_rk00F
 1620	f+4, 4	h, h	16,14	14~15	-11~-10	0~+1	Launch (JG?)		Cn_6rk6rk
 1621	f+4, 4, 3	h, h, h	16,14,20	14~15	-5~-4	KND	KND		Cn_6rk6rklk

@@ -15,9 +15,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	3+4, 3+4	! (TJ)	40	124~130 js1~	KND	KND	KND		
 	3+4, 3+4, 3+4	! (TJ)	60	154~160 js1~	KND	KND	KND		
 	3+4, 3+4, 3+4, 3+4	! (TJ)	80	184~190 js1~	KND	KND	KND		
-	3+4, 3+4, 3+4, 3+4 , 3+4	! (TJ)	100	214~220 js1~	KND	KND	KND		
+	3+4, 3+4, 3+4, 3+4, 3+4	! (TJ)	100	214~220 js1~	KND	KND	KND		
 1573	f+1	m	13	14~15	-6~-5	+5~+6	+5~+6		Pj_lp00F
-1574	f+1, 1
 1575	f+1, 2	m, h	13,13	14~15	-6~-5	+5~+6	+5~+6		Jc_6LPRP
 1576	f+1, 2, 1	m, h, ( (Sky))!							Jc_6LPRPLP
 	f+1, 2, 1*	m, h, ( (Sky))!							
@@ -25,7 +24,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	f+1, 2, 2*	m, h, m	13,13,30	14~15	-11	KND	KND		
 1581	f+2	h	17	10	-12	+5	KND		Jc_rp00F
 1596,1595	f+3	m	14	20~21	-7~-6	+7~+8	+7~+8		Jc_6lkwpRv2
-1597	f+3,2	m, h	14,20	20~21	-9	KND	KND		Jc_6lkrp
+1597	f+3, 2	m, h	14,20	20~21	-9	KND	KND		Jc_6lkrp
 1601	f+3, 1+2	m, m	14,22	17~18	-11~-10s	KND	JG		Jc_6lkwp
 1785	f+4~1	h!	80	65(66~)	CS	CS	CS		Jc_katata
 1786	f+4~1, 2	m	30	15~16 (66~)	+8~+9	KND	KND		Jc_katataki
@@ -68,7 +67,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1650	d/b+4	l (TC)	14	16s cs6~	-13	-2	-2		J5_t_srk
 1626	d/b+1+2	hhhhh	5,3,3,3,20	20~23, 31~37, 40~43, 50~56, 61~62	-4~-3	CS	CS		Ja_gunlrp04
 1606	b+1	m	17	20~21	-11~-10	+8~+9	+8~+9		Jc_lp00B
-1613	b+1,2	m,m	17,20	20~21	-14	KND	KND		Jc_4lprp
+1613	b+1, 2	m,m	17,20	20~21	-14	KND	KND		Jc_4lprp
 1620	b+2	m	27	19	+5	KND	KND		Jc_GUNrp01
 	b+2*	m	55	35	-7	KND	KND		
 1565	b+3	m	14	16~17	-9~-8	+2~+3	+2~+3		Jc_lk00B
@@ -159,3 +158,5 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1721	SIT 2, 1	l (TC), l (TC)	10,10	cs1~ar1~	-43~-41	-32~-30	-32~-30		Km_hplp01
 1737	SIT 2, 1, 2	l (TC), l (TC), l (TC)	10,10,10	cs1~ar1~	-47~-45	-36~-34	-36~-34		Km_hprp02
 1723	SIT 2, 1, 2, 1	l (TC), l (TC), l (TC), l (TC)	10,10,10,10	cs1~ar1~	-43~-41	-32~-30	-32~-30		Km_hplp03
+
+1574	f+1, 1

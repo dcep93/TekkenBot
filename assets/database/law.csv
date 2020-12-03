@@ -164,7 +164,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	DSS f+2	h(DSS)	10	12(13~)	0	+6	+6		
 1582	DSS f+3	m	30(45)	20~23 (21~) pc8~19	-17~-14	KND	KND (KND)	Power crush, wall bounce	Lw_OzKick
 1753	DSS f+4	h (TJ)	40	20~28a (21~) js9~	+7g	KND	KND		Lw_newtobikeri_01
-	DSS , ,			20~28 (21~) 9~					
+	DSS, , 			20~28 (21~) 9~					
 	b+1+2 (to TFS)	hmh or m punch parry((Special))(TFS)		3~50		+11			
 1795	TFS-success 1	h	12	29~30		+6~+7b	+6~+7b		Lw_drstlp00
 1759	TFS-success 2	h	12	22		+27g(KND)	+27g(KND)		Lw_drstrp00
@@ -180,7 +180,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1796	TFS-whiff f+1	m	25	17~19 (87~)	-14~-12	KND	KND		Lw_drstlp10
 	TFS-whiff f+3	m	30(45)	20~23 (91~) pc8~19	-17~-14	KND	KND (KND)	Power crush, Wall bounce	
 	TFS-whiff f+4	h (TJ)	40	20~28a (85~) js9~	+7g	KND	KND		
-	TFS-whiff , ,			20~28 (85~) 9~					
+	TFS-whiff, , 			20~28 (85~) 9~					
 	BT 1	h	7	10	+1	+8	+8		
 1600	BT 2	m	17	15~19	-14~-10	-1~+3	CS		Lw_R_rp00LH
 1601	BT 2, 2	m, m	17,20	15~19	-17~-15	KND	KND		Lw_R_rp_02

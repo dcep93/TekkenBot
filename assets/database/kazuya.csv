@@ -38,7 +38,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1610	b+1	h	13	11~12	-10~-9	+1~+2	+1~+2		Kz_uralp
 1611	b+1, 2	h, m	13,20	11~12	-14	KND	KND		Kz_4lprp
 1614	b+2	m	12	14~15	-8~-7	+4~+5	+4~+5		Kz_hizicom1
-1615	b+2,1	m,m	12,20	14~15	-14~-13	KND	KND		Kz_4rplp
+1615	b+2, 1	m,m	12,20	14~15	-14~-13	KND	KND		Kz_4rplp
 1617	b+2, 4	m, h	12,12	14~15	-3	+8	+8		Kz_hizicom2
 1619	b+2, 4, 1	m, h, m	12,12,22	14~15	-14~-12	KND	KND		Kz_hizicom3
 1621	b+3	h	15	18~19	-8~-7	+3~+4	+3~+4		Kz_Naru00
@@ -102,8 +102,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1716	DVK f, n, d, d/f+2	m	23	11~12 (14~)	-6~-5	Launch (JG?)	Launch (JG?)		Kz_shoryu_dvlSG
 	DVK f, n, d, d/f+4	l	15	16(19~)	-23	-3s (KND)	KND		Kz_m_k00Gup
 	DVK f, n, d, d/f+4, 1	l, m	15,27	16(19~)	-16	KND	KND		
-	DVK f, n, d, d/f+4 , 1, f, n, d, d/f+1	l, m, m	15,27,20	ar22~	-17~-15	Launch	Launch		
-	DVK f, n, d, d/f+4 , 1, f, n, d, d/f+1 When hit U/F	l, m, (throw)	15,27,20,15	ar22~	-17~-15	Throw(KND)	Throw(KND)		
+	DVK f, n, d, d/f+4, 1, f, n, d, d/f+1	l, m, m	15,27,20	ar22~	-17~-15	Launch	Launch		
+	DVK f, n, d, d/f+4, 1, f, n, d, d/f+1 When hit U/F	l, m, (throw)	15,27,20,15	ar22~	-17~-15	Throw(KND)	Throw(KND)		
 	DVK f, n, d, d/f+4, 4	l, l	15,12	22~	-23	KND	KND		
 1725	DVK SS+2	m	25	17~18 (26~)	-22~-21	Launch	Launch		Kz_kgtk_l
 2096	DVK d+1+2 (Opponent Down)	l(On grounded opponent)	20	22~30	-16~-8	KND	KND		Kz_Beam02_7CS

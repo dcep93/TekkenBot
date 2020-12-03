@@ -93,7 +93,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	u+3	m (TJ) (CRA)	21	16 js6	-4	9	JG		
 1556	u/f+3	m (TJ) (CRA)	23	16 js6	-2	11	JG		Re_jplk00F
 	u/b+4	m (TJ)	20	15 js12	-18	KND	KND		
-	u/b+4,f	m (TJ) (CRA)	20	15 js12	-27	KND	KND		
+	u/b+4, f	m (TJ) (CRA)	20	15 js12	-27	KND	KND		
 	u/b+4, b	m (TJ) (Special)	20	15 js12	-28	KND	KND		
 	u+4	m (TJ)	15	15 js9	-13	KND	JG		
 1571	u/f+4	m (TJ)	13	15 js9	-13	KND	KND		Co_jprk00F
@@ -133,7 +133,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	f, N, 4, 1, 2, 2, 2, F	h, m, m, m, l (Special)	18,12,8,10,15		-14	2	2		
 1789	f, F+2	m	24	18 pc6	-12	+7k	+7k	Tail spin, power crush	Re_russian00
 1791	f, F+3 or f, f, f+3	m	15	16	-14	JG	JG		Re_rolk00
-	f, F+3,B or f, f, f+3, B	m (BT)	15		-8	JG	JG		
+	f, F+3, B or f, f, f+3, B	m (BT)	15		-8	JG	JG		
 1793	f, F+3, 4	m, h	15,24		-13	KND	KND		Re_rolkrk00
 1794	f, F+4	h	21	15	-6	+5y	+5y		Re_usirokeri
 1795	f, F+4, 3+4	h, h (TJ)	21,21		-3y	KND	KND	Tail spin	Re_sasoriV2
@@ -172,7 +172,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	f+3+4	(DRU)							
 	DRU d	(special)							
 	DRU F	(high punch parry)							
-	DRU F,d	(Special)							
+	DRU F, d	(Special)							
 	DRU F, b	(Special)							
 	DRU b	(Blocks mid and high)							
 1818	DRU 1	m	25	18	-11	KND	KND		Re_suilp00
@@ -226,7 +226,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	KND RLX 4	m	17	25	-13	+11k	+11k	Homing, Tail spin	
 	KND RLX 3+4	(SIT SNA)							
 	KND RLX 1	m (special)	25	21	-10	KND	KND		
-	KND RLX 4	l (special)	14	24	-29	KND	KND		
+	KND RLX 4*	l (special)	14	24	-29	KND	KND		
 	KND RLX F+1+2	m	15	50	2	KND	KND		
 	KND RLX b+3+4	m	20	30	-5	KND	KND		
 	d+2+3 or BT d+3+4	(PLD RLX)							
@@ -266,14 +266,14 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	BT d+2	sm (TC)	10	10 cs1	-2	9	9		
 	BT d+3	l (TC)	12	10 cs1	-11	3	3		
 	BT d+4 (clean)	l (TC)	12	20 cs6	-26	KND	KND		
-	BT d+4 (clean)	l (TC)	8	20 cs6	-26	+2s	+2s		
+	BT d+4 (clean)*	l (TC)	8	20 cs6	-26	+2s	+2s		
 1733	BT d+4, 4	l, h	8,3	20 cs6	-11	KND	KND		Re_cap41C
 	BT d+4, u or d (clean)	l (SNA)	12	20 cs6	-26	KND	KND		
 	BT d+4, u or d	l (SNA)	8	20 cs6	-26	+8s	+8s		
 	BT d+4, F (clean)	l (DRU)	12	20 cs6	-26	KND	KND		
 	BT d+4, F	l (DRU)	8	20 cs6	-26	+6s	+5s		
 	BT u/b or u or u/f+2	m (TJ) (RLX)	25	32 js17	-14	-3s	-3s		
-	BT u/b or u or u/f+2	m (TJ) (grounded)	25		-15	-4s	-4s		
+	BT u/b or u or u/f+2*	m (TJ) (grounded)	25		-15	-4s	-4s		
 	b+1+4	(PHX)							
 	PHX d/b	(cancel stance)							
 	PHX F	(DRU)							
@@ -352,7 +352,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	3+4, 4	(CRA) m/h punch parry							
 	CRA d/b	(cancel stance)		total 18					
 	CRA u	(PAN)		total 30					
-	CRA d/b	(SNA)		Total 26					
+	CRA d/b*	(SNA)		Total 26					
 2014	CRA 1	m	23	22	5	KND	KND		5tsu_LP_01
 2015	CRA 2	h	21	16	-9	+10k	KND	Homing, Tail spin	5tsu_RP_00
 2017	CRA 3	m	21	14	-5	6	6		5tsu_coLK_1

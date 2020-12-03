@@ -15,7 +15,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	2, 2, b+2	m, m, m(throw)	9,9,5,(20)	15 js	-11	throw	throw		
 	3	h	15	14	-7	-1	-1		
 	4	h	15	12	-8	+3	+3		
-	4,2	h,m	15,15	12	-14	-1	-1		
+	4, 2	h,m	15,15	12	-14	-1	-1		
 1483	1+2	h,m	17,24	18	-14	KND	Tail Spin	Homing, Tail Spin	Mz_WP01
 1482	1+2~B	h	17	18	-9	-3	-3	Homing	Mz_WP00
 1520	f+2	m	8(,25)	20 js	-9	throw	throw		Mz_rp00F
@@ -42,7 +42,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	d or d/b+3	l	13 cs	16	-13	-2	-2		
 1598	d+4	l	9	19	-31	-9	-9		Mz_t_srk00y
 1599	d+4, 1	l,h	9(13),20	19	-12	+4	+4		Mz_t_srk01
-1602	d+4 ,1, 1+2	l,h,m	9(13),20,25(28)	19	-18s	KND	KND		Mz_t_srk02
+1602	d+4, 1, 1+2	l,h,m	9(13),20,25(28)	19	-18s	KND	KND		Mz_t_srk02
 1629	d/b+1	m	10	15	-6	+3	+3		Mz_t_slp00B
 1631	d/b+1, 1+2	m,m,m	10,7,10	15	-5	+6	+6		Mz_t_slp02B
 	d/b+1~F	m	7	15	-6	0	0		
@@ -66,7 +66,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1464	u/b or u or u/f+3	m(,m)	11(,23)	17 js9~	-13	JG	JG		Mz_9LK2
 1463	u/b or u or u/f+3, u	m(,m)	11(,23)	17 js9~	-13	JG	JG		Mz_9LK
 1467	u/b or u or u/f+4	h	20	19 js9~	-3	KND	KND	Homing, Tail Spin	Mz_9RK
-	u/b,b	special	js10~						
+	u/b, b	special	js10~						
 	u/b or u or u/f	special	js9~						
 1452	During jump 1	m	7	9	-23	-16	-16		Mz_jplp00
 1442	During jump 2	m	14	10	-22	-15	-15		Mz_jprp01
@@ -88,7 +88,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1640	ws+2	m	15	15	-9	-3	-3		Mz_s_trp00
 1641	ws+2, 2	m,m	13,23	15	-14	+5	Tail Spin	Tail spin	Mz_s_trp01
 1642	ws+3	m	12	14	-7	+9	+9		Mz_s_tlk00
-	ws+3,2	m,m	12,5(,20)	14	-11	throw	throw		
+	ws+3, 2	m,m	12,5(,20)	14	-11	throw	throw		
 	ws+4	m	15	11	-6	+5	+5		
 1590	FC+d/f+1	m	25	16	-9	KND	KND		Mz_Shield3
 1591	FC+d/f+2	l	17	20 cs	-13	+4s	+13g	Homing	Mz_Sya3rp00

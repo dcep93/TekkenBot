@@ -144,7 +144,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1602	RFF BT 4	m(RFF)	16	20	-9	+2	+2		Hw_spin_midrk2
 1603	RFF BT 4, 3	m, m	16,20	20	-5	+6 (KND)	KND		Hw_spin_midrklk
 1929	RFF BT d+3	l (TC)(LFF)	20	18F	-13	-2	KND		Hw_Bsr_lowlk
-	f+3	(Special)		18~19 4~					
+	f+3*	(Special)		18~19 4~					
 	LFS 3+4	(RFS)		18~19 4~					
 1809	LFS 1	h(LFF)	7	13	+5	+7	+7		Hw_jnblpL00
 1811	LFS 2	m(RFF)	15	16	-2	+9	+9		Hw_jnbrpL00
@@ -155,7 +155,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	LFS 3, d/f or f+4	m, h(LFF)	10,23	14	-1	KND	KND		
 1865	LFS 4	h (TJ), (RFS)	24	14	+4	KND	KND		Hw_jtmrk
 1926	LFS 1+4	! (TJ)(LFF)	80	67F	KND	KND	KND		Hw_jgfrk
-	LFS 1+4 , b, b (Cancel)	(LFF)		66~69 54~					
+	LFS 1+4, b, b (Cancel)	(LFF)		66~69 54~					
 1942	LFS f+3	m, (LFS)	23	19	4	KND	CS (20~21)		Hw_binlk00
 1890	LFS f+4	m(RFF)	17	16	-7	4	4		Hw_LF_srk
 1892	LFS f+4, 3	m, h (TJ)(RFF)	17,26	js17~	3	KND	KND		Hw_LF_srk_lk
@@ -177,7 +177,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1877	LFS u/f+3+4	mh (TJ)(LFF)	10,8	14,25 js9~	-10	+1	+1		Hw_66lrk2
 	LFS u/f+3+4, 4	mh (TJ), m (TJ)(LFF)	10,8,13	js1~	-13	+1	+1		
 	LFS f or b or u or d	(Special)		1~					
-	f, n+4	(Special)		1~					
+	f, n+4*	(Special)		1~					
 	RFS 3+4	(LFS)		1~					
 1808	RFS 1	m(LFF)	15	16	-2	+9	+9		Hw_jnblpR00
 1810	RFS 2	h(RFF)	7	13	+5	+7	+7		Hw_jnbrpR00

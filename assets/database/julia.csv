@@ -23,7 +23,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1598	4~2, 1	lh, m	7,5,21		-16	KND	KND		Jl_rkrp_mouko
 1583	1+2	m	14	18	-5	1	6		Jl_lrp00
 1584	1+2, 4	m, h	14,12		-12	-1	4		Jl_lrprk00
-1587	1+2, 4, b,f+1+2	m, h, m	14,12,25		-10	KND	KND		Jl_byakko
+1587	1+2, 4, b, f+1+2	m, h, m	14,12,25		-10	KND	KND		Jl_byakko
 1588	1+2, 4, 4	m, h, m	14,12,20		-20	KND	KND		Jl_WP_RK2
 1758	1+4	m, l	12,21	18	-26	KND	KND		Jl_lpkouso
 	1+4, D	m	12		-18	-7s	-7s		

@@ -78,8 +78,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1790	f, F+3, 1	m, h	20,5	23~25 (24~)	+1	+7	+7		Jz_narucom_S1
 	f, F+3, 1, 3	m, h, h	20,5,10	23~25 (24~)	-6	+4	+4		
 	f, F+3, 1, 3, 2	m, h, h, m	20,5,10,10	23~25 (24~)	-1	+4	+4		
-	f, F+3, 1, 3 , 2, 1	m, h, h, m, m	20,5,10,1010	23~25 (24~)	-7	+7	+7		
-	f, F+3, 1, 3 , 2, 1, 4	m, h, h, m, m, l	20,5,10,1010,10	23~25 (24~)	-13~-12	+3~+4	+3~+4		
+	f, F+3, 1, 3, 2, 1	m, h, h, m, m	20,5,10,1010	23~25 (24~)	-7	+7	+7		
+	f, F+3, 1, 3, 2, 1, 4	m, h, h, m, m, l	20,5,10,1010,10	23~25 (24~)	-13~-12	+3~+4	+3~+4		
 1814	f, F+4	m	19	21~24 (22~)	+0~+3s	+8~+11s	KND		Jz_migikakato
 1765,1766	b, f+2	m	15	15~16 (15~)	-7~-6	+4~+5	FS (+11~+12g) 24~25		Jz_karate01_R_A
 1769	b, f+2, 1	m, h	15,14	15~16 (15~)	-5	+6	+9		Jz_karate02
@@ -116,4 +116,4 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	f, n, d, d/f+3	m	20	16~18 (19~)	-9~-7	+10~+12kg	Launch	Homing, Tail spin	
 1818	f, n, d, d/f+4	l	10	20~21 (23~)	-31	Launch	Launch		Jz_m_k20_D
 1819	f, n, d, d/f+4, 3+4	l, m (TJ)	10,27	d js26~	-14~-4	KND	KND		Jz_mk2_dou
-	f, n, d, d/f,			26~					
+	f, n, d, d/f, 			26~					

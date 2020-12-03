@@ -12,7 +12,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1578	2, 2	h, h	10,15 (25)	12	-12	+4	+4	KND after proper timing	Dc_rprp
 	2:3	h, l, (TWISTL)	12,14	12	-11	+7s	+7s		
 1592	3	m	14	15	-7	+4	+4		Dc_lk00
-	3,B	m	14	15	-7	+4	+4		
+	3, B	m	14	15	-7	+4	+4		
 1594	3, 4	m, m	14,20	15	-14	Launch (JG?)	Launch (JG?)		Dc_lkrk
 	4	m	15	12	-9	+2	+7		
 1586	1+2 or BT 1+2	hh	6,20	22~23, 30~31	-2~-1	+13kg	KND(+13kg)	Homing	Dc_lrp2

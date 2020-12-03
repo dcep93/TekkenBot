@@ -26,7 +26,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1622	f+2, 3	h, m	15, 15	14 (18)	-10	2	2		Nb_rp00F2
 1623	f+2, 3, 4	h, m, m (HRM)	15, 15, 20	14 (21~22)	-6	8	KND		Nb_rp00F3
 1631	f+3	m	17	14	-7	7	7		Nb_lk00F
-1634	f+3,  1+2	m, h, h, h	17,5,5,5	14	-12	-6	0		Nb_lk00FChain3
+1634	f+3, 1+2	m, h, h, h	17,5,5,5	14	-12	-6	0		Nb_lk00FChain3
 	f+3, 1+2, 4	m, h, h, h, m	17,5,5,5,20	14	-16	KND	KND		
 1638	f+4	m	14	16	-9	4	4		Nb_rk00F
 1639	f+4, 4	m, h (TJ)	14,24	16	-6	KND	KND	Tail spin	Nb_rk00F2
@@ -94,7 +94,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1704	WS+2	mmm	8,3,10	15	-14	JG	JG		Nb_s_trp00
 1707	WS+3	m	14	14	-7	7	7		Nb_s_tlk00
 	WS+3, 1+2	m, h, h, h	14,5,5,5	14	-12	-6	0		
-	f+3, 1+2, 4	m, h, h, h, m	14,5,5,5,20	14	-16	KND	KND		
+	f+3, 1+2, 4*	m, h, h, h, m	14,5,5,5,20	14	-16	KND	KND		
 	WS+4	m	16	11	-6	5	5		
 1659	FC d/f+4	l (TC)	14	15	-13	-2	+3s		Nb_sya3rk00
 1660	FC d/f+4, 1	l (TC), m	14,15	15	-13	Launch	Launch		Nb_sya3rk_LP

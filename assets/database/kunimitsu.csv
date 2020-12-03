@@ -9,7 +9,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1609	1, 2	h, h	7, 8	10	-1	7	7		
 	1, 2, 2, B	h, h (BT)	7, 9	10	-16	-8	-8		
 1611	1, 2, 2	h, h, h	7,8,11	10	-12	4	4		
-	1, 2, 4	h, h, m (TJ)	7,8,20	10	-14	KND	KND		
+	1, 2, 4*	h, h, m (TJ)	7,8,20	10	-14	KND	KND		
 1562	2	h	12	12	-5	1	1		
 1563	2, 2	h, m	12,14	12	-6	5	5		
 	2, 2, 1+2	h, m (KAT)	12,14	12	-6	5	5		
@@ -25,7 +25,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1596	3+4	m (TJ)	14	32 js20~	-5	+6s	+6s		
 1597	3+4, 3+4	m, m (TJ)	14,16	32	-5	+6s	+6s		
 1626	f+2	h	12	13	-9	2	2		
-1627	f+2,3	h, h	12,20	13	-6	KND	KND	Homing	
+1627	f+2, 3	h, h	12,20	13	-6	KND	KND	Homing	
 1664	f+4	m	14	15	-8	-1	-1		
 	f+4, F	m (SET)	14	15	0	7	7		
 1636	f+1+2	m	20	14	-11	KND	KND		
@@ -71,10 +71,10 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1669	b+1 x 4	h x 4	9,10,11,12	17	5	6	11		
 1670	b+1 x 5	h x 5	9,10,11,12,13	17	5	6	11		
 1671	b+1 x 6	h x 6	9,10,11,12,13,14	17	-72	-71	-66		
-1674	d/b+3 (after b+1 (,1))	l (TC)	7	17	-20	-9	-9		
-	d/b+3, 3 (after b+1  (,1))	l (TC), l (TC)	7,5	17	-19	-7	-7		
-	d/b+3, 3, 3 (after b+1 (,1))	l (TC), l(TC), l(TC)	7,5,5	17	-47	-35	-35		
-	d/b+3, 3, 4 (after b+1 (,1))	l (TC), l(TC), m	7,5,15	17	-8	KND	KND		
+1674	d/b+3 (after b+1 (, 1))	l (TC)	7	17	-20	-9	-9		
+	d/b+3, 3 (after b+1  (, 1))	l (TC), l (TC)	7,5	17	-19	-7	-7		
+	d/b+3, 3, 3 (after b+1 (, 1))	l (TC), l(TC), l(TC)	7,5,5	17	-47	-35	-35		
+	d/b+3, 3, 4 (after b+1 (, 1))	l (TC), l(TC), m	7,5,15	17	-8	KND	KND		
 1675	b+2	m	23	17 pc8~	-13	KND	KND		
 1679	b+3	m	10	21	-10	+1s	+1s		
 1680	b+3, 4	m, m	10,23	21	-20	KND	KND		
@@ -114,8 +114,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1535	MUS 2	25	l	25	-18	KND	JG		
 1536	MUS 4	m	30	13	-14	KND	KND		
 1559	u/f, N, 4	m	25	24 js9~	-14	KND	KND		
-	u/b,b	(special)		js10~	–				
-1758	u/b,b+3	m (TJ)	30	68	±0	KND	KND		
+	u/b, b	(special)		js10~	–				
+1758	u/b, b+3	m (TJ)	30	68	±0	KND	KND		
 1685	FC 1	sm (TC)	5	10	-5	6	6		
 1687	FC 2	sm (TC)	8	11	-4	7	7		
 1692	FC 3	m (TC)	12	16	-17	-3	-3		
@@ -124,7 +124,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1748	WS 1, 1	m, m	11,15	13	-8	+3s	KND		
 1749	WS 2	m	14	14	-9	1	1		
 1750	WS 2, 4	m, h	14,20	14	-9	+11k	KND	Tail spin	
-	WS 2, 4,F	m, l (SET)	14,20	14	-9	+11k	KND	Tail spin	
+	WS 2, 4, F	m, l (SET)	14,20	14	-9	+11k	KND	Tail spin	
 1751	WS 3	m	16	15 js9~	-13	Launch	Launch		
 1752	WS 4	m	15	11	-6	5	5		
 1688	FC d/f+2	m (TC)	16	22	-13	2	+15g		

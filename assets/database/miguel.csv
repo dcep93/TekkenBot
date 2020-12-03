@@ -136,4 +136,4 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1439	SAV b+3	h	20	17~18 (27~) pc8~16	-7~-6	KND	KND	Power crush	Mt_P_midp
 	SAV b+3, F	h, (SAV)	20	17~18 (27~) pc8~16	-7~-6	KND	KND	Power crush	
 1461	SAV u/f+3	m	25	15~16 (25~) js14~	-9~-8	KND	KND		
-	SAV , ,			(+10~)					
+	SAV, , 			(+10~)					

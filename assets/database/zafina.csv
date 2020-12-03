@@ -58,7 +58,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	d/b+3, B	l	15	18	-11	0	0		
 1652	d/b+4	l (TC)	14	21 cs6	-13	-4	3		Qt_t_srk00B
 	d/b+4, D	l (TC) (MNT)	14	21 cs6	-14	-5	2		
-1654	d/b+4,2	l, m	14,17	21	-13	Launch	Launch		Qt_t_srk00Brp
+1654	d/b+4, 2	l, m	14,17	21	-13	Launch	Launch		Qt_t_srk00Brp
 1647	d/b+1+2	l (TC) (MNT)	17	28 cs9	-16	KND	KND		Qt_whasami
 1648	d/b+1+2, 1+2	l (TC), m	17,14	28	-14	KND	KND		Qt_whasami01
 1589	b+1	m	14	18	-14	2	2		Qt_nagi00

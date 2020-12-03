@@ -17,13 +17,13 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1568	3	h	22	16	-8	KND	KND		Km_lk00
 1569	3, 4	h, h	22,20	16	-8	+3	+3		Sm_double_00
 1603	3, 4, 3	h, h, h	22,20,25	16	-12	KND	KND		Sm_lk002
-	3, 4, 3, 4, ,	h, h, h, h, ,	22,20,25,20,,	16	-8	+3	+3		
+	3, 4, 3, 4, , 	h, h, h, h, ,	22,20,25,20,,	16	-8	+3	+3		
 	3, 4, 4	h, h, m	22,20,17	16	-12~-10 OC	KND	KND		
 1570	4 or f+4	h	20	15~16	-8~-7	+3~+4	+3~+4		Km_rk00
 1604	4, 4	h, m	20,18	15~16	-12~-10 OC	KND	KND		Sm_rk02
 	4, 3	h, h	20,25	15~16	-12	KND	KND		
 	4, 3, 4	h, h, h	20,25,20	15~16	-8	+3	+3		
-	4, 3, 4, 3, ,	h, h, h, h, ,	20,25,20,25,,	15~16	-12	KND	KND		
+	4, 3, 4, 3, , 	h, h, h, h, ,	20,25,20,25,,	15~16	-12	KND	KND		
 1565	1+2	m	19	19~20	-12~-11	+8~+9 OC	Launch		Sm_lrp
 1566	1+2, 1+2	m, m	19,22	19~20	-13~-12	Launch	Launch		Sm_lrp2
 	1+2, 3+4	m	19	19~20	-3~-2	+17	Launch		
@@ -31,7 +31,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	TAI 2	h	20	14~15	-9	KND	CS	Homing, tail spin	
 	TAI 3	l	24	20~21	-12~-11	+9~+10	+9~+10		
 	TAI 4	m	14	13~14	-14	-3	CS		
-	TAI 4,1	m,h	14,20	13~14	-9~-8	+10g~+11g	+10g~+11g	Tail spin	
+	TAI 4, 1	m,h	14,20	13~14	-9~-8	+10g~+11g	+10g~+11g	Tail spin	
 	TAI 1+2	m	15	23 (pc8~23)	-12	Throw(0)	Throw(0)	Power crush	
 1708	TAI f+2	m	20	18	-15	CS(JG)	CS(JG)		
 1696	TAI f+1+2	m	35	20~25	-24~-19	KND	KND	DOSUKOI CANNON	Sm_divinghead
@@ -65,7 +65,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1649	d+1	m	22	25~26	+3~+4 OC	+7~+8 OC	Launch		Sm_t_slp00
 	d+1, 3+4	m, (Special) (TC)	22	25~26	+5~+6 OC	+9~+10 OC	Launch		
 1651	d+2	l (TC)	15	29	-14	-3	-3		Sm_t_srp00
-1657	d+2, 2, ,,	l (TC), , ,	15,10,,,	29	-17	-11	-11		Sm_kabuki00
+1657	d+2, 2, , , 	l (TC), , ,	15,10,,,	29	-17	-11	-11		Sm_kabuki00
 	d+2, 1	l (TC), m	15,12	29 RC	-7	-1	+1		
 1672	d+4	l	18	21	-14	-3	Launch		Co_t_srk00
 1660	d+1+2	m	29	16	+1	+1	Throw(0)		Sm_okuri00
@@ -80,7 +80,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1611	b+1, 1, 1	h, h, m	18,15,20	20~21	+2~+4 OC	KND	KND		Sm_lp02
 	b+1, 1, 1, 3+4	h, h, m	18,15,20	20~21	+3~+5 OC	KND	KND		
 1622	b+1~2	mmmm	2,2,2,21	14(14)	-14	KND	KND		Sm_hyakuFinish
-	b+1~2 (1,2,1,2,1,2)	mmmm	2,2,2,2,2,2,2,21	14(14)	-14	KND	KND		
+	b+1~2 (1, 2, 1, 2, 1, 2)	mmmm	2,2,2,2,2,2,2,21	14(14)	-14	KND	KND		
 1624	b+2	m	12	15 RC	-14	-7	-7		Sm_tsuppari
 1625	b+2, 1	m, m	12,13	15 RC	-5	+1	+3		Sm_tsuppari2
 1627	b+2, 1, 2	m, m, m	12,13,22	15	-12	KND	KND		Sm_tsupparimid

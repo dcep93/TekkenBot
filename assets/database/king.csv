@@ -59,8 +59,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 2549	b+1, 2	h, h	13,20	12	-13	+5	+5		Kg_rpTap00
 2550	b+1, 4	h, m	13,23	d js16~	-9~-7	KND	KND		Kg_rpheel00
 1694	b+2	h	12	14	-5	+1	+1		Kg_rp00B
-1698	b+2, 1+2	h, h	12,22	14	+2~+3s	KND	KND	
-1695	b+2, 1	h, h	14,20	14	-9	KND	KND	Tailspin	
+1698	b+2, 1+2	h, h	12,22	14	+2~+3s	KND	KND		b+2, 1	h, h	14,20	14	-9	KND	KND	Tailspin	
 1699	b+2, 4	h, m	12,18	14	-9	Throw(KND)	Throw(KND)		Kg_AmericaRK
 1602	b+3	h	23	16~18	-10	KND	KND		Kg_turas
 1603	b+3 during hit from front 1+2	h	23,20	-10	Throw(KND)	Throw(KND)		
@@ -138,3 +137,5 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	f, n, d, D/F+2+3	h(Throw)	25	12		Throw(KND)			
 	f, n, d, D/F+1+4	h(Throw)	20	12		Throw(KND)			
 	f, n, d, d/f, n			12					
+
+1695	b+2, 1	h, h	14,20	14	-9	KND	KND	Tailspin	

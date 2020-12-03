@@ -64,8 +64,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	d/b+3, d/b+4, 4, B	l (TC), l (TC), l (TC), (HSP)	10,15,15	cs1~ ar19~	-20~-18	+4~+6	+4~+6	Tail spin	
 1594	d/b+3, d/b+4, 1+2	l (TC), l (TC), m	10,15,11	cs1~19	-14~-12	+2~+4	+4~+6		Cp_35head02
 1573	d/b+4	m	18	18 cs4~	-17	KND	KND		Cp_cntrk
-1574	d/b+4, 4, ,	m, m, ,	18,19,19,,	18 4~	-15	KND	KND		Cp_cntrk2
-1575	d/b+4, 4, 4, 4, ,	m x 4, ,	18,19,19,20,,	18 4~	-13	KND	KND	Rage art, Rage art	Cp_cntrk3
+1574	d/b+4, 4, , 	m, m, ,	18,19,19,,	18 4~	-15	KND	KND		Cp_cntrk2
+1575	d/b+4, 4, 4, 4, , 	m x 4, ,	18,19,19,20,,	18 4~	-13	KND	KND	Rage art, Rage art	Cp_cntrk3
 1579	d/b+4, b+4	m (TC), m, (HSP)	15,21	18 4~	-14	0	0		Cp_cntrkE
 1534	d/b+1+2	m	15	30~31	-7~-6	KND	KND		Cp_lrp00
 1621	d/b+3+4	mm?	12,12	30~31,41	-10	+11gs	KND(CS)		Cp_t_slrk01R

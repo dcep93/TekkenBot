@@ -14,7 +14,6 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	4	h	15	11~12	-9~-8	+5~+6	Launch (JG?)		
 1556,1557	1+2	mm(, Sm)	3,7(,20)	12,21~22 (,44)	-14~-13	-8	-8		Ka_lrp_tora
 	1+2f	mm(, Sm)	3,7(,20)	12,21~22 (,44)	-14~-13	+9	
-1944	1+4
 1940	2+3	Sm	10	22~54	-44~-12	KND	KND		Ka_Tora00
 1575	f+2	h	25	17~18 pc8~16	-9~-8	KND	KND	Power crush	Ka_6rp
 1584	f+3	m	13	18	-8	0	0		Ka_6lk
@@ -80,3 +79,5 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1967	RSS 3+4	m, m	7, 20	19	-15	Launch	Launch		Ka_renkan2
 1957	RSS f+1+2	!	30	50(66~) js1~8	CS	CS	CS		Ka_6lrk6lrp
 	RSS 1+3	m(Throw), m	15	46(62~)		Throw(+8)			
+
+1944	1+4

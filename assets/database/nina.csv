@@ -70,7 +70,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1747	d/f+3, 2, d+3	m, h, l (TC)	13,12,10	s cs10~	-14	-3	-3		Ni_rpslk
 	d/f+3, 2, d+3, 2	m, h, l (TC), m	13,12,10,10	10~	-13~-11	Launch (JG?)	Launch (JG?)		
 	d/f+3, 2, d+3, 4	m, h, l (TC), h	13,12,10,18	10~	-6	+5	Launch (JG?)		
-	d/f+3, 2, d+3, 4 , 3	m, h, l (TC), h, m	13,12,10,18,20	10~	+2~+3s	+5~+6s	KND		
+	d/f+3, 2, d+3, 4, 3	m, h, l (TC), h, m	13,12,10,18,20	10~	+2~+3s	+5~+6s	KND		
 1763	d/f+3, 3	m, h	13,6	10~	-14	-3	-3		Ni_lk01
 1764	d/f+3, 3, 3	m, h, h	13,6	10~	-14	-3	-3		Ni_lk12
 1798	d/f+3, 3, 3, 4	m, h, h, h	13,6,8,20	10~	-6	KND	CS	Tail spin	Ni_rk01

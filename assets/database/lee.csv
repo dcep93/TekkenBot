@@ -122,8 +122,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1645	f, f, f+3, 4	m, m	14,26	js1~	+3~+5	KND	KND		Le_ki01y
 	f, f, f+3, 4, 3+4	m, m, (HMS)	14,26	js1~	+4~+6	KND	KND		
 1632	WS+1	m	13	13~14	-2	+7	+7		
-1633	WS+1,4	m,h	13,17	13~14	-5	+4	+4		
-	WS+1,4,3(HMS)	m,h	13,17	13~14	-8	+1	+1		
+1633	WS+1, 4	m,h	13,17	13~14	-5	+4	+4		
+	WS+1, 4, 3(HMS)	m,h	13,17	13~14	-8	+1	+1		
 1636	WS+2	m	12	14~16	-8~-6	+3~+5	+3~+5		Le_s_trprk
 1638	WS+2, 3	m, m	12,24	14~16	-13~-12	Launch	Launch		Le_s_trplk_H
 1637	WS+2, 4	m, h	12,23	14~16	-6~-5	+16~+17kg	+16~+17kg	Tail spin	Le_s_trplk
@@ -136,8 +136,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1696	WS+3, 3, D/F+3	m, m, m	16,11,10	10~12	-19	-8	-8		Le_iflk06
 	WS+3, 3, D/F+3, n+3	m, m, m, h	16,11,10,10	10~12	-16	-5	-5		
 	WS+3, 3, D/F+3, n+3, 3	m, m, m, h, m	16,11,10,10,10	10~12	-19	-8	-8		
-1699	In+f-Kick D+3, ,,	l	10	10~12	-19	-8	-8		Le_rklk00
-	In+f-Kick U+3, ,,	m	15	10~12	-19	KND	KND		
+1699	In+f-Kick D+3, , , 	l	10	10~12	-19	-8	-8		Le_rklk00
+	In+f-Kick U+3, , , 	m	15	10~12	-19	KND	KND		
 	WS+4	m	16	11~12	-6~-5	+5~+6	+5~+6		
 	WS+4, 3	m, (HMS)	16	11~12	-9~-8	+2~+3	+2~+3		
 1757	FC+d/f+4	l (TC)	17	16~17s cs1~	-14~-13	-3s~-2s	KND		Le_syarkFy
@@ -178,7 +178,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1846	MS 3	m (TJ)	10	15~16 (17~) js9~	-12~-11	-1~0	-1~0		pol_ki11
 1847	MS 3, 4	m (TJ), m (TJ)	10,10	js1~	-13~-12	Launch (JG?)	Launch (JG?)		ThrmvLB2_00
 1712	MS 3+4	l (TJ)	17	29~33a,d (31~) js6~23	-35~-31	KND	KND		Le_nige00
-	MS etc, ,			29~33, (31~) 6~23					
+	MS etc, , 			29~33, (31~) 6~23					
 	MS b, n	(Sway)		(s)					
 1832	Sway 4	l (TC)	18	21~22 cs1~	-13~-12	+3~+4	KND		Le_step2_F0X
 	Sway n command			21~22 1~					
