@@ -2,6 +2,7 @@ import concurrent.futures
 import csv
 import os
 import requests
+import sys
 
 from bs4 import BeautifulSoup
 
@@ -21,6 +22,9 @@ def main():
         update(name, content)
 
 def get_file_names():
+    args = sys.argv[1:]
+    if args:
+        return [f'{i}.csv' for i in args]
     return os.listdir(database)
 
 def get_content(name):
