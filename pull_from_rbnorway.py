@@ -44,8 +44,13 @@ def update(name, content):
     same = 0
     updated = 0
     missing = 0
+    seen = set()
     for row in content:
         key = normalize(row[0])
+        while key in seen:
+            key += '*'
+        row[0] = key
+        seen.add(key)
         if key not in existing:
             missing += 1
             move_id = ''

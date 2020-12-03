@@ -117,7 +117,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	U/F+4, D	m (TJ)	21	18 js13	-19	JG	JG		
 1547	u/f+3+4	mm (TJ)	4,18	20 js9	-3s	+5s	+5s		An_abise3
 	u/f, N, 4	m (TJ)	25	25 js9	-9	KND	KND		
-	U/B,b	(TJ)		js					
+	U/B, b	(TJ)		js					
 1697	f, F+2	h	21	16	6	KND	KND	Homing, Tail spin	An_rpsp00
 1710	f, F+3	m (TJ)	14	15 js13	-13	JG	JG		An_ki01
 1712	f, F+3, 4	m (TJ), m	14,12		-23	JG	JG		An_ki02
@@ -160,15 +160,15 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1726	SS+3	m	23	21	4s	8s	KND		An_sidelk00
 1723	SS+1+2	mm (TJ)	5,7	19	-9	JG	JG		An_shorp01
 1612	Opponent down d+3+4	l	20	17	-17	-6	-6		An_dwki
-	Back against wall b,b,u/b	m	21	35	1	KND	KND		
+	Back against wall b, b, u/b	m	21	35	1	KND	KND		
 	BT+1 or 2	h	15	8	-8	3	3		
 	BT+3 or 4	h	18	10	-8	KND	KND		
 	BT+d+1 or d+2	sm	10	10	-2	9	9		
 	BT+d+3 or d+4	h	12	10	-11	3	3		
 	b+3 (to CJM)	(CJM)							
 	CJM d/f	(CD)							
-	CJM 1	h	14	11	-9	+14	+14		
-1742	CJM 1	h	10	10	-13	-2	-2		
+1742	CJM 1	h	14	11	-9	+14	+14		
+	CJM 1*	h	10	10	-13	-2	-2		
 1744	CJM 2, 1	h, m	10,12		-7	+4	+4		An_turnchop2
 1764	CJM 3	m	18	12	-12	3	KND		An_JudgmentKick_B
 1749	CJM 4	m (TC)	20	27 cs14	-29	KND	KND		An_suberuLow
