@@ -10,7 +10,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1789	1, 2, 1, d+2+4	h, h, m, l(Throw)	7,15,10,45	10		Throw(KND)			Kg_123ThrmvL
 1546	2	h	10	10	+1	+7	+7		Kg_rp00
 1547	2, 1	h, m	10,15	10	-1	+7	+7		Kg_rplu4t
-17331	1+2	m	18	18~20b	-11~-9	-2~0	0~+2		
+1717	1+2	m	18	18~20b	-11~-9	-2~0	0~+2		
 1719	1+2, 1	m, m	18,21	18~20	-13	KND	KND	Wall bounce	Kg_hizilp
 1721	1+2, 3	m, h	18,25	18~20	-3~-2	KND	KND	Tail spin	Kg_hizilk
 	1+2 1b	m	18	18~20	-18	-9~-7	Cancel	
@@ -59,10 +59,11 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 2549	b+1, 2	h, h	13,20	12	-13	+5	+5		Kg_rpTap00
 2550	b+1, 4	h, m	13,23	d js16~	-9~-7	KND	KND		Kg_rpheel00
 1694	b+2	h	12	14	-5	+1	+1		Kg_rp00B
-1698	b+2, 1+2	h, h	12,22	14	+2~+3s	KND	KND		b+2, 1	h, h	14,20	14	-9	KND	KND	Tailspin	
+1698	b+2, 1+2	h, h	12,22	14	+2~+3s	KND	KND	
+1695	b+2, 1	h, h	14,20	14	-9	KND	KND	Tailspin	
 1699	b+2, 4	h, m	12,18	14	-9	Throw(KND)	Throw(KND)		Kg_AmericaRK
 1602	b+3	h	23	16~18	-10	KND	KND		Kg_turas
-	b+3 during hit from front 1+2	h	23,20	-10	Throw(KND)	Throw(KND)		
+1603	b+3 during hit from front 1+2	h	23,20	-10	Throw(KND)	Throw(KND)		
 1606	b+4 (Close)	h	25	17	+2	KND	KND	Wall bounce	Kg_Yakuza
 	b+4	h	25	17	+2	KND	KND	Wall bounce	
 2547	u/b+1	h	21	20~23	-3~0	KND	KND	Homing	Kg_Aklp01m
@@ -80,7 +81,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1689	f, f, N, 2	l (TC)	15	18(19~) cs6~	-14	+1	Throw(KND)		Kg_p01
 1673	f, f, N, 1+2	m	0	9(10~)	0	+7	+18		Kg_BodyAt00
 1681	f, F+1	m	21	22~23 (23~)	-5~-4	+14~+15kg	KND	Homing, Tail spin	Kg_lygerlp00
-1684	f, F+2	m	19	31~32 (32~)	+2~+3s	+4~+5s	+4~+5s		Kg_p00
+1684,1685	f, F+2	m	19	31~32 (32~)	+2~+3s	+4~+5s	+4~+5s		Kg_p00
 1688	f, F+2, 1	m, h	19,25	31~32 (32~)	-1	KND	KND		Kg_fallerurari
 1703	f, F+4	m	25	15(16~)	-15	KND	Throw(KND)		Kg_tkr01
 1713	f, F+1+2	h (TJ)	21	20~39a (21~) js18~	-5~+14	KND	KND		Kg_p04

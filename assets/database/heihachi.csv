@@ -95,11 +95,11 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1702	f, n, d, d/f+2	h	23	11~12 (14~)	+5~+6	Launch (JG?)	Launch (JG?)		He_shoryu_S
 1707	f, n, d, d/f+3	m	30	27~28 (30~) js5~	+7~+8	KND	KND		He_m_k00_CS
 1706	f, n, d, D/F+3	l?	24	33~34 (37~) js5~28	-23~-22	KND	KND		
-1715	f, n, d, d/f+4	l(HS)	15	16~17 (19~)	-23	+5~+6s	KND		He_m_k00EN
-1733	f, n, d, d/f+4, 4	l, l(HS)	15,10	16~17 (19~)	-10	KND	KND		He_syrrk
-1736	f, n, d, d/f+4, 4 (Single hit)	l, l(HS)	15,10	16~17 (19~)	-10	+3s	KND		
-1741	f, n, d, d/f+4, 4, 4	l, l, l(HS)	15,10,8	16~17 (19~)	-10	KND	KND		He_tk5com_01
-1737	f, n, d, d/f+4, 4, 4 (Single hit)	l, l, l(HS)	15,10,8	16~17 (19~)	-10	+3s	KND		He_m_k02AG
+1714	f, n, d, d/f+4	l(HS)	15	16~17 (19~)	-23	+5~+6s	KND		He_m_k00EN
+1718	f, n, d, d/f+4, 4	l, l(HS)	15,10	16~17 (19~)	-10	KND	KND		He_syrrk
+	f, n, d, d/f+4, 4 (Single hit)	l, l(HS)	15,10	16~17 (19~)	-10	+3s	KND		
+1729	f, n, d, d/f+4, 4, 4	l, l, l(HS)	15,10,8	16~17 (19~)	-10	KND	KND		He_tk5com_01
+	f, n, d, d/f+4, 4, 4 (Single hit)	l, l, l(HS)	15,10,8	16~17 (19~)	-10	+3s	KND		He_m_k02AG
 	HS n, 1	m(HS)	20	ar28~	-15~-12	Launch	Launch		
 	HS n, 4	m(HS)	10	28~	-3~-2	+8~+9	+8~+9		
 	HS n, 4, 4	m, m(HS)	10,20	28~	-16~-15	-5~-4s	-5~-4s		

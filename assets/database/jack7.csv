@@ -148,7 +148,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	SIT f or b	(Special)		a					
 1539	u/f+3+4	m (TJ), (SIT)	23	34~39 js8~	+13~+18s	KND	KND		
 1768	d+3+4, 3+4	(Special), m, (SIT)	35	54~59 (70~) js1~	+13~+18s	KND	KND		
-1768	u/f+3+4, 3+4	m, m, (SIT)	23,35	54~59	+13~+18s	KND	KND		
+	u/f+3+4, 3+4	m, m, (SIT)	23,35	54~59	+13~+18s	KND	KND		
 1739	Grounded face up d+1+2	m, (SIT)	18	28~31 ar1~	+14~+17	KND	KND		Km_oklrp
 1724	SIT 1+2	m	21	24~25s cs1~ar1~	-44~-43	CS	CS		Jc_hpkani
 1720	SIT 1	l (TC)	10	19~21 cs1~ar1~	-48~46	-37~-35	-37~-35		Km_hplp00

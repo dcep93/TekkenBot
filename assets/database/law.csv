@@ -1,7 +1,7 @@
 move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes	Move Name
 2289	in rage 1+2	m	55	22 (32) pc8~17	-26	KND	KND	Rage art	Lw_RageArts02
 1735	in rage d/b+4, 3+4	l, h	20,32	24 js19~	-9	KND	KND	Rage drive, Homing	Lw_dklk0_3_EX
-1563	1	h	7	10	+1	+8	+8		Lw_lp00_A
+1563,1564	1	h	7	10	+1	+8	+8		Lw_lp00_A
 1783	1, 1	h, h	7,5	10	-7	-8	-8		d_pu01
 1785	1, 1, 1	h, h, h	7,5,5	10	-7	-8	-8		d_pu01_1
 1787	1, 1, 1, 1	h, h, h, h	7,5,5,5	10	-7	-8	-8		d_pu01_2
@@ -27,7 +27,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1607	3	h	12	12	-9	+2	+2		Lw_lk00
 1639	3, 3	h, m	12,17	12	-14	-3	KND		Lw_lk00F2
 1608	3, 4	h, h	12,20	12	-10	KND	KND	Tail spin	Lw_lkrk
-1610	4	h	14	11	-9	+7	Launch (JG?)		Lw_rk00
+1610,1612	4	h	14	11	-9	+7	Launch (JG?)		Lw_rk00
 1807	4, 3	h, h	14,12	11	-14~-13	-5~-4	-5~-4		Lw_rklk
 	4, 3, b, f	h, h, (TFS)	14,12	11	+7	+16g	+16g		
 1808	4, 3, 4	h, h, h	14,12,14	11	-6	-1	Launch (JG?)		Lw_rklkrk
@@ -64,7 +64,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1677	d+3+4	l (TC)	7	12s cs4~	-13	-2	-2		Co_t_srk00
 1812	d+3+4, 3	l (TC), m (TJ)	7,23	s js19~	-18~-16	Launch (JG?)	Launch (JG?)		Lw_syrksmlk
 1727	d/b+2	m	15	14b	-4	+7	+7		Lw_HiziB
-1729	d/b+2, 4	m, m (TJ)	15,25	js15~	-17~-10	KND	KND		Lw_hzovhrkA
+1728	d/b+2, 4	m, m (TJ)	15,25	js15~	-17~-10	KND	KND		Lw_hzovhrkA
 	d/b+2, 4, D	m, m (TJ)	15,25	d js15~	-6~+1	KND	KND		
 1702	d/b+3	l	15	17~19	-12~-10	+4~+6s	+14g		Lw_floor_k00
 1732	d/b+4	l (TC)	20	26~27 cs6~	-37	KND	KND	Homing	Lw_dklk0_R2
@@ -73,10 +73,10 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	d/b+1+2, u, u (Cancel)	(DSS)		78					
 1714	d/b+3+4	m	23	21	-13	KND	KND		
 1654	b+1	m	12	14	-9	+2	+2		Lw_lp00B_C
-1804	b+1, b, f	m, (DSS)	12	14	-7	+4	+4		Lw_urarp00
-1806	b+1, 2	m, m	12,12	14	-14	0	0		Lw_urrprp00
+	b+1, b, f	m, (DSS)	12	14	-7	+4	+4		Lw_urarp00
+1804	b+1, 2	m, m	12,12	14	-14	0	0		Lw_urrprp00
 	b+1, 2, b, f	m, m, (DSS)	12,12	14	-10	+4	+4		
-	b+1, 2, 2	m, m, m	12,12,22	14	-14~-13	KND	KND		
+1806	b+1, 2, 2	m, m, m	12,12,22	14	-14~-13	KND	KND		
 1655	b+2	m	12	16	-8	+4	+4		Lw_mUraken
 1659	b+2, 1	m, h	12,15	16	-3~-1	+16~+17kg	+16~+17kg	Tail spin	Lw_4rplrp
 1660	b+2, 2	m, h	12,10	16	-9	+4	KND		Lw_4rprp
@@ -103,11 +103,11 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	U+4 or FC+u+4	m (TJ)	18	18~28s js9~	-17~-7	Launch (JG?)	Launch (JG?)		
 	U/F+4 or FC+u/f+4	m (TJ)	23	18~28s js9~	-17~-7	Launch (JG?)	Launch (JG?)		
 1809	u/b or u or U/F+4, 3	m (TJ), m (TJ)	22,22	s js9~34, js43~	-18~-15	Launch (JG?)	Launch (JG?)		Lw_sjrklk
-1855	f, F+2	m	12	14~16 (15~)	-7~-5	+7~+9	+7~+9		Lw_dh_com01h
+1854,1855	f, F+2	m	12	14~16 (15~)	-7~-5	+7~+9	+7~+9		Lw_dh_com01h
 1856	f, F+2, 1	m, h	12,12	14~16 (15~)	-4~-3	+2~+3	+2~+3		Lw_dh_com02
 1857	f, F+2, 1, 3	m, h, m	12,12,23	14~16 (15~)	-13~-11	KND	KND		Lw_dh_com03
 1858	f, F+2, 3	m, h	12,20	14~16 (15~)	-15	KND	KND		Lw_dh_LK
-	f, F+3	m	30	20~23 (21~) pc6~19	-17~-14	KND	KND	Power crush, Wall bounce	
+2284	f, F+3	m	30	20~23 (21~) pc6~19	-17~-14	KND	KND	Power crush, Wall bounce	
 1644	f, F+4	m	17	16~17 (17~)	-13~-12	-2~-1	-2~-1		Lw_nkdr
 1645	f, F+4, 3	m, m	17,23	16~17 (17~)	-14	Launch	Launch	Tail spin	Lw_66rklk2
 1625	qcf+1	h	5	12(12~)	-3	+3	+3		Lw_atyatya_y
