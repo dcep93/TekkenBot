@@ -1,5 +1,5 @@
 from . import Overlay, CommandInputOverlay, t_tkinter
-from frame_data import DataColumns, Entry
+from frame_data import Database, DataColumns, Entry
 from game_parser import MoveInfoEnums
 from misc import Flags
 from record import Record, Replay, Shared
@@ -200,6 +200,9 @@ class FrameDataOverlay(Overlay.Overlay):
                     DataColumns.DataColumns.cmd: throw_break_string,
                 }
             elif game_log.just_lost_health(not is_p1):
+                for i in [True, False]:
+                    char = Entry.get_char_name(game_log, i)
+                    Database.populate_character(char)
                 entry = {
                     DataColumns.DataColumns.health: Entry.get_remaining_health_string(game_log),
                     DataColumns.DataColumns.cmd: DAMAGE_CMD,

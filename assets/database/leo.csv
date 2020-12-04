@@ -73,7 +73,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	u/b+4	m (TJ)	11	15~16 js9~	-19~-18	-8~-7	-8~-7		
 	u+4	m (TJ)	15	15~16 js9~	-13~-12	KND	Launch (JG?)		
 1554	u/f+4	m (TJ)	13	15~16 js9~	-13~-12	Launch (JG?)	Launch (JG?)		Un_jprk00F
-	u or u/f+3+4	m (TJ)	26	24~27 js9~	0~+3s	+6~+9s	JG		
+1526	u or u/f+3+4	m (TJ)	26	24~27 js9~	0~+3s	+6~+9s	JG		
 1771	f, F+2	m	25	14~15 (15~)	-10~-9	KND	KND		Un_tukimid2
 1790	f, F+3	m (TJ)	20	26~29a (27~) js9~	–7~-4s	KND	KND		Un_kakato
 	f, F+3, D	m (TJ), (BOK)	20	26~29a (27~) js9~	+1~+4s	KND	KND		

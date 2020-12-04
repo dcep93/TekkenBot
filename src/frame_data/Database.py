@@ -106,15 +106,20 @@ def key(entry):
 
 def populate_database():
     for character in Characters:
-        file_name = character.name
-        path = Path.path('./database/%s.csv' % file_name)
-        with open(path, encoding='UTF-8') as csvfile:
-            reader = csv.reader(csvfile, delimiter='\t')
-            data = [i for i in reader if i]
-            raw_moves[character] = data
-        header = data[0]
-        for move in data[1:]:
-            populate_move(file_name, header, move)
+        populate_character(character.name)
+
+def populate_character(character_name):
+    existing = [i for i in database.keys() if i[0] == character_name]
+    for i in existing:
+        del database[i]
+    path = Path.path('./database/%s.csv' % character_name)
+    with open(path, encoding='UTF-8') as csvfile:
+        reader = csv.reader(csvfile, delimiter='\t')
+        data = [i for i in reader if i]
+        raw_moves[Characters[character_name]] = data
+    header = data[0]
+    for move in data[1:]:
+        populate_move(character_name, header, move)
 
 def populate_move(char_name, header, move):
     entry = {}

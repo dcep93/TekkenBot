@@ -8,8 +8,7 @@ def build(game_log, is_p1):
     entry[DataColumns.DataColumns.fa] = get_fa(game_log, is_p1)
     entry[DataColumns.DataColumns.move_id] = game_log.get(is_p1, 1).move_id
  
-    movelist_parser = game_log.get(is_p1).movelist_parser
-    entry[DataColumns.DataColumns.char_name] = Database.Characters(movelist_parser.char_name).name if movelist_parser is not None else game_log.get(is_p1).char_id
+    entry[DataColumns.DataColumns.char_name] = get_char_name(game_log, is_p1)
     
     entry[DataColumns.DataColumns.health] = get_remaining_health_string(game_log)
 
@@ -22,6 +21,10 @@ def build(game_log, is_p1):
         del entry[DataColumns.DataColumns.fa]
 
     return entry
+
+def get_char_name(game_log, is_p1):
+    movelist_parser = game_log.get(is_p1).movelist_parser
+    return Database.Characters(movelist_parser.char_name).name if movelist_parser is not None else game_log.get(is_p1).char_id
 
 def build_frame_data_entry(game_log, entry, is_p1):
     entry[DataColumns.DataColumns.startup] = game_log.get(is_p1).startup
