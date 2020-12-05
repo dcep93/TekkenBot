@@ -23,7 +23,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1581	4, 4	h, m	16,25	11	-13~-12	KND	KND		Ab_rkrk
 1593	f+2	h	12	12	-8	-2	-2		Ab_6rp
 1594	f+2, 3	h, h	12,20	12	-12	KND	KND		Ab_6rplk
-1597	f+2, 4	h, l	12,13	12	-13~-12	-2~-1	KND		Ab_6rprk_R_3
+1596,1597	f+2, 4	h, l	12,13	12	-13~-12	-2~-1	KND		Ab_6rprk_R_3
 	f+2, 4, D/F	h, l, (SNK)	12,13	12	-4~-3	+7~+8	KND		
 	f+2, 4, D/F, D/B (Cancel)	h, l, (Special)	12,13	12s	-18~-17	-7~-8	KND		
 1599	f+2, 4, 4	h, l, h	12,13,21	12	-3~-2	+14~+15kg	Tail spin	Tail spin	Ab_6rprkrk
@@ -63,7 +63,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1659	f, F+4	h	25	16(17~) pc6~15	-11	KND	KND	Power crush, Wall Bounce	Ab_66rk
 1548	f, b+2	h (throw)	20(,35)	14(14~)	-4	Throw(KND) +13	Throw(KND) +13		Ab_64rp
 1604	f, f, f+2 or WR+2	m	20	20	+6	KND	KND	Wall bounce	Ab_666rp
-	WS+1	m	17	14	-2	+4	+12		
+1639	WS+1	m	17	14	-2	+4	+12		
 1641	WS+2	m	21	16	-17	CS	CS		Co_s_trp01
 1643	WS+3	m	14	13	-11	0	0		Ab_s_tlk00
 1644	WS+3, 3	m, m	14,20	13	-13	KND	KND		Ab_s_tlklk

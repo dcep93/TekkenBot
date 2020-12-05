@@ -1,6 +1,6 @@
 move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes	Move Name
-2425	in rage b+1+2	m		20?	–	KND	KND		Ym_RageArts_nRv
-	in rage u/b+1+4	Attack returned	20	6~	–	KND	KND	Rage drive	
+2424	in rage b+1+2	m		20?	–	KND	KND		Ym_RageArts_nRv
+1825	in rage u/b+1+4	Attack returned	20	6~	–	KND	KND	Rage drive	
 1594	1	h	9	10	+1	+8	+8		Ym_lp00F
 1566	1, 1	h, m	9,21	10	-9~-8	+4~+5s	KND		Ym_lp01
 	1, 2	h, m	9,16	10	-9	-3	-3		
@@ -15,20 +15,20 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1585	3~4	mm (TJ)	16,21	17,28~29 (18~)	-6~-5	+3~+4?	+3~+4?		Ym_lksrk02
 	3~4, u/b or u or u/f	mm (TJ), (Special) (TJ)(DGF)	16,21	17,28~29 a(18~)	+5~+6	+9~+10?	+9~+10?		
 1584	3~4 (Second hit miss)	m	16	17(18~)	-19? (Stance-9?)				Ym_lksrk01
-1957	4~3	m (TC)	33	25a(26~)	-12	Launch	Launch		Ym_zenkickC
-	4	h	22	15	-11	0	KND		
+1955	4~3	m (TC)	33	25a(26~)	-12	Launch	Launch		Ym_zenkickC
+1588	4	h	22	15	-11	0	KND		
 1589	4, 4	h, h	22,22	15	-4	-2	-2		Ym_k01
 1590	4, 4, 4	h, h, h	22,22,27	15	-4	KND	KND	Tail spin	Ym_k02
 1865	1+4 or WS+1+4	m	28	6	-15	CS	CS		Ym_vs_yos
 	4~1	m	28	6(7~)	-15	CS	CS		
-2018	1+2+3	m(!)	0	22~25	-8~-5	0~+3	+16~+19		Ym_sidlp00
-1597	f+2	h	24	17	-4	+13kg	SCD	Tail spin	Ym_rp00F
+2016	1+2+3	m(!)	0	22~25	-8~-5	0~+3	+16~+19		Ym_sidlp00
+1597,1598	f+2	h	24	17	-4	+13kg	SCD	Tail spin	Ym_rp00F
 1599	f+2, d/b+2	h, m	24,10	17 RC	-5~-4	+6~+7	+6~+7		Ym_rpgur00
 1841	f+2, D/B+2, 2	h, m, m	24,10,9	17 RC	-9~-8	+2~+3	+2~+3		Ym_gur2
 1843	f+2, D/B+2, 2, 2	h, m, m, m	24,10,9,8	17 RC	-9~-8	+2~+3	+2~+3		Ym_gur3
 1844	f+2, D/B+2, 2, 2, 2	h, m, m, m, m	24,10,9,8,6	17 RC	-9~-8	+2~+3	+2~+3		Ym_gur4
-1665	f+2, D/B+2, 2, 2, 2, 2	h, m, m, m, m, m	24,10,9,8,6,5	17 RC	-9~-8	+2~+3	+2~+3		Ym_zan2
-1666	f+2, D/B+2, 2, 2, 2, 2, 2	h, m, m, m, m, m, m	24,10,9,8,6,5,4	17 RG	-49~-46	-38~-35	-38~-35		Ym_zan2_R_A
+	f+2, D/B+2, 2, 2, 2, 2	h, m, m, m, m, m	24,10,9,8,6,5	17 RC	-9~-8	+2~+3	+2~+3		Ym_zan2
+	f+2, D/B+2, 2, 2, 2, 2, 2	h, m, m, m, m, m, m	24,10,9,8,6,5,4	17 RG	-49~-46	-38~-35	-38~-35		Ym_zan2_R_A
 1607	f+3	h	32	16	-10	KND	KND	Homing, Tail spin	Ym_lk00F
 1608	f+3, 3	h, l (TC)	32,21	16	-20	KND	KND		Ym_lk00L
 	f+3, 3, d+3+4	h, l (TC), (IND)	32,21	16 Air	-35	KND	KND?		
@@ -44,8 +44,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1684	d/f+3	m	13	17~18 RC	-4~-3	+4~+5	+4~+5		Ym_maegeri
 1685	d/f+3, 1	m, m	13,27	17~18	-9~-8?	+3~+4?s	KND		Ym_maezan
 	d/f+3, 1* (Cancel)	m, !	13,27～	17~18	0~+1 OC	0~+1 OC	KND		
-1922	d/f+1+2	l (TC)	12	26 RC	-11	+4	+7		Ym_getuki01
-1924	d/f+1+2, 2	l (TC), m	16,27	26	-13	0	+6k		Ym_66lk
+1920	d/f+1+2	l (TC)	12	26 RC	-11	+4	+7		Ym_getuki01
+1922	d/f+1+2, 2	l (TC), m	16,27	26	-13	0	+6k		Ym_66lk
 1735	d+1	m	20	24~25	-5~-4	0~+1 OC	KND		Ym_p00F
 	d+1, *, n (After on step)	!	27	65~66	0~+1 OC	0~+1 OC	KND		
 	d+1, *, n (After two step)	!	33	100~101	0~+1 OC	0~+1 OC	KND		
@@ -56,15 +56,15 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	d+1, *, B (Cancel)	(Special)		240~241					
 1662	d+2	m (TC)	16	16~17	-9~-8	0~+1	0~+1		Ym_zan
 1663	d+2, 1	m (TC), h	16,22	16~17	-9?	KND		Tail spin	Ym_2rplp
--1682	d+2, 2	m (TC), m	16,22	16~17	-12~-11	+7~+8	CS		
+1666,1667,1668	d+2, 2	m (TC), m	16,22	16~17	-12~-11	+7~+8	CS		
 1674	d+2, 2, 1	m (TC), m, h	16,22,27	16~17	-9	KND	KND		Ym_zanY
 1675	d+2, 2, d+1	m (TC), m, m	16,22,22	16~17	-10	+4s	KND		Ym_zanAB
 	d+2, 2, 2+3	m (TC), m, (Special)	16,22	16~17	-12~-11	+7~+8	CS		
-2007	d+1+4	!	81(,22)	30d	CS	CS	CS		Ym_DIE_00EE
+2005	d+1+4	!	81(,22)	30d	CS	CS	CS		Ym_DIE_00EE
 2009	d+1+4, b+1 (one spin)	!, !	81,24	30 RG	CS	CS	CS		Ym_DIE_00E2
 2010	d+1+4, B+1, 1 (two spins)	!, !, !	81,24,27	30 RG	CS	CS	CS		Ym_DIE_00E3
 2011	d+1+4, B+1, 1, 1 (three spins)	!, !, !, !	81,24,27,28	30 RG	CS	CS	CS		Ym_DIE_00E4
-2012	d+1+4, B+1, 1, 1, 1 (four spins)	!, !, !, !, !	81,24,27,28,37	30 RG	CS	CS	CS		
+	d+1+4, B+1, 1, 1, 1 (four spins)	!, !, !, !, !	81,24,27,28,37	30 RG	CS	CS	CS		
 2013	d+1+4, B+1, 1, 1, 1, 1 (five spins)	!, !, !, !, !, !	81,24,27,28,37,40	30 RG	CS	CS	CS		
 1691	d/b+1	m	21	20	-16	0 OC	0 OC		Ym_t_slp00
 1692	d/b+1, 1	m, m	21,31	20	-8	KND	KND		Ym_t_slp01
@@ -74,13 +74,13 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	D/B+2, 2, 2, 2	m, m, m, m	10,9,8,6	15 RC	-9~-8	+2~+3	+2~+3		
 1845	D/B+2, 2, 2, 2, 2	m, m, m, m, m	10,9,8,6,5	15 RC	-9~-8	+2~+3	+2~+3		Ym_gur5
 1846	D/B+2, 2, 2, 2, 2, 2	m, m, m, m, m, m	10,9,8,6,5,4	15 RG	-49~-46	-38~-35	-38~-35		Ym_gur6
-1913	d/b+3 or FC+d/b+3	l (TC)	13	18~19 RC	-25~-24	-14~-13	-14~-13		Ym_spnk3
-1914	d/b+3, 3	l (TC), l (TC)	13,9	18~19 RC	-19~-18	-7~-6	-7~-6		Ym_spnk4
-1915	d/b+3, 3, 3	l (TC) x 3	13,9,9	18~19 RC	-19~-18	-7~-6	-7~-6		Ym_spnk5
-1916	d/b+3, 3, 3, 3	l (TC) x 4	13,9,9,6	18~19 RC	-19~-18	-7~-6	-7~-6		Ym_spnk5E
-1917	d/b+3, 3, 3, 3, 3	l (TC) x 5	13,9,9,6,6	18~19 RC	-19~-18	-7~-6	-7~-6		Ym_spnkrk
-1918	d/b+3, 3, 3, 3, 3, 3	l (TC) x 6	13,9,9,6,6,6	18~19 RG	-27	-14	-14		Ym_spn_spnk
-1919	d/b+3, 3.. (two to five hits), f+4	m	20	12	-8	KND	KND		Ym_spn_spnk2
+1911	d/b+3 or FC+d/b+3	l (TC)	13	18~19 RC	-25~-24	-14~-13	-14~-13		Ym_spnk3
+1912	d/b+3, 3	l (TC), l (TC)	13,9	18~19 RC	-19~-18	-7~-6	-7~-6		Ym_spnk4
+1913	d/b+3, 3, 3	l (TC) x 3	13,9,9	18~19 RC	-19~-18	-7~-6	-7~-6		Ym_spnk5
+1914	d/b+3, 3, 3, 3	l (TC) x 4	13,9,9,6	18~19 RC	-19~-18	-7~-6	-7~-6		Ym_spnk5E
+1915	d/b+3, 3, 3, 3, 3	l (TC) x 5	13,9,9,6,6	18~19 RC	-19~-18	-7~-6	-7~-6		Ym_spnkrk
+1916	d/b+3, 3, 3, 3, 3, 3	l (TC) x 6	13,9,9,6,6,6	18~19 RG	-27	-14	-14		Ym_spn_spnk
+1917	d/b+3, 3.. (two to five hits), f+4	m	20	12	-8	KND	KND		Ym_spn_spnk2
 	d/b+3, 3.. (two to five hits), d+3+4	l, l, , (IND)	13,9,,	12 Air	-25	-13	-13		
 1678	d/b+4	l	18	17	-12	-1	-1		Ym_t_srk00
 	d/b*, 1+2 or FC+d/b*, 1+2 (to PDP)	(Special) (TC)(PDP)		RC					
@@ -106,20 +106,20 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1850	u/b+1+2, 1+2	h!	24	18~19 (37~)	+1~+2	+1~+2	CS		Ym_men00
 1856	u/b+1+2, n+1	!	29	20~104 (21~)	CS	CS	CS		Ym_spin00
 	u/b+1+2, n+1, b	!, !	29,29	20~50 (26~)	CS	CS	CS		
-2024	u+3+4	mm (TJ)	13,16	39~41, 45~48	+4~+7s	KND	KND		Ym_kn_kakat03
-2023	u+3+4 (First hit only)	m (TJ)	13	39~41	-9~-7	+2~+4s	+2~+4s		Ym_kn_kakat02
+2022	u+3+4	mm (TJ)	13,16	39~41, 45~48	+4~+7s	KND	KND		Ym_kn_kakat03
+2021	u+3+4 (First hit only)	m (TJ)	13	39~41	-9~-7	+2~+4s	+2~+4s		Ym_kn_kakat02
 1508	u/f+1	m (TJ)	25	23 js9	-6	+5s	JG		Ym_9lp
 1511	u/f+2	l (TJ)	25 js10	35s	-16	+6g	KND		Ym_jprp00F
 1532	u/f+3	m (TJ)	20	15	-13	Launch (JG?)	Launch (JG?)		Ym_jplk00F
 	u/b+4	m (TJ)	22	20	-19	KND	KND		
 1548	u or u/f+4	m (TJ)	28	20	-9	KND	KND	Homing	Ym_jprk00F
-1936	u/f+1+2	! (TJ)	54	113~114	KND	KND	KND		Ym_Heli01
-1939	u/f+1+2, d (First stage)	! (TJ)	27	55~56	+4~+5	+4~+5	+4~+5		Ym_sokuten
+1934	u/f+1+2	! (TJ)	54	113~114	KND	KND	KND		Ym_Heli01
+1937	u/f+1+2, d (First stage)	! (TJ)	27	55~56	+4~+5	+4~+5	+4~+5		Ym_sokuten
 	u/f+1+2, d (Second stage)	! (TJ)	40	83~84	+4~+5	+4~+5	+4~+5		
 	u/f+1+2, 1+2	(Special) (TJ)(DGF)		Air					
-1940	u/f+1+2, b	! (TJ)	47	93~94	KND	KND	KND		Ym_sokutenE
+1938	u/f+1+2, b	! (TJ)	47	93~94	KND	KND	KND		Ym_sokutenE
 	u/f+1+2, b, n+1+2	(Special) (TJ)(DGF)		Air					
-2014	u/f+3+4	m (TJ)	27	31~34	-16~-13	KND	KND		Ym_rk01_R_AB
+2012	u/f+3+4	m (TJ)	27	31~34	-16~-13	KND	KND		Ym_rk01_R_AB
 	u/f+3+4, 1+2	(Special) (TJ)(DGF)		Air					
 	u/f+3+4, 3+4	m (TJ), m	27,33		-12	Launch	Launch		
 	u/f+3+4, d+1+2	m (TJ), m (TJ)(FLE)	27,9	Air	+18 GB	KND	KND		
@@ -128,18 +128,18 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1755	u/f+3+4, b+1, 3+4	m (TJ), h, m (TJ)	27,10,28	()	0~+2 OC	KND	KND		Ym_jplrk01F
 1805	u/f+3+4, b+1, 4	m (TJ), h, m (TJ)	27,10,20	()	-14~+7	Launch (JG?)	Launch (JG?)		HARADAcom022
 	u/f+3+4, b+1, 4, d+1	m (TJ), h, m (TJ), m	27,10,20,20	()	-5~-4	0~+1 OC	KND		
-2026	u/f+3+4, u or u/f+3+4	m (TJ), mm (TJ)	27,13,13	()	-4~-3	KND	KND		Ni_UkemL0DE
+2024	u/f+3+4, u or u/f+3+4	m (TJ), mm (TJ)	27,13,13	()	-4~-3	KND	KND		Ni_UkemL0DE
 1602	f, F+2	m	24	15(16~)	-10	+3(Throw)	+?(Throw)		Ym_backtoF
 	f, F+2 Hit in front1+2	m((throw))	24,20(6,7,7)?	15(16~)			CS		
-1926	f, F+3	m	33	23(24~)	-5	+4	CS 12		Ym_vs_yos7
+1924	f, F+3	m	33	23(24~)	-5	+4	CS 12		Ym_vs_yos7
 	f, F+3, 1+2	m, (KIN)	30	23(24~)	+1	+10	CS 18		
-1929	f, F+4	m (TJ)	27	15~16 RBT (16~)	-5~-4?	Launch	Launch		Ym_rocket_CD
-1941	f, F+1+2	m	29	22~24 RBT (23~)	-8~-6	+3~+5 OC	+3~+5 OC		Ym_aguraOki
-1956	f, F+3+4	m (TJ)	20	22~24 (23~)	-20~-18	-9~-7 OC	-9~-7 OC		Ym_zenkickE
-1931	f, F+3+4, 1+2	m (TJ), m (TJ)	20,20	22~24 (23~)	-31~-25	KND	KND		wDm_Ym_rocketF
+1927	f, F+4	m (TJ)	27	15~16 RBT (16~)	-5~-4?	Launch	Launch		Ym_rocket_CD
+1939	f, F+1+2	m	29	22~24 RBT (23~)	-8~-6	+3~+5 OC	+3~+5 OC		Ym_aguraOki
+1954	f, F+3+4	m (TJ)	20	22~24 (23~)	-20~-18	-9~-7 OC	-9~-7 OC		Ym_zenkickE
+1929	f, F+3+4, 1+2	m (TJ), m (TJ)	20,20	22~24 (23~)	-31~-25	KND	KND		wDm_Ym_rocketF
 1960	f, F+3+4, 1+2, 3+4	m (TJ), m (TJ), m (TC)	20,20,27	22~24 (23~)	-13	Launch	Launch		Ym_kamikazearm
-2004	f, F+1+4	!	81	45 RG(46~)	CS	CS	CS		Ym_hara01
-2005	f, F+1+4, f, F	!, !	81,249	45(46~) RG	CS	CS	CS		Ym_jibaku
+2002	f, F+1+4	!	81	45 RG(46~)	CS	CS	CS		Ym_hara01
+2003	f, F+1+4, f, F	!, !	81,249	45(46~) RG	CS	CS	CS		Ym_jibaku
 	f, F+1+4, n	(Special)		RBT					
 1852	b, B+1+4	!	67	59(60~)	CS	CS	CS		Ym_yokogiri
 	b, B+1+4, B (Cancel)	(Special), m	28	47(48~)	-15	CS	CS		
@@ -169,13 +169,13 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	WS+4, 1+2	m (KIN)	14	11	-6	+5	+5		
 1660	FC+d/f+4	l (TC)	18	18 RC	-21	+4?s	KND	Homing	Ym_srk00
 1810	FC+D/F+1 FC+d/b, b+1	l!	16	25(26~)	KND	KND	KND		Ym_stlp00
-2020	SS+1	m	28	17(26~)	-9	+2	Launch (JG?)		Ym_jirahead
-2021	SS+2	m	27	18(27~)	-13	Launch	Launch		Ym_kn_kakat00
+2018	SS+1	m	28	17(26~)	-9	+2	Launch (JG?)		Ym_jirahead
+2019	SS+2	m	27	18(27~)	-13	Launch	Launch		Ym_kn_kakat00
 	SS+4	h	28	16(25~)	0	KND	CS	Homing, Tail spin	
 	SS+4, 1+2	h, (KIN)	28	16(25~)	+3	KND	CS	Homing, Tail spin	
 	SS+4, 3+4	h, (MED)	28	16 RBT(25~)	-3	KND	CS	Homing, Tail spin	
 	Grounded face up 3+4	(Special) (TC)(IND)		Air					
-1906	Opponent Down u/b or u+1	On grounded opponent(m)	24	28	-13	-8 OC	-8 OC		Ym_Battou2
+1904	Opponent Down u/b or u+1	On grounded opponent(m)	24	28	-13	-8 OC	-8 OC		Ym_Battou2
 	1+2 or FC+1+2 (to KIN)	(Special)(Returns move)(KIN)		28					
 	KIN Returns high or mid attacks	Attack returned(mm (TJ))	13,16	39~40	+4~+5s	KND	KND		
 	KIN F	(Special) (TC)(KIN)		39~40					
@@ -183,18 +183,18 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1878	KIN 1	m	13	17(32~)	-12	-1	-1		Ym_ZangeEf
 1880	KIN 1, 1	m, mm	13,6,20	17(32~)	-12	+4s	+4s		Ym_Renki2
 	KIN 1, 1, 2+3	m, mm, (NSS)	13,6,20	17(32~)	-28	-12 OC	-12 OC		
-1889	KIN 2	m	20	21(36~)	-14	Launch(JG?)	Launch(JG?)		Ym_RKatana2NG
-1891	KIN 2, 1+2	m, m	20,40	21(36~)	-18~-17 OC	KND	KND		Ym_RJab
+1887	KIN 2	m	20	21(36~)	-14	Launch(JG?)	Launch(JG?)		Ym_RKatana2NG
+1889	KIN 2, 1+2	m, m	20,40	21(36~)	-18~-17 OC	KND	KND		Ym_RJab
 	KIN 2, 1+2*	m, m	20,40	21(36~)	-1~0	KND	KND		
-1900	KIN 3	l (TJ)	17	25~32s js10 cs24	-16~-9	KND	KND		Ym_SlidingE
-1903	KIN 4	h	23	16(31~)	0	KND	CS	Homing, Tail spin	Ym_SideD_R_CD
+1898	KIN 3	l (TJ)	17	25~32s js10 cs24	-16~-9	KND	KND		Ym_SlidingE
+1901	KIN 4	h	23	16(31~)	0	KND	CS	Homing, Tail spin	Ym_SideD_R_CD
 	KIN 4, 1+2	h, (KIN)	28	16(31~)	+3	KND	CS	Homing, Tail spin	
 	KIN 4, 3+4	h, (MED)	28	16 RBT(31~)	-3	KND	CS	Homing, Tail spin	
-1898	KIN 1+2	mmmm (TJ)	4,4,4,24	12,19, 27,41 RBT (27~)	-6~-5	KND	KND		Ym_Sliding
-1893	KIN f+2	h	33	12(27~)	-13	KND	SCD		Ym_senpuu01
+1896	KIN 1+2	mmmm (TJ)	4,4,4,24	12,19, 27,41 RBT (27~)	-6~-5	KND	KND		Ym_Sliding
+1891	KIN f+2	h	33	12(27~)	-13	KND	SCD		Ym_senpuu01
 1884	KIN b+2	m	15	12(27~)	-9	+2	+2		Ym_kin4rp
 1885	KIN b+2, 1	m	15,19	12(27~)	-12	Launch	Launch		Ym_kin4rplp
-1899	KIN b+1+2	!	30?	45?(?~)	CS	CS	CS		Ym_vs_Heli
+1897	KIN b+1+2	!	30?	45?(?~)	CS	CS	CS		Ym_vs_Heli
 	KIN u+1+2	(Special) (TJ)(KIN)		Air					
 	3+4 or BT 3+4 (to MED)	(Special)(Recover health)(MED)		RBT					
 	MED 3+4	(MED)		RBT					
@@ -211,8 +211,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	FLE 1	(Special)		RC					
 1763	FLE 2	l (TC)	27	24~28 RG	-13~-9	KND	KND		Ym_jirahead2
 	FLE 3 or 4	(Special) (TJ)(FLE)		Air					
-2022	FLE 1+2	h	21?	18~19	-8~-7	Launch (JG?)	Launch (JG?)		Ym_kn_kakat01
-1959	FLE 3+4	m (TC)	33	25	-12	Launch	Launch		Ym_kamikaze
+2020	FLE 1+2	h	21?	18~19	-8~-7	Launch (JG?)	Launch (JG?)		Ym_kn_kakat01
+1957	FLE 3+4	m (TC)	33	25	-12	Launch	Launch		Ym_kamikaze
 	FLE f or b (to WFL)	(Special) (TJ)(WFL)		Air					
 1791	WFL 3	m, (Special)	33(,10,10)	17 Air(36~)	-17	Throw(KND)	Throw(KND)		Ym_takeumaC
 1793	WFL 4	l	20	23 RG(42~)	-10	+11 OC	KND		Ym_takeumaD
@@ -221,15 +221,15 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	FLE d	(Special) (TC)(FLE)		RC					
 	FLE d/b or d or d/f+3+4	(Special) (TC)(FLE)		Air					
 	FLE u/b or u or u/f+1+2	(Special) (TJ)(DGF)		Air					
-1760	FLE u+3+4	m (TJ)	40	38~39 RG	+3~+4	KND	KND		Ym_jiraibaB
+1762	FLE u+3+4	m (TJ)	40	38~39 RG	+3~+4	KND	KND		Ym_jiraibaB
 	FLE u+3+4, Any button	m (TJ), (Special)	40	38~39	-9~-8	KND	KND		
-	FLE u/b or u or u/f	! (TJ), (FLE)	28	30~40	KND	KND	KND		
+1772	FLE u/b or u or u/f	! (TJ), (FLE)	28	30~40	KND	KND	KND		
 	d+3+4 (to IND)	(Special) (TC)(IND)		Air					
 	IND n (to INS)	(Special) (TC)(INS)		Air					
-1952	INS 1	! (TJ)(INS)	20	53	0 OC	0 OC	0 OC		Ym_agura3
---1858	INS 2	m(INS)	9	39 RC	-9~-8	+2~+3	+2~+3		
-1930	INS 3	m (TJ)(INS)	20	32~38	-31~-25	KND	KND		wDm_Ym_rocketB
-	INS 3, 3+4	m (TJ), m (TJ)(INS)	20,27	32~38	-13	Launch	Launch		
+1950	INS 1	! (TJ)(INS)	20	53	0 OC	0 OC	0 OC		Ym_agura3
+	INS 2	m(INS)	9	39 RC	-9~-8	+2~+3	+2~+3		
+1928	INS 3	m (TJ)(INS)	20	32~38	-31~-25	KND	KND		wDm_Ym_rocketB
+1958	INS 3, 3+4	m (TJ), m (TJ)(INS)	20,27	32~38	-13	Launch	Launch		
 	INS 4	l (TC)(INS)	20	18?s	-21	+3? OC	KND		
 	INS B or F	(INS)		( RBT)					
 	INS 3+4* D or b or f or u	(INS)		()					
@@ -260,7 +260,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 2038	NSS 1, 2	h, m	9,10	10	-13~-12	-2~-1	-2~-1		SPYmA_rulu_Ra
 	NSS 1, 2, 1	h, m, m	9,10,8	10	-12	-1	-1		
 	NSS 2	h	13	10	-1	+5	+8		
-	NSS 2, 1	h, hh	13,6,13	10	-12	KND	KND		
+1575	NSS 2, 1	h, hh	13,6,13	10	-12	KND	KND		
 	NSS 1+4 or FC+1+2	m, (Special)	28	8~9	-16~-15	CS	CS		
 	NSS 4~1	m, (Special)	28	8~9 (9~)	-16~-15	CS	CS		
 	NSS 1+2+3	h	33	22	-18	KND	KND		

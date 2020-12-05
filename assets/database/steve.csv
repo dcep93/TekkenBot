@@ -4,7 +4,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1721	in rage d/f+2+3	m, m	14,21	14	+7	JG	JG	Rage drive	
 	in rage D/f+2+3	m, m (DUK)	14,21	14	+15g	JG	JG	Rage drive	
 1874	in rage d/f+3+4, 1+2	(Special), m x 5	10*4,19	15,(35~) cs1~	+1 (wl+7)	KND	KND	Rage art	
-1703	1	h	7	10	+1	+8	+8		
+1703,1608	1	h	7	10	+1	+8	+8		
 1616	1, 1	h, h	7,7	10	-3	+3	+3		
 	1, 1, 3 or 4 to Weave	h, h, (Special)	7,7	10	-6	0	0		
 1622	1, 1, 2	h, h, h	7,7,15	10	-7~-6	+4~+5	+4~+5			Uk_lprp02
@@ -21,7 +21,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	1, 2, 1, B	h, h, h, (FLK)	7,10,15	10	-1	+5	+5		
 	1, 2, 1, B, d/b (Cancel)	h, h, h, (FLK)	7,10,15	10s	-3	+3	+3		
 	1, 2, 1, 3 or 4 to Weave	h, h, h, (Special)	7,10,15	10	-6	0	0		
-	1, 2, 1, 2	h, h, h, m	7,10,15,15	10	-10~-9	KND	KND		
+1647	1, 2, 1, 2	h, h, h, m	7,10,15,15	10	-10~-9	KND	KND		
 	1, 2, 1, 2*	h, h, h, m, (Special)	7,10,15,15	10	-6~-5	KND	KND		
 1645	1, 2, 1, d+2	h, h, h, l (TC)	7,10,15,19	cs10~	-12~-11	+1~+2s	KND		
 	1, 2, 1, d+2, d	h, h, h, l (TC)	7,10,15,19	s cs10~	-12~-11	+1~+2s	KND		
@@ -40,8 +40,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	f+2, 1, B	m, h, (FLK)	11,12	21~22	+1	+5	+5		
 	f+2, 1, B, d/b (Cancel)	m, h, (FLK)	11,12	21~22 RC	0	+4	+4		
 1653	f+2, 1~2	m, m	11,20	21	-9	KND	KND		
-	f+1+2	mh	10,12	15~16, 23~25	-14~-12	-3~-1	-3~-1		
-	f+1+2, 2	mh, m	10,12,20	15~16, 23~25	-13~-12	KND	KND		
+1711	f+1+2	mh	10,12	15~16, 23~25	-14~-12	-3~-1	-3~-1		
+1712	f+1+2, 2	mh, m	10,12,20	15~16, 23~25	-13~-12	KND	KND		
 1810	d/f+1	m	12	13~14	-2~-1	+5~+6	+5~+6		
 	d/f+1, 3 or 4 to Weave	m, (Special)	12	13~14	-7~-6	0~+1	0~+1		
 1815	d/f+1, 2	m, h	12,13	13~14	-6	+3	+5		
@@ -69,7 +69,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1841	d/b+3	l	10	16	-15	+1	+1		
 1842	d/b+3, 2	l, h	10,16	16	-7~-6	KND	KND		
 1714	d/b+1+2	m	21	36~37 pc8~35	-18~-17	+24~+25	+24~+25	Power crush	
-1781	b+1	h	17	13~14	-14~-13	+2~+3	CS		
+1781,1783,1784	b+1	h	17	13~14	-14~-13	+2~+3	CS		
 	b+1, B	h, (FLK)	17	13~14	-1~0	+9~+10	CS		
 	b+1, B, d/b (Cancel)	h, (FLK)	17	13~14s	-3~-2	+7~+8	CS		
 1786	b+1, 2	h, h	17,9	13	-5	+19k	+19k		
@@ -183,7 +183,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1911	SWY 1+2 or +d, b, f, u direction	h(Throw)	0	10(20~)		Throw(+1)			
 	b+3+4 (to FLIK)	(FLIK)		10(20~)					
 	b+3+4, 3 or 4 to Weave	(Special)		10(20~)					
-1475	FLIK 1	h	14	12(17~)	-4	+7	+7		
+1475,1474	FLIK 1	h	14	12(17~)	-4	+7	+7		
 	FLIK 1, b+3+4 (One to three hits)	h, (ALB)	14	12	+14	+25g	+25g		
 1487	FLIK 1, 1	h, h	14,8	12	-8	+1	+1		
 1493	FLIK 1, 1, 1	h, h, h	14,8,8	12	-9	0	0		
