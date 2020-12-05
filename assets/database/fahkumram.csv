@@ -1,13 +1,13 @@
 move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes		Move Name
-	in rage d/f+3+3	m,Throw	55	20 pc8	-22	Throw	Throw	Rage art	
-	in rage 3, 4~3+4	m,l,h	12,10,10	13	-12	KND	KND	Rage drive, Tail spin	
+2000	in rage d/f+3+3	m,Throw	55	20 pc8	-22	Throw	Throw	Rage art	
+1573	in rage 3, 4~3+4	m,l,h	12,10,10	13	-12	KND	KND	Rage drive, Tail spin	
 	in rage f+3, 2, 4~3+4	m,m,l,h	19,17,10,10	17	-12	KND	KND	Rage drive, Tail spin	
 	in rage WS+2, 4~3+4	m,h,l,h	14,10,10	16	-12	KND	KND	Rage drive, Tail spin	
 	in rage 1, 2, 4, 3~3+4	h,h,h,l,h	7,8,17,10,10	10	-12	KND	KND	Rage drive, Tail spin	
 	in rage 2, 4, 3~3+4	h,h,l,h	8,17,10,10	12	-12	KND	KND	Rage drive, Tail spin	
-	in rage 4, 3~3+4	h,l,h	15,10,10	12	-12	KND	KND	Rage drive, Tail spin	
+1569	in rage 4, 3~3+4	h,l,h	15,10,10	12	-12	KND	KND	Rage drive, Tail spin	
 	in rage d+3, 4, 3~1	l,h,l,h	12,17,10,10	16	-12	KND	KND	Rage drive, Tail spin	
-	in rage u/f+3+4	m (TJ),Throw	35(,4,11)	15 js15	-3	Throw	Throw	Rage drive	
+1490	in rage u/f+3+4	m (TJ),Throw	35(,4,11)	15 js15	-3	Throw	Throw	Rage drive	
 1523	1	h	7	10	1	8	8		
 1524	1, 1	h, m	7,20	10	-7	4	KND		
 1526	1, 2	h, h	7,8	10	-2	5	5		
@@ -34,8 +34,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1559	3, 1, 4, 4	m,h,m,m	11,12,14,23	13	-14	KND	KND		
 1557	3, 1, d+4	m,h,l	11,12,15	13	-16	-5	+10g		
 1546	3, 4	m,m	11,20	13	-12	KND	KND		
-	3, 4~3	m,m	11,25	13	-7	+4	KND		
-	3, 4~3*	m,m	11,25	14	13	CS	CS			
+1548	3, 4~3	m,m	11,25	13	-7	+4	KND		
+1547	3, 4~3*	m,m	11,25	14	13	CS	CS			
 1553	3, 4~4	m,h	11,25	13	6	Tail spin	Tail spin	Homing, Tail spin	
 1560	4	h	14	12	-9	6	KND		
 	4, 3	h,h	14,16	12	-7	6	6		
@@ -59,9 +59,9 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1677	d/f+1, 2	m,h	10,17	13	-3	6	6		
 1680	d/f+1, 2~1	m,m	10,20	13	-3	KND	KND		
 1681	d/f+1, 4	m,m	10,23	13	-13	KND	KND	Homing, Tail spin	
-	d/f+1, 4~1	m,m	10,20	13	-3s	+7s	Launch		
+1605	d/f+1, 4~1	m,m	10,20	13	-3s	+7s	Launch		
 1607	d/f+1, 4~3	m,l	10,15	13	-23	-4	KND		
-	d/f+1, 4~3, 2	m,l,m	10,15,23	13	-16	Launch	Launch		
+1609	d/f+1, 4~3, 2	m,l,m	10,15,23	13	-16	Launch	Launch		
 1682	d/f+2	m	10	15	-7	4	4		
 1683	d/f+2, 1	m,m	10,22	15	-13s	KND	KND		
 1685	d/f+2, 3	m,h	10,11	15	-11	KND	KND		
@@ -72,7 +72,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1652	d+1	m	20	18	-5	+8s	KND		
 1655	d+2	sm (TC)	13	12 cs4	-9	2	2		
 1657	d+3	l	11	16	-16	-5	-5		
-11671	d+3, 4	l,h	11,16	16	-9	6	KND		
+1658	d+3, 4	l,h	11,16	16	-9	6	KND		
 	d+3, 4, 3	l,h,h	11,16,16	16	-7	6	6		
 	d+3, 4, 3~1	l,h,h	11,16,20	16	-4Sd	KND	KND	Tail spin	
 	d+3, 4, 3~4	l,h,m	11,16,20	16	-5	+11	+11		
@@ -92,7 +92,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1617	b+2, 3	h,l	15,23	14	-14	+2c	KND		
 1622	b+3	h	27	16	-7	KND	KND	Homing, Tail spin	Homing, Tail spin
 1628	b+4	m	14	14	-5	6	6		
-	b+4, 3	m,m	14,14	14	-10	1	1		
+1629	b+4, 3	m,m	14,14	14	-10	1	1		
 1630	b+4, 3, 2	m,m,m	14,14,27	14	-12	KND	KND		
 1627	b+1+4	m!	50	60	KND	KND	KND		
 	u/b+1	m (TJ)	20	28 js9	-5	KND	KND		

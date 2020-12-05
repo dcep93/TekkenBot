@@ -27,7 +27,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1623	f+2, 3, 4	h, m, m (HRM)	15, 15, 20	14 (21~22)	-6	8	KND		Nb_rp00F3
 1631	f+3	m	17	14	-7	7	7		Nb_lk00F
 1634	f+3, 1+2	m, h, h, h	17,5,5,5	14	-12	-6	0		Nb_lk00FChain3
-	f+3, 1+2, 4	m, h, h, h, m	17,5,5,5,20	14	-16	KND	KND		
+1636	f+3, 1+2, 4	m, h, h, h, m	17,5,5,5,20	14	-16	KND	KND		
 1638	f+4	m	14	16	-9	4	4		Nb_rk00F
 1639	f+4, 4	m, h (TJ)	14,24	16	-6	KND	KND	Tail spin	Nb_rk00F2
 	f+3+4			108					
@@ -55,7 +55,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1673	d+4, 4	l, m	9,16	14	-11	1	1		Nb_t_srk02
 1671	d+1+2	m	21	17	-4	+6s	KND		Nb_t_sWP00
 1691	d/b+1	m (TC)	12	16	-9	1	1		Nb_t_slp00B
-	d/b+1, 3	m (TC), h	15,17	16	9	8	8		
+1693	d/b+1, 3	m (TC), h	15,17	16	9	8	8		
 1692	d/b+1, 1+2	m (TC), m	15,25	16	-10	KND	KND		Nb_t_slp00B_WP
 	d/b+2	sm (TC)	8	11 cs4	-4	7	7		
 1699	d/b+3	l	12	18	-26	-9	-9		Nb_t_slk00By
@@ -69,13 +69,13 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	u/b or u+1	m (TJ)	12	18 js9	-12	-1	-1		
 1491	u/f+1	h	17	16	-9	5	5			
 1498	u/b+2	m	20	20	-9	5	5	punch sabaki 4-12		
-	u or u/f+2	m (TJ)	25	24 js9	1	KND	KND	Wall Bounce	
+1497	u or u/f+2	m (TJ)	25	24 js9	1	KND	KND	Wall Bounce	
 1520	u/b or u or u/f+3	m (TJ)	21	20 js9	-8	KND	KND		Nb_jplk00F
 	u/b+4	m (TJ)	16	21 js9	-3	1	1		
 	u+4	m (TJ)	20	21 js9	-8	KND	KND		
 1523	u/f+4	m (TJ)	22	23~25 js9	-8~-6	KND	KND		Nb_jprk00F
-	u/f+3+4	mm (TJ)	8,10	14 js8	-14	KND	KND		
-	u/f+3+4, 1+2	mm (TJ), m	8,10,25	14 js8	-13	KND	KND		
+1527	u/f+3+4	mm (TJ)	8,10	14 js8	-14	KND	KND		
+1528	u/f+3+4, 1+2	mm (TJ), m	8,10,25	14 js8	-13	KND	KND		
 	u/f, N, 4	m (TJ)	25	23 js9	-11	Launch	Launch		
 1624	f, F+2	m	8	14	-11	0	0		Nb_66RP
 1625	f, F+2, 2	m, m	8,13	14	-13	KND	KND		Nb_1inch
