@@ -15,7 +15,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1458	1, 1	h, h	7,7	10	-1	+6	+6		My_lplp
 1463	1, 1, 2	h, h, h	7,7,9	10	-12	+7	+7		My_lplprp03
 1459	1, 2	h, m	7,10	10	-7	+4	+4		My_lprp00
-1462	1, 2, 1	h, m, m	7,10,15	10	-19~-18	-8~-7	-8~-7		My_lprplp03yEX
+1461,1462	1, 2, 1	h, m, m	7,10,15	10	-19~-18	-8~-7	-8~-7		My_lprplp03yEX
 	1, 2, 1, 1	h, m, m, h	7,10,15,20	10	-15	KND	KND		
 	1, 2, 3	h, m, h	7,10,15	10	+1~+3	+20~+22kg	+20~+22kg		
 	1, 2, 3, 1+2	h, m, h, (MAX )	7,10,15	10	+5~+7	+24~+26kg	+24~+26kg		
@@ -27,7 +27,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1468	1+2	m	20	14	-14	KND	KND		My_Gosyouha
 1892	f+1	m	12	24~25	-17~-16	-4~-3	-4~-3		My_HItataki
 	f+1, 1+2	m, (MAX )	12	24	+2~+3	+15~+16	+15~+16		
-1477	f+2	mh	5,10	17,32~33	-14~-13	SH	SH		My_rp02F
+1476,1477	f+2	mh	5,10	17,32~33	-14~-13	SH	SH		My_rp02F
 	f+2 (Second hit only)	h	10	22~23	-14~-13	SH	SH		
 	f+2, 1+2	mh, (MAX )	5,10	17,32	+2~+3	SH	SH		
 1478	f+2When con, nects1	mh, h	5,10,15	17,32	-9	KND	KND		My_rp03F
@@ -35,7 +35,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	f+3, 1+2	h, (MAX )	15	23~25	+5~+7	+24~+26kg	+24~+26kg		
 1482	f+4	m	21	19	-13	KND	CS		My_rk00F
 1479	f+1+2	m	15	24~25 js10~	-9~-8	KND	KND		My_WPF
-1514	d/f+1	m	10	13~14	-3~-2	+5~+6	+5~+6		My_t_slpFy
+1513,1514	d/f+1	m	10	13~14	-3~-2	+5~+6	+5~+6		My_t_slpFy
 1515	d/f+1, 1	m, h	10,8	13~14	-4	+4	+4		My_t_slp02F
 1516	d/f+1, 4	m, m	10,21	13~14	-13	KND	CS		My_t_slprk
 1517	d/f+2	m	17	18~19	-9~-8	+14~+15kg	KND	Tail spin, Homing	My_t_srpF
@@ -46,8 +46,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	d/f+3, 4~3, 1+2	l, h, (MAX )	11,15	15	+5~+7	+24~+26kg	+24~+26kg		
 	d/f+4	m	15	14	-7	+4	+4		
 1505	d/b or d+1 or FC+d/b or d+1 BT d+1 or 2	Sm	5	10s cs4or1~	-5	+6	+6		My_t_slp00
-1506	d/b or d+1, 1+2	Sm, (MAX )	5	10 cs4or1~	-1	+10g	+10		My_t_srp00
-	d/b or d+2 or FC+2	l	13	14s cs6or1~	-14	-3	-3		
+	d/b or d+1, 1+2	Sm, (MAX )	5	10 cs4or1~	-1	+10g	+10		My_t_srp00
+1506	d/b or d+2 or FC+2	l	13	14s cs6or1~	-14	-3	-3		
 1509	d/b or d+3 or FC+3	l	12	15s cs6or1~	-15	-5	-5		My_t_slk00y
 1510	d+3, 1	l, Sm	12,5	15 61~s	-9	+2	+2		My_t_slk_LP
 	d+3, 1, 1+2	l, Sm, (MAX )	12,5	15 61~	-1	+10g	+10		
@@ -84,7 +84,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1946	dp+1	Sm, h	10,15	19,33~	-6	KND	KND	Tail spin	My_623A2
 1948	dp+2	Sm, h	10,15	23,39~	-6	KND	KND	Tail spin	My_623B2
 1900	qcb+1	h	20	15	-15	KND	KND		My_FudohP
-1902	qcb+2	h	10	20	-15	-5	-5		My_FudohP_LPy
+1902,1904,1906	qcb+2	h	10	20	-15	-5	-5		My_FudohP_LPy
 1903	qcb+2, 1	h, m	10,15	20	-15	KND	KND		My_FudohP_LP
 1905	qcb+2, 3	h, m	10,20	20	-8~-6s	KND	KND		My_FudohP_LK
 1907	qcb+2, 4	h, l	10,20	s cs18~	-18~-17	KND	KND		My_FudohP_RK
@@ -95,7 +95,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	1+2+3	(MAX)		17~(~) 1~					
 1898	MAX qcf+1+2	Sm x 2	10,10	19~,42~	+1~	KND	KND		My_EX_Reppuu2
 1950	MAX dp+1+2	Sm, h	10,15	23,38~	-2	Tail spin	Tail spin		My_623EX2
-1909	MAX qcb+1+2	h	10	19	-12	-2	-2		My_EX_FudohPAB_LPy
+1909,1911,1913	MAX qcb+1+2	h	10	19	-12	-2	-2		My_EX_FudohPAB_LPy
 1910	MAX qcb+1+2, 1	h, m	10,10	19	-2	KND	KND	Wall bounce	My_EX_FudohPAB_LP
 1912	MAX qcb+1+2, 3	h, m	10,20	19	-8~-6s	KND	KND		My_EX_FudohPAB_LK
 1914	MAX qcb+1+2, 4	h, l	10,15	s cs18~	-18~-17	KND	KND		My_EX_FudohPAB_RK
