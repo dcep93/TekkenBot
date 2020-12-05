@@ -121,7 +121,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1692	WS+1, 2	m, h	12,20	13	-9	KND	KND		
 1693	WS+2	m	13	16	-9	7	7		
 1694	WS+2, 4	m,m	13,20	16	-10	6	6		
-1548	WS+2, 4~3	m,m	13,25	16	-7	+4	KND			Nc_lkrklkN
+	WS+2, 4~3	m,m	13,25	16	-7	+4	KND			Nc_lkrklkN
 	WS+2, 4~3*	m,m	13,25	16	14	KND	KND		
 	WS+2, 4~4	m,h	13,25	16	6	KND	KND	Homing, Tail spin	
 1702	WS+3	m (TJ)	20	15 js15	-13	Launch	Launch		
