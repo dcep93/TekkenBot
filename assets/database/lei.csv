@@ -1,5 +1,5 @@
 move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes	Move Name
-2510	In rage d/f+3+4	m (Throw)	55	20 pc8	-22	Throw	Throw	Rage art	Re_RageArts_nRv
+2509	In rage d/f+3+4	m (Throw)	55	20 pc8	-22	Throw	Throw	Rage art	Re_RageArts_nRv
 1937	In rage SNA 1+4	m	40	15	+9g	KND	KND	Rage drive	5hebiLRP_01_EX
 1954	In rage DRG 1+4	m	40	15	+11g	KND	KND	Rage drive	5ryu_tora_1_EX
 	In rage DRG 1+4, F	m (TGR)	40	15	+10g	KND	KND	Rage drive	
@@ -35,11 +35,12 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1618	1+2, 1	h, h	16,12	14	-3	8	8		rei_p01
 1617	1+2, 2	h, m	16,21	14	-10	KND	JG		rei_p00b_1
 1668	f+2	h	11	12	0	6	6		
+1669	f+2, 4
 1684	f+3	m	20	16	-12	-1	-1		Re_6Nlk
 1685	f+3, 1	m, h	20,12	16	-3	8	8		Re_6Nlklp
 1686	f+3, 1, 2	m, h, m	20,12,12	16	-12	JG	JG		Re_6lklprp
 1690	f+4	h (TC)	26	23 cs4	-12	3	KND		Re_rk00F
-1691	f+4, 2	h (TC)	26,12	24 cs4	0	6	6		Re_cap32
+1691,1692	f+4, 2	h (TC)	26,12	24 cs4	0	6	6		Re_cap32
 1693	f+4, 2, 1	h (TC), m, m	26,12,12	25 cs4	-12	-1	-1		Re_raiko2
 1694	f+4, 2, 1, 2	h (TC), m, m, m	26,12,12,8	26 cs4	-12	-1	-1		Re_cap234
 1667	f+4, 2, 1, 2, 4	h (TC), m, m, m, m	26,12,12,8,12	27 cs4	-9	KND	KND		Re_cap25
@@ -92,7 +93,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	u/b+3	m (TJ) (CRA)	12	16 js6	-7	KND	KND		
 	u+3	m (TJ) (CRA)	21	16 js6	-4	9	JG		
 1556	u/f+3	m (TJ) (CRA)	23	16 js6	-2	11	JG		Re_jplk00F
-	u/b+4	m (TJ)	20	15 js12	-18	KND	KND		
+1573	u/b+4	m (TJ)	20	15 js12	-18	KND	KND		
 	u/b+4, f	m (TJ) (CRA)	20	15 js12	-27	KND	KND		
 	u/b+4, b	m (TJ) (Special)	20	15 js12	-28	KND	KND		
 	u+4	m (TJ)	15	15 js9	-13	KND	JG		
@@ -104,7 +105,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	u/b or u+3+4	m (TJ)	25	21 js9	-17	KND	KND		
 1590	u/f+3+4	m (TJ)	10,16	33 js9	-1	KND	KND		Re_skick01
 	u/f, N, 4	m (TJ)	25	23 js9	-11	JG	JG		
-1658	f, N, 1	m	9	12	-2	7 (11)	7(11)		Re_cap21
+1658,1659	f, N, 1	m	9	12	-2	7 (11)	7(11)		Re_cap21
 	f, N, 1, u or d	m (Special)	9	12	-11	-2(2)	-2(2)		
 1660	f, N, 1, 2	m, m	9,9	12	-12	1	1		Re_cap20
 	f, N, 1, 2, u or d	m, m (Special)	9,9	12	-10	3	3		
@@ -120,11 +121,11 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1677	f, N, 2, 1, 2	h, m, m	10,-,21		-17	KND	JG		Re_pu02_A
 1678	f, N, 2, 1, 2, 1	h, m, m, m	10,-,21,25		5	KND	KND		Re_pu02E
 1687	f, N, 3	h	30	15	3	KND	KND	Tail spin	Re_cap10
-	f, N, 4	h	18	10	-11	0	0		
-1701	f, N, 4, 1	h, m	18,12(5)		-1	5	5		Re_cap02N
+1695,1696	f, N, 4	h	18	10	-11	0	0		
+1699	f, N, 4, 1	h, m	18,12(5)		-1	5	5		Re_cap02N
 	f, N, 4, 1, F	h, m (Special)	18,12(5)		-3	3	3		
-1699	f, N, 4, 1, 2	h, m, m	18,12,8		-10	-4	-4		Re_cap01ARv
-1703	f, N, 4, 1, 2, 3	h, m, m, l	18,12,8,20		-6	KND	KND		Re_cap03
+1701	f, N, 4, 1, 2	h, m, m	18,12,8		-10	-4	-4		Re_cap01ARv
+1702,1703	f, N, 4, 1, 2, 3	h, m, m, l	18,12,8,20		-6	KND	KND		Re_cap03
 1688	f, N, 4, 1, 2, 3, 4	h, m, m, h, m	18,12,8,20,20		-7	KND	KND		Re_cap05M
 1689	f, N, 4, 1, 2, 3, d+4	h, m, m, h, l (TC)	18,12,8,20,20		-12	KND	KNd		Re_cap05L
 1923	f, N, 4, 1, 2, 2	h, m, m, m	18,12,8,10		-12	-1	-1		Re_02Nhebi2
@@ -183,11 +184,11 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	DRU 2, F+4	m (special)	17	18	-12	JG	JG		
 1824	DRU 2, 2	m, h	12, 20		5	5	5		Re_suiRP02
 	DRU 2, 2, F	m,h	12, 20		2	2	2		
-1838	DRU 3	l	10	17	-12	1	1		Re_suiLKRP
+1834,1837	DRU 3	l	10	17	-12	1	1		Re_suiLKRP
 	DRU 3, F	l (Special)	10		-22	-9	-9		
-1840	DRU 3, 2	l, m	10, 20		-1s	KND	KND		Re_suiLKRPRK
+1838	DRU 3, 2	l, m	10, 20		-1s	KND	KND		Re_suiLKRPRK
 	DRU 3, 2, F	l, m (special)	10, 20		-8s	KND	KND		
-1841	DRU 3, 2, 4	l, m, m	10,20,18		-21	KND	KND		Re_suiLKRPRK2
+1840	DRU 3, 2, 4	l, m, m	10,20,18		-21	KND	KND		Re_suiLKRPRK2
 	DRU 3, 2, 4, B	l, m, m (special)	10,20,18		-28	KND	KND		
 	DRU 3, 2, 4, F	l, m, m (special)	10,20,18		-27	KND	KND		
 1842	DRU 3, 1+2	l, h	10, 15		-9	KND	KND	Tail Spin	Re_suiLKLRP
@@ -205,7 +206,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	d+1+2 or BT d+1+4	(FCD RLX)							
 1869	FCD RLX 3	l	21	24	-37	KND	KND		Re_utLeglrk00
 1870	FCD RLX 3~4 (clean)	l (TC) (special)	12	24 cs10	-26	KND	KND		Re_okik_r10
-1873	FCD RLX 3~4	l (TC) (Special)	8	24 cs10	-26	-10s	-10s		Re_okik_r11
+1875	FCD RLX 3~4	l (TC) (Special)	8	24 cs10	-26	-10s	-10s		Re_okik_r11
 	FCD RLX 3~4, D (clean)	l (TC) (Special)	12	24 cs10	-26	KND	KND		
 	FCD RLX 3~4, D	l (TC) (Special)	8	24 cs 10	-26	-1s	-1s		
 	FCD RLX 3~4, 4	l, h	8,3		-11	KND	KND		
@@ -223,22 +224,22 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1880	SLD RLX d, 3+4	l	23	29	-42	KND	KND		Re_Neatawk
 	d+3+4 or BT d+2+3	(KND RLX)							
 1855	KND RLX 3	l	14	19	-37	KND	KND		Re_AoLeglrk00
-	KND RLX 4	m	17	25	-13	+11k	+11k	Homing, Tail spin	
+1857	KND RLX 4	m	17	25	-13	+11k	+11k	Homing, Tail spin	
 	KND RLX 3+4	(SIT SNA)							
 	KND RLX 1	m (special)	25	21	-10	KND	KND		
 	KND RLX 4*	l (special)	14	24	-29	KND	KND		
 	KND RLX F+1+2	m	15	50	2	KND	KND		
 	KND RLX b+3+4	m	20	30	-5	KND	KND		
 	d+2+3 or BT d+3+4	(PLD RLX)							
-	PLD RLX 3 (clean)	l (TC)	12	20 cs4	-26	KND	KND		
+171	PLD RLX 3 (clean)	l (TC)	12	20 cs4	-26	KND	KND		
 	PLD RLX 3	l (TC)	8	20 cs4	-26	+2s	+2s		
-	PLD RLX 3, 4	l, h	8,3		-11	KND	KND		
+1859	PLD RLX 3, 4	l, h	8,3		-11	KND	KND		
 	PLD RLX 3, u or d (clean)	l (TC)	12	20 cs4	-26	KND	KND		
 	PLD RLX 3, u or d	l (TC)	8	20 cs4	-26	+8s	+8s		
 	PLD RLX 3, F (clean)	l (TC) (Special)	12	20 cs4	-26	KND	KND		
 	PLD RLX 3, F	l (TC) (Special)	8	20 cs4	-26	+6s	+6s		
-1859	PLD RLX 4	m	20	22	-12	KND	KND		Re_cap41B
-	PLD RLX  3+4	m (Special)	12,14	21	-26	KND	KND		
+1860	PLD RLX 4	m	20	22	-12	KND	KND		Re_cap41B
+1862	PLD RLX  3+4	m (Special)	12,14	21	-26	KND	KND		
 	b+3+4 or B+3+4	(Special)							
 	BT F								
 	BT f								
@@ -255,7 +256,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1644	BT 4, 3	m, m	15,17		-15	JG	JG		rei_k01b2
 1645	BT 4, 4	m, m (TJ)	15,2		-3s	+1s	KND		Re_Se_rkrk
 1614	BT 1+2	h	12	10	-6	5	5		Re_R_lrp00
-	BT 1+2, 2	h, m (RLX)	12,18		-19	-3s	+5s		
+1615	BT 1+2, 2	h, m (RLX)	12,18		-19	-3s	+5s		
 1646	BT 3+4	m (TJ) (BT)	15	32 js10	-4	KND	KND		rei_k02b
 	BT 3+4, F	m (TJ)	15	32 js10	-12	KND	KND		
 1649	BT 3+4, 3+4	m, m (TJ) (BT)	15,15		-9	KND	KND		rei_k03b
@@ -265,14 +266,14 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1723	BT d+1	l (TC)	12	12 cs6	-6	5	KND		rei_p02b
 	BT d+2	sm (TC)	10	10 cs1	-2	9	9		
 	BT d+3	l (TC)	12	10 cs1	-11	3	3		
-	BT d+4 (clean)	l (TC)	12	20 cs6	-26	KND	KND		
+1732	BT d+4 (clean)	l (TC)	12	20 cs6	-26	KND	KND		
 	BT d+4 (clean)*	l (TC)	8	20 cs6	-26	+2s	+2s		
 1733	BT d+4, 4	l, h	8,3	20 cs6	-11	KND	KND		Re_cap41C
 	BT d+4, u or d (clean)	l (SNA)	12	20 cs6	-26	KND	KND		
 	BT d+4, u or d	l (SNA)	8	20 cs6	-26	+8s	+8s		
 	BT d+4, F (clean)	l (DRU)	12	20 cs6	-26	KND	KND		
 	BT d+4, F	l (DRU)	8	20 cs6	-26	+6s	+5s		
-	BT u/b or u or u/f+2	m (TJ) (RLX)	25	32 js17	-14	-3s	-3s		
+1550	BT u/b or u or u/f+2	m (TJ) (RLX)	25	32 js17	-14	-3s	-3s		
 	BT u/b or u or u/f+2*	m (TJ) (grounded)	25		-15	-4s	-4s		
 	b+1+4	(PHX)							
 	PHX d/b	(cancel stance)							
@@ -296,7 +297,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	SS+1+4 or SS+2+3	(SNA)							
 	SNA u	(DGN)							
 	SNA d, N	(PAN)							
-1912	SNA 1	h	10	11	-6	5	5		5hebiLP_01C
+1911,1912	SNA 1	h	10	11	-6	5	5		5hebiLP_01C
 1913	SNA 1, 1	h, h	10,9		-6	5	5		5hebiLP_02
 1915	SNA 1, 1, 1	h, h, h	10,9,8		-6	5	5		5hebiLP_03
 1917	SNA 1, 1, 1, 1	h, h, h, h	10,9,8,7		-6	5	5		5hebiLP_04
@@ -315,6 +316,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1928	SNA 3	m (TC) (RLX)	30	28 cs4	-7	JG	JG		5hebiLK_01
 	SNA 3, d	m (TC) (grounded)	30		-9	JG	JG		
 1929	SNA 4	l	15	15	-13	-2	-2		5hebiRK_01
+1930	SNA 4, 1
 1936	SNA 1+2	m	25	21	-10	KND	KND		5hebiLRP_01
 	3+4, 1	(DRG) m/h punch parry							
 	DRG u	(TGR)							
@@ -324,7 +326,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	DRG 2, F	m (TGR)	18		3	KND	JG		
 1956	DRG 3	l (TC)	14	16 cs4	-13	+4s	+2s		5ryu_LK01
 	DRG 3, F	l (TC) (CRA)	14		-20	-3s	-3s		
-1696	DRG 4	h	18	10	-11	0	0		Re_cap00kA
+	DRG 4	h	18	10	-11	0	0		Re_cap00kA
 1951	DRG 1+2	hh	5, 20	18	-2	KND	KND	Tail spin	5ryu_tora_WP2
 1952	DRG f+1+2	m	32	17	-5s	KND	KND		5ryu_tora_1
 	DRG f+1+2, F	m (TGR)	32		-11s	KND	KND		
@@ -346,6 +348,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1972	TGR 2	m	12	15	-14	-3	-3	KND	5tora_KoRP2
 1973	TGR 2, 2	m, h	12		-8	KND	KND	Tail spin	5tora_KoRPRP
 1975	TGR 3	m (TJ)	28	17 js8	-12	KND	KND	Tail spin	5tora_KoLK1
+1977	TGR 3, f+1
+1978	TGR 3, f+4
 	TGR 3, F	m (SIT SNA)	28		-11	KND	KND	Tail spin	
 1979	TGR 4	l (TC)	12	15 cs6	-26	KND	KND	KND	5tora_KoRK1
 1974	TGR 1+2	m	25	25	-7	KND	KND	Wall Bounce	5tora_WP
@@ -360,5 +364,5 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 2019	CRA 3, 4, 2	m, l, m	21,10,10		-16	-5	-5		5tsu_coLK_3
 2020	CRA 3, 4, 2, 3	m, l, m, m	21,10,10,15		-12	KND	KND		5tsu_coLK_4
 2021	CRA 4	l	20	21	-19	KND	KND		5tsu_RK_1
-2022	CRA 1+2	h	20	13	-2	KND	KND		5tsu_RK_2
-	CRA u/b or u or u/f+4	m (TJ) special)	25	13 js10	-2	JG	JG		
+2016	CRA 1+2	h	20	13	-2	KND	KND		5tsu_RK_2
+2022	CRA u/b or u or u/f+4	m (TJ) special)	25	13 js10	-2	JG	JG		

@@ -38,10 +38,10 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	d/f+2*	m (INT)	12		-15	JG	JG	Stance transition	
 1723	d/f+3	m	13	15	-7	+4	+4		Co_t_slkF
 1724	d/f+3, 1	m, h	13,12		-2	+9	+9		Na_3lklp
-1726	d/f+3, 1, 2	m, h, m	13,12,20		-11	+4s	KND		Na_3lklprp
-	d/f+3, 1, 2*	m, h, m	13,12,20		-11	+4s	KND	Stance transition	
+1727	d/f+3, 1, 2	m, h, m	13,12,20		-11	+4s	KND		Na_3lklprp
+1726	d/f+3, 1, 2*	m, h, m	13,12,20		-11	+4s	KND	Stance transition	
 1725	d/f+3, 1, 4	m, h, m	13,12,23		-14	KND	KND		Na_3lklprk
-1730	d/f+4	m	15	14	-7	+4	+4		Na_3rkrpy
+1730,1731	d/f+4	m	15	14	-7	+4	+4		Na_3rkrpy
 1734	d/f+4, 2	m, h	15,20		+1	+6	+6		Na_3rkrpKM
 1733	d/f+4, 2*	m, h (INT)	15,20		+5	+10	+10	Stance transition	Na_3rkrp
 1732	d/f+4, 3	m, m	15,18		-9	+7	KND		Na_3rklk
@@ -65,9 +65,9 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1628	b+1+2	m	25	22	+4	KND	JG		Na_4lrp
 	u/b or u or u/f+1+2	m (TJ)	12 js9	18	-12	-1	-1		
 1622	u/b+2	m	20	25	-20	CS	CS		Na_7rp
-	u+2	h	25	24	-9	KND	KND		
-	u/f+2	m	20	16~17	-11	+7	CS	Unparryable	
-	u/f+2*	m	20	16~17	-11	+7	CS	Unparryable, Stance transition	
+1610	u+2	h	25	24	-9	KND	KND		
+1608	u/f+2	m	20	16~17	-11	+7	CS	Unparryable	
+1607	u/f+2*	m	20	16~17	-11	+7	CS	Unparryable, Stance transition	
 1541	u/b or u or u/f+3	m (TJ)	25	29 js9	-9	KND	KND		Co_jplk00F
 1544	u/b or u or u/f+4	m	20	17	-7	+5	CS		Co_jprk00F
 	u/f, N, 4	m (TJ)	25	23 js9	-11	KND	KND		
@@ -91,7 +91,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	WS+3, 2	m, m	13,20		-19	KND	KND		
 	WS+4	m	18	11	-5	+6	+6		
 1750	FC+d/f+2	l (TC)	19	20	-13	+3s	KND		Na_23rp
-1632	SS+2	h	23	20	-8	CS	CS	Tail spin	Na_yokol
+1632,1633	SS+2	h	23	20	-8	CS	CS	Tail spin	Na_yokol
 	2+3+4	(special)		pc5				Power crush	
 1698	Opponent down d+3+4	l	11(,15)	18	-20	-9	-9		Na_2rkrk
 	BT 1	h	15	8	-8	+3	+3		
