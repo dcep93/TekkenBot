@@ -19,7 +19,7 @@ def update_helper(char_name, move_nodes):
     else:
         (key_in, key_out) = -1, 0
         key_to_val = {i.name: str(i.move_id) for i in move_nodes}
-    for row in start:
+    for row in start[1:]:
         val_in = row[key_in].split(',')
         val_out = ','.join([j for j in [key_to_val.get(i) for i in val_in] if j])
         check_out = row[key_out]
