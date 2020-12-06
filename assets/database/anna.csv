@@ -2,7 +2,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 2236	in rage b+1+2	h	55	13	-9	Throw(KND)	Throw(KND)	Rage art	An_RageArts02
 1704	in rage qcf+2+3	m, m	17,2	15	+5s	JG	JG	Rage drive	An_RD_EX2
 1577	1	h	7	10	+1	+8	+8		An_lp00F
-1559	1, 2	h, h	7,1	10	-1	+5	+5		An_sjprk02F
+1559	1, 2	h, h	7,1	10	-1	+5	+5		An_lprpF
 1560	1, 2, 1	h, h, h	7,10,6	10	-3	+4	+4		An_rplpf
 1562	1, 2, 1, 4	h, h, h, h	7,10,6,18	10	+7	JG	JG		An_senkyu
 1679	1, 2, 1, d+4	h, h, h, l	7,10,6,12	10 cs	-13	-2	-2		An_lprkd
@@ -42,7 +42,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1626	d/f+3	m	13	14	-11	+1	+1		An_t_slkF
 	d/f+3, 1, u or d	m (SS)	13	14	-12	0	0		
 	d/f+3, 1, b	m (CJM)	13	14	-15	-3	-3		
-1629,1630	d/f+3, 1	m, h	13,10	14	-3	+7	7		An_lklp01E
+1629,1630	d/f+3, 1	m, h	13,10	14	-3	+7	7		An_lklp01E,An_lklp_KE
 1631	d/f+3, 1, 2	m, h, h	13,10,6	14	-2	+9	+9		An_lprpFE
 1632	d/f+3, 1, 4	m, h, h	13,10,20		-3	-3	2		An_COMBO_0
 1633	d/f+3, 1, 4, 2	m, h, h, h	13,10,20,12		-4	0	0		An_COMBO_1
@@ -56,7 +56,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	d/f+3, 2, 1	m, h, h	13,12,6		-3	4	4		
 	d/f+3, 2, 1, 4	m, h, h, h	13,12,6,18		7	JG	JG		
 	d/f+3, 2, 1, d+4	m, h, h, l (TC)	13,12,6,12		-13	-2	-2		
-1677	d/f+3, 2, 3	m, h, h	13,12,15		-10	1	1		
+1677	d/f+3, 2, 3	m, h, h	13,12,15		-10	1	1		An_lkrplk
 	d/f+3, 2, 4	m, h, h	13,12,22		-6~-5	KND	KND	Tail spin	
 	d/f+3, 2, d+3	m, h, l (TC)	13,12,10		-14	-3	-3		
 1640	d/f+3, 3	m, h	13,6		-14	-3	-3		An_lk01
@@ -89,8 +89,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1660	d/b+4, 4	l (TC), m (TJ)	18,15		-20S	Throw(KND)	Throw(KND)		An_suna3
 1652	d/b+1+2	m	30	20 pc8	-13	KND	KND	Power crush	An_t_sWPB
 1663	d/b+3+4 (clean hit)	l (TC)	27	24	-26	-4	-4		An_t_slrkR
-	d/b+3+4	l (TC)	18	24 cs 6	-26	-6	-4		An_t_slrk2
-1664	d/b+3+4, 3	l (TC), h (TJ)	27(18),23		-7	KND	KND		
+	d/b+3+4	l (TC)	18	24 cs 6	-26	-6	-4		
+1664	d/b+3+4, 3	l (TC), h (TJ)	27(18),23		-7	KND	KND		An_t_slrk2
 1586	b+1	m	14	18	-11	0	0		An_lp00B
 1587	b+1, 2	m, h	14,12		-12	-1	-1		An_lp01B
 1588	b+1, 2, 2	m, h, m (TJ)	14,12,24		-11	KND	KND		An_lp02B
@@ -113,16 +113,16 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	U/B+4, D	m (TJ)	15		-19	-13	-13		
 	U+4	m (TJ)	18	18	-18	JG	JG		
 	U+4, D	m (TJ)	18		-19	JG	JG		
-1739	U/F+4	m (TJ)	21	18 js13	-18	JG	JG		
+1739	U/F+4	m (TJ)	21	18 js13	-18	JG	JG		An_smrk_01
 	U/F+4, D	m (TJ)	21	18 js13	-19	JG	JG		
-1546	u/f+3+4	mm (TJ)	4,18	20 js9	-3s	+5s	+5s		An_abise3
+1546	u/f+3+4	mm (TJ)	4,18	20 js9	-3s	+5s	+5s		An_abise2
 	u/f, N, 4	m (TJ)	25	25 js9	-9	KND	KND		
 	U/B, b	(TJ)		js					
 1697	f, F+2	h	21	16	6	KND	KND	Homing, Tail spin	An_rpsp00
 1710	f, F+3	m (TJ)	14	15 js13	-13	JG	JG		An_ki01
 1712	f, F+3, 4	m (TJ), m	14,12		-23	JG	JG		An_ki02
 1714	f, F+3, 4, 3	m (TJ), m, m	14,12,9		-14	-3	-3		An_ki03b
-1713	f, F+3, 4, b+3	m (TJ), m, m (CJM)	14,12,9		-1	10	10		
+1713	f, F+3, 4, b+3	m (TJ), m, m (CJM)	14,12,9		-1	10	10		An_ki03
 	f, F+3, 4, b+3, 4, 1+2	m (TJ), m, m, m! (CJM)	14,12,9,45		KND	KND	KND		
 1716	f, F+4	m (TJ)	20	31 js10	0	KNd	KND		An_abise
 	f, F+4, B	m (TJ) (CJM)	20		-9	KND	KND		
@@ -135,9 +135,9 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	FC+d/b or d+2	sm (TC)	8	11 cs1	-4	7	7		
 	FC+3	l (TC)	12	16 cs1	-17	-3	-3		
 	FC+4	l (TC)	10	12 cs1	-15	-4	-4		
-	WS+1	m	13	13	-3	7	7		An_shorp10
-1666	WS+2	m	22	18	-13	JG	JG		An_s_tlk
-1668	WS+3	m	20	11	-11	0	0		
+	WS+1	m	13	13	-3	7	7		
+1666	WS+2	m	22	18	-13	JG	JG		An_shorp10
+1668	WS+3	m	20	11	-11	0	0		An_s_tlk
 	WS+3, B	m (CJM)	20		-3	8	8		
 	WS+4	m	16	11	-6	5	5		
 1731	FC+f+1	m	22	22	-9	KND	KNd	Wall bounce	An_catlp00
@@ -148,7 +148,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	FC+u/b+4, D	m (TJ)	15		-19	-13	-13		
 	FC+u+4	m (TJ)	18		-18	JG	JG		
 	FC+u+4, D	m (TJ)	18		-19	JG	JG		
-	FC+u/f+4	m (TJ)	21	18 js13	-18	JG	JG		An_smrk_01
+	FC+u/f+4	m (TJ)	21	18 js13	-18	JG	JG		
 	FC+u/f+4, D	m (TJ)	21	18 js13	-19	JG	JG		
 	FC+U/B+4	m (TJ)	25	14 js11	-33	-22	-22		
 	FC+U/B+4, D	m (TJ)	25		-27	-16	-16		
@@ -167,15 +167,15 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	BT+d+3 or d+4	h	12	10	-11	3	3		
 	b+3 (to CJM)	(CJM)							
 	CJM d/f	(CD)							
-1742	CJM 1	h	14	11	-9	+14	+14		
+1742	CJM 1	h	14	11	-9	+14	+14		An_JudgmentUper
 	CJM 1*	h	10	10	-13	-2	-2		
-1743	CJM 2
+1743	An_turnchop
 1744	CJM 2, 1	h, m	10,12		-7	+4	+4		An_turnchop2
 1764	CJM 3	m	18	12	-12	3	KND		An_JudgmentKick_B
 1749	CJM 4	m (TC)	20	27 cs14	-29	KND	KND		An_suberuLow
 1745	CJM 1+2	m	20	17	-4s	+6s	+6s		An_judgeWP
 	CJM 2+3	m	20	13	-16	KND	KND		
-1746	CJM 3+4	m	23	20 pc8~	-14	KND	KND	Power crush	
+1746	CJM 3+4	m	23	20 pc8~	-14	KND	KND	Power crush	An_JudgeWK
 1751	CJM d/b or d+3	l	8	15	-11	0	0		An_JudgmentLow01
 1752	CJM d/b or d+3, 3	l, h	8,20		-7	7	7		An_JudgmentLow2
 	CJM u/b+4	m (TJ)	15	15 js8	-15	-4	-4		

@@ -3,7 +3,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1768	in rage f+2+3	m (TJ), m (TJ)	27,16	26~33a 86~87s (29~) 1js15~ 2js14~	+2~+3s	KND(KND)	KND(KND)	Rage drive	Ft_DPB_EX
 	in rage f+2+3, f	m (TJ), m (TJ), (Special) (TC)(BAL)	27,16s	26~33 86~87 (29~) 115~ 214~	+12~+13s	KND(KND)	KND(KND)	Rage art	
 1576	1	h	7	10	+1	+8	+8		Ft_lp00
-1577	1, 1	h, h	7,7	10	-1	+5	+5		Co_sjplp03F
+1577	1, 1	h, h	7,7	10	-1	+5	+5		Ft_lp01
 1578	1, 1, 2	h, h, h	7,7,12	10	-12	+3	+3		Ft_lp02
 1583	1, 2	h, h	7,10	10	-3	+3	+3		Ft_lprp00
 1584	1, 2, 1+2	h, h, m	7,10,20	10	-13~-12	+9~+10k	KND	Tail spin	Ft_lprp01
@@ -41,7 +41,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1722	d/f+3, 4	m, l	14,10	18	-12~-11	-1~0	-1~0		Ft_t_slkF06
 1723	d/f+3, 4, 4	m, l, h	14,10,16	18	-13~-12	0~+1	0~+1		Ft_t_slkF07
 1724	d/f+4	m	16	13~14	-9~-8	+2~+3	+2~+3		Ft_t_srkF
-1727,1728	d/f+3+4	mm	6,6	18,28	-13	KND	KND		Ft_HorseKick2
+1727,1728	d/f+3+4	mm	6,6	18,28	-13	KND	KND		Ft_HorseKick2,Ft_HorseKick2D
 1729	d/f+3+4, 4	mm, m (TJ)	6,6,23	js17~	-4~-2	KND	KND	Tail spin	Ft_Jheel
 1693	d+1	m	18	18~19s	-9~-8	+7~+8s	KND		Ft_t_slp00
 1694	d+2	m	12	15	-9	+2	+2		Ft_t_srp00
@@ -121,7 +121,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1751	WS+1	m	11	15~17	-11~-9	0~+2	0~+2		Ft_s_tlp00
 1752	WS+1, 2	m, h	11,20	15~17	-9~-8	KND	CS	Tail spin	Ft_s_tlp01
 1753	WS+1, 3	m, m	11,25	15~17	-13~-12	KND	KND		Ft_s_tlp02
-1754	WS+2	m	10	14	-7	+4	+4		Ft_s_trp012
+1754	WS+2	m	10	14	-7	+4	+4		Ft_s_trp00
 1757	WS+2, 1	m, m	10,14	14	-20~-17	Launch (JG?)	Launch (JG?)		Ft_s_trp02SP
 1756	WS+2, 2	m, m	10,20	14	-13s	+5s	KND		Ft_s_trp01
 1761	WS+3	h	17	17~18	-8~-7	KND	KND		Ft_s_tlk00

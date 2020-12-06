@@ -73,7 +73,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	u/b+4	m (TJ)	11	15~16 js9~	-19~-18	-8~-7	-8~-7		
 	u+4	m (TJ)	15	15~16 js9~	-13~-12	KND	Launch (JG?)		
 1554	u/f+4	m (TJ)	13	15~16 js9~	-13~-12	Launch (JG?)	Launch (JG?)		Un_jprk00F
-1526	u or u/f+3+4	m (TJ)	26	24~27 js9~	0~+3s	+6~+9s	JG		
+1526	u or u/f+3+4	m (TJ)	26	24~27 js9~	0~+3s	+6~+9s	JG		Un_9lrk
 1771	f, F+2	m	25	14~15 (15~)	-10~-9	KND	KND		Un_tukimid2
 1790	f, F+3	m (TJ)	20	26~29a (27~) js9~	–7~-4s	KND	KND		Un_kakato
 	f, F+3, D	m (TJ), (BOK)	20	26~29a (27~) js9~	+1~+4s	KND	KND		
@@ -117,7 +117,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1837	KNK 3, 4	m (TJ), m	13,27	20~21a	-12~-10	Launch	Launch		Un_kinkeiLKRK
 1839	KNK 4	l	18	20~21a	-12~-11	+9~+10	+9~+10		Un_kinkeiRK
 1827	KNK 1+2	m	20	24	-6	KND	Launch		Un_kinkeiWP
-1828	KNK 3+4	l	24	24~25a	-26	KND	KND		
+1828	KNK 3+4	l	24	24~25a	-26	KND	KND		Un_kinkeiWK
 	d+1+2 or FC+d/b or d+1+2	(Special) (TC)(BOK)		(s)					
 1798	BOK 1	m	14	13(33~) cs1~12	-4	+9	+9		Un_bokulprpy
 1802	BOK 1, 2	m, m	14,20	13(33~) 1~12	-14~-13	KND (JG?)	KND (JG?)		Un_bokulprp

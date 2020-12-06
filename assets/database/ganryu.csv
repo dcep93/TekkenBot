@@ -7,8 +7,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1591	1, 2, 1, 2	h, h, h, h	10,10,8,5	12	-1	+7	+10		Sm_lprp01
 1592	1, 2, 1, 2, 1	h, h, h, h, h	10,10,8,5,5	12	-1	+7	+10		Sm_rplp01
 1593	1, 2, 1, 2, 1, 2	h, h, h, h, h, h	10,10,8,5,5,5	12	-18	-7	-7		Sm_lprp02
-1594	1, 2, 1, 2, 1, 2, 1	h, h, h, h, h, h, h	10,10,8,5,5,55	12	-18	-7	-7		
-1595	1, 2, 1, 2, 1, 2, 1, 2	h, h, h, h, h, h, h, h	10,10,8,5,5,5,5,5	12	-18	-7	-7		
+1594	1, 2, 1, 2, 1, 2, 1	h, h, h, h, h, h, h	10,10,8,5,5,55	12	-18	-7	-7		Sm_rplp02
+1595	1, 2, 1, 2, 1, 2, 1, 2	h, h, h, h, h, h, h, h	10,10,8,5,5,5,5,5	12	-18	-7	-7		Sm_lprp03
 1558	2	h	12	12	+1	+7	+9		Sm_rp00
 1560	2, 1	h, h	12,12	12	-3	+8	+8	Jails	Sm_rplp
 1562	2, 1, 2	h, h, m	16,16,27	14	-13~-12 OC	Launch	Launch		Sm_rplprp
@@ -27,16 +27,16 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1565	1+2	m	19	19~20	-12~-11	+8~+9 OC	Launch		Sm_lrp
 1566	1+2, 1+2	m, m	19,22	19~20	-13~-12	Launch	Launch		Sm_lrp2
 	1+2, 3+4	m	19	19~20	-3~-2	+17	Launch		
-1704	TAI 1	h	17	11	-3	+8	CS		
-1707	TAI 2	h	20	14~15	-9	KND	CS	Homing, tail spin	
-1698	TAI 3	l	24	20~21	-12~-11	+9~+10	+9~+10		
-1700	TAI 4	m	14	13~14	-14	-3	CS		
-1701	TAI 4, 1	m,h	14,20	13~14	-9~-8	+10g~+11g	+10g~+11g	Tail spin	
-1702	TAI 1+2	m	15	23 (pc8~23)	-12	Throw(0)	Throw(0)	Power crush	
-1708	TAI f+2	m	20	18	-15	CS(JG)	CS(JG)		
+1704	TAI 1	h	17	11	-3	+8	CS		Sm_kmlp
+1707	TAI 2	h	20	14~15	-9	KND	CS	Homing, tail spin	Sm_harite00
+1698	TAI 3	l	24	20~21	-12~-11	+9~+10	+9~+10		Sm_kmlk
+1700	TAI 4	m	14	13~14	-14	-3	CS		Sm_kmrk
+1701	TAI 4, 1	m,h	14,20	13~14	-9~-8	+10g~+11g	+10g~+11g	Tail spin	Sm_kmrklp
+1702	TAI 1+2	m	15	23 (pc8~23)	-12	Throw(0)	Throw(0)	Power crush	Sm_kmtukami
+1708	TAI f+2	m	20	18	-15	CS(JG)	CS(JG)		Sm_km6RP
 1696	TAI f+1+2	m	35	20~25	-24~-19	KND	KND	DOSUKOI CANNON	Sm_divinghead
 	TAI d/f+1+2	parry	0	??	–	+16 (?)	–	Command low parry	
-1705	TAI db+1+2	!	40	50~59	KND	KND	KND		
+1705	TAI db+1+2	!	40	50~59	KND	KND	KND		Sm_kamasi00_Old
 1697	TAI d/b+1+2	l	20	22~30	-24~-16	KND	KND		Sm_harasuberi
 1596	f+2	m (TC)	14	14	-12	+1	CS		Sm_rp00F
 1597	f+2~1	h	16	16(17~)	+4	+12	+12		Sm_neko_00
@@ -65,7 +65,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1649	d+1	m	22	25~26	+3~+4 OC	+7~+8 OC	Launch		Sm_t_slp00
 	d+1, 3+4	m, (Special) (TC)	22	25~26	+5~+6 OC	+9~+10 OC	Launch		
 1651	d+2	l (TC)	15	29	-14	-3	-3		Sm_t_srp00
-1657,1659	d+2, 2, , , 	l (TC), , ,	15,10,,,	29	-17	-11	-11		Sm_kabuki00
+1657,1659	d+2, 2, , , 	l (TC), , ,	15,10,,,	29	-17	-11	-11		Sm_kabuki00,Sm_kabuki02
 	d+2, 1	l (TC), m	15,12	29 RC	-7	-1	+1		
 1672	d+4	l	18	21	-14	-3	Launch		Co_t_srk00
 1660	d+1+2	m	29	16	+1	+1	Throw(0)		Sm_okuri00
@@ -100,10 +100,10 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1599	f, F+1+2	h	15	13(14~)	-8	CS	CS		Sm_66WP
 1608	f, F+3+4	m (TJ)	50	39~41 RG (40~)	+7~+9	KND	KND		Sm_drop_00
 1623	b, f+1	m	24	30~32 (30~)	-14~-12	+9~+11OB	+9~+11OB		Sm_yokelp
-1630	b, f+2+3	m (TC)	22	32~33 (32~)	+5~+6	Launch	Launch		
+1630	b, f+2+3	m (TC)	22	32~33 (32~)	+5~+6	Launch	Launch		Sm_soltrp00
 1748	b, d/b, d, D/F+1	m	23	26~27 (30~)	-18~-17	Launch(JG?)	Launch(JG?)		Sm_splp00
 1734	b, d/b, d, D/F+2	m	35	22 RC(26~)	-6~-5	KND	KND	Wall bounce	Sm_p00
-1726	f, f, f+1+2 or WR+1+2	m	35	24(27~)	+9	+32 GB	+32 GB		
+1726	f, f, f+1+2 or WR+1+2	m	35	24(27~)	+9	+32 GB	+32 GB		Sm_runpush
 1714	WS+1	m	12	13~14	-3~-2	+8~+9	+8~+9		Sm_s_tlp00
 1715	WS+1, 2	m, m	12,23	13~14	-14	+6	+6		Sm_stlprp
 	WS+1, 2, 3+4	m, m	12,23	13~14	-14	+6	+6	Ends in TAI	
@@ -121,7 +121,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1643	FC+d/f+1, 2	m, m	9,12	17~19 RC	-8~-7	+2~+3	+2~+3		Sm_sylprp00
 1644	FC+d/f+1, 2, 1	m, m, m	9,12,12	17~19 RC	-8	+8	KND		Sm_syrplp01
 1645	FC+d/f+2	m	20	14~15	-12~-11	Tail spin	Tail spin	Tail spin	Sm_syarp00F
-1646	FC+d or d/f+1+2	l (TC)	24	23~24s	-23~-22	KND	KND		
+1646	FC+d or d/f+1+2	l (TC)	24	23~24s	-23~-22	KND	KND		Sm_lrps00
 1750	SS+1	h	25	17~19 (26~)	-9~-7	Launch	Launch		Sm_superLP
 1762	BT 1+2	m (TJ)	51	30~43 RG	-2~+11	KND	KND		Sm_motare_00
 	1+2+3+4	(Special)		30~43					

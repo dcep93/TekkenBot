@@ -4,7 +4,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1559	1	h	10	11	0	+6	+6		Km_lp00
 1560	1, 2	h, h	10,12	11	-5	+6	+6		Km_wantu
 1565	2	h	10	10	-1	+6	+6		Km_rp00
-1688,1585	2, 1	h, m	10,11	10	-3	+2	+2		Km_rplp
+1688,1585	2, 1	h, m	10,11	10	-3	+2	+2		Km_rplp,Km_rplpFrv
 1725	2, 1, 2	h, m, m	10,11,22	10s	-14~-13	Launch (JG?)	Launch (JG?)		Km_lprus
 1689	2, 1, 3	h, m, l	10,11,13	10	-13	-2	-2		Km_rplplk
 	3	h	25	18	-5	KND	KND		
@@ -66,8 +66,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1523	u or u/f+3, 4, 1+2	m (TJ), m (TJ), m	13,13,22	js1~8	-16~-14	KND	KND		Km_jplk00F3
 	u or u/f+3, 4, 1+2, 3+4	m (TJ), m (TJ), m, (HBS)	13,13,22	js1~8	-14~-13	KND	KND		
 1527	u/f+4	m (TJ)	20	29~30 js9~	-6~-5	KND	KND		Km_urakujin2rv
-	u/f+4, n+3+4	m (TJ), (HBS)	20	29~30 js9~	-1~0	KND	KND		Km_urakujin2
-1528	u/f+4, 3	m (TJ), m (TJ)	20,20	d js1~	+7~+8	KND	KND	Tail spin	
+	u/f+4, n+3+4	m (TJ), (HBS)	20	29~30 js9~	-1~0	KND	KND		
+1528	u/f+4, 3	m (TJ), m (TJ)	20,20	d js1~	+7~+8	KND	KND	Tail spin	Km_urakujin2
 1737	u/f+1+2	m (TJ)	28	18~23 js16~	-4~+1	+3~+8 (SH)	+3~+8 (SH)		Km_flyb00
 1545	u/f+1+2, 3+4	m (TJ), (HBS)	28	18~23 js16~	-4~+1	+3~+8 (SH)	+3~+8 (SH)		Km_sjplrkF
 1666	f, F+2	m?	23	19~21 (20~)	-19~-17	Launch(JG?)	Launch(JG?)		Kum_up00
@@ -146,10 +146,10 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	u/f+3+4 (After stance ends)	m (TJ)	21	34~39 js8~	-35~-30s	KND	KND		
 	u/f+3+4	m (TJ)	21	34~39 js8~	+10~+15s	KND	KND		
 	Grounded face up d+1+2 (After stance ends)	m	21	28~31	-20~-17	KND	KND		
-1736	Grounded face up d+1+2	m	21	28~31	+15~+19	KND	KND		
+1736	Grounded face up d+1+2	m	21	28~31	+15~+19	KND	KND		Km_oklrp
 1713	SIT 1	l (TC)	16	25~26s (46~) cs1~	-15~-14	KND	KND		Km_hplp00
 1733	SIT 2	m	18	21~22 (42~)	-15~-14	Launch (JG?)	Launch (JG?)		Km_hprp00
-1714	SIT 3+4	m (TJ)	20	25(46~) js2~	-21	KND	KND		
+1714	SIT 3+4	m (TJ)	20	25(46~) js2~	-21	KND	KND		Km_hpwk00
 	SIT b	(Special)		a,s					
 	SIT b, 3+4	(HBS)		,					
 	SIT f	(ROL)		a					
@@ -160,5 +160,4 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1793	ROL 4	m	20	26~30d (57~) js13~	+7~+11	KND	KND		Km_zenrk
 1787	ROL 1+2	m (TC)	22(,3)	25~40d (56~)	-15~+1	KND	KND		Km_zenring
 	ROL 3+4 (to HBS)	(Special) (TC)(HBS)		25~40 (56~)					
-
-1589	f+1+2, 1+2
+1589	Km_lrpf02

@@ -13,8 +13,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	1+2	m	20	17	-14	+2s	+2s		
 1587	1+2 When hit 1+2	m, (throw)	20,20	17		0			It_zan_na
 	1+2 When hit 1+2 When hit, b or f+2	m, (throw), (throw), (STB)	20,20,18	17		Throw(KND)	Throw(KND)		
-1560	3+4	m (TJ), ?	20	24~26s js13~	-10~-8	KND	KND		
-1543,1544	f+2	h	9	12	0	+6	+6		It_rp00F2
+1560	3+4	m (TJ), ?	20	24~26s js13~	-10~-8	KND	KND		It_lrk00
+1543,1544	f+2	h	9	12	0	+6	+6		It_rp00F,It_rp00F2
 1546	f+2, 1	h, m	9,12	12	-10~-9	+6~+7s	+6~+7s		It_rplp
 1547	f+2, 1, 1+2	h, m, m	9,12,25	12	-18~-17	KND	KND		It_rplplrp
 1548	f+2, 2	h, m(, (Special))(STB)	9,24	12	-26	CS	CS	Tail spin	It_rprp
@@ -43,9 +43,9 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1668	b+2	h (STB)	30	14~15	-9~-8	KND	KND		It_4rp
 1711	b+3	m	16	13	-4	+7	+7		It_4lk
 1712	b+3, 3	m, m	21	13	-12	+7	JG		It_4lklk
-1632,1633,1649,1650	b+4	m	10	17	-14	-3	-3		It_4rklpy
-1651	b+4, 1	m, h	10,18	17	-8	+13k	KND	Tail spin	It_4rkrp
-1635	b+4, 2	m, m (STB)	10,20	17	-12	KND	KND		
+1632,1633,1649,1650	b+4	m	10	17	-14	-3	-3		It_4rk,It_4rkrpRv,It_4rklky,It_4rklpy
+1651	b+4, 1	m, h	10,18	17	-8	+13k	KND	Tail spin	It_4rklp
+1635	b+4, 2	m, m (STB)	10,20	17	-12	KND	KND		It_4rkrp
 1642	b+4, 3	m, h	10,14	17	-12~-11	-4~-3	+1~+2	Homing	It_4rklk
 1644	b+4, 3, 2	m, h (TJ)	10,14,20	17	-13~-12	KND	KND		It_4rklkrpn
 1575	b+1+2	m	25	22~23 pc8~21	-13~-12	KND	KND	Power crush	It_spam
@@ -61,11 +61,11 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1731	f, F+2, 2 or FC+d/f+2, 2	m, h (STB)	14,20	14~16 (15~)	-2~-1	KND	KND		It_66rprp
 1733	f, F+2, 1+2 or FC+d/f+2, 1+2	m, m	14,20	14~16 (15~)	-13~-12	KND	KND	Wall bounce	It_66rplrp
 1744	f, F+4	m (TJ)	20	15~17 (16~) js11~	-5~-3	KND	KND		It_66rk
-1735	f, F+1+2	m	23	17~18	-8~-7	KND	KND		
+1735	f, F+1+2	m	23	17~18	-8~-7	KND	KND		It_66lrp
 1738	f, f, f+2	h (STB)	40	13~16 (16~) js3~	+7~+10g	KND	KND		It_RUN_rp00
 1715	WS+1	m	12	12~13	-4~-3	+7~+8	+7~+8		It_s_tlp00
 1716	WS+1, 1	m, h	12,15	12~13	-12	+9	+9		It_s_tlplp
-1721	WS+1, 2	m, m	12,12	12~13	-9	+4	+9	Tail spin	
+1721	WS+1, 2	m, m	12,12	12~13	-9	+4	+9	Tail spin	It_s_tlprpn
 1747	WS+2	m(, (Special))(STB)	20	15~16	-14~-13	Launch (JG?)	Launch (JG?)		It_s_trp00
 1723	WS+3	m	20	16	-8	KND	KND		Co_s_tlk00
 	WS+4	m	18	11~12	-6~-5	+5~+6	+5~+6		
@@ -78,10 +78,9 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	STB d+2	l (TC)	11	20s cs7~	-12	-1	-1		
 1667	STB d+2, 2	l, l	11,17	cs1~	-12~-11	KND	KND		It_2rprp
 1630	STB d/b+1+2	m, !	20,20	20,55	CS	CS	CS		It_quetzal2
-	STB b+4	m	10	17	-14	-3	-3		It_4rklky
+	STB b+4	m	10	17	-14	-3	-3		
 	STB b+4, 3	m, h	10,14	17	-15~-14	-4~-3	-4~-3	Homing	
 1643	STB b+4, 3, 2	m, h, m (TJ)	10,14,38	js1~31	-1~0	JG	JG		It_4rklkrp
-1722	STB WS+1, 2	m, m	12,23	12~13	+8	KND	KND	Tail spin	
-
-1657	d+1, 2
-1662	d+2, 2
+1722	STB WS+1, 2	m, m	12,23	12~13	+8	KND	KND	Tail spin	It_s_tlprp
+1657	It_2lprp_n
+1662	It_2rprpn

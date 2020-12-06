@@ -4,8 +4,8 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1922	in rage f+3+4, When hit 2	m (TJ), (throw), h	20,10,15	15~18 7~		KND		Rage art, Tail spin	Nj_SP_takai2EX
 1921	in rage f+3+4, When hit d+2	m (TJ), (throw), !	20,10,35	15~18 7~		KND		Rage art	Nj_meteo01EX
 1573	1	h	7	10	+1	+8	+8		Nj_lp002
-1577	1, 1	h, m	7,9	10	-9	+2	+2		
-1578	1, 1, 4	h, m, m(bt)	7,12	23	10	-14(bt)	KND	KND		
+1577	1, 1	h, m	7,9	10	-9	+2	+2		Nj_lplp
+1578	1, 1, 4	h, m, m(bt)	7,12	23	10	-14(bt)	KND	KND		Nj_lplprk
 1582	1, 2	h, h	7,12	10	-1	+6	+6		Nj_lprpF
 	1, 2, 3+4	h, h, (Special)	7,12	10	-10	-3	-3		
 1584	2	h	10	10	-1	+8	+8		Nj_rp00
@@ -19,7 +19,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1629	4, 1	h, h	17,12	12b	-2~-1	+5~+6	+5~+6		Nj_rklp
 1903	3~4	mm(BT)	13,15	25~26, 31~36b (17~)	-9~-4	KND	KND		Nj_sokuten2
 	3~4, f	mm, (PHR)	13,15	25~26, 31~36a (17~)	-39~-34	KND	KND		
-1891,1894,1895,1896	4~3	mm	13,15	25 js14~	-9	Launch (JG?)	Launch (JG?)		Nj_senpu01
+1891,1894,1895,1896	4~3	mm	13,15	25 js14~	-9	Launch (JG?)	Launch (JG?)		Nj_senpu01,Nj_senpu01A,Nj_senpu01C,Nj_senpu01D
 	4~3, F	mm (special)	13	25 js14~	-39	KND	KND		
 1897	4~3, 1	m, m, l (TC)	8,10(12),12	s cs1~	-13~-12	+4~+5	+4~+5		Nj_senlp00
 1898	4~3, 3	m, m, h	8,10(12),23	1~	-4~0	KND	KND	Tail spin	Nj_senlk00
@@ -38,7 +38,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1775	d/f+2, 4	m, m	16,20	16~18	-15~-14	KND	KND		Nj_R_rprk002
 1764	d/f+3	h (TC)	21	15~16 cs8~	-9~-8	+7~+8(SH)	Launch		Nj_t_slkF
 1766	d/f+4	m	13	15~16	-15~-14	-1~0 (Launch (JG?))	-1~0 (Launch (JG?))		Nj_t_srkF
-1768,1769	d/f+4, 4	m, m	13,13	15~16	-15~-14	KND	KND		Nj_t_srkF2y
+1768,1769	d/f+4, 4	m, m	13,13	15~16	-15~-14	KND	KND		Nj_t_srkF2,Nj_t_srkF2y
 1838	d/f+4, 4, 3	m, m, m (TJ)	13,15,22	js1~	-6~-3	KND	KND		Nj_comrollk
 	d/f+4, 4, U	m, m, (Special) (TJ)	13,15	js1~	-29~-26	-18~-15s -10~-7s	KND		
 	d/f+1+2	m	30	40	-12	KND	KND		
@@ -67,7 +67,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1725	b+4, (b+4, 3), f+4	m, l (TC), l (TC)	11,11,12	cs1~	-11~-10	0~+1	KND		Nj_rollp03y
 	b+4, (b+4, 3), f+4, 2	m, l (TC), l (TC), m	11,11,12,21	1~	-13	CS	KND		
 	b+4, (b+4, 3), f+4~3	m, l (TC), m (TJ)	11,11,22	js2~	-6~-3	KND	KND		
-2248	b+4, (b+4, 3), f+4, U	m, l (TC), (Special) (TJ)	11,11	js2?~	-58~-57	-47~-46	KND		
+2248	b+4, (b+4, 3), f+4, U	m, l (TC), (Special) (TJ)	11,11	js2?~	-58~-57	-47~-46	KND		Nj_move1
 1723	b+4, (b+4, 3), 3+4	m, l (TC), m	11,11,15	2?~	-25~-21	KND	KND		Nj_rollk01new
 1924	b+1+2	m	28	31~32	-10~-9	+1~+2	+1~+2		Nj_kata00
 1926	b+1+2, 2	m, m	28,12	31~32b	+1~+2s	+4~+5s	KND		Nj_katahizi
@@ -133,9 +133,9 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	BT 3, 4, 4, F	h, m, m (TJ), (PHR)	10,10,21	12~a	-36~-34	KND	KND		
 	BT 3, 4, U	h, m, (Special) (TJ)	10,10	js1~	-23~-22	-23~-22	-12~-11s		
 	BT 4	h	25	10	-8	KND	KND		
-1874	BT 1+2	m	25	15~16	-13~-12 pc6	CS	CS	Power Crush	
+1874	BT 1+2	m	25	15~16	-13~-12 pc6	CS	CS	Power Crush	Nj_eclipse00
 1863	BT 3+4	m, m	5,20	15,34~35 js13~	-20~-19	Launch(JG?)	Launch(JG?)		Nj_jpRlk00
-1864	BT 3+4 (Second hit only)	m	20	34~35 js13~	-20~-19	Launch (JG?)	Launch (JG?)		
+1864	BT 3+4 (Second hit only)	m	20	34~35 js13~	-20~-19	Launch (JG?)	Launch (JG?)		Nj_jpRlk01
 1617	BT f+1	m(, (throw))	18	16(b)	-13	+5b	+5b		Nj_R_lp00F
 1711	BT f+2	m	13	17~18	-5~-4	+6~+7	+6~+7		Nj_R_rp00F
 1715	BT f+2, 3	m, m	13,17	17~18	-12~-11	KND	KND		Nj_R_rplk00

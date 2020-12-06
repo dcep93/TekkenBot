@@ -12,7 +12,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1553	2, 1	h, m	8,9	10	-6s	+2s	+2s		Qt_rplp
 1554	2, 1, 3	h, m, l (MNT)	8,9,17	10	-17	KND	KND		Qt_rplplk
 	2, 1, 3, D	h, m (MNT)	8,9	10	-17s	-9s	-9s		
-1556	2, 2	h, m	8,12	10	-9	2	7		Qt_fwwp01
+1556	2, 2	h, m	8,12	10	-9	2	7		Qt_rpfw
 1559	2, 2, 1+2	h, m, m*3	8,12,7,11,20	10	-9s	+4s	+4s		Qt_fwwp02
 	3	h (SCR)	17	13	0	9	9		
 	3, B	h	17	13	-8	1	1		
@@ -108,13 +108,13 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	WS+4	m	18	11	-9	2	2		
 1614	FC+d/f+3	l (TC)	15	23	-26	KND	KND		Qt_syalkF
 	FC+d/f+3, D	l (TC) (MNT)	15	23	-26	KND	KND		
-1777	SS+1+2	m	22	17	-2s	+8s	KND		
+1777	SS+1+2	m	22	17	-2s	+8s	KND		Qt_sidatk_l
 	Back against wall b, b, u/b	m	21	39	+4s	KND	KND		
 	BT 1 or 2	h	15	8	-8	3	3		
 	BT 3 or 4	h	18	10	-8	KND	KND		
 	BT d+1 or d+2	sm (TC)	10	10	-2	9	9		
 	BT d+3 or d+4	l	12	10	-11	3	4		
-	d+1+2 or FC+d+1+2	(TRT)	–	–	–	–	–		Qt_sidatk_l
+	d+1+2 or FC+d+1+2	(TRT)	–	–	–	–	–		
 	TRT d/b			37					
 1766	TRT 1	l (TRT)	13	18	-11	5	KND		Qt_kKAM_lp
 1767	TRT 2	m	24	34	-9	Launch	Launch		Qt_kKAM_rp
@@ -129,7 +129,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	3+4 or FC+d+3	(SCR)	–	–	–	–	–		
 	SCR d/b	–	–	19	–	–	–		
 1730	SCR 1	h (SCR)	12	10	-2	9	9		Qt_fKAM_lp
-1731	SCR 1, 4	h, m (TRT)	12,18	10	-6	7	KND		
+1731	SCR 1, 4	h, m (TRT)	12,18	10	-6	7	KND		Qt_fKAM_lprkz
 1738	SCR 2	m (SCR)	17	14	-7	7	KND		Qt_fKAM_rp00
 1739	SCR 2, 2	m, m	17,17	14	-10	+8s	KND		Qt_fKAM_rp01
 1740	SCR 3	m (SCR)	15	13	-6	5	5		Qt_fKAM_lk00
@@ -139,14 +139,14 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1743	SCR 3, f+3	m, h (SCR)	15,20	13	3	KND	KND		Qt_fKAM_lkH01
 1747	SCR 4	m (SCR)	25	14 pc8	-13	Launch	Launch	Power Crush	Qt_fKAM_kagi00
 	SCR 4, B	m	25	14 pc8	-18	Launch	Launch	Power Crush	
-1728	SCR 1+2	m	28	17	6	KND	Launch		
+1728	SCR 1+2	m	28	17	6	KND	Launch		Qt_fKAM_lrp
 	SCR 1+2, D	m (TRT)	28	17	6	KND	Launch		
 1757	SCR 3+4	m, m (TJ)	10,20	18 js6	-12	+8k	+8k	Tail spin	Qt_fKAM_lrk01
-1732,1733	SCR d/f+3	l (TC)	10	28s cs6	-23	-10s	-10s	Homing	Qt_fKAM_3LK
+1732,1733	SCR d/f+3	l (TC)	10	28s cs6	-23	-10s	-10s	Homing	Qt_fKAM_3LK,Qt_fKAM_3LK_R
 	SCR d/f+3, D	l (TC) (MNT)	10	28 cs6	-23	-15s	-15s	Homing	
 1736	SCR d/f+3, 3	l (TC), l (TC)	10,10	28s	-23	Launch	Launch	Homing	Qt_fKAM_3LKLK
 	SCR d/f+3, 3, D	l (TC), l (TC) (MNT)	10,10	28	-23	Launch	Launch	Homing	
-1754	SCR d/f+4	l (TC)	17	19 cs6	-14	+7s	KND		Qt_fKAM_rk02
+1754	SCR d/f+4	l (TC)	17	19 cs6	-14	+7s	KND		Qt_fKAM_3RK
 	SCR d/f+4, D	l (TC) (MNT)	17	19	-14	+7s	KND		
 1744	SCR d+3	l (SCR)	10	18	-6	-3	+9g		Qt_fKAM_lkL00
 1746	SCR d+3, 3	l, h (SCR)	10,28	18	3	KND	KND	Tail spin	Qt_fKAM_lkL01H
@@ -176,7 +176,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1693	MNT d/f+2	m	10	19	-9	Launch	Launch		Qt_zKAM_rp01
 1707	MNT d/f+3	m (TJ) (MNT)	20	15 js10	-17	+19g	+19g		Qt_zKAM_lrk00
 	MNT d/f+3, 4	m (MNT) BT	20	15	-14	+22g	+22g		
-1718	MNT d/f+4	m (TRT)	18	17~18	-5	+13k	+13k		
+1718	MNT d/f+4	m (TRT)	18	17~18	-5	+13k	+13k		Qt_zKAM_3RK
 1688	MNT d+1	l (TC) (MNT)	14	15	-11	0	0		Qt_zKAM_lp01
 1689	MNT d+1, 4	l (TC), m (TJ)	14,23	15	-16	KND	Launch	Tail spin	Qt_zKAM_lprk
 	MNT d+1, 4, D	l (TC), m (TJ) (MNT)	14,23	15	-15	KND	Launch	Tail spin	

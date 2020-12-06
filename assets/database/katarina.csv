@@ -2,12 +2,12 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1994	in rage 3+4	m	55	20 pc8~17	-22	KND	KND	Rage art	Ln_RageArts02
 1689	in rage HAR 1+2	m (TJ)(, (throw))	35,5,15	15~16 (30~)	+5~+6s	Throw(KND)	Throw(KND)	Rage art	Ln_6rkrp_EX
 1528	1	h	7	10	+1	+8	+8		Ln_lp00
-1536,1540,1543,1545	1, 1	h, h	7,10	10	-2~-1	+4~+5	+4~+5		Ln_lplp1
-1535	1, 1, F	h, h, (HAR)	7,10	10	-1~0	+5~+6	+5~+6		
+1536,1540,1543,1545	1, 1	h, h	7,10	10	-2~-1	+4~+5	+4~+5		Ln_lplp1,Ln_lplp2,Ln_lplp3,Ln_lplp4
+1535	1, 1, F	h, h, (HAR)	7,10	10	-1~0	+5~+6	+5~+6		Ln_lplp
 1537	1, 1, 1	h, h, m	7,10,23	10	-5~-4	-1~0	KND		Ln_lplplp
 1541	1, 1, 2	h, h, h	7,10,17	10	+7	+9	CS		Ln_lplprp
 1544	1, 1, 3	h, h, m (TJ)	7,10,20	js14~	0~+1s	KND	KND		Ln_lplplk
-1546	1, 1, 4	h, h, m	7,10,21	14~	-19~-17	Launch (JG?)	Launch (JG?)		
+1546	1, 1, 4	h, h, m	7,10,21	14~	-19~-17	Launch (JG?)	Launch (JG?)		Ln_lplprk
 1529	1, 2	h, h	7,10	14~	-3	+3	+3		Ln_lprp
 1530	1, 4	h, l	7,10	14~	-12	+1	+1		Ln_lprk
 1547	2 or f+2	h	10	12	-3	+8	+8		Ln_rp00
@@ -21,14 +21,14 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1558	3, 4 or WS+3, 4	m, h	9,20	14	-8	KND	Tail spin	Tail spin	Ln_lkrk
 1570	4	h	17	11	-12	+8	Launch (JG?)		Ln_rk00
 1573	4, 4	h, m (TJ)	17,15	11a	-10	+4	+4		Ln_rk02
-1577	4, 4, 4	h, m (TJ), h	17,15,10	11	-10~-9	+4~+5	+4~+5		Ln_rk03
+1577	4, 4, 4	h, m (TJ), h	17,15,10	11	-10~-9	+4~+5	+4~+5		Ln_rk03_1
 	4, 4, 4, f	h, m (TJ), h, (HAR)	17,15,10	11	-1~0	+5~+6	+5~+6		
 1579	4, 4, 4, 4	h, m (TJ), h, h	17,15,10,21	11	-6~-5	+5~+6	+5~+6		Ln_rk04
 1580	4, 4, 4, 4, 4	h, m (TJ), h, h, m	17,20,10,21,25	11	-9	KND	KND	Wall bounce	Ln_rk05
 1569	f+3	m (TJ)	23	24~25 js6~	+1~+2s	+5~+6s	Launch		Ln_6lk
 1699	f+1+2	h	20	23	+1s	KND	KND		Ln_6lrp
 1703	f+3+4	m	23	24 pc8~23	-13	KND	KND	Power crush	Ln_lrk00
-1627,1629	d/f+1	m	13	13	-2	+5	+5		
+1627,1629	d/f+1	m	13	13	-2	+5	+5		Ln_t_slpF,Ln_t_slpFy
 1630	d/f+1, 1	m, h	13,8	13	-5	+6	+6		Ln_3lplp
 	d/f+1, 1, f	m, h, (HAR)	13,8	13	-1	+10	+10		
 1591	d/f+2	m	17	17~18	-7~-6	+4~+5	+4~+5		Ln_t_srpF
@@ -42,19 +42,19 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1616	d+1	m	20	17	-7s	+3s	KND		Ln_2lp
 1652	d+2	m?	18	20~21	-11~-10	0~+1	CS		Ln_2rp
 	d+2, F	m?, (HAR)	18	20~21	+3~+4	+14~+15g	CS		
-1618	d+3	l	12	16	-11	0	0		
+1618	d+3	l	12	16	-11	0	0		Ln_t_slk00
 1620	d+3, 3	l, m	12,18	16	-13~-12	0~+1	0~+1		Ln_2lklk
 1621	d+3, 4	l, h	12,18	16	-1	+6	KND		Ln_2lkrk
 1636	d/b+3	l (TC)	24	24~25 cs6~	-26	KND	KND		Ln_t_slk00B
 1640	d/b+4	l (TC)	24	29~30 cs6~	-26	KND	KND	Homing	Ln_1rk
 1677	d/b+3+4	! (TJ)	60	68 js54~	KND	KND	KND		Ln_1lrk
-1662,1667	b+1	m	13	14	-9	+2	+2		Ln_4lp
-1661	b+1, f	m, (HAR)	13	14	+3	+14g	+14g		
+1662,1667	b+1	m	13	14	-9	+2	+2		Ln_4lp1,Ln_4lp2
+1661	b+1, f	m, (HAR)	13	14	+3	+14g	+14g		Ln_4lp
 1663	b+1, 1	m, m	13,20	14	-12~-11	KND	KND		Ln_4lplp
 1668	b+1, 2	m, m	13,10	14	-8	+5	+5		Ln_4lprp
 1600	b+2	m (TC)	20 cs10	27~28	-14~-13	Launch	Launch		Ln_4rp
 1680	b+3	m	17	12	-9	+2	+20g		Ln_4lk
-1584,1585	b+4	m	17	17~18	-15~-14	+8~+9	CS		Ln_4rk_R
+1584,1585	b+4	m	17	17~18	-15~-14	+8~+9	CS		Ln_4rk_L,Ln_4rk_R
 1587	b+4, 1+2	m, h	17,20	17~18	+1s	KND	KND		Ln_4rklrp
 1583	b+4, 3+4	m, mm	17,3,17	17~18	-12s	KND	KND		Ln_4rklrk2
 1678	b+3+4	mm	15,20	23~24, 31~32	-14~-13	KND	KND		Ln_4lrk
@@ -64,7 +64,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1512	u or u/f+4	m	10	15~16 js9~	-15~-14	-4~-3	-4~-3		Ln_9rk
 1513	u/f+4, 4	m, m	10,10	js1~21	-13~-12	BU	BU		Ln_9rkrk
 1515	u/f+4, 4, 4	m, m, m (TJ)	10,10,10	1~21a	-10~-9	+4~+5	+4~+5		Ln_9rkrkrk
-1575	u/f+4, 4, 4, 4	m, m, m (TJ), h	10,10,10,10	1~21	-10~-11	+4~+5	+4~+5		
+1575	u/f+4, 4, 4, 4	m, m, m (TJ), h	10,10,10,10	1~21	-10~-11	+4~+5	+4~+5		Ln_rk03
 	u/f+4, 4, 4, 4, F	m, m, m (TJ), h, (HAR)	10,10,10,10	1~21	-1~0	+5~+6	+5~+6		
 	u/f+4, 4, 4, 4, 4	m, m, m (TJ), h, h	10,10,10,10,21	1~21	-6~-5	+5~+6	+5~+6		
 	u/f+4, 4, 4, 4, 4, 4	m, m, m (TJ), h, h, m	10,10,10,10,21,25	1~21	-9	KND	KND	Wall bounce	
@@ -91,5 +91,5 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1695	HAR 4	m (TJ)	27	15~16a (30~) ar15~	-9~-8	KND	KND	Wall bounce	Ln_6rkrk
 1687	HAR d/f+2	m	13	16	-13	-2	-2		Ln_6rk3rp
 1688	HAR d/f+2, 3	m, h	13,18	16	-3	+14k	+14k	Tail spin	Ln_6rk3rplk
-1694	HAR d/f+3	l	20	23	-12	+5	KND		
+1694	HAR d/f+3	l	20	23	-12	+5	KND		Ln_6rk3lk
 1674	HAR u/f+3	m (TJ)	20	27~28a (42~) js9~	-9~-8s	KND	Launch		Ln_6rk9lk

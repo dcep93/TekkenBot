@@ -13,7 +13,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1584	3	h	17	14~15	-11~-10	KND	KND	Tail spin	Fu_lk00
 	4	h	15	11	-9	+8	Launch (JG?)		
 1588	4~3	m (TJ)	23	23~25s (24~) js10~	-1~+1s	+3~+5s	KND		Fu_abise_00
-1589	4~3, d+1+2	m (TJ), (Special)	23	23~25 (24~) js10~	0~+2s	+4~+6s	KND		
+1589	4~3, d+1+2	m (TJ), (Special)	23	23~25 (24~) js10~	0~+2s	+4~+6s	KND		Fu_abise_00AB
 1894	1+2	m	24	20~21	-7~-6	CS	CS		Fu_Gheki
 	3+4 or u+3+4	(Special)(Absorbs 1 h/m hit)		2~10		(+5b)			
 	d+3+4	(Special)(Absorbs 1 h/m hit)		2~10		(+5b)			
@@ -44,7 +44,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1638	d+3, 4	l (TC), h	12,21	14 6~	0~+1	KND	KND		Wg_tessahi
 1757	d/b+1	m	25	18	-9	KND	KND		Fu_kasui
 	d/b+1 (clean hit)	m	37	18	-9	KND	KND		
-1656	d/b+2	l(RDS)	13	18 cs6~	-8(RDS)	+5s	+18g		
+1656	d/b+2	l(RDS)	13	18 cs6~	-8(RDS)	+5s	+18g		Fu_t_srp00B
 1657	d/b+3	l(!)	0	15	+2	+2s	+12s		Fu_Anklk00
 1658	d/b+4	l	14	18	-12	+7s	KND		Fu_Fujin
 2028	b+1	m(RDS)	10	8~13(b)		+1	+1		Fu_TEST_L
@@ -60,7 +60,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1780	u+1+2, 2	mm, m	5,5,12	16~18, 22~24	-12	-1	-1		Fu_kaoh00
 1767	u+1+2, 2, 1	mm, m, m	5,5,12,20	16~18, 22~24	-12~-11	KND	KND		Fu_kaokasui
 	u+1+2, 2, 1, b (Cancel)	mm, m, (RDS)	5,5,12	16~18, 22~24b	-19	-8	-8		
-1741	u+1+2, 3+4	mm	5,5	16~18, 22~24	-16~-14	-5~-3s	-5~-3s		
+1741	u+1+2, 3+4	mm	5,5	16~18, 22~24	-16~-14	-5~-3s	-5~-3s		Fu_zenhekBZ
 1502	u or u/f+1	l (TJ), (AOP)	15	33~35 js9~23	-7~-5	+10~+12s	+10~+12s		Fu_89lp
 	u/b+3	m	11	16~17 js9~	-13~-12	-1~0	-1~0		
 	u+3	m	15	16~17 js9~	-13~-12	KND	Launch (JG?)		
@@ -73,7 +73,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	u/f+1+2, B	m (TJ)(RDS)	23	26~27b js9~	+3~+4s	+7~+8s	KND		
 1744	u/f+3+4	mmm (RDS)(TJ)	8,10,12	16~17 ,27~28, 36~37(b) js9~	-3~-2	KND	KND		Fu_jplrk02F
 1743	u/f+3+4 (Third hit miss)	mm (RDS)(TJ)	8,10	16~17 ,27~28(b) js9~	-21~-20				Fu_jplrk01F
-1746,1747	f, F+1	m	19	15(16~)	-11	0s	0s		Fu_ryuho00C_
+1746,1747	f, F+1	m	19	15(16~)	-11	0s	0s		Fu_ryuho00,Fu_ryuho00C_
 	f, F+1, D	m, (AOP)	19	15(16~)	-5	+6s	+6s		
 1753	f, F+1, 3	m, h	19,20	15(16~)	-1~0	KND	KND		Fu_ryuho01v
 1755	f, F+1, 4	m, m	19,20	15(16~)	-12~-11	KND	KND		Fu_ryuhork
@@ -85,7 +85,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	f, F+4, When guarded4	m (TJ), (Special)		24(25~) 9~20	+5				
 1878	f, F+1+2	m	12	14~16 (15~)	-9~-7	+5~+7	+5~+7		Fu_sohek00
 1880	f, F+1+2, 1+2	m, m	12,21	14~16 (15~)	-8~-7	+5~+6s	KND		Fu_sohek01
-1893	f, F+3+4	m (TJ)	25	37~45~js9~	-5~+3	KND	KND		
+1893	f, F+3+4	m (TJ)	25	37~45~js9~	-5~+3	KND	KND		Fu_tensho00
 1668	f, f, f+3	m (TJ), (Special)	20	23~30 (26~) js3~	+7~+14g	KND	KND		Wn_runlk00
 1661	WS+1	m	10	13~14	-4~-3	+7~+8	+7~+8		Co_s_tlp00
 1662	WS+1, 4	m, m(RDS)	10,20	13~14	-10	+12kg	+12kg		Co_s_tlprk

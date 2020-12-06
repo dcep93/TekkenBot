@@ -1,13 +1,13 @@
 move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes	Move Name
-2222	in rage d/f+1+2 or FC+d/f+1+2	m	55	20	-22	KND	KND	Rage art	Bx_RageArts_nRv2
+2222	in rage d/f+1+2 or FC+d/f+1+2	m	55	20	-22	KND	KND	Rage art	Bx_RageArts02
 1777	in rage b+1+2	m	30	18~19	+6~+7s	KND	KND	Rage art	Bx_sphiji_EX
-1765,1766	1	h	7	10	+1	+8	+8		Bx_lp00_2F
+1765,1766	1	h	7	10	+1	+8	+8		Bx_lp00F,Bx_lp00_2F
 1767	1, 2	h, h	7,8	10	-2	+5	+5		Bx_lp00_3F
 1772	1, 2, 1	h, h, m	7,8,18	10	-6	+6	CS		Bx_lprplp
 1704	1, 2, 3	h, h, l	7,8,15	10	-12	+2	KND		Bx_lprplk00
 1705	1, 2, 4	h, h, h	7,8,24	10	-3	KND	KND	Tail spin	Bx_lprk
 1793	1, 4	h, h	7,14	10	-7	+4	+4		Bx_rprk_00
-1726,1727	1, 4, 2	h, h, h	7,14,18	10	-7	+4	CS	Rage art, Rage art	Bx_rkbRP_3_R_A
+1726,1727	1, 4, 2	h, h, h	7,14,18	10	-7	+4	CS	Rage art, Rage art	Bx_rkbRP_3_R_A,Bx_rkbRP_3_R_D
 1724	1, 4, 2, 1	h, h, h, h	7,14,18,17	10	0	CS	CS	Rage art, Rage art	Bx_back_RP2
 1716	1, 4, 2, 1, 2	h, h, h, h, h	7,14,18,17,22	10	-9	KND	KND		Bx_super2RP
 	1, 4, 2, 1, u or d (Cancel)	h, h, h	7,14,18	10	-10	+1	CS		
@@ -23,15 +23,15 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1775	3, 2, 1, 2	m, m, m, m	14,11,10,14	16	-10	KND	KND		Bx_lp00_5F
 1784	3, 2, 1, 4	m, m, m, l	14,14,10,12	16	-11	0	0		Bx_GatGun04
 1818	3, 3	m, h	14,13	16	-6	+6	+6		Bx_LK_LK
-1860	3, 3, 2	m, h, h	14,13,20	16	-7~-6	Launch	Launch		
-1861	3, 3, 4	m, h, m	14,13,25	16	-12	KND	KND		Bx_smk_step
+1860	3, 3, 2	m, h, h	14,13,20	16	-7~-6	Launch	Launch		Bx_smkup
+1861	3, 3, 4	m, h, m	14,13,25	16	-12	KND	KND		Bx_smklrk
 1623	4	h	15	12	-7	+6	Launch (JG?)		Bx_hiRK_LKrv
 1819	4, 3	h, m	15,12	12	-10~-9	+2~+3	+2~+3		Bx_hiRK_LK
 1821	4, 3, 4	h, m, m	15,12,16	12	-12	KND	KND	Tail spin	Bx_midco_RK
 	4, 3, 4* (Very long hold)	h, m, m	15,12,25	12	-9~-8	KND	KND	Tail spin	
 1823	4, 3, f+4	h, m, h	15,12,18	12	-5~-4	+6~+7	KND		Bx_hico_RK
 1570	1+2	m	16	17~18	-7~-6	+6~+7	+5~+6b	Homing	Bx_lrp00
-1572	1+2, 1	m, h	16,16	17	-1	+6	+6		
+1572	1+2, 1	m, h	16,16	17	-1	+6	+6		Bx_lrplp
 1571	1+2, 2	m, m	16,20	17	-14	KND	KND		Bx_lrprp
 1626	3+4	m	20	18	-13	CS	CS		Bx_lk2
 1628	f+2	m	10	15	-10	+1	+1		Bx_6rplpRs
@@ -47,13 +47,13 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1709	D/F+1, 1, 1	m, m, m	8,2,2	15	-10	-4	-4		Bx_Mbody_L2
 1710	D/F+1, 1, 1, 1	m, m, m, m	8,2,2,2	15	-10	-4	-4		Bx_Mbody_L3
 1711	d/f+1, 2	m, m	8,20	15	-15	+1	KND		Bx_midlprp
-1683,1684	d/f+2	m	12	13	-6	+5	+5		Bx_t_srpF
+1683,1684	d/f+2	m	12	13	-6	+5	+5		Bx_t_srpF,Bx_t_srpFG15
 1689	d/f+2, 1	m, h	12,11	13	-4	+8	+8		Bx_3rplp
 1688	d/f+2, 3	m, m	12,20	13	-13	CS	CS		Bx_3rplk
 1795	d/f+3	l (TC)	20	29~30s cs6~	-26	KND	KND	Homing	Bx_back_LK
 1786	d/f+4	m	23	22~24	-6~-4	KND	KND	Tail spin, Homing	Bx_t_srkF
-1884	d+2	m	17	14~15	-2~-1	+7~+8s	+8~+9s		
-1867	d+2, 3	m, m	14,21	14~15	-10	KND	Launch		Bx_10hit_03
+1884	d+2	m	17	14~15	-2~-1	+7~+8s	+8~+9s		ThrmvRB2_00F
+1867	d+2, 3	m, m	14,21	14~15	-10	KND	Launch		Bx_elbowhiza
 1673	d+3	l	10	16	-11	0	0		Bx_t_slk
 1674	d+3, 2	l, h	10,22	16	-7	KND	KND		Bx_t_slksmsh
 1785	d+4	l	13	15	-11	0	0		Bx_t_srk
@@ -76,14 +76,14 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	b+2, 1, u or d (Cancel)	h	18	17	-10	+1	CS		
 	b+2, 4	h, m (TJ)	18,21	js16~	-5	KND	KND	Tail spin	
 	b+2, 1, 4	h, h, m (TJ)	18,17,21	js16~	-5~-4	KND	KND	Tail spin	
-1857	b+3	m	12	19	-7	+4	+4		Bx_smklrpSit
+1857	b+3	m	12	19	-7	+4	+4		Bx_smk1
 	b+3, F or d/F	m, (Special) (TC)(CD)	12	20	+1	+12g	+12		
-1763	b+3, 2	m, h	12,12	20	-4	+7	+7		Bx_FeSt_RPrv
+1763	b+3, 2	m, h	12,12	20	-4	+7	+7		Bx_FeSt_RP
 	b+3, 2, 1	m, h, m	12,12,10	20	-9	+2	+2		
 	b+3, 2, 1, 2	m, h, m, m	12,12,10,14	20	-10	KND	KND		
 	b+3, 2, 1, 4	m, h, m, l	12,12,10,12	20	-11	0	0		
 	b+3, 4	m, m	12,18	20	-12	-2	-2		
-1858	b+3, 1+2	m, m	12,25	20	-6	+4s	KND		Bx_smkup
+1858	b+3, 1+2	m, m	12,25	20	-6	+4s	KND		Bx_smklrp
 	b+3, 1+2, D	m, m	12,25	20s	-6	+4s	KND		
 1658	b+4	m	18	16	-10	+15	+15		Bx_shk1
 1782	b+1+3 or b+2+4	Absorbs 1 h/m hit		2~10		+3			Bx_kill_1
@@ -116,7 +116,7 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1692	WS+1	m	20	15~16	-16~-15	Launch (JG?)	Launch (JG?)		Bx_s_tlp00
 1733	WS+2 (to GUP)	m(GUP)	18	19	-10	+1	+1		Bx_nage_RP
 1736	GUP When hit b or F+2	m, (throw)	18,25	19	-10	Throw(KND)	Throw(KND)		Bx_hit_RP
-1694,1695	WS+3	m	18	12	-10	+4	uKZD		Bx_s_tlk00
+1694,1695	WS+3	m	18	12	-10	+4	uKZD		Bx_s_tlk00,Bx_s_tlk00_R
 1797	WS+3, 4	m, m	18,25	12	-10	+4	+29G		Bx_neeco_RK
 	WS+4	m	16	11~12	-6~-5	+5~+6	+5~+6		
 	WS+1+2	m	12	10~11	-5~-4	+6~+7	+6~+7		
@@ -130,11 +130,11 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	qcf+1	m	20	15~16 (17~)	-16~-15	JG	JG		
 1734	qcf+2	h	18	14(16~)	-6	+4	+4		Bx_nage_RP02
 1735	qcf+2, 1	h, m	26	14(16~)	-11	KND	KND		Bx_s_trplp
-1853	qcf+1+2	m?	28	15~16 (17~)	-12~-11	KND	KND	Wall bounce	Bx_step_FSG
+1853	qcf+1+2	m?	28	15~16 (17~)	-12~-11	KND	KND	Wall bounce	Bx_hiziex
 	qcf+3	m	18	12(14~)	-10	+4	KND		
 	qcf+3, 4	m, m	18,25	12(14~)	-10	+4	KND		
-1850	qcf+4	m	13	18(20~)	-5	+1	+3		Bx_jetura
-1852	qcf+4, 1	m, h	13,14	18(20~)	0	CS	CS		Bx_step_F00
+1850	qcf+4	m	13	18(20~)	-5	+1	+3		Bx_jeturaRv
+1852	qcf+4, 1	m, h	13,14	18(20~)	0	CS	CS		Bx_jetura
 	qcf+4, 1, d or u (Cancel)	m, (Special)	13	18(20~)	-11	-5	-3		
 	qcf+4, 1, 2	m, h, h	13,14,22	18(20~)	-9	KND	KND		
 	qcf+4, 1, 4	m, h, m (TJ)	13,14,21	js16~	-5~-4	KND	KND	Tail spin	

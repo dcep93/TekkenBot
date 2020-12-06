@@ -1,6 +1,6 @@
 move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hit frame	Notes	Move Name
 2332	In rage b+3+4	m (throw)	55	20	-22	throw	throw	Rage art	Ak_RageArts02
-1651	In rage f, N, d, d/f+1+2	h!	0	20	+24g	+24g	+24g	Rage drive	
+1651	In rage f, N, d, d/f+1+2	h!	0	20	+24g	+24g	+24g	Rage drive	Ak_DOKU_EX
 1554	1	h	7	10	+1	+8	+8		Ak_lp00F
 1540	1, 2	h, h	7,10		-1	+5	+5		Ak_lprpF
 1541	1, 2, 1	h, h, m	7, 10, 17		-5	+1	+31g		Ak_rplu6
@@ -9,12 +9,12 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	3	h	25	17	-14	KND	KND		
 	4	h	20	13	-5	+6	JG		
 1544	1+2	m	10	17	-10	0	0		Ak_TurnElbow
-	1+2, B	m (BT)	10		-10	0	0		Ak_ElbowUpSho
-1546	1+2, 2	m, h	10, 20		-3	KND	KND		
-1547	1+2, 4	m, m	10, 17		-13	+8	KND		
-2215,2217,2218	3+4	m (TJ)	14	25 js11	-7	+3	+3		Ak_sokuten
+	1+2, B	m (BT)	10		-10	0	0		
+1546	1+2, 2	m, h	10, 20		-3	KND	KND		Ak_ElbowUpSho
+1547	1+2, 4	m, m	10, 17		-13	+8	KND		Ak_ElbowMkick
+2215,2217,2218	3+4	m (TJ)	14	25 js11	-7	+3	+3		Ak_sokuten,Ak_sokutenA,Ak_sokutenB
 	3+4, 1	m, m (TJ) (throw)	14, 25(,5)		0	Throw	Throw		
-2219	3+4, 1*	m, m (TJ)	14, 25		0	+2s	+2s		
+2219	3+4, 1*	m, m (TJ)	14, 25		0	+2s	+2s		Ak_sokubody
 2227	3+4, 2	m, m (TJ)	14, 25		-18	KND	KND		Ak_sokuelbow
 1700	1+4	m!	25	52	KND	KND	KND		Ak_EXC00_
 1555	f+2	m	12	15	-11	+2	+2		Ak_rp00F
@@ -47,23 +47,23 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 	d+1+4 or d+2+3	l (special)		total 27					
 1822	d+1+4 or d+2+3, 1+2	m (TC) (throw)	18 (,15)	14	-19s	Throw	Throw		Ak_Tackle
 1829	d+1+4 or d+2+3, 2	l	20	19	-13	+5	KND		Ak_sabaki_P
-1830	d+1+4 or d+2+3, 1	h	13	11	+1	+8	Launch		
+1830	d+1+4 or d+2+3, 1	h	13	11	+1	+8	Launch		Ak_sabaki_lp
 1597	d/b+2	m	10	14	-11	0	0		Ak_t_srp00B
 1598	d/b+2, 3	m, m	10, 20		-13	+21	+21		Ak_t_srp01B
 1599	d/b+2, 4	m, h	10, 20		-9	+13k	KND	Tail spin	Ak_t_srp02B
-1631	d/b+3	l (TC)	23	23 cs8	-26	+5	KND(JG)	Homing		
+1631	d/b+3	l (TC)	23	23 cs8	-26	+5	KND(JG)	Homing		Ak_suimen
 1632	d/b+4	l (TC, TJ)	20	29 cs6 js16	-20	KND	KND		Ak_lowDrop
 1600	d/b+1+2	m	30	26	+3	KND	KND		Ak_Headbat
 	d/b+1+2, D	(special)							
 1565	b+1	h	12	12	-7	+5	KND		Ak_lp00B
 1566	b+1, 2	h, m	12, 17		-12	+6	KND		Ak_lp00Brp
 1568	b+2	m	10	15	-9	+2s	+2s		Ak_rp01B2
-1569	b+2, 1	m, m	10, 8		-12	-1	-1		Ak_rp03B
+1569	b+2, 1	m, m	10, 8		-12	-1	-1		Ak_rp02B
 1563	b+2, 1, 2	m, m, h	10, 8, 20		-7	KND	KND	Tail spin	Ak_lkrklk01
 1573	b+3	h	23	16	-10	KND	KND		Ak_turas
 1574	b+4	m	15	15	-9	+2	+2		Ak_4RK
 	b+4 (when hit) 1+2	m (throw)	14, 20			throw			
-1572	b+1+2	m	0	18	+1	+5	+16		Co_Span_stand
+1572	b+1+2	m	0	18	+1	+5	+16		Ak_Wharite
 1670	b+1+4	m	24	31	-13	KND	KND		Ak_yumi01
 1538	b+2+3	m!	50	3	JG	JG	JG		Ak_SUPER_UP00
 2231	u/b+1	h	21	20	-6	KND	KND	Homing	Ak_lp01m
@@ -92,12 +92,12 @@ move_id	Command	Hit level	Damage	Start up frame	Block frame	Hit frame	Counter hi
 1640	f, f, f+3	m (TJ)	30	23 js3	+10g	KND	KND		Ak_runki00
 1696	f, f, f+3+4	m (TJ)	40	28 js9	+17g	KND	KND		Ak_dki11
 1641	WR+4	l (TJ)	20	20 js7	-24	KND	KND		Ak_runrk00
-	FC+1	sm (TC)	5	10	-5	+6	+6		Ak_Elbow
-	FC+2	sm (TC)	8	11	-4	+7	+7		Ak_s_trp00
+	FC+1	sm (TC)	5	10	-5	+6	+6		
+	FC+2	sm (TC)	8	11	-4	+7	+7		
 	FC+3	l (TC)	12	18	-16	-2	-2		
 	FC+4	l (TC)	12	14	-15	-4	-4		
-1635	WS+1	m	16	16	-10	JG	JG		
-1636	WS+2	m	17	12	-9	+3	KND		
+1635	WS+1	m	16	16	-10	JG	JG		Ak_Elbow
+1636	WS+2	m	17	12	-9	+3	KND		Ak_s_trp00
 	WS+3	h	28	16	0	KND	KND		
 	WS+4	m	20	11	-6	+5	+5		
 1667	FC+d/f+2	m	23	24	+1	KND	KND		Ak_Chop02
