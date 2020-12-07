@@ -5,3 +5,7 @@
 
 *.pyc
 *.pkl
+
+Lib
+Scripts
+pyvenv.cfg
