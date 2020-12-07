@@ -1,3 +1,6 @@
 ::get pyinstaller if you haven't already!
 ::pip install pyinstaller
-rm -f TekkenBotPrime.exe && rm -rf dist && pyinstaller --noconfirm --onefile --windowed --clean --icon=assets/img/tekken_bot_close.ico --name TekkenBotPrime main.py && cp dist/TekkenBotPrime.exe ./
+del TekkenBotPrime.exe
+rmdir /S /Q dist
+pyinstaller --noconfirm --onefile --windowed --clean --icon=assets/img/tekken_bot_close.ico --name TekkenBotPrime main.py
+copy dist\TekkenBotPrime.exe .\TekkenBotPrime.exe
