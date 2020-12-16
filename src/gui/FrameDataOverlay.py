@@ -206,6 +206,7 @@ class FrameDataOverlay(Overlay.Overlay):
                 entry = {
                     DataColumns.DataColumns.health: Entry.get_remaining_health_string(game_log),
                     DataColumns.DataColumns.cmd: DAMAGE_CMD,
+                    DataColumns.DataColumns.combo: Entry.get_combo(game_log, is_p1),
                 }
             else:
                 return
