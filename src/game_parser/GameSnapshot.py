@@ -90,7 +90,7 @@ class PlayerSnapshot:
         return (self.distance / 3700000) - 309.76
 
     def is_getting_comboed(self):
-        return self.hit_outcome != MoveInfoEnums.HitOutcome.NONE
+        return self.hit_outcome != MoveInfoEnums.HitOutcome.NONE or self.simple_state == MoveInfoEnums.SimpleMoveStates.JUGGLED
 
 class GameSnapshot:
     def __init__(self, p1, p2, frame_count, facing_bool, is_player_player_one):
