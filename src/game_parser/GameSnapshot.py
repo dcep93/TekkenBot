@@ -86,6 +86,12 @@ class PlayerSnapshot:
     def get_frames_til_next_move(self):
         return self.recovery - self.move_timer
 
+    def get_distance(self):
+        return (self.distance / 3700000) - 309.76
+
+    def is_getting_comboed(self):
+        return self.hit_outcome != MoveInfoEnums.HitOutcome.NONE
+
 class GameSnapshot:
     def __init__(self, p1, p2, frame_count, facing_bool, is_player_player_one):
         self.p1 = p1

@@ -42,7 +42,7 @@ class TekkenBotPrime(t_tkinter.Tk):
 
         self.text.pack(fill=t_tkinter.BOTH)
 
-        self.geometry('1100x420+0+0')
+        self.geometry('1200x420+0+0')
 
     def update(self):
         game_reader = self.game_reader

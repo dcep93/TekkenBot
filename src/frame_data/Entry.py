@@ -20,6 +20,8 @@ def build(game_log, is_p1):
     if not game_log.get(not is_p1).is_blocking():
         del entry[DataColumns.DataColumns.fa]
 
+    entry[DataColumns.DataColumns.combo] = get_combo(game_log, is_p1)
+
     return entry
 
 def get_char_name(game_log, is_p1):
@@ -65,3 +67,19 @@ def get_fa(game_log, is_p1):
 def get_remaining_health_string(game_log):
     remainings = [MAX_HEALTH - game_log.get(i).damage_taken for i in [True, False]]
     return '%d/%d' % tuple(remainings)
+
+def get_combo(game_log, is_p1):
+    count = 0
+    damage = 0
+    last_damage = game_log.get(not is_p1).damage_taken
+    for frame in range(1000):
+        p = game_log.get(not is_p1, frame)
+        if p is None:
+            break
+        if p.damage_taken != last_damage:
+            count += 1
+            damage += last_damage - p.damage_taken
+            last_damage = p.damage_taken
+        if not p.is_getting_comboed():
+            break
+    return f'{count}/{damage}'

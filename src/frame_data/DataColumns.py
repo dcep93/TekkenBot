@@ -13,3 +13,4 @@ class DataColumns(enum.Enum):
     counter = 'frame advantage on counter hit'
     fa = 'frame advantage right now'
     health = 'remaining health'
+    combo = 'combo data'

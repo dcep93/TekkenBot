@@ -125,6 +125,4 @@ def get_recording_string():
     return '%s\n# %s\n' % (moves_string, comment)
 
 def get_distance():
-    raw_distance = Shared.Shared.game_log.get(True).distance
-    normalized = (raw_distance - 1148262975) / 4500000
-    return normalized - 2
+    return Shared.Shared.game_log.get(True).get_distance()
