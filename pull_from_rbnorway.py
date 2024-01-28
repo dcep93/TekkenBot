@@ -10,7 +10,7 @@ CONCURRENT_THREADS = 8
 COMMAND = 'Command'
 TO_SKIP = ['panda']
 
-database = os.path.join('assets', 'database')
+database = os.path.join('assets', 'frame_data')
 
 def main():
     names = [i for i in get_file_names() if i.replace('.csv', '') not in TO_SKIP]

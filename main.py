@@ -25,7 +25,7 @@ if __name__ == "__main__":
             print("died")
         input()
 
-# pyinstaller seems to ignore second level imports
+# pyinstaller seems to ignore imports in child scripts
 # dont need to call this function, just need
 # to have the import statements there I guess
 # https://stackoverflow.com/questions/7436132/pyinstaller-spec-file-importerror-no-module-named-blah

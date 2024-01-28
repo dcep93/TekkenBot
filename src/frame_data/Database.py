@@ -112,7 +112,7 @@ def populate_character(character_name):
     existing = [i for i in database.keys() if i[0] == character_name]
     for i in existing:
         del database[i]
-    path = Path.path('./database/%s.csv' % character_name)
+    path = Path.path('./frame_data/%s.csv' % character_name)
     with open(path, encoding='UTF-8') as csvfile:
         reader = csv.reader(csvfile, delimiter='\t')
         data = [i for i in reader if i]

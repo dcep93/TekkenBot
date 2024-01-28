@@ -29,7 +29,7 @@ def update_helper(char_name, move_nodes):
     print('diff', count)
     if count > 0:
         csv_content = '\n'.join(['\t'.join(i) for i in start])+'\n'
-        path = Path.path('./database/%s.csv' % char.name)
+        path = Path.path('./frame_data/%s.csv' % char.name)
         with open(path, 'w', encoding='UTF-8') as fh:
             fh.write(csv_content)
     print('done')
