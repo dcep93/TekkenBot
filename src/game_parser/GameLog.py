@@ -1,6 +1,5 @@
 from . import GameReader
 from game_parser import MoveInfoEnums
-from misc import Flags
 from record import Record
 
 class GameLog:
@@ -128,6 +127,7 @@ class GameLog:
         return False
 
     def get_throw_break(self, is_p1):
+        # TODO frames_to_break
         frames_to_break = 19
         state = self.get(not is_p1)
         throw_tech = state.throw_tech

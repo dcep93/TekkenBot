@@ -1,7 +1,6 @@
 from . import Overlay, CommandInputOverlay, t_tkinter
 from frame_data import Database, DataColumns, Entry
 from game_parser import MoveInfoEnums
-from misc import Flags
 from record import Record, Replay, Shared
 
 DAMAGE_CMD = 'DMG'
@@ -175,7 +174,7 @@ class FrameDataOverlay(Overlay.Overlay):
     def populate_column_names(self):
         columns_entry = {col:col.name for col in DataColumns.DataColumns}
         column_names = self.get_frame_data_string(columns_entry)
-        prefix = self.get_prefix(True)
+        prefix = self.get_prefix(None)
         spaces = " " * len(prefix)
         string = spaces + column_names
 
@@ -202,6 +201,7 @@ class FrameDataOverlay(Overlay.Overlay):
             elif game_log.just_lost_health(not is_p1):
                 for i in [True, False]:
                     char = Entry.get_char_name(game_log, i)
+                    # TODO what?! does this read a file every hit?!
                     Database.populate_character(char)
                 entry = {
                     DataColumns.DataColumns.health: Entry.get_remaining_health_string(game_log),

@@ -38,13 +38,9 @@ Created by roguelike2d. Maintained by the community.
 
 ### TODO
 
-- [ ] Correct throw break timings for command throws instead of always 19
-- [ ] Make options file work/persist
-- [ ] Make replays not occasionally miss timing
 - [ ] brush up kbd trainer
 - [ ] throw break trainer
 - [ ] check out tekken 8 practice tools to see what already exists
 - [ ] make it work with tekken 8!
-- [ ] pull_from_rbnorway.py
 - [ ] fresh images
 - [ ] memory_address.ini

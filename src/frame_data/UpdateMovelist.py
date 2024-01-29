@@ -33,6 +33,3 @@ def update_helper(char_name, move_nodes):
         with open(path, 'w', encoding='UTF-8') as fh:
             fh.write(csv_content)
     print('done')
-
-def update_move(move_id, move_name):
-    pass

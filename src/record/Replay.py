@@ -6,6 +6,8 @@ from frame_data import DataColumns
 from gui import FrameDataOverlay
 from misc.Windows import w as Windows
 
+# TODO test for fun - what are my frame windows? how precise is the replay?
+
 seconds_per_frame = 1/60.
 # if need to wait more than imprecise_wait_cutoff_s, sleep until
 # imprecise_wait_cutoff_buffer_s is remaining

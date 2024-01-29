@@ -5,10 +5,14 @@ import time
 
 from . import GameReader
 
+from misc import Flags
+
+# this file is used to record a bug and quickly replay it so it can be fixed
+
 class Recorder(GameReader.GameReader):
-    def __init__(self, pickle_dest):
+    def __init__(self):
         super().__init__()
-        self.pickle_dest = pickle_dest
+        self.pickle_dest = Flags.Flags.pickle_dest
         self.reset(False)
         signal.signal(signal.SIGINT, lambda _,__: self.save_and_quit())
 
@@ -44,10 +48,10 @@ class Recorder(GameReader.GameReader):
         sys.exit(0)
 
 class Reader(GameReader.GameReader):
-    def __init__(self, pickle_src, fast):
+    def __init__(self):
         super().__init__()
-        self.pickle_src = pickle_src
-        self.fast = fast
+        self.pickle_src = Flags.Flags.pickle_src
+        self.fast = Flags.Flags.fast
 
         print('loading', self.pickle_src, self.fast)
         with open(self.pickle_src, 'rb') as fh:

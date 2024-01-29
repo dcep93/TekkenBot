@@ -12,22 +12,22 @@ class TekkenBotPrime(t_tkinter.Tk):
     def __init__(self):
         super().__init__()
         self.init_tk()
-        self.print_folder()
 
-        self.game_log = Shared.Shared.game_log = GameLog.GameLog()
+        Shared.Shared.game_log = GameLog.GameLog()
         if Flags.Flags.pickle_dest is not None:
-            game_reader = ScriptedGame.Recorder(Flags.Flags.pickle_dest)
+            game_reader = ScriptedGame.Recorder()
         elif Flags.Flags.pickle_src is not None:
-            game_reader = ScriptedGame.Reader(Flags.Flags.pickle_src, Flags.Flags.fast)
+            game_reader = ScriptedGame.Reader()
         else:
             game_reader = GameReader.GameReader()
-        self.game_reader = Shared.Shared.game_reader = game_reader
+        Shared.Shared.game_reader = game_reader
         self.overlay_family = OverlayFamily.OverlayFamily()
 
         Database.populate_database()
 
         self.update()
-        self.update_restarter()
+        if Flags.Flags.pickle_src is None:
+            self.update_restarter()
 
     def init_tk(self):
         self.wm_title("dcep93/TekkenBot")
@@ -45,35 +45,27 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.geometry('1200x420+0+0')
 
     def update(self):
-        game_reader = self.game_reader
+        game_reader = Shared.Shared.game_reader
         now = time.time()
         self.last_update = now
         try:
-            self.game_log.update(game_reader, self.overlay_family)
+            Shared.Shared.game_log.update(game_reader, self.overlay_family)
         except:
             pass
         finally:
             after = time.time()
 
-            elapsed_ms = after - now
+            elapsed_ms = 1000*(after - now)
             wait_ms = game_reader.get_update_wait_ms(elapsed_ms)
             if wait_ms >= 0:
                 self.after(wait_ms, self.update)
 
     def update_restarter(self):
-        if Flags.Flags.pickle_src is not None:
-            return
         restart_seconds = 10
         if self.last_update + restart_seconds < time.time():
             print("something broke? restarting")
             self.update()
         self.after(1000 * restart_seconds, self.update_restarter)
-
-    def print_folder(self):
-        main = os.path.abspath(sys.argv[0])
-        folder = os.path.basename(os.path.dirname(main))
-        if folder.startswith('Tekken'):
-            print(folder)
 
 class TextRedirector:
     def __init__(self, widget, stdout, tag="stdout"):

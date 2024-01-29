@@ -7,7 +7,7 @@ import sys
 from bs4 import BeautifulSoup
 
 CONCURRENT_THREADS = 8
-COMMAND = 'Command'
+HEADER_KEY = 'Command'
 TO_SKIP = ['panda']
 
 database = os.path.join('assets', 'frame_data')
@@ -29,6 +29,7 @@ def get_file_names():
 
 def get_content(name):
     url_name = name.replace('.csv', '').replace('_', '-')
+    # TODO new url
     url = f'http://rbnorway.org/{url_name}-t7-frames/'
     page = requests.get(url, headers={"User-Agent": ""})
     if page.status_code != 200:
@@ -56,19 +57,17 @@ def update(name, content):
             move_id = ''
             move_name = ''
         else:
-            move_id_pos = len(row) + 1
             val = existing[key]
             del existing[key]
-            if are_same(row, val):
+            move_id, existing_data, move_name = val[0], val[1:], idx(val, len(row)+1)
+            if are_same(row, existing_data):
                 same += 1
             else:
                 updated += 1
-            move_id = val[0]
-            move_name = idx(val, move_id_pos)
         row.insert(0, move_id)
         row.append(move_name)
-    header = existing[COMMAND]
-    del existing[COMMAND]
+    header = existing[HEADER_KEY]
+    del existing[HEADER_KEY]
     content.insert(0, header)
     extra = len(existing)
     if extra:
@@ -81,7 +80,12 @@ def load(name):
     path = get_path(name)
     with open(path, encoding='UTF-8') as fh:
         reader = csv.reader(fh, delimiter='\t')
-        return {normalize(i[1]): i for i in reader if i}
+        # TODO this probably wont work
+        data = {HEADER_KEY: reader.get()}
+        reader.next()
+        for i in reader:
+            data[normalize(i[1])] = i
+        return data
 
 def normalize(move):
     return ', '.join([i.strip() for i in move.split(',')])
@@ -94,7 +98,7 @@ def write(name, content):
 
 def are_same(pulled, existing):
     for i, val in enumerate(pulled):
-        if idx(existing, i+1) != val:
+        if idx(existing, i) != val:
             return False
     return True
 

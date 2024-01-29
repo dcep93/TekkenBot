@@ -33,7 +33,7 @@ class Overlay:
     def __init__(self):
         self.visible = False
 
-        window_name = self.get_name()
+        window_name = self.__class__.__name__
         print("Launching {}".format(window_name))
 
         self.toplevel = t_tkinter.Toplevel()
@@ -48,10 +48,8 @@ class Overlay:
 
         self.toplevel.attributes("-topmost", True)
 
-    def get_name(self):
-        return self.__class__.__name__
-
     def update_location(self, game_reader):
+        # TODO only do once per second
         if Windows.valid:
             tekken_rect = game_reader.get_window_rect()
         else:
@@ -62,7 +60,7 @@ class Overlay:
             self.toplevel.geometry(geometry)
             if not self.visible:
                 self.show()
-        else:
+        elif self.visible:
             self.hide()
 
     def show(self):
