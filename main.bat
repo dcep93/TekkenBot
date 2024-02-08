@@ -1,2 +1,2 @@
 python3 main.py
-read
+@REM call main.bat

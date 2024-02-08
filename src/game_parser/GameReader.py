@@ -9,7 +9,7 @@ from misc.Windows import w as Windows
 
 # I have no idea how this file works
 
-game_string = 'TekkenGame-Win64-Shipping.exe'
+game_string = 'Polaris-Win64-Shipping.exe'
 
 class AddressType(enum.Enum):
     _float = 0
@@ -34,6 +34,7 @@ class GameReader:
         self.p2_movelist_parser = None
 
     def get_value_from_address(self, process_handle, address, address_type):
+        return 0
         if address_type is AddressType._string:
             data = ctypes.create_string_buffer(16)
             bytes_read = ctypes.c_ulonglong(16)

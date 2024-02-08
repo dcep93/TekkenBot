@@ -21,6 +21,7 @@ class ColorSchemeEnum(enum.Enum):
 
 class Overlay:
     padding = 15
+    geometry = None
 
     @abc.abstractmethod
     def update_state(self):
@@ -60,6 +61,10 @@ class Overlay:
             self.toplevel.geometry(geometry)
             if not self.visible:
                 self.show()
+            if geometry != self.geometry:
+                self.geometry = geometry
+                self.update_location(game_reader)
+
         elif self.visible:
             self.hide()
 

@@ -39,8 +39,7 @@ Created by roguelike2d. Maintained by the community.
 ### TODO
 
 - [ ] brush up kbd trainer
-- [ ] throw break trainer
-- [ ] check out tekken 8 practice tools to see what already exists
-- [ ] make it work with tekken 8!
+- [ ] throw break trainer and plug
+- [ ] make it work with tekken 8! get_value_from_address
 - [ ] fresh images
 - [ ] memory_address.ini

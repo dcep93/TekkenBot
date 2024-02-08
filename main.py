@@ -16,7 +16,6 @@ if __name__ == "__main__":
     try:
         main()
     except Exception as e:
-        # todo test for exe
         if sys.__stdout__.isatty():
             raise e
         else:
