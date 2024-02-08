@@ -32,7 +32,7 @@ class Overlay:
         pass
 
     def __init__(self):
-        self.visible = False
+        self.visible = True
 
         window_name = self.__class__.__name__
         print("Launching {}".format(window_name))
