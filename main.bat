@@ -1,3 +1,3 @@
 python3 main.py
-@REM call main.bat
 pause
+@REM call main.bat
