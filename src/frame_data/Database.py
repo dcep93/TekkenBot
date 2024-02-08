@@ -46,7 +46,6 @@ class Characters(enum.Enum):
     eliza = '[Vampire]'
     geese = '[Geese_Howard]'
     noctis = '[Noctis]'
-    anna = '[ANNA]'
     lei = '[Lei_Wulong]'
     marduk = '[MARDUK]'
     armor_king = '[ARMOR_KING]'
