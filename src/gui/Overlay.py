@@ -50,23 +50,24 @@ class Overlay:
         self.toplevel.attributes("-topmost", True)
 
     def update_location(self, game_reader):
-        # TODO only do once per second
         if Windows.valid:
             tekken_rect = game_reader.get_window_rect()
         else:
             tekken_rect = FullscreenTekkenRect(self.toplevel)
+        geometry = None
         if tekken_rect is not None:
             x, y = self.get_geometry(tekken_rect)
             geometry = '+%d+%d' % (x, y)
             self.toplevel.geometry(geometry)
             if not self.visible:
                 self.show()
-            if geometry != self.geometry:
-                self.geometry = geometry
-                self.update_location(game_reader)
 
         elif self.visible:
             self.hide()
+
+        if geometry != self.geometry:
+            self.geometry = geometry
+            self.toplevel.after(20, self.update_location(game_reader))
 
     def show(self):
         self.toplevel.deiconify()
