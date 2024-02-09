@@ -143,7 +143,6 @@ class GameReader:
 
     def get_update_wait_ms(self, elapsed_ms):
         if self.acquire_state == AcquireState.has_everything:
-            # TODO think about this
             wait_ms = max(2, 8 - int(round(elapsed_ms)))
         else:
             wait_ms = 1000
