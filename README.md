@@ -40,6 +40,7 @@ Created by roguelike2d. Maintained by the community.
 
 - [ ] brush up kbd trainer
 - [ ] throw break trainer and advertise
-- [ ] make it work with tekken 8! get_value_from_address
+- [ ] make it work with tekken 8! memory_address,get_value_from_address
 - [ ] fresh images
-- [ ] memory_address.ini
+- [ ] autobuild exe and release on commit if version is updated!
+- [ ] pull_from_rbnorway

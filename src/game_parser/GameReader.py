@@ -155,13 +155,13 @@ class GameReader:
             self.acquire_state = AcquireState.need_names
             return None
 
-        last_eight_frames = self.get_last_eight_frames(process_handle, player_data_base_address)
+        frame_chunk = self.get_frame_chunk(process_handle, player_data_base_address)
 
-        if rollback_frame >= len(last_eight_frames):
-            print("ERROR: requesting %s frame of %s long rollback frame" % (rollback_frame, len(last_eight_frames)))
+        if rollback_frame >= len(frame_chunk):
+            print("ERROR: requesting %s frame of %s long rollback frame" % (rollback_frame, len(frame_chunk)))
             return None
 
-        best_frame_count, player_data_second_address = sorted(last_eight_frames, key=lambda x: -x[0])[rollback_frame]
+        best_frame_count, player_data_second_address = sorted(frame_chunk, key=lambda x: -x[0])[rollback_frame]
 
         player_data_frame = self.get_block_of_data(process_handle, player_data_second_address, self.c['MemoryAddressOffsets']['rollback_frame_offset'])
 
@@ -203,17 +203,17 @@ class GameReader:
                 address = self.get_value_from_address(process_handle, address, None)
         return address
 
-    def get_last_eight_frames(self, process_handle, player_data_base_address):
-        last_eight_frames = []
+    def get_frame_chunk(self, process_handle, player_data_base_address):
+        frame_chunk = []
 
         second_address_base = self.get_value_from_address(process_handle, player_data_base_address, AddressType._64bit)
         offset = self.c['MemoryAddressOffsets']['rollback_frame_offset']
         frame_count = self.c['GameDataAddress']['frame_count']
-        for i in range(8):  # for rollback purposes, there are 8 copies of the game state, each one updatating once every 8 frames
+        for i in range(32):  # for rollback purposes, there are copies of the game state
             potential_second_address = second_address_base + (i * offset)
             potential_frame_count = self.get_value_from_address(process_handle, potential_second_address + frame_count, None)
-            last_eight_frames.append((potential_frame_count, potential_second_address))
-        return last_eight_frames
+            frame_chunk.append((potential_frame_count, potential_second_address))
+        return frame_chunk
 
     def read_from_addresses(self, p1_dict, p2_dict, player_data_frame):
         for data_type, value in self.c['PlayerDataAddress'].items():
