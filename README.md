@@ -39,7 +39,6 @@ Created by roguelike2d. Maintained by the community.
 ### TODO
 
 - [ ] brush up kbd trainer
-- [ ] throw break trainer and advertise
 - [ ] make it work with tekken 8! memory_address,get_value_from_address
 - [ ] fresh images
 - [ ] autobuild exe and release on commit if version is updated!
