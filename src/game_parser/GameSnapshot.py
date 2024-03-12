@@ -26,24 +26,13 @@ class PlayerSnapshot:
         self.stun_state = MoveInfoEnums.StunStates(d['PlayerDataAddress.stun_type'])
         self.power_crush_flag = d['PlayerDataAddress.power_crush'] > 0
 
-        cancel_window_bitmask = d['PlayerDataAddress.cancel_window']
         recovery_window_bitmask = d['PlayerDataAddress.recovery']
-
-        self.is_cancelable = (MoveInfoEnums.CancelStatesBitmask.CANCELABLE.value & cancel_window_bitmask) == MoveInfoEnums.CancelStatesBitmask.CANCELABLE.value
-        self.is_bufferable = (MoveInfoEnums.CancelStatesBitmask.BUFFERABLE.value & cancel_window_bitmask) == MoveInfoEnums.CancelStatesBitmask.BUFFERABLE.value
-        self.is_parry_1 = (MoveInfoEnums.CancelStatesBitmask.PARRYABLE_1.value & cancel_window_bitmask) == MoveInfoEnums.CancelStatesBitmask.PARRYABLE_1.value
-        self.is_parry_2 = (MoveInfoEnums.CancelStatesBitmask.PARRYABLE_2.value & cancel_window_bitmask) == MoveInfoEnums.CancelStatesBitmask.PARRYABLE_2.value
 
         self.is_recovering = (MoveInfoEnums.ComplexMoveStates.RECOVERING.value & recovery_window_bitmask) == MoveInfoEnums.ComplexMoveStates.RECOVERING.value
 
         self.is_jump = d['PlayerDataAddress.jump_flags'] & MoveInfoEnums.JumpFlagBitmask.JUMP.value == MoveInfoEnums.JumpFlagBitmask.JUMP.value
         self.hit_outcome = MoveInfoEnums.HitOutcome(d['PlayerDataAddress.hit_outcome'])
         self.mystery_state = d['PlayerDataAddress.mystery_state']
-
-        self.wins = d['EndBlockPlayerDataAddress.round_wins']
-        self.combo_counter = d['EndBlockPlayerDataAddress.display_combo_counter']
-        self.combo_damage = d['EndBlockPlayerDataAddress.display_combo_damage']
-        self.juggle_damage = d['EndBlockPlayerDataAddress.display_juggle_damage']
 
         self.movelist_parser = d['movelist_parser']
 

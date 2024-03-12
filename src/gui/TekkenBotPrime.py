@@ -2,6 +2,8 @@ import os
 import time
 import sys
 
+import traceback
+
 from . import t_tkinter, OverlayFamily
 from frame_data import Database
 from game_parser import GameLog, GameReader, ScriptedGame
@@ -42,7 +44,7 @@ class TekkenBotPrime(t_tkinter.Tk):
 
         self.text.pack(fill=t_tkinter.BOTH)
 
-        self.geometry('1200x420+0+0')
+        self.geometry('1600x420+0+0')
 
     def update(self):
         game_reader = Shared.Shared.game_reader
@@ -51,7 +53,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         try:
             Shared.Shared.game_log.update(game_reader, self.overlay_family)
         except:
-            pass
+            print(traceback.format_exc())
         finally:
             after = time.time()
 

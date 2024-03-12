@@ -127,16 +127,15 @@ class GameLog:
         return False
 
     def get_throw_break(self, is_p1):
-        # TODO frames_to_break
-        frames_to_break = 19
+        frames_to_break = 20
         state = self.get(not is_p1)
         throw_tech = state.throw_tech
         if throw_tech == MoveInfoEnums.ThrowTechs.NONE:
             return False
         
         prev_state = self.get(is_p1, 2)
-        move_id = prev_state.move_id
         if prev_state is None: return False
+        move_id = prev_state.move_id
         current_buttons = self.get(not is_p1, 1).get_input_state()[1].name
         if '1' not in current_buttons and '2' not in current_buttons:
             if move_id != self.get(is_p1, 1).move_id:

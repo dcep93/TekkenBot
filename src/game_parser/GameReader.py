@@ -2,6 +2,8 @@ import ctypes
 import enum
 import struct
 
+import traceback
+
 from . import GameSnapshot, MoveInfoEnums
 from game_parser import MovelistParser
 from misc import ConfigReader, Flags
@@ -34,7 +36,6 @@ class GameReader:
         self.p2_movelist_parser = None
 
     def get_value_from_address(self, process_handle, address, address_type):
-        return 0
         if address_type is AddressType._string:
             data = ctypes.create_string_buffer(16)
             bytes_read = ctypes.c_ulonglong(16)
@@ -136,6 +137,11 @@ class GameReader:
             process_handle = Windows.open_process(0x10, False, self.pid)
             try:
                 return self.get_game_snapshot(rollback_frame, process_handle)
+            except:
+                print(traceback.format_exc())
+                # TODO cleanup
+                import os
+                os._exit(0)
             finally:
                 Windows.close_handle(process_handle)
 
@@ -187,7 +193,7 @@ class GameReader:
             print("%s not found. Likely wrong process id. Reacquiring pid." % game_string)
             self.pid = None
         elif self.module_address != self.c['MemoryAddressOffsets']['expected_module_address']:
-            print("Unrecognized location for %s module. Tekken.exe Patch? Wrong process id?" % game_string)
+            print("Unrecognized location for %s module. Tekken.exe Patch? Wrong process id?" % game_string, hex(self.module_address))
         else:
             print("Found %s" % game_string)
             self.acquire_state = AcquireState.need_names
@@ -200,17 +206,16 @@ class GameReader:
             if i + 1 < len(addresses):
                 address = self.get_value_from_address(process_handle, address, AddressType._64bit)
             else:
-                address = self.get_value_from_address(process_handle, address, None)
+                address = self.get_value_from_address(process_handle, address, AddressType._64bit)
         return address
 
     def get_frame_chunk(self, process_handle, player_data_base_address):
         frame_chunk = []
 
-        second_address_base = self.get_value_from_address(process_handle, player_data_base_address, AddressType._64bit)
         offset = self.c['MemoryAddressOffsets']['rollback_frame_offset']
-        frame_count = self.c['GameDataAddress']['frame_count']
+        frame_count = self.c['GameDataAddress']['timer_in_frames']
         for i in range(32):  # for rollback purposes, there are copies of the game state
-            potential_second_address = second_address_base + (i * offset)
+            potential_second_address = player_data_base_address + (i * offset)
             potential_frame_count = self.get_value_from_address(process_handle, potential_second_address + frame_count, None)
             frame_chunk.append((potential_frame_count, potential_second_address))
         return frame_chunk
@@ -220,13 +225,6 @@ class GameReader:
             p1_value = self.get_value_from_data_block(player_data_frame, value, 0, self.is_data_a_float(data_type))
             p2_value = self.get_value_from_data_block(player_data_frame, value, self.c['MemoryAddressOffsets']['p2_data_offset'], self.is_data_a_float(data_type))
             address = 'PlayerDataAddress.%s' % data_type
-            p1_dict[address] = p1_value
-            p2_dict[address] = p2_value
-
-        for data_type, value in self.c['EndBlockPlayerDataAddress'].items():
-            p1_value = self.get_value_from_data_block(player_data_frame, value)
-            p2_value = self.get_value_from_data_block(player_data_frame, value, self.c['MemoryAddressOffsets']['p2_end_block_offset'])
-            address = 'EndBlockPlayerDataAddress.%s' % data_type
             p1_dict[address] = p1_value
             p2_dict[address] = p2_value
 
@@ -246,7 +244,8 @@ class GameReader:
         p2_dict['movelist_parser'] = self.p2_movelist_parser
 
     def reacquire_names(self, process_handle):
-        if not Flags.Flags.no_movelist:
+        # TODO reacquire_names
+        if False and not Flags.Flags.no_movelist:
             opponent_side = self.get_value_at_end_of_pointer_trail(process_handle, "OPPONENT_SIDE", False)
             self.is_player_player_one = (opponent_side == 1)
 

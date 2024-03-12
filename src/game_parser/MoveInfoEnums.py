@@ -7,18 +7,16 @@ class safeEnum(enum.Enum):
         return cls(0)
 
 class AttackType(safeEnum):
-    ANTIAIR_ONLY = 11 #Doesn't hit characters on the ground? Very rare, appears on Alisa's chainsaw stance f+2
-    THROW = 10  #this is only the attack type *during* the throw animation
-    LOW_UNBLOCKABLE = 9 #Yoshimitsu's 10 hit combo 2 has one
-    HIGH_UNBLOCKABLE = 8  #Akuma's focus attack
-    MID_UNBLOCKABLE = 7
+    THROW = 6291466  #this is only the attack type *during* the throw animation
+    MID_UNBLOCKABLE = 12582919
     #UNKNOWN_6 = 6 #????? may not exist
-    HIGH = 5
-    SMID = 4
-    PROJ = 3 #Special mids that can't be parried. Unknown if/what other properties they share.
-    MID = 2
-    LOW = 1
+    HIGH = 10485765
+    SMID = 6291460
+    MID = 8388610
+    LOW = 2097153
     NA = 0 #This move is not an attack
+
+    BROKEN_RESTING = 12582912
 
 class SimpleMoveStates(safeEnum):
     UNINITIALIZED = 0
@@ -93,7 +91,9 @@ class ThrowTechs(safeEnum):
     NONE = 0
     TE1 = 1 #both 1 and 2 seem to sometimes include normal throws that can be broken with either
     TE2 = 2
-    TE1_2 = 3
+    TE1_2 = 4026531870
+
+    BROKEN_ThrowTechs = 3221225501
 
 class StunStates(enum.Enum):
     NONE = 0
