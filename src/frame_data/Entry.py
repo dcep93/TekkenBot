@@ -5,7 +5,9 @@ MAX_HEALTH = 180
 
 def build(game_log, is_p1):
     entry = {}
-    entry[DataColumns.DataColumns.fa] = get_fa(game_log, is_p1)
+    fa_str = get_fa(game_log, is_p1)
+    Hook.track_fa(game_log, is_p1, fa_str, receiver)
+    entry[DataColumns.DataColumns.fa] = fa_str
     entry[DataColumns.DataColumns.move_id] = game_log.get(is_p1, 1).move_id
  
     entry[DataColumns.DataColumns.char_name] = get_char_name(game_log, is_p1)
@@ -60,9 +62,6 @@ def get_fa(game_log, is_p1):
         time_till_recovery_p2 = 0 if receiver.hit_outcome is MoveInfoEnums.HitOutcome.NONE else receiver.get_frames_til_next_move()
 
         raw_fa = time_till_recovery_p2 - time_till_recovery_p1
-
-        if receiver.is_blocking():
-            Hook.on_block(game_log, is_p1, raw_fa)
 
         raw_fa_str = str(raw_fa)
 
