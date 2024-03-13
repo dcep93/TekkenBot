@@ -22,6 +22,9 @@ class AcquireState(enum.Enum):
     need_names = 2
     has_everything = 3
 
+class ReadProcessMemoryException(Exception):
+    pass
+
 class GameReader:
     def __init__(self):
         self.acquire_state = AcquireState.need_pid
@@ -48,7 +51,7 @@ class GameReader:
             e = Windows.get_last_error()
             # known problem of failing to read_process_memory
             # when not in a fight
-            raise Exception("read_process_memory Error: Code %s" % e)
+            raise ReadProcessMemoryException("read_process_memory Error: Code %s" % e)
 
         value = data.value
 
@@ -143,7 +146,7 @@ class GameReader:
     def get_game_snapshot(self, rollback_frame):
         try:
             player_data_base_address = self.get_player_data_base_address()
-        except:
+        except ReadProcessMemoryException:
             self.acquire_state = AcquireState.need_names
             return None
 
@@ -191,14 +194,10 @@ class GameReader:
                 print("Failed to acquire process_handle")
 
     def get_player_data_base_address(self):
-        addresses = split_str_to_hex(self.player_data_pointer_offset)
+        offsets = split_str_to_hex(self.player_data_pointer_offset)
         address = self.module_address
-        for i, offset in enumerate(addresses):
-            address += offset
-            if i + 1 < len(addresses):
-                address = self.get_value_from_address(address, AddressType._64bit)
-            else:
-                address = self.get_value_from_address(address, AddressType._64bit)
+        for i, offset in enumerate(offsets):
+            address = self.get_value_from_address(address+offset, AddressType._64bit)
         return address
 
     def get_frame_chunk(self, player_data_base_address):
@@ -238,22 +237,21 @@ class GameReader:
     def reacquire_names(self, is_player_player_one):
         self.acquire_state = AcquireState.has_everything
         if not Flags.Flags.no_movelist:
-            p1_movelist_block, p1_movelist_address = self.populate_movelists("P1_Movelist")
-            p2_movelist_block, p2_movelist_address = self.populate_movelists("P2_Movelist")
+            self.p1_movelist_parser = self.populate_movelists("P1_Movelist")
+            self.p2_movelist_parser = self.populate_movelists("P2_Movelist")
 
-            self.p1_movelist_parser = MovelistParser.MovelistParser(p1_movelist_block, p1_movelist_address)
-            self.p2_movelist_parser = MovelistParser.MovelistParser(p2_movelist_block, p2_movelist_address)
             print("acquired movelists")
-            asdf
+            raise Exception("check_movelists")
 
     def populate_movelists(self, data_type):
+        return
         movelist_str = self.c["NonPlayerDataAddresses"][data_type]
         movelist_trail = split_str_to_hex(movelist_str)
 
         movelist_address = self.get_value_from_address(self.module_address + movelist_trail[0], AddressType._64bit)
         movelist_block = self.get_block_of_data(movelist_address, self.c["MemoryAddressOffsets"]["movelist_size"])
 
-        return movelist_block, movelist_address
+        return MovelistParser.MovelistParser(movelist_block, movelist_address)
 
 def split_str_to_hex(string):
     return list(map(to_hex, string.split()))

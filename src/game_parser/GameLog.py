@@ -53,8 +53,10 @@ class GameLog:
             self.state_log.pop(0)
 
     def get_current_move_string(self, is_p1):
-        # TODO
-        move_id = self.get(is_p1, 1).move_id
+        state = self.get(is_p1, 1)
+        move_id = state.move_id
+        if state.movelist_parser is not None:
+            return self.deduce_move_string_from_parser(is_p1, move_id, parser)
         return self.deduce_move_string_from_inputs(is_p1, move_id)
 
     def deduce_move_string_from_parser(self, is_p1, move_id, parser):
