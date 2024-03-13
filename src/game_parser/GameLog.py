@@ -53,6 +53,7 @@ class GameLog:
             self.state_log.pop(0)
 
     def get_current_move_string(self, is_p1):
+        # TODO
         move_id = self.get(is_p1, 1).move_id
         return self.deduce_move_string_from_inputs(is_p1, move_id)
 

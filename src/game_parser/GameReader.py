@@ -3,6 +3,7 @@ import enum
 import struct
 
 from . import GameSnapshot, MoveInfoEnums
+from game_parser import MovelistParser
 from misc import ConfigReader, Flags
 from misc.Windows import w as Windows
 
@@ -18,7 +19,7 @@ class AddressType(enum.Enum):
 class AcquireState(enum.Enum):
     need_pid = 0
     need_module = 1
-    # need_names = 2
+    need_names = 2
     has_everything = 3
 
 class GameReader:
@@ -28,7 +29,8 @@ class GameReader:
         self.module_address = 0
         self.c = ConfigReader.ConfigReader('memory_address')
         self.player_data_pointer_offset = self.c['MemoryAddressOffsets']['player_data_pointer_offset']
-        self.is_in_match = False
+        self.p1_movelist_parser = None
+        self.p2_movelist_parser = None
 
     def get_value_from_address(self, address, address_type):
         if address_type is AddressType._string:
@@ -91,7 +93,7 @@ class GameReader:
         return value
 
     def is_foreground_pid(self):
-        if not self.is_in_match:
+        if self.acquire_state != AcquireState.has_everything:
             return False
         pid = Windows.get_foreground_pid()
         return pid == self.pid
@@ -142,10 +144,8 @@ class GameReader:
         try:
             player_data_base_address = self.get_player_data_base_address()
         except:
-            self.is_in_match = False
+            self.acquire_state = AcquireState.need_names
             return None
-
-        self.is_in_match = True
 
         frame_chunk = self.get_frame_chunk(player_data_base_address)
 
@@ -169,6 +169,9 @@ class GameReader:
 
         facing_bool = bool(self.get_value_from_data_block(player_data_frame, self.c['GameDataAddress']['facing']) ^ is_player_player_one)
 
+        if self.acquire_state == AcquireState.need_names:
+            self.reacquire_names(is_player_player_one)
+
         return GameSnapshot.GameSnapshot(is_player_player_one, p1_snapshot, p2_snapshot, best_frame_count, facing_bool)
 
     def reacquire_module(self):
@@ -183,7 +186,7 @@ class GameReader:
             print("Found %s" % game_string)
             self.process_handle = Windows.open_process(0x10, False, self.pid)
             if self.process_handle:
-                self.acquire_state = AcquireState.has_everything
+                self.acquire_state = AcquireState.need_names
             else:
                 print("Failed to acquire process_handle")
 
@@ -228,6 +231,29 @@ class GameReader:
             address = 'PlayerDataAddress.%s' % axis
             p1_dict[address] = p1_coord_array
             p2_dict[address] = p2_coord_array
+
+        p1_dict['movelist_parser'] = self.p1_movelist_parser
+        p2_dict['movelist_parser'] = self.p2_movelist_parser
+
+    def reacquire_names(self, is_player_player_one):
+        self.acquire_state = AcquireState.has_everything
+        if not Flags.Flags.no_movelist:
+            p1_movelist_block, p1_movelist_address = self.populate_movelists("P1_Movelist")
+            p2_movelist_block, p2_movelist_address = self.populate_movelists("P2_Movelist")
+
+            self.p1_movelist_parser = MovelistParser.MovelistParser(p1_movelist_block, p1_movelist_address)
+            self.p2_movelist_parser = MovelistParser.MovelistParser(p2_movelist_block, p2_movelist_address)
+            print("acquired movelists")
+            asdf
+
+    def populate_movelists(self, data_type):
+        movelist_str = self.c["NonPlayerDataAddresses"][data_type]
+        movelist_trail = split_str_to_hex(movelist_str)
+
+        movelist_address = self.get_value_from_address(self.module_address + movelist_trail[0], AddressType._64bit)
+        movelist_block = self.get_block_of_data(movelist_address, self.c["MemoryAddressOffsets"]["movelist_size"])
+
+        return movelist_block, movelist_address
 
 def split_str_to_hex(string):
     return list(map(to_hex, string.split()))
