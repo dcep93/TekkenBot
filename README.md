@@ -24,7 +24,7 @@ Created by roguelike2d. Maintained by the community.
 
 ### Frame Data
 
-- [x] Characters' frame data is imported from rbnorway - when that move is detected, its data is shown instead of reading game state
+- [x] Characters' frame data is imported from tekken8framedata.com - when that move is detected, its data is shown instead of reading game state
 - [x] When an unknown move is performed, its data is remembered so that next time there are fewer 'unknown' values
 - [x] Remaining opponent health is displayed so you don't have to guess what will kill them
 - [x] Tells you what break a throw is, along with what and when the user attempted to break, even if the break is late.
@@ -40,5 +40,4 @@ Created by roguelike2d. Maintained by the community.
 
 - [ ] fresh images
 - [ ] autobuild exe and release on commit if version is updated!
-- [ ] pull_from_rbnorway
 - [ ] documentation

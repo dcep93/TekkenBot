@@ -2,6 +2,8 @@ from . import Database
 
 from misc import Path
 
+# TODO auto update
+
 def update(char_name, move_nodes):
     try:
         update_helper(char_name, move_nodes)
