@@ -34,8 +34,6 @@ class PlayerSnapshot:
         self.hit_outcome = MoveInfoEnums.HitOutcome(d['PlayerDataAddress.hit_outcome'])
         self.mystery_state = d['PlayerDataAddress.mystery_state']
 
-        self.movelist_parser = d['movelist_parser']
-
         self.character_name = MoveInfoEnums.CharacterCodes(d['PlayerDataAddress.char_id']).name
 
     def get_input_state(self):
@@ -82,9 +80,9 @@ class PlayerSnapshot:
         return self.hit_outcome != MoveInfoEnums.HitOutcome.NONE or self.simple_state == MoveInfoEnums.SimpleMoveStates.JUGGLED
 
 class GameSnapshot:
-    def __init__(self, p1, p2, frame_count, facing_bool, is_player_player_one):
+    def __init__(self, is_player_player_one, p1, p2, frame_count, facing_bool):
+        self.is_player_player_one = is_player_player_one
         self.p1 = p1
         self.p2 = p2
         self.frame_count = frame_count
         self.facing_bool = facing_bool
-        self.is_player_player_one = is_player_player_one

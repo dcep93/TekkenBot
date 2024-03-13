@@ -16,7 +16,7 @@ class AttackType(safeEnum):
     LOW = 2097153
     NA = 0 #This move is not an attack
 
-    BROKEN_RESTING = 12582912
+    RECOVERING = 12582912
 
 class SimpleMoveStates(safeEnum):
     UNINITIALIZED = 0
@@ -89,8 +89,8 @@ class ComplexMoveStates(safeEnum):  #These are tracking states>
 
 class ThrowTechs(safeEnum):
     NONE = 0
-    TE1 = 1 #both 1 and 2 seem to sometimes include normal throws that can be broken with either
-    TE2 = 2
+    TE1 = 3489660956
+    TE2 = 3758096415
     TE1_2 = 4026531870
 
     BROKEN_ThrowTechs = 3221225501
@@ -175,6 +175,9 @@ class InputAttackCodes(enum.Enum):
     xRAGE = 8192
 
 class CharacterCodes(enum.Enum):
+    KING_ = 128
+    KAZUYA = 8
+
     PAUL = 0
     LAW = 1
     KING = 2
@@ -183,8 +186,8 @@ class CharacterCodes(enum.Enum):
     XIAOYU = 5
     JIN = 6
     BRYAN = 7
-    HEIHACHI = 8
-    KAZUYA = 9
+    # HEIHACHI = 8
+    # KAZUYA = 9
     STEVE = 10
     JACK_7 = 11
     ASUKA = 12

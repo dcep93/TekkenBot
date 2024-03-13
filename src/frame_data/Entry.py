@@ -1,7 +1,7 @@
-from . import Database, DataColumns
+from . import Database, DataColumns, Hook
 from game_parser import MoveInfoEnums
 
-MAX_HEALTH = 175
+MAX_HEALTH = 180
 
 def build(game_log, is_p1):
     entry = {}
@@ -25,12 +25,14 @@ def build(game_log, is_p1):
     return entry
 
 def get_char_name(game_log, is_p1):
-    movelist_parser = game_log.get(is_p1).movelist_parser
-    return Database.Characters(movelist_parser.char_name).name if movelist_parser is not None else game_log.get(is_p1).char_id
+    return MoveInfoEnums.CharacterCodes(game_log.get(is_p1).char_id).name
 
 def build_frame_data_entry(game_log, entry, is_p1):
-    entry[DataColumns.DataColumns.startup] = game_log.get(is_p1).startup
-    entry[DataColumns.DataColumns.hit_type] = MoveInfoEnums.AttackType(game_log.get(is_p1).attack_type).name + ("_THROW" if game_log.get(is_p1).is_attack_throw() else "")
+    state = game_log.get(is_p1, 1)
+    entry[DataColumns.DataColumns.startup] = state.startup
+    entry[DataColumns.DataColumns.hit_type] = MoveInfoEnums.AttackType(state.attack_type).name
+    if state.is_attack_throw():
+        entry[DataColumns.DataColumns.hit_type] += "_THROW"
     entry[DataColumns.DataColumns.cmd] = game_log.get_current_move_string(is_p1)
 
     receiver = game_log.get(not is_p1)
@@ -58,6 +60,10 @@ def get_fa(game_log, is_p1):
         time_till_recovery_p2 = 0 if receiver.hit_outcome is MoveInfoEnums.HitOutcome.NONE else receiver.get_frames_til_next_move()
 
         raw_fa = time_till_recovery_p2 - time_till_recovery_p1
+
+        if receiver.is_blocking():
+            Hook.on_block(game_log, is_p1, raw_fa)
+
         raw_fa_str = str(raw_fa)
 
         if raw_fa > 0:

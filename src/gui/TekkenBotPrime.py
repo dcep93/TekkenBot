@@ -54,6 +54,9 @@ class TekkenBotPrime(t_tkinter.Tk):
             Shared.Shared.game_log.update(game_reader, self.overlay_family)
         except:
             print(traceback.format_exc())
+            if Flags.Flags.debug:
+                import os
+                os._exit(0)
         finally:
             after = time.time()
 

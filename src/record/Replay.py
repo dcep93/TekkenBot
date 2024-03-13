@@ -242,7 +242,7 @@ def replay_move(move):
         reverse = False
     else:
         last_state = Shared.Shared.game_log.state_log[-1]
-        reverse = bool(last_state.facing_bool) ^ (not last_state.is_player_player_one)
+        reverse = last_state.facing_bool
     hex_key_codes = move_to_hexes(move, reverse)
     to_release = [i for i in Replayer.pressed if i not in hex_key_codes]
     to_press = [i for i in hex_key_codes if i not in Replayer.pressed]

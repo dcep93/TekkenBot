@@ -2,10 +2,7 @@ import ctypes
 import enum
 import struct
 
-import traceback
-
 from . import GameSnapshot, MoveInfoEnums
-from game_parser import MovelistParser
 from misc import ConfigReader, Flags
 from misc.Windows import w as Windows
 
@@ -21,7 +18,7 @@ class AddressType(enum.Enum):
 class AcquireState(enum.Enum):
     need_pid = 0
     need_module = 1
-    need_names = 2
+    # need_names = 2
     has_everything = 3
 
 class GameReader:
@@ -29,13 +26,11 @@ class GameReader:
         self.acquire_state = AcquireState.need_pid
         self.pid = None
         self.module_address = 0
-        self.is_player_player_one = True # default
         self.c = ConfigReader.ConfigReader('memory_address')
         self.player_data_pointer_offset = self.c['MemoryAddressOffsets']['player_data_pointer_offset']
-        self.p1_movelist_parser = None
-        self.p2_movelist_parser = None
+        self.is_in_match = False
 
-    def get_value_from_address(self, process_handle, address, address_type):
+    def get_value_from_address(self, address, address_type):
         if address_type is AddressType._string:
             data = ctypes.create_string_buffer(16)
             bytes_read = ctypes.c_ulonglong(16)
@@ -46,14 +41,12 @@ class GameReader:
             data = ctypes.c_ulong()
             bytes_read = ctypes.c_ulonglong(4)
 
-        successful = Windows.read_process_memory(process_handle, address, ctypes.byref(data), ctypes.sizeof(data), ctypes.byref(bytes_read))
+        successful = Windows.read_process_memory(self.process_handle, address, ctypes.byref(data), ctypes.sizeof(data), ctypes.byref(bytes_read))
         if not successful:
             e = Windows.get_last_error()
             # known problem of failing to read_process_memory
             # when not in a fight
-            if not (e == 299 and self.acquire_state == AcquireState.need_names):
-                print("read_process_memory Error: Code %s" % e)
-            return 0
+            raise Exception("read_process_memory Error: Code %s" % e)
 
         value = data.value
 
@@ -68,14 +61,13 @@ class GameReader:
         else:
             return int(value)
 
-    @staticmethod
-    def get_block_of_data(process_handle, address, size_of_block):
+    def get_block_of_data(self, address, size_of_block):
         data = ctypes.create_string_buffer(size_of_block)
         bytes_read = ctypes.c_ulonglong(size_of_block)
-        successful = Windows.read_process_memory(process_handle, address, ctypes.byref(data), ctypes.sizeof(data), ctypes.byref(bytes_read))
+        successful = Windows.read_process_memory(self.process_handle, address, ctypes.byref(data), ctypes.sizeof(data), ctypes.byref(bytes_read))
         if not successful:
             e = Windows.get_last_error()
-            print("Getting Block of Data Error: Code %s" % e)
+            raise Exception("Getting Block of Data Error: Code %s" % e)
         return data
 
     @staticmethod
@@ -87,18 +79,20 @@ class GameReader:
         else:
             return struct.unpack("<I", data_bytes)[0]
 
-    def get_value_at_end_of_pointer_trail(self, process_handle, data_type, address_type):
+    def get_value_at_end_of_pointer_trail(self, data_type, address_type):
         addresses_str = self.c['NonPlayerDataAddresses'][data_type]
         addresses = split_str_to_hex(addresses_str)
         value = self.module_address
         for i, offset in enumerate(addresses):
             if i + 1 < len(addresses):
-                value = self.get_value_from_address(process_handle, value + offset, AddressType._64bit)
+                value = self.get_value_from_address(value + offset, AddressType._64bit)
             else:
-                value = self.get_value_from_address(process_handle, value + offset, address_type)
+                value = self.get_value_from_address(value + offset, address_type)
         return value
 
     def is_foreground_pid(self):
+        if not self.is_in_match:
+            return False
         pid = Windows.get_foreground_pid()
         return pid == self.pid
 
@@ -133,18 +127,8 @@ class GameReader:
         if self.acquire_state == AcquireState.need_module:
             self.reacquire_module()
 
-        if self.module_address is not None:
-            process_handle = Windows.open_process(0x10, False, self.pid)
-            try:
-                return self.get_game_snapshot(rollback_frame, process_handle)
-            except:
-                print(traceback.format_exc())
-                # TODO cleanup
-                import os
-                os._exit(0)
-            finally:
-                Windows.close_handle(process_handle)
-
+        if self.process_handle is not None:
+            return self.get_game_snapshot(rollback_frame)
         return None
 
     def get_update_wait_ms(self, elapsed_ms):
@@ -154,14 +138,16 @@ class GameReader:
             wait_ms = 1000
         return wait_ms
 
-    def get_game_snapshot(self, rollback_frame, process_handle):
-        player_data_base_address = self.get_player_data_base_address(process_handle)
-
-        if player_data_base_address == 0:
-            self.acquire_state = AcquireState.need_names
+    def get_game_snapshot(self, rollback_frame):
+        try:
+            player_data_base_address = self.get_player_data_base_address()
+        except:
+            self.is_in_match = False
             return None
 
-        frame_chunk = self.get_frame_chunk(process_handle, player_data_base_address)
+        self.is_in_match = True
+
+        frame_chunk = self.get_frame_chunk(player_data_base_address)
 
         if rollback_frame >= len(frame_chunk):
             print("ERROR: requesting %s frame of %s long rollback frame" % (rollback_frame, len(frame_chunk)))
@@ -169,7 +155,7 @@ class GameReader:
 
         best_frame_count, player_data_second_address = sorted(frame_chunk, key=lambda x: -x[0])[rollback_frame]
 
-        player_data_frame = self.get_block_of_data(process_handle, player_data_second_address, self.c['MemoryAddressOffsets']['rollback_frame_offset'])
+        player_data_frame = self.get_block_of_data(player_data_second_address, self.c['MemoryAddressOffsets']['rollback_frame_offset'])
 
         p1_dict = {}
         p2_dict = {}
@@ -179,12 +165,11 @@ class GameReader:
         p1_snapshot = GameSnapshot.PlayerSnapshot(p1_dict)
         p2_snapshot = GameSnapshot.PlayerSnapshot(p2_dict)
 
-        facing = self.get_value_from_data_block(player_data_frame, self.c['GameDataAddress']['facing'])
+        is_player_player_one = self.get_value_at_end_of_pointer_trail("OPPONENT_SIDE", AddressType._64bit) == 1
 
-        if self.acquire_state == AcquireState.need_names and p1_snapshot.character_name != MoveInfoEnums.CharacterCodes.NOT_YET_LOADED.name and p2_snapshot.character_name != MoveInfoEnums.CharacterCodes.NOT_YET_LOADED.name:
-            self.reacquire_names(process_handle)
+        facing_bool = bool(self.get_value_from_data_block(player_data_frame, self.c['GameDataAddress']['facing']) ^ is_player_player_one)
 
-        return GameSnapshot.GameSnapshot(p1_snapshot, p2_snapshot, best_frame_count, facing, self.is_player_player_one)
+        return GameSnapshot.GameSnapshot(is_player_player_one, p1_snapshot, p2_snapshot, best_frame_count, facing_bool)
 
     def reacquire_module(self):
         print("Trying to acquire Tekken library in pid: %s" % self.pid)
@@ -196,27 +181,31 @@ class GameReader:
             print("Unrecognized location for %s module. Tekken.exe Patch? Wrong process id?" % game_string, hex(self.module_address))
         else:
             print("Found %s" % game_string)
-            self.acquire_state = AcquireState.need_names
+            self.process_handle = Windows.open_process(0x10, False, self.pid)
+            if self.process_handle:
+                self.acquire_state = AcquireState.has_everything
+            else:
+                print("Failed to acquire process_handle")
 
-    def get_player_data_base_address(self, process_handle):
+    def get_player_data_base_address(self):
         addresses = split_str_to_hex(self.player_data_pointer_offset)
         address = self.module_address
         for i, offset in enumerate(addresses):
             address += offset
             if i + 1 < len(addresses):
-                address = self.get_value_from_address(process_handle, address, AddressType._64bit)
+                address = self.get_value_from_address(address, AddressType._64bit)
             else:
-                address = self.get_value_from_address(process_handle, address, AddressType._64bit)
+                address = self.get_value_from_address(address, AddressType._64bit)
         return address
 
-    def get_frame_chunk(self, process_handle, player_data_base_address):
+    def get_frame_chunk(self, player_data_base_address):
         frame_chunk = []
 
         offset = self.c['MemoryAddressOffsets']['rollback_frame_offset']
-        frame_count = self.c['GameDataAddress']['timer_in_frames']
+        frame_count = self.c['GameDataAddress']['frame_count']
         for i in range(32):  # for rollback purposes, there are copies of the game state
             potential_second_address = player_data_base_address + (i * offset)
-            potential_frame_count = self.get_value_from_address(process_handle, potential_second_address + frame_count, None)
+            potential_frame_count = self.get_value_from_address(potential_second_address + frame_count, None)
             frame_chunk.append((potential_frame_count, potential_second_address))
         return frame_chunk
 
@@ -239,33 +228,6 @@ class GameReader:
             address = 'PlayerDataAddress.%s' % axis
             p1_dict[address] = p1_coord_array
             p2_dict[address] = p2_coord_array
-
-        p1_dict['movelist_parser'] = self.p1_movelist_parser
-        p2_dict['movelist_parser'] = self.p2_movelist_parser
-
-    def reacquire_names(self, process_handle):
-        # TODO reacquire_names
-        if False and not Flags.Flags.no_movelist:
-            opponent_side = self.get_value_at_end_of_pointer_trail(process_handle, "OPPONENT_SIDE", False)
-            self.is_player_player_one = (opponent_side == 1)
-
-            p1_movelist_block, p1_movelist_address = self.populate_movelists(process_handle, "P1_Movelist")
-            p2_movelist_block, p2_movelist_address = self.populate_movelists(process_handle, "P2_Movelist")
-
-            self.p1_movelist_parser = MovelistParser.MovelistParser(p1_movelist_block, p1_movelist_address)
-            self.p2_movelist_parser = MovelistParser.MovelistParser(p2_movelist_block, p2_movelist_address)
-            print("acquired movelists")
-
-        self.acquire_state = AcquireState.has_everything
-
-    def populate_movelists(self, process_handle, data_type):
-        movelist_str = self.c["NonPlayerDataAddresses"][data_type]
-        movelist_trail = split_str_to_hex(movelist_str)
-
-        movelist_address = self.get_value_from_address(process_handle, self.module_address + movelist_trail[0], AddressType._64bit)
-        movelist_block = self.get_block_of_data(process_handle, movelist_address, self.c["MemoryAddressOffsets"]["movelist_size"])
-
-        return movelist_block, movelist_address
 
 def split_str_to_hex(string):
     return list(map(to_hex, string.split()))

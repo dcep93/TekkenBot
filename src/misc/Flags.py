@@ -6,6 +6,7 @@ class Flags:
     fast = False
     no_movelist = False
     update_movelist = False
+    debug = False
 
 def handle():
     temp_argv = []
@@ -23,6 +24,8 @@ def handle():
             Flags.no_movelist = True
         elif arg == '--update':
             Flags.update_movelist = True
+        elif arg == '--debug':
+            Flags.debug = True
         elif arg.startswith('-'):
             print('Flag not recognized', arg)
             exit()

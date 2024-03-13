@@ -38,7 +38,7 @@ Created by roguelike2d. Maintained by the community.
 
 ### TODO
 
-- [ ] brush up kbd trainer
 - [ ] fresh images
 - [ ] autobuild exe and release on commit if version is updated!
 - [ ] pull_from_rbnorway
+- [ ] documentation

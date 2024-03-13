@@ -30,7 +30,7 @@ class CommandInputOverlay(Overlay.Overlay):
     def update_state(self, game_log):
         last_state = game_log.state_log[-1]
         time_d = last_state.frame_count % 100
-        player = last_state.p1 if last_state.is_player_player_one else last_state.p2
+        player = last_state.p1 if game_log.is_player_player_one else last_state.p2
         input_state = player.get_input_state()
 
         if self.last_n_were_same(input_state):
