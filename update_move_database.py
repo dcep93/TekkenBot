@@ -45,6 +45,7 @@ def get_content(obj):
     trimmed = content[content.index(start)+len(start):]
     trimmed = trimmed[:trimmed.index(";</script>")]
     data = json.loads(trimmed)
+    seen = set()
     return {"name": name, "rows": data[0]["items"]["rows"]}
 
 def update(name, rows):
@@ -53,8 +54,13 @@ def update(name, rows):
     same = 0
     updated = 0
     added = 0
+    seen = set()
     for move in moves:
-        key = move[0]
+        key = move[1]
+        while key in seen:
+            key += "*"
+        move[1] = key
+        seen.add(key)
         if key not in existing:
             added += 1
         else:
@@ -65,11 +71,13 @@ def update(name, rows):
                 same += 1
             else:
                 updated += 1
+                print(move)
+                print(val)
     extra = len(existing)
     if extra:
         moves += [[]]
     moves += [existing[key] for key in sorted(existing.keys())]
-    print(f'same: {same} updated: {updated} added: {added} extra: {extra} - {name}')
+    print(f'updated: {updated} added: {added} extra: {extra} same: {same} - {name}')
     write(name, moves)
 
 def get_move(row):
@@ -84,7 +92,7 @@ def load(name):
     if not os.path.exists(path):
         return {}
     with open(path, encoding='UTF-8') as fh:
-        return {move[0]: move for move in 
+        return {move[1]: move for move in 
             [line.split("\t") for line in fh.read().split("\n")[1:] if line]
         }
 
