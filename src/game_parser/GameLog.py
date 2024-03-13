@@ -56,6 +56,44 @@ class GameLog:
         move_id = self.get(is_p1, 1).move_id
         return self.deduce_move_string_from_inputs(is_p1, move_id)
 
+    def deduce_move_string_from_parser(self, is_p1, move_id, parser):
+        previous_move_id = -1
+
+        input_array = []
+
+        i = 1
+        done = False
+
+        for _ in range(1000):
+            next_move, last_move_was_empty_cancel = parser.input_for_move(move_id, previous_move_id)
+            next_move = str(next_move)
+
+            if last_move_was_empty_cancel:
+                input_array[-1] = ''
+
+            input_array.append(next_move)
+
+            if parser.can_be_done_from_neutral(move_id):
+                break
+
+            for _ in range(1000):
+                old_player = self.get(is_p1, i)
+                i += 1
+                if old_player is None:
+                    done = True
+                    break
+                if old_player.move_id != move_id:
+                    previous_move_id = move_id
+                    move_id = old_player.move_id
+                    break
+            if done:
+                break
+
+        clean_input_array = tuple(reversed([a for a in input_array if len(a) > 0]))
+        if clean_input_array != ("N/A",):
+            string = ','.join(clean_input_array)
+            return '$ %s' % string
+
     def deduce_move_string_from_inputs(self, is_p1, move_id):
         for i in range(1, len(self.state_log)):
             state = self.get(is_p1, i)
