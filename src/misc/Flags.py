@@ -4,8 +4,6 @@ class Flags:
     pickle_src = None
     pickle_dest = None
     fast = False
-    no_movelist = False
-    update_movelist = False
     debug = False
 
 def handle():
@@ -20,10 +18,6 @@ def handle():
             Flags.pickle_dest = pickle_dest
         elif arg == '--fast':
             Flags.fast = True
-        elif arg == '--no-movelist':
-            Flags.no_movelist = True
-        elif arg == '--update':
-            Flags.update_movelist = True
         elif arg == '--debug':
             Flags.debug = True
         elif arg.startswith('-'):

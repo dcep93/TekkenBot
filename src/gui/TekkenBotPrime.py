@@ -7,8 +7,7 @@ import traceback
 from . import t_tkinter, FrameDataOverlay
 from frame_data import Database
 from game_parser import GameLog, GameReader, ScriptedGame
-from misc import Flags, Path
-from record import Shared
+from misc import Flags, Path, Shared
 
 class TekkenBotPrime(t_tkinter.Tk):
     def __init__(self):
@@ -51,7 +50,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         now = time.time()
         self.last_update = now
         try:
-            Shared.Shared.game_log.update(game_reader, self.overlay_family)
+            Shared.Shared.game_log.update(game_reader, self.overlay)
         except:
             print(traceback.format_exc())
             if Flags.Flags.debug:

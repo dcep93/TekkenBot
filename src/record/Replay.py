@@ -1,9 +1,10 @@
 import os
 import time
 
-from . import Shared
+from . import Record
 from frame_data import DataColumns
 from gui import FrameDataOverlay
+from misc import Shared
 from misc.Windows import w as Windows
 
 seconds_per_frame = 1/60.
@@ -44,7 +45,7 @@ attack_string_to_hex = {
 }
 
 def replay():
-    moves = get_moves_from_path(Shared.RAW_PATH)
+    moves = get_moves_from_path()
     if moves is None:
         return
     Shared.Shared.frame_data_overlay.print_f({
@@ -54,8 +55,8 @@ def replay():
     Replayer.moves = moves
     wait_for_focus_and_replay_moves()
 
-def get_moves_from_path(raw_path, swap=False):
-    path = Shared.get_path(raw_path)
+def get_moves_from_path(swap=False):
+    path = Record.get_record_path()
     if not os.path.isfile(path):
         print("recording not found: %s" % path)
         return None

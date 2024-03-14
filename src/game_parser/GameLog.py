@@ -15,8 +15,8 @@ class GameLog:
         state = self.state_log[-1-frames_ago]
         return state.p1 if is_p1 else state.p2
 
-    def update(self, game_reader, overlay_family):
-        overlay_family.update_location(game_reader)
+    def update(self, game_reader, overlay):
+        overlay.update_location(game_reader)
         game_snapshot = game_reader.get_updated_state(0)
 
         if game_snapshot is not None:
@@ -29,11 +29,11 @@ class GameLog:
                     for i in range(missed_states):
                         dropped_state = game_reader.get_updated_state(missed_states - i)
                         if dropped_state is not None:
-                            self.track_gamedata(dropped_state, overlay_family)
+                            self.track_gamedata(dropped_state, overlay)
 
-                self.track_gamedata(game_snapshot, overlay_family)
+                self.track_gamedata(game_snapshot, overlay)
 
-    def track_gamedata(self, game_snapshot, overlay_family):
+    def track_gamedata(self, game_snapshot, overlay):
         if len(self.state_log) > 0 and self.state_log[-1].frame_count == game_snapshot.frame_count:
             return
 
@@ -46,17 +46,11 @@ class GameLog:
             print(game_snapshot.frame_count, obj)
             self.obj = obj
 
-        overlay_family.update_state(self)
+        overlay.update_state(self)
         Record.record_if_activated()
 
         if len(self.state_log) > 300:
             self.state_log.pop(0)
-
-    def was_just_floated(self, is_p1):
-        player = self.get(is_p1, 1)
-        if player is None:
-            return False
-        return player.is_jump
 
     def is_starting_attack(self, is_p1):
         before = 2
@@ -103,7 +97,7 @@ class GameLog:
             if '1' in buttons or '2' in buttons:
                 return False
             i += 1
-        print("impossible a")
+        raise Exception("get_throw_break")
 
     def just_lost_health(self, is_p1):
         prev_state = self.get(is_p1, 2)

@@ -1,8 +1,8 @@
 import enum
 
-from . import Shared
 from frame_data import DataColumns
 from game_parser import ScriptedGame
+from misc import Shared
 from misc.Windows import w as Windows
 
 def record_single():
@@ -34,7 +34,7 @@ def record_end():
     recording_string = get_recording_string()
     print(recording_string)
     Recorder.history = None
-    path = Shared.get_path()
+    path = get_record_path()
     with open(path, 'w') as fh:
         fh.write(recording_string)
 
@@ -126,3 +126,6 @@ def get_recording_string():
 
 def get_distance():
     return Shared.Shared.game_log.get(True).get_distance()
+
+def get_record_path(file_name):
+    return Path.path('./record/recording.txt' % file_name)

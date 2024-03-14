@@ -42,3 +42,4 @@ Created by roguelike2d. Maintained by the community.
 - [ ] autobuild exe and release on commit if version is updated!
 - [ ] documentation
 - [ ] reduce noise from strings
+- [ ] get_update_wait_ms

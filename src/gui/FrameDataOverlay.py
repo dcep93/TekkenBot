@@ -1,9 +1,9 @@
 from . import t_tkinter
 from frame_data import Entry, Hook
 from game_parser import MoveInfoEnums
-from misc import Path
+from misc import Path, Shared
 from misc.Windows import w as Windows
-from record import Record, Replay, Shared
+from record import Record, Replay
 
 DAMAGE_CMD = 'DMG'
 
@@ -63,7 +63,6 @@ class FrameDataOverlay():
         self.style.configure('.', foreground=Overlay.ColorSchemeEnum.advantage_text.value)
         self.style.configure('TFrame', background=self.tranparency_color)
 
-        # self.create_padding_frame()
         # self.fa_var = self.create_frame_advantage_label()
         self.create_padding_frame()
         self.text = self.create_textbox()

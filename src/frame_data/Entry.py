@@ -35,8 +35,6 @@ def get_fa(game_log, is_p1, attacker, receiver):
         return 'KND'
     elif receiver.is_being_juggled():
         return 'JGL'
-    elif game_log.was_just_floated(not is_p1):
-        return 'FLT'
     else:
         time_till_recovery_p1 = attacker.get_frames_til_next_move()
         time_till_recovery_p2 = 0 if receiver.hit_outcome is MoveInfoEnums.HitOutcome.NONE else receiver.get_frames_til_next_move()
