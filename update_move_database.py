@@ -103,7 +103,7 @@ def write(name, moves):
         fh.write(csv_content)
 
 def get_path(name):
-    return os.path.join(database, f"{name}.csv") 
+    return os.path.join(database, f"{name.replace(' ', '_').lower()}.csv") 
 
 if __name__ == "__main__":
     main()
