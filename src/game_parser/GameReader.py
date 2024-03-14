@@ -20,8 +20,8 @@ class AddressType(enum.Enum):
 class AcquireState(enum.Enum):
     need_pid = 0
     need_module = 1
-    need_names = 2
-    has_everything = 3
+    has_everything = 2
+    in_match = 3
 
 class ReadProcessMemoryException(Exception):
     pass
@@ -95,7 +95,7 @@ class GameReader:
         return value
 
     def is_foreground_pid(self):
-        if self.acquire_state != AcquireState.has_everything:
+        if self.acquire_state != AcquireState.in_match:
             return False
         pid = Windows.get_foreground_pid()
         return pid == self.pid
@@ -123,7 +123,7 @@ class GameReader:
             self.pid = Windows.get_pid(game_string)
             if self.has_working_pid():
                 print("Tekken pid acquired: %s" % self.pid)
-                self.acquire_state = AcquireState.need_module
+                self.acquire_state = AcquireState.has_everything
             else:
                 print("Tekken pid not acquired. Trying to acquire...")
                 return None
@@ -136,19 +136,19 @@ class GameReader:
         return None
 
     def get_update_wait_ms(self, elapsed_ms):
-        if self.acquire_state == AcquireState.has_everything:
+        if self.acquire_state == AcquireState.in_match:
             wait_ms = max(2, 8 - int(round(elapsed_ms)))
         else:
-            wait_ms = 1000
+            wait_ms = 100
         return wait_ms
 
     def get_game_snapshot(self, rollback_frame):
         try:
             player_data_base_address = self.get_player_data_base_address()
         except ReadProcessMemoryException:
-            if self.acquire_state == AcquireState.has_everything:
+            if self.acquire_state == AcquireState.in_match:
                 Hook.finish_match()
-            self.acquire_state = AcquireState.need_names
+            self.acquire_state = AcquireState.has_everything
             return None
 
         frame_chunk = self.get_frame_chunk(player_data_base_address)
@@ -173,9 +173,6 @@ class GameReader:
 
         facing_bool = bool(self.get_value_from_data_block(player_data_frame, self.c['GameDataAddress']['facing']) ^ is_player_player_one)
 
-        if self.acquire_state == AcquireState.need_names:
-            self.reacquire_names(is_player_player_one)
-
         return GameSnapshot.GameSnapshot(is_player_player_one, p1_snapshot, p2_snapshot, best_frame_count, facing_bool)
 
     def reacquire_module(self):
@@ -190,7 +187,7 @@ class GameReader:
             print("Found %s" % game_string)
             self.process_handle = Windows.open_process(0x10, False, self.pid)
             if self.process_handle:
-                self.acquire_state = AcquireState.need_names
+                self.acquire_state = AcquireState.has_everything
             else:
                 print("Failed to acquire process_handle")
 
