@@ -9,24 +9,24 @@ def build(game_log, is_p1):
     attacker = game_log.get(is_p1)
     receiver = game_log.get(not is_p1)
 
-    entry[DataColumns.DataColumns.fa] = get_fa(game_log, is_p1, attacker, receiver)
+    entry[DataColumns.fa] = get_fa(game_log, is_p1, attacker, receiver)
 
-    entry[DataColumns.DataColumns.startup] = attacker.startup
+    entry[DataColumns.startup] = attacker.startup
     if attacker.is_attack_throw():
-        entry[DataColumns.DataColumns.hit_type] = "THROW"
+        entry[DataColumns.hit_type] = "THROW"
     else:
-        entry[DataColumns.DataColumns.hit_type] = MoveInfoEnums.AttackType(attacker.attack_type).name
+        entry[DataColumns.hit_type] = MoveInfoEnums.AttackType(attacker.attack_type).name
 
     if receiver.is_blocking():
-        entry[DataColumns.DataColumns.block] = entry[DataColumns.DataColumns.fa]
+        entry[DataColumns.block] = entry[DataColumns.fa]
 
-    entry[DataColumns.DataColumns.move_id] = attacker.move_id
+    entry[DataColumns.move_id] = attacker.move_id
  
-    entry[DataColumns.DataColumns.char_name] = MoveInfoEnums.CharacterCodes(attacker.char_id).name
+    entry[DataColumns.char_name] = MoveInfoEnums.CharacterCodes(attacker.char_id).name
     
-    entry[DataColumns.DataColumns.health] = get_remaining_health_string(game_log)
+    entry[DataColumns.health] = get_remaining_health_string(game_log)
 
-    entry[DataColumns.DataColumns.combo] = get_combo(game_log, is_p1)
+    entry[DataColumns.combo] = get_combo(game_log, is_p1)
 
     return entry
 

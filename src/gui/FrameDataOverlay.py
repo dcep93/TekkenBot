@@ -1,5 +1,5 @@
 from . import t_tkinter
-from frame_data import DataColumns, Entry
+from frame_data import Entry, Hook
 from game_parser import MoveInfoEnums
 from misc import Path
 from misc.Windows import w as Windows
@@ -15,9 +15,9 @@ class FrameDataOverlay():
     last_time = None
     col_max_length = 10
     sizes = {
-        DataColumns.DataColumns.move_id: 18,
-        DataColumns.DataColumns.startup: 14,
-        DataColumns.DataColumns.block: 12,
+        DataColumns.move_id: 18,
+        DataColumns.startup: 14,
+        DataColumns.block: 12,
     }
 
     def __init__(self):
@@ -82,16 +82,7 @@ class FrameDataOverlay():
 
         self.entries.append(entry)
 
-        # TODO hook
-        # if DataColumns.DataColumns.fa in entry:
-        #     fa = entry[DataColumns.DataColumns.fa]
-        #     background = self.get_background(fa)
-        #     self.style.configure('.', background=background)
-        #     self.fa_var.set(fa)
-        # else:
-        #     fa = None
-        #     self.style.configure('.', background=self.background_color)
-        #     self.fa_var.set("")
+        Hook.handle_entry(entry)
 
         text_tag = 'p1' if is_p1 else 'p2'
         out = self.get_prefix(is_p1) + self.get_frame_data_string(entry)
@@ -173,12 +164,12 @@ class FrameDataOverlay():
         return (' ' * before) + value + (' ' * after)
 
     def get_frame_data_string(self, entry):
-        values = [self.get_value(entry, col) for col in DataColumns.DataColumns]
+        values = [self.get_value(entry, col) for col in Entry.DataColumns]
         return '|'.join(values)
 
     def scroll(self):
         if len(self.entries) > 0:
-            if self.entries[-1][DataColumns.DataColumns.move_id] == DAMAGE_CMD:
+            if self.entries[-1][Entry.DataColumns.move_id] == DAMAGE_CMD:
                 self.pop_entry(len(self.entries) - 1)
 
         while len(self.entries) >= self.max_lines:
@@ -192,7 +183,7 @@ class FrameDataOverlay():
         self.text.delete(start, end)
 
     def populate_column_names(self):
-        columns_entry = {col:col.name for col in DataColumns.DataColumns}
+        columns_entry = {col:col.name for col in Entry.DataColumns}
         column_names = self.get_frame_data_string(columns_entry)
         prefix = self.get_prefix(None)
         spaces = " " * len(prefix)
@@ -215,17 +206,17 @@ class FrameDataOverlay():
             throw_break_string = game_log.get_throw_break(is_p1)
             if throw_break_string:
                 entry = {
-                    DataColumns.DataColumns.move_id: throw_break_string,
+                    Entry.DataColumns.move_id: throw_break_string,
                 }
             elif game_log.just_lost_health(not is_p1):
                 entry = {
-                    DataColumns.DataColumns.health: Entry.get_remaining_health_string(game_log),
-                    DataColumns.DataColumns.move_id: DAMAGE_CMD,
-                    DataColumns.DataColumns.combo: Entry.get_combo(game_log, is_p1),
+                    Entry.DataColumns.health: Entry.get_remaining_health_string(game_log),
+                    Entry.DataColumns.move_id: DAMAGE_CMD,
+                    Entry.DataColumns.combo: Entry.get_combo(game_log, is_p1),
                 }
             else:
                 return
-        entry[DataColumns.DataColumns.time] = self.get_time(game_log)
+        entry[Entry.DataColumns.time] = self.get_time(game_log)
         self.print_f(entry, is_p1)
 
     def update_location(self, game_reader):

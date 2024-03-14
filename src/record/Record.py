@@ -14,8 +14,8 @@ def record_both():
 def record_start(state):
     print("starting recording %s" % state.name)
     Shared.Shared.frame_data_overlay.print_f({
-        DataColumns.DataColumns.move_id: 'RECORD',
-        DataColumns.DataColumns.char_name: state.name
+        Entry.DataColumns.move_id: 'RECORD',
+        Entry.DataColumns.char_name: state.name
     })
     Recorder.state = state
     Recorder.history = []
@@ -27,8 +27,8 @@ def record_end():
     print("ending recording")
     Recorder.state = RecordingState.OFF
     Shared.Shared.frame_data_overlay.print_f({
-        DataColumns.DataColumns.move_id: 'RECORD',
-        DataColumns.DataColumns.char_name: Recorder.state.name
+        Entry.DataColumns.move_id: 'RECORD',
+        Entry.DataColumns.char_name: Recorder.state.name
     })
 
     recording_string = get_recording_string()
