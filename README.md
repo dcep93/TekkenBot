@@ -43,4 +43,3 @@ Created by roguelike2d. Maintained by the community.
 - [ ] documentation
 - [ ] populate_database
 - [ ] populate_movelists
-- [ ] deduce_move_string_from_parser
