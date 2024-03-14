@@ -12,12 +12,12 @@ def build(game_log, is_p1):
     entry[DataColumns.fa] = get_fa(game_log, is_p1, attacker, receiver)
 
     entry[DataColumns.startup] = attacker.startup
-    if attacker.is_attack_throw():
+    if attacker.is_attack_throw:
         entry[DataColumns.hit_type] = "THROW"
     else:
         entry[DataColumns.hit_type] = MoveInfoEnums.AttackType(attacker.attack_type).name
 
-    if receiver.is_blocking():
+    if receiver.complex_state == MoveInfoEnums.ComplexMoveStates.BLOCK:
         entry[DataColumns.block] = entry[DataColumns.fa]
 
     entry[DataColumns.move_id] = attacker.move_id
@@ -31,13 +31,13 @@ def build(game_log, is_p1):
     return entry
 
 def get_fa(game_log, is_p1, attacker, receiver):
-    if receiver.is_being_knocked_down():
+    if receiver.simple_state == MoveInfoEnums.SimpleMoveStates.KNOCKDOWN:
         return 'KND'
-    elif receiver.is_being_juggled():
+    elif receiver.hit_outcome == MoveInfoEnums.HitOutcome.JUGGLE:
         return 'JGL'
     else:
-        time_till_recovery_p1 = attacker.get_frames_til_next_move()
-        time_till_recovery_p2 = 0 if receiver.hit_outcome is MoveInfoEnums.HitOutcome.NONE else receiver.get_frames_til_next_move()
+        time_till_recovery_p1 = attacker.frames_til_next_move
+        time_till_recovery_p2 = 0 if receiver.hit_outcome is MoveInfoEnums.HitOutcome.NONE else receiver.frames_til_next_move
 
         raw_fa = time_till_recovery_p2 - time_till_recovery_p1
 
@@ -63,7 +63,7 @@ def get_combo(game_log, is_p1):
             count += 1
             damage += last_damage - p.damage_taken
             last_damage = p.damage_taken
-        if not p.is_getting_comboed():
+        if p.hit_outcome in [MoveInfoEnums.HitOutcome.NONE, MoveInfoEnums.HitOutcome.BLOCKED_STANDING, MoveInfoEnums.HitOutcome.BLOCKED_CROUCHING]:
             break
     return f'{count}/{damage}'
 

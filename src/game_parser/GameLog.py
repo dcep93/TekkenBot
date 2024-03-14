@@ -76,7 +76,7 @@ class GameLog:
         prev_state = self.get(is_p1, 2)
         if prev_state is None: return False
         move_id = prev_state.move_id
-        current_buttons = self.get(not is_p1, 1).get_input_state()[1].name
+        current_buttons = self.get(not is_p1, 1).input_button.name
         if '1' not in current_buttons and '2' not in current_buttons:
             if move_id != self.get(is_p1, 1).move_id:
                 return 'br: %s' % throw_tech.name
@@ -93,7 +93,7 @@ class GameLog:
                 break_string = throw_break.name.replace('x', '')
                 throw_break_string = 'br: %s/%s %d/%d' % (break_string, correct, i-2, frames_to_break)
                 return throw_break_string
-            buttons = state.get_input_state()[1].name
+            buttons = state.input_button.name
             if '1' in buttons or '2' in buttons:
                 return False
             i += 1

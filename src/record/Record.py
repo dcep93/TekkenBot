@@ -66,11 +66,11 @@ def get_input_state():
     else:
         player = last_state.p2
         opp = last_state.p1
-    player_input_state = player.get_input_as_string()
-    opp_input_state = opp.get_input_as_string()
+    player_input_state = get_input_as_string(player)
     if Recorder.state == RecordingState.SINGLE:
         return player_input_state
     else:
+        opp_input_state = get_input_as_string(opp)
         return (player_input_state, opp_input_state)
 
 def last_move_was(input_state):
@@ -125,7 +125,14 @@ def get_recording_string():
     return '%s\n# %s\n' % (moves_string, comment)
 
 def get_distance():
-    return Shared.Shared.game_log.get(True).get_distance()
+    return Shared.Shared.game_log.get(True).distance
 
 def get_record_path(file_name):
     return Path.path('./record/recording.txt' % file_name)
+
+def get_input_as_string(state):
+    direction_string = state.input_direction.name
+    attack_string = state.input_button.name.replace('x', '').replace('N', '')
+    if direction_string == 'N' and attack_string != '':
+        return attack_string
+    return '%s%s' % (direction_string, attack_string)
