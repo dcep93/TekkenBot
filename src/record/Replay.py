@@ -2,7 +2,7 @@ import os
 import time
 
 from . import Record
-from frame_data import DataColumns
+from frame_data import Entry
 from gui import FrameDataOverlay
 from misc import Shared
 from misc.Windows import w as Windows

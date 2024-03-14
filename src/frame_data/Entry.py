@@ -79,14 +79,14 @@ def get_combo(game_log, is_p1):
 
 @enum.unique
 class DataColumns(enum.Enum):
-    is_player = 'is this the player running TekkenBot'
     time = 'time (frame / diff)'
     char_name = 'character name'
-    move_id = 'internal move id number'
     hit_type = 'attack type (high/mid/low/etc)'
     startup = 'startup frames'
-    block = 'frame advantage on block (looks in database for minimum magnitude)'
-    fa = 'frame advantage right now'
+    block = 'frame advantage on block (looks in database for minimum)'
     combo = 'combo data (hits / damage)'
-    health = 'remaining health (p1 / p2)'
     hit_outcome = 'MoveInfoEnums.HitOutcome.name'
+    fa = 'frame advantage right now'
+    health = 'remaining health (p1 / p2)'
+    move_id = 'internal move id number'
+    is_player = 'is this the player running TekkenBot'

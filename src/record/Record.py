@@ -1,6 +1,6 @@
 import enum
 
-from frame_data import DataColumns
+from frame_data import Entry
 from game_parser import ScriptedGame
 from misc import Shared
 from misc.Windows import w as Windows

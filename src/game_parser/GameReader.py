@@ -4,7 +4,6 @@ import struct
 
 from . import GameSnapshot, MoveInfoEnums
 from frame_data import Hook
-from game_parser import MovelistParser
 from misc import ConfigReader, Flags
 from misc.Windows import w as Windows
 
@@ -17,20 +16,15 @@ class AddressType(enum.Enum):
     _64bit = 1
     _string = 2
 
-class AcquireState(enum.Enum):
-    need_pid = 0
-    need_module = 1
-    has_everything = 2
-    in_match = 3
-
 class ReadProcessMemoryException(Exception):
     pass
 
 class GameReader:
     def __init__(self):
-        self.acquire_state = AcquireState.need_pid
         self.pid = None
         self.module_address = 0
+        self.process_handle = None
+        self.in_match = False
         self.c = ConfigReader.ConfigReader('memory_address')
         self.player_data_pointer_offset = self.c['MemoryAddressOffsets']['player_data_pointer_offset']
 
@@ -95,7 +89,7 @@ class GameReader:
         return value
 
     def is_foreground_pid(self):
-        if self.acquire_state != AcquireState.in_match:
+        if not self.in_match:
             return False
         pid = Windows.get_foreground_pid()
         return pid == self.pid
@@ -123,20 +117,17 @@ class GameReader:
             self.pid = Windows.get_pid(game_string)
             if self.has_working_pid():
                 print("Tekken pid acquired: %s" % self.pid)
-                self.acquire_state = AcquireState.has_everything
+                self.reacquire_module()
             else:
                 print("Tekken pid not acquired. Trying to acquire...")
                 return None
-
-        if self.acquire_state == AcquireState.need_module:
-            self.reacquire_module()
 
         if self.process_handle is not None:
             return self.get_game_snapshot(rollback_frame)
         return None
 
     def get_update_wait_ms(self, elapsed_ms):
-        if self.acquire_state == AcquireState.in_match:
+        if self.in_match:
             wait_ms = max(2, 8 - int(round(elapsed_ms)))
         else:
             wait_ms = 100
@@ -146,13 +137,14 @@ class GameReader:
         try:
             player_data_base_address = self.get_player_data_base_address()
         except ReadProcessMemoryException:
-            if self.acquire_state == AcquireState.in_match:
+            if self.in_match:
                 Hook.finish_match()
-            self.acquire_state = AcquireState.has_everything
+            self.in_match = False
             return None
 
-        if self.acquire_state != AcquireState.in_match:
+        if not self.in_match:
             Hook.start_match()
+            self.in_match = True
 
         frame_chunk = self.get_frame_chunk(player_data_base_address)
 
@@ -189,9 +181,7 @@ class GameReader:
         else:
             print("Found %s" % game_string)
             self.process_handle = Windows.open_process(0x10, False, self.pid)
-            if self.process_handle:
-                self.acquire_state = AcquireState.has_everything
-            else:
+            if not self.process_handle:
                 print("Failed to acquire process_handle")
 
     def get_player_data_base_address(self):

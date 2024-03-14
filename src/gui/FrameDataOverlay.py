@@ -1,3 +1,5 @@
+import enum
+
 from . import t_tkinter
 from frame_data import Entry, Hook
 from game_parser import MoveInfoEnums
@@ -10,14 +12,12 @@ DAMAGE_CMD = 'DMG'
 class FrameDataOverlay():
     padding = 15
     geometry = None
-    unknown = '???'
+    unknown = ''
     max_lines = 6
     last_time = None
     col_max_length = 10
     sizes = {
-        DataColumns.move_id: 18,
-        DataColumns.startup: 14,
-        DataColumns.block: 12,
+        Entry.DataColumns.hit_outcome: 25,
     }
 
     def __init__(self):
@@ -60,18 +60,20 @@ class FrameDataOverlay():
         self.style = t_tkinter.Style()
         self.style.theme_use('alt')
         self.style.configure('.', background=self.background_color)
-        self.style.configure('.', foreground=Overlay.ColorSchemeEnum.advantage_text.value)
+        self.style.configure('.', foreground=ColorSchemeEnum.advantage_text.value)
         self.style.configure('TFrame', background=self.tranparency_color)
 
-        # self.fa_var = self.create_frame_advantage_label()
+
+        self.fa_var = t_tkinter.StringVar()
+        self.fa_label = self.create_frame_advantage_label()
         self.create_padding_frame()
         self.text = self.create_textbox()
         self.create_padding_frame()
         self.create_padding_frame()
         self.add_buttons()
 
-        self.text.tag_config("p1", foreground=Overlay.ColorSchemeEnum.p1_text.value)
-        self.text.tag_config("p2", foreground=Overlay.ColorSchemeEnum.p2_text.value)
+        self.text.tag_config("p1", foreground=ColorSchemeEnum.p1_text.value)
+        self.text.tag_config("p2", foreground=ColorSchemeEnum.p2_text.value)
 
     def print_f(self, entry, is_p1=None):
         if len(self.entries) == 0:
@@ -80,6 +82,8 @@ class FrameDataOverlay():
         self.scroll()
 
         self.entries.append(entry)
+
+        self.handle_fa(entry)
 
         Hook.handle_entry(entry)
 
@@ -90,22 +94,41 @@ class FrameDataOverlay():
         out += "\n"
         self.text.insert("end", out, text_tag)
 
+    def handle_fa(self, entry):
+        if entry[Entry.DataColumns.block] is None:
+            fa_str = "-"
+        else:
+            fa_str = entry.get(Entry.DataColumns.fa, "-")
+        try:
+            fa = int(fa_str)
+        except ValueError:
+            fa = 0
+        if fa <= -15:
+            color = ColorSchemeEnum.advantage_very_punishible
+        elif fa <= -10:
+            color = ColorSchemeEnum.advantage_punishible
+        elif fa <= 0:
+            color = ColorSchemeEnum.advantage_slight_minus
+        else:
+            color = ColorSchemeEnum.advantage_plus
+        self.fa_label.configure(background=color.value)
+        self.fa_var.set(fa_str)
+
     def create_padding_frame(self):
         padding = t_tkinter.Frame(self.toplevel, width=10)
         padding.pack(side=t_tkinter.LEFT)
 
     def create_frame_advantage_label(self):
-        frame_advantage_var = t_tkinter.StringVar()
-        frame_advantage_label = t_tkinter.Label(self.toplevel, textvariable=frame_advantage_var,
+        frame_advantage_label = t_tkinter.Label(self.toplevel, textvariable=self.fa_var,
             font=("Courier New", 44), width=4, anchor='c', borderwidth=1, relief='ridge')
         frame_advantage_label.pack(side=t_tkinter.LEFT)
-        return frame_advantage_var
+        return frame_advantage_label
 
     def create_textbox(self):
         textbox = t_tkinter.Text(self.toplevel, font=("Courier New", 10), highlightthickness=0, pady=0, relief='flat')
         textbox.pack(side=t_tkinter.LEFT)
         textbox.configure(background=self.background_color)
-        textbox.configure(foreground=Overlay.ColorSchemeEnum.system_text.value)
+        textbox.configure(foreground=ColorSchemeEnum.system_text.value)
         return textbox
 
     def add_buttons(self):
@@ -149,7 +172,7 @@ class FrameDataOverlay():
         return '%d/%3d' % (now, diff)
 
     def get_value(self, entry, col):
-        if col in entry:
+        if col in entry and entry[col] is not None:
             value = str(entry[col])
         else:
             value = self.unknown
@@ -163,7 +186,9 @@ class FrameDataOverlay():
         return (' ' * before) + value + (' ' * after)
 
     def get_frame_data_string(self, entry):
-        values = [self.get_value(entry, col) for col in Entry.DataColumns]
+        values = [self.get_value(entry, col) for col in Entry.DataColumns if col not in [
+            Entry.DataColumns.is_player,
+        ]]
         return '|'.join(values)
 
     def scroll(self):

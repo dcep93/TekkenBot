@@ -167,9 +167,12 @@ class InputAttackCodes(enum.Enum):
 
 class CharacterCodes(enum.Enum):
     LAW = 1
+    KING = 2
+    YOSHIMITSU = 3
     KAZUYA = 8
     ASUKA = 11
     DRAGUNOV = 15
+    LEO = 16
     ALISA = 18
     JUN = 27
     VICTOR = 30
