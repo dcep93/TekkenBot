@@ -32,8 +32,6 @@ class GameReader:
         self.module_address = 0
         self.c = ConfigReader.ConfigReader('memory_address')
         self.player_data_pointer_offset = self.c['MemoryAddressOffsets']['player_data_pointer_offset']
-        self.p1_movelist_parser = None
-        self.p2_movelist_parser = None
 
     def get_value_from_address(self, address, address_type):
         if address_type is AddressType._string:
@@ -230,25 +228,6 @@ class GameReader:
             address = 'PlayerDataAddress.%s' % axis
             p1_dict[address] = p1_coord_array
             p2_dict[address] = p2_coord_array
-
-        p1_dict['movelist_parser'] = self.p1_movelist_parser
-        p2_dict['movelist_parser'] = self.p2_movelist_parser
-
-    def reacquire_names(self, is_player_player_one):
-        self.acquire_state = AcquireState.has_everything
-        if not Flags.Flags.no_movelist:
-            self.p1_movelist_parser = self.populate_movelists("P1_Movelist")
-            self.p2_movelist_parser = self.populate_movelists("P2_Movelist")
-
-    def populate_movelists(self, data_type):
-        return
-        movelist_str = self.c["NonPlayerDataAddresses"][data_type]
-        movelist_trail = split_str_to_hex(movelist_str)
-
-        movelist_address = self.get_value_from_address(self.module_address + movelist_trail[0], AddressType._64bit)
-        movelist_block = self.get_block_of_data(movelist_address, self.c["MemoryAddressOffsets"]["movelist_size"])
-
-        return MovelistParser.MovelistParser(movelist_block, movelist_address)
 
 def split_str_to_hex(string):
     return list(map(to_hex, string.split()))

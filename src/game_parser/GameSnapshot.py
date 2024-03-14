@@ -34,8 +34,6 @@ class PlayerSnapshot:
         self.hit_outcome = MoveInfoEnums.HitOutcome(d['PlayerDataAddress.hit_outcome'])
         self.mystery_state = d['PlayerDataAddress.mystery_state']
 
-        self.movelist_parser = d['movelist_parser']
-
         self.character_name = MoveInfoEnums.CharacterCodes(d['PlayerDataAddress.char_id']).name
 
     def get_input_state(self):
