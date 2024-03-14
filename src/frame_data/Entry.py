@@ -9,6 +9,8 @@ def build(game_log, is_p1):
     attacker = game_log.get(is_p1)
     receiver = game_log.get(not is_p1)
 
+    entry[DataColumns.is_player] = game_log.is_player_player_one == is_p1
+
     entry[DataColumns.fa] = get_fa(game_log, is_p1, attacker, receiver)
 
     entry[DataColumns.startup] = attacker.startup
@@ -73,12 +75,13 @@ def get_combo(game_log, is_p1):
 
 @enum.unique
 class DataColumns(enum.Enum):
-    time = 'time'
+    is_player = 'is this the player running TekkenBot'
+    time = 'time (frame / diff)'
     char_name = 'character name'
     move_id = 'internal move id number'
-    hit_type = 'attack type'
+    hit_type = 'attack type (high/mid/low/etc)'
     startup = 'startup frames'
-    block = 'frame advantage on block'
+    block = 'frame advantage on block (looks in database for minimum magnitude)'
     fa = 'frame advantage right now'
-    combo = 'combo data'
-    health = 'remaining health'
+    combo = 'combo data (hits / damage)'
+    health = 'remaining health (p1 / p2)'

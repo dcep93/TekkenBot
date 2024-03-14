@@ -5,3 +5,9 @@ import json
 
 def initialize():
     return
+
+def finish_match():
+    pass
+
+def record_move(entry):
+    pass

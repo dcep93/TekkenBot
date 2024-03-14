@@ -1,8 +1,11 @@
+from . import Database, Entry
+
 def start_match():
     pass
 
 def finish_match():
-    pass
+    Database.finish_match()
 
 def handle_entry(entry):
-    pass
+    if Entry.DataColumns.is_player in entry:
+        Database.record_move(entry)
