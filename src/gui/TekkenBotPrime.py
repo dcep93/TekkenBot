@@ -25,7 +25,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         Shared.Shared.game_reader = game_reader
         self.overlay = FrameDataOverlay.FrameDataOverlay()
 
-        Database.populate_database()
+        Database.initialize()
 
         self.update()
         if Flags.Flags.pickle_src is None:

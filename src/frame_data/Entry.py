@@ -1,4 +1,5 @@
-from . import Database, DataColumns
+import enum
+
 from game_parser import MoveInfoEnums
 
 MAX_HEALTH = 180
@@ -67,3 +68,15 @@ def get_combo(game_log, is_p1):
         if not p.is_getting_comboed():
             break
     return f'{count}/{damage}'
+
+@enum.unique
+class DataColumns(enum.Enum):
+    time = 'time'
+    char_name = 'character name'
+    move_id = 'internal move id number'
+    hit_type = 'attack type'
+    startup = 'startup frames'
+    block = 'frame advantage on block'
+    fa = 'frame advantage right now'
+    combo = 'combo data'
+    health = 'remaining health'

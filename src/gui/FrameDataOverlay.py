@@ -1,5 +1,5 @@
 from . import t_tkinter
-from frame_data import Database, DataColumns, Entry
+from frame_data import DataColumns, Entry
 from game_parser import MoveInfoEnums
 from misc import Path
 from misc.Windows import w as Windows

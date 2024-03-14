@@ -3,6 +3,7 @@ import enum
 import struct
 
 from . import GameSnapshot, MoveInfoEnums
+from frame_data import Hook
 from game_parser import MovelistParser
 from misc import ConfigReader, Flags
 from misc.Windows import w as Windows
@@ -145,6 +146,8 @@ class GameReader:
         try:
             player_data_base_address = self.get_player_data_base_address()
         except ReadProcessMemoryException:
+            if self.acquire_state == AcquireState.has_everything:
+                Hook.finish_match()
             self.acquire_state = AcquireState.need_names
             return None
 
