@@ -98,14 +98,26 @@ class GameLog:
             return '$ %s' % string
 
     def deduce_move_string_from_inputs(self, is_p1, move_id):
-        for i in range(1, len(self.state_log)):
+        last_input = ''
+        reversed_inputs = []
+        for i in range(2, len(self.state_log)):
             state = self.get(is_p1, i)
             if state is None:
                 break
-            if state.move_id != move_id:
-                input_string = state.get_input_as_string()
-                return '* %s' % input_string
-        return "N/A"
+            input_string = state.get_input_as_string()
+            if input_string != last_input:
+                reversed_inputs.append(input_string.replace("N", ""))
+            if state.attack_type == MoveInfoEnums.AttackType.RECOVERING:
+                break
+            last_input = input_string
+        inputs = []
+        previous_input = ''
+        for input_ in reversed(reversed_inputs):
+            if all(i in previous_input for i in input_):
+                continue
+            previous_input = input_
+            inputs.append(input_)
+        return '* %s' % ",".join(inputs)
 
     def was_just_floated(self, is_p1):
         player = self.get(is_p1, 1)

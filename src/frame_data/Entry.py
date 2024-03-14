@@ -5,7 +5,8 @@ MAX_HEALTH = 180
 
 def build(game_log, is_p1):
     entry = {}
-    fa_str = get_fa(game_log, is_p1)
+    receiver = game_log.get(not is_p1)
+    fa_str = get_fa(game_log, is_p1, receiver)
     Hook.track_fa(game_log, is_p1, fa_str, receiver)
     entry[DataColumns.DataColumns.fa] = fa_str
     entry[DataColumns.DataColumns.move_id] = game_log.get(is_p1, 1).move_id
@@ -16,7 +17,7 @@ def build(game_log, is_p1):
 
     loaded = Database.load(entry)
     if not loaded:
-        entry = build_frame_data_entry(game_log, entry, is_p1)
+        entry = build_frame_data_entry(game_log, entry, is_p1, receiver)
         Database.record(entry)
 
     if not game_log.get(not is_p1).is_blocking():
@@ -29,15 +30,13 @@ def build(game_log, is_p1):
 def get_char_name(game_log, is_p1):
     return MoveInfoEnums.CharacterCodes(game_log.get(is_p1).char_id).name
 
-def build_frame_data_entry(game_log, entry, is_p1):
+def build_frame_data_entry(game_log, entry, is_p1, receiver):
     state = game_log.get(is_p1, 1)
     entry[DataColumns.DataColumns.startup] = state.startup
     entry[DataColumns.DataColumns.hit_type] = MoveInfoEnums.AttackType(state.attack_type).name
     if state.is_attack_throw():
         entry[DataColumns.DataColumns.hit_type] += "_THROW"
     entry[DataColumns.DataColumns.cmd] = game_log.get_current_move_string(is_p1)
-
-    receiver = game_log.get(not is_p1)
 
     fa = entry[DataColumns.DataColumns.fa]
     if receiver.is_blocking():
@@ -49,8 +48,7 @@ def build_frame_data_entry(game_log, entry, is_p1):
 
     return entry
 
-def get_fa(game_log, is_p1):
-    receiver = game_log.get(not is_p1)
+def get_fa(game_log, is_p1, receiver):
     if receiver.is_being_knocked_down():
         return 'KND'
     elif receiver.is_being_juggled():

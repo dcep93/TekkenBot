@@ -240,9 +240,6 @@ class GameReader:
             self.p1_movelist_parser = self.populate_movelists("P1_Movelist")
             self.p2_movelist_parser = self.populate_movelists("P2_Movelist")
 
-            print("acquired movelists")
-            raise Exception("check_movelists")
-
     def populate_movelists(self, data_type):
         return
         movelist_str = self.c["NonPlayerDataAddresses"][data_type]

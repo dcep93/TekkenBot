@@ -1,3 +1,3 @@
 python3 main.py --debug
-pause
+@REM pause
 call main.bat

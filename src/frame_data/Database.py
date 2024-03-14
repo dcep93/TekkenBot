@@ -104,6 +104,7 @@ def key(entry):
     return (entry[DataColumns.DataColumns.char_name], str(entry[DataColumns.DataColumns.move_id]))
 
 def populate_database():
+    return
     for character in Characters:
         populate_character(character.name)
 

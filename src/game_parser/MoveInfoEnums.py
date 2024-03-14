@@ -175,8 +175,10 @@ class InputAttackCodes(enum.Enum):
     xRAGE = 8192
 
 class CharacterCodes(enum.Enum):
+    DUMMY = 116
     KING_ = 128
     KAZUYA = 8
+    JUN = 27
 
     PAUL = 0
     LAW = 1
@@ -205,7 +207,6 @@ class CharacterCodes(enum.Enum):
     JOSIE = 24
     GIGAS = 25
     KAZUMI = 26
-    DEVIL_KAZUMI = 27 #not selectable
     NINA = 28
     MASTER_RAVEN = 29
     LEE = 30
