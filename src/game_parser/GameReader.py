@@ -151,6 +151,9 @@ class GameReader:
             self.acquire_state = AcquireState.has_everything
             return None
 
+        if self.acquire_state != AcquireState.in_match:
+            Hook.start_match()
+
         frame_chunk = self.get_frame_chunk(player_data_base_address)
 
         if rollback_frame >= len(frame_chunk):

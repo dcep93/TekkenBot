@@ -1,3 +1,6 @@
+def start_match():
+    pass
+
 def finish_match():
     pass
 
