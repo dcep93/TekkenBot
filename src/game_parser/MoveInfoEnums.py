@@ -85,6 +85,8 @@ class ComplexMoveStates(safeEnum):  #These are tracking states>
 
     SW = 28 #sidewalk left or right
 
+    BROKEN_54 = 54
+
     UNKN = 999999 #used to indicate a non standard tracking move
 
 class ThrowTechs(safeEnum):
@@ -180,6 +182,7 @@ class CharacterCodes(enum.Enum):
     KAZUYA = 8
     JUN = 27
     VICTOR = 30
+    DRAGUNOV = 15
 
     PAUL = 0
     LAW = 1
@@ -196,7 +199,7 @@ class CharacterCodes(enum.Enum):
     ASUKA = 12
     DEVIL_JIN = 13
     FENG = 14
-    LILI = 15
+    LILI = 150
     DRAGUNOV = 16
     LEO = 17
     LARS = 18
