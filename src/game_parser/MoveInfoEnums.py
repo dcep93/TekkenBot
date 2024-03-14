@@ -179,6 +179,7 @@ class CharacterCodes(enum.Enum):
     KING_ = 128
     KAZUYA = 8
     JUN = 27
+    VICTOR = 30
 
     PAUL = 0
     LAW = 1
@@ -209,7 +210,7 @@ class CharacterCodes(enum.Enum):
     KAZUMI = 26
     NINA = 28
     MASTER_RAVEN = 29
-    LEE = 30
+    LEE = 300
     BOB = 31
     AKUMA = 32
     KUMA = 33
