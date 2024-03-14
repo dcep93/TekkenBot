@@ -22,7 +22,11 @@ def build(game_log, is_p1):
 
     entry[DataColumns.move_id] = attacker.move_id
  
-    entry[DataColumns.char_name] = MoveInfoEnums.CharacterCodes(attacker.char_id).name
+    try:
+        char_name = MoveInfoEnums.CharacterCodes(attacker.char_id).name
+    except ValueError:
+        char_name = attacker.char_id
+    entry[DataColumns.char_name] = char_name
     
     entry[DataColumns.health] = get_remaining_health_string(game_log)
 
