@@ -183,9 +183,11 @@ class CharacterCodes(enum.Enum):
     JUN = 27
     VICTOR = 30
     DRAGUNOV = 15
+    ALISA = 18
+    LAW = 1
+    ASUKA = 11
 
     PAUL = 0
-    LAW = 1
     KING = 2
     YOSHIMITSU = 3
     HWOARANG = 4
@@ -195,15 +197,13 @@ class CharacterCodes(enum.Enum):
     # HEIHACHI = 8
     # KAZUYA = 9
     STEVE = 10
-    JACK_7 = 11
-    ASUKA = 12
+    JACK_7 = 110
     DEVIL_JIN = 13
     FENG = 14
     LILI = 150
     DRAGUNOV = 16
     LEO = 17
-    LARS = 18
-    ALISA = 19
+    LARS = 180
     CLAUDIO = 20
     KATARINA = 21
     LUCKY_CHLOE = 22
