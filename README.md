@@ -41,3 +41,4 @@ Created by roguelike2d. Maintained by the community.
 - [ ] fresh images
 - [ ] autobuild exe and release on commit if version is updated!
 - [ ] documentation
+- [ ] reduce noise from strings

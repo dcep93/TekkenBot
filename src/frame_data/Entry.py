@@ -1,50 +1,35 @@
-from . import Database, DataColumns, Hook
+from . import Database, DataColumns
 from game_parser import MoveInfoEnums
 
 MAX_HEALTH = 180
 
 def build(game_log, is_p1):
     entry = {}
+    attacker = game_log.get(is_p1)
     receiver = game_log.get(not is_p1)
-    fa_str = get_fa(game_log, is_p1, receiver)
-    Hook.track_fa(game_log, is_p1, fa_str, receiver)
-    entry[DataColumns.DataColumns.fa] = fa_str
-    entry[DataColumns.DataColumns.move_id] = game_log.get(is_p1, 1).move_id
+
+    entry[DataColumns.DataColumns.fa] = get_fa(game_log, is_p1, attacker, receiver)
+
+    entry[DataColumns.DataColumns.startup] = attacker.startup
+    if attacker.is_attack_throw():
+        entry[DataColumns.DataColumns.hit_type] = "THROW"
+    else:
+        entry[DataColumns.DataColumns.hit_type] = MoveInfoEnums.AttackType(attacker.attack_type).name
+
+    if receiver.is_blocking():
+        entry[DataColumns.DataColumns.block] = entry[DataColumns.DataColumns.fa]
+
+    entry[DataColumns.DataColumns.move_id] = attacker.move_id
  
-    entry[DataColumns.DataColumns.char_name] = get_char_name(game_log, is_p1)
+    entry[DataColumns.DataColumns.char_name] = MoveInfoEnums.CharacterCodes(attacker.char_id).name
     
     entry[DataColumns.DataColumns.health] = get_remaining_health_string(game_log)
-
-    # TODO wut
-    loaded = Database.load(entry)
-    if not loaded:
-        entry = build_frame_data_entry(game_log, entry, is_p1, receiver)
-        Database.record(entry)
-
-    if not game_log.get(not is_p1).is_blocking():
-        del entry[DataColumns.DataColumns.fa]
 
     entry[DataColumns.DataColumns.combo] = get_combo(game_log, is_p1)
 
     return entry
 
-def get_char_name(game_log, is_p1):
-    return MoveInfoEnums.CharacterCodes(game_log.get(is_p1).char_id).name
-
-def build_frame_data_entry(game_log, entry, is_p1, receiver):
-    state = game_log.get(is_p1, 1)
-    entry[DataColumns.DataColumns.startup] = state.startup
-    if state.is_attack_throw():
-        entry[DataColumns.DataColumns.hit_type] = "THROW"
-    else:
-        entry[DataColumns.DataColumns.hit_type] = MoveInfoEnums.AttackType(state.attack_type).name
-
-    if receiver.is_blocking():
-        entry[DataColumns.DataColumns.block] = entry[DataColumns.DataColumns.fa]
-
-    return entry
-
-def get_fa(game_log, is_p1, receiver):
+def get_fa(game_log, is_p1, attacker, receiver):
     if receiver.is_being_knocked_down():
         return 'KND'
     elif receiver.is_being_juggled():
@@ -52,7 +37,7 @@ def get_fa(game_log, is_p1, receiver):
     elif game_log.was_just_floated(not is_p1):
         return 'FLT'
     else:
-        time_till_recovery_p1 = game_log.get(is_p1).get_frames_til_next_move()
+        time_till_recovery_p1 = attacker.get_frames_til_next_move()
         time_till_recovery_p2 = 0 if receiver.hit_outcome is MoveInfoEnums.HitOutcome.NONE else receiver.get_frames_til_next_move()
 
         raw_fa = time_till_recovery_p2 - time_till_recovery_p1
