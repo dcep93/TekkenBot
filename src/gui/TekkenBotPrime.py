@@ -4,7 +4,7 @@ import sys
 
 import traceback
 
-from . import t_tkinter, OverlayFamily
+from . import t_tkinter, FrameDataOverlay
 from frame_data import Database
 from game_parser import GameLog, GameReader, ScriptedGame
 from misc import Flags, Path
@@ -23,7 +23,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         else:
             game_reader = GameReader.GameReader()
         Shared.Shared.game_reader = game_reader
-        self.overlay_family = OverlayFamily.OverlayFamily()
+        self.overlay = FrameDataOverlay.FrameDataOverlay()
 
         Database.populate_database()
 
