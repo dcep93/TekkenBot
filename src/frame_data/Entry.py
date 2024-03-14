@@ -9,7 +9,15 @@ def build(game_log, is_p1):
     attacker = game_log.get(is_p1)
     receiver = game_log.get(not is_p1)
 
+    try:
+        char_name = MoveInfoEnums.CharacterCodes(attacker.char_id).name
+    except ValueError:
+        char_name = attacker.char_id
+    entry[DataColumns.char_name] = char_name
+
     entry[DataColumns.is_player] = game_log.is_player_player_one == is_p1
+
+    entry[DataColumns.move_id] = attacker.move_id
 
     entry[DataColumns.fa] = get_fa(game_log, is_p1, attacker, receiver)
 
@@ -21,18 +29,14 @@ def build(game_log, is_p1):
 
     if receiver.complex_state == MoveInfoEnums.ComplexMoveStates.BLOCK:
         entry[DataColumns.block] = entry[DataColumns.fa]
+    else:
+        entry[DataColumns.block] = None
 
-    entry[DataColumns.move_id] = attacker.move_id
- 
-    try:
-        char_name = MoveInfoEnums.CharacterCodes(attacker.char_id).name
-    except ValueError:
-        char_name = attacker.char_id
-    entry[DataColumns.char_name] = char_name
-    
     entry[DataColumns.health] = get_remaining_health_string(game_log)
 
     entry[DataColumns.combo] = get_combo(game_log, is_p1)
+
+    entry[DataColumns.hit_outcome] = receiver.hit_outcome.name
 
     return entry
 
@@ -85,3 +89,4 @@ class DataColumns(enum.Enum):
     fa = 'frame advantage right now'
     combo = 'combo data (hits / damage)'
     health = 'remaining health (p1 / p2)'
+    hit_outcome = 'MoveInfoEnums.HitOutcome.name'
