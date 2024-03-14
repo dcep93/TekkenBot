@@ -48,7 +48,7 @@ def replay():
     if moves is None:
         return
     Shared.Shared.frame_data_overlay.print_f({
-        DataColumns.DataColumns.cmd: 'REPLAY'
+        DataColumns.DataColumns.move_id: 'REPLAY'
     })
     print('waiting for tekken focus')
     Replayer.moves = moves

@@ -15,6 +15,7 @@ def build(game_log, is_p1):
     
     entry[DataColumns.DataColumns.health] = get_remaining_health_string(game_log)
 
+    # TODO wut
     loaded = Database.load(entry)
     if not loaded:
         entry = build_frame_data_entry(game_log, entry, is_p1, receiver)
@@ -33,18 +34,13 @@ def get_char_name(game_log, is_p1):
 def build_frame_data_entry(game_log, entry, is_p1, receiver):
     state = game_log.get(is_p1, 1)
     entry[DataColumns.DataColumns.startup] = state.startup
-    entry[DataColumns.DataColumns.hit_type] = MoveInfoEnums.AttackType(state.attack_type).name
     if state.is_attack_throw():
-        entry[DataColumns.DataColumns.hit_type] += "_THROW"
-    entry[DataColumns.DataColumns.cmd] = game_log.get_current_move_string(is_p1)
+        entry[DataColumns.DataColumns.hit_type] = "THROW"
+    else:
+        entry[DataColumns.DataColumns.hit_type] = MoveInfoEnums.AttackType(state.attack_type).name
 
-    fa = entry[DataColumns.DataColumns.fa]
     if receiver.is_blocking():
-        entry[DataColumns.DataColumns.block] = fa
-    elif receiver.is_getting_counter_hit():
-        entry[DataColumns.DataColumns.counter] = fa
-    elif receiver.is_getting_hit():
-        entry[DataColumns.DataColumns.normal] = fa
+        entry[DataColumns.DataColumns.block] = entry[DataColumns.DataColumns.fa]
 
     return entry
 

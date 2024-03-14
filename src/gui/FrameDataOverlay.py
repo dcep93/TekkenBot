@@ -15,11 +15,9 @@ class FrameDataOverlay():
     last_time = None
     col_max_length = 10
     sizes = {
-        DataColumns.DataColumns.cmd: 18,
+        DataColumns.DataColumns.move_id: 18,
         DataColumns.DataColumns.startup: 14,
         DataColumns.DataColumns.block: 12,
-        DataColumns.DataColumns.normal: 12,
-        DataColumns.DataColumns.counter: 12,
     }
 
     def __init__(self):
@@ -84,6 +82,7 @@ class FrameDataOverlay():
 
         self.entries.append(entry)
 
+        # TODO hook
         # if DataColumns.DataColumns.fa in entry:
         #     fa = entry[DataColumns.DataColumns.fa]
         #     background = self.get_background(fa)
@@ -174,12 +173,12 @@ class FrameDataOverlay():
         return (' ' * before) + value + (' ' * after)
 
     def get_frame_data_string(self, entry):
-        values = [self.get_value(entry, col) for col in DataColumns.DataColumns if col is not DataColumns.DataColumns.fa]
+        values = [self.get_value(entry, col) for col in DataColumns.DataColumns]
         return '|'.join(values)
 
     def scroll(self):
         if len(self.entries) > 0:
-            if self.entries[-1][DataColumns.DataColumns.cmd] == DAMAGE_CMD:
+            if self.entries[-1][DataColumns.DataColumns.move_id] == DAMAGE_CMD:
                 self.pop_entry(len(self.entries) - 1)
 
         while len(self.entries) >= self.max_lines:
@@ -216,13 +215,12 @@ class FrameDataOverlay():
             throw_break_string = game_log.get_throw_break(is_p1)
             if throw_break_string:
                 entry = {
-                    DataColumns.DataColumns.move_id: game_log.get(is_p1).move_id,
-                    DataColumns.DataColumns.cmd: throw_break_string,
+                    DataColumns.DataColumns.move_id: throw_break_string,
                 }
             elif game_log.just_lost_health(not is_p1):
                 entry = {
                     DataColumns.DataColumns.health: Entry.get_remaining_health_string(game_log),
-                    DataColumns.DataColumns.cmd: DAMAGE_CMD,
+                    DataColumns.DataColumns.move_id: DAMAGE_CMD,
                     DataColumns.DataColumns.combo: Entry.get_combo(game_log, is_p1),
                 }
             else:
