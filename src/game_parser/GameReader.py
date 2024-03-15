@@ -176,13 +176,14 @@ class GameReader:
         if self.module_address is None:
             print("%s not found. Likely wrong process id. Reacquiring pid." % game_string)
             self.pid = None
-        elif self.module_address != self.c['MemoryAddressOffsets']['expected_module_address']:
+            return
+        if self.module_address != self.c['MemoryAddressOffsets']['expected_module_address']:
             print("Unrecognized location for %s module. Tekken.exe Patch? Wrong process id?" % game_string, hex(self.module_address))
         else:
             print("Found %s" % game_string)
-            self.process_handle = Windows.open_process(0x10, False, self.pid)
-            if not self.process_handle:
-                print("Failed to acquire process_handle")
+        self.process_handle = Windows.open_process(0x10, False, self.pid)
+        if not self.process_handle:
+            print("Failed to acquire process_handle")
 
     def get_player_data_base_address(self):
         offsets = split_str_to_hex(self.player_data_pointer_offset)

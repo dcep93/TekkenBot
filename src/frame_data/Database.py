@@ -32,7 +32,7 @@ def finish_match():
         print(f"finish_match updating {char_name}")
         filename = Path.path(f'./database/frame_data/{char_name}.json')
         with open(filename, 'w') as fh:
-            json.dump(database[char_name], fh, indent=2)
+            json.dump(database[char_name], fh, indent=2, sort_keys=True)
 
 def record_move(entry):
     raw_char_name = entry[Entry.DataColumns.char_name]

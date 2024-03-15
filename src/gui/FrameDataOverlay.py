@@ -10,12 +10,12 @@ from record import Record, Replay
 DAMAGE_CMD = 'DMG'
 
 class FrameDataOverlay():
-    padding = 15
+    padding = 0
     geometry = None
     unknown = ''
     max_lines = 6
     last_time = None
-    col_max_length = 10
+    col_max_length = 12
     sizes = {
         Entry.DataColumns.hit_outcome: 25,
     }
@@ -95,7 +95,7 @@ class FrameDataOverlay():
         self.text.insert("end", out, text_tag)
 
     def handle_fa(self, entry):
-        if entry[Entry.DataColumns.block] is None:
+        if entry.get(Entry.DataColumns.block) is None:
             fa_str = "-"
         else:
             fa_str = entry.get(Entry.DataColumns.fa, "-")
@@ -193,7 +193,11 @@ class FrameDataOverlay():
 
     def scroll(self):
         if len(self.entries) > 0:
-            if self.entries[-1][Entry.DataColumns.move_id] == DAMAGE_CMD:
+            latest = self.entries[-1]
+            if latest.get(Entry.DataColumns.hit_outcome) in [
+                MoveInfoEnums.HitOutcome.JUGGLE.name,
+                MoveInfoEnums.HitOutcome.SCREW.name,
+            ] or latest[Entry.DataColumns.move_id] == DAMAGE_CMD:
                 self.pop_entry(len(self.entries) - 1)
 
         while len(self.entries) >= self.max_lines:

@@ -17,6 +17,7 @@ class AttackType(safeEnum):
     NA = 0 #This move is not an attack
 
     RECOVERING = 12582912
+    UNKNOWN = 1048579
 
 class SimpleMoveStates(safeEnum):
     UNINITIALIZED = 0
@@ -171,9 +172,15 @@ class CharacterCodes(enum.Enum):
     YOSHIMITSU = 3
     KAZUYA = 8
     ASUKA = 11
+    DEVIL_JIN = 12
+    LILI = 14
     DRAGUNOV = 15
     LEO = 16
     ALISA = 18
+    NINA = 21
     JUN = 27
+    REINA = 28
+    AZUCENA = 29
     VICTOR = 30
+    RAVEN = 31
     _DUMMY = 116
