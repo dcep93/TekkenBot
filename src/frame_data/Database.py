@@ -31,8 +31,9 @@ def finish_match():
         characters_to_update.pop(char_name)
         print(f"finish_match updating {char_name}")
         filename = Path.path(f'./database/frame_data/{char_name}.json')
+        to_write = json.dumps(database[char_name], indent=2, sort_keys=True)
         with open(filename, 'w') as fh:
-            json.dump(database[char_name], fh, indent=2, sort_keys=True)
+            fh.write(to_write)
 
 def record_move(entry):
     raw_char_name = entry[Entry.DataColumns.char_name]
