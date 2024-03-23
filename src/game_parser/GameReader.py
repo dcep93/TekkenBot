@@ -166,9 +166,12 @@ class GameReader:
 
         is_player_player_one = self.get_value_at_end_of_pointer_trail("OPPONENT_SIDE", AddressType._64bit) == 1
 
+        if not is_player_player_one:
+            p1_snapshot, p2_snapshot = p2_snapshot, p1_snapshot
+
         facing_bool = bool(self.get_value_from_data_block(player_data_frame, self.c['GameDataAddress']['facing']) ^ is_player_player_one)
 
-        return GameSnapshot.GameSnapshot(is_player_player_one, p1_snapshot, p2_snapshot, best_frame_count, facing_bool)
+        return GameSnapshot.GameSnapshot(p1_snapshot, p2_snapshot, best_frame_count, facing_bool)
 
     def reacquire_module(self):
         print("Trying to acquire Tekken library in pid: %s" % self.pid)

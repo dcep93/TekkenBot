@@ -4,7 +4,6 @@ from record import Record
 
 class GameLog:
     obj = None
-    is_player_player_one = True
 
     def __init__(self):
         self.state_log = []
@@ -37,8 +36,6 @@ class GameLog:
         if len(self.state_log) > 0 and self.state_log[-1].frame_count == game_snapshot.frame_count:
             return
 
-        self.is_player_player_one = game_snapshot.is_player_player_one
-
         self.state_log.append(game_snapshot)
 
         obj = None # for debugging
@@ -49,7 +46,7 @@ class GameLog:
         overlay.update_state(self)
         Record.record_if_activated()
 
-        if len(self.state_log) > 300:
+        if len(self.state_log) > 3000:
             self.state_log.pop(0)
 
     def is_starting_attack(self, is_p1):
@@ -67,7 +64,6 @@ class GameLog:
         return False
 
     def get_throw_break(self, is_p1):
-        frames_to_break = 20
         state = self.get(not is_p1)
         throw_tech = state.throw_tech
         if throw_tech in [MoveInfoEnums.ThrowTechs.NONE, MoveInfoEnums.ThrowTechs.BROKEN_ThrowTechs]:
@@ -91,7 +87,7 @@ class GameLog:
                 relevant = current_buttons.replace('x3', '').replace('x4', '')
                 throw_break = MoveInfoEnums.InputAttackCodes[relevant]
                 break_string = throw_break.name.replace('x', '')
-                throw_break_string = 'br: %s/%s %d/%d' % (break_string, correct, i-2, frames_to_break)
+                throw_break_string = '%s/%s %d' % (break_string, correct, i-2)
                 return throw_break_string
             buttons = state.input_button.name
             if '1' in buttons or '2' in buttons:

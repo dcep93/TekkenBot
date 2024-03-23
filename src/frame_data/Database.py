@@ -50,7 +50,7 @@ def record_move(entry):
             {k.name:v for k,v in entry.items()}
         )
 
-    move_id = entry[Entry.DataColumns.move_id]
+    move_id = str(entry[Entry.DataColumns.move_id])
     char_dict = database[char_name]
     if move_id in char_dict:
         val = char_dict[move_id]

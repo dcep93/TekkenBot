@@ -28,8 +28,7 @@ class PlayerSnapshot:
         self.recovery_window_bitmask = d['PlayerDataAddress.recovery']
 
 class GameSnapshot:
-    def __init__(self, is_player_player_one, p1, p2, frame_count, facing_bool):
-        self.is_player_player_one = is_player_player_one
+    def __init__(self, p1, p2, frame_count, facing_bool):
         self.p1 = p1
         self.p2 = p2
         self.frame_count = frame_count

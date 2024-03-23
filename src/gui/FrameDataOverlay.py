@@ -64,12 +64,11 @@ class FrameDataOverlay():
         self.style.configure('TFrame', background=self.tranparency_color)
 
 
-        self.fa_var = t_tkinter.StringVar()
-        self.fa_label = self.create_frame_advantage_label()
         self.create_padding_frame()
         self.text = self.create_textbox()
         self.create_padding_frame()
-        self.create_padding_frame()
+        self.fa_var = t_tkinter.StringVar()
+        self.fa_label = self.create_frame_advantage_label()
         self.add_buttons()
 
         self.text.tag_config("p1", foreground=ColorSchemeEnum.p1_text.value)
@@ -79,7 +78,8 @@ class FrameDataOverlay():
         if len(self.entries) == 0:
             print(self.column_names_string)
 
-        self.scroll()
+        if entry[Entry.DataColumns.move_id] != DAMAGE_CMD:
+            self.scroll()
 
         self.entries.append(entry)
 
@@ -286,8 +286,8 @@ class FullscreenTekkenRect:
 @enum.unique
 class ColorSchemeEnum(enum.Enum):
     background = 'gray10'
-    p1_text = '#93A1A1'
-    p2_text = '#586E75'
+    p1_text = '#586E75'
+    p2_text = '#93A1A1'
     system_text = 'lawn green'
     advantage_plus = 'DodgerBlue2'
     advantage_slight_minus = 'ivory2'

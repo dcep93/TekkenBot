@@ -15,7 +15,7 @@ def build(game_log, is_p1):
         char_name = attacker.char_id
     entry[DataColumns.char_name] = char_name
 
-    entry[DataColumns.is_player] = game_log.is_player_player_one == is_p1
+    entry[DataColumns.is_player] = is_p1
 
     entry[DataColumns.move_id] = attacker.move_id
 
@@ -74,7 +74,12 @@ def get_combo(game_log, is_p1):
             damage += last_damage - p.damage_taken
             last_damage = p.damage_taken
         if p.hit_outcome in [MoveInfoEnums.HitOutcome.NONE, MoveInfoEnums.HitOutcome.BLOCKED_STANDING, MoveInfoEnums.HitOutcome.BLOCKED_CROUCHING]:
-            break
+            if p.simple_state not in [
+                MoveInfoEnums.SimpleMoveStates.JUGGLED,
+                MoveInfoEnums.SimpleMoveStates.WALL_SPLAT_18,
+                MoveInfoEnums.SimpleMoveStates.WALL_SPLAT_19,
+            ]:
+                break
     return f'{count}/{damage}'
 
 @enum.unique
@@ -82,11 +87,11 @@ class DataColumns(enum.Enum):
     time = 'time (frame / diff)'
     char_name = 'character name'
     hit_type = 'attack type (high/mid/low/etc)'
+    hit_outcome = 'MoveInfoEnums.HitOutcome.name'
+    move_id = 'internal move id number'
+    health = 'remaining health (p1 / p2)'
+    combo = 'combo data (hits / damage)'
     startup = 'startup frames'
     block = 'frame advantage on block (looks in database for minimum)'
-    combo = 'combo data (hits / damage)'
-    hit_outcome = 'MoveInfoEnums.HitOutcome.name'
     fa = 'frame advantage right now'
-    health = 'remaining health (p1 / p2)'
-    move_id = 'internal move id number'
     is_player = 'is this the player running TekkenBot'

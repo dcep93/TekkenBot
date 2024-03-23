@@ -60,12 +60,8 @@ class Recorder:
 
 def get_input_state():
     last_state = Shared.Shared.game_log.state_log[-1]
-    if Shared.Shared.game_log.is_player_player_one:
-        player = last_state.p1
-        opp = last_state.p2
-    else:
-        player = last_state.p2
-        opp = last_state.p1
+    player = last_state.p1
+    opp = last_state.p2
     player_input_state = get_input_as_string(player)
     if Recorder.state == RecordingState.SINGLE:
         return player_input_state
