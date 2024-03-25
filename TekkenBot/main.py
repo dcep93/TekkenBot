@@ -5,7 +5,7 @@ sys.path.append('src')
 import traceback
 
 from gui import TekkenBotPrime
-from misc import Flags, recorded_sha, imports
+from misc import Flags, recorded_sha
 
 def main():
     print("https://github.com/dcep93/TekkenBot")
