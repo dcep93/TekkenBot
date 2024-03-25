@@ -1,5 +1,5 @@
 set -euo pipefail
 
-zip -r TekkenBotPrime.zip TekkenBot
+tar -a -c -f TekkenBotPrime.zip TekkenBot
 
 mv TekkenBotPrime.zip TekkenBot
