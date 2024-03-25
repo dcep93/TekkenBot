@@ -1,3 +1,3 @@
 from tkinter import *
 from tkinter.ttk import *
-import tkinterx
+import tkinter

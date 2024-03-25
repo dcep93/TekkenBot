@@ -20,4 +20,4 @@ jobs:
         with:
           tag_name: tag/${{ github.sha }}
           name: release/${{ github.sha }}
-          files: TekkenBotPrime.tar.gz
+          files: TekkenBotPrime.tar
