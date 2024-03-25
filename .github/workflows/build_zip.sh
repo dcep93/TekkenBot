@@ -1,3 +1,3 @@
 set -euo pipefail
 
-tar -a -c -f TekkenBotPrime.zip TekkenBot
+tar -a -c -f TekkenBotPrime.tar.gz TekkenBot
