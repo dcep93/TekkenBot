@@ -24,7 +24,6 @@ if __name__ == "__main__":
             print(traceback.format_exc())
             print(e)
             print("died")
-        input()
 
 # pyinstaller seems to ignore imports in child scripts
 # dont need to call this function, just need
