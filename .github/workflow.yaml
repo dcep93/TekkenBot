@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   workflow:
     runs-on: ubuntu-latest
