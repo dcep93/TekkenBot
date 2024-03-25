@@ -11,6 +11,7 @@ jobs:
           fetch-depth: 2
           submodules: true
       - run: bash .github/workflows/record_sha.sh
+      - run: bash .github/workflows/build_exe.sh
       - run: bash .github/workflows/build_zip.sh
 
       # # https://github.com/softprops/action-gh-release
