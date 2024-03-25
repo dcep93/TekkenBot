@@ -1,6 +1,3 @@
-import tkinter
-import tkinterx
-
 import sys
 
 sys.path.append('src')
