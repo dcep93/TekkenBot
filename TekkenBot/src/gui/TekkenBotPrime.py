@@ -82,7 +82,8 @@ class TextRedirector:
         self.widget.insert("end", s, (self.tag,))
         self.widget.configure(state="disabled")
         self.widget.see('end')
-        self.stdout.write(s)
+        if self.stdout:
+            self.stdout.write(s)
 
     def flush(self):
         pass

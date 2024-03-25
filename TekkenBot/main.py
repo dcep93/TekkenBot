@@ -18,7 +18,7 @@ if __name__ == "__main__":
     try:
         main()
     except Exception as e:
-        if sys.__stdout__.isatty():
+        if sys.__stdout__ and sys.__stdout__.isatty():
             raise e
         else:
             print(traceback.format_exc())
