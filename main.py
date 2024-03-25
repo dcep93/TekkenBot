@@ -5,9 +5,10 @@ sys.path.append('src')
 import traceback
 
 from gui import TekkenBotPrime
-from misc import Flags
+from misc import Flags, recorded_sha
 
 def main():
+    print(recorded_sha.sha)
     Flags.handle()
     app = TekkenBotPrime.TekkenBotPrime()
     app.mainloop()
