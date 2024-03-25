@@ -39,5 +39,5 @@ Created by roguelike2d. Maintained by the community.
 ### TODO
 
 - [ ] fresh images
-- [ ] autobuild exe and release on commit if version is updated!
+- [ ] autobuild exe and shortcut file
 - [ ] documentation
