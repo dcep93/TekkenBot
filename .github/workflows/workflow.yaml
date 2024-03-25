@@ -26,3 +26,4 @@ jobs:
           draft: false
           prerelease: false
           asset_name: test123
+          file: TekkenBotPrime.exe
