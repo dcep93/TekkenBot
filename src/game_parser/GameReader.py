@@ -130,7 +130,8 @@ class GameReader:
         if self.in_match:
             wait_ms = max(2, 8 - int(round(elapsed_ms)))
         else:
-            wait_ms = 100
+            wait_ms = 1000
+        print(wait_ms, elapsed_ms)
         return wait_ms
 
     def get_game_snapshot(self, rollback_frame):

@@ -167,6 +167,7 @@ class InputAttackCodes(enum.Enum):
     xRAGE = 8192
 
 class CharacterCodes(enum.Enum):
+    PAUL = 0
     LAW = 1
     KING = 2
     YOSHIMITSU = 3
@@ -176,21 +177,21 @@ class CharacterCodes(enum.Enum):
     BRYAN = 7
     KAZUYA = 8
     STEVE = 9
-    # BLAH = 10
+    JACK = 10
     ASUKA = 11
     DEVIL_JIN = 12
     FENG = 13
     LILI = 14
     DRAGUNOV = 15
     LEO = 16
-    # BLAH = 17
+    LARS = 17
     ALISA = 18
     CLAUDIO = 19
-    # BLAH = 20
+    SHAHEEN = 20
     NINA = 21
-    # BLAH = 22
-    # BLAH = 23
-    # BLAH = 24
+    LEE = 22
+    KUMA = 23
+    PANDA = 24
     ZAFINA = 25
     LEROY = 26
     JUN = 27
@@ -198,5 +199,4 @@ class CharacterCodes(enum.Enum):
     AZUCENA = 29
     VICTOR = 30
     RAVEN = 31
-    # BLAH = 32
     _DUMMY = 116

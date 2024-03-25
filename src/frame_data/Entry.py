@@ -6,7 +6,7 @@ MAX_HEALTH = 180
 
 def build(game_log, is_p1):
     entry = {}
-    attacker = game_log.get(is_p1)
+    attacker = game_log.get(is_p1, 1)
     receiver = game_log.get(not is_p1)
 
     try:

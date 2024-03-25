@@ -7,8 +7,6 @@ from misc import Path, Shared
 from misc.Windows import w as Windows
 from record import Record, Replay
 
-DAMAGE_CMD = 'DMG'
-
 class FrameDataOverlay():
     padding = 0
     geometry = None
@@ -77,9 +75,6 @@ class FrameDataOverlay():
     def print_f(self, entry, is_p1=None):
         if len(self.entries) == 0:
             print(self.column_names_string)
-
-        if entry[Entry.DataColumns.move_id] != DAMAGE_CMD:
-            self.scroll()
 
         self.entries.append(entry)
 
@@ -164,12 +159,13 @@ class FrameDataOverlay():
             player_name = "p1" if is_p1 else "p2"
         return "%s: " % player_name
 
-    def get_time(self, game_log):
+    def get_time(self, game_log, is_p1):
         now = game_log.state_log[-1].frame_count
         prev = self.last_time if self.last_time is not None else 0
         self.last_time = now
         diff = max(now - prev, 0)
-        return '%d/%3d' % (now, diff)
+        frames_til_attack = game_log.get(not is_p1, 1).startup - game_log.get(not is_p1, 1).move_timer
+        return '%d/%3d/%3d' % (now, diff, frames_til_attack)
 
     def get_value(self, entry, col):
         if col in entry and entry[col] is not None:
@@ -197,7 +193,7 @@ class FrameDataOverlay():
             if latest.get(Entry.DataColumns.hit_outcome) in [
                 MoveInfoEnums.HitOutcome.JUGGLE.name,
                 MoveInfoEnums.HitOutcome.SCREW.name,
-            ] or latest[Entry.DataColumns.move_id] == DAMAGE_CMD:
+            ]:
                 self.pop_entry(len(self.entries) - 1)
 
         while len(self.entries) >= self.max_lines:
@@ -236,15 +232,9 @@ class FrameDataOverlay():
                 entry = {
                     Entry.DataColumns.move_id: throw_break_string,
                 }
-            elif game_log.just_lost_health(not is_p1):
-                entry = {
-                    Entry.DataColumns.health: Entry.get_remaining_health_string(game_log),
-                    Entry.DataColumns.move_id: DAMAGE_CMD,
-                    Entry.DataColumns.combo: Entry.get_combo(game_log, is_p1),
-                }
             else:
                 return
-        entry[Entry.DataColumns.time] = self.get_time(game_log)
+        entry[Entry.DataColumns.time] = self.get_time(game_log, is_p1)
         self.print_f(entry, is_p1)
 
     def update_location(self, game_reader):

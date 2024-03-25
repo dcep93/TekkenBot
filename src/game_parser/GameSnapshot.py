@@ -8,11 +8,10 @@ class PlayerSnapshot:
         self.simple_state = MoveInfoEnums.SimpleMoveStates(d['PlayerDataAddress.simple_move_state'])
         self.attack_type = MoveInfoEnums.AttackType(d['PlayerDataAddress.attack_type'])
         self.startup = d['PlayerDataAddress.attack_startup']
-        self.startup_end = d['PlayerDataAddress.attack_startup_end']
         self.attack_damage = d['PlayerDataAddress.attack_damage']
         self.complex_state = MoveInfoEnums.ComplexMoveStates(d['PlayerDataAddress.complex_move_state'])
         self.damage_taken = d['PlayerDataAddress.damage_taken']
-        self.move_timer = d['PlayerDataAddress.move_timer']
+        self.move_timer = 0 if self.startup == 0 else d['PlayerDataAddress.move_timer']
         self.recovery = d['PlayerDataAddress.recovery']
         self.frames_til_next_move = self.recovery - self.move_timer
         self.char_id = d['PlayerDataAddress.char_id']
