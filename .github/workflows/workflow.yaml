@@ -12,3 +12,16 @@ jobs:
           submodules: true
       - run: bash .github/workflows/record_sha.sh
       - run: bash .github/workflows/build_exe.sh
+
+      # https://github.com/actions/create-release
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: auto-release
+          draft: false
+          prerelease: false
