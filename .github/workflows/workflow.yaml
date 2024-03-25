@@ -13,17 +13,8 @@ jobs:
       - run: bash .github/workflows/record_sha.sh
       - run: bash .github/workflows/build_exe.sh
 
-      # https://github.com/actions/create-release
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      # https://github.com/softprops/action-gh-release
+      - name: Release
+        uses: softprops/action-gh-release@v2
         with:
-          tag_name: tag/${{ github.sha }}
-          release_name: release/${{ github.sha }}
-          body: auto-release
-          draft: false
-          prerelease: false
-          asset_name: test123
-          file: TekkenBotPrime.exe
+          files: TekkenBotPrime.exe
