@@ -76,6 +76,8 @@ class FrameDataOverlay():
         if len(self.entries) == 0:
             print(self.column_names_string)
 
+        self.scroll()
+
         self.entries.append(entry)
 
         self.handle_fa(entry)
