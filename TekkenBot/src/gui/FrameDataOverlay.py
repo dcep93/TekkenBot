@@ -12,7 +12,6 @@ class FrameDataOverlay():
     geometry = None
     unknown = ''
     max_lines = 6
-    last_time = None
     col_max_length = 12
     sizes = {
         Entry.DataColumns.hit_outcome: 25,
@@ -44,6 +43,26 @@ class FrameDataOverlay():
         self.populate_column_names()
 
         Shared.Shared.frame_data_overlay = self
+
+    def handle_fa(self, entry):
+        if entry.get(Entry.DataColumns.block) is None:
+            fa_str = "-"
+        else:
+            fa_str = entry.get(Entry.DataColumns.fa, "-")
+        try:
+            fa = int(fa_str)
+        except ValueError:
+            fa = 0
+        if fa <= -15:
+            color = ColorSchemeEnum.advantage_very_punishible
+        elif fa <= -10:
+            color = ColorSchemeEnum.advantage_punishible
+        elif fa <= 0:
+            color = ColorSchemeEnum.advantage_slight_minus
+        else:
+            color = ColorSchemeEnum.advantage_plus
+        self.fa_label.configure(background=color.value)
+        self.fa_var.set(fa_str)
 
     def update_state(self, game_log):
         self.read_player_state(True, game_log)
@@ -91,26 +110,6 @@ class FrameDataOverlay():
         out += "\n"
         self.text.insert("end", out, text_tag)
 
-    def handle_fa(self, entry):
-        if entry.get(Entry.DataColumns.block) is None:
-            fa_str = "-"
-        else:
-            fa_str = entry.get(Entry.DataColumns.fa, "-")
-        try:
-            fa = int(fa_str)
-        except ValueError:
-            fa = 0
-        if fa <= -15:
-            color = ColorSchemeEnum.advantage_very_punishible
-        elif fa <= -10:
-            color = ColorSchemeEnum.advantage_punishible
-        elif fa <= 0:
-            color = ColorSchemeEnum.advantage_slight_minus
-        else:
-            color = ColorSchemeEnum.advantage_plus
-        self.fa_label.configure(background=color.value)
-        self.fa_var.set(fa_str)
-
     def create_padding_frame(self):
         padding = t_tkinter.Frame(self.toplevel, width=10)
         padding.pack(side=t_tkinter.LEFT)
@@ -137,37 +136,12 @@ class FrameDataOverlay():
         frame.pack(side=t_tkinter.LEFT)
 
     @staticmethod
-    def get_background(fa):
-        try:
-            fa = int(fa)
-        except (ValueError, TypeError):
-            return Overlay.ColorSchemeEnum.advantage_plus.value
-        if fa <= -14:
-            return Overlay.ColorSchemeEnum.advantage_very_punishible.value
-        elif fa <= -10:
-            return Overlay.ColorSchemeEnum.advantage_punishible.value
-        elif fa <= -5:
-            return Overlay.ColorSchemeEnum.advantage_safe_minus.value
-        elif fa < 0:
-            return Overlay.ColorSchemeEnum.advantage_slight_minus.value
-        else:
-            return Overlay.ColorSchemeEnum.advantage_plus.value
-
-    @staticmethod
     def get_prefix(is_p1):
         if is_p1 is None:
             player_name = '  '
         else:
             player_name = "p1" if is_p1 else "p2"
         return "%s: " % player_name
-
-    def get_time(self, game_log, is_p1):
-        now = game_log.state_log[-1].frame_count
-        prev = self.last_time if self.last_time is not None else 0
-        self.last_time = now
-        diff = max(now - prev, 0)
-        frames_til_attack = game_log.get(not is_p1, 1).startup - game_log.get(not is_p1, 1).move_timer
-        return '%d/%3d/%3d' % (now, diff, frames_til_attack)
 
     def get_value(self, entry, col):
         if col in entry and entry[col] is not None:
@@ -238,6 +212,12 @@ class FrameDataOverlay():
                 return
         entry[Entry.DataColumns.time] = self.get_time(game_log, is_p1)
         self.print_f(entry, is_p1)
+
+    def get_time(self, game_log, is_p1):
+        return '%3d/%3d' % (
+            game_log.get(not is_p1, 1).frames_til_attack,
+            game_log.get_free_frames(not is_p1)
+        )
 
     def update_location(self, game_reader):
         if Windows.valid:

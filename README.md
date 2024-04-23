@@ -32,3 +32,5 @@ Created by roguelike2d. Maintained by the community.
 
 - [ ] fresh images
 - [ ] documentation
+- [ ] autobuild memory_address.ini on patch (maybe use .CT file too)
+- [ ] get_free_frames: notify interrupts like drag's d+3,2,1+2

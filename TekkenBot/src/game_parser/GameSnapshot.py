@@ -12,6 +12,7 @@ class PlayerSnapshot:
         self.complex_state = MoveInfoEnums.ComplexMoveStates(d['PlayerDataAddress.complex_move_state'])
         self.damage_taken = d['PlayerDataAddress.damage_taken']
         self.move_timer = 0 if self.startup == 0 else d['PlayerDataAddress.move_timer']
+        self.frames_til_attack = self.startup - self.move_timer
         self.recovery = d['PlayerDataAddress.recovery']
         self.frames_til_next_move = self.recovery - self.move_timer
         self.char_id = d['PlayerDataAddress.char_id']

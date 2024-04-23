@@ -101,3 +101,6 @@ class GameLog:
             return False
         next_state = self.get(is_p1, 1)
         return next_state.damage_taken != prev_state.damage_taken
+
+    def get_free_frames(self, is_p1):
+        return 0
