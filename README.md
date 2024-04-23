@@ -28,6 +28,10 @@ Created by roguelike2d. Maintained by the community.
 - [x] Recording works for both players to allow easy creation, editing, and sharing of TAS duels.
 - [x] Shows the distance from 2.00 the player is after the recording finishes. Can be used for kbd practice.
 
+### update_memory_address.py
+
+- [ ] When there is a Tekken8 patch, config settings in memory_address.ini break. Run `python update_memory_address.py` to automatically determine new address locations and update the file. Once the file is committed to the repo, github actions will automatically rebuild a package for non-coders to download.
+
 ### TODO
 
 - [ ] fresh images
