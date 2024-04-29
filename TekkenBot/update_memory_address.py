@@ -9,9 +9,8 @@ def main():
         while True:
             count += 1
             print(count, path)
-            try:
-                address = f()
-            except:
+            address = f()
+            if address is None:
                 continue
             found[path] = address
             break
@@ -19,7 +18,7 @@ def main():
         
 
 def player_data_pointer_offset():
-    pass
+    return True
 
 to_update = [
     ("MemoryAddressOffsets", "player_data_pointer_offset"), player_data_pointer_offset,
