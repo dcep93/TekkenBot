@@ -18,7 +18,7 @@ def main():
         
 
 def player_data_pointer_offset():
-    return True
+    return "0x8EE02C8 0x10 0x68 0x8 0x30"
 
 to_update = [
     ("MemoryAddressOffsets", "player_data_pointer_offset"), player_data_pointer_offset,
