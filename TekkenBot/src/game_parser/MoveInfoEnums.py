@@ -98,7 +98,7 @@ class ThrowTechs(safeEnum):
 
     BROKEN_ThrowTechs = 3221225501
 
-class StunStates(enum.Enum):
+class StunStates(safeEnum):
     NONE = 0
     UNKNOWN_2 = 2 #Lili BT/Jumping/Kicks?
     BLOCK = 0x01000100
@@ -109,7 +109,7 @@ class StunStates(enum.Enum):
     BLOCK_NO_HIT = 0x1000000 #law's UF+4, sometimes???? Proximity guard maybe?
 
 #Note that this information resides on the player BEING hit not the player doing the hitting. Also note that there's no counter hit state for side or back attacks.
-class HitOutcome(enum.Enum):
+class HitOutcome(safeEnum):
     NONE = 0
     BLOCKED_STANDING = 1
     BLOCKED_CROUCHING = 2
@@ -131,7 +131,7 @@ class HitOutcome(enum.Enum):
     NORMAL_HIT_STANDING_RIGHT = 18
     NORMAL_HIT_CROUCHING_RIGHT = 19
 
-class InputDirectionCodes(enum.Enum):
+class InputDirectionCodes(safeEnum):
     NULL = 0
 
     N = 0x20
@@ -147,7 +147,7 @@ class InputDirectionCodes(enum.Enum):
     df = 8
     db = 2
 
-class InputAttackCodes(enum.Enum):
+class InputAttackCodes(safeEnum):
     N = 0
     x1 = 512
     x2 = 1024
@@ -200,3 +200,7 @@ class CharacterCodes(enum.Enum):
     VICTOR = 30
     RAVEN = 31
     _DUMMY = 116
+
+class UniversalAnimationCodes(enum.Enum):
+    NEUTRAL = 32769
+    CROUCHING_NEUTRAL = 32770

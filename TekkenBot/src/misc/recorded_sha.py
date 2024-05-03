@@ -1,1 +1,1 @@
-../../.github/recorded_sha.py
+sha = "local"

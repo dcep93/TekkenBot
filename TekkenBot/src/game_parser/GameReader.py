@@ -8,6 +8,7 @@ from misc import ConfigReader, Flags
 from misc.Windows import w as Windows
 
 # I have no idea how this file works
+# update: I mostly understand how this file works
 
 game_string = 'Polaris-Win64-Shipping.exe'
 
@@ -26,7 +27,6 @@ class GameReader:
         self.process_handle = None
         self.in_match = False
         self.c = ConfigReader.ConfigReader('memory_address')
-        self.player_data_pointer_offset = self.c['MemoryAddressOffsets']['player_data_pointer_offset']
 
     def get_value_from_address(self, address, address_type):
         if address_type is AddressType._string:
@@ -114,13 +114,7 @@ class GameReader:
         if not Windows.valid:
             raise Exception("Not windows - cannot update state")
         if not self.has_working_pid():
-            self.pid = Windows.get_pid(game_string)
-            if self.has_working_pid():
-                print("Tekken pid acquired: %s" % self.pid)
-                self.reacquire_module()
-            else:
-                print("Tekken pid not acquired. Trying to acquire...")
-                return None
+            self.reacquire_module()
 
         if self.process_handle is not None:
             return self.get_game_snapshot(rollback_frame)
@@ -174,22 +168,27 @@ class GameReader:
         return GameSnapshot.GameSnapshot(p1_snapshot, p2_snapshot, best_frame_count, facing_bool)
 
     def reacquire_module(self):
-        print("Trying to acquire Tekken library in pid: %s" % self.pid)
+        self.pid = Windows.get_pid(game_string)
+        if self.has_working_pid():
+            print("Tekken pid acquired: %s" % self.pid)
+        else:
+            print("Tekken pid not acquired. Trying to acquire...")
+            return
         self.module_address = Windows.get_module_address(self.pid, game_string)
         if self.module_address is None:
             print("%s not found. Likely wrong process id. Reacquiring pid." % game_string)
             self.pid = None
             return
         if self.module_address != self.c['MemoryAddressOffsets']['expected_module_address']:
-            print("Unrecognized location for %s module. Tekken.exe Patch? Wrong process id?" % game_string, hex(self.module_address))
+            print("Tekken patch? run $ python update_memory_address.py")
         else:
             print("Found %s" % game_string)
-        self.process_handle = Windows.open_process(0x10, False, self.pid)
+        self.process_handle = Windows.open_process(0x0510, False, self.pid)
         if not self.process_handle:
             print("Failed to acquire process_handle")
 
     def get_player_data_base_address(self):
-        offsets = split_str_to_hex(self.player_data_pointer_offset)
+        offsets = split_str_to_hex(self.c['MemoryAddressOffsets']['player_data_pointer_offset'])
         address = self.module_address
         for i, offset in enumerate(offsets):
             address = self.get_value_from_address(address+offset, AddressType._64bit)

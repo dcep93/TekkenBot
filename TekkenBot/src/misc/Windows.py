@@ -122,6 +122,9 @@ class Windows:
                 w.close_handle(h_process)
         return pid
 
+    def get_process_handle(self, pid):
+        return self.open_process(0x0510, False, pid)
+
     @staticmethod
     def press_key(hex_key_code):
         extra = ctypes.c_ulong(0)
