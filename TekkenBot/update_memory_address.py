@@ -14,7 +14,7 @@ def main():
         raise Exception("need to be on windows")
     Vars.game_reader = GameReader.GameReader()
     Vars.game_reader.reacquire_module()
-    print("\nreading memory and generating pointers_map - this usually takes around 5 minutes")
+    print("\ncollecting memory data - this usually takes around 5 minutes")
     Vars.start = time.time()
     Vars.memory = read_all_memory()
     log([
@@ -22,44 +22,40 @@ def main():
         f"{len(Vars.memory)} pages",
         f"{sum([len(v) for v in Vars.memory.values()])/1024**3:0.2f} gb",
     ])
+    Vars.move_id_addresses = get_move_id_addresses()
+    log([
+        "found move_id_addresses",
+        f"{[len(i) for i in Vars.move_id_addresses]}",
+    ])
     Vars.pointers_map = get_pointers_map()
     log([
         "finished generating pointers_map",
         f"{len(Vars.pointers_map)}",
     ])
-
     found = {}
     for path, f in to_update:
         print(path)
-        found[path] = f()
+        found[path] = f(found)
     print(found)
 
-def player_data_pointer_offset():
-    def get_move_id_address():
-        crouching_map = {
-            False: 32769,
-            True: 32770,
-        }
-        crouching_input = Replay.direction_string_to_hexes[True]['d']
-        
-        is_crouching = False
-        possibilities = find_bytes(crouching_map[is_crouching].to_bytes(4))
-        for _ in range(1_000):
-            if len(possibilities) == 0:
-                break
-            if len(possibilities) == 1:
-                return possibilities[0]
-            is_crouching = not is_crouching
-            if is_crouching:
-                Windows.w.press_key(crouching_input)
-            else:
-                Windows.w.release_key(crouching_input)
-            Windows.sleep(0.01)
-            expected = crouching_map[is_crouching]
-            possibilities = [p for p in possibilities if Vars.game_reader.get_int_from_address(p, 4) == expected]
-            
-        raise Exception(f"get_move_id_address {len(possibilities)}")
+def expected_module_address(found):
+    return hex(Vars.game_reader.module_address)
 
+def rollback_frame_offset(found):
+    addresses = Vars.move_id_addresses[True]
+    distances = [addresses[i+1] - addresses[i] for i in range(len(addresses))]
+    return hex(min(distances))
+
+def p2_data_offset(found):
+    offsets = [min([
+        p2_address for p2_address in Vars.move_id_addresses[False] if p2_address > p1_address
+    ])-p1_address for p1_address in Vars.move_id_addresses[True]]
+    return hex(min(offsets))
+
+def player_data_pointer_offset(found):
+    found_rollback_frame_offset = found[("MemoryAddressOffsets", "rollback_frame_offset")]
+    addresses = Vars.move_id_addresses[True]
+    move_id_address = min([v for v in addresses if v + found_rollback_frame_offset in addresses])
     move_id_address = get_move_id_address() # 0x1969F740528 (offset 518)
 
     candidates = [move_id_address]
@@ -81,6 +77,9 @@ def player_data_pointer_offset():
     return " ".join([hex(i) for i in candidates+known_offsets])
 
 to_update = [
+    (("MemoryAddressOffsets", "expected_module_address"), expected_module_address),
+    (("MemoryAddressOffsets", "rollback_frame_offset"), rollback_frame_offset),
+    (("MemoryAddressOffsets", "p2_data_offset"), p2_data_offset),
     (("MemoryAddressOffsets", "player_data_pointer_offset"), player_data_pointer_offset),
 ]
 
@@ -109,7 +108,6 @@ def read_all_memory():
     raise Exception("read_all_memory")
 
 def get_pointers_map():
-    return None
     prefixes = {}
     guaranteed_prefix = 3
     for address, block_raw in Vars.memory.items():
@@ -171,10 +169,45 @@ def get_indices(needle, haystack):
         index += 1
     raise Exception(f"get_indices {index} / {len(haystack)}")
 
+def get_move_id_addresses():
+    crouching_bytes_map = {
+        False: 32769,
+        True: 32770,
+    }
+
+    crouching_input_map = {
+        Replay.direction_string_to_hexes[is_p1]['d']
+        for is_p1 in [True, False]
+    }
+
+    start_possibilities = find_bytes(crouching_bytes_map[False].to_bytes(4))
+    move_id_addresses = {is_p1: start_possibilities for is_p1 in [True, False]}
+    p1_is_crouching = False
+    prev_num_possibilities = 0
+    for _ in range(1_000):
+        num_possibilities = sum([len(i) for i in move_id_addresses.values()])
+        if prev_num_possibilities == num_possibilities:
+            break
+            return move_id_addresses
+        prev_num_possibilities = num_possibilities
+        Windows.release_key(crouching_input_map[p1_is_crouching])
+        p1_is_crouching = not p1_is_crouching
+        Windows.w.press_key(crouching_input_map[p1_is_crouching])
+        Windows.sleep(0.01)
+        for key, possibilities in move_id_addresses.items():
+            expected = crouching_bytes_map[key == p1_is_crouching]
+            move_id_addresses[key] = [p for p in possibilities if Vars.game_reader.get_int_from_address(p, 4) == expected]
+        
+    for i in sorted(possibilities):
+        print(hex(i))
+    exit()
+    raise Exception(f"get_move_id_addresses {len(possibilities)}")
+
 class Vars:
     game_reader = None
     start = None
     memory = None
+    move_id_addresses = None
     pointers_map = None
 
 if __name__ == "__main__":
