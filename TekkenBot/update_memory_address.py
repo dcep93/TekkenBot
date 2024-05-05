@@ -184,6 +184,7 @@ def get_move_id_addresses():
     move_id_addresses = {is_p1: start_possibilities for is_p1 in [True, False]}
     p1_is_crouching = False
     prev_num_possibilities = 0
+    ensure_foreground()
     for _ in range(1_000):
         num_possibilities = sum([len(i) for i in move_id_addresses.values()])
         if prev_num_possibilities == num_possibilities:
@@ -193,6 +194,8 @@ def get_move_id_addresses():
         Windows.release_key(crouching_input_map[p1_is_crouching])
         p1_is_crouching = not p1_is_crouching
         Windows.w.press_key(crouching_input_map[p1_is_crouching])
+        if not Vars.game_reader.is_foreground_pid():
+            raise Exception("Tekken needs to remain in foreground during get_move_id_addresses")
         Windows.sleep(0.01)
         for key, possibilities in move_id_addresses.items():
             expected = crouching_bytes_map[key == p1_is_crouching]
@@ -200,8 +203,15 @@ def get_move_id_addresses():
         
     for i in sorted(possibilities):
         print(hex(i))
-    exit()
     raise Exception(f"get_move_id_addresses {len(possibilities)}")
+
+def ensure_foreground():
+    for _ in range(10):
+        print("for this step, Tekken needs to be in foreground")
+        if Vars.game_reader.is_foreground_pid():
+            break
+        Windows.sleep(1)
+    raise Exception("Tekken needs to be in foreground")
 
 class Vars:
     game_reader = None
