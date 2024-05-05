@@ -7,7 +7,6 @@ from misc import Path, Shared, Windows
 from record import Record, Replay
 
 class FrameDataOverlay():
-    padding = 0
     geometry = None
     unknown = ''
     max_lines = 6
@@ -69,7 +68,7 @@ class FrameDataOverlay():
 
     def get_geometry(self, tekken_rect):
         x = (tekken_rect.right + tekken_rect.left) / 2  - self.toplevel.winfo_width() / 2
-        y = tekken_rect.bottom - self.toplevel.winfo_height() - self.padding
+        y = tekken_rect.bottom - self.toplevel.winfo_height()
         return x,y
 
     def init_tkinter(self):

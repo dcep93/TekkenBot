@@ -4,21 +4,28 @@ sys.path.append('src')
 
 import collections
 import time
+import threading
 
 from game_parser import GameReader
 from gui import t_tkinter, TekkenBotPrime
 from misc import Windows
+
+DEBUG_FAST = True
 
 def main():
     if not Windows.w.valid:
         raise Exception("need to be on windows")
     Vars.game_reader = GameReader.GameReader()
     Vars.game_reader.reacquire_module()
-    print("\n")
-    tk = t_tkinter.Tk()
-    TekkenBotPrime.init_tk(tk)
-    tk.geometry('1600x420+0+0')
-    print("collecting memory data - this usually takes around 5 minutes")
+    if not Vars.game_reader.process_handle:
+        raise Exception("need to be running tekken")
+    Vars.game_reader.in_match = True
+    print("")
+    Vars.tk = t_tkinter.Tk()
+    TekkenBotPrime.init_tk(Vars.tk)
+    Vars.tk.attributes("-topmost", True)
+    Vars.tk.overrideredirect(True)
+    print("phase 1 of 3 - collecting initial memory data - this usually takes around 1 minute - wait in practice mode and do not make any inputs")
     Vars.start = time.time()
     Vars.memory = read_all_memory()
     log([
@@ -26,41 +33,54 @@ def main():
         f"{len(Vars.memory)} pages",
         f"{sum([len(v) for v in Vars.memory.values()])/1024**3:0.2f} gb",
     ])
+    print("phase 2 of 3 - collecting input data - this usually takes around 2 minutes - wait for instructions")
     Vars.move_id_addresses = get_move_id_addresses()
     log([
         "finished get_move_id_addresses",
-        f"{[len(i) for i in Vars.move_id_addresses]}",
+        f"{[len(i) for i in Vars.move_id_addresses.values()]}",
     ])
-    # Vars.pointers_map = get_pointers_map()
-    # log([
-    #     "finished get_pointers_map",
-    #     f"{len(Vars.pointers_map)}",
-    # ])
     found = {}
     for path, f in to_update:
         print(path)
-        found[path] = f(found)
+        if f == player_data_pointer_offset:
+            print("phase 3 of 3 - building pointers_map - this usually takes around 5 minutes - feel free to make inputs")
+        found[path] = f()
     print(found)
 
-def expected_module_address(found):
+def expected_module_address():
     return hex(Vars.game_reader.module_address)
 
-def rollback_frame_offset(found):
+def get_p1_move_id_address_index():
     addresses = Vars.move_id_addresses[True]
-    distances = [addresses[i+1] - addresses[i] for i in range(len(addresses))]
-    return hex(get_most_common(distances))
+    needed_copies = 4
+    def helper(i):
+        distance = addresses[i]-addresses[i-1]
+        for j in range(1, needed_copies):
+            if addresses[i+j] - addresses[i+j-1] != distance:
+                return False
+        return True
+    for i in range(1, len(addresses)-needed_copies):
+        if helper(i):
+            return i
+    raise Exception(f"get_p1_move_id_address")
 
-def p2_data_offset(found):
-    offsets = [min([
-        p2_address for p2_address in Vars.move_id_addresses[False] if p2_address > p1_address
-    ])-p1_address for p1_address in Vars.move_id_addresses[True]]
-    return hex(get_most_common(offsets))
-
-def player_data_pointer_offset(found):
-    raise Exception("player_data_pointer_offset")
-    found_rollback_frame_offset = int(found[("MemoryAddressOffsets", "rollback_frame_offset")], 16)
+def rollback_frame_offset():
     addresses = Vars.move_id_addresses[True]
-    move_id_address = min([v for v in addresses if v + found_rollback_frame_offset in addresses])
+    index = get_p1_move_id_address_index()
+    return hex(addresses[index+1]-addresses[index])
+
+def p2_data_offset():
+    counts = collections.defaultdict(int)
+    for p1_address in Vars.move_id_addresses[True]:
+        for p2_address in Vars.move_id_addresses[False]:
+            if p2_address > p1_address:
+                counts[p2_address-p1_address] += 1
+                break
+    return hex(sorted([(v, k) for k,v in counts.items()])[-1][1])
+
+def player_data_pointer_offset():
+    address_index = get_p1_move_id_address_index()
+    move_id_address = Vars.move_id_addresses[True][address_index]
 
     candidates = [move_id_address]
     # assume that PlayerDataAddress.move_id offset and
@@ -69,10 +89,15 @@ def player_data_pointer_offset(found):
     previous_offset = Vars.game_reader.c['MemoryAddressOffsets']['player_data_pointer_offset']
     known_offsets = previous_offset[1:]
     move_id_offset = Vars.game_reader.c["PlayerDataAddress"]["move_id"]
+    pointers_map = get_pointers_map()
+    log([
+        "finished get_pointers_map",
+        f"{len(pointers_map)}",
+    ])
     for offset in reversed(known_offsets+[move_id_offset]):
         next_candidates = []
         for c in candidates:
-            for source in Vars.pointers_map.get(hex(c-offset), []):
+            for source in pointers_map.get(hex(c-offset), []):
                 next_candidates.append(source)
         candidates = next_candidates
     candidates = [c for c in [cc - Vars.game_reader.module_address for cc in candidates] if c > 0]
@@ -100,18 +125,25 @@ def read_all_memory():
         GameReader.ctypes.c_size_t,
     ]
     memory = {}
+    if DEBUG_FAST:
+        return memory
     address = 0
     for _ in range(1_000_000):
         info = get_memory_basic_information(Vars.game_reader.process_handle, address)
         if info["region_size"] == 0:
             return memory
         if info["scannable"]:
+            update_tk()
             block = Vars.game_reader.get_block_of_data(address, info["region_size"])
             memory[address] = block
         address += info["region_size"]
     raise Exception("read_all_memory")
 
 def get_pointers_map():
+    import json
+    if DEBUG_FAST:
+        with open("pointers_map.json") as fh:
+            return json.load(fh)
     prefixes = {}
     guaranteed_prefix = 3
     for address, block_raw in Vars.memory.items():
@@ -124,7 +156,7 @@ def get_pointers_map():
             prefix = address_bytes[:guaranteed_prefix]+i.to_bytes(1)
             prefixes[prefix] = [address_bytes, address_end_bytes]
     pointers_map = collections.defaultdict(list)
-    found = 0
+    num_pointers_found = 0
     for i, prefix in enumerate(prefixes):
         for base_address, index in find_bytes(prefix):
             raw_destination = Vars.memory[base_address][index-8+len(prefix):index+len(prefix)]
@@ -133,8 +165,10 @@ def get_pointers_map():
             destination = int.from_bytes(raw_destination[::-1])
             source = base_address+index+len(prefix)-8
             pointers_map[hex(destination)].append(source)
-            found += 1
-        log(["get_pointers_map", f"{i+1} of {len(prefixes)}", f"{found} found"])
+            num_pointers_found += 1
+        log(["get_pointers_map", f"{i+1} of {len(prefixes)}", f"{num_pointers_found} found"])
+    with open("pointers_map.json", "w") as fh:
+        json.dump(pointers_map, fh)
     return pointers_map
 
 def get_memory_basic_information(process_handle, address):
@@ -160,6 +194,7 @@ def get_memory_basic_information(process_handle, address):
 def find_bytes(byte_array):
     needle = bytes(byte_array[::-1])
     for base_address, haystack in Vars.memory.items():
+        update_tk()
         for index in get_indices(needle, haystack):
             yield base_address, index
 
@@ -174,43 +209,58 @@ def get_indices(needle, haystack):
     raise Exception(f"get_indices {index} / {len(haystack)}")
 
 def get_move_id_addresses():
+    import json
+    if DEBUG_FAST:
+        with open("move_id_addresses.json") as fh:
+            return {k == "true":v for k, v in json.load(fh).items()}
     crouching_bytes_map = {
         False: 32769,
         True: 32770,
     }
-    found = find_bytes(crouching_bytes_map[False].to_bytes(4))
-    possibilities = [base_address+index for base_address,index in found]
+    found_bytes = find_bytes(crouching_bytes_map[False].to_bytes(4))
+    possibilities = [base_address+index for base_address,index in found_bytes]
     move_id_addresses = {}
     for is_p1 in [True, False]:
-        Windows.w.press_key(crouching_input_map[is_p1])
+        print(f"waiting for {'p1' if is_p1 else 'p2'} crouch")
         p_possibilities = wait_for_range(possibilities, crouching_bytes_map[True], 50, 200)
-        Windows.w.release_key(crouching_input_map[is_p1])
+        print(f"waiting for {'p1' if is_p1 else 'p2'} stand")
         p_possibilities = wait_for_range(p_possibilities, crouching_bytes_map[False], 50, 200)
         move_id_addresses[is_p1] = p_possibilities
+    with open("move_id_addresses.json", "w") as fh:
+        json.dump(move_id_addresses, fh)
     return move_id_addresses
 
 def wait_for_range(possibilities, expected, floor, ceiling):
+    def f(p):
+        try:
+            return Vars.game_reader.get_int_from_address(p, 4)
+        except GameReader.ReadProcessMemoryException:
+            return None
     for _ in range(10_000):
-        p_possibilities = [p for p in possibilities if Vars.game_reader.get_int_from_address(p, 4) == expected]
-        if len(p_possibilities) < 200:
+        update_tk()
+        p_possibilities = [p for p in possibilities if f(p) == expected]
+        if len(p_possibilities) >= floor and len(p_possibilities) <= ceiling:
             return p_possibilities
         Windows.w.sleep(0.1)
     raise Exception(f"wait_for_range {len(p_possibilities)}")
 
-def get_most_common(arr):
-    counts = collections.defaultdict(int)
-    for d in arr:
-        counts[d] += 1
-    m = list(sorted([(v,k) for k,v in counts.items()]))[-1]
-    print("get_most_common", counts)
-    return m
+def update_tk():
+    tekken_rect = Vars.game_reader.get_window_rect()
+    if tekken_rect is not None:
+        height = 200
+        geometry = f'{tekken_rect.right}x{height}+0-0'
+        Vars.tk.geometry(geometry)
+        Vars.tk.deiconify()
+    else:
+        Vars.tk.withdraw()
+    Vars.tk.update()
 
 class Vars:
     game_reader = None
     start = None
     memory = None
     move_id_addresses = None
-    pointers_map = None
+    tk = None
 
 if __name__ == "__main__":
     main()
