@@ -180,7 +180,7 @@ class GameReader:
             self.pid = None
             return
         if self.module_address != self.c['MemoryAddressOffsets']['expected_module_address']:
-            print("Tekken patch? run $ python update_memory_address.py")
+            print("Tekken patch? enter practice mode as p1 and run $ python update_memory_address.py")
         else:
             print("Found %s" % game_string)
         self.process_handle = Windows.open_process(0x0510, False, self.pid)
