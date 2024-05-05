@@ -7,6 +7,7 @@ import time
 
 from game_parser import GameReader
 from misc import Windows
+from record import Replay
 
 def main():
     if not Windows.w.valid:
@@ -34,17 +35,46 @@ def main():
     print(found)
 
 def player_data_pointer_offset():
-    # TODO find move_id_address
-    move_id_address = 0x1969F740528 # - 518 <- 0x194AA138DD8
+    def get_move_id_address():
+        crouching_map = {
+            False: 32769,
+            True: 32770,
+        }
+        crouching_input = Replay.direction_string_to_hexes[True]['d']
+        
+        is_crouching = False
+        possibilities = find_bytes(crouching_map[is_crouching].to_bytes(4))
+        for _ in range(1_000):
+            if len(possibilities) == 0:
+                break
+            if len(possibilities) == 1:
+                return possibilities[0]
+            is_crouching = not is_crouching
+            if is_crouching:
+                Windows.w.press_key(crouching_input)
+            else:
+                Windows.w.release_key(crouching_input)
+            Windows.sleep(0.01)
+            expected = crouching_map[is_crouching]
+            possibilities = [p for p in possibilities if Vars.game_reader.get_int_from_address(p, 4) == expected]
+            
+        raise Exception(f"get_move_id_address {len(possibilities)}")
+
+    move_id_address = get_move_id_address() # 0x1969F740528 (offset 518)
+
     candidates = [move_id_address]
     # assume that PlayerDataAddress.move_id offset and
     # MemoryAddressOffsets.player_data_pointer_offset[1:] dont change
-    previous_offset = Vars.game_reader.c['MemoryAddressOffsets']['player_data_pointer_offset']
     # TODO see if we can avoid using known offsets
+    previous_offset = Vars.game_reader.c['MemoryAddressOffsets']['player_data_pointer_offset']
     known_offsets = GameReader.split_str_to_hex(previous_offset)[1:]
     move_id_offset = Vars.game_reader.c["PlayerDataAddress"]["move_id"]
     for offset in reversed(known_offsets+[move_id_offset]):
-        candidates = [source for c in candidates for source in Vars.pointers_map.get(hex(c-offset), [])]
+        next_candidates = []
+        for c in candidates:
+            for source in Vars.pointers_map.get(hex(c-offset), []):
+                next_candidates.append(source)
+        candidates = next_candidates
     candidates = [c for c in [cc - Vars.game_reader.module_address for cc in candidates] if c > 0]
     if len(candidates) != 1:
         raise Exception(f"player_data_pointer_offset {len(candidates)}")
@@ -79,6 +109,7 @@ def read_all_memory():
     raise Exception("read_all_memory")
 
 def get_pointers_map():
+    return None
     prefixes = {}
     guaranteed_prefix = 3
     for address, block_raw in Vars.memory.items():
@@ -141,7 +172,10 @@ def get_indices(needle, haystack):
     raise Exception(f"get_indices {index} / {len(haystack)}")
 
 class Vars:
-    pass
+    game_reader = None
+    start = None
+    memory = None
+    pointers_map = None
 
 if __name__ == "__main__":
     main()

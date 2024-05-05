@@ -204,7 +204,3 @@ class CharacterCodes(enum.Enum):
     VICTOR = 30
     RAVEN = 31
     _DUMMY = 116
-
-class UniversalAnimationCodes(enum.Enum):
-    NEUTRAL = 32769
-    CROUCHING_NEUTRAL = 32770
