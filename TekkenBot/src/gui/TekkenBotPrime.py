@@ -12,7 +12,7 @@ from misc import Flags, Path, Shared
 class TekkenBotPrime(t_tkinter.Tk):
     def __init__(self):
         super().__init__()
-        init_tk(self)
+        self.text = init_tk(self)
         self.geometry('1600x420+0+0')
 
         Shared.Shared.game_log = GameLog.GameLog()
@@ -86,3 +86,4 @@ def init_tk(tk):
     text.tag_configure("stderr", foreground="#b22222")
 
     text.pack(fill=t_tkinter.BOTH)
+    return text
