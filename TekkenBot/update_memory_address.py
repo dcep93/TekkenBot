@@ -6,8 +6,11 @@ import collections
 import time
 
 from game_parser import GameReader
+from misc import Windows
 
 def main():
+    if not Windows.w.valid:
+        raise Exception("need to be on windows")
     Vars.game_reader = GameReader.GameReader()
     Vars.game_reader.reacquire_module()
     print("\nreading memory and generating pointers_map - this usually takes around 5 minutes")
@@ -37,6 +40,7 @@ def player_data_pointer_offset():
     # assume that PlayerDataAddress.move_id offset and
     # MemoryAddressOffsets.player_data_pointer_offset[1:] dont change
     previous_offset = Vars.game_reader.c['MemoryAddressOffsets']['player_data_pointer_offset']
+    # TODO see if we can avoid using known offsets
     known_offsets = GameReader.split_str_to_hex(previous_offset)[1:]
     move_id_offset = Vars.game_reader.c["PlayerDataAddress"]["move_id"]
     for offset in reversed(known_offsets+[move_id_offset]):
@@ -56,10 +60,10 @@ def log(arr):
     print(" / ".join([f"{(time.time()-Vars.start):0.2f} seconds"] + arr))
 
 def read_all_memory():
-    GameReader.Windows.k32.VirtualQueryEx.argtypes = [
-        GameReader.Windows.wintypes.HANDLE,
-        GameReader.Windows.wintypes.LPCVOID,
-        GameReader.Windows.wintypes.LPVOID,
+    Windows.w.k32.VirtualQueryEx.argtypes = [
+        Windows.w.wintypes.HANDLE,
+        Windows.w.wintypes.LPCVOID,
+        Windows.w.wintypes.LPVOID,
         GameReader.ctypes.c_size_t,
     ]
     memory = {}
@@ -78,10 +82,9 @@ def get_pointers_map():
     prefixes = {}
     guaranteed_prefix = 3
     for address, block_raw in Vars.memory.items():
-        # arbitrary cutoff
-        if address < 0x10000000000:
-            continue
         address_bytes, address_end_bytes = [a.to_bytes(8) for a in [address, address + len(block_raw)]]
+        if int.from_bytes(address_end_bytes[:guaranteed_prefix]) == 0:
+            continue
         if address_bytes[:guaranteed_prefix] != address_end_bytes[:guaranteed_prefix]:
             raise Exception(f"get_pointers_map {list(address_bytes)} : {list(address_end_bytes)}")
         for i in range(address_bytes[guaranteed_prefix], address_end_bytes[guaranteed_prefix]+1):
@@ -91,11 +94,11 @@ def get_pointers_map():
     found = 0
     for i, prefix in enumerate(prefixes):
         for base_address, index in find_bytes(prefix):
-            source = base_address+index+len(prefix)-8
             raw_destination = Vars.memory[base_address][index-8+len(prefix):index+len(prefix)]
             if len(raw_destination) < 8:
                 continue
-            destination = int.from_bytes(bytes(reversed(raw_destination)))
+            destination = int.from_bytes(reversed(raw_destination))
+            source = base_address+index+len(prefix)-8
             pointers_map[hex(destination)].append(source)
             found += 1
         log(["get_pointers_map", f"{i+1} of {len(prefixes)}", f"{found} found"])
@@ -105,13 +108,13 @@ def get_memory_basic_information(process_handle, address):
     class MemoryBasicInformation(GameReader.ctypes.Structure):
         """https://msdn.microsoft.com/en-us/library/aa366775"""
         _fields_ = (
-            ('BaseAddress', GameReader.Windows.wintypes.LPVOID),
-            ('AllocationBase',    GameReader.Windows.wintypes.LPVOID),
+            ('BaseAddress', Windows.w.wintypes.LPVOID),
+            ('AllocationBase',    Windows.w.wintypes.LPVOID),
             ('AllocationProtect', GameReader.ctypes.c_size_t),
             ('RegionSize', GameReader.ctypes.c_size_t),
-            ('State',   GameReader.Windows.wintypes.DWORD),
-            ('Protect', GameReader.Windows.wintypes.DWORD),
-            ('Type',    GameReader.Windows.wintypes.DWORD),
+            ('State',   Windows.w.wintypes.DWORD),
+            ('Protect', Windows.w.wintypes.DWORD),
+            ('Type',    Windows.w.wintypes.DWORD),
         )
     mbi = MemoryBasicInformation()
     GameReader.Windows.k32.VirtualQueryEx(process_handle, address, GameReader.ctypes.byref(mbi), GameReader.ctypes.sizeof(mbi))

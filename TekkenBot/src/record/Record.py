@@ -3,7 +3,6 @@ import enum
 from frame_data import Entry
 from game_parser import ScriptedGame
 from misc import Shared
-from misc.Windows import w as Windows
 
 def record_single():
     record_start(RecordingState.SINGLE)

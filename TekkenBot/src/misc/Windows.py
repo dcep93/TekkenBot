@@ -3,16 +3,15 @@ import os.path
 import sys
 import time
 
-# this is trash and could stand to be rewritten
 class Windows:
-    valid = True
+    valid = False
     def __init__(self):
         try:
             from ctypes import wintypes
         except ValueError:
-            self.__class__.valid = False
             return
 
+        self.valid = True
         ctypes.windll.shcore.SetProcessDpiAwareness(1)
 
         self.wintypes = wintypes
@@ -40,17 +39,16 @@ class Windows:
         self.get_process_image_filename = psapi.GetProcessImageFileNameA
         self.get_process_image_filename.restype = wintypes.DWORD
 
-    @staticmethod
-    def get_module_address(pid, name):
+    def get_module_address(self, pid, name):
         class ModuleEntry(ctypes.Structure):
-            _fields_ = [('dwSize', w.wintypes.DWORD),
-                        ('th32ModuleID', w.wintypes.DWORD),
-                        ('th32ProcessID', w.wintypes.DWORD),
-                        ('GlblcntUsage', w.wintypes.DWORD),
-                        ('ProccntUsage', w.wintypes.DWORD),
-                        ('modBaseAddr', ctypes.POINTER(w.wintypes.BYTE)),
-                        ('modBaseSize', w.wintypes.DWORD),
-                        ('hModule', w.wintypes.HMODULE),
+            _fields_ = [('dwSize', self.wintypes.DWORD),
+                        ('th32ModuleID', self.wintypes.DWORD),
+                        ('th32ProcessID', self.wintypes.DWORD),
+                        ('GlblcntUsage', self.wintypes.DWORD),
+                        ('ProccntUsage', self.wintypes.DWORD),
+                        ('modBaseAddr', ctypes.POINTER(self.wintypes.BYTE)),
+                        ('modBaseSize', self.wintypes.DWORD),
+                        ('hModule', self.wintypes.HMODULE),
                         ('szModule', ctypes.c_char * 256),
                         ('szExePath', ctypes.c_char * 260)]
 
@@ -62,13 +60,13 @@ class Windows:
 
         h_module_snap = ctypes.windll.kernel32.CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pid)
         if h_module_snap == -1:
-            print('CreateToolhelp32Snapshot Error [%d]' % w.get_last_error())
+            print('CreateToolhelp32Snapshot Error [%d]' % self.get_last_error())
             print('Build the code yourself? This is the error for using 32-bit Python. Try the 64-bit version.')
 
         ret = ctypes.windll.kernel32.Module32First(h_module_snap, ctypes.pointer(me32))
         if ret == 0:
-            print('ListProcessModules() Error on Module32First[%d]' % w.get_last_error())
-            w.close_handle(h_module_snap)
+            print('ListProcessModules() Error on Module32First[%d]' % self.get_last_error())
+            self.close_handle(h_module_snap)
 
         address_to_return = None
         while ret:
@@ -76,19 +74,17 @@ class Windows:
                 address_to_return = me32.hModule
 
             ret = ctypes.windll.kernel32.Module32Next(h_module_snap, ctypes.pointer(me32))
-        w.close_handle(h_module_snap)
+        self.close_handle(h_module_snap)
 
         return address_to_return
 
-    @staticmethod
-    def get_foreground_pid():
-        pid = w.wintypes.DWORD()
+    def get_foreground_pid(self):
+        pid = self.wintypes.DWORD()
         active = ctypes.windll.user32.GetForegroundWindow()
         ctypes.windll.user32.GetWindowThreadProcessId(active, ctypes.byref(pid))
         return pid.value
 
-    @staticmethod
-    def get_pid(process_name):
+    def get_pid(self, process_name):
         MAX_PATH = 260
         PROCESS_TERMINATE = 0x0001
         PROCESS_QUERY_INFORMATION = 0x0400
@@ -97,29 +93,29 @@ class Windows:
         pid = None
         count = 32
         for _ in range(10000):
-            process_ids = (w.wintypes.DWORD*count)()
+            process_ids = (self.wintypes.DWORD*count)()
             cb = ctypes.sizeof(process_ids)
-            bytes_returned = w.wintypes.DWORD()
+            bytes_returned = self.wintypes.DWORD()
             # ???
-            if w.enum_processes(ctypes.byref(process_ids), cb, ctypes.byref(bytes_returned)):
+            if self.enum_processes(ctypes.byref(process_ids), cb, ctypes.byref(bytes_returned)):
                 if bytes_returned.value < cb:
                     break
                 count *= 2
             else:
                 raise Exception("Call to enum_processes failed")
 
-        num_values = int(bytes_returned.value / ctypes.sizeof(w.wintypes.DWORD))
+        num_values = int(bytes_returned.value / ctypes.sizeof(self.wintypes.DWORD))
         for index in range(num_values):
             process_id = process_ids[index]
 
-            h_process = w.open_process(PROCESS_TERMINATE | PROCESS_QUERY_INFORMATION, False, process_id)
+            h_process = self.open_process(PROCESS_TERMINATE | PROCESS_QUERY_INFORMATION, False, process_id)
             if h_process:
                 image_file_name = (ctypes.c_char*MAX_PATH)()
-                if w.get_process_image_filename(h_process, image_file_name, MAX_PATH) > 0:
+                if self.get_process_image_filename(h_process, image_file_name, MAX_PATH) > 0:
                     filename = os.path.basename(image_file_name.value)
                     if filename == process_name_in_bytes:
                         pid = process_id
-                w.close_handle(h_process)
+                self.close_handle(h_process)
         return pid
 
     def get_process_handle(self, pid):
@@ -141,15 +137,14 @@ class Windows:
         x = Input( ctypes.c_ulong(1), ii_ )
         ctypes.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
 
-    @staticmethod
-    def sleep(seconds):
+    def sleep(self, seconds):
         # SetWaitableTimer not working :(
-        w.dumb_sleep(seconds)
+        self.dumb_sleep(seconds)
         # # https://stackoverflow.com/a/11658115
         # # The kernel measures in 100 nanosecond intervals, so we must multiply .25 by 10000
         # delay = ctypes.c_longlong(int(seconds * 10000))
-        # w.k32.SetWaitableTimer(w.timer(), ctypes.byref(delay), 0, ctypes.c_void_p(), ctypes.c_void_p(), False)
-        # w.k32.WaitForSingleObject(w.timer(), 0xffffffff)
+        # self.k32.SetWaitableTimer(self.timer(), ctypes.byref(delay), 0, ctypes.c_void_p(), ctypes.c_void_p(), False)
+        # self.k32.WaitForSingleObject(self.timer(), 0xffffffff)
 
     @staticmethod
     def dumb_sleep(seconds):
@@ -165,14 +160,13 @@ class Windows:
                 return
 
     timer_ = None
-    @classmethod
-    def timer(cls):
-        if cls.timer_ == None:
+    def timer(self):
+        if self.timer_ == None:
             # This sets the priority of the process to realtime--the same priority as the mouse pointer.
-            w.k32.SetThreadPriority(w.k32.GetCurrentThread(), 31)
+            self.k32.SetThreadPriority(self.k32.GetCurrentThread(), 31)
             # This creates a timer. This only needs to be done once.
-            cls.timer_ = w.k32.CreateWaitableTimerA(ctypes.c_void_p(), True, ctypes.c_void_p())
-        return cls.timer_
+            self.timer_ = self.k32.CreateWaitableTimerA(ctypes.c_void_p(), True, ctypes.c_void_p())
+        return self.timer_
 
 # C struct redefinitions
 PUL = ctypes.POINTER(ctypes.c_ulong)

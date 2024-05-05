@@ -3,8 +3,7 @@ import enum
 from . import t_tkinter
 from frame_data import Entry, Hook
 from game_parser import MoveInfoEnums
-from misc import Path, Shared
-from misc.Windows import w as Windows
+from misc import Path, Shared, Windows
 from record import Record, Replay
 
 class FrameDataOverlay():
@@ -220,7 +219,7 @@ class FrameDataOverlay():
         )
 
     def update_location(self, game_reader):
-        if Windows.valid:
+        if Windows.w.valid:
             tekken_rect = game_reader.get_window_rect()
         else:
             tekken_rect = FullscreenTekkenRect(self.toplevel)

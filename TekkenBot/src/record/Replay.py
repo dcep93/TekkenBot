@@ -4,8 +4,7 @@ import time
 from . import Record
 from frame_data import Entry
 from gui import FrameDataOverlay
-from misc import Shared
-from misc.Windows import w as Windows
+from misc import Shared, Windows
 
 seconds_per_frame = 1/60.
 # if need to wait more than imprecise_wait_cutoff_s, sleep until
@@ -161,7 +160,7 @@ class Replayer:
     log = []
 
 def is_foreground_pid():
-    return not Windows.valid or Shared.Shared.game_reader.is_foreground_pid()
+    return not Windows.w.valid or Shared.Shared.game_reader.is_foreground_pid()
 
 def wait_for_focus_and_replay_moves():
     if Replayer.i is not None:
@@ -190,7 +189,7 @@ def handle_next_move():
         Shared.Shared.frame_data_overlay.toplevel.after(wait_ms, handle_next_move)
         return
     if diff > 0:
-        Windows.sleep(diff)
+        Windows.w.sleep(diff)
     else:
         Replayer.start -= diff
     replay_next_move()
@@ -214,9 +213,9 @@ def replay_next_move():
 
 def finish():
     all_hexes = get_all_hexes()
-    if Windows.valid:
+    if Windows.w.valid:
         for hex_key_code in all_hexes:
-            Windows.release_key(hex_key_code)
+            Windows.w.release_key(hex_key_code)
     Replayer.pressed = []
     print("done", Replayer.count)
     while Replayer.log:
@@ -254,11 +253,11 @@ def replay_move(move):
         finish()
         return True
 
-    if Windows.valid:
+    if Windows.w.valid:
         for hex_key_code in to_release:
-            Windows.release_key(hex_key_code)
+            Windows.w.release_key(hex_key_code)
         for hex_key_code in to_press:
-            Windows.press_key(hex_key_code)
+            Windows.w.press_key(hex_key_code)
     Replayer.pressed = hex_key_codes
     return False
 

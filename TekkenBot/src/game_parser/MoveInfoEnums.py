@@ -1,12 +1,17 @@
 import enum
 
+from misc import Flags
+
 class safeEnum(enum.Enum):
     @classmethod
     def _missing_(cls, value):
-        print('_missing_', cls, value)
+        if Flags.debug:
+            print('_missing_', cls, value)
         return cls(0)
 
 class AttackType(safeEnum):
+    NA = 0 #This move is not an attack
+
     THROW = 6291466  #this is only the attack type *during* the throw animation
     MID_UNBLOCKABLE = 12582919
     #UNKNOWN_6 = 6 #????? may not exist
@@ -14,7 +19,6 @@ class AttackType(safeEnum):
     SMID = 6291460
     MID = 8388610
     LOW = 2097153
-    NA = 0 #This move is not an attack
 
     RECOVERING = 12582912
     UNKNOWN = 1048579
