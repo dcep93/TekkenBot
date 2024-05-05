@@ -1,11 +1,10 @@
 import configparser
 import ctypes
 import enum
-import struct
 
 from . import GameSnapshot
 from frame_data import Hook
-from misc import Flags, Windows
+from misc import Flags, Path, Windows
 
 game_string = 'Polaris-Win64-Shipping.exe'
 
@@ -15,8 +14,14 @@ class GameReader:
         self.module_address = None
         self.process_handle = None
         self.in_match = False
-        self.c = configparser.ConfigParser()
-        self.c.read('memory_address.ini')
+        def hexify(vv):
+            h = list(map(lambda x: int(x, 16), vv.split()))
+            if len(h) == 1:
+                return h[0]
+            return h
+        self._c = configparser.ConfigParser(inline_comment_prefixes=('#', ';'))
+        self._c.read(Path.path('config/memory_address.ini'))
+        self.c = {k: {kk:hexify(vv) for kk,vv in v.items()} for k,v in self._c.items()}
 
     def get_updated_state(self, rollback_frame):
         if not Windows.w.valid:
@@ -77,12 +82,12 @@ class GameReader:
         p1_snapshot = GameSnapshot.PlayerSnapshot(p1_dict)
         p2_snapshot = GameSnapshot.PlayerSnapshot(p2_dict)
 
-        is_player_player_one = self.get_8_bytes_at_end_of_pointer_trail(self.c['NonPlayerDataAddresses']["OPPONENT_SIDE"]) == 1
+        is_player_player_one = self.get_8_bytes_at_end_of_pointer_trail(self.c['NonPlayerDataAddresses']["opponent_side"]) == 1
 
         if not is_player_player_one:
             p1_snapshot, p2_snapshot = p2_snapshot, p1_snapshot
 
-        raw_facing = self.get_value_from_data_block(player_data_frame, self.c['GameDataAddress']['facing'])
+        raw_facing = self.get_4_bytes_from_data_block(player_data_frame, self.c['GameDataAddress']['facing'])
         facing_bool = bool(raw_facing ^ is_player_player_one)
 
         return GameSnapshot.GameSnapshot(p1_snapshot, p2_snapshot, frame_count, facing_bool)
@@ -106,7 +111,7 @@ class GameReader:
 
     def get_block_of_data(self, address, size_of_block):
         data = ctypes.create_string_buffer(size_of_block)
-        bytes_read = ctypes.c_ulonglong(size_of_block)
+        bytes_read = ctypes.c_ulonglong()
         successful = Windows.w.read_process_memory(
             self.process_handle,
             address,
@@ -117,22 +122,21 @@ class GameReader:
         if not successful:
             e = Windows.w.get_last_error()
             raise ReadProcessMemoryException("get_block_of_data Error: Code %s" % e)
-        return data
+        return data.raw
 
     def get_int_from_address(self, address, num_bytes):
         data = self.get_block_of_data(address, num_bytes)
-        return int.from_bytes(data)
+        return int.from_bytes(data[::-1])
 
-    def get_8_bytes_at_end_of_pointer_trail(self, addresses_str):
-        addresses = split_str_to_hex(addresses_str)
+    def get_8_bytes_at_end_of_pointer_trail(self, trail):
         address = self.module_address
-        for i, offset in enumerate(addresses):
+        for i, offset in enumerate(trail):
             address = self.get_int_from_address(address + offset, 8)
         return address
 
     @staticmethod
     def get_4_bytes_from_data_block(frame, offset):
-        return int.from_bytes(frame[offset: offset + 4])
+        return int.from_bytes(frame[offset: offset + 4][::-1])
 
     def is_foreground_pid(self):
         pid = Windows.w.get_foreground_pid()
@@ -156,6 +160,3 @@ class GameReader:
 
 class ReadProcessMemoryException(Exception):
     pass
-
-def split_str_to_hex(string):
-    return list(map(lambda x: int(x, 16), string.split()))

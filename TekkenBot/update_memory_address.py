@@ -18,18 +18,18 @@ def main():
     Vars.start = time.time()
     Vars.memory = read_all_memory()
     log([
-        "finished reading memory",
+        "finished read_all_memory",
         f"{len(Vars.memory)} pages",
         f"{sum([len(v) for v in Vars.memory.values()])/1024**3:0.2f} gb",
     ])
     Vars.move_id_addresses = get_move_id_addresses()
     log([
-        "found move_id_addresses",
+        "finished get_move_id_addresses",
         f"{[len(i) for i in Vars.move_id_addresses]}",
     ])
     Vars.pointers_map = get_pointers_map()
     log([
-        "finished generating pointers_map",
+        "finished get_pointers_map",
         f"{len(Vars.pointers_map)}",
     ])
     found = {}
@@ -63,7 +63,7 @@ def player_data_pointer_offset(found):
     # MemoryAddressOffsets.player_data_pointer_offset[1:] dont change
     # TODO see if we can avoid using known offsets
     previous_offset = Vars.game_reader.c['MemoryAddressOffsets']['player_data_pointer_offset']
-    known_offsets = GameReader.split_str_to_hex(previous_offset)[1:]
+    known_offsets = previous_offset[1:]
     move_id_offset = Vars.game_reader.c["PlayerDataAddress"]["move_id"]
     for offset in reversed(known_offsets+[move_id_offset]):
         next_candidates = []
@@ -103,7 +103,7 @@ def read_all_memory():
             return memory
         if info["scannable"]:
             block = Vars.game_reader.get_block_of_data(address, info["region_size"])
-            memory[address] = block.raw
+            memory[address] = block
         address += info["region_size"]
     raise Exception("read_all_memory")
 
@@ -126,7 +126,7 @@ def get_pointers_map():
             raw_destination = Vars.memory[base_address][index-8+len(prefix):index+len(prefix)]
             if len(raw_destination) < 8:
                 continue
-            destination = int.from_bytes(reversed(raw_destination))
+            destination = int.from_bytes(raw_destination[::-1])
             source = base_address+index+len(prefix)-8
             pointers_map[hex(destination)].append(source)
             found += 1
@@ -146,7 +146,7 @@ def get_memory_basic_information(process_handle, address):
             ('Type',    Windows.w.wintypes.DWORD),
         )
     mbi = MemoryBasicInformation()
-    GameReader.Windows.k32.VirtualQueryEx(process_handle, address, GameReader.ctypes.byref(mbi), GameReader.ctypes.sizeof(mbi))
+    GameReader.Windows.w.k32.VirtualQueryEx(process_handle, address, GameReader.ctypes.byref(mbi), GameReader.ctypes.sizeof(mbi))
 
     return {
         "scannable": mbi.Protect == 0x04 and mbi.State == 0x00001000,
@@ -154,7 +154,7 @@ def get_memory_basic_information(process_handle, address):
     }
 
 def find_bytes(byte_array):
-    needle = bytes(reversed([i for i in byte_array]))
+    needle = bytes(byte_array[::-1])
     for base_address, haystack in Vars.memory.items():
         for index in get_indices(needle, haystack):
             yield base_address, index
@@ -176,41 +176,42 @@ def get_move_id_addresses():
     }
 
     crouching_input_map = {
-        Replay.direction_string_to_hexes[is_p1]['d']
+        is_p1: Replay.direction_string_to_hexes[is_p1]['d']
         for is_p1 in [True, False]
     }
 
-    start_possibilities = find_bytes(crouching_bytes_map[False].to_bytes(4))
+    found = find_bytes(crouching_bytes_map[False].to_bytes(4))
+    start_possibilities = [base_address+index for base_address,index in found]
     move_id_addresses = {is_p1: start_possibilities for is_p1 in [True, False]}
     p1_is_crouching = False
     prev_num_possibilities = 0
     ensure_foreground()
-    for _ in range(1_000):
+    Vars.count = 0
+    for loops in range(1_000):
+        print(f"get_move_id_addresses {Vars.game_reader.get_int_from_address(0x17EF54A0528, 4)} {[(k,len(p)) for k,p in move_id_addresses.items()]} {0x17EF54A0528 in move_id_addresses[True]}")
         num_possibilities = sum([len(i) for i in move_id_addresses.values()])
-        if prev_num_possibilities == num_possibilities:
+        if num_possibilities == 0 or (loops > 10 and prev_num_possibilities == num_possibilities):
+            return move_id_addresses
             break
             return move_id_addresses
         prev_num_possibilities = num_possibilities
-        Windows.release_key(crouching_input_map[p1_is_crouching])
+        Windows.w.release_key(crouching_input_map[p1_is_crouching])
         p1_is_crouching = not p1_is_crouching
         Windows.w.press_key(crouching_input_map[p1_is_crouching])
         if not Vars.game_reader.is_foreground_pid():
             raise Exception("Tekken needs to remain in foreground during get_move_id_addresses")
-        Windows.sleep(0.01)
+        Windows.w.sleep(1)
         for key, possibilities in move_id_addresses.items():
             expected = crouching_bytes_map[key == p1_is_crouching]
             move_id_addresses[key] = [p for p in possibilities if Vars.game_reader.get_int_from_address(p, 4) == expected]
-        
-    for i in sorted(possibilities):
-        print(hex(i))
-    raise Exception(f"get_move_id_addresses {len(possibilities)}")
+    raise Exception(f"get_move_id_addresses {[(k,len(p)) for k,p in move_id_addresses.items()]}")
 
 def ensure_foreground():
     for _ in range(10):
         print("for this step, Tekken needs to be in foreground")
         if Vars.game_reader.is_foreground_pid():
-            break
-        Windows.sleep(1)
+            return
+        Windows.w.sleep(1)
     raise Exception("Tekken needs to be in foreground")
 
 class Vars:

@@ -5,8 +5,11 @@ from misc import Flags
 class safeEnum(enum.Enum):
     @classmethod
     def _missing_(cls, value):
-        if Flags.debug:
-            print('_missing_', cls, value)
+        if Flags.Flags.debug:
+            e = Exception(f'_missing_ {cls}, {value}')
+            if Flags.Flags.debug:
+                print(e)
+                # raise e
         return cls(0)
 
 class AttackType(safeEnum):
