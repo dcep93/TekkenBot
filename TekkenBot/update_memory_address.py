@@ -6,15 +6,19 @@ import collections
 import time
 
 from game_parser import GameReader
+from gui import t_tkinter, TekkenBotPrime
 from misc import Windows
-from record import Replay
 
 def main():
     if not Windows.w.valid:
         raise Exception("need to be on windows")
     Vars.game_reader = GameReader.GameReader()
     Vars.game_reader.reacquire_module()
-    print("\ncollecting memory data - this usually takes around 5 minutes")
+    print("\n")
+    tk = t_tkinter.Tk()
+    TekkenBotPrime.init_tk(tk)
+    tk.geometry('1600x420+0+0')
+    print("collecting memory data - this usually takes around 5 minutes")
     Vars.start = time.time()
     Vars.memory = read_all_memory()
     log([
@@ -170,55 +174,28 @@ def get_indices(needle, haystack):
     raise Exception(f"get_indices {index} / {len(haystack)}")
 
 def get_move_id_addresses():
-    crouching_input_map = {
-        is_p1: Replay.direction_string_to_hexes[is_p1]['d']
-        for is_p1 in [True, False]
+    crouching_bytes_map = {
+        False: 32769,
+        True: 32770,
     }
+    found = find_bytes(crouching_bytes_map[False].to_bytes(4))
+    possibilities = [base_address+index for base_address,index in found]
+    move_id_addresses = {}
+    for is_p1 in [True, False]:
+        Windows.w.press_key(crouching_input_map[is_p1])
+        p_possibilities = wait_for_range(possibilities, crouching_bytes_map[True], 50, 200)
+        Windows.w.release_key(crouching_input_map[is_p1])
+        p_possibilities = wait_for_range(p_possibilities, crouching_bytes_map[False], 50, 200)
+        move_id_addresses[is_p1] = p_possibilities
+    return move_id_addresses
 
-    def release():
-        for p1_is_crouching in [True, False]:
-            Windows.w.release_key(crouching_input_map[p1_is_crouching])
-
-    def helper():
-        crouching_bytes_map = {
-            False: 32769,
-            True: 32770,
-        }
-        found = find_bytes(crouching_bytes_map[False].to_bytes(4))
-        possibilities = [base_address+index for base_address,index in found]
-        move_id_addresses = {}
-        ensure_foreground()
-        for is_p1 in [True, False]:
-            release()
-            Windows.w.press_key(crouching_input_map[is_p1])
-            for _ in range(100):
-                if not Vars.game_reader.is_foreground_pid():
-                    raise Exception("Tekken needs to remain in foreground during get_move_id_addresses")
-                Windows.w.sleep(0.01)
-            expected = crouching_bytes_map[True]
-            move_id_addresses[is_p1] = [p for p in possibilities if Vars.game_reader.get_int_from_address(p, 4) == expected]
-        release()
-        Windows.w.sleep(1)
-        for is_p1 in [True, False]:
-            expected = crouching_bytes_map[False]
-            p_possibilities = [p for p in move_id_addresses[is_p1] if Vars.game_reader.get_int_from_address(p, 4) == expected]
-            if len(p_possibilities) == 0 or len(p_possibilities) > 150:
-                raise Exception(f"get_move_id_addresses {len(p_possibilities)}")
-            move_id_addresses[is_p1] = p_possibilities
-
-    try:
-        helper()
-    finally:
-        release()
-
-def ensure_foreground():
-    for loop in range(10_000):
-        if loop % 100 == 0:
-            print("for this step, Tekken needs to be in foreground")
-        if Vars.game_reader.is_foreground_pid():
-            return
-        Windows.w.sleep(0.01)
-    raise Exception("Tekken needs to be in foreground")
+def wait_for_range(possibilities, expected, floor, ceiling):
+    for _ in range(10_000):
+        p_possibilities = [p for p in possibilities if Vars.game_reader.get_int_from_address(p, 4) == expected]
+        if len(p_possibilities) < 200:
+            return p_possibilities
+        Windows.w.sleep(0.1)
+    raise Exception(f"wait_for_range {len(p_possibilities)}")
 
 def get_most_common(arr):
     counts = collections.defaultdict(int)

@@ -12,7 +12,8 @@ from misc import Flags, Path, Shared
 class TekkenBotPrime(t_tkinter.Tk):
     def __init__(self):
         super().__init__()
-        self.init_tk()
+        init_tk(self)
+        self.geometry('1600x420+0+0')
 
         Shared.Shared.game_log = GameLog.GameLog()
         if Flags.Flags.pickle_dest is not None:
@@ -29,21 +30,6 @@ class TekkenBotPrime(t_tkinter.Tk):
         self.update()
         if Flags.Flags.pickle_src is None:
             self.update_restarter()
-
-    def init_tk(self):
-        self.wm_title("dcep93/TekkenBot")
-        self.iconbitmap(Path.path('./img/tekken_bot_close.ico'))
-
-        self.text = t_tkinter.Text(self, wrap="word")
-        stdout = sys.stdout
-        sys.stdout = TextRedirector(self.text, stdout, "stdout")
-        stderr = sys.stderr
-        sys.stderr = TextRedirector(self.text, stderr, "stderr")
-        self.text.tag_configure("stderr", foreground="#b22222")
-
-        self.text.pack(fill=t_tkinter.BOTH)
-
-        self.geometry('1600x420+0+0')
 
     def update(self):
         game_reader = Shared.Shared.game_reader
@@ -87,3 +73,16 @@ class TextRedirector:
 
     def flush(self):
         pass
+
+def init_tk(tk):
+    tk.wm_title("dcep93/TekkenBot")
+    tk.iconbitmap(Path.path('./img/tekken_bot_close.ico'))
+
+    text = t_tkinter.Text(tk, wrap="word")
+    stdout = sys.stdout
+    sys.stdout = TextRedirector(text, stdout, "stdout")
+    stderr = sys.stderr
+    sys.stderr = TextRedirector(text, stderr, "stderr")
+    text.tag_configure("stderr", foreground="#b22222")
+
+    text.pack(fill=t_tkinter.BOTH)
