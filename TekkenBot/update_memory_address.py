@@ -27,11 +27,11 @@ def main():
         "finished get_move_id_addresses",
         f"{[len(i) for i in Vars.move_id_addresses]}",
     ])
-    Vars.pointers_map = get_pointers_map()
-    log([
-        "finished get_pointers_map",
-        f"{len(Vars.pointers_map)}",
-    ])
+    # Vars.pointers_map = get_pointers_map()
+    # log([
+    #     "finished get_pointers_map",
+    #     f"{len(Vars.pointers_map)}",
+    # ])
     found = {}
     for path, f in to_update:
         print(path)
@@ -44,19 +44,19 @@ def expected_module_address(found):
 def rollback_frame_offset(found):
     addresses = Vars.move_id_addresses[True]
     distances = [addresses[i+1] - addresses[i] for i in range(len(addresses))]
-    return hex(min(distances))
+    return hex(get_most_common(distances))
 
 def p2_data_offset(found):
     offsets = [min([
         p2_address for p2_address in Vars.move_id_addresses[False] if p2_address > p1_address
     ])-p1_address for p1_address in Vars.move_id_addresses[True]]
-    return hex(min(offsets))
+    return hex(get_most_common(offsets))
 
 def player_data_pointer_offset(found):
-    found_rollback_frame_offset = found[("MemoryAddressOffsets", "rollback_frame_offset")]
+    raise Exception("player_data_pointer_offset")
+    found_rollback_frame_offset = int(found[("MemoryAddressOffsets", "rollback_frame_offset")], 16)
     addresses = Vars.move_id_addresses[True]
     move_id_address = min([v for v in addresses if v + found_rollback_frame_offset in addresses])
-    move_id_address = get_move_id_address() # 0x1969F740528 (offset 518)
 
     candidates = [move_id_address]
     # assume that PlayerDataAddress.move_id offset and
@@ -170,49 +170,63 @@ def get_indices(needle, haystack):
     raise Exception(f"get_indices {index} / {len(haystack)}")
 
 def get_move_id_addresses():
-    crouching_bytes_map = {
-        False: 32769,
-        True: 32770,
-    }
-
     crouching_input_map = {
         is_p1: Replay.direction_string_to_hexes[is_p1]['d']
         for is_p1 in [True, False]
     }
 
-    found = find_bytes(crouching_bytes_map[False].to_bytes(4))
-    start_possibilities = [base_address+index for base_address,index in found]
-    move_id_addresses = {is_p1: start_possibilities for is_p1 in [True, False]}
-    p1_is_crouching = False
-    prev_num_possibilities = 0
-    ensure_foreground()
-    Vars.count = 0
-    for loops in range(1_000):
-        print(f"get_move_id_addresses {Vars.game_reader.get_int_from_address(0x17EF54A0528, 4)} {[(k,len(p)) for k,p in move_id_addresses.items()]} {0x17EF54A0528 in move_id_addresses[True]}")
-        num_possibilities = sum([len(i) for i in move_id_addresses.values()])
-        if num_possibilities == 0 or (loops > 10 and prev_num_possibilities == num_possibilities):
-            return move_id_addresses
-            break
-            return move_id_addresses
-        prev_num_possibilities = num_possibilities
-        Windows.w.release_key(crouching_input_map[p1_is_crouching])
-        p1_is_crouching = not p1_is_crouching
-        Windows.w.press_key(crouching_input_map[p1_is_crouching])
-        if not Vars.game_reader.is_foreground_pid():
-            raise Exception("Tekken needs to remain in foreground during get_move_id_addresses")
+    def release():
+        for p1_is_crouching in [True, False]:
+            Windows.w.release_key(crouching_input_map[p1_is_crouching])
+
+    def helper():
+        crouching_bytes_map = {
+            False: 32769,
+            True: 32770,
+        }
+        found = find_bytes(crouching_bytes_map[False].to_bytes(4))
+        possibilities = [base_address+index for base_address,index in found]
+        move_id_addresses = {}
+        ensure_foreground()
+        for is_p1 in [True, False]:
+            release()
+            Windows.w.press_key(crouching_input_map[is_p1])
+            for _ in range(100):
+                if not Vars.game_reader.is_foreground_pid():
+                    raise Exception("Tekken needs to remain in foreground during get_move_id_addresses")
+                Windows.w.sleep(0.01)
+            expected = crouching_bytes_map[True]
+            move_id_addresses[is_p1] = [p for p in possibilities if Vars.game_reader.get_int_from_address(p, 4) == expected]
+        release()
         Windows.w.sleep(1)
-        for key, possibilities in move_id_addresses.items():
-            expected = crouching_bytes_map[key == p1_is_crouching]
-            move_id_addresses[key] = [p for p in possibilities if Vars.game_reader.get_int_from_address(p, 4) == expected]
-    raise Exception(f"get_move_id_addresses {[(k,len(p)) for k,p in move_id_addresses.items()]}")
+        for is_p1 in [True, False]:
+            expected = crouching_bytes_map[False]
+            p_possibilities = [p for p in move_id_addresses[is_p1] if Vars.game_reader.get_int_from_address(p, 4) == expected]
+            if len(p_possibilities) == 0 or len(p_possibilities) > 150:
+                raise Exception(f"get_move_id_addresses {len(p_possibilities)}")
+            move_id_addresses[is_p1] = p_possibilities
+
+    try:
+        helper()
+    finally:
+        release()
 
 def ensure_foreground():
-    for _ in range(10):
-        print("for this step, Tekken needs to be in foreground")
+    for loop in range(10_000):
+        if loop % 100 == 0:
+            print("for this step, Tekken needs to be in foreground")
         if Vars.game_reader.is_foreground_pid():
             return
-        Windows.w.sleep(1)
+        Windows.w.sleep(0.01)
     raise Exception("Tekken needs to be in foreground")
+
+def get_most_common(arr):
+    counts = collections.defaultdict(int)
+    for d in arr:
+        counts[d] += 1
+    m = list(sorted([(v,k) for k,v in counts.items()]))[-1]
+    print("get_most_common", counts)
+    return m
 
 class Vars:
     game_reader = None
