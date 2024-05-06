@@ -30,7 +30,6 @@ Created by roguelike2d. Maintained by the community.
 
 - [x] Record and replay feature built. Intended for combo construction/hypothetical scenario validation. Could potentially be used for cheating, but would need a nefarious coder to implement, as the current iteration requires clicking on the button, and there is a delay.
 - [x] Recording works for both players to allow easy creation, editing, and sharing of TAS duels.
-- [x] Shows the distance from 2.00 the player is after the recording finishes. Can be used for KBD practice.
 
 ### update_memory_address.py
 

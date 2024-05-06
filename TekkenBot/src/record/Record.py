@@ -114,13 +114,7 @@ def get_recording_string():
     lines = [' '.join(i) for i in chunks]
     moves_string = '\n'.join(lines)
 
-    distance = get_distance()
-    quotient = distance / count
-    comment = '%f / %d = %f' % (distance, count, quotient)
-    return '%s\n# %s\n' % (moves_string, comment)
-
-def get_distance():
-    return Shared.Shared.game_log.get(True).distance
+    return '%s\n# %d\n' % (moves_string, count)
 
 def get_record_path(file_name):
     return Path.path('./record/recording.txt' % file_name)

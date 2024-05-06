@@ -10,14 +10,13 @@ from game_parser import GameReader, MoveInfoEnums
 from gui import t_tkinter, TekkenBotPrime
 from misc import Path, Windows
 
-DEBUG_FAST = False
+DEBUG_FAST = True
 
 # config not handled:
 # PlayerDataAddress.move_id
 # GameDataAddress.facing
 
 # TODO PlayerDataAddress
-# distance
 # recovery
 # hit_outcome
 # simple_move_state
@@ -140,10 +139,10 @@ def frame_count():
             return hex(offset)
     raise Exception(f"frame_count - (maybe try restarting the practice mode)")
 
-def attack_type():
+def damage_taken():
     return hex(player_data_helper([
-        ("waiting for high attack", lambda e: e == MoveInfoEnums.AttackType.HIGH.value),
-        ("waiting for mid attack", lambda e: e == MoveInfoEnums.AttackType.MID.value),
+        ("waiting for 5 damage_taken", lambda e: e == MoveInfoEnums.InputAttackCodes.x1x2x3x4.value),
+        ("waiting for  input", lambda e: e == MoveInfoEnums.InputAttackCodes.x3x4.value),
     ]))
 
 def player_data_helper(instructions):
@@ -152,7 +151,7 @@ def player_data_helper(instructions):
     possibilities = [player_data_base_address+i for i in range(distance)]
     for msg, f in instructions:
         print(msg)
-        possibilities = wait_for_range(possibilities, f, 1, 5)
+        possibilities = wait_for_range(possibilities, f, 1, 100)
         if len(possibilities) == 0:
             break
     if len(possibilities) != 1:
@@ -200,6 +199,7 @@ to_update = [
     (("MemoryAddressOffsets", "rollback_frame_offset"), rollback_frame_offset),
     (("MemoryAddressOffsets", "p2_data_offset"), p2_data_offset),
     (("GameDataAddress", "frame_count"), frame_count),
+    (("GameDataAddress", "damage_taken"), damage_taken),
     (("GameDataAddress", "attack_type"), attack_type),
     (("MemoryAddressOffsets", "player_data_pointer_offset"), player_data_pointer_offset),
     (("NonPlayerDataAddresses", "opponent_side"), opponent_side),
@@ -329,14 +329,16 @@ def read_4_bytes(address):
     except GameReader.ReadProcessMemoryException:
         return None
 
-def wait_for_range(possibilities, f, floor, ceiling):
+def wait_for_range(a_possibilities, f, floor, ceiling):
+    b_possibilities = [p for p in a_possibilities if not f(read_4_bytes(p))]
     for _ in range(10_000):
         update_tk()
-        p_possibilities = [p for p in possibilities if f(read_4_bytes(p))]
-        if len(p_possibilities) >= floor and len(p_possibilities) <= ceiling:
-            return p_possibilities
+        c_possibilities = [p for p in b_possibilities if f(read_4_bytes(p))]
+        print(len(a_possibilities), len(b_possibilities), len(c_possibilities))
+        if len(c_possibilities) >= floor and len(c_possibilities) <= ceiling:
+            return c_possibilities
         Windows.w.sleep(0.1)
-    raise Exception(f"wait_for_range {len(p_possibilities)}")
+    raise Exception(f"wait_for_range {len(b_possibilities)}")
 
 def update_tk():
     tekken_rect = Vars.game_reader.get_window_rect()

@@ -16,8 +16,6 @@ class PlayerSnapshot:
         self.recovery = d['recovery']
         self.frames_til_next_move = self.recovery - self.move_timer
         self.char_id = d['char_id']
-        raw_distance = d['distance']
-        self.distance = (raw_distance / 3700000) - 309.76
         throw_flag = d['throw_flag']
         self.is_attack_throw = throw_flag == 1
         self.throw_tech = MoveInfoEnums.ThrowTechs(d['throw_tech'])
