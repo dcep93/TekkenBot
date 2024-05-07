@@ -50,7 +50,7 @@ def main():
     with open(Path.path('config/memory_address.ini'), 'w') as fh:
         config_obj.write(fh)
 
-###
+### phases
 
 def memoize(f):
     d = {}
@@ -236,7 +236,7 @@ def get_pointers_map():
         json.dump(pointers_map, fh)
     return pointers_map
 
-###
+### helpers
 
 def hexify(obj):
     if isinstance(obj, list):
@@ -388,7 +388,7 @@ def get_pointer_offset(sources, max_offset):
         candidates = next_candidates
     raise Exception(f"get_pointer_offset {len(candidates)}")
     
-###
+### updaters
 
 @memoize
 def get_expected_module_address():
@@ -496,8 +496,8 @@ to_update = [
     (("GameDataAddress", "frame_count"), get_frame_count),
     (("PlayerDataAddress", "simple_move_state"), get_simple_move_state),
     (("MemoryAddressOffsets", "p2_data_offset"), get_p2_data_offset),
-    (("GameDataAddress", "damage_taken"), get_damage_taken),
-    (("GameDataAddress", "attack_type"), get_attack_type),
+    (("PlayerDataAddress", "damage_taken"), get_damage_taken),
+    (("PlayerDataAddress", "attack_type"), get_attack_type),
     # phase 3 get_pointers_map
     (("MemoryAddressOffsets", "player_data_pointer_offset"), get_player_data_pointer_offset),
     (("NonPlayerDataAddresses", "opponent_side"), get_opponent_side),
