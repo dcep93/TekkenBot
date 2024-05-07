@@ -155,13 +155,20 @@ def get_point_slope():
         except GameReader.ReadProcessMemoryException:
             return None
 
-    press_keys(['d'])
-    sleep_frames(32)
-    move_id_addresses = [a for a in move_id_addresses if read_4_bytes(a) == crouching_bytes_map[True]]
+    def filter_move_id_addresses():
+        press_keys(['d'])
+        sleep_frames(32)
+        move_id_addresses = [a for a in move_id_addresses if read_4_bytes(a) == crouching_bytes_map[True]]
 
-    release_all_keys()
-    sleep_frames(32)
-    move_id_addresses = [a for a in move_id_addresses if read_4_bytes(a) == crouching_bytes_map[False]]
+        release_all_keys()
+        sleep_frames(32)
+        move_id_addresses = [a for a in move_id_addresses if read_4_bytes(a) == crouching_bytes_map[False]]
+        return move_id_addresses
+    
+    try:
+        move_id_addresses = filter_move_id_addresses()
+    finally:
+        release_all_keys()
 
     def helper():
         needed_matches = 20
@@ -289,20 +296,25 @@ def sleep_frames(frames):
     Windows.w.sleep(seconds)
 
 def get_blocks_from_instructions(instructions):
-    move_id_offset = move_id_offset()
-    move_id_address, rollback_frame_offset = get_point_slope()
-    player_data_base_address = move_id_address - move_id_offset
-    blocks = []
-    for keys, duration in instructions:
-        if keys is None:
-            release_all_keys()
-        else:
-            press_keys(keys)
-        sleep_frames(duration)
-        block = Vars.game_reader.get_block_of_data(player_data_base_address, rollback_frame_offset * 32)
-        blocks.append(block)
-    release_all_keys()
-    return find_offset_from_block(validate_f, block)
+    def helper():
+        move_id_offset = move_id_offset()
+        move_id_address, rollback_frame_offset = get_point_slope()
+        player_data_base_address = move_id_address - move_id_offset
+        blocks = []
+        for keys, duration in instructions:
+            if keys is None:
+                release_all_keys()
+            else:
+                press_keys(keys)
+            sleep_frames(duration)
+            block = Vars.game_reader.get_block_of_data(player_data_base_address, rollback_frame_offset * 32)
+            blocks.append(block)
+        release_all_keys()
+        return find_offset_from_block(validate_f, block)
+    try:
+        return helper()
+    finally:
+        release_all_keys()
 
 @memoize
 def get_choreographed_blocks():
@@ -501,7 +513,4 @@ class Vars:
     active = None
 
 if __name__ == "__main__":
-    try:
-        main()
-    finally:
-        release_all_keys()
+    main()
