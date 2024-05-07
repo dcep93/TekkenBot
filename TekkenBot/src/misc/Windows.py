@@ -8,7 +8,8 @@ class Windows:
     def __init__(self):
         try:
             from ctypes import wintypes
-        except ValueError:
+            from ctypes import windll
+        except (ValueError, ImportError):
             return
 
         self.valid = True

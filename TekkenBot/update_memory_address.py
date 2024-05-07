@@ -1,6 +1,7 @@
+import os
 import sys
 
-sys.path.append('src')
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "src"))
 
 import collections
 import json
@@ -17,6 +18,7 @@ DEBUG_FAST = True
 # assumes PlayerDataAddress.move_id doesn't change
 
 def main():
+    print("this project is under heavy construction, and I don't really expect it to work until 5/16/24, but you're free to try it out anyway!")
     if not Windows.w.valid:
         raise Exception("need to be on windows")
     Vars.game_reader = GameReader.GameReader()
