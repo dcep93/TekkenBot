@@ -43,8 +43,7 @@ def main():
         found[path] = f()
     config_obj = Vars.game_reader._c
     for path, raw in found.items():
-        if path != ("PlayerDataAddress", "move_id"):
-            raw *= 2
+        # TODO experiment - run once, everything changes, run twice, everything goes back
         value = hexify(raw)
         print(path, value)
         config_obj[path[0]][path[1]] = value
