@@ -1,5 +1,6 @@
 import json
 import time
+import typing
 
 from . import Entry
 from src.game_parser import MoveInfoEnums
@@ -35,7 +36,7 @@ def finish_match():
         with open(filename, 'w') as fh:
             fh.write(to_write)
 
-def record_move(entry):
+def record_move(entry: typing.Dict[[Entry.DataColumns], typing.Any]):
     raw_char_name = entry[Entry.DataColumns.char_name]
     if isinstance(raw_char_name, int):
         return
@@ -73,7 +74,6 @@ def record_move(entry):
     ]}
     characters_to_update[char_name] = True
 
-
-database = {}
-characters_to_update = {}
+database: typing.Dict[str, typing.Dict[str, typing.Dict[str, typing.Any]]] = {}
+characters_to_update: typing.Dict[str, bool] = {}
 moves_done_by_opponent_this_match = {"char_name": None}
