@@ -1,6 +1,6 @@
 import enum
 
-from misc import Flags
+from src.misc import Flags
 
 class safeEnum(enum.Enum):
     @classmethod

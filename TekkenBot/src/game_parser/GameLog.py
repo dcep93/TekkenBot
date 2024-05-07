@@ -1,6 +1,6 @@
 from . import GameReader
-from game_parser import MoveInfoEnums
-from record import Record
+from src.game_parser import MoveInfoEnums
+from src.record import Record
 
 class GameLog:
     obj = None

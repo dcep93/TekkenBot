@@ -2,8 +2,8 @@ import json
 import time
 
 from . import Entry
-from game_parser import MoveInfoEnums
-from misc import Path
+from src.game_parser import MoveInfoEnums
+from src.misc import Path
 
 def initialize():
     for char in MoveInfoEnums.CharacterCodes:

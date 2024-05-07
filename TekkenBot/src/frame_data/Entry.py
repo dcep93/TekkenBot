@@ -1,6 +1,6 @@
 import enum
 
-from game_parser import MoveInfoEnums
+from src.game_parser import MoveInfoEnums
 
 MAX_HEALTH = 180
 

@@ -1,17 +1,14 @@
-import os
 import sys
-
-sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "src"))
 
 import collections
 import json
 import time
 import threading
 
-from game_parser import GameReader, MoveInfoEnums
-from gui import t_tkinter, TekkenBotPrime
-from misc import Path, Windows
-from record import Replay
+from src.game_parser import GameReader, MoveInfoEnums
+from src.gui import t_tkinter, TekkenBotPrime
+from src.misc import Path, Windows
+from src.record import Replay
 
 DEBUG_FAST = True
 
@@ -19,6 +16,8 @@ DEBUG_FAST = True
 
 def main():
     print("this project is under heavy construction, and I don't really expect it to work until 5/16/24, but you're free to try it out anyway!")
+    if not t_tkinter.valid:
+        import tkinter
     if not Windows.w.valid:
         raise Exception("need to be on windows")
     Vars.game_reader = GameReader.GameReader()
@@ -64,7 +63,7 @@ def memoize(f):
         return v
     return g
 
-def enter_phase(phase, log_before, log_after_f=None):
+def enter_phase(phase: str, log_before, log_after_f=None):
     def f(g):
         @memoize
         def h(*args):
@@ -77,6 +76,7 @@ def enter_phase(phase, log_before, log_after_f=None):
                 log_after = log_after_f(v)
                 log(log_after)
             return v
+    return f
 
 @enter_phase(
     1,

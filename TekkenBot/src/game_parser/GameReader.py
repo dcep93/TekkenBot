@@ -3,8 +3,8 @@ import ctypes
 import enum
 
 from . import GameSnapshot
-from frame_data import Hook
-from misc import Flags, Path, Windows
+from src.frame_data import Hook
+from src.misc import Flags, Path, Windows
 
 game_string = 'Polaris-Win64-Shipping.exe'
 

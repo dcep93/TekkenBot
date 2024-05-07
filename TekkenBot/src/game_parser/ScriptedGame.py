@@ -4,8 +4,7 @@ import sys
 import time
 
 from . import GameReader
-
-from misc import Flags
+from src.misc import Flags
 
 # this file is used to record a bug and quickly replay it so it can be fixed
 

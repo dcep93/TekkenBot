@@ -1,13 +1,12 @@
 import os
-import time
 import sys
-
+import time
 import traceback
 
 from . import t_tkinter, FrameDataOverlay
-from frame_data import Database
-from game_parser import GameLog, GameReader, ScriptedGame
-from misc import Flags, Path, Shared
+from src.frame_data import Database
+from src.game_parser import GameLog, GameReader, ScriptedGame
+from src.misc import Flags, Path, Shared
 
 class TekkenBotPrime(t_tkinter.Tk):
     def __init__(self):
