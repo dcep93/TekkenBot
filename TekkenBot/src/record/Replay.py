@@ -1,10 +1,10 @@
-import os
-import time
-
 from . import Record
 from src.frame_data import Entry
 from src.gui import FrameDataOverlay
 from src.misc import Shared, Windows
+
+import os
+import time
 
 seconds_per_frame = 1/60.
 # if need to wait more than imprecise_wait_cutoff_s, sleep until

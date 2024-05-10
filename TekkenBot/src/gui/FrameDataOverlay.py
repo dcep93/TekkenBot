@@ -1,10 +1,10 @@
-import enum
-
 from . import t_tkinter
 from src.frame_data import Entry, Hook
 from src.game_parser import MoveInfoEnums
 from src.misc import Path, Shared, Windows
 from src.record import Record, Replay
+
+import enum
 
 class FrameDataOverlay():
     geometry = None

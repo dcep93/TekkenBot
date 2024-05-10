@@ -1,8 +1,8 @@
-import sys
-import traceback
-
 from src.gui import TekkenBotPrime
 from src.misc import Flags, recorded_sha
+
+import sys
+import traceback
 
 def main():
     print("https://github.com/dcep93/TekkenBot")

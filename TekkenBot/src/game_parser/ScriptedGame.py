@@ -1,10 +1,10 @@
+from . import GameReader
+from src.misc import Flags
+
 import pickle
 import signal
 import sys
 import time
-
-from . import GameReader
-from src.misc import Flags
 
 # this file is used to record a bug and quickly replay it so it can be fixed
 

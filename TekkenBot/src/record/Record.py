@@ -1,8 +1,8 @@
-import enum
-
 from src.frame_data import Entry
 from src.game_parser import ScriptedGame
 from src.misc import Shared
+
+import enum
 
 def record_single():
     record_start(RecordingState.SINGLE)

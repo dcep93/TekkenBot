@@ -1,20 +1,22 @@
-from . import GameReader
-from src.game_parser import MoveInfoEnums
+from . import GameReader, GameSnapshot, MoveInfoEnums
+from src.gui import FrameDataOverlay
 from src.record import Record
 
+import typing
+
 class GameLog:
-    obj = None
 
     def __init__(self):
-        self.state_log = []
+        self.obj: typing.Any = None
+        self.state_log: typing.List[GameSnapshot.GameSnapshot] = []
 
-    def get(self, is_p1, frames_ago=0):
+    def get(self, is_p1: bool, frames_ago:int = 0) -> typing.Optional[GameSnapshot.PlayerSnapshot]:
         if len(self.state_log) <= frames_ago:
             return None
         state = self.state_log[-1-frames_ago]
         return state.p1 if is_p1 else state.p2
 
-    def update(self, game_reader, overlay):
+    def update(self, game_reader: GameReader.GameReader, overlay: FrameDataOverlay.FrameDataOverlay):
         overlay.update_location(game_reader)
         game_snapshot = game_reader.get_updated_state(0)
 
@@ -32,7 +34,7 @@ class GameLog:
 
                 self.track_gamedata(game_snapshot, overlay)
 
-    def track_gamedata(self, game_snapshot, overlay):
+    def track_gamedata(self, game_snapshot: GameSnapshot.GameSnapshot, overlay: FrameDataOverlay.FrameDataOverlay):
         if len(self.state_log) > 0 and self.state_log[-1].frame_count == game_snapshot.frame_count:
             return
 
@@ -50,7 +52,7 @@ class GameLog:
         if len(self.state_log) > 3000:
             self.state_log.pop(0)
 
-    def is_starting_attack(self, is_p1):
+    def is_starting_attack(self, is_p1: bool) -> bool:
         before = 2
         player = self.get(is_p1, before)
         if player is not None and player.startup != 0:
@@ -64,20 +66,20 @@ class GameLog:
                     return True
         return False
 
-    def get_throw_break(self, is_p1):
+    def get_throw_break(self, is_p1: bool) -> typing.Optional[str]:
         state = self.get(not is_p1)
         throw_tech = state.throw_tech
         if throw_tech in [MoveInfoEnums.ThrowTechs.NONE, MoveInfoEnums.ThrowTechs.BROKEN_ThrowTechs]:
-            return False
+            return None
         
         prev_state = self.get(is_p1, 2)
-        if prev_state is None: return False
+        if prev_state is None: return None
         move_id = prev_state.move_id
         current_buttons = self.get(not is_p1, 1).input_button.name
         if '1' not in current_buttons and '2' not in current_buttons:
             if move_id != self.get(is_p1, 1).move_id:
                 return 'br: %s' % throw_tech.name
-            return False
+            return None
 
         correct = state.throw_tech.name
 
@@ -92,16 +94,16 @@ class GameLog:
                 return throw_break_string
             buttons = state.input_button.name
             if '1' in buttons or '2' in buttons:
-                return False
+                return None
             i += 1
         raise Exception("get_throw_break")
 
-    def just_lost_health(self, is_p1):
+    def just_lost_health(self, is_p1: bool) -> bool:
         prev_state = self.get(is_p1, 2)
         if prev_state is None:
             return False
         next_state = self.get(is_p1, 1)
         return next_state.damage_taken != prev_state.damage_taken
 
-    def get_free_frames(self, is_p1):
+    def get_free_frames(self, is_p1: bool) -> int:
         return 0

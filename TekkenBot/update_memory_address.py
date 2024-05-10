@@ -1,14 +1,12 @@
-import sys
+from src.game_parser import GameReader, MoveInfoEnums
+from src.gui import t_tkinter, TekkenBotPrime
+from src.misc import Path, Windows
+from src.record import Replay
 
 import collections
 import json
 import time
 import threading
-
-from src.game_parser import GameReader, MoveInfoEnums
-from src.gui import t_tkinter, TekkenBotPrime
-from src.misc import Path, Windows
-from src.record import Replay
 
 DEBUG_FAST = True
 
