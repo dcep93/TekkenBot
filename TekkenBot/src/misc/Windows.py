@@ -13,10 +13,13 @@ class Windows:
             return
 
         self.valid = True
-        ctypes.windll.shcore.SetProcessDpiAwareness(1)
 
         self.wintypes = wintypes
-        self.k32 = ctypes.windll.kernel32
+        self.windll = windll
+
+        self.windll.shcore.SetProcessDpiAwareness(1)
+
+        self.k32 = self.windll.kernel32
 
         self.open_process = self.k32.OpenProcess
         self.open_process.argtypes = [wintypes.DWORD, ctypes.wintypes.BOOL, ctypes.wintypes.DWORD]
@@ -34,7 +37,7 @@ class Windows:
         self.close_handle.argtypes = [wintypes.HANDLE]
         self.close_handle.restype = wintypes.BOOL
 
-        psapi = ctypes.WinDLL('Psapi.dll')
+        psapi = self.windll('Psapi.dll')
         self.enum_processes = psapi.EnumProcesses
         self.enum_processes.restype = wintypes.BOOL
         self.get_process_image_filename = psapi.GetProcessImageFileNameA
@@ -59,12 +62,12 @@ class Windows:
         me32 = ModuleEntry()
         me32.dwSize = ctypes.sizeof(ModuleEntry)
 
-        h_module_snap = ctypes.windll.kernel32.CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pid)
+        h_module_snap = self.windll.kernel32.CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pid)
         if h_module_snap == -1:
             print('CreateToolhelp32Snapshot Error [%d]' % self.get_last_error())
             print('Build the code yourself? This is the error for using 32-bit Python. Try the 64-bit version.')
 
-        ret = ctypes.windll.kernel32.Module32First(h_module_snap, ctypes.pointer(me32))
+        ret = self.windll.kernel32.Module32First(h_module_snap, ctypes.pointer(me32))
         if ret == 0:
             print('ListProcessModules() Error on Module32First[%d]' % self.get_last_error())
             self.close_handle(h_module_snap)
@@ -74,15 +77,15 @@ class Windows:
             if name == me32.szModule.decode("utf-8"):
                 address_to_return = me32.hModule
 
-            ret = ctypes.windll.kernel32.Module32Next(h_module_snap, ctypes.pointer(me32))
+            ret = self.windll.kernel32.Module32Next(h_module_snap, ctypes.pointer(me32))
         self.close_handle(h_module_snap)
 
         return address_to_return
 
     def get_foreground_pid(self) -> int:
         pid = self.wintypes.DWORD()
-        active = ctypes.windll.user32.GetForegroundWindow()
-        ctypes.windll.user32.GetWindowThreadProcessId(active, ctypes.byref(pid))
+        active = self.windll.user32.GetForegroundWindow()
+        self.windll.user32.GetWindowThreadProcessId(active, ctypes.byref(pid))
         return pid.value
 
     def get_pid(self, process_name: str) -> int:
@@ -119,24 +122,27 @@ class Windows:
                 self.close_handle(h_process)
         return pid
 
+    def get_window_rect(self) -> typing.Any:
+        rect = self.wintypes.RECT()
+        ctypes.windll.user32.GetWindowRect(ctypes.windll.user32.GetForegroundWindow(), ctypes.byref(rect))
+        return rect
+
     def get_process_handle(self, pid: int) -> int:
         return self.open_process(0x0510, False, pid)
 
-    @staticmethod
-    def press_key(hex_key_code: int):
+    def press_key(self, hex_key_code: int):
         extra = ctypes.c_ulong(0)
         ii_ = Input_I()
         ii_.ki = KeyBdInput( 0, hex_key_code, 0x0008, 0, ctypes.pointer(extra) )
         x = Input( ctypes.c_ulong(1), ii_ )
-        ctypes.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
+        self.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
 
-    @staticmethod
-    def release_key(hex_key_code: int):
+    def release_key(self, hex_key_code: int):
         extra = ctypes.c_ulong(0)
         ii_ = Input_I()
         ii_.ki = KeyBdInput( 0, hex_key_code, 0x0008 | 0x0002, 0, ctypes.pointer(extra) )
         x = Input( ctypes.c_ulong(1), ii_ )
-        ctypes.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
+        self.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
 
     def sleep(self, seconds: float):
         # SetWaitableTimer not working :(

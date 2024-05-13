@@ -1,7 +1,7 @@
-from . import Record
-from src.frame_data import Entry
-from src.gui import FrameDataOverlay
-from src.misc import Shared, Windows
+from ..record import Record
+from ..frame_data import Entry
+from ..gui import FrameDataOverlay
+from ..misc import Shared, Windows
 
 import os
 import time

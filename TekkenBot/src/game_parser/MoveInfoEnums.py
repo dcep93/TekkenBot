@@ -1,4 +1,4 @@
-from src.misc import Flags
+from ..misc import Flags
 
 import enum
 

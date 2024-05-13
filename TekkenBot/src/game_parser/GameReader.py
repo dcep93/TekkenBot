@@ -1,6 +1,6 @@
-from . import GameSnapshot
-from src.frame_data import Hook
-from src.misc import Flags, Path, Windows
+from ..game_parser import GameSnapshot
+from ..frame_data import Hook
+from ..misc import Flags, Path, Windows
 
 import configparser
 import ctypes
@@ -10,21 +10,14 @@ import typing
 game_string = 'Polaris-Win64-Shipping.exe'
 
 class GameReader:
-    def __init__(self):
+    def __init__(self) -> None:
         self.pid: typing.Optional[int] = None
         self.module_address: typing.Optional[int] = None
         self.process_handle: typing.Optional[int] = None
         self.in_match: bool = False
         self._c: configparser.ConfigParser = configparser.ConfigParser(inline_comment_prefixes=('#', ';'))
         self._c.read(Path.path('config/memory_address.ini'))
-        self.c: typing.Dict[str, typing.Union[int, typing.List[int]]] = {k: {kk:self.hexify(vv) for kk,vv in v.items()} for k,v in self._c.items()}
-
-    @staticmethod
-    def hexify(vv: str):
-        h = list(map(lambda x: int(x, 16), vv.split()))
-        if len(h) == 1:
-            return h[0]
-        return h
+        self.c: typing.Dict[str, typing.Dict[str, typing.List[int]]] = {k: {kk:list(map(lambda x: int(x, 16), vv.split())) for kk,vv in v.items()} for k,v in self._c.items()}
 
     def get_updated_state(self, rollback_frame: int) -> typing.Optional[GameSnapshot.GameSnapshot]:
         if not Windows.w.valid:
@@ -58,8 +51,9 @@ class GameReader:
             print("Failed to acquire process_handle")
 
     def get_game_snapshot(self, rollback_frame: int) -> typing.Optional[GameSnapshot.GameSnapshot]:
+        pointers = self.c['MemoryAddressOffsets']['player_data_pointer_offset']
         try:
-            player_data_base_address = self.get_8_bytes_at_end_of_pointer_trail(self.c['MemoryAddressOffsets']['player_data_pointer_offset'])
+            player_data_base_address = self.get_8_bytes_at_end_of_pointer_trail(pointers)
         except ReadProcessMemoryException:
             if self.in_match:
                 Hook.finish_match()
@@ -75,10 +69,10 @@ class GameReader:
         p1_dict = {}
         p2_dict = {}
 
-        p2_offset = self.c['MemoryAddressOffsets']['p2_data_offset']
-        for name, value in self.c['PlayerDataAddress'].items():
-            p1_value = self.get_4_bytes_from_data_block(player_data_frame, value)
-            p2_value = self.get_4_bytes_from_data_block(player_data_frame, value + p2_offset)
+        p2_offset = self.c['MemoryAddressOffsets']['p2_data_offset'][0]
+        for name, values in self.c['PlayerDataAddress'].items():
+            p1_value = self.get_4_bytes_from_data_block(player_data_frame, values[0])
+            p2_value = self.get_4_bytes_from_data_block(player_data_frame, values[0] + p2_offset)
             p1_dict[name] = p1_value
             p2_dict[name] = p2_value
 
@@ -90,17 +84,17 @@ class GameReader:
         if not is_player_player_one:
             p1_snapshot, p2_snapshot = p2_snapshot, p1_snapshot
 
-        raw_facing = self.get_4_bytes_from_data_block(player_data_frame, self.c['GameDataAddress']['facing'])
+        raw_facing = self.get_4_bytes_from_data_block(player_data_frame, self.c['GameDataAddress']['facing'][0])
         facing_bool = bool(raw_facing ^ is_player_player_one)
 
         return GameSnapshot.GameSnapshot(p1_snapshot, p2_snapshot, frame_count, facing_bool)
 
-    def get_frame(self, player_data_base_address: int, rollback_frame: int) -> (int, bytes):
-        rollback_frame_offset = self.c['MemoryAddressOffsets']['rollback_frame_offset']
+    def get_frame(self, player_data_base_address: int, rollback_frame: int) -> typing.Tuple[int, bytes]:
+        rollback_frame_offset = self.c['MemoryAddressOffsets']['rollback_frame_offset'][0]
         
         frame_chunk = []
 
-        frame_count = self.c['GameDataAddress']['frame_count']
+        frame_count = self.c['GameDataAddress']['frame_count'][0]
         for i in range(32):  # for rollback purposes, there are copies of the game state
             potential_second_address = player_data_base_address + (i * rollback_frame_offset)
             potential_frame_count = self.get_int_from_address(potential_second_address + frame_count, 4)
@@ -129,17 +123,18 @@ class GameReader:
 
     def get_int_from_address(self, address: int, num_bytes: int) -> int:
         data = self.get_block_of_data(address, num_bytes)
-        return int.from_bytes(data[::-1])
+        return int.from_bytes(data[::-1], 'little')
 
     def get_8_bytes_at_end_of_pointer_trail(self, trail: typing.List[int]) -> int:
         address = self.module_address
+        assert(not address is None)
         for i, offset in enumerate(trail):
             address = self.get_int_from_address(address + offset, 8)
         return address
 
     @staticmethod
     def get_4_bytes_from_data_block(frame: bytes, offset: int) -> int:
-        return int.from_bytes(frame[offset: offset + 4][::-1])
+        return int.from_bytes(frame[offset: offset + 4][::-1], 'little')
 
     def is_foreground_pid(self) -> bool:
         pid = Windows.w.get_foreground_pid()
@@ -148,9 +143,7 @@ class GameReader:
     def get_window_rect(self) -> typing.Optional[typing.Any]:
         # see https://stackoverflow.com/questions/21175922/enumerating-windows-trough-ctypes-in-python for clues for doing this without needing focus using WindowsEnum
         if self.in_match and self.is_foreground_pid():
-            rect = Windows.w.wintypes.RECT()
-            ctypes.windll.user32.GetWindowRect(ctypes.windll.user32.GetForegroundWindow(), ctypes.byref(rect))
-            return rect
+            return Windows.w.get_window_rect()
         else:
             return None
 

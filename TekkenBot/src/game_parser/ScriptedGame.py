@@ -1,5 +1,5 @@
-from . import GameReader, GameSnapshot
-from src.misc import Flags
+from ..game_parser import GameReader, GameSnapshot
+from ..misc import Flags
 
 import pickle
 import signal

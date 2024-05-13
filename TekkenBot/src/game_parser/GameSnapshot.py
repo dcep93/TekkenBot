@@ -1,4 +1,4 @@
-from . import MoveInfoEnums
+from ..game_parser import MoveInfoEnums
 
 class PlayerSnapshot:
     def __init__(self, player_data_dict: typing.Dict[str, int]):

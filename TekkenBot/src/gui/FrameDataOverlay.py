@@ -1,8 +1,8 @@
-from . import t_tkinter
-from src.frame_data import Entry, Hook
-from src.game_parser import GameLog, GameReader, MoveInfoEnums
-from src.misc import Path, Shared, Windows
-from src.record import Record, Replay
+from ..gui import t_tkinter
+from ..frame_data import Entry, Hook
+from ..game_parser import GameLog, GameReader, MoveInfoEnums
+from ..misc import Path, Shared, Windows
+from ..record import Record, Replay
 
 import enum
 import typing

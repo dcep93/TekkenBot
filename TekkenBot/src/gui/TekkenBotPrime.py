@@ -1,7 +1,7 @@
-from . import t_tkinter, FrameDataOverlay
-from src.frame_data import Database
-from src.game_parser import GameLog, GameReader, ScriptedGame
-from src.misc import Flags, Path, Shared
+from ..gui import t_tkinter, FrameDataOverlay
+from ..frame_data import Database
+from ..game_parser import GameLog, GameReader, ScriptedGame
+from ..misc import Flags, Path, Shared
 
 import os
 import sys

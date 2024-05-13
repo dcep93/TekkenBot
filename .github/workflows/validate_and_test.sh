@@ -1,3 +1,3 @@
 #!bin/bash
 
-mypy .
+PYTHONPATH=TekkenBot mypy .

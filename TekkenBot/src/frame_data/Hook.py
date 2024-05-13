@@ -1,4 +1,4 @@
-from . import Database, Entry
+from ..frame_data import Database, Entry
 
 def start_match():
     pass

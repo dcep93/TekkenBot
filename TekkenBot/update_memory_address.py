@@ -1,7 +1,7 @@
 from src.game_parser import GameReader, MoveInfoEnums
-from src.gui import t_tkinter, TekkenBotPrime
-from src.misc import Path, Windows
-from src.record import Replay
+from ..gui import t_tkinter, TekkenBotPrime
+from ..misc import Path, Windows
+from ..record import Replay
 
 import collections
 import json

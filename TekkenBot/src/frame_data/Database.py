@@ -1,6 +1,6 @@
-from . import Entry
-from src.game_parser import MoveInfoEnums
-from src.misc import Path
+from ..frame_data import Entry
+from ..game_parser import MoveInfoEnums
+from ..misc import Path
 
 import json
 import time

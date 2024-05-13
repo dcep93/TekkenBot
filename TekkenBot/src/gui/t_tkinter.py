@@ -1,3 +1,5 @@
+# type:ignore
+
 valid = False
 try:
     from tkinter import *

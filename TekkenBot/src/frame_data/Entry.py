@@ -1,6 +1,7 @@
-from src.game_parser import GameLog, GameSnapshot, MoveInfoEnums
+from ..game_parser import GameLog, GameSnapshot, MoveInfoEnums
 
 import enum
+import typing
 
 MAX_HEALTH = 180
 

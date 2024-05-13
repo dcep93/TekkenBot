@@ -1,6 +1,6 @@
-from . import GameReader, GameSnapshot, MoveInfoEnums
-from src.gui import FrameDataOverlay
-from src.record import Record
+from ..game_parser import GameReader, GameSnapshot, MoveInfoEnums
+from ..gui import FrameDataOverlay
+from ..record import Record
 
 import typing
 

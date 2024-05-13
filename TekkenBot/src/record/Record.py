@@ -1,6 +1,6 @@
-from src.frame_data import Entry
-from src.game_parser import ScriptedGame
-from src.gui import TekkenBotPrime
+from ..frame_data import Entry
+from ..game_parser import ScriptedGame
+from ..gui import TekkenBotPrime
 
 import enum
 
