@@ -1,4 +1,4 @@
-from . import GameReader
+from . import GameReader, GameSnapshot
 from src.misc import Flags
 
 import pickle
@@ -11,23 +11,24 @@ import time
 class Recorder(GameReader.GameReader):
     def __init__(self):
         super().__init__()
-        self.pickle_dest = Flags.Flags.pickle_dest
-        self.reset(False)
+        self.active: bool = False
+        self.all_datas: typing.List[(float, typing.List[GameSnapshot.GameSnapshot])] = []
+        self.num_datas: int = 0
         signal.signal(signal.SIGINT, lambda _,__: self.save_and_quit())
 
-    def reset(self, active=None):
+    def reset(self, active: typing.Optional[bool]=None):
         if active is not None:
             self.active = active
         self.all_datas = []
         self.num_datas = 0
 
-    def get_updated_state(self, rollback_frame):
+    def get_updated_state(self, rollback_frame: int) -> GameSnapshot.GameSnapshot:
         game_snapshot = super().get_updated_state(rollback_frame)
         if self.active:
             self.record_data(rollback_frame == 0, game_snapshot)
         return game_snapshot
 
-    def record_data(self, new_update, game_snapshot):
+    def record_data(self, new_update: bool, game_snapshot: GameSnapshot.GameSnapshot):
         self.num_datas += 1
         if new_update:
             now = time.time()
@@ -38,7 +39,7 @@ class Recorder(GameReader.GameReader):
     def dump(self):
         self.active = False
         print('writing', self.num_datas, len(self.all_datas))
-        with open(self.pickle_dest, 'wb') as fh:
+        with open(Flags.Flags.pickle_dest, 'wb') as fh:
             pickle.dump(self.all_datas, fh)
         self.reset()
 
@@ -49,17 +50,14 @@ class Recorder(GameReader.GameReader):
 class Reader(GameReader.GameReader):
     def __init__(self):
         super().__init__()
-        self.pickle_src = Flags.Flags.pickle_src
-        self.fast = Flags.Flags.fast
-
-        print('loading', self.pickle_src, self.fast)
-        with open(self.pickle_src, 'rb') as fh:
+        print('loading', Flags.Flags.pickle_src, self.fast)
+        with open(Flags.Flags.pickle_src, 'rb') as fh:
             self.all_datas = pickle.load(fh)
 
         if not self.all_datas:
             raise Exception("no data in pickle")
 
-        self.offset = time.time() - self.load()
+        self.offset: float = time.time() - self.load()
 
     def load(self):
         timestamp, self.datas = self.all_datas.pop(0)
@@ -68,12 +66,12 @@ class Reader(GameReader.GameReader):
     def get_update_wait_ms(self, _):
         if len(self.all_datas) == 0:
             print("done with pickle")
-            if self.fast:
+            if Flags.Flags.fast:
                 sys.exit(0)
             return -1
 
         next_timestamp = self.load()
-        if self.fast:
+        if Flags.Flags.fast:
             return 0
         wait_s = next_timestamp + self.offset - time.time()
         wait_ms = max(int(wait_s * 1000), 0)

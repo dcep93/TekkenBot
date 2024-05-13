@@ -40,7 +40,7 @@ class Windows:
         self.get_process_image_filename = psapi.GetProcessImageFileNameA
         self.get_process_image_filename.restype = wintypes.DWORD
 
-    def get_module_address(self, pid, name):
+    def get_module_address(self, pid: int, name: str) -> int:
         class ModuleEntry(ctypes.Structure):
             _fields_ = [('dwSize', self.wintypes.DWORD),
                         ('th32ModuleID', self.wintypes.DWORD),
@@ -79,13 +79,13 @@ class Windows:
 
         return address_to_return
 
-    def get_foreground_pid(self):
+    def get_foreground_pid(self) -> int:
         pid = self.wintypes.DWORD()
         active = ctypes.windll.user32.GetForegroundWindow()
         ctypes.windll.user32.GetWindowThreadProcessId(active, ctypes.byref(pid))
         return pid.value
 
-    def get_pid(self, process_name):
+    def get_pid(self, process_name: str) -> int:
         MAX_PATH = 260
         PROCESS_TERMINATE = 0x0001
         PROCESS_QUERY_INFORMATION = 0x0400
@@ -119,11 +119,11 @@ class Windows:
                 self.close_handle(h_process)
         return pid
 
-    def get_process_handle(self, pid):
+    def get_process_handle(self, pid: int) -> int:
         return self.open_process(0x0510, False, pid)
 
     @staticmethod
-    def press_key(hex_key_code):
+    def press_key(hex_key_code: int):
         extra = ctypes.c_ulong(0)
         ii_ = Input_I()
         ii_.ki = KeyBdInput( 0, hex_key_code, 0x0008, 0, ctypes.pointer(extra) )
@@ -131,14 +131,14 @@ class Windows:
         ctypes.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
 
     @staticmethod
-    def release_key(hex_key_code):
+    def release_key(hex_key_code: int):
         extra = ctypes.c_ulong(0)
         ii_ = Input_I()
         ii_.ki = KeyBdInput( 0, hex_key_code, 0x0008 | 0x0002, 0, ctypes.pointer(extra) )
         x = Input( ctypes.c_ulong(1), ii_ )
         ctypes.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
 
-    def sleep(self, seconds):
+    def sleep(self, seconds: float):
         # SetWaitableTimer not working :(
         self.dumb_sleep(seconds)
         # # https://stackoverflow.com/a/11658115
@@ -148,7 +148,7 @@ class Windows:
         # self.k32.WaitForSingleObject(self.timer(), 0xffffffff)
 
     @staticmethod
-    def dumb_sleep(seconds):
+    def dumb_sleep(seconds: float):
         before = time.time()
         buffer_s = 0.0015
         acceptable_early = 0.0005

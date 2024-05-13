@@ -10,6 +10,7 @@ jobs:
         with:
           fetch-depth: 2
           submodules: true
+      - run: bash .github/workflows/validate_and_test.sh
       - run: bash .github/workflows/record_sha.sh
       - run: bash .github/workflows/build_exe.sh
       - run: bash .github/workflows/build_tar.sh

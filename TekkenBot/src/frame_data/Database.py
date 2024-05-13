@@ -6,7 +6,6 @@ import json
 import time
 import typing
 
-
 class Database:
     def __init__(self):
         self.database: typing.Dict[str, typing.Dict[str, typing.Dict[str, typing.Any]]] = {}
@@ -80,5 +79,3 @@ class Database:
             Entry.DataColumns.block,
         ]}
         self.characters_to_update[char_name] = True
-
-d = Database()

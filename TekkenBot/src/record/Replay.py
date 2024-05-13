@@ -47,7 +47,7 @@ def replay():
     moves = get_moves_from_path()
     if moves is None:
         return
-    Shared.Shared.frame_data_overlay.print_f({
+    TekkenBotPrime.TekkenBotPrime.instance.overlay.print_f({
         Entry.DataColumns.move_id: 'REPLAY'
     })
     print('waiting for tekken focus')
@@ -160,7 +160,7 @@ class Replayer:
     log = []
 
 def is_foreground_pid():
-    return not Windows.w.valid or Shared.Shared.game_reader.is_foreground_pid()
+    return not Windows.w.valid or TekkenBotPrime.TekkenBotPrime.instance.game_reader.is_foreground_pid()
 
 def wait_for_focus_and_replay_moves():
     if Replayer.i is not None:
@@ -168,7 +168,7 @@ def wait_for_focus_and_replay_moves():
     if is_foreground_pid():
         replay_moves()
     else:
-        Shared.Shared.frame_data_overlay.toplevel.after(100, wait_for_focus_and_replay_moves)
+        TekkenBotPrime.TekkenBotPrime.instance.overlay.toplevel.after(100, wait_for_focus_and_replay_moves)
 
 def replay_moves():
     if Replayer.i is not None:
@@ -186,7 +186,7 @@ def handle_next_move():
         # get a bit closer because precise_wait is more expensive
         wait_s = diff - imprecise_wait_cutoff_s + imprecise_wait_cutoff_buffer_s
         wait_ms = int(wait_s * 1000)
-        Shared.Shared.frame_data_overlay.toplevel.after(wait_ms, handle_next_move)
+        TekkenBotPrime.TekkenBotPrime.instance.overlay.toplevel.after(wait_ms, handle_next_move)
         return
     if diff > 0:
         Windows.w.sleep(diff)
@@ -197,7 +197,7 @@ def handle_next_move():
 def replay_next_move():
     if Replayer.i == len(Replayer.moves):
         one_frame_ms = int(1000 * seconds_per_frame)
-        Shared.Shared.frame_data_overlay.toplevel.after(one_frame_ms, finish)
+        TekkenBotPrime.TekkenBotPrime.instance.overlay.toplevel.after(one_frame_ms, finish)
         return
 
     move, count = Replayer.moves[Replayer.i]
@@ -237,11 +237,11 @@ def get_diff():
     return target - actual
 
 def replay_move(move):
-    state_log = Shared.Shared.game_log.state_log
+    state_log = TekkenBotPrime.TekkenBotPrime.instance.game_log.state_log
     if len(state_log) == 0:
         reverse = False
     else:
-        last_state = Shared.Shared.game_log.state_log[-1]
+        last_state = TekkenBotPrime.TekkenBotPrime.instance.game_log.state_log[-1]
         reverse = last_state.facing_bool
     hex_key_codes = move_to_hexes(move, reverse)
     to_release = [i for i in Replayer.pressed if i not in hex_key_codes]

@@ -1,21 +1,21 @@
 from . import t_tkinter
 from src.frame_data import Entry, Hook
-from src.game_parser import MoveInfoEnums
+from src.game_parser import GameLog, GameReader, MoveInfoEnums
 from src.misc import Path, Shared, Windows
 from src.record import Record, Replay
 
 import enum
+import typing
 
-class FrameDataOverlay():
-    geometry = None
-    unknown = ''
-    max_lines = 6
-    col_max_length = 12
-    sizes = {
-        Entry.DataColumns.hit_outcome: 25,
-    }
-
+class FrameDataOverlay:
     def __init__(self):
+        self.geometry: typing.Optional[str] = None
+        self.unknown = ''
+        self.max_lines = 6
+        self.col_max_length = 12
+        self.sizes: typing.Dict[Entry.DataColumns, int] = {
+            Entry.DataColumns.hit_outcome: 25,
+        }
         self.visible = True
 
         window_name = self.__class__.__name__
@@ -35,14 +35,12 @@ class FrameDataOverlay():
 
         #
 
-        self.entries = []
-        self.column_names_string = None
+        self.entries: Entry.Entry = []
+        self.column_names_string: typing.Optional[str] = None
         self.init_tkinter()
         self.populate_column_names()
 
-        Shared.Shared.frame_data_overlay = self
-
-    def handle_fa(self, entry):
+    def handle_fa(self, entry: Entry.Entry):
         if entry.get(Entry.DataColumns.block) is None:
             fa_str = "-"
         else:
@@ -62,11 +60,11 @@ class FrameDataOverlay():
         self.fa_label.configure(background=color.value)
         self.fa_var.set(fa_str)
 
-    def update_state(self, game_log):
+    def update_state(self, game_log: GameLog.GameLog):
         self.read_player_state(True, game_log)
         self.read_player_state(False, game_log)
 
-    def get_geometry(self, tekken_rect):
+    def get_geometry(self, tekken_rect) -> (int, int):
         x = (tekken_rect.right + tekken_rect.left) / 2  - self.toplevel.winfo_width() / 2
         y = tekken_rect.bottom - self.toplevel.winfo_height()
         return x,y
@@ -134,14 +132,14 @@ class FrameDataOverlay():
         frame.pack(side=t_tkinter.LEFT)
 
     @staticmethod
-    def get_prefix(is_p1):
+    def get_prefix(is_p1: bool) -> str:
         if is_p1 is None:
             player_name = '  '
         else:
             player_name = "p1" if is_p1 else "p2"
         return "%s: " % player_name
 
-    def get_value(self, entry, col):
+    def get_value(self, entry: Entry.Entry, col: Entry.DataColumns) -> str:
         if col in entry and entry[col] is not None:
             value = str(entry[col])
         else:
@@ -155,7 +153,7 @@ class FrameDataOverlay():
         after = diff - before
         return (' ' * before) + value + (' ' * after)
 
-    def get_frame_data_string(self, entry):
+    def get_frame_data_string(self, entry: Entry.Entry) -> str:
         values = [self.get_value(entry, col) for col in Entry.DataColumns if col not in [
             Entry.DataColumns.is_player,
         ]]
@@ -173,7 +171,7 @@ class FrameDataOverlay():
         while len(self.entries) >= self.max_lines:
             self.pop_entry(0)
 
-    def pop_entry(self, index):
+    def pop_entry(self, index: int):
         offset = 2
         self.entries.pop(index)
         start = "%0.1f" % (index + offset)
@@ -196,7 +194,7 @@ class FrameDataOverlay():
         self.text.delete("1.0", "2.0")
         self.text.insert("1.0", string + '\n')
 
-    def read_player_state(self, is_p1, game_log):
+    def read_player_state(self, is_p1: bool, game_log: GameLog.GameLog):
         # ignore the fact that some moves have multiple active frames
         if game_log.is_starting_attack(is_p1):
             entry = Entry.build(game_log, is_p1)
@@ -211,13 +209,13 @@ class FrameDataOverlay():
         entry[Entry.DataColumns.time] = self.get_time(game_log, is_p1)
         self.print_f(entry, is_p1)
 
-    def get_time(self, game_log, is_p1):
+    def get_time(self, game_log: GameLog.GameLog, is_p1: bool) -> str:
         return '%3d/%3d' % (
             game_log.get(not is_p1, 1).frames_til_attack,
             game_log.get_free_frames(not is_p1)
         )
 
-    def update_location(self, game_reader):
+    def update_location(self, game_reader: GameReader.GameReader):
         if Windows.w.valid:
             tekken_rect = game_reader.get_window_rect()
         else:

@@ -15,14 +15,16 @@ class GameReader:
         self.module_address: typing.Optional[int] = None
         self.process_handle: typing.Optional[int] = None
         self.in_match: bool = False
-        def hexify(vv: str):
-            h = list(map(lambda x: int(x, 16), vv.split()))
-            if len(h) == 1:
-                return h[0]
-            return h
         self._c: configparser.ConfigParser = configparser.ConfigParser(inline_comment_prefixes=('#', ';'))
         self._c.read(Path.path('config/memory_address.ini'))
-        self.c: typing.Dict[str, typing.Union[int, typing.List[int]]] = {k: {kk:hexify(vv) for kk,vv in v.items()} for k,v in self._c.items()}
+        self.c: typing.Dict[str, typing.Union[int, typing.List[int]]] = {k: {kk:self.hexify(vv) for kk,vv in v.items()} for k,v in self._c.items()}
+
+    @staticmethod
+    def hexify(vv: str):
+        h = list(map(lambda x: int(x, 16), vv.split()))
+        if len(h) == 1:
+            return h[0]
+        return h
 
     def get_updated_state(self, rollback_frame: int) -> typing.Optional[GameSnapshot.GameSnapshot]:
         if not Windows.w.valid:

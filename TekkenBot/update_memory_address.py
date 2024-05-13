@@ -5,8 +5,9 @@ from src.record import Replay
 
 import collections
 import json
-import time
 import threading
+import time
+import typing
 
 DEBUG_FAST = True
 
@@ -43,7 +44,7 @@ def main():
     config_obj = Vars.game_reader._c
     for path, raw in found.items():
         # TODO experiment - run once, everything changes, run twice, everything goes back
-        value = hexify(raw)
+        value = GameReader.GameReader.hexify(raw)
         print(path, value)
         config_obj[path[0]][path[1]] = value
     with open(Path.path('config/memory_address.ini'), 'w') as fh:
@@ -61,7 +62,7 @@ def memoize(f):
         return v
     return g
 
-def enter_phase(phase: str, log_before, log_after_f=None):
+def enter_phase(phase: int, log_before: typing.List[str], log_after_f=None):
     def f(g):
         @memoize
         def h(*args):
@@ -238,12 +239,7 @@ def get_pointers_map():
 
 ### helpers
 
-def hexify(obj):
-    if isinstance(obj, list):
-        return " ".join(hexify([i for i in obj]))
-    return hex(obj)
-
-def log(arr):
+def log(arr: typing.List[str]):
     print(" / ".join([f"{(time.time()-Vars.start):0.2f} seconds"] + arr))
 
 def update_tk():
@@ -257,7 +253,7 @@ def update_tk():
         Vars.tk.withdraw()
     Vars.tk.update()
 
-def find_bytes(byte_array):
+def find_bytes(byte_array: bytes) -> typing.Generator[(int, int)]:
     memory = get_all_memory()
     def get_indices(needle, haystack):
         index = 0
@@ -275,7 +271,7 @@ def find_bytes(byte_array):
         for index in get_indices(needle, haystack):
             yield base_address, index
 
-def press_keys(keys):
+def press_keys(keys: str):
     m = {k:v for d in [
         Replay.attack_string_to_hex,
         Replay.direction_string_to_hexes,
@@ -291,11 +287,11 @@ def release_all_keys():
         for c in d.values():
             Windows.w.release_key(c)
 
-def sleep_frames(frames):
+def sleep_frames(frames: int):
     seconds = frames * Replay.seconds_per_frame
     Windows.w.sleep(seconds)
 
-def get_blocks_from_instructions(instructions):
+def get_blocks_from_instructions(instructions: typing.List[(str, int)]) -> typing.List[bytes]:
     def helper():
         move_id_offset = move_id_offset()
         move_id_address, rollback_frame_offset = get_point_slope()
@@ -310,21 +306,24 @@ def get_blocks_from_instructions(instructions):
             block = Vars.game_reader.get_block_of_data(player_data_base_address, rollback_frame_offset * 32)
             blocks.append(block)
         release_all_keys()
-        return find_offset_from_block(validate_f, block)
+        return blocks
     try:
         return helper()
     finally:
         release_all_keys()
 
 @memoize
-def get_choreographed_blocks():
+def get_choreographed_blocks() -> typing.List[bytes]:
     return get_blocks_from_instructions([
         ("1", 10),
         (None, 10),
         ("1", 10),
     ])
 
-def find_offset_from_blocks(blocks, validate_f):
+def find_offset_from_blocks(
+    blocks: typing.List[bytes],
+    validate_f: typing.Callable[typing.List[typing.List[int]], bool],
+) -> int:
     _, rollback_frame_offset = get_point_slope()
     for offset in range(0x100, 0x10000):
         value_blocks = [
@@ -340,12 +339,12 @@ def find_offset_from_blocks(blocks, validate_f):
                 ]
             ] for block in blocks
         ]
-        validated = validate_f(values)
+        validated = validate_f(value_blocks)
         if validate_f(values):
             return offset
     raise Exception("find_offset_from_block")
 
-def find_offset_from_expected(blocks, expected):
+def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[int]) -> int:
     frame_count_offset = get_frame_count()
 
     def equals(a, b):
@@ -372,7 +371,7 @@ def find_offset_from_expected(blocks, expected):
 
     return find_offset_from_blocks(blocks, validate_f)
 
-def get_pointer_offset(sources, max_offset):
+def get_pointer_offset(sources: typing.List[int], max_offset: int) -> typing.List[int]:
     candidates = {source: [] for source in sources}
 
     for _ in range(10):
@@ -498,6 +497,7 @@ to_update = [
     (("MemoryAddressOffsets", "p2_data_offset"), get_p2_data_offset),
     (("PlayerDataAddress", "damage_taken"), get_damage_taken),
     (("PlayerDataAddress", "attack_type"), get_attack_type),
+    # TODO rest of the offsets
     # phase 3 get_pointers_map
     (("MemoryAddressOffsets", "player_data_pointer_offset"), get_player_data_pointer_offset),
     (("NonPlayerDataAddresses", "opponent_side"), get_opponent_side),
@@ -507,7 +507,7 @@ to_update = [
 
 class Vars:
     phase = None
-    game_reader = None
+    game_reader: GameReader.GameReader = None
     start = None
     tk = None
     active = None
