@@ -1,6 +1,6 @@
 from .src.game_parser import GameReader, MoveInfoEnums
 from .src.gui import t_tkinter, TekkenBotPrime
-from .src.misc import Path, Windows
+from .src.misc import Path, Windows, w_windows
 from .src.record import Replay
 
 import collections
@@ -96,22 +96,22 @@ def enter_phase(phase: int, log_before: typing.List[str], log_after_f: typing.Op
 )
 def get_all_memory() -> typing.Dict[int, bytes]:
     Windows.w.k32.VirtualQueryEx.argtypes = [
-        Windows.w.wintypes.HANDLE,
-        Windows.w.wintypes.LPCVOID,
-        Windows.w.wintypes.LPVOID,
+        w_windows.wintypes.HANDLE,
+        w_windows.wintypes.LPCVOID,
+        w_windows.wintypes.LPVOID,
         ctypes.c_size_t,
     ]
     def get_memory_scannable_size(address: int) -> int:
-        class MemoryBasicInformation(GameReader.ctypes.Structure): # type: ignore
+        class MemoryBasicInformation(ctypes.Structure):
             """https://msdn.microsoft.com/en-us/library/aa366775"""
             _fields_ = (
-                ('BaseAddress', Windows.w.wintypes.LPVOID),
-                ('AllocationBase',    Windows.w.wintypes.LPVOID),
+                ('BaseAddress', w_windows.wintypes.LPVOID),
+                ('AllocationBase',    w_windows.wintypes.LPVOID),
                 ('AllocationProtect', ctypes.c_size_t),
                 ('RegionSize', ctypes.c_size_t),
-                ('State',   Windows.w.wintypes.DWORD),
-                ('Protect', Windows.w.wintypes.DWORD),
-                ('Type',    Windows.w.wintypes.DWORD),
+                ('State',   w_windows.wintypes.DWORD),
+                ('Protect', w_windows.wintypes.DWORD),
+                ('Type',    w_windows.wintypes.DWORD),
             )
         mbi = MemoryBasicInformation()
         Windows.w.k32.VirtualQueryEx(Vars.v.game_reader.process_handle, address, ctypes.byref(mbi), ctypes.sizeof(mbi))
@@ -376,8 +376,7 @@ def get_pointer_offset(sources: typing.List[int], max_offset: int) -> typing.Lis
             for offset in range(max_offset):
                 sources = pointers_map.get(hex(address-offset), [])
                 for source in sources:
-                    assert(not Vars.v.game_reader.module_address is None)
-                    diff = source - Vars.v.game_reader.module_address
+                    diff = source - get_expected_module_address()
                     if diff > 0:
                         return [diff, offset]+prev
                     next_candidates[source] = [offset] + prev

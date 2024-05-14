@@ -1,3 +1,5 @@
+from ..misc import w_windows
+
 import ctypes
 import os.path
 import sys
@@ -5,55 +7,45 @@ import time
 import typing
 
 class Windows:
-    valid = False
     def __init__(self) -> None:
-        try:
-            from ctypes import wintypes
-            from ctypes import windll
-        except (ValueError, ImportError):
-            return
+        self.valid = w_windows.valid
 
-        self.valid = True # type: ignore
+        w_windows.windll.shcore.SetProcessDpiAwareness(1)
 
-        self.wintypes = wintypes
-        self.windll = windll
-
-        self.windll.shcore.SetProcessDpiAwareness(1)
-
-        self.k32 = self.windll.kernel32
+        self.k32 = w_windows.windll.kernel32
 
         self.open_process = self.k32.OpenProcess
-        self.open_process.argtypes = [wintypes.DWORD, ctypes.wintypes.BOOL, ctypes.wintypes.DWORD]
-        self.open_process.restype = wintypes.HANDLE
+        self.open_process.argtypes = [w_windows.wintypes.DWORD, ctypes.wintypes.BOOL, ctypes.wintypes.DWORD]
+        self.open_process.restype = w_windows.wintypes.HANDLE
 
         self.read_process_memory = self.k32.ReadProcessMemory
-        self.read_process_memory.argtypes = [wintypes.HANDLE, ctypes.wintypes.LPCVOID, ctypes.wintypes.LPVOID, ctypes.c_size_t, ctypes.POINTER(ctypes.c_size_t)]
-        self.read_process_memory.restype = wintypes.BOOL
+        self.read_process_memory.argtypes = [w_windows.wintypes.HANDLE, ctypes.wintypes.LPCVOID, ctypes.wintypes.LPVOID, ctypes.c_size_t, ctypes.POINTER(ctypes.c_size_t)]
+        self.read_process_memory.restype = w_windows.wintypes.BOOL
 
         self.get_last_error = self.k32.GetLastError
-        self.get_last_error.argtypes = None # type: ignore
-        self.get_last_error.restype = wintypes.DWORD
+        self.get_last_error.argtypes = None
+        self.get_last_error.restype = w_windows.wintypes.DWORD
 
         self.close_handle = self.k32.CloseHandle
-        self.close_handle.argtypes = [wintypes.HANDLE]
-        self.close_handle.restype = wintypes.BOOL
+        self.close_handle.argtypes = [w_windows.wintypes.HANDLE]
+        self.close_handle.restype = w_windows.wintypes.BOOL
 
-        psapi = ctypes.WinDLL('Psapi.dll')
+        psapi = w_windows.WinDLL('Psapi.dll')
         self.enum_processes = psapi.EnumProcesses
-        self.enum_processes.restype = wintypes.BOOL
+        self.enum_processes.restype = w_windows.wintypes.BOOL
         self.get_process_image_filename = psapi.GetProcessImageFileNameA
-        self.get_process_image_filename.restype = wintypes.DWORD
+        self.get_process_image_filename.restype = w_windows.wintypes.DWORD
 
     def get_module_address(self, pid: int, name: str) -> typing.Optional[int]:
         class ModuleEntry(ctypes.Structure):
-            _fields_ = [('dwSize', self.wintypes.DWORD),
-                        ('th32ModuleID', self.wintypes.DWORD),
-                        ('th32ProcessID', self.wintypes.DWORD),
-                        ('GlblcntUsage', self.wintypes.DWORD),
-                        ('ProccntUsage', self.wintypes.DWORD),
-                        ('modBaseAddr', ctypes.POINTER(self.wintypes.BYTE)),
-                        ('modBaseSize', self.wintypes.DWORD),
-                        ('hModule', self.wintypes.HMODULE),
+            _fields_ = [('dwSize', w_windows.wintypes.DWORD),
+                        ('th32ModuleID', w_windows.wintypes.DWORD),
+                        ('th32ProcessID', w_windows.wintypes.DWORD),
+                        ('GlblcntUsage', w_windows.wintypes.DWORD),
+                        ('ProccntUsage', w_windows.wintypes.DWORD),
+                        ('modBaseAddr', ctypes.POINTER(w_windows.wintypes.BYTE)),
+                        ('modBaseSize', w_windows.wintypes.DWORD),
+                        ('hModule', w_windows.wintypes.HMODULE),
                         ('szModule', ctypes.c_char * 256),
                         ('szExePath', ctypes.c_char * 260)]
 
@@ -63,12 +55,12 @@ class Windows:
         me32 = ModuleEntry()
         me32.dwSize = ctypes.sizeof(ModuleEntry)
 
-        h_module_snap = self.windll.kernel32.CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pid)
+        h_module_snap = w_windows.windll.kernel32.CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pid)
         if h_module_snap == -1:
             print('CreateToolhelp32Snapshot Error [%d]' % self.get_last_error())
             print('Build the code yourself? This is the error for using 32-bit Python. Try the 64-bit version.')
 
-        ret = self.windll.kernel32.Module32First(h_module_snap, ctypes.pointer(me32))
+        ret = w_windows.windll.kernel32.Module32First(h_module_snap, ctypes.pointer(me32))
         if ret == 0:
             print('ListProcessModules() Error on Module32First[%d]' % self.get_last_error())
             self.close_handle(h_module_snap)
@@ -78,15 +70,16 @@ class Windows:
             if name == me32.szModule.decode("utf-8"):
                 address_to_return = me32.hModule
 
-            ret = self.windll.kernel32.Module32Next(h_module_snap, ctypes.pointer(me32))
+            ret = w_windows.windll.kernel32.Module32Next(h_module_snap, ctypes.pointer(me32))
         self.close_handle(h_module_snap)
 
         return address_to_return
 
     def get_foreground_pid(self) -> int:
-        pid = self.wintypes.DWORD()
-        active = self.windll.user32.GetForegroundWindow()
-        self.windll.user32.GetWindowThreadProcessId(active, ctypes.byref(pid))
+        pid = w_windows.wintypes.DWORD()
+        active = w_windows.windll.user32.GetForegroundWindow()
+        w_windows.windll.user32.GetWindowThreadProcessId(active, ctypes.byref(pid))
+        assert(isinstance(pid.value, int))
         return pid.value
 
     def get_pid(self, process_name: str) -> typing.Optional[int]:
@@ -98,9 +91,9 @@ class Windows:
         pid = None
         count = 32
         for _ in range(10000):
-            process_ids = (self.wintypes.DWORD*count)()
+            process_ids = (w_windows.wintypes.DWORD*count)()
             cb = ctypes.sizeof(process_ids)
-            bytes_returned = self.wintypes.DWORD()
+            bytes_returned = w_windows.wintypes.DWORD()
             # ???
             if self.enum_processes(ctypes.byref(process_ids), cb, ctypes.byref(bytes_returned)):
                 if bytes_returned.value < cb:
@@ -109,7 +102,7 @@ class Windows:
             else:
                 raise Exception("Call to enum_processes failed")
 
-        num_values = int(bytes_returned.value / ctypes.sizeof(self.wintypes.DWORD))
+        num_values = int(bytes_returned.value / ctypes.sizeof(w_windows.wintypes.DWORD))
         for index in range(num_values):
             process_id = process_ids[index]
 
@@ -124,8 +117,8 @@ class Windows:
         return pid
 
     def get_window_rect(self) -> typing.Any:
-        rect = self.wintypes.RECT()
-        self.windll.user32.GetWindowRect(self.windll.user32.GetForegroundWindow(), ctypes.byref(rect))
+        rect = w_windows.wintypes.RECT()
+        w_windows.windll.user32.GetWindowRect(w_windows.windll.user32.GetForegroundWindow(), ctypes.byref(rect))
         return rect
 
     def get_process_handle(self, pid: int) -> int:
@@ -136,14 +129,14 @@ class Windows:
         ii_ = Input_I()
         ii_.ki = KeyBdInput( 0, hex_key_code, 0x0008, 0, ctypes.pointer(extra) )
         x = Input( ctypes.c_ulong(1), ii_ )
-        self.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
+        w_windows.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
 
     def release_key(self, hex_key_code: int) -> None:
         extra = ctypes.c_ulong(0)
         ii_ = Input_I()
         ii_.ki = KeyBdInput( 0, hex_key_code, 0x0008 | 0x0002, 0, ctypes.pointer(extra) )
         x = Input( ctypes.c_ulong(1), ii_ )
-        self.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
+        w_windows.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
 
     def sleep(self, seconds: float) -> None:
         # SetWaitableTimer not working :(
