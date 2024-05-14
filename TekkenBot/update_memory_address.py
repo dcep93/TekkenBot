@@ -507,18 +507,17 @@ to_update = [
 ###
 
 class Vars:
-    v: Vars
     def __init__(self, game_reader: GameReader.GameReader):
-        self.game_reader = game_reader
-        self.phase = 0
-        self.start = time.time()
-        self.tk = t_tkinter.Tk()
-        self.active = ("", "")
+        Vars.game_reader = game_reader
+        Vars.phase = 0
+        Vars.start = time.time()
+        Vars.tk = t_tkinter.Tk()
+        Vars.active = ("", "")
 
 
-        t_tkinter.init_tk(self.tk)
-        self.tk.attributes("-topmost", True)
-        self.tk.overrideredirect(True)
+        t_tkinter.init_tk(Vars.tk)
+        Vars.tk.attributes("-topmost", True)
+        Vars.tk.overrideredirect(True)
 
 if __name__ == "__main__":
     main()
