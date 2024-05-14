@@ -8,10 +8,10 @@ import sys
 import time
 import traceback
 
-class TekkenBotPrime(t_tkinter.Tk): # type: ignore
+class TekkenBotPrime(t_tkinter.Tk):
     def __init__(self) -> None:
         super().__init__()
-        TekkenBotPrime.t = self
+        self.__class__.t = self
 
         self.text = t_tkinter.init_tk(self)
         self.geometry('1600x420+0+0')
@@ -34,7 +34,7 @@ class TekkenBotPrime(t_tkinter.Tk): # type: ignore
         now = time.time()
         self.last_update = now
         try:
-            self.game_log.update(self.game_reader, self.overlay)
+            self.game_log.update(self.game_reader)
         except:
             print(traceback.format_exc())
             if Flags.Flags.debug:

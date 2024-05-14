@@ -4,16 +4,15 @@ import sys
 import typing
 
 valid = False
-class Tk:
-    pass
-Text: typing.Any = None
 try:
     from tkinter import *
-    from tkinter.ttk import * # type: ignore
     import tkinter
+    from tkinter.ttk import * # type: ignore
     valid = True
 except ModuleNotFoundError:
-    pass
+    class Tk:
+        pass
+    Text: typing.Any = None
 
 class TextRedirector:
     def __init__(self, widget: typing.Any, stdout: typing.Any, tag:str="stdout") -> None:
