@@ -4,8 +4,9 @@ import sys
 import typing
 
 valid = False
-Tk = typing.Any
-Text = typing.Any
+class Tk:
+    pass
+Text: typing.Any = None
 try:
     from tkinter import *
     from tkinter.ttk import * # type: ignore
