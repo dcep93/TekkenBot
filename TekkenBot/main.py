@@ -1,19 +1,11 @@
-from src.gui import TekkenBotPrime
-from src.misc import Flags, recorded_sha
+from src.main import main
 
 import sys
 import traceback
 
-def main() -> None:
-    print("https://github.com/dcep93/TekkenBot")
-    print("sha:", recorded_sha.sha)
-    Flags.handle()
-    app = TekkenBotPrime.TekkenBotPrime()
-    app.mainloop()
-
 if __name__ == "__main__":
     try:
-        main()
+        main.main()
     except Exception as e:
         if sys.__stdout__ and sys.__stdout__.isatty():
             raise e

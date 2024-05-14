@@ -1,4 +1,4 @@
 #!bin/bash
 
 pip install mypy
-mypy . --strict
+mypy --strict src
