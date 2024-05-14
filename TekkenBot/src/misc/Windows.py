@@ -13,7 +13,7 @@ class Windows:
         except (ValueError, ImportError):
             return
 
-        self.valid = True
+        self.valid = True # type: ignore
 
         self.wintypes = wintypes
         self.windll = windll
