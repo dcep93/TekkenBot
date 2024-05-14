@@ -1,5 +1,3 @@
-# type: ignore
-
 from ..record import Record
 from ..frame_data import Entry
 from ..gui import FrameDataOverlay, TekkenBotPrime
@@ -57,8 +55,9 @@ def replay() -> None:
     Replayer.moves = moves
     wait_for_focus_and_replay_moves()
 
-def get_moves_from_path(swap=False) -> typing.Optional[typing.List[str]]:
-    path = Record.get_record_path()
+MovesType = typing.List[typing.Any]
+def get_moves_from_path(path: str="recording.txt", swap: bool=False) -> typing.Optional[MovesType]:
+    path = Record.get_record_path(path)
     if not os.path.isfile(path):
         print("recording not found: %s" % path)
         return None
@@ -89,8 +88,8 @@ def get_moves_from_path(swap=False) -> typing.Optional[typing.List[str]]:
 
     return moves
 
-def loads_moves(compacted_moves, swap) -> typing.List[typing.Tuple[str, int]]:
-    moves = []
+def loads_moves(compacted_moves: typing.List[str], swap: bool) -> MovesType:
+    moves: typing.List[typing.Tuple[str, int]] = []
     for compacted_move in compacted_moves:
         parts = compacted_move.split('(')
         move = parts[0]
@@ -108,13 +107,14 @@ def loads_moves(compacted_moves, swap) -> typing.List[typing.Tuple[str, int]]:
         if move.startswith('+'):
             r_path = move[1:]
             r_moves = get_moves_from_path(r_path, swap)
+            assert(not r_moves is None)
             for i in range(count):
                 moves += r_moves
         else:
             moves.append((move, count))
     return moves
 
-def combine(moves_1: typing.List[str], moves_2: typing.List[str]) -> typing.List[str]:
+def combine(moves_1: MovesType, moves_2: MovesType) -> MovesType:
     out = []
     moves_1 = list(moves_1)
     moves_2 = list(moves_2)
@@ -154,16 +154,16 @@ def combine_move(m1: str, m2: str) -> str:
     return d + a
 
 class Replayer:
-    moves = None
+    moves: typing.List[typing.Tuple[str, int]] = []
     pressed: typing.List[int] = []
 
-    i = None
-    start = None
-    count = None
+    i = 0
+    start = 0.
+    count = 0
     log: typing.List[typing.List[typing.Any]] = []
 
 def is_foreground_pid() -> bool:
-    return not Windows.w.valid or TekkenBotPrime.t.game_reader.is_foreground_pid()
+    return not Windows.w.valid or TekkenBotPrime.TekkenBotPrime.t.game_reader.is_foreground_pid()
 
 def wait_for_focus_and_replay_moves() -> None:
     if Replayer.i is not None:
@@ -189,7 +189,7 @@ def handle_next_move() -> None:
         # get a bit closer because precise_wait is more expensive
         wait_s = diff - imprecise_wait_cutoff_s + imprecise_wait_cutoff_buffer_s
         wait_ms = int(wait_s * 1000)
-        TekkenBotPrime.t.overlay.toplevel.after(wait_ms, handle_next_move)
+        TekkenBotPrime.TekkenBotPrime.t.overlay.toplevel.after(wait_ms, handle_next_move)
         return
     if diff > 0:
         Windows.w.sleep(diff)
@@ -200,7 +200,7 @@ def handle_next_move() -> None:
 def replay_next_move() -> None:
     if Replayer.i == len(Replayer.moves):
         one_frame_ms = int(1000 * seconds_per_frame)
-        TekkenBotPrime.t.overlay.toplevel.after(one_frame_ms, finish)
+        TekkenBotPrime.TekkenBotPrime.t.overlay.toplevel.after(one_frame_ms, finish)
         return
 
     move, count = Replayer.moves[Replayer.i]
@@ -223,7 +223,7 @@ def finish() -> None:
     print("done", Replayer.count)
     while Replayer.log:
         print(*Replayer.log.pop(0))
-    Replayer.i = None
+    Replayer.i = 0
 
 def get_all_hexes() -> typing.List[int]:
     direction_string = ''.join(direction_string_to_hexes[True].keys())
@@ -239,12 +239,12 @@ def get_diff() -> float:
     actual = time.time() - Replayer.start
     return target - actual
 
-def replay_move(move) -> bool:
-    state_log = TekkenBotPrime.t.game_log.state_log
+def replay_move(move: str) -> bool:
+    state_log = TekkenBotPrime.TekkenBotPrime.t.game_log.state_log
     if len(state_log) == 0:
         reverse = False
     else:
-        last_state = TekkenBotPrime.t.game_log.state_log[-1]
+        last_state = TekkenBotPrime.TekkenBotPrime.t.game_log.state_log[-1]
         reverse = last_state.facing_bool
     hex_key_codes = move_to_hexes(move, reverse)
     to_release = [i for i in Replayer.pressed if i not in hex_key_codes]
@@ -264,7 +264,7 @@ def replay_move(move) -> bool:
     Replayer.pressed = hex_key_codes
     return False
 
-def move_to_hexes(move, reverse=False, p1=True) -> typing.List[int]:
+def move_to_hexes(move: str, reverse: bool=False, p1: bool=True) -> typing.List[int]:
     if '/' in move:
         p1_move, p2_move = move.split('/')
         p1_codes = move_to_hexes(p1_move, reverse, True)

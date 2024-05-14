@@ -125,8 +125,8 @@ class FrameDataOverlay:
 
     def add_buttons(self) -> None:
         frame = t_tkinter.Frame(self.toplevel)
-        t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="record single", command=Record.record_single).pack(fill='x') # type: ignore
-        t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="record both", command=Record.record_both).pack(fill='x') # type: ignore
+        # t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="record single", command=Record.record_single).pack(fill='x') # type: ignore
+        # t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="record both", command=Record.record_both).pack(fill='x') # type: ignore
         t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="end recording", command=Record.record_end).pack(fill='x') # type: ignore
         t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="replay", command=Replay.replay).pack(fill='x') # type: ignore
         frame.pack(side=t_tkinter.LEFT)

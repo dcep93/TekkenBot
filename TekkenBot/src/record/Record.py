@@ -1,5 +1,5 @@
 from ..frame_data import Entry
-from ..game_parser import ScriptedGame
+from ..game_parser import GameSnapshot, ScriptedGame
 from ..gui import TekkenBotPrime
 from ..misc import Path
 
@@ -35,7 +35,7 @@ def record_end() -> None:
     recording_string = get_recording_string()
     print(recording_string)
     Recorder.history = []
-    path = get_record_path()
+    path = get_record_path(None)
     with open(path, 'w') as fh:
         fh.write(recording_string)
 
@@ -55,35 +55,34 @@ class RecordingState(enum.Enum):
     SINGLE = 1
     BOTH = 2
 
+InputState = typing.Tuple[str, str]
+
 class Recorder:
     state = RecordingState.OFF
-    history: typing.List[typing.Tuple[str, int]] = []
+    history: typing.List[typing.List[InputState, int]] = [] # type: ignore
 
-def get_input_state() -> typing.Any[str, typing.Tuple[str, str]]:
+def get_input_state() -> InputState:
     last_state = TekkenBotPrime.TekkenBotPrime.t.game_log.state_log[-1]
     player = last_state.p1
     opp = last_state.p2
-    player_input_state = get_input_as_string(player)
-    if Recorder.state == RecordingState.SINGLE:
-        return player_input_state
-    else:
-        opp_input_state = get_input_as_string(opp)
-        return (player_input_state, opp_input_state)
+    return (
+        get_input_as_string(player),
+        "" if Recorder.state == RecordingState.SINGLE else get_input_as_string(opp),
+    )
 
-def last_move_was(input_state: str) -> bool:
+def last_move_was(input_state: InputState) -> bool:
     if len(Recorder.history) == 0:
         return False
-    return Recorder.history[-1][0] == input_state
+    return Recorder.history[-1][0] == input_state # type: ignore
 
-def get_move(item: typing.Tuple[str, int]) -> str:
-    input_state, count = item
+def get_move(input_state: InputState, count: int) -> str:
     raw_move = get_raw_move(input_state)
     if count == 1:
         return raw_move
     else:
         return '%s(%d)' % (raw_move, count)
 
-def get_raw_move(input_state: typing.Any[typing.Tuple[str, str], str]) -> str:
+def get_raw_move(input_state: InputState) -> str:
     if isinstance(input_state, tuple):
         if input_state[1] == 'N':
             return input_state[0]
@@ -103,7 +102,7 @@ def record_state() -> None:
 
 def get_recording_string() -> str:
     count = sum([i[1] for i in Recorder.history])
-    moves = [get_move(i) for i in Recorder.history]
+    moves = [get_move(*i) for i in Recorder.history]
     if moves and moves[0].startswith('N'):
         moves = moves[1:]
         count -= Recorder.history[0][1]
@@ -118,10 +117,12 @@ def get_recording_string() -> str:
 
     return '%s\n# %d\n' % (moves_string, count)
 
-def get_record_path(file_name: str='recording.txt') -> str:
+def get_record_path(file_name: typing.Optional[str]) -> str:
+    if file_name is None:
+        file_name = "recording.txt"
     return Path.path('./record/%s' % file_name)
 
-def get_input_as_string(state) -> str:
+def get_input_as_string(state: GameSnapshot.PlayerSnapshot) -> str:
     direction_string = state.input_direction.name
     attack_string = state.input_button.name.replace('x', '').replace('N', '')
     if direction_string == 'N' and attack_string != '':
