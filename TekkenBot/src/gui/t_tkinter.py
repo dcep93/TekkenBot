@@ -3,8 +3,6 @@ from ..misc import Path
 import sys
 
 valid = False
-class Tk:
-    pass
 try:
     from tkinter import * # type: ignore
     from tkinter.ttk import * # type: ignore

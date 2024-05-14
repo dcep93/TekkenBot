@@ -13,24 +13,19 @@ DEBUG_FAST = True
 
 # assumes PlayerDataAddress.move_id doesn't change
 
-def main():
+def main() -> None:
     print("this project is under heavy construction, and I don't really expect it to work until 5/16/24, but you're free to try it out anyway!")
     if not t_tkinter.valid:
         import tkinter
     if not Windows.w.valid:
         raise Exception("need to be on windows")
-    Vars.game_reader = GameReader.GameReader()
-    Vars.game_reader.reacquire_module()
-    if not Vars.game_reader.process_handle:
+    game_reader = GameReader.GameReader()
+    game_reader.reacquire_module()
+    if not game_reader.process_handle:
         raise Exception("need to be running tekken")
-    Vars.game_reader.in_match = True
-    Vars.tk = t_tkinter.Tk()
-    TekkenBotPrime.init_tk(Vars.tk)
-    Vars.tk.attributes("-topmost", True)
-    Vars.tk.overrideredirect(True)
-    Vars.start = time.time()
-    Vars.phase = 0
-    found = {}
+    game_reader.in_match = True
+    Vars.v = Vars(game_reader)
+    found: typing.Dict[typing.Tuple[str, str], typing.Any[int, typing.List[int]]] = {}
     print("")
     print("you should be in practice mode as p1 Jun vs Raven")
     print("with practice options set to None on primary and Block All on secondary:")
@@ -39,12 +34,16 @@ def main():
     print("")
     for path, f in to_update:
         print(path)
-        Vars.active = path
+        Vars.v.active = path
         found[path] = f()
     config_obj = Vars.game_reader._c
+    def hexify(raw: typing.Any[int, typing.List[int]]) -> str:
+        if isinstance(raw, int):
+            return f'0x{raw:x}'
+        return ' '.join([hexify(r) for r in raw])
     for path, raw in found.items():
         # TODO experiment - run once, everything changes, run twice, everything goes back
-        value = GameReader.GameReader.hexify(raw)
+        value = hexify(raw)
         print(path, value)
         config_obj[path[0]][path[1]] = value
     with open(Path.path('config/memory_address.ini'), 'w') as fh:
@@ -508,11 +507,18 @@ to_update = [
 ###
 
 class Vars:
-    phase: int = 0
-    game_reader: GameReader.GameReader = None # type: ignore
-    start: int = 0
-    tk = None
-    active = None
+    v: Vars
+    def __init__(self, game_reader: GameReader.GameReader):
+        self.game_reader = game_reader
+        self.phase = 0
+        self.start = time.time()
+        self.tk = t_tkinter.Tk()
+        self.active = ("", "")
+
+
+        t_tkinter.init_tk(self.tk)
+        self.tk.attributes("-topmost", True)
+        self.tk.overrideredirect(True)
 
 if __name__ == "__main__":
     main()
