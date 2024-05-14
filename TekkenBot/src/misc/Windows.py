@@ -32,7 +32,7 @@ class Windows:
         self.close_handle.argtypes = [w_windows.wintypes.HANDLE]
         self.close_handle.restype = w_windows.wintypes.BOOL
 
-        psapi = w_windows.WinDLL('Psapi.dll')
+        psapi = ctypes.WinDLL('Psapi.dll')
         self.enum_processes = psapi.EnumProcesses
         self.enum_processes.restype = w_windows.wintypes.BOOL
         self.get_process_image_filename = psapi.GetProcessImageFileNameA
