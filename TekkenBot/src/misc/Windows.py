@@ -4,14 +4,12 @@ import sys
 import time
 import typing
 
-asdf
-
 class Windows:
     valid = False
     def __init__(self) -> None:
         try:
             from ctypes import wintypes
-            from ctypes import windll # type: ignore
+            from ctypes import windll
         except (ValueError, ImportError):
             return
 
@@ -33,14 +31,14 @@ class Windows:
         self.read_process_memory.restype = wintypes.BOOL
 
         self.get_last_error = self.k32.GetLastError
-        self.get_last_error.argtypes = None
+        self.get_last_error.argtypes = None # type: ignore
         self.get_last_error.restype = wintypes.DWORD
 
         self.close_handle = self.k32.CloseHandle
         self.close_handle.argtypes = [wintypes.HANDLE]
         self.close_handle.restype = wintypes.BOOL
 
-        psapi = self.windll('Psapi.dll')
+        psapi = ctypes.WinDLL('Psapi.dll')
         self.enum_processes = psapi.EnumProcesses
         self.enum_processes.restype = wintypes.BOOL
         self.get_process_image_filename = psapi.GetProcessImageFileNameA
