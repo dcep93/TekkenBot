@@ -3,7 +3,7 @@ from ..game_parser import MoveInfoEnums
 import typing
 
 class PlayerSnapshot:
-    def __init__(self, player_data_dict: typing.Dict[str, int]):
+    def __init__(self, player_data_dict: typing.Dict[str, int]) -> None:
         d = player_data_dict
 
         self.move_id = d['move_id']
@@ -28,7 +28,7 @@ class PlayerSnapshot:
         self.recovery_window_bitmask = d['recovery']
 
 class GameSnapshot:
-    def __init__(self, p1: PlayerSnapshot, p2: PlayerSnapshot, frame_count: int, facing_bool: bool):
+    def __init__(self, p1: PlayerSnapshot, p2: PlayerSnapshot, frame_count: int, facing_bool: bool) -> None:
         self.p1 = p1
         self.p2 = p2
         self.frame_count = frame_count

@@ -9,28 +9,29 @@ import time
 import traceback
 
 class TekkenBotPrime(t_tkinter.Tk):
-    def __init__(self):
+    t: TekkenBotPrime
+    def __init__(self) -> None:
         super().__init__()
+        TekkenBotPrime.t = self
 
-        self.text = init_tk(self)
+        self.text = t_tkinter.init_tk(self)
         self.geometry('1600x420+0+0')
 
         self.game_log = GameLog.GameLog()
-        if Flags.Flags.pickle_dest is not None:
+        if Flags.Flags.pickle_dest != "":
             game_reader = ScriptedGame.Recorder()
-        elif Flags.Flags.pickle_src is not None:
+        elif Flags.Flags.pickle_src != "":
             game_reader = ScriptedGame.Reader()
         else:
-            game_reader = GameReader.GameReader()
+            game_reader = GameReader.GameReader() # type: ignore
         self.game_reader = game_reader
-        self.game_reader.test_failure()
         self.overlay = FrameDataOverlay.FrameDataOverlay()
 
         self.update()
-        if Flags.Flags.pickle_src is None:
+        if Flags.Flags.pickle_src != "":
             self.update_restarter()
 
-    def update(self):
+    def update(self) -> None:
         now = time.time()
         self.last_update = now
         try:
@@ -48,11 +49,9 @@ class TekkenBotPrime(t_tkinter.Tk):
             if wait_ms >= 0:
                 self.after(wait_ms, self.update)
 
-    def update_restarter(self):
+    def update_restarter(self) -> None:
         restart_seconds = 10
         if self.last_update + restart_seconds < time.time():
             print("something broke? restarting")
             self.update()
         self.after(1000 * restart_seconds, self.update_restarter)
-
-t = TekkenBotPrime()

@@ -6,10 +6,10 @@ import typing
 
 class Windows:
     valid = False
-    def __init__(self):
+    def __init__(self) -> None:
         try:
             from ctypes import wintypes
-            from ctypes import windll
+            from ctypes import windll # type: ignore
         except (ValueError, ImportError):
             return
 
@@ -129,23 +129,23 @@ class Windows:
         return rect
 
     def get_process_handle(self, pid: int) -> int:
-        return self.open_process(0x0510, False, pid)
+        return int(self.open_process(0x0510, False, pid))
 
-    def press_key(self, hex_key_code: int):
+    def press_key(self, hex_key_code: int) -> None:
         extra = ctypes.c_ulong(0)
         ii_ = Input_I()
         ii_.ki = KeyBdInput( 0, hex_key_code, 0x0008, 0, ctypes.pointer(extra) )
         x = Input( ctypes.c_ulong(1), ii_ )
         self.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
 
-    def release_key(self, hex_key_code: int):
+    def release_key(self, hex_key_code: int) -> None:
         extra = ctypes.c_ulong(0)
         ii_ = Input_I()
         ii_.ki = KeyBdInput( 0, hex_key_code, 0x0008 | 0x0002, 0, ctypes.pointer(extra) )
         x = Input( ctypes.c_ulong(1), ii_ )
         self.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
 
-    def sleep(self, seconds: float):
+    def sleep(self, seconds: float) -> None:
         # SetWaitableTimer not working :(
         self.dumb_sleep(seconds)
         # # https://stackoverflow.com/a/11658115
@@ -155,7 +155,7 @@ class Windows:
         # self.k32.WaitForSingleObject(self.timer(), 0xffffffff)
 
     @staticmethod
-    def dumb_sleep(seconds: float):
+    def dumb_sleep(seconds: float) -> None:
         before = time.time()
         buffer_s = 0.0015
         acceptable_early = 0.0005
@@ -168,7 +168,7 @@ class Windows:
                 return
 
     timer_ = None
-    def timer(self):
+    def timer(self) -> typing.Any:
         if self.timer_ == None:
             # This sets the priority of the process to realtime--the same priority as the mouse pointer.
             self.k32.SetThreadPriority(self.k32.GetCurrentThread(), 31)

@@ -16,7 +16,7 @@ class GameLog:
         state = self.state_log[-1-frames_ago]
         return state.p1 if is_p1 else state.p2
 
-    def update(self, game_reader: GameReader.GameReader, overlay: FrameDataOverlay.FrameDataOverlay):
+    def update(self, game_reader: GameReader.GameReader, overlay: FrameDataOverlay.FrameDataOverlay) -> None:
         overlay.update_location(game_reader)
         game_snapshot = game_reader.get_updated_state(0)
 
@@ -34,7 +34,7 @@ class GameLog:
 
                 self.track_gamedata(game_snapshot, overlay)
 
-    def track_gamedata(self, game_snapshot: GameSnapshot.GameSnapshot, overlay: FrameDataOverlay.FrameDataOverlay):
+    def track_gamedata(self, game_snapshot: GameSnapshot.GameSnapshot, overlay: FrameDataOverlay.FrameDataOverlay) -> None:
         if len(self.state_log) > 0 and self.state_log[-1].frame_count == game_snapshot.frame_count:
             return
 

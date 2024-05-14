@@ -8,10 +8,10 @@ import typing
 
 class Database:
     def __init__(self) -> None:
-        self.database: typing.Dict[str, typing.Dict[str, typing.Dict[str, typing.Any]]] = {}
+        self.database: typing.Dict[str, typing.Dict[str, typing.Dict[str, str]]] = {}
         self.characters_to_update: typing.Dict[str, bool] = {}
         self.opp_char: typing.Optional[str] = None
-        self.opp_moves: typing.Optional[typing.List[typing.Dict[str, typing.Any]]] = None
+        self.opp_moves: typing.Optional[typing.List[typing.Dict[str, str]]] = None
 
         for char in MoveInfoEnums.CharacterCodes:
             char_name = char.name.lower()
@@ -24,7 +24,7 @@ class Database:
             except FileNotFoundError:
                 self.database[char_name] = {}
 
-    def finish_match(self):
+    def finish_match(self) -> None:
         # moves_done_by_opponent_this_match
         if self.opp_char is not None:
             filename = f'{int(time.time())}_{self.opp_char}'
@@ -42,7 +42,7 @@ class Database:
             with open(filename, 'w') as fh:
                 fh.write(to_write)
 
-    def record_move(self, entry: Entry.Entry):
+    def record_move(self, entry: Entry.Entry) -> None:
         raw_char_name = entry[Entry.DataColumns.char_name]
         if isinstance(raw_char_name, int):
             return

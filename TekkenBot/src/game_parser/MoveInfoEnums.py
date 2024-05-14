@@ -4,7 +4,7 @@ import enum
 
 class safeEnum(enum.Enum):
     @classmethod
-    def _missing_(cls, value):
+    def _missing_(cls, value): # type: ignore
         if Flags.Flags.debug:
             e = Exception(f'_missing_ {cls}, {value}')
             if Flags.Flags.debug:

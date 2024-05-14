@@ -40,7 +40,7 @@ class FrameDataOverlay:
         self.init_tkinter()
         self.populate_column_names()
 
-    def handle_fa(self, entry: Entry.Entry):
+    def handle_fa(self, entry: Entry.Entry) -> None:
         if entry.get(Entry.DataColumns.block) is None:
             fa_str = "-"
         else:
@@ -60,16 +60,16 @@ class FrameDataOverlay:
         self.fa_label.configure(background=color.value)
         self.fa_var.set(fa_str)
 
-    def update_state(self, game_log: GameLog.GameLog):
+    def update_state(self, game_log: GameLog.GameLog) -> None:
         self.read_player_state(True, game_log)
         self.read_player_state(False, game_log)
 
-    def get_geometry(self, tekken_rect) -> typing.Tuple[int, int]:
+    def get_geometry(self, tekken_rect: typing.Any) -> typing.Tuple[int, int]:
         x = (tekken_rect.right + tekken_rect.left) / 2  - self.toplevel.winfo_width() / 2
         y = tekken_rect.bottom - self.toplevel.winfo_height()
         return x,y
 
-    def init_tkinter(self):
+    def init_tkinter(self) -> None:
         self.style = t_tkinter.Style()
         self.style.theme_use('alt')
         self.style.configure('.', background=self.background_color)
@@ -87,7 +87,7 @@ class FrameDataOverlay:
         self.text.tag_config("p1", foreground=ColorSchemeEnum.p1_text.value)
         self.text.tag_config("p2", foreground=ColorSchemeEnum.p2_text.value)
 
-    def print_f(self, entry, is_p1=None):
+    def print_f(self, entry: Entry.Entry, is_p1: typing.Optional[bool]=None) -> None:
         if len(self.entries) == 0:
             print(self.column_names_string)
 
@@ -106,33 +106,33 @@ class FrameDataOverlay:
         out += "\n"
         self.text.insert("end", out, text_tag)
 
-    def create_padding_frame(self):
+    def create_padding_frame(self) -> None:
         padding = t_tkinter.Frame(self.toplevel, width=10)
         padding.pack(side=t_tkinter.LEFT)
 
-    def create_frame_advantage_label(self):
+    def create_frame_advantage_label(self) -> typing.Any:
         frame_advantage_label = t_tkinter.Label(self.toplevel, textvariable=self.fa_var,
-            font=("Courier New", 44), width=4, anchor='c', borderwidth=1, relief='ridge')
+            font=("Courier New", 44), width=4, anchor='c', borderwidth=1, relief='ridge') # type: ignore
         frame_advantage_label.pack(side=t_tkinter.LEFT)
         return frame_advantage_label
 
-    def create_textbox(self):
+    def create_textbox(self) -> typing.Any:
         textbox = t_tkinter.Text(self.toplevel, font=("Courier New", 10), highlightthickness=0, pady=0, relief='flat')
         textbox.pack(side=t_tkinter.LEFT)
         textbox.configure(background=self.background_color)
         textbox.configure(foreground=ColorSchemeEnum.system_text.value)
         return textbox
 
-    def add_buttons(self):
+    def add_buttons(self) -> None:
         frame = t_tkinter.Frame(self.toplevel)
-        t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="record single", command=Record.record_single).pack(fill='x')
-        t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="record both", command=Record.record_both).pack(fill='x')
-        t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="end recording", command=Record.record_end).pack(fill='x')
-        t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="replay", command=Replay.replay).pack(fill='x')
+        t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="record single", command=Record.record_single).pack(fill='x') # type: ignore
+        t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="record both", command=Record.record_both).pack(fill='x') # type: ignore
+        t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="end recording", command=Record.record_end).pack(fill='x') # type: ignore
+        t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="replay", command=Replay.replay).pack(fill='x') # type: ignore
         frame.pack(side=t_tkinter.LEFT)
 
     @staticmethod
-    def get_prefix(is_p1: bool) -> str:
+    def get_prefix(is_p1: typing.Optional[bool]) -> str:
         if is_p1 is None:
             player_name = '  '
         else:
@@ -159,7 +159,7 @@ class FrameDataOverlay:
         ]]
         return '|'.join(values)
 
-    def scroll(self):
+    def scroll(self) -> None:
         if len(self.entries) > 0:
             latest = self.entries[-1]
             if latest.get(Entry.DataColumns.hit_outcome) in [
@@ -171,14 +171,14 @@ class FrameDataOverlay:
         while len(self.entries) >= self.max_lines:
             self.pop_entry(0)
 
-    def pop_entry(self, index: int):
+    def pop_entry(self, index: int) -> None:
         offset = 2
         self.entries.pop(index)
         start = "%0.1f" % (index + offset)
         end = "%0.1f" % (index + offset + 1)
         self.text.delete(start, end)
 
-    def populate_column_names(self):
+    def populate_column_names(self) -> None:
         columns_entry = {col:col.name for col in Entry.DataColumns}
         column_names = self.get_frame_data_string(columns_entry)
         prefix = self.get_prefix(None)
@@ -194,7 +194,7 @@ class FrameDataOverlay:
         self.text.delete("1.0", "2.0")
         self.text.insert("1.0", string + '\n')
 
-    def read_player_state(self, is_p1: bool, game_log: GameLog.GameLog):
+    def read_player_state(self, is_p1: bool, game_log: GameLog.GameLog) -> None:
         # ignore the fact that some moves have multiple active frames
         if game_log.is_starting_attack(is_p1):
             entry = Entry.build(game_log, is_p1)
@@ -215,7 +215,7 @@ class FrameDataOverlay:
             game_log.get_free_frames(not is_p1)
         )
 
-    def update_location(self, game_reader: GameReader.GameReader):
+    def update_location(self, game_reader: GameReader.GameReader) -> None:
         if Windows.w.valid:
             tekken_rect = game_reader.get_window_rect()
         else:
@@ -233,19 +233,19 @@ class FrameDataOverlay:
 
         if geometry != self.geometry:
             self.geometry = geometry
-            self.toplevel.after(20, self.update_location(game_reader))
+            self.toplevel.after(20, lambda: self.update_location(game_reader))
 
-    def show(self):
+    def show(self) -> None:
         self.toplevel.deiconify()
         self.visible = True
 
-    def hide(self):
+    def hide(self) -> None:
         self.toplevel.withdraw()
         self.visible = False
 
 
 class FullscreenTekkenRect:
-    def __init__(self, toplevel):
+    def __init__(self, toplevel: typing.Any) -> None:
         self.left = 0
         self.right = toplevel.winfo_screenwidth()
         self.top = 0

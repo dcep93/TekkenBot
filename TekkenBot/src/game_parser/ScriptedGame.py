@@ -17,7 +17,7 @@ class Recorder(GameReader.GameReader):
         self.num_datas: int = 0
         signal.signal(signal.SIGINT, lambda _,__: self.save_and_quit())
 
-    def reset(self, active: typing.Optional[bool]=None):
+    def reset(self, active: typing.Optional[bool]=None) -> None:
         if active is not None:
             self.active = active
         self.all_datas = []
@@ -29,7 +29,7 @@ class Recorder(GameReader.GameReader):
             self.record_data(rollback_frame == 0, game_snapshot)
         return game_snapshot
 
-    def record_data(self, new_update: bool, game_snapshot: GameSnapshot.GameSnapshot):
+    def record_data(self, new_update: bool, game_snapshot: GameSnapshot.GameSnapshot) -> None:
         self.num_datas += 1
         if new_update:
             now = time.time()
@@ -37,14 +37,14 @@ class Recorder(GameReader.GameReader):
         else:
             self.all_datas[-1][1].append(game_snapshot)
 
-    def dump(self):
+    def dump(self) -> None:
         self.active = False
         print('writing', self.num_datas, len(self.all_datas))
         with open(Flags.Flags.pickle_dest, 'wb') as fh:
             pickle.dump(self.all_datas, fh)
         self.reset()
 
-    def save_and_quit(self):
+    def save_and_quit(self) -> None:
         self.dump()
         sys.exit(0)
 
@@ -52,7 +52,6 @@ class Reader(Recorder):
     def __init__(self) -> None:
         super().__init__()
         print('loading', Flags.Flags.pickle_src, Flags.Flags.fast)
-        assert(not Flags.Flags.pickle_src is None)
         with open(Flags.Flags.pickle_src, 'rb') as fh:
             self.all_datas = pickle.load(fh)
 
@@ -65,7 +64,7 @@ class Reader(Recorder):
         timestamp, self.datas = self.all_datas.pop(0)
         return timestamp
 
-    def get_update_wait_ms(self, _):
+    def get_update_wait_ms(self, _: float) -> int:
         if len(self.all_datas) == 0:
             print("done with pickle")
             if Flags.Flags.fast:
@@ -79,7 +78,7 @@ class Reader(Recorder):
         wait_ms = max(int(wait_s * 1000), 0)
         return wait_ms
 
-    def get_updated_state(self, _):
+    def get_updated_state(self, _: int) -> typing.Optional[GameSnapshot.GameSnapshot]:
         if len(self.datas) == 0:
             return None
         return self.datas.pop(0)

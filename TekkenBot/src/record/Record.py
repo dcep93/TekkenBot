@@ -6,44 +6,44 @@ from ..misc import Path
 import enum
 import typing
 
-def record_single():
+def record_single() -> None:
     record_start(RecordingState.SINGLE)
 
-def record_both():
+def record_both() -> None:
     record_start(RecordingState.BOTH)
 
-def record_start(state: RecordingState):
+def record_start(state: RecordingState) -> None:
     print("starting recording %s" % state.name)
-    TekkenBotPrime.t.overlay.print_f({
+    TekkenBotPrime.TekkenBotPrime.t.overlay.print_f({
         Entry.DataColumns.move_id: 'RECORD',
         Entry.DataColumns.char_name: state.name
     })
     Recorder.state = state
     Recorder.history = []
-    reader = TekkenBotPrime.t.game_reader
+    reader = TekkenBotPrime.TekkenBotPrime.t.game_reader
     if isinstance(reader, ScriptedGame.Recorder):
         reader.reset(True)
 
-def record_end():
+def record_end() -> None:
     print("ending recording")
     Recorder.state = RecordingState.OFF
-    TekkenBotPrime.t.overlay.print_f({
+    TekkenBotPrime.TekkenBotPrime.t.overlay.print_f({
         Entry.DataColumns.move_id: 'RECORD',
         Entry.DataColumns.char_name: Recorder.state.name
     })
 
     recording_string = get_recording_string()
     print(recording_string)
-    Recorder.history = None
+    Recorder.history = []
     path = get_record_path()
     with open(path, 'w') as fh:
         fh.write(recording_string)
 
-    reader = TekkenBotPrime.t.game_reader
+    reader = TekkenBotPrime.TekkenBotPrime.t.game_reader
     if isinstance(reader, ScriptedGame.Recorder):
         reader.dump()
 
-def record_if_activated():
+def record_if_activated() -> None:
     if Recorder.state != RecordingState.OFF:
         record_state()
 
@@ -59,8 +59,8 @@ class Recorder:
     state = RecordingState.OFF
     history: typing.List[typing.Tuple[str, int]] = []
 
-def get_input_state():
-    last_state = TekkenBotPrime.t.game_log.state_log[-1]
+def get_input_state() -> typing.Any[str, typing.Tuple[str, str]]:
+    last_state = TekkenBotPrime.TekkenBotPrime.t.game_log.state_log[-1]
     player = last_state.p1
     opp = last_state.p2
     player_input_state = get_input_as_string(player)
@@ -70,12 +70,12 @@ def get_input_state():
         opp_input_state = get_input_as_string(opp)
         return (player_input_state, opp_input_state)
 
-def last_move_was(input_state) -> bool:
+def last_move_was(input_state: str) -> bool:
     if len(Recorder.history) == 0:
         return False
     return Recorder.history[-1][0] == input_state
 
-def get_move(item):
+def get_move(item: typing.Tuple[str, int]) -> str:
     input_state, count = item
     raw_move = get_raw_move(input_state)
     if count == 1:
@@ -83,7 +83,7 @@ def get_move(item):
     else:
         return '%s(%d)' % (raw_move, count)
 
-def get_raw_move(input_state):
+def get_raw_move(input_state: typing.Any[typing.Tuple[str, str], str]) -> str:
     if isinstance(input_state, tuple):
         if input_state[1] == 'N':
             return input_state[0]
@@ -93,8 +93,8 @@ def get_raw_move(input_state):
             return '/'.join(input_state)
     return input_state
 
-def record_state():
-    if TekkenBotPrime.t.game_reader.is_foreground_pid():
+def record_state() -> None:
+    if TekkenBotPrime.TekkenBotPrime.t.game_reader.is_foreground_pid():
         input_state = get_input_state()
         if last_move_was(input_state):
             Recorder.history[-1][-1] += 1

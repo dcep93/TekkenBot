@@ -1,12 +1,12 @@
 import sys
 
 class Flags:
-    pickle_src = None
-    pickle_dest = None
+    pickle_src = ""
+    pickle_dest = ""
     fast = False
     debug = False
 
-def handle():
+def handle() -> None:
     temp_argv = []
     while sys.argv:
         arg = sys.argv.pop(0)

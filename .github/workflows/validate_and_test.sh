@@ -1,3 +1,3 @@
 #!bin/bash
 
-PYTHONPATH=TekkenBot mypy .
+mypy . --strict

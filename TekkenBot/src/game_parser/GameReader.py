@@ -30,7 +30,7 @@ class GameReader:
 
         return self.get_game_snapshot(rollback_frame)
     
-    def reacquire_module(self):
+    def reacquire_module(self) -> None:
         self.pid = Windows.w.get_pid(game_string)
         if self.pid:
             print("Tekken pid acquired: %s" % self.pid)
@@ -42,7 +42,7 @@ class GameReader:
             print("%s not found. Likely wrong process id. Reacquiring pid." % game_string)
             self.pid = None
             return
-        if self.module_address != self.c['MemoryAddressOffsets']['expected_module_address']:
+        if self.module_address != self.c['MemoryAddressOffsets']['expected_module_address'][0]:
             print("Tekken patch? enter practice mode as p1 and run $ python update_memory_address.py")
         else:
             print("Found %s" % game_string)
@@ -147,7 +147,7 @@ class GameReader:
         else:
             return None
 
-    def get_update_wait_ms(self, elapsed_ms: int) -> int:
+    def get_update_wait_ms(self, elapsed_ms: float) -> int:
         if self.in_match:
             wait_ms = max(2, 8 - int(round(elapsed_ms)))
         else:

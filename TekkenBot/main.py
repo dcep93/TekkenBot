@@ -4,7 +4,7 @@ from .src.misc import Flags, recorded_sha
 import sys
 import traceback
 
-def main():
+def main() -> None:
     print("https://github.com/dcep93/TekkenBot")
     print("sha:", recorded_sha.sha)
     Flags.handle()
@@ -26,7 +26,7 @@ if __name__ == "__main__":
 # dont need to call this function, just need
 # to have the import statements there I guess
 # https://stackoverflow.com/questions/7436132/pyinstaller-spec-file-importerror-no-module-named-blah
-def import_for_pyinstaller():
+def import_for_pyinstaller() -> None:
     import tkinter
     import tkinter.ttk
     import ctypes
