@@ -5,14 +5,15 @@ import pickle
 import signal
 import sys
 import time
+import typing
 
 # this file is used to record a bug and quickly replay it so it can be fixed
 
 class Recorder(GameReader.GameReader):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.active: bool = False
-        self.all_datas: typing.List[(float, typing.List[GameSnapshot.GameSnapshot])] = []
+        self.all_datas: typing.List[typing.Tuple[float, typing.List[GameSnapshot.GameSnapshot]]] = []
         self.num_datas: int = 0
         signal.signal(signal.SIGINT, lambda _,__: self.save_and_quit())
 
@@ -22,9 +23,9 @@ class Recorder(GameReader.GameReader):
         self.all_datas = []
         self.num_datas = 0
 
-    def get_updated_state(self, rollback_frame: int) -> GameSnapshot.GameSnapshot:
+    def get_updated_state(self, rollback_frame: int) -> typing.Optional[GameSnapshot.GameSnapshot]:
         game_snapshot = super().get_updated_state(rollback_frame)
-        if self.active:
+        if game_snapshot is not None and self.active:
             self.record_data(rollback_frame == 0, game_snapshot)
         return game_snapshot
 
@@ -47,10 +48,11 @@ class Recorder(GameReader.GameReader):
         self.dump()
         sys.exit(0)
 
-class Reader(GameReader.GameReader):
-    def __init__(self):
+class Reader(Recorder):
+    def __init__(self) -> None:
         super().__init__()
-        print('loading', Flags.Flags.pickle_src, self.fast)
+        print('loading', Flags.Flags.pickle_src, Flags.Flags.fast)
+        assert(not Flags.Flags.pickle_src is None)
         with open(Flags.Flags.pickle_src, 'rb') as fh:
             self.all_datas = pickle.load(fh)
 
@@ -59,7 +61,7 @@ class Reader(GameReader.GameReader):
 
         self.offset: float = time.time() - self.load()
 
-    def load(self):
+    def load(self) -> float:
         timestamp, self.datas = self.all_datas.pop(0)
         return timestamp
 

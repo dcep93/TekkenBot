@@ -30,16 +30,16 @@ def build(game_log: GameLog.GameLog, is_p1: bool) -> Entry:
     try:
         char_name = MoveInfoEnums.CharacterCodes(attacker.char_id).name
     except ValueError:
-        char_name = attacker.char_id
+        char_name = str(attacker.char_id)
     entry[DataColumns.char_name] = char_name
 
-    entry[DataColumns.is_player] = is_p1
+    entry[DataColumns.is_player] = str(is_p1)
 
-    entry[DataColumns.move_id] = attacker.move_id
+    entry[DataColumns.move_id] = str(attacker.move_id)
 
     entry[DataColumns.fa] = get_fa(is_p1, attacker, receiver)
 
-    entry[DataColumns.startup] = attacker.startup
+    entry[DataColumns.startup] = str(attacker.startup)
     if attacker.is_attack_throw:
         entry[DataColumns.hit_type] = "THROW"
     else:
@@ -48,7 +48,7 @@ def build(game_log: GameLog.GameLog, is_p1: bool) -> Entry:
     if receiver.complex_state == MoveInfoEnums.ComplexMoveStates.BLOCK:
         entry[DataColumns.block] = entry[DataColumns.fa]
     else:
-        entry[DataColumns.block] = None
+        entry[DataColumns.block] = str(None)
 
     entry[DataColumns.health] = get_remaining_health_string(game_log)
 

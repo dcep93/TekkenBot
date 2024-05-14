@@ -1,7 +1,7 @@
-from src.game_parser import GameReader, MoveInfoEnums
-from ..gui import t_tkinter, TekkenBotPrime
-from ..misc import Path, Windows
-from ..record import Replay
+from .src.game_parser import GameReader, MoveInfoEnums
+from .src.gui import t_tkinter, TekkenBotPrime
+from .src.misc import Path, Windows
+from .src.record import Replay
 
 import collections
 import json
@@ -139,15 +139,15 @@ def get_all_memory():
         "this usually takes around 1 minute",
     ],
 )
-def get_point_slope():
+def get_point_slope() -> typing.Tuple[int, int]:
     if DEBUG_FAST:
         with open("point_slope.json") as fh:
-            return json.loads(fh)
+            return json.load(fh)
     crouching_bytes_map = {
         False: 32769,
         True: 32770,
     }
-    found_bytes = find_bytes(crouching_bytes_map[False].to_bytes(4))
+    found_bytes = find_bytes(crouching_bytes_map[False].to_bytes(4, 'little'))
     move_id_addresses = [base_address+index for base_address,index in found_bytes]
 
     def read_4_bytes(address):
@@ -253,7 +253,7 @@ def update_tk():
         Vars.tk.withdraw()
     Vars.tk.update()
 
-def find_bytes(byte_array: bytes) -> typing.Generator[(int, int)]:
+def find_bytes(byte_array: bytes) -> typing.Iterable[typing.Tuple[int, int]]:
     memory = get_all_memory()
     def get_indices(needle, haystack):
         index = 0
@@ -271,10 +271,11 @@ def find_bytes(byte_array: bytes) -> typing.Generator[(int, int)]:
         for index in get_indices(needle, haystack):
             yield base_address, index
 
+# TODO fix
 def press_keys(keys: str):
     m = {k:v for d in [
-        Replay.attack_string_to_hex,
-        Replay.direction_string_to_hexes,
+        Replay.attack_string_to_hex[True],
+        Replay.direction_string_to_hexes[True],
     ] for k,v in d.items()}
     for key in keys:
         Windows.w.press_key(m[key])
@@ -291,7 +292,7 @@ def sleep_frames(frames: int):
     seconds = frames * Replay.seconds_per_frame
     Windows.w.sleep(seconds)
 
-def get_blocks_from_instructions(instructions: typing.List[(str, int)]) -> typing.List[bytes]:
+def get_blocks_from_instructions(instructions: typing.List[typing.Tuple[typing.Optional[str], int]]) -> typing.List[bytes]:
     def helper():
         move_id_offset = move_id_offset()
         move_id_address, rollback_frame_offset = get_point_slope()
@@ -322,7 +323,7 @@ def get_choreographed_blocks() -> typing.List[bytes]:
 
 def find_offset_from_blocks(
     blocks: typing.List[bytes],
-    validate_f: typing.Callable[typing.List[typing.List[int]], bool],
+    validate_f: typing.Callable[[typing.List[typing.List[typing.Tuple[int, int, int]]]], bool],
 ) -> int:
     _, rollback_frame_offset = get_point_slope()
     for offset in range(0x100, 0x10000):
@@ -339,8 +340,7 @@ def find_offset_from_blocks(
                 ]
             ] for block in blocks
         ]
-        validated = validate_f(value_blocks)
-        if validate_f(values):
+        if validate_f(value_blocks):
             return offset
     raise Exception("find_offset_from_block")
 
@@ -372,14 +372,16 @@ def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[
     return find_offset_from_blocks(blocks, validate_f)
 
 def get_pointer_offset(sources: typing.List[int], max_offset: int) -> typing.List[int]:
-    candidates = {source: [] for source in sources}
+    candidates: typing.Dict[int, typing.List[int]] = {source: [] for source in sources}
 
+    pointers_map = get_pointers_map()
     for _ in range(10):
         next_candidates = {}
         for address, prev in candidates.items():
             for offset in range(max_offset):
-                sources = Vars.pointers_map.get(hex(address-offset), [])
+                sources = pointers_map.get(hex(address-offset), [])
                 for source in sources:
+                    assert(not Vars.game_reader.module_address is None)
                     diff = source - Vars.game_reader.module_address
                     if diff > 0:
                         return [diff, offset]+prev
@@ -506,9 +508,9 @@ to_update = [
 ###
 
 class Vars:
-    phase = None
-    game_reader: GameReader.GameReader = None
-    start = None
+    phase: int = 0
+    game_reader: GameReader.GameReader = None # type: ignore
+    start: int = 0
     tk = None
     active = None
 

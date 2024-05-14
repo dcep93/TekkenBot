@@ -1,7 +1,7 @@
 from ..gui import t_tkinter, FrameDataOverlay
 from ..frame_data import Database
 from ..game_parser import GameLog, GameReader, ScriptedGame
-from ..misc import Flags, Path, Shared
+from ..misc import Flags, Path
 
 import os
 import sys
@@ -9,10 +9,8 @@ import time
 import traceback
 
 class TekkenBotPrime(t_tkinter.Tk):
-    instance: TekkenBotPrime
     def __init__(self):
         super().__init__()
-        self.__class__.instance = self
 
         self.text = init_tk(self)
         self.geometry('1600x420+0+0')
@@ -57,33 +55,4 @@ class TekkenBotPrime(t_tkinter.Tk):
             self.update()
         self.after(1000 * restart_seconds, self.update_restarter)
 
-class TextRedirector:
-    def __init__(self, widget, stdout, tag="stdout"):
-        self.widget = widget
-        self.stdout = stdout
-        self.tag = tag
-
-    def write(self, s: str):
-        self.widget.configure(state="normal")
-        self.widget.insert("end", s, (self.tag,))
-        self.widget.configure(state="disabled")
-        self.widget.see('end')
-        if self.stdout:
-            self.stdout.write(s)
-
-    def flush(self):
-        pass
-
-def init_tk(tk: t_tkinter.Tk) -> t_tkinter.Text:
-    tk.wm_title("dcep93/TekkenBot")
-    tk.iconbitmap(Path.path('./img/tekken_bot_close.ico'))
-
-    text = t_tkinter.Text(tk, wrap="word")
-    stdout = sys.stdout
-    sys.stdout = TextRedirector(text, stdout, "stdout")
-    stderr = sys.stderr
-    sys.stderr = TextRedirector(text, stderr, "stderr")
-    text.tag_configure("stderr", foreground="#b22222")
-
-    text.pack(fill=t_tkinter.BOTH)
-    return text
+t = TekkenBotPrime()

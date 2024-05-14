@@ -1,5 +1,7 @@
 from ..game_parser import MoveInfoEnums
 
+import typing
+
 class PlayerSnapshot:
     def __init__(self, player_data_dict: typing.Dict[str, int]):
         d = player_data_dict

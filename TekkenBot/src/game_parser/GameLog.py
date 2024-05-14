@@ -6,13 +6,13 @@ import typing
 
 class GameLog:
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.obj: typing.Any = None
         self.state_log: typing.List[GameSnapshot.GameSnapshot] = []
 
-    def get(self, is_p1: bool, frames_ago:int = 0) -> typing.Optional[GameSnapshot.PlayerSnapshot]:
+    def get(self, is_p1: bool, frames_ago:int = 0) -> GameSnapshot.PlayerSnapshot:
         if len(self.state_log) <= frames_ago:
-            return None
+            return None # type: ignore
         state = self.state_log[-1-frames_ago]
         return state.p1 if is_p1 else state.p2
 

@@ -2,6 +2,7 @@ import ctypes
 import os.path
 import sys
 import time
+import typing
 
 class Windows:
     valid = False
@@ -43,7 +44,7 @@ class Windows:
         self.get_process_image_filename = psapi.GetProcessImageFileNameA
         self.get_process_image_filename.restype = wintypes.DWORD
 
-    def get_module_address(self, pid: int, name: str) -> int:
+    def get_module_address(self, pid: int, name: str) -> typing.Optional[int]:
         class ModuleEntry(ctypes.Structure):
             _fields_ = [('dwSize', self.wintypes.DWORD),
                         ('th32ModuleID', self.wintypes.DWORD),
@@ -88,7 +89,7 @@ class Windows:
         self.windll.user32.GetWindowThreadProcessId(active, ctypes.byref(pid))
         return pid.value
 
-    def get_pid(self, process_name: str) -> int:
+    def get_pid(self, process_name: str) -> typing.Optional[int]:
         MAX_PATH = 260
         PROCESS_TERMINATE = 0x0001
         PROCESS_QUERY_INFORMATION = 0x0400
@@ -124,7 +125,7 @@ class Windows:
 
     def get_window_rect(self) -> typing.Any:
         rect = self.wintypes.RECT()
-        ctypes.windll.user32.GetWindowRect(ctypes.windll.user32.GetForegroundWindow(), ctypes.byref(rect))
+        self.windll.user32.GetWindowRect(self.windll.user32.GetForegroundWindow(), ctypes.byref(rect))
         return rect
 
     def get_process_handle(self, pid: int) -> int:

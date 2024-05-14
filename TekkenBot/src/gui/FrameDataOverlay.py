@@ -1,14 +1,14 @@
 from ..gui import t_tkinter
 from ..frame_data import Entry, Hook
 from ..game_parser import GameLog, GameReader, MoveInfoEnums
-from ..misc import Path, Shared, Windows
+from ..misc import Path, Windows
 from ..record import Record, Replay
 
 import enum
 import typing
 
 class FrameDataOverlay:
-    def __init__(self):
+    def __init__(self) -> None:
         self.geometry: typing.Optional[str] = None
         self.unknown = ''
         self.max_lines = 6
@@ -35,7 +35,7 @@ class FrameDataOverlay:
 
         #
 
-        self.entries: Entry.Entry = []
+        self.entries: typing.List[Entry.Entry] = []
         self.column_names_string: typing.Optional[str] = None
         self.init_tkinter()
         self.populate_column_names()
@@ -64,7 +64,7 @@ class FrameDataOverlay:
         self.read_player_state(True, game_log)
         self.read_player_state(False, game_log)
 
-    def get_geometry(self, tekken_rect) -> (int, int):
+    def get_geometry(self, tekken_rect) -> typing.Tuple[int, int]:
         x = (tekken_rect.right + tekken_rect.left) / 2  - self.toplevel.winfo_width() / 2
         y = tekken_rect.bottom - self.toplevel.winfo_height()
         return x,y

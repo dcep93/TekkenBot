@@ -7,7 +7,7 @@ import time
 import typing
 
 class Database:
-    def __init__(self):
+    def __init__(self) -> None:
         self.database: typing.Dict[str, typing.Dict[str, typing.Dict[str, typing.Any]]] = {}
         self.characters_to_update: typing.Dict[str, bool] = {}
         self.opp_char: typing.Optional[str] = None
@@ -20,9 +20,9 @@ class Database:
             filename = Path.path(f'./database/frame_data/{char_name}.json')
             try:
                 with open(filename) as fh:
-                    database[char_name] = json.load(fh)
+                    self.database[char_name] = json.load(fh)
             except FileNotFoundError:
-                database[char_name] = {}
+                self.database[char_name] = {}
 
     def finish_match(self):
         # moves_done_by_opponent_this_match
@@ -53,8 +53,9 @@ class Database:
             if self.opp_char == None:
                 self.opp_char = char_name
                 self.opp_moves = []
+            assert(not self.opp_moves is None)
             self.opp_moves.append(
-                {k.name:v for k,v in entry.entry.items()}
+                {k.name:v for k,v in entry.items()}
             )
 
         move_id = str(entry[Entry.DataColumns.move_id])
@@ -79,3 +80,5 @@ class Database:
             Entry.DataColumns.block,
         ]}
         self.characters_to_update[char_name] = True
+
+d = Database()

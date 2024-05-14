@@ -1,10 +1,11 @@
 from ..record import Record
 from ..frame_data import Entry
 from ..gui import FrameDataOverlay
-from ..misc import Shared, Windows
+from ..misc import Windows
 
 import os
 import time
+import typing
 
 seconds_per_frame = 1/60.
 # if need to wait more than imprecise_wait_cutoff_s, sleep until
@@ -47,7 +48,7 @@ def replay():
     moves = get_moves_from_path()
     if moves is None:
         return
-    TekkenBotPrime.TekkenBotPrime.instance.overlay.print_f({
+    TekkenBotPrime.t.overlay.print_f({
         Entry.DataColumns.move_id: 'REPLAY'
     })
     print('waiting for tekken focus')
@@ -152,15 +153,15 @@ def combine_move(m1, m2):
 
 class Replayer:
     moves = None
-    pressed = []
+    pressed: typing.List[int] = []
 
     i = None
     start = None
     count = None
-    log = []
+    log: typing.List[typing.List[typing.Any]] = []
 
 def is_foreground_pid():
-    return not Windows.w.valid or TekkenBotPrime.TekkenBotPrime.instance.game_reader.is_foreground_pid()
+    return not Windows.w.valid or TekkenBotPrime.t.game_reader.is_foreground_pid()
 
 def wait_for_focus_and_replay_moves():
     if Replayer.i is not None:
@@ -168,7 +169,7 @@ def wait_for_focus_and_replay_moves():
     if is_foreground_pid():
         replay_moves()
     else:
-        TekkenBotPrime.TekkenBotPrime.instance.overlay.toplevel.after(100, wait_for_focus_and_replay_moves)
+        TekkenBotPrime.t.overlay.toplevel.after(100, wait_for_focus_and_replay_moves)
 
 def replay_moves():
     if Replayer.i is not None:
@@ -186,7 +187,7 @@ def handle_next_move():
         # get a bit closer because precise_wait is more expensive
         wait_s = diff - imprecise_wait_cutoff_s + imprecise_wait_cutoff_buffer_s
         wait_ms = int(wait_s * 1000)
-        TekkenBotPrime.TekkenBotPrime.instance.overlay.toplevel.after(wait_ms, handle_next_move)
+        TekkenBotPrime.t.overlay.toplevel.after(wait_ms, handle_next_move)
         return
     if diff > 0:
         Windows.w.sleep(diff)
@@ -197,7 +198,7 @@ def handle_next_move():
 def replay_next_move():
     if Replayer.i == len(Replayer.moves):
         one_frame_ms = int(1000 * seconds_per_frame)
-        TekkenBotPrime.TekkenBotPrime.instance.overlay.toplevel.after(one_frame_ms, finish)
+        TekkenBotPrime.t.overlay.toplevel.after(one_frame_ms, finish)
         return
 
     move, count = Replayer.moves[Replayer.i]
@@ -237,11 +238,11 @@ def get_diff():
     return target - actual
 
 def replay_move(move):
-    state_log = TekkenBotPrime.TekkenBotPrime.instance.game_log.state_log
+    state_log = TekkenBotPrime.t.game_log.state_log
     if len(state_log) == 0:
         reverse = False
     else:
-        last_state = TekkenBotPrime.TekkenBotPrime.instance.game_log.state_log[-1]
+        last_state = TekkenBotPrime.t.game_log.state_log[-1]
         reverse = last_state.facing_bool
     hex_key_codes = move_to_hexes(move, reverse)
     to_release = [i for i in Replayer.pressed if i not in hex_key_codes]
