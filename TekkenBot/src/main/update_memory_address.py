@@ -494,7 +494,7 @@ to_update: typing.List[typing.Tuple[typing.Tuple[str, str], typing.Callable[[], 
     (("PlayerDataAddress", "simple_move_state"), get_simple_move_state),
     (("MemoryAddressOffsets", "p2_data_offset"), get_p2_data_offset),
     #
-    (("GameDataAddress", "facing"), get_facing),
+    (("GameDataAddress", "facing"), get_attack_type),
     (("PlayerDataAddress", "attack_type"), get_attack_type),
     (("PlayerDataAddress", "recovery"), get_attack_type),
     (("PlayerDataAddress", "hit_outcome"), get_attack_type),
