@@ -39,7 +39,7 @@ def main() -> None:
         Vars.v.active = path
         val = update_f()
         found[path] = val
-    config_obj = Vars.game_reader._c
+    config_obj = Vars.v.game_reader._c
     def hexify(raw: FoundType) -> str:
         if isinstance(raw, int):
             return f'0x{raw:x}'
@@ -69,9 +69,9 @@ def enter_phase(phase: int, log_before: typing.List[str], log_after_f: typing.Op
     def f(g: MemoizeT) -> MemoizeT:
         @memoize
         def h(*args: typing.Any) -> typing.Any:
-            Vars.phase += 1
-            if Vars.phase != phase:
-                raise Exception(f"enter_phase {phase} {Vars.phase}")
+            Vars.v.phase += 1
+            if Vars.v.phase != phase:
+                raise Exception(f"enter_phase {phase} {Vars.v.phase}")
             log(log_before)
             v = g(*args)
             if log_after_f is not None:
@@ -114,7 +114,7 @@ def get_all_memory() -> typing.Dict[int, bytes]:
                 ('Type',    Windows.w.wintypes.DWORD),
             )
         mbi = MemoryBasicInformation()
-        Windows.w.k32.VirtualQueryEx(Vars.game_reader.process_handle, address, ctypes.byref(mbi), ctypes.sizeof(mbi))
+        Windows.w.k32.VirtualQueryEx(Vars.v.game_reader.process_handle, address, ctypes.byref(mbi), ctypes.sizeof(mbi))
 
         scannable_size = mbi.RegionSize
         assert(isinstance(scannable_size, int))
@@ -132,7 +132,7 @@ def get_all_memory() -> typing.Dict[int, bytes]:
             return memory
         if scannable_size > 0:
             update_tk()
-            block = Vars.game_reader.get_block_of_data(address, scannable_size)
+            block = Vars.v.game_reader.get_block_of_data(address, scannable_size)
             memory[address] = block
         address += abs(scannable_size)
     raise Exception("get_all_memory")
@@ -158,7 +158,7 @@ def get_point_slope() -> typing.Tuple[int, int]:
 
     def read_4_bytes(address: int) -> typing.Optional[int]:
         try:
-            return Vars.game_reader.get_int_from_address(address, 4)
+            return Vars.v.game_reader.get_int_from_address(address, 4)
         except GameReader.ReadProcessMemoryException:
             return None
 
@@ -246,18 +246,18 @@ def get_pointers_map() -> typing.Dict[str, typing.List[int]]:
 ### helpers
 
 def log(arr: typing.List[str]) -> None:
-    print(" / ".join([f"{(time.time()-Vars.start):0.2f} seconds"] + arr))
+    print(" / ".join([f"{(time.time()-Vars.v.start):0.2f} seconds"] + arr))
 
 def update_tk() -> None:
-    tekken_rect = Vars.game_reader.get_window_rect()
+    tekken_rect = Vars.v.game_reader.get_window_rect()
     if tekken_rect is not None:
         height = 200
         geometry = f'{tekken_rect.right}x{height}+0-0'
-        Vars.tk.geometry(geometry)
-        Vars.tk.deiconify()
+        Vars.v.tk.geometry(geometry)
+        Vars.v.tk.deiconify()
     else:
-        Vars.tk.withdraw()
-    Vars.tk.update()
+        Vars.v.tk.withdraw()
+    Vars.v.tk.update()
 
 def find_bytes(byte_array: typing.List[int]) -> typing.Iterable[typing.Tuple[int, int]]:
     memory = get_all_memory()
@@ -304,8 +304,9 @@ def get_blocks_from_instructions(instructions: typing.List[typing.Tuple[str, int
         prev = ''
         for keys, duration in instructions:
             press_keys(keys, prev)
+            prev = keys
             sleep_frames(duration)
-            block = Vars.game_reader.get_block_of_data(player_data_base_address, rollback_frame_offset * 32)
+            block = Vars.v.game_reader.get_block_of_data(player_data_base_address, rollback_frame_offset * 32)
             blocks.append(block)
         press_keys('', None)
         return blocks
@@ -318,7 +319,7 @@ def get_blocks_from_instructions(instructions: typing.List[typing.Tuple[str, int
 def get_choreographed_blocks() -> typing.List[bytes]:
     return get_blocks_from_instructions([
         ("1", 10),
-        ("", 10),
+        ("", 60),
         ("1", 10),
     ])
 
@@ -333,7 +334,7 @@ def find_offset_from_blocks(
                 (
                     base,
                     offset,
-                    Vars.game_reader.get_4_bytes_from_data_block(block, base + offset),
+                    Vars.v.game_reader.get_4_bytes_from_data_block(block, base + offset),
                 )
                 for base in [
                     rollback_frame_offset * i
@@ -356,16 +357,16 @@ def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[
             return True
         return a == b # type: ignore
 
-    def validate_f(value_blocks: typing.List[int]) -> bool:
+    def validate_f(value_blocks: typing.List[typing.List[typing.Tuple[int, int, int]]]) -> bool:
         values = [
             value for i in range(len(expected)) for frame, value in sorted([(
-                Vars.game_reader.get_4_bytes_from_data_block(block, base + frame_count_offset),
+                Vars.v.game_reader.get_4_bytes_from_data_block(block, base + frame_count_offset),
                 value,
             ) for base, offset, value in value_blocks[i]])
         ]
 
         if DEBUG_FAST:
-            if value_blocks[0][0][1] == Vars.game_reader.c[Vars.active[0]][Vars.active[1]]:
+            if value_blocks[0][0][1] == Vars.v.game_reader.c[Vars.v.active[0]][Vars.v.active[1]][0]:
                 print(values)
 
         return equals(value_blocks, expected)
@@ -382,8 +383,8 @@ def get_pointer_offset(sources: typing.List[int], max_offset: int) -> typing.Lis
             for offset in range(max_offset):
                 sources = pointers_map.get(hex(address-offset), [])
                 for source in sources:
-                    assert(not Vars.game_reader.module_address is None)
-                    diff = source - Vars.game_reader.module_address
+                    assert(not Vars.v.game_reader.module_address is None)
+                    diff = source - Vars.v.game_reader.module_address
                     if diff > 0:
                         return [diff, offset]+prev
                     next_candidates[source] = [offset] + prev
@@ -394,8 +395,8 @@ def get_pointer_offset(sources: typing.List[int], max_offset: int) -> typing.Lis
 
 @memoize
 def get_expected_module_address() -> int:
-    assert(Vars.game_reader.module_address is not None)
-    return Vars.game_reader.module_address
+    assert(Vars.v.game_reader.module_address is not None)
+    return Vars.v.game_reader.module_address
 
 @memoize
 def get_rollback_frame_offset() -> int:
@@ -406,7 +407,7 @@ def get_rollback_frame_offset() -> int:
 @memoize
 def get_move_id_offset() -> int:
     # assume that PlayerDataAddress.move_id offset doesnt change
-    return Vars.game_reader.c["PlayerDataAddress"]["move_id"][0]
+    return Vars.v.game_reader.c["PlayerDataAddress"]["move_id"][0]
 
 @memoize
 def get_frame_count() -> int:
