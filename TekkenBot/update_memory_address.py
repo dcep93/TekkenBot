@@ -423,8 +423,8 @@ def get_simple_move_state() -> int:
     return find_offset_from_expected(
         blocks,
         [
-            1, 2, 3, 4, 5, 6
-        ] + [1] * 20
+            256,
+        ],
     )
 
 @memoize
@@ -435,8 +435,8 @@ def get_p2_data_offset() -> int:
     p2_offset_plus_simple_move_state = find_offset_from_expected(
         blocks,
         [
-            1, 2, 3, 4, 5, 6
-        ] + [1] * 20
+            256,
+        ],
     )
 
     return p2_offset_plus_simple_move_state - simple_move_state_offset
@@ -447,8 +447,8 @@ def get_damage_taken() -> int:
     return find_offset_from_expected(
         blocks,
         [
-            1, 2, 3, 4, 5, 6
-        ] + [1] * 20
+            256,
+        ],
     )
 
 @memoize
@@ -457,8 +457,8 @@ def get_attack_type() -> int:
     return find_offset_from_expected(
         blocks,
         [
-            1, 2, 3, 4, 5, 6
-        ] + [1] * 20
+            256,
+        ],
     )
 
 @memoize
