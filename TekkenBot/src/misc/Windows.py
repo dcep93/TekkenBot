@@ -4,6 +4,8 @@ import sys
 import time
 import typing
 
+asdf
+
 class Windows:
     valid = False
     def __init__(self) -> None:

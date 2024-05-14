@@ -349,27 +349,20 @@ def find_offset_from_blocks(
 def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[int]) -> int:
     frame_count_offset = get_frame_count()
 
-    def equals(a: typing.Any, b: typing.Any) -> bool:
-        if isinstance(a, list):
-            for i in range(len(a)):
-                if not equals(a[i], b[i]):
-                    return False
-            return True
-        return a == b # type: ignore
-
+    def stringify(values: typing.List[int]) -> str:
+        return ",".join([""]+[str(i) for i in values]+[""])
+    
     def validate_f(value_blocks: typing.List[typing.List[typing.Tuple[int, int, int]]]) -> bool:
-        values = [
-            value for i in range(len(expected)) for frame, value in sorted([(
-                Vars.v.game_reader.get_4_bytes_from_data_block(block, base + frame_count_offset),
-                value,
-            ) for base, offset, value in value_blocks[i]])
-        ]
+        values = [value for block in value_blocks for base, offset, value in block]
 
         if DEBUG_FAST:
             if value_blocks[0][0][1] == Vars.v.game_reader.c[Vars.v.active[0]][Vars.v.active[1]][0]:
                 print(values)
 
-        return equals(value_blocks, expected)
+        values_str = stringify(values)
+        expected_str = stringify(expected)
+
+        return expected_str in values_str
 
     return find_offset_from_blocks(blocks, validate_f)
 
