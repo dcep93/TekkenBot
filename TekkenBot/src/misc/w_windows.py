@@ -10,5 +10,5 @@ try:
     from ctypes import wintypes
     from ctypes import windll # type: ignore
     valid = True
-except ModuleNotFoundError:
+except ImportError:
     pass

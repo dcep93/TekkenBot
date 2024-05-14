@@ -6,6 +6,12 @@ from ..misc import Path
 import enum
 import typing
 
+@enum.unique
+class RecordingState(enum.Enum):
+    OFF = 0
+    SINGLE = 1
+    BOTH = 2
+
 def record_single() -> None:
     record_start(RecordingState.SINGLE)
 
@@ -49,17 +55,11 @@ def record_if_activated() -> None:
 
 moves_per_line = 10
 
-@enum.unique
-class RecordingState(enum.Enum):
-    OFF = 0
-    SINGLE = 1
-    BOTH = 2
-
 InputState = typing.Tuple[str, str]
 
 class Recorder:
     state = RecordingState.OFF
-    history: typing.List[typing.List[InputState, int]] = [] # type: ignore
+    history = [] # type: ignore
 
 def get_input_state() -> InputState:
     last_state = TekkenBotPrime.TekkenBotPrime.t.game_log.state_log[-1]

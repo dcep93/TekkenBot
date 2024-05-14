@@ -9,6 +9,8 @@ import typing
 class Windows:
     def __init__(self) -> None:
         self.valid = w_windows.valid
+        if not self.valid:
+            return
 
         w_windows.windll.shcore.SetProcessDpiAwareness(1)
 

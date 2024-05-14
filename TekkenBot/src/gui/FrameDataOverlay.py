@@ -1,5 +1,5 @@
 from ..gui import t_tkinter
-from ..frame_data import Entry, Hook
+from ..frame_data import Builder, Entry, Hook
 from ..game_parser import GameLog, GameReader, MoveInfoEnums
 from ..misc import Path, Windows
 from ..record import Record, Replay
@@ -197,7 +197,7 @@ class FrameDataOverlay:
     def read_player_state(self, is_p1: bool, game_log: GameLog.GameLog) -> None:
         # ignore the fact that some moves have multiple active frames
         if game_log.is_starting_attack(is_p1):
-            entry = Entry.build(game_log, is_p1)
+            entry = Builder.build(game_log, is_p1)
         else:
             throw_break_string = game_log.get_throw_break(is_p1)
             if throw_break_string:

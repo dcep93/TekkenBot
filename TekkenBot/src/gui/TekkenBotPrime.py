@@ -8,7 +8,7 @@ import sys
 import time
 import traceback
 
-class TekkenBotPrime(t_tkinter.Tk):
+class TekkenBotPrime(t_tkinter.Tk): # type: ignore
     t: TekkenBotPrime
     def __init__(self) -> None:
         super().__init__()
