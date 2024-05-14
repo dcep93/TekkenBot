@@ -517,6 +517,7 @@ to_update: typing.List[typing.Tuple[typing.Tuple[str, str], typing.Callable[[], 
 ###
 
 class Vars:
+    v: 'Vars'
     def __init__(self, game_reader: GameReader.GameReader) -> None:
         self.game_reader = game_reader
         self.phase = 0

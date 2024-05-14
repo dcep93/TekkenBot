@@ -10,9 +10,9 @@ try:
     from tkinter.ttk import * # type: ignore
     valid = True
 except ModuleNotFoundError:
-    class Tk:
+    class Tk: # type: ignore[no-redef]
         pass
-    Text: typing.Any = None
+    Text: typing.Any = None # type: ignore[no-redef]
 
 class TextRedirector:
     def __init__(self, widget: typing.Any, stdout: typing.Any, tag:str="stdout") -> None:
