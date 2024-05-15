@@ -10,7 +10,7 @@ import threading
 import time
 import typing
 
-DEBUG_FAST = False
+DEBUG_FAST = True
 
 # assumes PlayerDataAddress.move_id doesn't change
 
@@ -36,7 +36,7 @@ def main() -> None:
     print("you should be in practice mode as p1 Jun vs Raven")
     print("with practice options set to Opponent Actions -> Standing / Action After a Hit or Block -> Block All :")
     print("if you're not on that screen already, you'll need to restart this tool")
-    print("do not make any inputs until phase 3")
+    print("do not make any inputs until phase 4")
     print("")
     for path, update_f in to_update:
         print(path)
@@ -44,7 +44,7 @@ def main() -> None:
         raw = update_f()
         val = hexify(raw)
         found[path] = val
-        print(val)
+        log([val])
         print("")
     config_obj = Vars.game_reader._c
     for path, val in found.items():
@@ -270,6 +270,8 @@ def press_keys(keys: str, previous: typing.Optional[str]) -> None:
         while not Vars.game_reader.is_foreground_pid():
             print("waiting for focus")
             sleep_frames(10)
+
+    update_tk()
             
     for key in previous:
         if key not in keys:
@@ -285,9 +287,6 @@ def sleep_frames(frames: int) -> None:
 @memoize
 def get_point_slope() -> typing.Tuple[int, int]:
     move_id_addresses = get_move_id_addresses()
-
-    if not Vars.game_reader.is_foreground_pid():
-        raise Exception("needs to remain in foreground during phase 2")
 
     def read_4_bytes(address: int) -> typing.Optional[int]:
             try:
@@ -350,45 +349,58 @@ def get_choreographed_blocks() -> typing.List[bytes]:
         ("1", 10),
     ])
 
+ToValidateType = typing.Tuple[int, typing.List[typing.Tuple[bytes, typing.List[typing.Tuple[int, int]]]]]
 def find_offset_from_blocks(
     blocks: typing.List[bytes],
-    validate_f: typing.Callable[[typing.List[typing.List[typing.Tuple[int, int, int]]]], bool],
+    validate_f: typing.Callable[[ToValidateType], bool],
 ) -> int:
     _, rollback_frame_offset = get_point_slope()
     for offset in range(0x100, 0x10000):
-        value_blocks = [
-            [
+        to_validate = (offset, [
+            (block, [
                 (
                     base,
-                    offset,
                     Vars.game_reader.get_4_bytes_from_data_block(block, base + offset),
                 )
                 for base in [
                     rollback_frame_offset * i
                     for i in range(len(block)//rollback_frame_offset)
                 ]
-            ] for block in blocks
-        ]
-        if validate_f(value_blocks):
+            ]) for block in blocks
+        ])
+        if validate_f(to_validate):
             return offset
     raise Exception("find_offset_from_block")
 
-def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[int]) -> int:
+def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[typing.List[int]]) -> int:
     def stringify(values: typing.List[int]) -> str:
-        return ",".join([""]+[str(i) for i in values]+[""])
-    
-    def validate_f(value_blocks: typing.List[typing.List[typing.Tuple[int, int, int]]]) -> bool:
-        values = [value for block in value_blocks for base, offset, value in block]
+        return ",".join([""]+[hex(i) for i in values]+[""])
 
-        if DEBUG_FAST or True:
-            if value_blocks[0][0][1] == Vars.game_reader.c[Vars.active[0]][Vars.active[1]][0]:
-                print(Vars.active, values)
-                return True
+    expected_strs = [stringify(e) for e in expected]
+
+    frame_count_offset = get_frame_count()
+    
+    def validate_f(to_validate: ToValidateType) -> bool:
+        offset, data = to_validate
+
+        value_by_frame: typing.Dict[int, int] = {}
+
+        for block, block_data in data:
+            for base, value in block_data:
+                frame_count = Vars.game_reader.get_4_bytes_from_data_block(block, base + frame_count_offset)
+                value_by_frame[frame_count] = value
+
+        values = [value_by_frame.get(i, -1) for i in range(min(value_by_frame), max(value_by_frame))]
 
         values_str = stringify(values)
-        expected_str = stringify(expected)
 
-        return expected_str in values_str
+        if DEBUG_FAST:
+            if offset == Vars.game_reader.c[Vars.active[0]][Vars.active[1]][0]:
+                print(all((e in values_str for e in expected_strs)))
+                print(values)
+                return True
+
+        return all((e in values_str for e in expected_strs))
 
     return find_offset_from_blocks(blocks, validate_f)
 
@@ -435,9 +447,12 @@ def get_frame_count() -> int:
     get_all_memory()
     blocks = get_blocks_from_instructions([("", 1)])
 
-    def validate_f(value_blocks: typing.List[typing.List[typing.Tuple[int, int, int]]]) -> bool:
-        for block in value_blocks:
-            values = [value for base, offset, value in block]
+    def validate_f(to_validate: ToValidateType) -> bool:
+        offset, data = to_validate
+        for block, block_data in data:
+            values = [value for base, value in block_data]
+            if values[0] <= 122:
+                return False
             for i in range(len(values)-1):
                 diff = values[i+1]-values[i]
                 if diff not in [1, -31]:
@@ -452,8 +467,10 @@ def get_simple_move_state() -> int:
     return find_offset_from_expected(
         blocks,
         [
-            -1,
-        ],
+            [MoveInfoEnums.SimpleMoveStates.STANDING.value] +
+            [MoveInfoEnums.SimpleMoveStates.STANDING_FORWARD.value] * 11 +
+            [MoveInfoEnums.SimpleMoveStates.STANDING.value],
+        ]
     )
 
 def get_p2_data_offset() -> int:
@@ -463,7 +480,7 @@ def get_p2_data_offset() -> int:
     p2_offset_plus_simple_move_state = find_offset_from_expected(
         blocks,
         [
-            -1,
+            [-2],
         ],
     )
 
@@ -474,7 +491,7 @@ def get_damage_taken() -> int:
     return find_offset_from_expected(
         blocks,
         [
-            -1,
+            [-2],
         ],
     )
 
@@ -483,7 +500,7 @@ def get_attack_type() -> int:
     return find_offset_from_expected(
         blocks,
         [
-            -1,
+            [-2],
         ],
     )
 
@@ -521,6 +538,7 @@ to_update: typing.List[typing.Tuple[typing.Tuple[str, str], typing.Callable[[], 
     # phase 2 get_point_slope
     (("MemoryAddressOffsets", "rollback_frame_offset"), get_rollback_frame_offset),
     (("PlayerDataAddress", "simple_move_state"), get_simple_move_state),
+    (("", ""), lambda: 1//0),
     (("MemoryAddressOffsets", "p2_data_offset"), get_p2_data_offset),
     # TODO
     (("PlayerDataAddress", "attack_type"), get_attack_type),
@@ -538,6 +556,6 @@ to_update: typing.List[typing.Tuple[typing.Tuple[str, str], typing.Callable[[], 
     (("PlayerDataAddress", "attack_damage"), get_attack_type),
     (("GameDataAddress", "facing"), get_attack_type),
     # phase 3 get_pointers_map
-    (("MemoryAddressOffsets", "player_data_pointer_offset"), get_player_data_pointer_offset),
-    (("NonPlayerDataAddresses", "opponent_side"), get_opponent_side),
+    # (("MemoryAddressOffsets", "player_data_pointer_offset"), get_player_data_pointer_offset),
+    # (("NonPlayerDataAddresses", "opponent_side"), get_opponent_side),
 ]

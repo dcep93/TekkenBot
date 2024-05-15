@@ -43,7 +43,6 @@ class GameLog:
         self.state_log.append(game_snapshot)
 
         obj = None # for debugging
-        obj = [i.complex_state for i in [game_snapshot.p1, game_snapshot.p2]]
         if obj != self.obj:
             print(game_snapshot.frame_count, obj)
             self.obj = obj
