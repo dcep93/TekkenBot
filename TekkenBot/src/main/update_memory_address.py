@@ -224,8 +224,7 @@ def get_pointers_map() -> typing.Dict[str, typing.List[int]]:
         if Vars.game_reader.bytes_to_int(address_end_bytes[:guaranteed_prefix]) == 0:
             continue
         if address_bytes[:guaranteed_prefix] != address_end_bytes[:guaranteed_prefix]:
-            raise Exception(f"get_pointers_map {list(address_bytes)} : {
-                            list(address_end_bytes)}")
+            raise Exception(f"get_pointers_map {list(address_bytes)} : {list(address_end_bytes)}")
         for i in range(address_bytes[guaranteed_prefix], address_end_bytes[guaranteed_prefix]+1):
             prefix = address_bytes[:guaranteed_prefix] + \
                 Vars.game_reader.int_to_bytes(i, 1)
@@ -242,8 +241,7 @@ def get_pointers_map() -> typing.Dict[str, typing.List[int]]:
             source = base_address+index+len(prefix)-8
             pointers_map[hex(destination)].append(source)
             num_pointers_found += 1
-        log(["get_pointers_map", f"{
-            i+1} of {len(prefixes)}", f"{num_pointers_found} found"])
+        log(["get_pointers_map", f"{i+1} of {len(prefixes)}", f"{num_pointers_found} found"])
 
     with open("pointers_map.json", "w") as fh:
         json.dump(pointers_map, fh)
@@ -566,8 +564,7 @@ def get_player_data_pointer_offset() -> typing.List[int]:
     sources = pointers_map.get(hex(address), [])
 
     if len(sources) == 0:
-        raise Exception(f"get_player_data_pointer_offset {
-                        hex(address)} {len(pointers_map)}")
+        raise Exception(f"get_player_data_pointer_offset {hex(address)} {len(pointers_map)}")
 
     return get_pointer_offset(sources, 0x100)
 

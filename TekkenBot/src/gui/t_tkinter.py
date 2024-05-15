@@ -3,16 +3,17 @@ from ..misc import Path
 import sys
 import typing
 
+from tkinter import *
+import tkinter as _tkinter
+
+tkinter = _tkinter
+
 valid = False
 try:
-    from tkinter import *
-    import tkinter
     from tkinter.ttk import *  # type: ignore
     valid = True
 except ModuleNotFoundError:
-    class Tk:  # type: ignore[no-redef]
-        pass
-    Text: typing.Any = None  # type: ignore[no-redef]
+    pass
 
 
 class TextRedirector:

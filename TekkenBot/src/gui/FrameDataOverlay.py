@@ -113,9 +113,8 @@ class FrameDataOverlay:
         padding.pack(side=t_tkinter.LEFT)
 
     def create_frame_advantage_label(self) -> typing.Any:
-        frame_advantage_label = t_tkinter.Label(self.toplevel, textvariable=self.fa_var,
-                                                # type: ignore
-                                                font=("Courier New", 44), width=4, anchor='c', borderwidth=1, relief='ridge')
+        frame_advantage_label = t_tkinter.Label(self.toplevel, textvariable=self.fa_var, font=(
+            "Courier New", 44), width=4, anchor='c', borderwidth=1, relief='ridge')  # type: ignore
         frame_advantage_label.pack(side=t_tkinter.LEFT)
         return frame_advantage_label
 
@@ -129,13 +128,13 @@ class FrameDataOverlay:
 
     def add_buttons(self) -> None:
         frame = t_tkinter.Frame(self.toplevel)
-        # t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="record single", command=Record.record_single).pack(fill='x') # type: ignore
-        # t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="record both", command=Record.record_both).pack(fill='x') # type: ignore
         t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color,
-                                 # type: ignore
-                                 text="end recording", command=Record.record_end).pack(fill='x')
+                                 text="record single", command=Record.record_single).pack(fill='x')
         t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color,
-                                 # type: ignore
+                                 text="record both", command=Record.record_both).pack(fill='x')
+        t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color,
+                                 text="end recording", command=Record.record_end).pack(fill='x',)
+        t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color,
                                  text="replay", command=Replay.replay).pack(fill='x')
         frame.pack(side=t_tkinter.LEFT)
 
