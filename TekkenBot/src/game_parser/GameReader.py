@@ -19,6 +19,14 @@ class GameReader:
         self._c.read(Path.path('config/memory_address.ini'))
         self.c: typing.Dict[str, typing.Dict[str, typing.List[int]]] = {k: {kk:list(map(lambda x: int(x, 16), vv.split())) for kk,vv in v.items()} for k,v in self._c.items()}
 
+    @staticmethod
+    def bytes_to_int(b: bytes) -> int:
+        return int.from_bytes(b, 'big')
+
+    @staticmethod
+    def int_to_bytes(i: int, n: int) -> bytes:
+        return i.to_bytes(n, 'big')
+
     def get_updated_state(self, rollback_frame: int) -> typing.Optional[GameSnapshot.GameSnapshot]:
         if not Windows.w.valid:
             raise Exception("Not windows - cannot update state")
@@ -123,7 +131,7 @@ class GameReader:
 
     def get_int_from_address(self, address: int, num_bytes: int) -> int:
         data = self.get_block_of_data(address, num_bytes)
-        return int.from_bytes(data[::-1], 'little')
+        return self.bytes_to_int(data[::-1])
 
     def get_8_bytes_at_end_of_pointer_trail(self, trail: typing.List[int]) -> int:
         address = self.module_address
@@ -132,9 +140,8 @@ class GameReader:
             address = self.get_int_from_address(address + offset, 8)
         return address
 
-    @staticmethod
-    def get_4_bytes_from_data_block(frame: bytes, offset: int) -> int:
-        return int.from_bytes(frame[offset: offset + 4][::-1], 'little')
+    def get_4_bytes_from_data_block(self, frame: bytes, offset: int) -> int:
+        return self.bytes_to_int(frame[offset: offset + 4][::-1])
 
     def is_foreground_pid(self) -> bool:
         pid = Windows.w.get_foreground_pid()

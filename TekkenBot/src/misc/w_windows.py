@@ -1,14 +1,18 @@
 # mypy: disable_error_code="unused-ignore"
 
+import ctypes
 import typing
 
+from ctypes import wintypes as _wintypes
+
+wintypes = _wintypes
+
 valid = False
-wintypes: typing.Any
 windll: typing.Any
 WinDLL: typing.Any
 try:
-    from ctypes import wintypes
     from ctypes import windll # type: ignore
+    Windll = ctypes.WinDLL # type: ignore
     valid = True
 except ImportError:
     pass
