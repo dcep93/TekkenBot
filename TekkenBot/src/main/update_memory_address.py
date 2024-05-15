@@ -224,7 +224,7 @@ def get_pointers_map() -> typing.Dict[str, typing.List[int]]:
         if Vars.game_reader.bytes_to_int(address_end_bytes[:guaranteed_prefix]) == 0:
             continue
         if address_bytes[:guaranteed_prefix] != address_end_bytes[:guaranteed_prefix]:
-            raise Exception(f"get_pointers_map {list(address_bytes)} : {list(address_end_bytes)}")
+            raise Exception(f"get_pointers_map {list(address_bytes)} : {list(address_end_bytes)}")  # nopep8
         for i in range(address_bytes[guaranteed_prefix], address_end_bytes[guaranteed_prefix]+1):
             prefix = address_bytes[:guaranteed_prefix] + \
                 Vars.game_reader.int_to_bytes(i, 1)
@@ -241,7 +241,7 @@ def get_pointers_map() -> typing.Dict[str, typing.List[int]]:
             source = base_address+index+len(prefix)-8
             pointers_map[hex(destination)].append(source)
             num_pointers_found += 1
-        log(["get_pointers_map", f"{i+1} of {len(prefixes)}", f"{num_pointers_found} found"])
+        log(["get_pointers_map", f"{i+1} of {len(prefixes)}", f"{num_pointers_found} found"])  # nopep8
 
     with open("pointers_map.json", "w") as fh:
         json.dump(pointers_map, fh)
@@ -287,12 +287,14 @@ def find_bytes(byte_array: bytes) -> typing.Iterable[typing.Tuple[int, int]]:
             yield base_address, index
 
 
-def press_keys(keys: str, previous: typing.Optional[str]) -> None:
+def press_keys(keys: str, previous: typing.Optional[str]) -> bool:
+    not_in_focus = False
     m = get_input_hexes()
     if previous is None:
         previous = ''.join(m.keys())
     else:
         while not Vars.game_reader.is_foreground_pid():
+            not_in_focus = True
             print("waiting for focus")
             sleep_frames(10)
 
@@ -304,6 +306,8 @@ def press_keys(keys: str, previous: typing.Optional[str]) -> None:
     for key in keys:
         if key not in previous:
             Windows.w.press_key(m[key])
+
+    return not_in_focus
 
 
 def sleep_frames(frames: int) -> None:
@@ -564,7 +568,7 @@ def get_player_data_pointer_offset() -> typing.List[int]:
     sources = pointers_map.get(hex(address), [])
 
     if len(sources) == 0:
-        raise Exception(f"get_player_data_pointer_offset {hex(address)} {len(pointers_map)}")
+        raise Exception(f"get_player_data_pointer_offset {hex(address)} {len(pointers_map)}")  # nopep8
 
     return get_pointer_offset(sources, 0x100)
 
