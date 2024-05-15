@@ -287,16 +287,16 @@ def find_bytes(byte_array: bytes) -> typing.Iterable[typing.Tuple[int, int]]:
             yield base_address, index
 
 
-def press_keys(keys: str, previous: typing.Optional[str]) -> bool:
-    not_in_focus = False
+def press_keys(keys: str, previous: typing.Optional[str]) -> None:
     m = get_input_hexes()
     if previous is None:
         previous = ''.join(m.keys())
-    else:
         while not Vars.game_reader.is_foreground_pid():
-            not_in_focus = True
             print("waiting for focus")
             sleep_frames(10)
+    else:
+        if not Vars.game_reader.is_foreground_pid():
+            raise Exception("need to remain in focus")
 
     update_tk()
 
@@ -306,8 +306,6 @@ def press_keys(keys: str, previous: typing.Optional[str]) -> bool:
     for key in keys:
         if key not in previous:
             Windows.w.press_key(m[key])
-
-    return not_in_focus
 
 
 def sleep_frames(frames: int) -> None:
@@ -326,8 +324,9 @@ def get_point_slope() -> typing.Tuple[int, int]:
             return None
 
     def filter_move_id_addresses(move_id_addresses: typing.List[int]) -> typing.List[int]:
-        press_keys('d', '')
+        press_keys('d', None)
         sleep_frames(60)
+        press_keys('', 'd')
         return [a for a in move_id_addresses if read_4_bytes(a) == MoveInfoEnums.UniversalMoves.CROUCHING.value]
 
     try:
@@ -362,6 +361,7 @@ def get_blocks_from_instructions(instructions: typing.List[typing.Tuple[str, int
         player_data_base_address = move_id_address - move_id_offset
         blocks = []
         prev = ''
+        press_keys('', None)
         for keys, duration in instructions:
             press_keys(keys, prev)
             prev = keys
