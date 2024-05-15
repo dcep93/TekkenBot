@@ -18,8 +18,6 @@ class PlayerSnapshot:
         self.recovery = d['recovery']
         self.frames_til_next_move = self.recovery - self.move_timer
         self.char_id = d['char_id']
-        throw_flag = d['throw_flag']
-        self.is_attack_throw = throw_flag == 1
         self.throw_tech = MoveInfoEnums.ThrowTechs(d['throw_tech'])
         self.input_direction = MoveInfoEnums.InputDirectionCodes(d['input_direction'])
         self.input_button = MoveInfoEnums.InputAttackCodes(d['input_attack'] % MoveInfoEnums.InputAttackCodes.xRAGE.value)

@@ -535,7 +535,6 @@ to_update: typing.List[typing.Tuple[typing.Tuple[str, str], typing.Callable[[], 
     (("PlayerDataAddress", "attack_startup"), get_attack_type),
     (("PlayerDataAddress", "char_id"), get_attack_type),
     (("PlayerDataAddress", "move_timer"), get_attack_type),
-    (("PlayerDataAddress", "throw_flag"), get_attack_type),
     (("PlayerDataAddress", "attack_damage"), get_attack_type),
     (("GameDataAddress", "facing"), get_attack_type),
     # phase 3 get_pointers_map
