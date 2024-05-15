@@ -12,7 +12,7 @@ windll: typing.Any
 WinDLL: typing.Any
 try:
     from ctypes import windll # type: ignore
-    Windll = ctypes.WinDLL # type: ignore
+    WinDLL = ctypes.WinDLL # type: ignore
     valid = True
 except ImportError:
     pass

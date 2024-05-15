@@ -19,10 +19,8 @@ def build(game_log: GameLog.GameLog, is_p1: bool) -> Entry.Entry:
     entry[Entry.DataColumns.fa] = get_fa(is_p1, attacker, receiver)
 
     entry[Entry.DataColumns.startup] = str(attacker.startup)
-    if attacker.is_attack_throw:
-        entry[Entry.DataColumns.hit_type] = "THROW"
-    else:
-        entry[Entry.DataColumns.hit_type] = MoveInfoEnums.AttackType(attacker.attack_type).name
+
+    entry[Entry.DataColumns.hit_type] = MoveInfoEnums.AttackType(attacker.attack_type).name
 
     if receiver.complex_state == MoveInfoEnums.ComplexMoveStates.BLOCK:
         entry[Entry.DataColumns.block] = entry[Entry.DataColumns.fa]

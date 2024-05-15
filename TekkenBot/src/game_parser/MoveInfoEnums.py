@@ -12,6 +12,10 @@ class safeEnum(enum.Enum):
                 # raise e
         return cls(0)
 
+class UniversalMoves(safeEnum):
+    STANDING = 32769
+    CROUCHING = 32770
+
 class AttackType(safeEnum):
     NA = 0 #This move is not an attack
 

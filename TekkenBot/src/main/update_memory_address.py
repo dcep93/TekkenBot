@@ -10,7 +10,7 @@ import threading
 import time
 import typing
 
-DEBUG_FAST = True
+DEBUG_FAST = False
 
 # assumes PlayerDataAddress.move_id doesn't change
 
@@ -27,7 +27,7 @@ def main() -> None:
         raise Exception("need to be running tekken")
     game_reader.in_match = True
     Vars.v = Vars(game_reader)
-    found: typing.Dict[typing.Tuple[str, str], FoundType] = {}
+    found: typing.Dict[typing.Tuple[str, str], str] = {}
     print("")
     print("you should be in practice mode as p1 Jun vs Raven")
     print("with practice options set to Opponent Actions -> Standing / Action After a Hit or Block -> Block All :")
@@ -37,18 +37,16 @@ def main() -> None:
     for path, update_f in to_update:
         print(path)
         Vars.v.active = path
-        val = update_f()
+        raw = update_f()
+        val = hexify(raw)
         found[path] = val
+        print(val)
+        print("")
     config_obj = Vars.v.game_reader._c
-    def hexify(raw: FoundType) -> str:
-        if isinstance(raw, int):
-            return f'0x{raw:x}'
-        return ' '.join([hexify(r) for r in raw])
-    for path, raw in found.items():
+    for path, val in found.items():
         # TODO experiment - run once, everything changes, run twice, everything goes back
-        value = hexify(raw)
-        print(path, value)
-        config_obj[path[0]][path[1]] = value
+        print(path, val)
+        config_obj[path[0]][path[1]] = val
     with open(Path.path('config/memory_address.ini'), 'w') as fh:
         config_obj.write(fh)
 
@@ -84,7 +82,7 @@ def enter_phase(phase: int, log_before: typing.List[str], log_after_f: typing.Op
 @enter_phase(
     1,
     [
-        "phase 1 of 3",
+        "phase 1 of 4",
         "collecting initial memory data",
         "this usually takes around 1 minute",
     ],
@@ -140,22 +138,35 @@ def get_all_memory() -> typing.Dict[int, bytes]:
 @enter_phase(
     2,
     [
-        "phase 2 of 3",
+        "phase 2 of 4",
+        "scanning memory",
+        "this usually takes around 1 minute",
+    ],
+)
+def get_move_id_addresses() -> typing.List[int]:
+    if DEBUG_FAST:
+        with open("move_id_addresses.json") as fh:
+            return json.load(fh) # type: ignore
+
+    standing_bytes = Vars.v.game_reader.int_to_bytes(MoveInfoEnums.UniversalMoves.STANDING.value, 4)
+    found_bytes = find_bytes(standing_bytes)
+    move_id_addresses = [base_address+index for base_address,index in found_bytes]
+    
+    with open("move_id_addresses.json", "w") as fh:
+        json.dump(move_id_addresses, fh)
+
+    return move_id_addresses
+
+@enter_phase(
+    3,
+    [
+        "phase 3 of 4",
         "collecting input data",
         "this usually takes around 1 minute",
     ],
 )
 def get_point_slope() -> typing.Tuple[int, int]:
-    if DEBUG_FAST:
-        with open("point_slope.json") as fh:
-            return json.load(fh) # type: ignore
-    crouching_bytes_map = {
-        False: 32769,
-        True: 32770,
-    }
-    crouching_bytes = Vars.v.game_reader.int_to_bytes(crouching_bytes_map[False], 4)
-    found_bytes = find_bytes(crouching_bytes)
-    move_id_addresses = [base_address+index for base_address,index in found_bytes]
+    move_id_addresses = get_move_id_addresses()
 
     if not Vars.v.game_reader.is_foreground_pid():
         raise Exception("needs to remain in foreground during phase 2")
@@ -169,11 +180,11 @@ def get_point_slope() -> typing.Tuple[int, int]:
     def filter_move_id_addresses(move_id_addresses: typing.List[int]) -> typing.List[int]:
         press_keys('d', '')
         sleep_frames(60)
-        move_id_addresses = [a for a in move_id_addresses if read_4_bytes(a) == crouching_bytes_map[True]]
+        move_id_addresses = [a for a in move_id_addresses if read_4_bytes(a) == MoveInfoEnums.UniversalMoves.CROUCHING.value]
 
         press_keys('', None)
         sleep_frames(60)
-        move_id_addresses = [a for a in move_id_addresses if read_4_bytes(a) == crouching_bytes_map[False]]
+        move_id_addresses = [a for a in move_id_addresses if read_4_bytes(a) == MoveInfoEnums.UniversalMoves.STANDING.value]
         return move_id_addresses
     
     try:
@@ -181,32 +192,25 @@ def get_point_slope() -> typing.Tuple[int, int]:
     finally:
         press_keys('', None)
 
-    def helper() -> typing.Tuple[int, int]:
-        needed_matches = 20
-        for skip in range(1, 1 + len(move_id_addresses)//needed_matches):
-            for i, a in enumerate(move_id_addresses):
-                if i + skip >= len(move_id_addresses):
-                    continue
-                distance = move_id_addresses[i+skip]-a
-                for x in range(needed_matches)[::-1]:
-                    j = i + (skip * x)
-                    if j >= len(move_id_addresses) or move_id_addresses[j] - a != x * distance:
-                        distance = -1
-                        break
-                if distance != -1:
-                    return a+distance, distance
-        raise Exception(f"get_point_slope {len(move_id_addresses)}")
-
-    point_slope = helper()
-    
-    with open("point_slope.json", "w") as fh:
-        json.dump(point_slope, fh)
-    return point_slope
+    needed_matches = 20
+    for skip in range(1, 1 + len(move_id_addresses)//needed_matches):
+        for i, a in enumerate(move_id_addresses):
+            if i + skip >= len(move_id_addresses):
+                continue
+            distance = move_id_addresses[i+skip]-a
+            for x in range(needed_matches)[::-1]:
+                j = i + (skip * x)
+                if j >= len(move_id_addresses) or move_id_addresses[j] - a != x * distance:
+                    distance = -1
+                    break
+            if distance != -1:
+                return a, distance
+    raise Exception(f"get_point_slope {len(move_id_addresses)}")
 
 @enter_phase(
-    3,
+    4,
     [
-        "phase 3 of 3",
+        "phase 3 of 4",
         "building pointers_map - feel free to make inputs",
         "this usually takes around 5 minutes",
     ],
@@ -219,6 +223,7 @@ def get_pointers_map() -> typing.Dict[str, typing.List[int]]:
     if DEBUG_FAST:
         with open("pointers_map.json") as fh:
             return json.load(fh) # type: ignore
+
     memory = get_all_memory()
     prefixes = {}
     guaranteed_prefix = 3
@@ -244,8 +249,10 @@ def get_pointers_map() -> typing.Dict[str, typing.List[int]]:
             pointers_map[hex(destination)].append(source)
             num_pointers_found += 1
         log(["get_pointers_map", f"{i+1} of {len(prefixes)}", f"{num_pointers_found} found"])
+
     with open("pointers_map.json", "w") as fh:
         json.dump(pointers_map, fh)
+
     return pointers_map
 
 ### helpers
@@ -352,16 +359,16 @@ def find_offset_from_blocks(
     raise Exception("find_offset_from_block")
 
 def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[int]) -> int:
-    return -1
     def stringify(values: typing.List[int]) -> str:
         return ",".join([""]+[str(i) for i in values]+[""])
     
     def validate_f(value_blocks: typing.List[typing.List[typing.Tuple[int, int, int]]]) -> bool:
         values = [value for block in value_blocks for base, offset, value in block]
 
-        if DEBUG_FAST:
+        if DEBUG_FAST or True:
             if value_blocks[0][0][1] == Vars.v.game_reader.c[Vars.v.active[0]][Vars.v.active[1]][0]:
                 print(Vars.v.active, values)
+                return True
 
         values_str = stringify(values)
         expected_str = stringify(expected)
@@ -386,6 +393,11 @@ def get_pointer_offset(sources: typing.List[int], max_offset: int) -> typing.Lis
                     next_candidates[source] = [offset] + prev
         candidates = next_candidates
     raise Exception(f"get_pointer_offset {len(candidates)}")
+
+def hexify(raw: FoundType) -> str:
+    if isinstance(raw, int):
+        return hex(raw)
+    return ' '.join([hexify(r) for r in raw])
     
 ### updaters
 
@@ -394,7 +406,6 @@ def get_expected_module_address() -> int:
     assert(Vars.v.game_reader.module_address is not None)
     return Vars.v.game_reader.module_address
 
-@memoize
 def get_rollback_frame_offset() -> int:
     distance: int
     _, distance = get_point_slope()
@@ -405,7 +416,6 @@ def get_move_id_offset() -> int:
     # assume that PlayerDataAddress.move_id offset doesnt change
     return Vars.v.game_reader.c["PlayerDataAddress"]["move_id"][0]
 
-@memoize
 def get_frame_count() -> int:
     get_all_memory()
     blocks = get_blocks_from_instructions([("", 1)])
@@ -431,7 +441,6 @@ def get_simple_move_state() -> int:
         ],
     )
 
-@memoize
 def get_p2_data_offset() -> int:
     simple_move_state_offset = get_simple_move_state()
     blocks = get_choreographed_blocks()
@@ -445,7 +454,6 @@ def get_p2_data_offset() -> int:
 
     return p2_offset_plus_simple_move_state - simple_move_state_offset
 
-@memoize
 def get_damage_taken() -> int:
     blocks = get_blocks_from_instructions([("", 1)])
     return find_offset_from_expected(
@@ -455,7 +463,6 @@ def get_damage_taken() -> int:
         ],
     )
 
-@memoize
 def get_attack_type() -> int:
     blocks = get_choreographed_blocks()
     return find_offset_from_expected(
@@ -465,21 +472,23 @@ def get_attack_type() -> int:
         ],
     )
 
-@memoize
 def get_player_data_pointer_offset() -> typing.List[int]:
     pointers_map = get_pointers_map()
     move_id_address, _ = get_point_slope()
-    move_id_offset = get_move_id_offset()
 
-    sources = pointers_map.get(hex(move_id_address-move_id_offset), [])
+    address = move_id_address - get_move_id_offset()
+
+    sources = pointers_map.get(hex(address), [])
 
     if len(sources) == 0:
-        raise Exception(f"get_player_data_pointer_offset {hex(move_id_address)}")
+        raise Exception(f"get_player_data_pointer_offset {hex(address)} {len(pointers_map)}")
 
     return get_pointer_offset(sources, 0x100)
 
-@memoize
 def get_opponent_side() -> typing.List[int]:
+    if DEBUG_FAST:
+        return Vars.v.game_reader.c["NonPlayerDataAddresses"]["opponent_side"]
+    # https://github.com/WAZAAAAA0/TekkenBot/issues/57#issuecomment-2087909057
     bytes_to_find_str = "01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 02 00 00 00 02 00 00 00 02 00 00 00 02 00 00 00 02 00 00 00 02 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 08 00 00 00 08 00 00 00 08 00 00 00 08 00 00 00 08 00 00 00 08 00 00 00 10 00 00 00 10 00 00 00 10 00 00 00 10 00 00 00 10 00 00 00 10 00 00 00 20 00 00 00 20 00 00 00 20 00 00 00 20 00 00 00 20 00 00 00 20 00 00 00 00 00 00 00 40 00 00 00 40 00 00 00 40 00 00 00 40 00 00 00 40"
     bytes_to_find = list(map(lambda x: int(x, 16), bytes_to_find_str.split()))
     found_bytes = list(find_bytes(bytes(bytes_to_find[::-1])))
@@ -499,7 +508,6 @@ to_update: typing.List[typing.Tuple[typing.Tuple[str, str], typing.Callable[[], 
     (("PlayerDataAddress", "simple_move_state"), get_simple_move_state),
     (("MemoryAddressOffsets", "p2_data_offset"), get_p2_data_offset),
     # TODO
-    (("GameDataAddress", "facing"), get_attack_type),
     (("PlayerDataAddress", "attack_type"), get_attack_type),
     (("PlayerDataAddress", "recovery"), get_attack_type),
     (("PlayerDataAddress", "hit_outcome"), get_attack_type),
@@ -514,6 +522,7 @@ to_update: typing.List[typing.Tuple[typing.Tuple[str, str], typing.Callable[[], 
     (("PlayerDataAddress", "move_timer"), get_attack_type),
     (("PlayerDataAddress", "throw_flag"), get_attack_type),
     (("PlayerDataAddress", "attack_damage"), get_attack_type),
+    (("GameDataAddress", "facing"), get_attack_type),
     # phase 3 get_pointers_map
     (("MemoryAddressOffsets", "player_data_pointer_offset"), get_player_data_pointer_offset),
     (("NonPlayerDataAddresses", "opponent_side"), get_opponent_side),
