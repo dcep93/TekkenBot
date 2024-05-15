@@ -8,8 +8,10 @@ import sys
 import time
 import traceback
 
+
 class TekkenBotPrime(t_tkinter.Tk):
     t: 'TekkenBotPrime'
+
     def __init__(self) -> None:
         super().__init__()
         self.__class__.t = self
@@ -23,7 +25,7 @@ class TekkenBotPrime(t_tkinter.Tk):
         elif Flags.Flags.pickle_src != "":
             game_reader = ScriptedGame.Reader()
         else:
-            game_reader = GameReader.GameReader() # type: ignore
+            game_reader = GameReader.GameReader()  # type: ignore
         self.game_reader = game_reader
         self.overlay = FrameDataOverlay.FrameDataOverlay()
 

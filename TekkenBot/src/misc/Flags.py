@@ -1,10 +1,12 @@
 import sys
 
+
 class Flags:
     pickle_src = ""
     pickle_dest = ""
     fast = False
     debug = False
+
 
 def handle() -> None:
     temp_argv = []

@@ -6,6 +6,7 @@ import sys
 import time
 import typing
 
+
 class Windows:
     def __init__(self) -> None:
         self.valid = w_windows.valid
@@ -17,11 +18,13 @@ class Windows:
         self.k32 = w_windows.windll.kernel32
 
         self.open_process = self.k32.OpenProcess
-        self.open_process.argtypes = [w_windows.wintypes.DWORD, ctypes.wintypes.BOOL, ctypes.wintypes.DWORD]
+        self.open_process.argtypes = [
+            w_windows.wintypes.DWORD, ctypes.wintypes.BOOL, ctypes.wintypes.DWORD]
         self.open_process.restype = w_windows.wintypes.HANDLE
 
         self.read_process_memory = self.k32.ReadProcessMemory
-        self.read_process_memory.argtypes = [w_windows.wintypes.HANDLE, ctypes.wintypes.LPCVOID, ctypes.wintypes.LPVOID, ctypes.c_size_t, ctypes.POINTER(ctypes.c_size_t)]
+        self.read_process_memory.argtypes = [w_windows.wintypes.HANDLE, ctypes.wintypes.LPCVOID,
+                                             ctypes.wintypes.LPVOID, ctypes.c_size_t, ctypes.POINTER(ctypes.c_size_t)]
         self.read_process_memory.restype = w_windows.wintypes.BOOL
 
         self.get_last_error = self.k32.GetLastError
@@ -57,14 +60,19 @@ class Windows:
         me32 = ModuleEntry()
         me32.dwSize = ctypes.sizeof(ModuleEntry)
 
-        h_module_snap = w_windows.windll.kernel32.CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pid)
+        h_module_snap = w_windows.windll.kernel32.CreateToolhelp32Snapshot(
+            TH32CS_SNAPMODULE, pid)
         if h_module_snap == -1:
-            print('CreateToolhelp32Snapshot Error [%d]' % self.get_last_error())
-            print('Build the code yourself? This is the error for using 32-bit Python. Try the 64-bit version.')
+            print(
+                'CreateToolhelp32Snapshot Error [%d]' % self.get_last_error())
+            print(
+                'Build the code yourself? This is the error for using 32-bit Python. Try the 64-bit version.')
 
-        ret = w_windows.windll.kernel32.Module32First(h_module_snap, ctypes.pointer(me32))
+        ret = w_windows.windll.kernel32.Module32First(
+            h_module_snap, ctypes.pointer(me32))
         if ret == 0:
-            print('ListProcessModules() Error on Module32First[%d]' % self.get_last_error())
+            print(
+                'ListProcessModules() Error on Module32First[%d]' % self.get_last_error())
             self.close_handle(h_module_snap)
 
         address_to_return = None
@@ -72,7 +80,8 @@ class Windows:
             if name == me32.szModule.decode("utf-8"):
                 address_to_return = me32.hModule
 
-            ret = w_windows.windll.kernel32.Module32Next(h_module_snap, ctypes.pointer(me32))
+            ret = w_windows.windll.kernel32.Module32Next(
+                h_module_snap, ctypes.pointer(me32))
         self.close_handle(h_module_snap)
 
         return address_to_return
@@ -80,8 +89,9 @@ class Windows:
     def get_foreground_pid(self) -> int:
         pid = w_windows.wintypes.DWORD()
         active = w_windows.windll.user32.GetForegroundWindow()
-        w_windows.windll.user32.GetWindowThreadProcessId(active, ctypes.byref(pid))
-        assert(isinstance(pid.value, int))
+        w_windows.windll.user32.GetWindowThreadProcessId(
+            active, ctypes.byref(pid))
+        assert (isinstance(pid.value, int))
         return pid.value
 
     def get_pid(self, process_name: str) -> typing.Optional[int]:
@@ -104,11 +114,13 @@ class Windows:
             else:
                 raise Exception("Call to enum_processes failed")
 
-        num_values = int(bytes_returned.value / ctypes.sizeof(w_windows.wintypes.DWORD))
+        num_values = int(bytes_returned.value /
+                         ctypes.sizeof(w_windows.wintypes.DWORD))
         for index in range(num_values):
             process_id = process_ids[index]
 
-            h_process = self.open_process(PROCESS_TERMINATE | PROCESS_QUERY_INFORMATION, False, process_id)
+            h_process = self.open_process(
+                PROCESS_TERMINATE | PROCESS_QUERY_INFORMATION, False, process_id)
             if h_process:
                 image_file_name = (ctypes.c_char*MAX_PATH)()
                 if self.get_process_image_filename(h_process, image_file_name, MAX_PATH) > 0:
@@ -120,7 +132,8 @@ class Windows:
 
     def get_window_rect(self) -> typing.Any:
         rect = w_windows.wintypes.RECT()
-        w_windows.windll.user32.GetWindowRect(w_windows.windll.user32.GetForegroundWindow(), ctypes.byref(rect))
+        w_windows.windll.user32.GetWindowRect(
+            w_windows.windll.user32.GetForegroundWindow(), ctypes.byref(rect))
         return rect
 
     def get_process_handle(self, pid: int) -> int:
@@ -129,16 +142,19 @@ class Windows:
     def press_key(self, hex_key_code: int) -> None:
         extra = ctypes.c_ulong(0)
         ii_ = Input_I()
-        ii_.ki = KeyBdInput( 0, hex_key_code, 0x0008, 0, ctypes.pointer(extra) )
-        x = Input( ctypes.c_ulong(1), ii_ )
-        w_windows.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
+        ii_.ki = KeyBdInput(0, hex_key_code, 0x0008, 0, ctypes.pointer(extra))
+        x = Input(ctypes.c_ulong(1), ii_)
+        w_windows.windll.user32.SendInput(
+            1, ctypes.pointer(x), ctypes.sizeof(x))
 
     def release_key(self, hex_key_code: int) -> None:
         extra = ctypes.c_ulong(0)
         ii_ = Input_I()
-        ii_.ki = KeyBdInput( 0, hex_key_code, 0x0008 | 0x0002, 0, ctypes.pointer(extra) )
-        x = Input( ctypes.c_ulong(1), ii_ )
-        w_windows.windll.user32.SendInput(1, ctypes.pointer(x), ctypes.sizeof(x))
+        ii_.ki = KeyBdInput(0, hex_key_code, 0x0008 |
+                            0x0002, 0, ctypes.pointer(extra))
+        x = Input(ctypes.c_ulong(1), ii_)
+        w_windows.windll.user32.SendInput(
+            1, ctypes.pointer(x), ctypes.sizeof(x))
 
     def sleep(self, seconds: float) -> None:
         # SetWaitableTimer not working :(
@@ -163,16 +179,21 @@ class Windows:
                 return
 
     timer_ = None
+
     def timer(self) -> typing.Any:
         if self.timer_ == None:
             # This sets the priority of the process to realtime--the same priority as the mouse pointer.
             self.k32.SetThreadPriority(self.k32.GetCurrentThread(), 31)
             # This creates a timer. This only needs to be done once.
-            self.timer_ = self.k32.CreateWaitableTimerA(ctypes.c_void_p(), True, ctypes.c_void_p())
+            self.timer_ = self.k32.CreateWaitableTimerA(
+                ctypes.c_void_p(), True, ctypes.c_void_p())
         return self.timer_
+
 
 # C struct redefinitions
 PUL = ctypes.POINTER(ctypes.c_ulong)
+
+
 class KeyBdInput(ctypes.Structure):
     _fields_ = [("wVk", ctypes.c_ushort),
                 ("wScan", ctypes.c_ushort),
@@ -180,23 +201,27 @@ class KeyBdInput(ctypes.Structure):
                 ("time", ctypes.c_ulong),
                 ("dwExtraInfo", PUL)]
 
+
 class HardwareInput(ctypes.Structure):
     _fields_ = [("uMsg", ctypes.c_ulong),
                 ("wParamL", ctypes.c_short),
                 ("wParamH", ctypes.c_ushort)]
+
 
 class MouseInput(ctypes.Structure):
     _fields_ = [("dx", ctypes.c_long),
                 ("dy", ctypes.c_long),
                 ("mouseData", ctypes.c_ulong),
                 ("dwFlags", ctypes.c_ulong),
-                ("time",ctypes.c_ulong),
+                ("time", ctypes.c_ulong),
                 ("dwExtraInfo", PUL)]
+
 
 class Input_I(ctypes.Union):
     _fields_ = [("ki", KeyBdInput),
-                 ("mi", MouseInput),
-                 ("hi", HardwareInput)]
+                ("mi", MouseInput),
+                ("hi", HardwareInput)]
+
 
 class Input(ctypes.Structure):
     _fields_ = [("type", ctypes.c_ulong),

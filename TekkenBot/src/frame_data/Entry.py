@@ -1,6 +1,7 @@
 import enum
 import typing
 
+
 @enum.unique
 class DataColumns(enum.Enum):
     time = 'time (frame / diff)'
@@ -14,5 +15,6 @@ class DataColumns(enum.Enum):
     block = 'frame advantage on block (looks in database for minimum)'
     fa = 'frame advantage right now'
     is_player = 'is this the player running TekkenBot'
+
 
 Entry = typing.Dict[DataColumns, typing.Any]

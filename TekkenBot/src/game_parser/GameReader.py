@@ -9,15 +9,18 @@ import typing
 
 game_string = 'Polaris-Win64-Shipping.exe'
 
+
 class GameReader:
     def __init__(self) -> None:
         self.pid: typing.Optional[int] = None
         self.module_address: typing.Optional[int] = None
         self.process_handle: typing.Optional[int] = None
         self.in_match: bool = False
-        self._c: configparser.ConfigParser = configparser.ConfigParser(inline_comment_prefixes=('#', ';'))
+        self._c: configparser.ConfigParser = configparser.ConfigParser(
+            inline_comment_prefixes=('#', ';'))
         self._c.read(Path.path('config/memory_address.ini'))
-        self.c: typing.Dict[str, typing.Dict[str, typing.List[int]]] = {k: {kk:list(map(lambda x: int(x, 16), vv.split())) for kk,vv in v.items()} for k,v in self._c.items()}
+        self.c: typing.Dict[str, typing.Dict[str, typing.List[int]]] = {k: {kk: list(map(
+            lambda x: int(x, 16), vv.split())) for kk, vv in v.items()} for k, v in self._c.items()}
 
     @staticmethod
     def bytes_to_int(b: bytes) -> int:
@@ -37,7 +40,7 @@ class GameReader:
             return None
 
         return self.get_game_snapshot(rollback_frame)
-    
+
     def reacquire_module(self) -> None:
         self.pid = Windows.w.get_pid(game_string)
         if self.pid:
@@ -45,13 +48,16 @@ class GameReader:
         else:
             print("Tekken pid not acquired. Trying to acquire...")
             return
-        self.module_address = Windows.w.get_module_address(self.pid, game_string)
+        self.module_address = Windows.w.get_module_address(
+            self.pid, game_string)
         if self.module_address is None:
-            print("%s not found. Likely wrong process id. Reacquiring pid." % game_string)
+            print("%s not found. Likely wrong process id. Reacquiring pid." %
+                  game_string)
             self.pid = None
             return
         if self.module_address != self.c['MemoryAddressOffsets']['expected_module_address'][0]:
-            print("Tekken patch? enter practice mode as p1 and run $ python update_memory_address.py")
+            print(
+                "Tekken patch? enter practice mode as p1 and run $ python update_memory_address.py")
         else:
             print("Found %s" % game_string)
         self.process_handle = Windows.w.get_process_handle(self.pid)
@@ -61,7 +67,8 @@ class GameReader:
     def get_game_snapshot(self, rollback_frame: int) -> typing.Optional[GameSnapshot.GameSnapshot]:
         pointers = self.c['MemoryAddressOffsets']['player_data_pointer_offset']
         try:
-            player_data_base_address = self.get_8_bytes_at_end_of_pointer_trail(pointers)
+            player_data_base_address = self.get_8_bytes_at_end_of_pointer_trail(
+                pointers)
         except ReadProcessMemoryException:
             if self.in_match:
                 Hook.finish_match()
@@ -72,45 +79,55 @@ class GameReader:
             Hook.start_match()
             self.in_match = True
 
-        frame_count, player_data_frame = self.get_frame(player_data_base_address, rollback_frame)
+        frame_count, player_data_frame = self.get_frame(
+            player_data_base_address, rollback_frame)
 
         p1_dict = {}
         p2_dict = {}
 
         p2_offset = self.c['MemoryAddressOffsets']['p2_data_offset'][0]
         for name, values in self.c['PlayerDataAddress'].items():
-            p1_value = self.get_4_bytes_from_data_block(player_data_frame, values[0])
-            p2_value = self.get_4_bytes_from_data_block(player_data_frame, values[0] + p2_offset)
+            p1_value = self.get_4_bytes_from_data_block(
+                player_data_frame, values[0])
+            p2_value = self.get_4_bytes_from_data_block(
+                player_data_frame, values[0] + p2_offset)
             p1_dict[name] = p1_value
             p2_dict[name] = p2_value
 
         p1_snapshot = GameSnapshot.PlayerSnapshot(p1_dict)
         p2_snapshot = GameSnapshot.PlayerSnapshot(p2_dict)
 
-        is_player_player_one = self.get_8_bytes_at_end_of_pointer_trail(self.c['NonPlayerDataAddresses']["opponent_side"]) == 1
+        is_player_player_one = self.get_8_bytes_at_end_of_pointer_trail(
+            self.c['NonPlayerDataAddresses']["opponent_side"]) == 1
 
         if not is_player_player_one:
             p1_snapshot, p2_snapshot = p2_snapshot, p1_snapshot
 
-        raw_facing = self.get_4_bytes_from_data_block(player_data_frame, self.c['GameDataAddress']['facing'][0])
+        raw_facing = self.get_4_bytes_from_data_block(
+            player_data_frame, self.c['GameDataAddress']['facing'][0])
         facing_bool = bool(raw_facing ^ is_player_player_one)
 
         return GameSnapshot.GameSnapshot(p1_snapshot, p2_snapshot, frame_count, facing_bool)
 
     def get_frame(self, player_data_base_address: int, rollback_frame: int) -> typing.Tuple[int, bytes]:
         rollback_frame_offset = self.c['MemoryAddressOffsets']['rollback_frame_offset'][0]
-        
+
         frame_chunk = []
 
         frame_count = self.c['GameDataAddress']['frame_count'][0]
         for i in range(32):  # for rollback purposes, there are copies of the game state
-            potential_second_address = player_data_base_address + (i * rollback_frame_offset)
-            potential_frame_count = self.get_int_from_address(potential_second_address + frame_count, 4)
-            frame_chunk.append((potential_frame_count, potential_second_address))
+            potential_second_address = player_data_base_address + \
+                (i * rollback_frame_offset)
+            potential_frame_count = self.get_int_from_address(
+                potential_second_address + frame_count, 4)
+            frame_chunk.append(
+                (potential_frame_count, potential_second_address))
 
-        best_frame_count, player_data_second_address = sorted(frame_chunk, key=lambda x: -x[0])[rollback_frame]
+        best_frame_count, player_data_second_address = sorted(
+            frame_chunk, key=lambda x: -x[0])[rollback_frame]
 
-        player_data_frame = self.get_block_of_data(player_data_second_address, rollback_frame_offset)
+        player_data_frame = self.get_block_of_data(
+            player_data_second_address, rollback_frame_offset)
 
         return best_frame_count, player_data_frame
 
@@ -126,7 +143,8 @@ class GameReader:
         )
         if not successful:
             e = Windows.w.get_last_error()
-            raise ReadProcessMemoryException("get_block_of_data Error: Code %s" % e)
+            raise ReadProcessMemoryException(
+                "get_block_of_data Error: Code %s" % e)
         return data.raw
 
     def get_int_from_address(self, address: int, num_bytes: int) -> int:
@@ -135,7 +153,7 @@ class GameReader:
 
     def get_8_bytes_at_end_of_pointer_trail(self, trail: typing.List[int]) -> int:
         address = self.module_address
-        assert(not address is None)
+        assert (not address is None)
         for i, offset in enumerate(trail):
             address = self.get_int_from_address(address + offset, 8)
         return address
@@ -160,6 +178,7 @@ class GameReader:
         else:
             wait_ms = 1000
         return wait_ms
+
 
 class ReadProcessMemoryException(Exception):
     pass

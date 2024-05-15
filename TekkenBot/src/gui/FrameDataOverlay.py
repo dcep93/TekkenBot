@@ -7,6 +7,7 @@ from ..record import Record, Replay
 import enum
 import typing
 
+
 class FrameDataOverlay:
     def __init__(self) -> None:
         self.geometry: typing.Optional[str] = None
@@ -65,17 +66,18 @@ class FrameDataOverlay:
         self.read_player_state(False, game_log)
 
     def get_geometry(self, tekken_rect: typing.Any) -> typing.Tuple[int, int]:
-        x = (tekken_rect.right + tekken_rect.left) / 2  - self.toplevel.winfo_width() / 2
+        x = (tekken_rect.right + tekken_rect.left) / \
+            2 - self.toplevel.winfo_width() / 2
         y = tekken_rect.bottom - self.toplevel.winfo_height()
-        return x,y
+        return x, y
 
     def init_tkinter(self) -> None:
         self.style = t_tkinter.Style()
         self.style.theme_use('alt')
         self.style.configure('.', background=self.background_color)
-        self.style.configure('.', foreground=ColorSchemeEnum.advantage_text.value)
+        self.style.configure(
+            '.', foreground=ColorSchemeEnum.advantage_text.value)
         self.style.configure('TFrame', background=self.tranparency_color)
-
 
         self.create_padding_frame()
         self.text = self.create_textbox()
@@ -87,7 +89,7 @@ class FrameDataOverlay:
         self.text.tag_config("p1", foreground=ColorSchemeEnum.p1_text.value)
         self.text.tag_config("p2", foreground=ColorSchemeEnum.p2_text.value)
 
-    def print_f(self, entry: Entry.Entry, is_p1: typing.Optional[bool]=None) -> None:
+    def print_f(self, entry: Entry.Entry, is_p1: typing.Optional[bool] = None) -> None:
         if len(self.entries) == 0:
             print(self.column_names_string)
 
@@ -112,12 +114,14 @@ class FrameDataOverlay:
 
     def create_frame_advantage_label(self) -> typing.Any:
         frame_advantage_label = t_tkinter.Label(self.toplevel, textvariable=self.fa_var,
-            font=("Courier New", 44), width=4, anchor='c', borderwidth=1, relief='ridge') # type: ignore
+                                                # type: ignore
+                                                font=("Courier New", 44), width=4, anchor='c', borderwidth=1, relief='ridge')
         frame_advantage_label.pack(side=t_tkinter.LEFT)
         return frame_advantage_label
 
     def create_textbox(self) -> typing.Any:
-        textbox = t_tkinter.Text(self.toplevel, font=("Courier New", 10), highlightthickness=0, pady=0, relief='flat')
+        textbox = t_tkinter.Text(self.toplevel, font=(
+            "Courier New", 10), highlightthickness=0, pady=0, relief='flat')
         textbox.pack(side=t_tkinter.LEFT)
         textbox.configure(background=self.background_color)
         textbox.configure(foreground=ColorSchemeEnum.system_text.value)
@@ -127,8 +131,12 @@ class FrameDataOverlay:
         frame = t_tkinter.Frame(self.toplevel)
         # t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="record single", command=Record.record_single).pack(fill='x') # type: ignore
         # t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="record both", command=Record.record_both).pack(fill='x') # type: ignore
-        t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="end recording", command=Record.record_end).pack(fill='x') # type: ignore
-        t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color, text="replay", command=Replay.replay).pack(fill='x') # type: ignore
+        t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color,
+                                 # type: ignore
+                                 text="end recording", command=Record.record_end).pack(fill='x')
+        t_tkinter.tkinter.Button(frame, pady=0, highlightbackground=self.background_color,
+                                 # type: ignore
+                                 text="replay", command=Replay.replay).pack(fill='x')
         frame.pack(side=t_tkinter.LEFT)
 
     @staticmethod
@@ -179,7 +187,7 @@ class FrameDataOverlay:
         self.text.delete(start, end)
 
     def populate_column_names(self) -> None:
-        columns_entry = {col:col.name for col in Entry.DataColumns}
+        columns_entry = {col: col.name for col in Entry.DataColumns}
         column_names = self.get_frame_data_string(columns_entry)
         prefix = self.get_prefix(None)
         spaces = " " * len(prefix)
@@ -250,6 +258,7 @@ class FullscreenTekkenRect:
         self.right = toplevel.winfo_screenwidth()
         self.top = 0
         self.bottom = toplevel.winfo_screenheight()
+
 
 @enum.unique
 class ColorSchemeEnum(enum.Enum):

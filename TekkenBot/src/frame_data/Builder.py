@@ -1,6 +1,7 @@
 from ..frame_data import Entry
 from ..game_parser import GameLog, GameSnapshot, MoveInfoEnums
 
+
 def build(game_log: GameLog.GameLog, is_p1: bool) -> Entry.Entry:
     entry = {}
     attacker = game_log.get(is_p1, 1)
@@ -20,7 +21,8 @@ def build(game_log: GameLog.GameLog, is_p1: bool) -> Entry.Entry:
 
     entry[Entry.DataColumns.startup] = str(attacker.startup)
 
-    entry[Entry.DataColumns.hit_type] = MoveInfoEnums.AttackType(attacker.attack_type).name
+    entry[Entry.DataColumns.hit_type] = MoveInfoEnums.AttackType(
+        attacker.attack_type).name
 
     if receiver.complex_state == MoveInfoEnums.ComplexMoveStates.BLOCK:
         entry[Entry.DataColumns.block] = entry[Entry.DataColumns.fa]
@@ -34,6 +36,7 @@ def build(game_log: GameLog.GameLog, is_p1: bool) -> Entry.Entry:
     entry[Entry.DataColumns.hit_outcome] = receiver.hit_outcome.name
 
     return entry
+
 
 def get_fa(is_p1: bool, attacker: GameSnapshot.PlayerSnapshot, receiver: GameSnapshot.PlayerSnapshot) -> str:
     if receiver.simple_state == MoveInfoEnums.SimpleMoveStates.KNOCKDOWN:
@@ -52,10 +55,13 @@ def get_fa(is_p1: bool, attacker: GameSnapshot.PlayerSnapshot, receiver: GameSna
             raw_fa_str = "+%s" % raw_fa_str
         return raw_fa_str
 
+
 def get_remaining_health_string(game_log: GameLog.GameLog) -> str:
     MAX_HEALTH = 180
-    remainings = [MAX_HEALTH - game_log.get(i).damage_taken for i in [True, False]]
+    remainings = [MAX_HEALTH -
+                  game_log.get(i).damage_taken for i in [True, False]]
     return '%d/%d' % tuple(remainings)
+
 
 def get_combo(game_log: GameLog.GameLog, is_p1: bool) -> str:
     count = 0

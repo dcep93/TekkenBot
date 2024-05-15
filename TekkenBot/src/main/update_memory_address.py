@@ -15,6 +15,8 @@ DEBUG_FAST = True
 # assumes PlayerDataAddress.move_id doesn't change
 
 FoundType = typing.Union[int, typing.List[int]]
+
+
 def main() -> None:
     print("this project is under heavy construction, and I don't really expect it to work until 5/16/24, but you're free to try it out anyway!")
     if not t_tkinter.valid:
@@ -54,7 +56,8 @@ def main() -> None:
     with open(Path.path('config/memory_address.ini'), 'w') as fh:
         config_obj.write(fh)
 
-### phases
+# phases
+
 
 class Vars:
     phase = 0
@@ -64,19 +67,25 @@ class Vars:
     active = ("", "")
     game_reader = GameReader.GameReader()
 
+
 MemoizeT = typing.TypeVar('MemoizeT', bound=typing.Callable[..., typing.Any])
+
+
 def memoize(f: MemoizeT) -> MemoizeT:
     d: typing.Dict[typing.Any, typing.Any] = {}
+
     def g(*args: typing.Any) -> typing.Any:
         if args in d:
             return d[args]
         v = f(*args)
         d[args] = v
         return v
-    return g # type: ignore
+    return g  # type: ignore
 
-def enter_phase(phase: int, log_before: typing.List[str], log_after_f: typing.Optional[typing.Callable[..., typing.List[str]]]=None) -> typing.Callable[..., typing.Any]:
+
+def enter_phase(phase: int, log_before: typing.List[str], log_after_f: typing.Optional[typing.Callable[..., typing.List[str]]] = None) -> typing.Callable[..., typing.Any]:
     Vars.max_phases += 1
+
     def f(g: MemoizeT) -> MemoizeT:
         @memoize
         def h(*args: typing.Any) -> typing.Any:
@@ -89,8 +98,9 @@ def enter_phase(phase: int, log_before: typing.List[str], log_after_f: typing.Op
                 log_after = log_after_f(v)
                 log(log_after)
             return v
-        return h # type: ignore
+        return h  # type: ignore
     return f
+
 
 @enter_phase(
     1,
@@ -111,6 +121,7 @@ def get_all_memory() -> typing.Dict[int, bytes]:
         w_windows.wintypes.LPVOID,
         ctypes.c_size_t,
     ]
+
     def get_memory_scannable_size(address: int) -> int:
         class MemoryBasicInformation(ctypes.Structure):
             """https://msdn.microsoft.com/en-us/library/aa366775"""
@@ -124,10 +135,11 @@ def get_all_memory() -> typing.Dict[int, bytes]:
                 ('Type',    w_windows.wintypes.DWORD),
             )
         mbi = MemoryBasicInformation()
-        Windows.w.k32.VirtualQueryEx(Vars.game_reader.process_handle, address, ctypes.byref(mbi), ctypes.sizeof(mbi))
+        Windows.w.k32.VirtualQueryEx(
+            Vars.game_reader.process_handle, address, ctypes.byref(mbi), ctypes.sizeof(mbi))
 
         scannable_size = mbi.RegionSize
-        assert(isinstance(scannable_size, int))
+        assert (isinstance(scannable_size, int))
         if mbi.Protect != 0x04 or mbi.State != 0x00001000:
             scannable_size = -scannable_size
         return scannable_size
@@ -147,6 +159,7 @@ def get_all_memory() -> typing.Dict[int, bytes]:
         address += abs(scannable_size)
     raise Exception("get_all_memory")
 
+
 @enter_phase(
     2,
     [
@@ -157,16 +170,19 @@ def get_all_memory() -> typing.Dict[int, bytes]:
 def get_move_id_addresses() -> typing.List[int]:
     if DEBUG_FAST:
         with open("move_id_addresses.json") as fh:
-            return json.load(fh) # type: ignore
+            return json.load(fh)  # type: ignore
 
-    standing_bytes = Vars.game_reader.int_to_bytes(MoveInfoEnums.UniversalMoves.STANDING.value, 4)
+    standing_bytes = Vars.game_reader.int_to_bytes(
+        MoveInfoEnums.UniversalMoves.STANDING.value, 4)
     found_bytes = find_bytes(standing_bytes)
-    move_id_addresses = [base_address+index for base_address,index in found_bytes]
-    
+    move_id_addresses = [base_address +
+                         index for base_address, index in found_bytes]
+
     with open("move_id_addresses.json", "w") as fh:
         json.dump(move_id_addresses, fh)
 
     return move_id_addresses
+
 
 @enter_phase(
     3,
@@ -176,10 +192,11 @@ def get_move_id_addresses() -> typing.List[int]:
     ],
 )
 def get_input_hexes() -> typing.Dict[str, int]:
-    return {k:v for d in [
+    return {k: v for d in [
         Replay.attack_string_to_hex,
         Replay.direction_string_to_hexes,
-    ] for k,v in d[True].items()}
+    ] for k, v in d[True].items()}
+
 
 @enter_phase(
     4,
@@ -195,43 +212,50 @@ def get_input_hexes() -> typing.Dict[str, int]:
 def get_pointers_map() -> typing.Dict[str, typing.List[int]]:
     if DEBUG_FAST:
         with open("pointers_map.json") as fh:
-            return json.load(fh) # type: ignore
+            return json.load(fh)  # type: ignore
 
     memory = get_all_memory()
     prefixes = {}
     guaranteed_prefix = 3
     to_bytes = Vars.game_reader.int_to_bytes
     for address, block_raw in memory.items():
-        address_bytes, address_end_bytes = [Vars.game_reader.int_to_bytes(a, 8) for a in [address, address + len(block_raw)]]
+        address_bytes, address_end_bytes = [Vars.game_reader.int_to_bytes(
+            a, 8) for a in [address, address + len(block_raw)]]
         if Vars.game_reader.bytes_to_int(address_end_bytes[:guaranteed_prefix]) == 0:
             continue
         if address_bytes[:guaranteed_prefix] != address_end_bytes[:guaranteed_prefix]:
-            raise Exception(f"get_pointers_map {list(address_bytes)} : {list(address_end_bytes)}")
+            raise Exception(f"get_pointers_map {list(address_bytes)} : {
+                            list(address_end_bytes)}")
         for i in range(address_bytes[guaranteed_prefix], address_end_bytes[guaranteed_prefix]+1):
-            prefix = address_bytes[:guaranteed_prefix]+Vars.game_reader.int_to_bytes(i, 1)
+            prefix = address_bytes[:guaranteed_prefix] + \
+                Vars.game_reader.int_to_bytes(i, 1)
             prefixes[prefix] = [address_bytes, address_end_bytes]
     pointers_map = collections.defaultdict(list)
     num_pointers_found = 0
     for i, prefix in enumerate(prefixes):
         for base_address, index in find_bytes(prefix):
-            raw_destination = memory[base_address][index-8+len(prefix):index+len(prefix)]
+            raw_destination = memory[base_address][index -
+                                                   8+len(prefix):index+len(prefix)]
             if len(raw_destination) < 8:
                 continue
             destination = Vars.game_reader.bytes_to_int(raw_destination[::-1])
             source = base_address+index+len(prefix)-8
             pointers_map[hex(destination)].append(source)
             num_pointers_found += 1
-        log(["get_pointers_map", f"{i+1} of {len(prefixes)}", f"{num_pointers_found} found"])
+        log(["get_pointers_map", f"{
+            i+1} of {len(prefixes)}", f"{num_pointers_found} found"])
 
     with open("pointers_map.json", "w") as fh:
         json.dump(pointers_map, fh)
 
     return pointers_map
 
-### helpers
+# helpers
+
 
 def log(arr: typing.List[str]) -> None:
     print(" / ".join([f"{(time.time()-Vars.start):0.2f} seconds"] + arr))
+
 
 def update_tk() -> None:
     if Vars.game_reader.is_foreground_pid():
@@ -244,8 +268,10 @@ def update_tk() -> None:
         Vars.tk.withdraw()
     Vars.tk.update()
 
+
 def find_bytes(byte_array: bytes) -> typing.Iterable[typing.Tuple[int, int]]:
     memory = get_all_memory()
+
     def get_indices(needle: bytes, haystack: bytes) -> typing.Iterable[int]:
         index = 0
         for _ in range(1_000_000):
@@ -262,6 +288,7 @@ def find_bytes(byte_array: bytes) -> typing.Iterable[typing.Tuple[int, int]]:
         for index in get_indices(needle, haystack):
             yield base_address, index
 
+
 def press_keys(keys: str, previous: typing.Optional[str]) -> None:
     m = get_input_hexes()
     if previous is None:
@@ -272,7 +299,7 @@ def press_keys(keys: str, previous: typing.Optional[str]) -> None:
             sleep_frames(10)
 
     update_tk()
-            
+
     for key in previous:
         if key not in keys:
             Windows.w.release_key(m[key])
@@ -280,32 +307,35 @@ def press_keys(keys: str, previous: typing.Optional[str]) -> None:
         if key not in previous:
             Windows.w.press_key(m[key])
 
+
 def sleep_frames(frames: int) -> None:
     seconds = frames * Replay.seconds_per_frame
     Windows.w.sleep(seconds)
+
 
 @memoize
 def get_point_slope() -> typing.Tuple[int, int]:
     move_id_addresses = get_move_id_addresses()
 
     def read_4_bytes(address: int) -> typing.Optional[int]:
-            try:
-                return Vars.game_reader.get_int_from_address(address, 4)
-            except GameReader.ReadProcessMemoryException:
-                return None
+        try:
+            return Vars.game_reader.get_int_from_address(address, 4)
+        except GameReader.ReadProcessMemoryException:
+            return None
 
     def filter_move_id_addresses(move_id_addresses: typing.List[int]) -> typing.List[int]:
         press_keys('d', '')
         sleep_frames(60)
         return [a for a in move_id_addresses if read_4_bytes(a) == MoveInfoEnums.UniversalMoves.CROUCHING.value]
-    
+
     try:
         move_id_addresses = filter_move_id_addresses(move_id_addresses)
     finally:
         press_keys('', None)
-    
+
     sleep_frames(60)
-    move_id_addresses = [a for a in move_id_addresses if read_4_bytes(a) == MoveInfoEnums.UniversalMoves.STANDING.value]
+    move_id_addresses = [a for a in move_id_addresses if read_4_bytes(
+        a) == MoveInfoEnums.UniversalMoves.STANDING.value]
 
     needed_matches = 20
     for skip in range(1, 1 + len(move_id_addresses)//needed_matches):
@@ -322,6 +352,7 @@ def get_point_slope() -> typing.Tuple[int, int]:
                 return a, distance
     raise Exception(f"get_point_slope {len(move_id_addresses)}")
 
+
 def get_blocks_from_instructions(instructions: typing.List[typing.Tuple[str, int]]) -> typing.List[bytes]:
     def helper() -> typing.List[bytes]:
         move_id_offset = get_move_id_offset()
@@ -333,13 +364,15 @@ def get_blocks_from_instructions(instructions: typing.List[typing.Tuple[str, int
             press_keys(keys, prev)
             prev = keys
             sleep_frames(duration)
-            block = Vars.game_reader.get_block_of_data(player_data_base_address, rollback_frame_offset * 30)
+            block = Vars.game_reader.get_block_of_data(
+                player_data_base_address, rollback_frame_offset * 30)
             blocks.append(block)
         return blocks
     try:
         return helper()
     finally:
         press_keys('', None)
+
 
 @memoize
 def get_choreographed_blocks() -> typing.List[bytes]:
@@ -349,7 +382,11 @@ def get_choreographed_blocks() -> typing.List[bytes]:
         ("1", 10),
     ])
 
-ToValidateType = typing.Tuple[int, typing.List[typing.Tuple[bytes, typing.List[typing.Tuple[int, int]]]]]
+
+ToValidateType = typing.Tuple[int,
+                              typing.List[typing.Tuple[bytes, typing.List[typing.Tuple[int, int]]]]]
+
+
 def find_offset_from_blocks(
     blocks: typing.List[bytes],
     validate_f: typing.Callable[[ToValidateType], bool],
@@ -360,7 +397,8 @@ def find_offset_from_blocks(
             (block, [
                 (
                     base,
-                    Vars.game_reader.get_4_bytes_from_data_block(block, base + offset),
+                    Vars.game_reader.get_4_bytes_from_data_block(
+                        block, base + offset),
                 )
                 for base in [
                     rollback_frame_offset * i
@@ -372,6 +410,7 @@ def find_offset_from_blocks(
             return offset
     raise Exception("find_offset_from_block")
 
+
 def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[typing.List[int]]) -> int:
     def stringify(values: typing.List[int]) -> str:
         return ",".join([""]+[hex(i) for i in values]+[""])
@@ -379,7 +418,7 @@ def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[
     expected_strs = [stringify(e) for e in expected]
 
     frame_count_offset = get_frame_count()
-    
+
     def validate_f(to_validate: ToValidateType) -> bool:
         offset, data = to_validate
 
@@ -387,10 +426,12 @@ def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[
 
         for block, block_data in data:
             for base, value in block_data:
-                frame_count = Vars.game_reader.get_4_bytes_from_data_block(block, base + frame_count_offset)
+                frame_count = Vars.game_reader.get_4_bytes_from_data_block(
+                    block, base + frame_count_offset)
                 value_by_frame[frame_count] = value
 
-        values = [value_by_frame.get(i, -1) for i in range(min(value_by_frame), max(value_by_frame))]
+        values = [value_by_frame.get(
+            i, -1) for i in range(min(value_by_frame), max(value_by_frame))]
 
         values_str = stringify(values)
 
@@ -404,8 +445,10 @@ def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[
 
     return find_offset_from_blocks(blocks, validate_f)
 
+
 def get_pointer_offset(sources: typing.List[int], max_offset: int) -> typing.List[int]:
-    candidates: typing.Dict[int, typing.List[int]] = {source: [] for source in sources}
+    candidates: typing.Dict[int, typing.List[int]] = {
+        source: [] for source in sources}
 
     pointers_map = get_pointers_map()
     for _ in range(10):
@@ -421,27 +464,32 @@ def get_pointer_offset(sources: typing.List[int], max_offset: int) -> typing.Lis
         candidates = next_candidates
     raise Exception(f"get_pointer_offset {len(candidates)}")
 
+
 def hexify(raw: FoundType) -> str:
     if isinstance(raw, int):
         return hex(raw)
     return ' '.join([hexify(r) for r in raw])
-    
-### updaters
+
+# updaters
+
 
 @memoize
 def get_expected_module_address() -> int:
-    assert(Vars.game_reader.module_address is not None)
+    assert (Vars.game_reader.module_address is not None)
     return Vars.game_reader.module_address
+
 
 def get_rollback_frame_offset() -> int:
     distance: int
     _, distance = get_point_slope()
     return distance
 
+
 @memoize
 def get_move_id_offset() -> int:
     # assume that PlayerDataAddress.move_id offset doesnt change
     return Vars.game_reader.c["PlayerDataAddress"]["move_id"][0]
+
 
 def get_frame_count() -> int:
     get_all_memory()
@@ -461,6 +509,7 @@ def get_frame_count() -> int:
 
     return find_offset_from_blocks(blocks, validate_f)
 
+
 @memoize
 def get_simple_move_state() -> int:
     blocks = get_choreographed_blocks()
@@ -472,6 +521,7 @@ def get_simple_move_state() -> int:
             [MoveInfoEnums.SimpleMoveStates.STANDING.value],
         ]
     )
+
 
 def get_p2_data_offset() -> int:
     simple_move_state_offset = get_simple_move_state()
@@ -486,6 +536,7 @@ def get_p2_data_offset() -> int:
 
     return p2_offset_plus_simple_move_state - simple_move_state_offset
 
+
 def get_damage_taken() -> int:
     blocks = get_blocks_from_instructions([("", 1)])
     return find_offset_from_expected(
@@ -494,6 +545,7 @@ def get_damage_taken() -> int:
             [-2],
         ],
     )
+
 
 def get_attack_type() -> int:
     blocks = get_choreographed_blocks()
@@ -504,6 +556,7 @@ def get_attack_type() -> int:
         ],
     )
 
+
 def get_player_data_pointer_offset() -> typing.List[int]:
     pointers_map = get_pointers_map()
     move_id_address, _ = get_point_slope()
@@ -513,9 +566,11 @@ def get_player_data_pointer_offset() -> typing.List[int]:
     sources = pointers_map.get(hex(address), [])
 
     if len(sources) == 0:
-        raise Exception(f"get_player_data_pointer_offset {hex(address)} {len(pointers_map)}")
+        raise Exception(f"get_player_data_pointer_offset {
+                        hex(address)} {len(pointers_map)}")
 
     return get_pointer_offset(sources, 0x100)
+
 
 def get_opponent_side() -> typing.List[int]:
     if DEBUG_FAST:
@@ -529,6 +584,7 @@ def get_opponent_side() -> typing.List[int]:
     destination = found_bytes[0]
     address = destination[0] + destination[1]
     return get_pointer_offset([address], 0x10)
+
 
 to_update: typing.List[typing.Tuple[typing.Tuple[str, str], typing.Callable[[], FoundType]]] = [
     # phase 1 get_all_memory

@@ -6,9 +6,11 @@ import json
 import time
 import typing
 
+
 class Database:
     def __init__(self) -> None:
-        self.database: typing.Dict[str, typing.Dict[str, typing.Dict[str, str]]] = {}
+        self.database: typing.Dict[str,
+                                   typing.Dict[str, typing.Dict[str, str]]] = {}
         self.characters_to_update: typing.Dict[str, bool] = {}
         self.opp_char: typing.Optional[str] = None
         self.opp_moves: typing.Optional[typing.List[typing.Dict[str, str]]] = None
@@ -38,7 +40,8 @@ class Database:
             self.characters_to_update.pop(char_name)
             print(f"finish_match updating {char_name}")
             filename = Path.path(f'./database/frame_data/{char_name}.json')
-            to_write = json.dumps(self.database[char_name], indent=2, sort_keys=True)
+            to_write = json.dumps(
+                self.database[char_name], indent=2, sort_keys=True)
             with open(filename, 'w') as fh:
                 fh.write(to_write)
 
@@ -53,9 +56,9 @@ class Database:
             if self.opp_char == None:
                 self.opp_char = char_name
                 self.opp_moves = []
-            assert(not self.opp_moves is None)
+            assert (not self.opp_moves is None)
             self.opp_moves.append(
-                {k.name:v for k,v in entry.items()}
+                {k.name: v for k, v in entry.items()}
             )
 
         move_id = str(entry[Entry.DataColumns.move_id])
@@ -66,8 +69,8 @@ class Database:
             if entry[Entry.DataColumns.block] is None:
                 entry[Entry.DataColumns.block] = val[Entry.DataColumns.block.name]
             elif \
-                val[Entry.DataColumns.block.name] is None or \
-                val[Entry.DataColumns.block.name] > entry[Entry.DataColumns.block]:
+                    val[Entry.DataColumns.block.name] is None or \
+                    val[Entry.DataColumns.block.name] > entry[Entry.DataColumns.block]:
                 val[Entry.DataColumns.block.name] = entry[Entry.DataColumns.block]
                 already_correct = False
             if val[Entry.DataColumns.startup.name] > entry[Entry.DataColumns.startup]:
@@ -80,5 +83,6 @@ class Database:
             Entry.DataColumns.block,
         ]}
         self.characters_to_update[char_name] = True
+
 
 d = Database()

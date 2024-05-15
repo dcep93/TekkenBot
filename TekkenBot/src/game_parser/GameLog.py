@@ -4,15 +4,16 @@ from ..record import Record
 
 import typing
 
+
 class GameLog:
 
     def __init__(self) -> None:
         self.obj: typing.Any = None
         self.state_log: typing.List[GameSnapshot.GameSnapshot] = []
 
-    def get(self, is_p1: bool, frames_ago:int = 0) -> GameSnapshot.PlayerSnapshot:
+    def get(self, is_p1: bool, frames_ago: int = 0) -> GameSnapshot.PlayerSnapshot:
         if len(self.state_log) <= frames_ago:
-            return None # type: ignore
+            return None  # type: ignore
         state = self.state_log[-1-frames_ago]
         return state.p1 if is_p1 else state.p2
 
@@ -25,11 +26,13 @@ class GameLog:
             # we don't run perfectly in sync, if we get back the same frame, throw it away
             if len(self.state_log) == 0 or game_snapshot.frame_count != self.state_log[-1].frame_count:
                 if len(self.state_log) > 0:
-                    frames_lost = game_snapshot.frame_count - self.state_log[-1].frame_count - 1
+                    frames_lost = game_snapshot.frame_count - \
+                        self.state_log[-1].frame_count - 1
                     missed_states = min(7, frames_lost)
 
                     for i in range(missed_states):
-                        dropped_state = game_reader.get_updated_state(missed_states - i)
+                        dropped_state = game_reader.get_updated_state(
+                            missed_states - i)
                         if dropped_state is not None:
                             self.track_gamedata(dropped_state)
 
@@ -42,7 +45,7 @@ class GameLog:
 
         self.state_log.append(game_snapshot)
 
-        obj = None # for debugging
+        obj = None  # for debugging
         if obj != self.obj:
             print(game_snapshot.frame_count, obj)
             self.obj = obj
@@ -72,9 +75,10 @@ class GameLog:
         throw_tech = state.throw_tech
         if throw_tech in [MoveInfoEnums.ThrowTechs.NONE, MoveInfoEnums.ThrowTechs.BROKEN_ThrowTechs]:
             return None
-        
+
         prev_state = self.get(is_p1, 2)
-        if prev_state is None: return None
+        if prev_state is None:
+            return None
         move_id = prev_state.move_id
         current_buttons = self.get(not is_p1, 1).input_button.name
         if '1' not in current_buttons and '2' not in current_buttons:

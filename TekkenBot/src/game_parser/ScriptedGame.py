@@ -9,15 +9,17 @@ import typing
 
 # this file is used to record a bug and quickly replay it so it can be fixed
 
+
 class Recorder(GameReader.GameReader):
     def __init__(self) -> None:
         super().__init__()
         self.active: bool = False
-        self.all_datas: typing.List[typing.Tuple[float, typing.List[GameSnapshot.GameSnapshot]]] = []
+        self.all_datas: typing.List[typing.Tuple[float,
+                                                 typing.List[GameSnapshot.GameSnapshot]]] = []
         self.num_datas: int = 0
-        signal.signal(signal.SIGINT, lambda _,__: self.save_and_quit())
+        signal.signal(signal.SIGINT, lambda _, __: self.save_and_quit())
 
-    def reset(self, active: typing.Optional[bool]=None) -> None:
+    def reset(self, active: typing.Optional[bool] = None) -> None:
         if active is not None:
             self.active = active
         self.all_datas = []
@@ -47,6 +49,7 @@ class Recorder(GameReader.GameReader):
     def save_and_quit(self) -> None:
         self.dump()
         sys.exit(0)
+
 
 class Reader(Recorder):
     def __init__(self) -> None:
