@@ -5,13 +5,10 @@ from ..record import Replay
 
 import collections
 import ctypes
-# TODO
-import json
+import re
 import time
 import typing
 
-# TODO
-DEBUG_FAST = True
 
 # assumes PlayerDataAddress.move_id doesn't change
 
@@ -37,9 +34,13 @@ def main() -> None:
         "you should be in practice mode as p1 Jin vs Kazuya",
         "with practice options set to Opponent Actions -> Standing / Action After a Hit or Block -> Block All :",
         "if you're not on that screen already, you'll need to restart this tool",
-        "do not make any inputs until phase 4",
+        "do not make any inputs until the end of the throw animation",
         "",
     ]))
+    get_all_memory()
+    get_move_id_addresses()
+    get_choreographed_blocks()
+    get_throw_choreographed_blocks()
     for path, update_f in to_update:
         log([f"{path}"])
         Vars.active = path
@@ -142,8 +143,6 @@ def get_all_memory() -> typing.Dict[int, bytes]:
         return scannable_size
 
     memory: typing.Dict[int, bytes] = {}
-    if DEBUG_FAST:
-        return memory
     address = 0
     for _ in range(1_000_000):
         scannable_size = get_memory_scannable_size(address)
@@ -166,18 +165,11 @@ def get_all_memory() -> typing.Dict[int, bytes]:
     lambda move_id_addresses: [f"{len(move_id_addresses)} address candidates"]
 )
 def get_move_id_addresses() -> typing.List[int]:
-    if DEBUG_FAST:
-        with open("move_id_addresses.json") as fh:
-            return json.load(fh)  # type: ignore
-
     standing_bytes = Vars.game_reader.int_to_bytes(
         MoveInfoEnums.UniversalMoves.STANDING.value, 4)
     found_bytes = find_bytes(standing_bytes)
     move_id_addresses = [base_address +
                          index for base_address, index in found_bytes]
-
-    with open("move_id_addresses.json", "w") as fh:
-        json.dump(move_id_addresses, fh)
 
     return move_id_addresses
 
@@ -199,7 +191,7 @@ def get_input_hexes() -> typing.Dict[str, int]:
 @enter_phase(
     4,
     [
-        "building pointers_map - feel free to make inputs",
+        "building pointers_map",
         "this usually takes around 5 minutes",
     ],
     lambda pointers_map: [
@@ -208,10 +200,6 @@ def get_input_hexes() -> typing.Dict[str, int]:
     ],
 )
 def get_pointers_map() -> typing.Dict[str, typing.List[int]]:
-    if DEBUG_FAST:
-        with open("pointers_map.json") as fh:
-            return json.load(fh)  # type: ignore
-
     memory = get_all_memory()
     prefixes = {}
     guaranteed_prefix = 3
@@ -241,19 +229,9 @@ def get_pointers_map() -> typing.Dict[str, typing.List[int]]:
             num_pointers_found += 1
         log(["get_pointers_map", f"{i+1} of {len(prefixes)}", f"{num_pointers_found} found"])  # nopep8
 
-    with open("pointers_map.json", "w") as fh:
-        json.dump(pointers_map, fh)
-
     return pointers_map
 
 # helpers
-
-# TODO
-
-
-def cheat(a1: str, a2: str) -> int:
-    print("cheating", a1, a2)
-    return Vars.game_reader.c[a1][a2][0]
 
 
 def log(arr: typing.List[str]) -> None:
@@ -299,11 +277,10 @@ def press_keys(keys: str, previous: typing.Optional[str]) -> None:
         while not Vars.game_reader.is_foreground_pid():
             log(["waiting for focus"])
             sleep_frames(10)
+        update_tk()
     else:
         if not Vars.game_reader.is_foreground_pid():
             raise Exception("need to remain in focus")
-
-    update_tk()
 
     for key in previous:
         if key not in keys:
@@ -315,7 +292,7 @@ def press_keys(keys: str, previous: typing.Optional[str]) -> None:
 
 def sleep_frames(frames: float) -> None:
     seconds = frames * Replay.seconds_per_frame
-    Windows.w.sleep(seconds)
+    time.sleep(seconds)
 
 
 @memoize
@@ -360,6 +337,13 @@ def get_point_slope() -> typing.Tuple[int, int]:
     raise Exception(f"get_point_slope {len(move_id_addresses)}")
 
 
+def get_current_frame() -> int:
+    move_id_address, rollback_frame_offset = get_point_slope()
+    player_data_base_address = move_id_address - get_move_id_offset()
+    base = player_data_base_address + get_frame_count()
+    return max([Vars.game_reader.get_int_from_address(base + i * rollback_frame_offset, 4) for i in range(32)])
+
+
 def get_blocks_from_instructions(instructions: typing.List[typing.Tuple[str, int]]) -> typing.List[bytes]:
     def helper() -> typing.List[bytes]:
         move_id_offset = get_move_id_offset()
@@ -368,16 +352,20 @@ def get_blocks_from_instructions(instructions: typing.List[typing.Tuple[str, int
         blocks = []
         press_keys('', None)
         prev_keys = ''
-        prev_time = time.time()
+        starting_frame = get_current_frame()
+        # TODO this doesnt seem to sleep exactly properly
         for keys, duration in instructions:
             press_keys(keys, prev_keys)
             prev_keys = keys
-            delay = (time.time() - prev_time) / Replay.seconds_per_frame
-            sleep_frames(duration - delay)
-            prev_time = time.time()
+            sleep_frames(duration-0.5)
             block = Vars.game_reader.get_block_of_data(
                 player_data_base_address, rollback_frame_offset * 32)
             blocks.append(block)
+            current_frame = get_current_frame()
+            frames_elapsed = current_frame - starting_frame
+            starting_frame = current_frame
+            if duration > frames_elapsed:
+                sleep_frames(duration - frames_elapsed)
         press_keys('', prev_keys)
         return blocks
     try:
@@ -388,41 +376,28 @@ def get_blocks_from_instructions(instructions: typing.List[typing.Tuple[str, int
 
 @memoize
 def get_choreographed_blocks() -> typing.List[bytes]:
-    with open("choreographed_blocks.json") as fh:
-        b = [bytes(i) for i in json.load(fh)]
-        return b
-
-    b = get_blocks_from_instructions([
+    return get_blocks_from_instructions([
         ("", 10),
         ("1", 10),
         ("", 10),
         ("1", 10),
-        ("", 20),
-        ("", 20),
+        ("uf", 20),
+        ("db", 20),
         ("", 20),
     ])
-    with open("choreographed_blocks.json", "w") as fh:
-        bb = [list(i) for i in b]
-        json.dump(bb, fh)
-    return b
 
 
 @memoize
 def get_throw_choreographed_blocks() -> typing.List[bytes]:
-    # with open("throw_choreographed_blocks.json") as fh:
-    #     b = [bytes(i) for i in json.load(fh)]
-    #     return b
-
-    b = get_blocks_from_instructions([
+    return get_blocks_from_instructions([
         ("", 10),
-        ("uf12", 10),
-        ("uf", 10),
-        ("", 10),
+        ("24", 10),
+        ("", 32),
+        ("", 32),
+        ("", 32),
+        ("", 32),
+        ("", 32),
     ])
-    with open("throw_choreographed_blocks.json", "w") as fh:
-        bb = [list(i) for i in b]
-        json.dump(bb, fh)
-    return b
 
 
 ToValidateType = typing.Tuple[int,
@@ -432,10 +407,9 @@ ToValidateType = typing.Tuple[int,
 def find_offset_from_blocks(
     blocks: typing.List[bytes],
     validate_f: typing.Callable[[ToValidateType], bool],
-    is_p1: bool,
+    extra_offset: int,
 ) -> int:
     rollback_frame_offset = get_rollback_frame_offset()
-    offset_for_p2 = 0 if is_p1 else get_p2_data_offset()
     for offset in range(0x100, 0x10000):
         if offset % 0x100 == 0:
             update_tk()
@@ -444,7 +418,7 @@ def find_offset_from_blocks(
                 (
                     base,
                     Vars.game_reader.get_4_bytes_from_data_block(
-                        block, base + offset + offset_for_p2),
+                        block, base + offset + extra_offset),
                 )
                 for base in [
                     rollback_frame_offset * i
@@ -457,13 +431,15 @@ def find_offset_from_blocks(
     raise Exception("find_offset_from_block")
 
 
-def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[typing.List[int]], is_p1: bool) -> int:
-    def stringify(values: typing.List[int]) -> str:
-        return ",".join([""]+[hex(i) for i in values]+[""])
+def stringify(values: typing.List[int]) -> str:
+    return ",".join([str(i) for i in values])
 
-    expected_strs = [stringify(e) for e in expected]
+
+def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[typing.List[int]], extra_offset: int = 0) -> int:
 
     frame_count_offset = get_frame_count()
+
+    pattern = re.compile("(-?\\d,){,2}".join([stringify(i) for i in expected]))
 
     def validate_f(to_validate: ToValidateType) -> bool:
         offset, data = to_validate
@@ -476,14 +452,16 @@ def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[
                     block, base + frame_count_offset)
                 value_by_frame[frame_count] = value
 
-        values = [value_by_frame.get(
-            i, -1) for i in range(min(value_by_frame), max(value_by_frame))]
+        values: typing.List[int] = []
+        for i in range(min(value_by_frame), max(value_by_frame)):
+            v = value_by_frame.get(i, values[-1])
+            values.append(v)
 
         values_str = stringify(values)
 
-        if DEBUG_FAST:
+        if True:
             if offset == Vars.game_reader.c[Vars.active[0]][Vars.active[1]][0]:
-                if not all((e in values_str for e in expected_strs)):
+                if pattern.match(values_str) is None:
                     print(values)
                     c = 0
                     p = None
@@ -496,14 +474,14 @@ def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[
                             c = 1
                     print(p, c)
                     log([f"{len(values)}"])
-                    import sys
                     print("bye")
+                    import sys
                     sys.exit(1)
                 return True
 
-        return all((e in values_str for e in expected_strs))
+        return pattern.match(values_str) is not None
 
-    return find_offset_from_blocks(blocks, validate_f, is_p1)
+    return find_offset_from_blocks(blocks, validate_f, extra_offset)
 
 
 def get_pointer_offset(sources: typing.List[int], max_offset: int) -> typing.List[int]:
@@ -544,7 +522,6 @@ def get_expected_module_address() -> int:
 
 def get_rollback_frame_offset() -> int:
     distance: int
-    return cheat("MemoryAddressOffsets", "rollback_frame_offset")
     _, distance = get_point_slope()
     return distance
 
@@ -557,15 +534,20 @@ def get_move_id_offset() -> int:
 
 @memoize
 def get_frame_count() -> int:
-    get_all_memory()
-    return cheat("GameDataAddress", "frame_count")
-    blocks = get_blocks_from_instructions([("", 1)])
+    move_id_offset = get_move_id_offset()
+    move_id_address, rollback_frame_offset = get_point_slope()
+    player_data_base_address = move_id_address - move_id_offset
+
+    block = Vars.game_reader.get_block_of_data(
+        player_data_base_address,
+        rollback_frame_offset * 32,
+    )
 
     def validate_f(to_validate: ToValidateType) -> bool:
         offset, data = to_validate
         for block, block_data in data:
             values = [value for base, value in block_data]
-            if values[0] <= 122:
+            if values[0] <= 500:
                 return False
             for i in range(len(values)-1):
                 diff = values[i+1]-values[i]
@@ -573,7 +555,7 @@ def get_frame_count() -> int:
                     return False
         return True
 
-    return find_offset_from_blocks(blocks, validate_f, True)
+    return find_offset_from_blocks([block], validate_f, 0)
 
 
 @memoize
@@ -583,29 +565,27 @@ def get_simple_move_state() -> int:
         blocks,
         [
             [MoveInfoEnums.SimpleMoveStates.STANDING.value] * 20 +
-            [MoveInfoEnums.SimpleMoveStates.STANDING_FORWARD.value] * 66 +
-            [MoveInfoEnums.SimpleMoveStates.STANDING.value] * 20,
+            [MoveInfoEnums.SimpleMoveStates.STANDING_FORWARD.value] * 53,
+            [MoveInfoEnums.SimpleMoveStates.CROUCH_BACK.value] * 16,
+            [MoveInfoEnums.SimpleMoveStates.STANDING.value] * 10,
         ],
-        True,
     )
 
 
+@ memoize
 def get_p2_data_offset() -> int:
-    return cheat("MemoryAddressOffsets", "p2_data_offset")
     blocks = get_choreographed_blocks()
 
-    p2_offset_plus_simple_move_state = find_offset_from_expected(
+    return find_offset_from_expected(
         blocks,
         [
             [MoveInfoEnums.SimpleMoveStates.STANDING.value] * 30 +
-            [MoveInfoEnums.SimpleMoveStates.STANDING_FORWARD.value] * 26 +
-            [MoveInfoEnums.SimpleMoveStates.STANDING_BACK.value] * 31 +
+            [MoveInfoEnums.SimpleMoveStates.STANDING_FORWARD.value] * 25,
+            [MoveInfoEnums.SimpleMoveStates.STANDING_BACK.value] * 30,
             [MoveInfoEnums.SimpleMoveStates.STANDING.value] * 10,
         ],
-        True,
+        get_simple_move_state(),
     )
-
-    return p2_offset_plus_simple_move_state - get_simple_move_state()
 
 
 def get_attack_type() -> int:
@@ -614,10 +594,9 @@ def get_attack_type() -> int:
         blocks,
         [
             [MoveInfoEnums.AttackType.RECOVERING.value] * 30 +
-            [MoveInfoEnums.AttackType.HIGH.value] * 66 +
-            [MoveInfoEnums.AttackType.RECOVERING.value] * 10,
+            [MoveInfoEnums.AttackType.HIGH.value] * 53,
+            [MoveInfoEnums.AttackType.RECOVERING.value] * 30,
         ],
-        True,
     )
 
 
@@ -626,11 +605,13 @@ def get_recovery() -> int:
     return find_offset_from_expected(
         blocks,
         [
-            [122] * 25 +
-            [27] * 66 +
-            [122] * 15,
+            [122] * 24 +
+            [27] * 53,
+            [10] * 9,
+            [60] * 5,
+            [10] * 9,
+            [122] * 2,
         ],
-        True,
     )
 
 
@@ -640,11 +621,11 @@ def get_hit_outcome() -> int:
         blocks,
         [
             [MoveInfoEnums.HitOutcome.NONE.value] * 37 +
-            [MoveInfoEnums.HitOutcome.NORMAL_HIT_STANDING.value] * 27 +
-            [MoveInfoEnums.HitOutcome.BLOCKED_STANDING.value] * 31 +
+            [MoveInfoEnums.HitOutcome.NORMAL_HIT_STANDING.value] * 26,
+            [MoveInfoEnums.HitOutcome.BLOCKED_STANDING.value] * 30,
             [MoveInfoEnums.HitOutcome.NONE.value] * 10,
         ],
-        False,
+        get_p2_data_offset(),
     )
 
 
@@ -654,10 +635,10 @@ def get_stun_type() -> int:
         blocks,
         [
             [MoveInfoEnums.StunStates.NONE.value] * 37 +
-            [MoveInfoEnums.StunStates.GETTING_HIT.value] * 58 +
+            [MoveInfoEnums.StunStates.GETTING_HIT.value] * 57,
             [MoveInfoEnums.StunStates.NONE.value] * 10,
         ],
-        False,
+        get_p2_data_offset(),
     )
 
 
@@ -666,11 +647,11 @@ def get_throw_tech() -> int:
     return find_offset_from_expected(
         blocks,
         [
-            [MoveInfoEnums.ThrowTechs.NONE.value] * 37 +
-            [MoveInfoEnums.ThrowTechs.TE1_2.value] * 158 +
-            [MoveInfoEnums.ThrowTechs.NONE.value] * 10,
+            [MoveInfoEnums.ThrowTechs.BROKEN_ThrowTechs.value] * 30 +
+            [MoveInfoEnums.ThrowTechs.TE2.value] * 80,
+            [MoveInfoEnums.ThrowTechs.BROKEN_ThrowTechs.value] * 30,
         ],
-        False,
+        get_p2_data_offset(),
     )
 
 
@@ -683,10 +664,10 @@ def get_complex_move_state() -> int:
             [MoveInfoEnums.ComplexMoveStates.C_MINUS.value] * 9 +
             [MoveInfoEnums.ComplexMoveStates.END1.value] * 18 +
             [MoveInfoEnums.ComplexMoveStates.C_MINUS.value] * 9 +
-            [MoveInfoEnums.ComplexMoveStates.END1.value] * 30 +
+            [MoveInfoEnums.ComplexMoveStates.END1.value] * 18 +
+            [MoveInfoEnums.ComplexMoveStates.RECOVERING.value] * 10 +
             [MoveInfoEnums.ComplexMoveStates.F_MINUS.value] * 17,
         ],
-        True,
     )
 
 
@@ -695,10 +676,10 @@ def get_damage_taken() -> int:
     return find_offset_from_expected(
         blocks,
         [
-            [45] * 37 +
-            [50] * 74,
+            [0] * 37 +
+            [5] * 74,
         ],
-        False,
+        get_p2_data_offset(),
     )
 
 
@@ -708,17 +689,15 @@ def get_input_attack() -> int:
         blocks,
         [
             [MoveInfoEnums.InputAttackCodes.N.value] * 28 +
-            [MoveInfoEnums.InputAttackCodes.x1.value] * 10 +
-            [MoveInfoEnums.InputAttackCodes.N.value] * 10 +
-            [MoveInfoEnums.InputAttackCodes.x1.value] * 10 +
-            [MoveInfoEnums.InputAttackCodes.N.value] * 54,
+            [MoveInfoEnums.InputAttackCodes.x1.value] * 9,
+            [MoveInfoEnums.InputAttackCodes.x1.value] * 9 +
+            [MoveInfoEnums.InputAttackCodes.N.value] * 40,
         ],
-        True,
     )
 
 
 def get_input_direction() -> int:
-    blocks = get_throw_choreographed_blocks()
+    blocks = get_choreographed_blocks()
     return find_offset_from_expected(
         blocks,
         [
@@ -726,7 +705,6 @@ def get_input_direction() -> int:
             [MoveInfoEnums.InputDirectionCodes.uf.value] * 110 +
             [MoveInfoEnums.InputDirectionCodes.NULL.value] * 10,
         ],
-        True,
     )
 
 
@@ -736,10 +714,9 @@ def get_attack_startup() -> int:
         blocks,
         [
             [0] * 28 +
-            [10] * 66 +
+            [10] * 54 +
             [0] * 17,
         ],
-        True,
     )
 
 
@@ -777,10 +754,11 @@ def get_move_timer() -> int:
         blocks,
         [
             list(range(1, 28)) +
-            list(range(1, 40)) +
-            list(range(1, 17)),
+            list(range(1, 28)) +
+            list(range(1, 11)) +
+            list(range(1, 8)) +
+            list(range(1, 11)),
         ],
-        True,
     )
 
 
@@ -789,10 +767,9 @@ def get_facing() -> int:
     return find_offset_from_expected(
         blocks,
         [
-            [0] * 100 +
-            [1] * 100,
+            [0] * 70,
+            [1] * 60,
         ],
-        True,
     )
 
 
@@ -811,8 +788,6 @@ def get_player_data_pointer_offset() -> typing.List[int]:
 
 
 def get_opponent_side() -> typing.List[int]:
-    if DEBUG_FAST:
-        return Vars.game_reader.c["NonPlayerDataAddresses"]["opponent_side"]
     # https://github.com/WAZAAAAA0/TekkenBot/issues/57#issuecomment-2087909057
     bytes_to_find_str = "01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 02 00 00 00 02 00 00 00 02 00 00 00 02 00 00 00 02 00 00 00 02 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 08 00 00 00 08 00 00 00 08 00 00 00 08 00 00 00 08 00 00 00 08 00 00 00 10 00 00 00 10 00 00 00 10 00 00 00 10 00 00 00 10 00 00 00 10 00 00 00 20 00 00 00 20 00 00 00 20 00 00 00 20 00 00 00 20 00 00 00 20 00 00 00 00 00 00 00 40 00 00 00 40 00 00 00 40 00 00 00 40 00 00 00 40"
     bytes_to_find = list(map(lambda x: int(x, 16), bytes_to_find_str.split()))
@@ -851,6 +826,4 @@ to_update: typing.List[typing.Tuple[typing.Tuple[str, str], typing.Callable[[], 
     (("MemoryAddressOffsets", "player_data_pointer_offset"),
      get_player_data_pointer_offset),
     (("NonPlayerDataAddresses", "opponent_side"), get_opponent_side),
-    # TODO
-    (("", ""), lambda: 1//0),
 ]
