@@ -292,7 +292,7 @@ def press_keys(keys: str, previous: typing.Optional[str]) -> None:
 
 def sleep_frames(frames: float) -> None:
     seconds = frames * Replay.seconds_per_frame
-    time.sleep(seconds)
+    Windows.w.sleep(seconds)
 
 
 @memoize
@@ -353,7 +353,6 @@ def get_blocks_from_instructions(instructions: typing.List[typing.Tuple[str, int
         press_keys('', None)
         prev_keys = ''
         starting_frame = get_current_frame()
-        # TODO this doesnt seem to sleep exactly properly
         for keys, duration in instructions:
             press_keys(keys, prev_keys)
             prev_keys = keys
