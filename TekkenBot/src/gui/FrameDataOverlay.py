@@ -84,7 +84,7 @@ class FrameDataOverlay:
         self.create_padding_frame()
         self.fa_var = t_tkinter.StringVar()
         self.fa_label = self.create_frame_advantage_label()
-        self.add_buttons()
+        # self.add_buttons()
 
         self.text.tag_config("p1", foreground=ColorSchemeEnum.p1_text.value)
         self.text.tag_config("p2", foreground=ColorSchemeEnum.p2_text.value)
@@ -217,10 +217,11 @@ class FrameDataOverlay:
         self.print_f(entry, is_p1)
 
     def get_time(self, game_log: GameLog.GameLog, is_p1: bool) -> str:
-        return '%3d/%3d' % (
-            game_log.get(not is_p1, 1).frames_til_attack,
-            game_log.get_free_frames(not is_p1)
-        )
+        return str(game_log.state_log[-1].frame_count)
+        # return '%3d/%3d' % (
+        #     game_log.get(not is_p1, 1).frames_til_attack,
+        #     game_log.get_free_frames(not is_p1)
+        # )
 
     def update_location(self, game_reader: GameReader.GameReader) -> None:
         if Windows.w.valid:

@@ -43,3 +43,5 @@ Created by roguelike2d. Maintained by the community.
 - [ ] get_free_frames: notify interrupts like drag's d+3,2,1+2
 - [ ] check we can download exe from releases
 - [ ] fix record/replay
+- [ ] moves on block not working from db
+- [ ] get_time broken

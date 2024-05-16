@@ -33,6 +33,8 @@ class TextRedirector:
     def flush(self) -> None:
         pass
 
+# TODO - just redirect text and padding
+
 
 def init_tk(tk: Tk) -> Text:
     tk.wm_title("dcep93/TekkenBot")

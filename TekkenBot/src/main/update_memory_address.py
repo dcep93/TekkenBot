@@ -50,7 +50,6 @@ def main() -> None:
         log([val, "\n"])
     config_obj = Vars.game_reader._c
     for path, val in found.items():
-        # TODO experiment - run once, everything changes, run twice, everything goes back
         config_obj[path[0]][path[1]] = val
     with open(Path.path('config/memory_address.ini'), 'w') as fh:
         config_obj.write(fh)
@@ -353,6 +352,7 @@ def get_blocks_from_instructions(instructions: typing.List[typing.Tuple[str, int
         press_keys('', None)
         prev_keys = ''
         starting_frame = get_current_frame()
+        # TODO this doesnt sleep accurately, especially when the game slows down FPS
         for keys, duration in instructions:
             press_keys(keys, prev_keys)
             prev_keys = keys
@@ -438,7 +438,8 @@ def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[
 
     frame_count_offset = get_frame_count()
 
-    pattern = re.compile("(-?\\d,){,2}".join([stringify(i) for i in expected]))
+    pattern = re.compile(
+        ",(-?\\d+,){,3}".join([stringify(i) for i in expected]))
 
     def validate_f(to_validate: ToValidateType) -> bool:
         offset, data = to_validate
@@ -453,32 +454,12 @@ def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[
 
         values: typing.List[int] = []
         for i in range(min(value_by_frame), max(value_by_frame)):
-            v = value_by_frame.get(i, values[-1])
+            v = value_by_frame[i] if i in value_by_frame else values[-1]
             values.append(v)
 
         values_str = stringify(values)
 
-        if True:
-            if offset == Vars.game_reader.c[Vars.active[0]][Vars.active[1]][0]:
-                if pattern.match(values_str) is None:
-                    print(values)
-                    c = 0
-                    p = None
-                    for i in values:
-                        if i == p:
-                            c += 1
-                        else:
-                            print(p, c)
-                            p = i
-                            c = 1
-                    print(p, c)
-                    log([f"{len(values)}"])
-                    print("bye")
-                    import sys
-                    sys.exit(1)
-                return True
-
-        return pattern.match(values_str) is not None
+        return pattern.search(values_str) is not None
 
     return find_offset_from_blocks(blocks, validate_f, extra_offset)
 
@@ -565,7 +546,7 @@ def get_simple_move_state() -> int:
         [
             [MoveInfoEnums.SimpleMoveStates.STANDING.value] * 20 +
             [MoveInfoEnums.SimpleMoveStates.STANDING_FORWARD.value] * 53,
-            [MoveInfoEnums.SimpleMoveStates.CROUCH_BACK.value] * 16,
+            [MoveInfoEnums.SimpleMoveStates.CROUCH_BACK.value] * 15,
             [MoveInfoEnums.SimpleMoveStates.STANDING.value] * 10,
         ],
     )
@@ -647,8 +628,8 @@ def get_throw_tech() -> int:
         blocks,
         [
             [MoveInfoEnums.ThrowTechs.BROKEN_ThrowTechs.value] * 30 +
-            [MoveInfoEnums.ThrowTechs.TE2.value] * 80,
-            [MoveInfoEnums.ThrowTechs.BROKEN_ThrowTechs.value] * 30,
+            [MoveInfoEnums.ThrowTechs.TE2.value] * 120,
+            [MoveInfoEnums.ThrowTechs.BROKEN_ThrowTechs.value] * 29,
         ],
         get_p2_data_offset(),
     )
@@ -689,7 +670,8 @@ def get_input_attack() -> int:
         [
             [MoveInfoEnums.InputAttackCodes.N.value] * 28 +
             [MoveInfoEnums.InputAttackCodes.x1.value] * 9,
-            [MoveInfoEnums.InputAttackCodes.x1.value] * 9 +
+            [MoveInfoEnums.InputAttackCodes.N.value] * 9,
+            [MoveInfoEnums.InputAttackCodes.x1.value] * 9,
             [MoveInfoEnums.InputAttackCodes.N.value] * 40,
         ],
     )
@@ -700,9 +682,10 @@ def get_input_direction() -> int:
     return find_offset_from_expected(
         blocks,
         [
-            [MoveInfoEnums.InputDirectionCodes.NULL.value] * 28 +
-            [MoveInfoEnums.InputDirectionCodes.uf.value] * 110 +
-            [MoveInfoEnums.InputDirectionCodes.NULL.value] * 10,
+            [MoveInfoEnums.InputDirectionCodes.N.value] * 28 +
+            [MoveInfoEnums.InputDirectionCodes.uf.value] * 18,
+            [MoveInfoEnums.InputDirectionCodes.db.value] * 18,
+            [MoveInfoEnums.InputDirectionCodes.N.value] * 10,
         ],
     )
 
@@ -713,7 +696,7 @@ def get_attack_startup() -> int:
         blocks,
         [
             [0] * 28 +
-            [10] * 54 +
+            [10] * 53,
             [0] * 17,
         ],
     )
@@ -752,10 +735,10 @@ def get_move_timer() -> int:
     return find_offset_from_expected(
         blocks,
         [
-            list(range(1, 28)) +
-            list(range(1, 28)) +
-            list(range(1, 11)) +
-            list(range(1, 8)) +
+            list(range(1, 28)),
+            list(range(1, 28)),
+            list(range(1, 11)),
+            list(range(1, 6)),
             list(range(1, 11)),
         ],
     )
@@ -766,7 +749,7 @@ def get_facing() -> int:
     return find_offset_from_expected(
         blocks,
         [
-            [0] * 70,
+            [0] * 70 +
             [1] * 60,
         ],
     )
