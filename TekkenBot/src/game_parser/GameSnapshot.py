@@ -12,7 +12,6 @@ class PlayerSnapshot:
             d['simple_move_state'])
         self.attack_type = MoveInfoEnums.AttackType(d['attack_type'])
         self.startup = d['attack_startup']
-        self.attack_damage = d['attack_damage']
         self.complex_state = MoveInfoEnums.ComplexMoveStates(
             d['complex_move_state'])
         self.damage_taken = d['damage_taken']
@@ -28,7 +27,6 @@ class PlayerSnapshot:
             d['input_attack'] % MoveInfoEnums.InputAttackCodes.xRAGE.value)
         self.stun_state = MoveInfoEnums.StunStates(d['stun_type'])
         self.hit_outcome = MoveInfoEnums.HitOutcome(d['hit_outcome'])
-        self.recovery_window_bitmask = d['recovery']
 
 
 class GameSnapshot:
