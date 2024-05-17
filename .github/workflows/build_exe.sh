@@ -9,7 +9,7 @@ python -m PyInstaller \
     --hidden-import _bootlocale \
     --noconfirm \
     --onefile \
-    # --windowed \
+    --windowed \
     --clean \
     --icon=assets/img/favicon.ico \
     --name TekkenBot420 \
