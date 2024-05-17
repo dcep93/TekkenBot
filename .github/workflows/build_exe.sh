@@ -15,5 +15,5 @@ python -m PyInstaller \
     --name TekkenBot420 \
     main.py
 
-mv dist\\TekkenBot420 ..\\TekkenBot420.exe
-rm -rf dist
+mv dist\\TekkenBot420 .\\TekkenBot420.exe
+rm -rf dist build TekkenBot420.spec
