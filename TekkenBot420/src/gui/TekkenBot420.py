@@ -37,7 +37,7 @@ class TekkenBot420(t_tkinter.Tk):
         now = time.time()
         self.last_update = now
         try:
-            self.game_log.update(self.overlay, self.game_reader)
+            self.game_log.update(self.game_reader)
         except:
             print(traceback.format_exc())
             if Flags.Flags.debug:
