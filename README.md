@@ -37,9 +37,7 @@ Created by roguelike2d. Maintained by the community.
 
 ### TODO
 
-- [ ] documentation how-to
-- [ ] get_free_frames: notify interrupts like drag's d+3,2,1+2
-- [ ] fix record/replay
-- [ ] moves on block not working from db
 - [ ] get_time broken
-- [ ] check that updating assets works
+- [ ] get_free_frames: notify interrupts like drag's d+3,2,1+2
+- [ ] documentation how-to
+- [ ] fix record/replay

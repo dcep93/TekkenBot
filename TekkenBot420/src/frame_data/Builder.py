@@ -3,7 +3,7 @@ from ..game_parser import GameLog, GameSnapshot, MoveInfoEnums
 
 
 def build(game_log: GameLog.GameLog, is_p1: bool) -> Entry.Entry:
-    entry = {}
+    entry: Entry.Entry = {}
     attacker = game_log.get(is_p1, 1)
     receiver = game_log.get(not is_p1)
 
@@ -13,13 +13,13 @@ def build(game_log: GameLog.GameLog, is_p1: bool) -> Entry.Entry:
         char_name = str(attacker.char_id)
     entry[Entry.DataColumns.char_name] = char_name
 
-    entry[Entry.DataColumns.is_player] = str(is_p1)
+    entry[Entry.DataColumns.is_player] = is_p1
 
-    entry[Entry.DataColumns.move_id] = str(attacker.move_id)
+    entry[Entry.DataColumns.move_id] = attacker.move_id
 
     entry[Entry.DataColumns.fa] = get_fa(is_p1, attacker, receiver)
 
-    entry[Entry.DataColumns.startup] = str(attacker.startup)
+    entry[Entry.DataColumns.startup] = attacker.startup
 
     entry[Entry.DataColumns.hit_type] = MoveInfoEnums.AttackType(
         attacker.attack_type).name
@@ -27,7 +27,7 @@ def build(game_log: GameLog.GameLog, is_p1: bool) -> Entry.Entry:
     if receiver.complex_state == MoveInfoEnums.ComplexMoveStates.BLOCK:
         entry[Entry.DataColumns.block] = entry[Entry.DataColumns.fa]
     else:
-        entry[Entry.DataColumns.block] = str(None)
+        entry[Entry.DataColumns.block] = None
 
     entry[Entry.DataColumns.health] = get_remaining_health_string(game_log)
 
