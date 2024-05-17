@@ -352,7 +352,7 @@ def get_blocks_from_instructions(instructions: typing.List[typing.Tuple[str, int
         blocks = []
         press_keys('', None)
         prev_keys = ''
-        # TODO this doesnt sleep accurately, especially when the game slows down FPS
+        # FIXME this doesnt sleep accurately, especially when the game slows down FPS
         for keys, duration in instructions:
             starting_frame = get_current_frame()
             press_keys(keys, prev_keys)
@@ -470,11 +470,12 @@ def get_pointer_offset(sources: typing.List[int], max_offset: int, desired_depth
 
     pointers_map = get_pointers_map()
     max_depth_seen = -1
+    # FIXME
     # it's possible that multiple offset combos can match
     # perhaps we need to verify by exiting the game and reopening
     # that sounds tough, let's try to just keep getting lucky
     for depth in range(desired_depth):
-        depth += 2 # dont ask
+        depth += 2  # dont ask
         next_candidates = {}
         for address, prev in candidates.items():
             for offset in range(max_offset):
