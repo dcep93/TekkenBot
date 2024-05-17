@@ -21,4 +21,4 @@ jobs:
         with:
           tag_name: sha/${{ github.sha }}
           name: ${{ github.event.commits[0].message }}
-          files: TekkenBotPrime.tar
+          files: TekkenBot420.tar

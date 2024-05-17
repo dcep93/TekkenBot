@@ -8,11 +8,11 @@ python -m PyInstaller \
     --hidden-import _bootlocale \
     --noconfirm \
     --onefile \
-    --windowed \
+    # --windowed \
     --clean \
     --icon=TekkenBot/assets/img/tekken_bot_close.ico \
-    --name TekkenBotPrime \
+    --name TekkenBot420 \
     TekkenBot/main.py
 
-mv dist/TekkenBotPrime ./TekkenBotPrime.exe
+mv dist/TekkenBot420 ./TekkenBot420.exe
 rm -rf dist

@@ -9,7 +9,7 @@ import time
 import traceback
 
 
-class TekkenBotPrime(t_tkinter.Tk):
+class TekkenBot420(t_tkinter.Tk):
     t: 'TekkenBotPrime'
 
     def __init__(self) -> None:

@@ -1,3 +1,3 @@
 set -euo pipefail
 
-tar -a -c -f TekkenBotPrime.tar *
+tar -a -c -f TekkenBot420.tar *

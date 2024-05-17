@@ -1,6 +1,6 @@
 from ..frame_data import Entry
 from ..game_parser import GameSnapshot, ScriptedGame
-from ..gui import TekkenBotPrime
+from ..gui import TekkenBot420
 from ..misc import Path
 
 import enum
@@ -24,13 +24,13 @@ def record_both() -> None:
 
 def record_start(state: RecordingState) -> None:
     print("starting recording %s" % state.name)
-    TekkenBotPrime.TekkenBotPrime.t.overlay.print_f({
+    TekkenBot420.TekkenBot420.t.overlay.print_f({
         Entry.DataColumns.move_id: 'RECORD',
         Entry.DataColumns.char_name: state.name
     })
     Recorder.state = state
     Recorder.history = []
-    reader = TekkenBotPrime.TekkenBotPrime.t.game_reader
+    reader = TekkenBot420.TekkenBot420.t.game_reader
     if isinstance(reader, ScriptedGame.Recorder):
         reader.reset(True)
 
@@ -38,7 +38,7 @@ def record_start(state: RecordingState) -> None:
 def record_end() -> None:
     print("ending recording")
     Recorder.state = RecordingState.OFF
-    TekkenBotPrime.TekkenBotPrime.t.overlay.print_f({
+    TekkenBot420.TekkenBot420.t.overlay.print_f({
         Entry.DataColumns.move_id: 'RECORD',
         Entry.DataColumns.char_name: Recorder.state.name
     })
@@ -50,7 +50,7 @@ def record_end() -> None:
     with open(path, 'w') as fh:
         fh.write(recording_string)
 
-    reader = TekkenBotPrime.TekkenBotPrime.t.game_reader
+    reader = TekkenBot420.TekkenBot420.t.game_reader
     if isinstance(reader, ScriptedGame.Recorder):
         reader.dump()
 
@@ -71,7 +71,7 @@ class Recorder:
 
 
 def get_input_state() -> InputState:
-    last_state = TekkenBotPrime.TekkenBotPrime.t.game_log.state_log[-1]
+    last_state = TekkenBot420.TekkenBot420.t.game_log.state_log[-1]
     player = last_state.p1
     opp = last_state.p2
     return (
@@ -107,7 +107,7 @@ def get_raw_move(input_state: InputState) -> str:
 
 
 def record_state() -> None:
-    if TekkenBotPrime.TekkenBotPrime.t.game_reader.is_foreground_pid():
+    if TekkenBot420.TekkenBot420.t.game_reader.is_foreground_pid():
         input_state = get_input_state()
         if last_move_was(input_state):
             Recorder.history[-1][-1] += 1

@@ -1,4 +1,4 @@
-from ..gui import TekkenBotPrime
+from ..gui import TekkenBot420
 from ..misc import Flags, recorded_sha
 
 import sys
@@ -9,5 +9,5 @@ def main() -> None:
     print("https://github.com/dcep93/TekkenBot")
     print("sha:", recorded_sha.sha)
     Flags.handle()
-    app = TekkenBotPrime.TekkenBotPrime()
+    app = TekkenBot420.TekkenBot420()
     app.mainloop()

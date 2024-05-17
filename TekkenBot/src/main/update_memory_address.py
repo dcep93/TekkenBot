@@ -1,5 +1,5 @@
 from ..game_parser import GameReader, MoveInfoEnums
-from ..gui import t_tkinter, TekkenBotPrime
+from ..gui import t_tkinter, TekkenBot420
 from ..misc import Path, Windows, w_windows
 from ..record import Replay
 

@@ -1,5 +1,5 @@
 from ..game_parser import GameReader, GameSnapshot, MoveInfoEnums
-from ..gui import TekkenBotPrime
+from ..gui import TekkenBot420
 from ..record import Record
 
 import typing
@@ -18,7 +18,7 @@ class GameLog:
         return state.p1 if is_p1 else state.p2
 
     def update(self, game_reader: GameReader.GameReader) -> None:
-        overlay = TekkenBotPrime.TekkenBotPrime.t.overlay
+        overlay = TekkenBot420.TekkenBot420.t.overlay
         overlay.update_location(game_reader)
         game_snapshot = game_reader.get_updated_state(0)
 
@@ -39,7 +39,7 @@ class GameLog:
                 self.track_gamedata(game_snapshot)
 
     def track_gamedata(self, game_snapshot: GameSnapshot.GameSnapshot) -> None:
-        overlay = TekkenBotPrime.TekkenBotPrime.t.overlay
+        overlay = TekkenBot420.TekkenBot420.t.overlay
         if len(self.state_log) > 0 and self.state_log[-1].frame_count == game_snapshot.frame_count:
             return
 
