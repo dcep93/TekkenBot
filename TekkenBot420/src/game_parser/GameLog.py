@@ -114,7 +114,7 @@ class GameLog:
     def get_time_str(self, entry: Entry.Entry, is_p1: bool) -> str:
         state = self.get(not is_p1, 1)
         if state.move_timer != 0:
-            return str(-state.move_timer)
+            return f"c{state.move_timer}"
         if state.stun_state not in [
             MoveInfoEnums.StunStates.NONE,
             MoveInfoEnums.StunStates.DOING_THE_HITTING,
@@ -125,9 +125,10 @@ class GameLog:
             if s is None:
                 break
             if s.stun_state != state.stun_state:
-                old = self.state_log[-age].frame_count
+                old = self.state_log[-age].frame_count - \
+                    self.state_log[-1].frame_count
                 if state.stun_state == MoveInfoEnums.StunStates.NONE:
-                    return str(old)
+                    return f"b{old}"
                 if state.stun_state == MoveInfoEnums.StunStates.DOING_THE_HITTING:
-                    return str(-old)
+                    return f"p{old}"
         return "?"
