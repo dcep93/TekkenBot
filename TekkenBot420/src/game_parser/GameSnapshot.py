@@ -16,7 +16,6 @@ class PlayerSnapshot:
             d['complex_move_state'])
         self.damage_taken = d['damage_taken']
         self.move_timer = 0 if self.startup == 0 else d['move_timer']
-        self.frames_til_attack = self.startup - self.move_timer
         self.recovery = d['recovery']
         self.frames_til_next_move = self.recovery - self.move_timer
         self.char_id = d['char_id']

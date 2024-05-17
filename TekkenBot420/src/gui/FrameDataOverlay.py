@@ -206,15 +206,8 @@ class FrameDataOverlay:
                 }
             else:
                 return
-        entry[Entry.DataColumns.time] = self.get_time(game_log, is_p1)
+        entry[Entry.DataColumns.time] = game_log.get_time_str(entry, is_p1)
         self.print_f(entry, is_p1)
-
-    def get_time(self, game_log: GameLog.GameLog, is_p1: bool) -> str:
-        return str(game_log.state_log[-1].frame_count)
-        # return '%3d/%3d' % (
-        #     game_log.get(not is_p1, 1).frames_til_attack,
-        #     game_log.get_free_frames(not is_p1)
-        # )
 
     def update_location(self, game_reader: GameReader.GameReader) -> None:
         if Windows.w.valid:

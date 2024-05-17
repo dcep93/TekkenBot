@@ -37,7 +37,5 @@ Created by roguelike2d. Maintained by the community.
 
 ### TODO
 
-- [ ] get_time broken
-- [ ] get_free_frames: notify interrupts like drag's d+3,2,1+2
 - [ ] documentation how-to
 - [ ] fix record/replay

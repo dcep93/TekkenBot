@@ -1,3 +1,4 @@
+from ..frame_data import Entry
 from ..game_parser import GameReader, GameSnapshot, MoveInfoEnums
 from ..gui import TekkenBot420
 from ..record import Record
@@ -110,5 +111,23 @@ class GameLog:
         next_state = self.get(is_p1, 1)
         return next_state.damage_taken != prev_state.damage_taken
 
-    def get_free_frames(self, is_p1: bool) -> int:
-        return 0
+    def get_time_str(self, entry: Entry.Entry, is_p1: bool) -> str:
+        state = self.get(not is_p1, 1)
+        if state.move_timer != 0:
+            return str(-state.move_timer)
+        if state.stun_state not in [
+            MoveInfoEnums.StunStates.NONE,
+            MoveInfoEnums.StunStates.DOING_THE_HITTING,
+        ]:
+            return state.stun_state.name
+        for age in range(2, 30):
+            s = self.get(not is_p1, age)
+            if s is None:
+                break
+            if s.stun_state != state.stun_state:
+                old = self.state_log[-age].frame_count
+                if state.stun_state == MoveInfoEnums.StunStates.NONE:
+                    return str(old)
+                if state.stun_state == MoveInfoEnums.StunStates.DOING_THE_HITTING:
+                    return str(-old)
+        return "?"
