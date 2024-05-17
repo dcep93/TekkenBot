@@ -37,11 +37,8 @@ Created by roguelike2d. Maintained by the community.
 
 ### TODO
 
-- [ ] fresh images
 - [ ] documentation how-to
-- [ ] autobuild memory_address.ini on patch
 - [ ] get_free_frames: notify interrupts like drag's d+3,2,1+2
-- [ ] check we can download exe from releases
 - [ ] fix record/replay
 - [ ] moves on block not working from db
 - [ ] get_time broken

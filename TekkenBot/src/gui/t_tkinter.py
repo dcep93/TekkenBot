@@ -36,14 +36,16 @@ class TextRedirector:
 # TODO - just redirect text and padding
 
 
-def init_tk(tk: Tk) -> Text:
+def init_tk(tk: Tk, **kwargs: int) -> Text:
     tk.wm_title("dcep93/TekkenBot")
-    tk.iconbitmap(Path.path('./img/tekken_bot_close.ico'))
+    tk.iconbitmap(Path.path('./img/favicon.ico'))
+    tk.attributes("-topmost", True)
 
     text = Text(tk, wrap="word")
     sys.stdout = TextRedirector(text, sys.stdout, "stdout")  # type: ignore
     sys.stderr = TextRedirector(text, sys.stderr, "stderr")  # type: ignore
     text.tag_configure("stderr", foreground="#b22222")
 
-    text.pack(fill=BOTH)
+    text.pack(fill=BOTH, **kwargs)  # type: ignore
+
     return text

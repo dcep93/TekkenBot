@@ -19,20 +19,11 @@ class FrameDataOverlay:
         }
         self.visible = True
 
-        window_name = self.__class__.__name__
-        print("Launching {}".format(window_name))
-
         self.toplevel = t_tkinter.Toplevel()
-
-        self.toplevel.wm_title(window_name)
-        self.toplevel.iconbitmap(Path.path('./img/tekken_bot_close.ico'))
-        self.toplevel.overrideredirect(True)
 
         self.background_color = ColorSchemeEnum.background.value
         self.tranparency_color = self.background_color
         self.toplevel.configure(background=self.tranparency_color)
-
-        self.toplevel.attributes("-topmost", True)
 
         #
 

@@ -10,7 +10,7 @@ python -m PyInstaller \
     --onefile \
     # --windowed \
     --clean \
-    --icon=TekkenBot/assets/img/tekken_bot_close.ico \
+    --icon=TekkenBot/assets/img/favicon.ico \
     --name TekkenBot420 \
     TekkenBot/main.py
 

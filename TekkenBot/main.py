@@ -1,18 +1,17 @@
 from src.main import main
 
 import sys
+import time
 import traceback
 
 if __name__ == "__main__":
     try:
         main.main()
     except Exception as e:
-        if sys.__stdout__ and sys.__stdout__.isatty():
-            raise e
-        else:
-            print(traceback.format_exc())
-            print(e)
-            print("died")
+        print(traceback.format_exc())
+        print(e)
+        print("died")
+        time.sleep(10)
 
 # pyinstaller seems to ignore imports in child scripts
 # dont need to call this function, just need

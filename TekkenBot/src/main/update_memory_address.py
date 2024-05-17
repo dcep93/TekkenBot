@@ -24,9 +24,7 @@ def main() -> None:
     if not Vars.game_reader.process_handle:
         raise Exception("need to be running tekken")
 
-    t_tkinter.init_tk(Vars.tk)
-    Vars.tk.attributes("-topmost", True)
-    Vars.tk.overrideredirect(True)
+    t_tkinter.init_tk(Vars.tk, padx=50)
 
     found: typing.Dict[typing.Tuple[str, str], str] = {}
     print("\n".join([
