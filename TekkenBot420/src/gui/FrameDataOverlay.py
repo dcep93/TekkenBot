@@ -24,6 +24,7 @@ class FrameDataOverlay:
         self.background_color = ColorSchemeEnum.background.value
         self.tranparency_color = self.background_color
         self.toplevel.configure(background=self.tranparency_color)
+        self.toplevel.overrideredirect(True)
 
         #
 
@@ -63,6 +64,7 @@ class FrameDataOverlay:
         return x, y
 
     def init_tkinter(self) -> None:
+        self.toplevel.attributes("-topmost", True)
         self.style = t_tkinter.Style()
         self.style.theme_use('alt')
         self.style.configure('.', background=self.background_color)

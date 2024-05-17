@@ -42,3 +42,4 @@ Created by roguelike2d. Maintained by the community.
 - [ ] fix record/replay
 - [ ] moves on block not working from db
 - [ ] get_time broken
+- [ ] check that updating assets works

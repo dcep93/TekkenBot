@@ -39,7 +39,6 @@ class TextRedirector:
 def init_tk(tk: Tk, **kwargs: int) -> Text:
     tk.wm_title("dcep93/TekkenBot")
     tk.iconbitmap(Path.path('./img/favicon.ico'))
-    tk.attributes("-topmost", True)
 
     text = Text(tk, wrap="word")
     sys.stdout = TextRedirector(text, sys.stdout, "stdout")  # type: ignore

@@ -24,8 +24,10 @@ def main() -> None:
     if not Vars.game_reader.process_handle:
         raise Exception("need to be running tekken")
 
-    Vars.tk.overrideredirect(True)
     t_tkinter.init_tk(Vars.tk, padx=50)
+    Vars.tk.overrideredirect(True)
+    Vars.tk.configure(background="white")
+    Vars.tk.attributes("-topmost", True)
 
     found: typing.Dict[typing.Tuple[str, str], str] = {}
     print("\n".join([
@@ -350,18 +352,17 @@ def get_blocks_from_instructions(instructions: typing.List[typing.Tuple[str, int
         blocks = []
         press_keys('', None)
         prev_keys = ''
-        starting_frame = get_current_frame()
         # TODO this doesnt sleep accurately, especially when the game slows down FPS
         for keys, duration in instructions:
+            starting_frame = get_current_frame()
             press_keys(keys, prev_keys)
             prev_keys = keys
-            sleep_frames(duration-0.5)
+            sleep_frames(duration-2)
             block = Vars.game_reader.get_block_of_data(
                 player_data_base_address, rollback_frame_offset * 32)
             blocks.append(block)
             current_frame = get_current_frame()
             frames_elapsed = current_frame - starting_frame
-            starting_frame = current_frame
             if duration > frames_elapsed:
                 sleep_frames(duration - frames_elapsed)
         press_keys('', prev_keys)
@@ -463,12 +464,17 @@ def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[
     return find_offset_from_blocks(blocks, validate_f, extra_offset)
 
 
-def get_pointer_offset(sources: typing.List[int], max_offset: int) -> typing.List[int]:
+def get_pointer_offset(sources: typing.List[int], max_offset: int, desired_depth: int) -> typing.List[int]:
     candidates: typing.Dict[int, typing.List[int]] = {
         source: [] for source in sources}
 
     pointers_map = get_pointers_map()
-    for _ in range(10):
+    max_depth_seen = -1
+    # it's possible that multiple offset combos can match
+    # perhaps we need to verify by exiting the game and reopening
+    # that sounds tough, let's try to just keep getting lucky
+    for depth in range(desired_depth):
+        depth += 2 # dont ask
         next_candidates = {}
         for address, prev in candidates.items():
             for offset in range(max_offset):
@@ -476,10 +482,12 @@ def get_pointer_offset(sources: typing.List[int], max_offset: int) -> typing.Lis
                 for source in sources:
                     diff = source - get_expected_module_address()
                     if diff > 0:
-                        return [diff, offset]+prev
+                        if depth == desired_depth:
+                            return [diff, offset]+prev
+                        max_depth_seen = depth
                     next_candidates[source] = [offset] + prev
         candidates = next_candidates
-    raise Exception(f"get_pointer_offset {len(candidates)}")
+    raise Exception(f"get_pointer_offset {len(candidates)} {max_depth_seen}")
 
 
 FoundType = typing.Union[int, typing.List[int]]
@@ -765,7 +773,7 @@ def get_player_data_pointer_offset() -> typing.List[int]:
     if len(sources) == 0:
         raise Exception(f"get_player_data_pointer_offset {hex(address)} {len(pointers_map)}")  # nopep8
 
-    return get_pointer_offset(sources, 0x100)
+    return get_pointer_offset(sources, 0x100, 5)
 
 
 def get_opponent_side() -> typing.List[int]:
@@ -777,7 +785,7 @@ def get_opponent_side() -> typing.List[int]:
         raise Exception(f"get_opponent_side {len(found_bytes)}")
     destination = found_bytes[0]
     address = destination[0] + destination[1]
-    return get_pointer_offset([address], 0x10)
+    return get_pointer_offset([address], 0x10, 2)
 
 
 to_update: typing.List[typing.Tuple[typing.Tuple[str, str], typing.Callable[[], FoundType]]] = [
