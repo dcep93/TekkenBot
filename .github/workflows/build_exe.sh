@@ -11,9 +11,9 @@ python -m PyInstaller \
     --onefile \
     --windowed \
     --clean \
-    --icon=assets/img/favicon.ico \
+    --icon=assets\\img\\favicon.ico \
     --name TekkenBot420 \
     main.py
 
-mv dist/TekkenBot420 ../TekkenBot420.exe
+mv dist\\TekkenBot420 ..\\TekkenBot420.exe
 rm -rf dist
