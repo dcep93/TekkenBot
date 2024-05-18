@@ -54,6 +54,7 @@ def main() -> None:
         config_obj[path[0]][path[1]] = val
     with open(Path.path('config/memory_address.ini'), 'w') as fh:
         config_obj.write(fh)
+    Vars.tk.withdraw()
 
 # phases
 
@@ -356,7 +357,6 @@ def get_blocks_from_instructions(instructions: typing.List[typing.Tuple[str, int
         blocks = []
         press_keys('', None)
         prev_keys = ''
-        # FIXME this doesnt sleep accurately, especially when the game slows down FPS
         for keys, duration in instructions:
             starting_frame = get_current_frame()
             press_keys(keys, prev_keys)
@@ -365,10 +365,13 @@ def get_blocks_from_instructions(instructions: typing.List[typing.Tuple[str, int
             block = Vars.game_reader.get_block_of_data(
                 player_data_base_address, rollback_frame_offset * 32)
             blocks.append(block)
-            current_frame = get_current_frame()
-            frames_elapsed = current_frame - starting_frame
-            if duration > frames_elapsed:
-                sleep_frames(duration - frames_elapsed)
+            while True:
+                current_frame = get_current_frame()
+                frames_elapsed = current_frame - starting_frame
+                if duration > frames_elapsed:
+                    sleep_frames(duration - frames_elapsed - 0.9)
+                else:
+                    break
         press_keys('', prev_keys)
         return blocks
     try:
@@ -473,26 +476,23 @@ def get_pointer_offset(sources: typing.List[int], max_offset: int, desired_depth
         source: [] for source in sources}
 
     pointers_map = get_pointers_map()
-    max_depth_seen = -1
-    # FIXME
+    # TODO
     # it's possible that multiple offset combos can match
     # perhaps we need to verify by exiting the game and reopening
     # that sounds tough, let's try to just keep getting lucky
-    for depth in range(desired_depth):
-        depth += 2  # dont ask
+    for depth in range(desired_depth-1):
         next_candidates = {}
         for address, prev in candidates.items():
             for offset in range(max_offset):
                 sources = pointers_map.get(hex(address-offset), [])
                 for source in sources:
-                    diff = source - get_expected_module_address()
-                    if diff > 0:
-                        if depth == desired_depth:
-                            return [diff, offset]+prev
-                        max_depth_seen = depth
                     next_candidates[source] = [offset] + prev
         candidates = next_candidates
-    raise Exception(f"get_pointer_offset {len(candidates)} {max_depth_seen}")
+    possibilities = sorted([i for i in [[source - get_expected_module_address()] +
+                           prev for source, prev in candidates.items()] if i[0] > 0])
+    if len(possibilities) != 1:
+        raise Exception(f"get_pointer_offset {len(possibilities)}")
+    return possibilities[0]
 
 
 FoundType = typing.Union[int, typing.List[int]]
