@@ -113,6 +113,10 @@ def enter_phase(phase: int, log_before: typing.List[str], log_after_f: typing.Op
     ],
 )
 def get_all_memory() -> typing.Dict[int, bytes]:
+    return _get_all_memory()
+
+
+def _get_all_memory() -> typing.Dict[int, bytes]:
     Windows.w.k32.VirtualQueryEx.argtypes = [
         w_windows.wintypes.HANDLE,
         w_windows.wintypes.LPCVOID,
