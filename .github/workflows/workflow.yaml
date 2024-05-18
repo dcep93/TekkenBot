@@ -15,10 +15,10 @@ jobs:
       - run: bash .github/workflows/build_exe.sh
       - run: bash .github/workflows/build_tar.sh
 
-      # https://github.com/softprops/action-gh-release
-      - name: Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: sha/${{ github.sha }}
-          name: ${{ github.event.commits[0].message }}
-          files: TekkenBot420.tar
+      # # https://github.com/softprops/action-gh-release
+      # - name: Release
+      #   uses: softprops/action-gh-release@v2
+      #   with:
+      #     tag_name: sha/${{ github.sha }}
+      #     name: ${{ github.event.commits[0].message }}
+      #     files: TekkenBot420.tar
