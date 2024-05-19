@@ -17,15 +17,13 @@ Created by roguelike2d. Maintained by the community.
 
 ## New Features in this fork
 
-### Auto build and release
-
-- [x] When there is a code or config change, automatically builds an exe file available on the [releases page](https://github.com/dcep93/TekkenBot/releases).
-
 ### Code
 
 - [x] The main purpose of this project was to simplify the code so that other devs can more easily iterate or fork
 - [x] I'll watch the github issues tab for improvements/bug fixes when they're posted
+- [x] Information about data displayed is briefly described in [Entry.py](https://github.com/dcep93/TekkenBot/blob/master/TekkenBot420/src/frame_data/Entry.py)
 - [x] For simplicity, you can easily add custom code to [Hook.py](https://github.com/dcep93/TekkenBot/blob/master/TekkenBot420/src/frame_data/Hook.py)
+- [x] When there is a code or config change, automatically builds an exe file available on the [releases page](https://github.com/dcep93/TekkenBot/releases)
 
 ### Database
 
