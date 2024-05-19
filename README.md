@@ -6,6 +6,8 @@ Created by roguelike2d. Maintained by the community.
 
 ### Note: Do not move the exe to a different folder - it needs to be able to see the 'assets' directory. Create a shortcut if you want to have an easy reference file.
 
+### You can run the code yourself using main.py, or unzip the tar from the latest [release](https://github.com/dcep93/TekkenBot/releases) and run the exe
+
 ## Related
 
 1. The original repository:
@@ -39,4 +41,3 @@ Created by roguelike2d. Maintained by the community.
 ### update_memory_address.py
 
 - [x] When there is a Tekken8 patch, config settings in memory_address.ini break. Open practice mode as p1 Jin vs Kazuya and run `python update_memory_address.py` to automatically determine new address locations and update the file. This should take about 10 minutes, but might need you to close Tekken and reopen it, in case a problem is found. Once the file is committed to the repo, github actions will automatically rebuild a package for non-coders to download.
-
