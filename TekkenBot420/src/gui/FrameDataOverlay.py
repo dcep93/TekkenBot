@@ -155,7 +155,7 @@ class FrameDataOverlay:
 
     def get_frame_data_string(self, entry: Entry.Entry) -> str:
         values = [self.get_value(entry, col) for col in Entry.DataColumns if col not in [
-            Entry.DataColumns.is_player,
+            Entry.DataColumns._is_player,
         ]]
         return '|'.join(values)
 

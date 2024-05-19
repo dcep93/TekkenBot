@@ -13,7 +13,7 @@ def build(game_log: GameLog.GameLog, is_p1: bool) -> Entry.Entry:
         char_name = str(attacker.char_id)
     entry[Entry.DataColumns.char_name] = char_name
 
-    entry[Entry.DataColumns.is_player] = is_p1
+    entry[Entry.DataColumns._is_player] = is_p1
 
     entry[Entry.DataColumns.move_id] = attacker.move_id
 

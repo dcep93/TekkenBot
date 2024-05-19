@@ -10,5 +10,5 @@ def finish_match() -> None:
 
 
 def handle_entry(entry: Entry.Entry) -> None:
-    if Entry.DataColumns.is_player in entry:
+    if Entry.DataColumns._is_player in entry:
         Database.d.record_move(entry)

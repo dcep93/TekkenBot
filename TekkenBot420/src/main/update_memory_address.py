@@ -471,6 +471,7 @@ def get_pointer_offset(
                                         prev for source, prev in candidates.items()] if i[0] > 0])
 
     while len(possibilities) > 1:
+        print(f"pruning {len(possibilities)} possibilities")
         popup = t_tkinter.Toplevel(Vars.tk)
         t_tkinter.Label(popup, text="\n".join([
             "too many pointer offsets were found",
@@ -540,13 +541,16 @@ def get_frame_count() -> int:
             block, (rollback_frame_offset * i) + offset) for i in range(32)]
 
         if values[0] <= 500:
-            return False
+            continue
         for i in range(len(values)-1):
             diff = values[i+1]-values[i]
             if diff not in [1, -31]:
-                return False
+                offset = -1
+                break
+        if offset == -1:
+            continue
 
-        return True
+        return offset
 
     raise Exception("get_frame_count")
 
@@ -558,8 +562,8 @@ def get_simple_move_state() -> int:
         blocks,
         (
             [MoveInfoEnums.SimpleMoveStates.STANDING.value] * 20 +
-            [MoveInfoEnums.SimpleMoveStates.STANDING_FORWARD.value] * 53 +
-            [MoveInfoEnums.SimpleMoveStates.CROUCH_BACK.value] * 15 +
+            [MoveInfoEnums.SimpleMoveStates.STANDING_FORWARD.value] * 54 +
+            [MoveInfoEnums.SimpleMoveStates.CROUCH_BACK.value] * 16 +
             [MoveInfoEnums.SimpleMoveStates.STANDING.value] * 10
         ),
     )
@@ -573,8 +577,8 @@ def get_p2_data_offset() -> int:
         blocks,
         (
             [MoveInfoEnums.SimpleMoveStates.STANDING.value] * 30 +
-            [MoveInfoEnums.SimpleMoveStates.STANDING_FORWARD.value] * 25 +
-            [MoveInfoEnums.SimpleMoveStates.STANDING_BACK.value] * 30 +
+            [MoveInfoEnums.SimpleMoveStates.STANDING_FORWARD.value] * 26 +
+            [MoveInfoEnums.SimpleMoveStates.STANDING_BACK.value] * 31 +
             [MoveInfoEnums.SimpleMoveStates.STANDING.value] * 10
         ),
         get_simple_move_state(),
@@ -587,7 +591,7 @@ def get_attack_type() -> int:
         blocks,
         (
             [MoveInfoEnums.AttackType.RECOVERING.value] * 30 +
-            [MoveInfoEnums.AttackType.HIGH.value] * 53 +
+            [MoveInfoEnums.AttackType.HIGH.value] * 54 +
             [MoveInfoEnums.AttackType.RECOVERING.value] * 30
         ),
     )
@@ -599,10 +603,10 @@ def get_recovery() -> int:
         blocks,
         (
             [122] * 24 +
-            [27] * 53 +
-            [10] * 9 +
-            [60] * 5 +
-            [10] * 9 +
+            [27] * 54 +
+            [10] * 10 +
+            [60] * 6 +
+            [10] * 10 +
             [122] * 2
         ),
     )
@@ -614,8 +618,8 @@ def get_hit_outcome() -> int:
         blocks,
         (
             [MoveInfoEnums.HitOutcome.NONE.value] * 37 +
-            [MoveInfoEnums.HitOutcome.NORMAL_HIT_STANDING.value] * 26 +
-            [MoveInfoEnums.HitOutcome.BLOCKED_STANDING.value] * 30 +
+            [MoveInfoEnums.HitOutcome.NORMAL_HIT_STANDING.value] * 27 +
+            [MoveInfoEnums.HitOutcome.BLOCKED_STANDING.value] * 31 +
             [MoveInfoEnums.HitOutcome.NONE.value] * 10
         ),
         get_p2_data_offset(),
@@ -628,7 +632,7 @@ def get_stun_type() -> int:
         blocks,
         (
             [MoveInfoEnums.StunStates.NONE.value] * 37 +
-            [MoveInfoEnums.StunStates.GETTING_HIT.value] * 57 +
+            [MoveInfoEnums.StunStates.GETTING_HIT.value] * 58 +
             [MoveInfoEnums.StunStates.NONE.value] * 10
         ),
         get_p2_data_offset(),
@@ -682,9 +686,9 @@ def get_input_attack() -> int:
         blocks,
         (
             [MoveInfoEnums.InputAttackCodes.N.value] * 28 +
-            [MoveInfoEnums.InputAttackCodes.x1.value] * 9 +
-            [MoveInfoEnums.InputAttackCodes.N.value] * 9 +
-            [MoveInfoEnums.InputAttackCodes.x1.value] * 9 +
+            [MoveInfoEnums.InputAttackCodes.x1.value] * 10 +
+            [MoveInfoEnums.InputAttackCodes.N.value] * 10 +
+            [MoveInfoEnums.InputAttackCodes.x1.value] * 10 +
             [MoveInfoEnums.InputAttackCodes.N.value] * 40
         ),
     )
@@ -696,8 +700,8 @@ def get_input_direction() -> int:
         blocks,
         (
             [MoveInfoEnums.InputDirectionCodes.N.value] * 28 +
-            [MoveInfoEnums.InputDirectionCodes.uf.value] * 18 +
-            [MoveInfoEnums.InputDirectionCodes.db.value] * 18 +
+            [MoveInfoEnums.InputDirectionCodes.uf.value] * 20 +
+            [MoveInfoEnums.InputDirectionCodes.db.value] * 20 +
             [MoveInfoEnums.InputDirectionCodes.N.value] * 10
         ),
     )
@@ -709,7 +713,7 @@ def get_attack_startup() -> int:
         blocks,
         (
             [0] * 28 +
-            [10] * 53 +
+            [10] * 54 +
             [0] * 17
         ),
     )
@@ -730,7 +734,7 @@ def get_char_id() -> int:
 
         p2_values = get_values_from_blocks(blocks, offset + p2_offset)
 
-        if not all((i == MoveInfoEnums.CharacterCodes.KAZUYA.value) for i in p1_values):
+        if not all((i == MoveInfoEnums.CharacterCodes.KAZUYA.value) for i in p2_values):
             continue
 
         return offset
@@ -746,7 +750,7 @@ def get_move_timer() -> int:
             list(range(1, 28)) +
             list(range(1, 28)) +
             list(range(1, 11)) +
-            list(range(1, 6)) +
+            list(range(1, 7)) +
             list(range(1, 11))
         ),
     )

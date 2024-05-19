@@ -52,7 +52,7 @@ class Database:
         char_name = raw_char_name.lower()
 
         # moves_done_by_opponent_this_match
-        if not entry[Entry.DataColumns.is_player]:
+        if not entry[Entry.DataColumns._is_player]:
             if self.opp_char == None:
                 self.opp_char = char_name
                 self.opp_moves = []
