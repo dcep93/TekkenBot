@@ -113,11 +113,15 @@ class GameLog:
 
     def get_time_str(self, entry: Entry.Entry, is_p1: bool) -> str:
         state = self.get(not is_p1, 1)
-        if state.complex_state == MoveInfoEnums.ComplexMoveStates.END1:
-            return f"p{state.frames_til_next_move}"
         if state.move_timer != 0:
-            return f"c{state.startup - state.move_timer}"
-        block = self.get(is_p1, 1).startup - state.recovery
-        if block < 0:
-            return ""
-        return f"b{block}"
+            d = state.startup - state.move_timer
+            if d > 0:
+                return f"c{d}"
+        if state.complex_state != MoveInfoEnums.ComplexMoveStates.BLOCK:
+            for i in range(2, self.get(is_p1).startup):
+                s = self.get(not is_p1, i)
+                if s is not None:
+                    if s.complex_state == MoveInfoEnums.ComplexMoveStates.BLOCK:
+                        ss = self.get(is_p1, i)
+                        return f"b{ss.startup - ss.move_timer}"
+        return ""

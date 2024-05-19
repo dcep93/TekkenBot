@@ -160,13 +160,14 @@ class FrameDataOverlay:
         return '|'.join(values)
 
     def scroll(self) -> None:
-        if len(self.entries) > 0:
+        if len(self.entries) > 1:
             latest = self.entries[-1]
             if latest.get(Entry.DataColumns.hit_outcome) in [
                 MoveInfoEnums.HitOutcome.JUGGLE.name,
                 MoveInfoEnums.HitOutcome.SCREW.name,
             ]:
-                self.pop_entry(len(self.entries) - 1)
+                if self.entries[-2][Entry.DataColumns._is_player] == latest[Entry.DataColumns._is_player]:
+                    self.pop_entry(len(self.entries) - 1)
 
         while len(self.entries) >= self.max_lines:
             self.pop_entry(0)
