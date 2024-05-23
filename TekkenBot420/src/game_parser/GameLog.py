@@ -111,7 +111,7 @@ class GameLog:
         next_state = self.get(is_p1, 1)
         return next_state.damage_taken != prev_state.damage_taken
 
-    def get_time_str(self, entry: Entry.Entry, is_p1: bool) -> str:
+    def get_interrupt(self, entry: Entry.Entry, is_p1: bool) -> str:
         state = self.get(not is_p1, 1)
         if state.move_timer != 0:
             d = state.startup - state.move_timer
@@ -122,6 +122,6 @@ class GameLog:
                 s = self.get(not is_p1, i)
                 if s is not None:
                     if s.complex_state == MoveInfoEnums.ComplexMoveStates.BLOCK:
-                        ss = self.get(is_p1, i)
-                        return f"b{ss.startup - ss.move_timer}"
+                        ss = self.get(is_p1, i-1)
+                        return f"b{ss.startup - ss.move_timer} {ss.startup} {self.state_log[-i].frame_count}"
         return ""

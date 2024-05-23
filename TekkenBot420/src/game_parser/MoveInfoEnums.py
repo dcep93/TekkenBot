@@ -223,4 +223,5 @@ class CharacterCodes(enum.Enum):
     AZUCENA = 29
     VICTOR = 30
     RAVEN = 31
+    EDDY = 33
     _DUMMY = 116

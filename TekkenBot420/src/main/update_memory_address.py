@@ -409,22 +409,33 @@ def get_throw_choreographed_blocks() -> typing.List[bytes]:
 def stringify(values: typing.List[int]) -> str:
     return ",".join([str(i) for i in values])
 
+def find_offset_from_f(f: typing.Callable[[int], bool]) -> int:
+    possibilities: typing.List[int] = []
+
+    for offset in range(0x10000):
+        if offset % 0x100 == 0:
+            update_tk()
+
+        if f(offset):
+            possibilities.append(offset)
+
+    if len(possibilities) != 1:
+        raise Exception(f"find_offset_from_f {len(possibilities)} {possibilities[:3]}")
+
+    return possibilities[0]
+
 
 def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[int], extra_offset: int = 0) -> int:
     expected_str = stringify(expected)
 
-    for offset in range(0x100, 0x10000):
-        if offset % 0x100 == 0:
-            update_tk()
-
+    def f(offset: int) -> bool:
         values = get_values_from_blocks(blocks, offset + extra_offset)
 
         values_str = stringify(values)
 
-        if expected_str in values_str:
-            return offset
+        return expected_str in values_str
 
-    raise Exception("find_offset_from_expected")
+    return find_offset_from_f(f)
 
 
 def get_values_from_blocks(blocks: typing.List[bytes], offset: int) -> typing.List[int]:
@@ -533,26 +544,20 @@ def get_frame_count() -> int:
         rollback_frame_offset * 32,
     )
 
-    for offset in range(0x100, 0x10000):
-        if offset % 0x100 == 0:
-            update_tk()
-
+    def f(offset: int) -> bool:
         values = [get_game_reader().get_4_bytes_from_data_block(
             block, (rollback_frame_offset * i) + offset) for i in range(32)]
 
         if values[0] <= 500:
-            continue
+            return False
         for i in range(len(values)-1):
             diff = values[i+1]-values[i]
             if diff not in [1, -31]:
-                offset = -1
-                break
-        if offset == -1:
-            continue
+                return False
+        print(values)
+        return True
 
-        return offset
-
-    raise Exception("get_frame_count")
+    return find_offset_from_f(f)
 
 
 @memoize

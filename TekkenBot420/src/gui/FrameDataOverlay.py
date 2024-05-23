@@ -1,7 +1,7 @@
 from ..gui import t_tkinter
 from ..frame_data import Builder, Entry, Hook
-from ..game_parser import GameLog, GameReader, MoveInfoEnums
-from ..misc import Path, Windows
+from ..game_parser import GameLog, GameReader, GameSnapshot, MoveInfoEnums
+from ..misc import Config, Path, Windows
 from ..record import Record, Replay
 
 import enum
@@ -15,7 +15,7 @@ class FrameDataOverlay:
         self.max_lines = 6
         self.col_max_length = 12
         self.sizes: typing.Dict[Entry.DataColumns, int] = {
-            Entry.DataColumns.hit_outcome: 25,
+            Entry.DataColumns.hit_outcome: 23,
         }
         self.visible = True
 
@@ -28,6 +28,7 @@ class FrameDataOverlay:
 
         #
 
+        self.last_snapshot: typing.Optional[GameSnapshot.GameSnapshot] = None
         self.entries: typing.List[Entry.Entry] = []
         self.column_names_string: typing.Optional[str] = None
         self.init_tkinter()
@@ -60,7 +61,10 @@ class FrameDataOverlay:
     def get_geometry(self, tekken_rect: typing.Any) -> typing.Tuple[int, int]:
         x = (tekken_rect.right + tekken_rect.left) / \
             2 - self.toplevel.winfo_width() / 2
-        y = tekken_rect.bottom - self.toplevel.winfo_height()
+        if Config.config.get("displayOnTop"):
+            y = 0
+        else:
+            y = tekken_rect.bottom - self.toplevel.winfo_height()
         return x, y
 
     def init_tkinter(self) -> None:
@@ -113,7 +117,7 @@ class FrameDataOverlay:
 
     def create_textbox(self) -> typing.Any:
         textbox = t_tkinter.Text(self.toplevel, font=(
-            "Courier New", 10), highlightthickness=0, pady=0, relief='flat')
+            "Courier New", Config.config.get("fontSize", 10)), highlightthickness=0, pady=0, relief='flat')
         textbox.pack(side=t_tkinter.LEFT)
         textbox.configure(background=self.background_color)
         textbox.configure(foreground=ColorSchemeEnum.system_text.value)
@@ -145,7 +149,7 @@ class FrameDataOverlay:
         else:
             value = self.unknown
 
-        size = self.sizes[col] if col in self.sizes else self.col_max_length
+        size = self.sizes.get(col, self.col_max_length)
         diff = size - len(value)
         if diff <= 0:
             return value[:size]
@@ -166,7 +170,7 @@ class FrameDataOverlay:
                 MoveInfoEnums.HitOutcome.JUGGLE.name,
                 MoveInfoEnums.HitOutcome.SCREW.name,
             ]:
-                if self.entries[-2][Entry.DataColumns._is_player] == latest[Entry.DataColumns._is_player]:
+                if self.entries[-2].get(Entry.DataColumns._is_player) == latest.get(Entry.DataColumns._is_player):
                     self.pop_entry(len(self.entries) - 1)
 
         while len(self.entries) >= self.max_lines:
@@ -207,7 +211,10 @@ class FrameDataOverlay:
                 }
             else:
                 return
-        entry[Entry.DataColumns.time] = game_log.get_time_str(entry, is_p1)
+        current_snapshot = game_log.state_log[-1]
+        if self.last_snapshot is not None:
+            entry[Entry.DataColumns.age] = f"{current_snapshot.frame_count - self.last_snapshot.frame_count} {current_snapshot.frame_count}"
+        self.last_snapshot = current_snapshot
         self.print_f(entry, is_p1)
 
     def update_location(self, game_reader: GameReader.GameReader) -> None:

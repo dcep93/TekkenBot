@@ -4,6 +4,7 @@ import typing
 
 @enum.unique
 class DataColumns(enum.Enum):
+    age = 'number of frames since the last entry'
     char_name = 'character name'
     hit_type = 'attack type (high/mid/low/etc)'
     hit_outcome = 'MoveInfoEnums.HitOutcome.name'
@@ -14,7 +15,7 @@ class DataColumns(enum.Enum):
     startup = 'startup frames'
     block = 'frame advantage on block (looks in database for minimum)'
     fa = 'frame advantage right now'
-    time = 'reports any of p(frames less than optimal punish), c(frames before hit would land), b(frames could have interrupted)'
+    interrupt = 'reports c(frames before hit would land) or b(frames could have interrupted)'
 
     _is_player = 'is this the player running TekkenBot'
 

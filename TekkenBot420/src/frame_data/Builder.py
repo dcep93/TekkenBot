@@ -35,6 +35,8 @@ def build(game_log: GameLog.GameLog, is_p1: bool) -> Entry.Entry:
 
     entry[Entry.DataColumns.hit_outcome] = receiver.hit_outcome.name
 
+    entry[Entry.DataColumns.interrupt] = game_log.get_interrupt(entry, is_p1)
+
     return entry
 
 
