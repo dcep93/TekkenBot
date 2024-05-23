@@ -213,8 +213,8 @@ class FrameDataOverlay:
                 return
         current_snapshot = game_log.state_log[-1]
         if self.last_snapshot is not None:
-            entry[Entry.DataColumns.age] = f"{
-                current_snapshot.frame_count - self.last_snapshot.frame_count} {current_snapshot.frame_count}"
+            age = current_snapshot.frame_count - self.last_snapshot.frame_count
+            entry[Entry.DataColumns.age] = f"{age} {current_snapshot.frame_count}"  # nopep8
         self.last_snapshot = current_snapshot
         self.print_f(entry, is_p1)
 
