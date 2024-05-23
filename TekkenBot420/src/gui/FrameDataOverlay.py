@@ -61,10 +61,10 @@ class FrameDataOverlay:
     def get_geometry(self, tekken_rect: typing.Any) -> typing.Tuple[int, int]:
         x = (tekken_rect.right + tekken_rect.left) / \
             2 - self.toplevel.winfo_width() / 2
-        if Config.config.get("displayOnTop"):
-            y = 0
-        else:
+        if Config.config.get("displayOnBottom", True):
             y = tekken_rect.bottom - self.toplevel.winfo_height()
+        else:
+            y = 0
         return x, y
 
     def init_tkinter(self) -> None:
@@ -213,7 +213,8 @@ class FrameDataOverlay:
                 return
         current_snapshot = game_log.state_log[-1]
         if self.last_snapshot is not None:
-            entry[Entry.DataColumns.age] = f"{current_snapshot.frame_count - self.last_snapshot.frame_count} {current_snapshot.frame_count}"
+            entry[Entry.DataColumns.age] = f"{
+                current_snapshot.frame_count - self.last_snapshot.frame_count} {current_snapshot.frame_count}"
         self.last_snapshot = current_snapshot
         self.print_f(entry, is_p1)
 
