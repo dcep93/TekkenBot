@@ -409,7 +409,8 @@ def get_throw_choreographed_blocks() -> typing.List[bytes]:
 def stringify(values: typing.List[int]) -> str:
     return ",".join([str(i) for i in values])
 
-def find_offset_from_f(f: typing.Callable[[int], bool]) -> int:
+
+def find_all_offsets_from_f(f: typing.Callable[[int], bool]) -> typing.List[int]:
     possibilities: typing.List[int] = []
 
     for offset in range(0x10000):
@@ -418,6 +419,11 @@ def find_offset_from_f(f: typing.Callable[[int], bool]) -> int:
 
         if f(offset):
             possibilities.append(offset)
+    return possibilities
+
+
+def find_offset_from_f(f: typing.Callable[[int], bool]) -> int:
+    possibilities = find_all_offsets_from_f(f)
 
     if len(possibilities) != 1:
         raise Exception(f"find_offset_from_f {len(possibilities)} {possibilities[:3]}")
@@ -554,10 +560,13 @@ def get_frame_count() -> int:
             diff = values[i+1]-values[i]
             if diff not in [1, -31]:
                 return False
-        print(values)
         return True
 
-    return find_offset_from_f(f)
+    possibilities = find_all_offsets_from_f(f)
+    if len(possibilities) > 0:
+        print("multiple possibilities for get_frame_count")
+        print(len(possibilities), possibilities[:8])
+    return possibilities[0]
 
 
 @memoize
