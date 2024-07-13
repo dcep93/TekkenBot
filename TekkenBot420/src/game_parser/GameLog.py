@@ -116,7 +116,7 @@ class GameLog:
         if state.move_timer != 0:
             d = state.startup - state.move_timer
             if d > 0:
-                return f"c{d}"
+                return f"c{d} {state.startup}"
         if state.complex_state != MoveInfoEnums.ComplexMoveStates.BLOCK:
             for i in range(2, self.get(is_p1).startup):
                 s = self.get(not is_p1, i)
