@@ -754,8 +754,8 @@ def get_facing() -> typing.List[int]:
     return find_offset_from_expected(
         blocks,
         (
-            [0] * 70 +
-            [1] * 60
+            [0] * 123 +
+            [1] * 76
         ),
     )
 

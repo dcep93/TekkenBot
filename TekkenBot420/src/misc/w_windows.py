@@ -1,3 +1,5 @@
+# mypy: disable_error_code="unused-ignore"
+
 import ctypes
 import typing
 
