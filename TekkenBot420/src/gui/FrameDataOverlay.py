@@ -81,7 +81,8 @@ class FrameDataOverlay:
         self.create_padding_frame()
         self.fa_var = t_tkinter.StringVar()
         self.fa_label = self.create_frame_advantage_label()
-        # self.add_buttons()
+        if Config.config.get("showReplayButton", False):
+            self.add_buttons()
 
         self.text.tag_config("p1", foreground=ColorSchemeEnum.p1_text.value)
         self.text.tag_config("p2", foreground=ColorSchemeEnum.p2_text.value)

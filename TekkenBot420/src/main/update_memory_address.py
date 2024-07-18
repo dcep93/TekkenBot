@@ -410,7 +410,7 @@ def stringify(values: typing.List[int]) -> str:
     return ",".join([str(i) for i in values])
 
 
-def find_offset_from_f(f: typing.Callable[[int], bool]) -> int:
+def find_offset_from_f(f: typing.Callable[[int], bool]) -> typing.List[int]:
     possibilities: typing.List[int] = []
 
     for offset in range(0x10000):
@@ -419,11 +419,7 @@ def find_offset_from_f(f: typing.Callable[[int], bool]) -> int:
 
         if f(offset):
             possibilities.append(offset)
-
-    if len(possibilities) != 1:
-        print(f"find_offset_from_f {len(possibilities)} {hexify(possibilities[:8])}")
-
-    return possibilities[0]
+    return possibilities
 
 
 def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[int], extra_offset: int = 0) -> int:
@@ -557,7 +553,7 @@ def get_frame_count() -> int:
                 return False
         return True
 
-    return find_offset_from_f(f)
+    return find_offset_from_f(f)[0]
 
 
 @memoize
@@ -586,8 +582,8 @@ def get_p2_data_offset() -> int:
             [MoveInfoEnums.SimpleMoveStates.STANDING_BACK.value] * 31 +
             [MoveInfoEnums.SimpleMoveStates.STANDING.value] * 10
         ),
-        get_simple_move_state(),
-    )
+        get_simple_move_state()[0],
+    )[0]
 
 
 def get_attack_type() -> int:

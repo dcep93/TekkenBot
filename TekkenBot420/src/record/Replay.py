@@ -165,7 +165,7 @@ class Replayer:
     moves: typing.List[typing.Tuple[str, int]] = []
     pressed: typing.List[int] = []
 
-    i = 0
+    i = None
     start = 0.
     count = 0
     log: typing.List[typing.List[typing.Any]] = []
@@ -240,7 +240,7 @@ def finish() -> None:
     print("done", Replayer.count)
     while Replayer.log:
         print(*Replayer.log.pop(0))
-    Replayer.i = 0
+    Replayer.i = None
 
 
 def get_all_hexes() -> typing.List[int]:
