@@ -46,7 +46,7 @@ def main() -> None:
         log([f"{path}"])
         Vars.active = path
         raw = update_f()
-        val = hexify(raw)
+        val = ' '.join([hex(r) for r in raw])
         found[path] = val
         log([val, "\n"])
     config_obj = get_game_reader()._c
@@ -344,14 +344,14 @@ def get_point_slope() -> typing.Tuple[int, int]:
 
 def get_current_frame() -> int:
     move_id_address, rollback_frame_offset = get_point_slope()
-    player_data_base_address = move_id_address - get_move_id_offset()
-    base = player_data_base_address + get_frame_count()
+    player_data_base_address = move_id_address - get_move_id_offset()[0]
+    base = player_data_base_address + get_frame_count()[0]
     return max([get_game_reader().get_int_from_address(base + i * rollback_frame_offset, 4) for i in range(32)])
 
 
 def get_blocks_from_instructions(instructions: typing.List[typing.Tuple[str, int]]) -> typing.List[bytes]:
     def helper() -> typing.List[bytes]:
-        move_id_offset = get_move_id_offset()
+        move_id_offset = get_move_id_offset()[0]
         move_id_address, rollback_frame_offset = get_point_slope()
         player_data_base_address = move_id_address - move_id_offset
         blocks = []
@@ -422,7 +422,7 @@ def find_offset_from_f(f: typing.Callable[[int], bool]) -> typing.List[int]:
     return possibilities
 
 
-def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[int], extra_offset: int = 0) -> int:
+def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[int], extra_offset: int = 0) -> typing.List[int]:
     expected_str = stringify(expected)
 
     def f(offset: int) -> bool:
@@ -436,8 +436,8 @@ def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[
 
 
 def get_values_from_blocks(blocks: typing.List[bytes], offset: int) -> typing.List[int]:
-    rollback_frame_offset = get_rollback_frame_offset()
-    frame_count_offset = get_frame_count()
+    rollback_frame_offset = get_rollback_frame_offset()[0]
+    frame_count_offset = get_frame_count()[0]
 
     value_by_frame: typing.Dict[int, int] = {}
 
@@ -500,39 +500,31 @@ def get_pointer_offset(
     return possibilities[0]
 
 
-FoundType = typing.Union[int, typing.List[int]]
-
-
-def hexify(raw: FoundType) -> str:
-    if isinstance(raw, int):
-        return hex(raw)
-    return ' '.join([hexify(r) for r in raw])
-
 # updaters
 
 
 @memoize
-def get_expected_module_address() -> int:
+def get_expected_module_address() -> typing.List[int]:
     m = get_game_reader().module_address
     assert (m is not None)
-    return m
+    return [m]
 
 
-def get_rollback_frame_offset() -> int:
+def get_rollback_frame_offset() -> typing.List[int]:
     distance: int
     _, distance = get_point_slope()
-    return distance
+    return [distance]
 
 
 @memoize
-def get_move_id_offset() -> int:
+def get_move_id_offset() -> typing.List[int]:
     # assume that PlayerDataAddress.move_id offset doesnt change
-    return get_game_reader().c["PlayerDataAddress"]["move_id"][0]
+    return get_game_reader().c["PlayerDataAddress"]["move_id"]
 
 
 @memoize
-def get_frame_count() -> int:
-    move_id_offset = get_move_id_offset()
+def get_frame_count() -> typing.List[int]:
+    move_id_offset = get_move_id_offset()[0]
     move_id_address, rollback_frame_offset = get_point_slope()
     player_data_base_address = move_id_address - move_id_offset
 
@@ -553,11 +545,11 @@ def get_frame_count() -> int:
                 return False
         return True
 
-    return find_offset_from_f(f)[0]
+    return find_offset_from_f(f)
 
 
 @memoize
-def get_simple_move_state() -> int:
+def get_simple_move_state() -> typing.List[int]:
     blocks = get_choreographed_blocks()
     return find_offset_from_expected(
         blocks,
@@ -571,7 +563,7 @@ def get_simple_move_state() -> int:
 
 
 @ memoize
-def get_p2_data_offset() -> int:
+def get_p2_data_offset() -> typing.List[int]:
     blocks = get_choreographed_blocks()
 
     return find_offset_from_expected(
@@ -583,10 +575,10 @@ def get_p2_data_offset() -> int:
             [MoveInfoEnums.SimpleMoveStates.STANDING.value] * 10
         ),
         get_simple_move_state()[0],
-    )[0]
+    )
 
 
-def get_attack_type() -> int:
+def get_attack_type() -> typing.List[int]:
     blocks = get_choreographed_blocks()
     return find_offset_from_expected(
         blocks,
@@ -598,7 +590,7 @@ def get_attack_type() -> int:
     )
 
 
-def get_recovery() -> int:
+def get_recovery() -> typing.List[int]:
     blocks = get_choreographed_blocks()
     return find_offset_from_expected(
         blocks,
@@ -613,7 +605,7 @@ def get_recovery() -> int:
     )
 
 
-def get_hit_outcome() -> int:
+def get_hit_outcome() -> typing.List[int]:
     blocks = get_choreographed_blocks()
     return find_offset_from_expected(
         blocks,
@@ -623,11 +615,11 @@ def get_hit_outcome() -> int:
             [MoveInfoEnums.HitOutcome.BLOCKED_STANDING.value] * 31 +
             [MoveInfoEnums.HitOutcome.NONE.value] * 10
         ),
-        get_p2_data_offset(),
+        get_p2_data_offset()[0],
     )
 
 
-def get_stun_type() -> int:
+def get_stun_type() -> typing.List[int]:
     blocks = get_choreographed_blocks()
     return find_offset_from_expected(
         blocks,
@@ -636,11 +628,11 @@ def get_stun_type() -> int:
             [MoveInfoEnums.StunStates.GETTING_HIT.value] * 58 +
             [MoveInfoEnums.StunStates.NONE.value] * 10
         ),
-        get_p2_data_offset(),
+        get_p2_data_offset()[0],
     )
 
 
-def get_throw_tech() -> int:
+def get_throw_tech() -> typing.List[int]:
     blocks = get_throw_choreographed_blocks()
     return find_offset_from_expected(
         blocks,
@@ -649,11 +641,11 @@ def get_throw_tech() -> int:
             [MoveInfoEnums.ThrowTechs.TE2.value] * 120 +
             [MoveInfoEnums.ThrowTechs.BROKEN_ThrowTechs.value] * 29
         ),
-        get_p2_data_offset(),
+        get_p2_data_offset()[0],
     )
 
 
-def get_complex_move_state() -> int:
+def get_complex_move_state() -> typing.List[int]:
     blocks = get_choreographed_blocks()
     return find_offset_from_expected(
         blocks,
@@ -669,7 +661,7 @@ def get_complex_move_state() -> int:
     )
 
 
-def get_damage_taken() -> int:
+def get_damage_taken() -> typing.List[int]:
     blocks = get_choreographed_blocks()
     return find_offset_from_expected(
         blocks,
@@ -677,11 +669,11 @@ def get_damage_taken() -> int:
             [0] * 37 +
             [5] * 74
         ),
-        get_p2_data_offset(),
+        get_p2_data_offset()[0],
     )
 
 
-def get_input_attack() -> int:
+def get_input_attack() -> typing.List[int]:
     blocks = get_choreographed_blocks()
     return find_offset_from_expected(
         blocks,
@@ -695,7 +687,7 @@ def get_input_attack() -> int:
     )
 
 
-def get_input_direction() -> int:
+def get_input_direction() -> typing.List[int]:
     blocks = get_choreographed_blocks()
     return find_offset_from_expected(
         blocks,
@@ -708,7 +700,7 @@ def get_input_direction() -> int:
     )
 
 
-def get_attack_startup() -> int:
+def get_attack_startup() -> typing.List[int]:
     blocks = get_choreographed_blocks()
     return find_offset_from_expected(
         blocks,
@@ -720,11 +712,11 @@ def get_attack_startup() -> int:
     )
 
 
-def get_char_id() -> int:
+def get_char_id() -> typing.List[int]:
     blocks = get_choreographed_blocks()
 
     rollback_frame_offset = get_rollback_frame_offset()
-    p2_offset = get_p2_data_offset()
+    p2_offset = get_p2_data_offset()[0]
     for offset in range(0x100, 0x10000):
         if offset % 0x100 == 0:
             update_tk()
@@ -738,12 +730,12 @@ def get_char_id() -> int:
         if not all((i == MoveInfoEnums.CharacterCodes.KAZUYA.value) for i in p2_values):
             continue
 
-        return offset
+        return [offset]
 
     raise Exception("get_char_id")
 
 
-def get_move_timer() -> int:
+def get_move_timer() -> typing.List[int]:
     blocks = get_choreographed_blocks()
     return find_offset_from_expected(
         blocks,
@@ -757,7 +749,7 @@ def get_move_timer() -> int:
     )
 
 
-def get_facing() -> int:
+def get_facing() -> typing.List[int]:
     blocks = get_throw_choreographed_blocks()
     return find_offset_from_expected(
         blocks,
@@ -772,7 +764,7 @@ def get_player_data_pointer_offset() -> typing.List[int]:
     pointers_map = get_pointers_map()
     move_id_address, _ = get_point_slope()
 
-    address = move_id_address - get_move_id_offset()
+    address = move_id_address - get_move_id_offset()[0]
 
     sources = pointers_map.get(hex(address), [])
 
@@ -807,7 +799,7 @@ def get_opponent_side() -> typing.List[int]:
     return get_pointer_offset([address], 0x10, 2, f)
 
 
-to_update: typing.List[typing.Tuple[typing.Tuple[str, str], typing.Callable[[], FoundType]]] = [
+to_update: typing.List[typing.Tuple[typing.Tuple[str, str], typing.Callable[[], typing.List[int]]]] = [
     # phase 1 get_all_memory
     (("MemoryAddressOffsets", "expected_module_address"), get_expected_module_address),
     (("PlayerDataAddress", "move_id"), get_move_id_offset),

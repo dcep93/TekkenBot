@@ -165,7 +165,7 @@ class Replayer:
     moves: typing.List[typing.Tuple[str, int]] = []
     pressed: typing.List[int] = []
 
-    i = None
+    i = -1
     start = 0.
     count = 0
     log: typing.List[typing.List[typing.Any]] = []
@@ -176,17 +176,17 @@ def is_foreground_pid() -> bool:
 
 
 def wait_for_focus_and_replay_moves() -> None:
-    if Replayer.i is not None:
+    if Replayer.i != -1:
         return
     if is_foreground_pid():
         replay_moves()
     else:
-        TekkenBot420.t.overlay.toplevel.after(
+        TekkenBot420.TekkenBot420.t.overlay.toplevel.after(
             100, wait_for_focus_and_replay_moves)
 
 
 def replay_moves() -> None:
-    if Replayer.i is not None:
+    if Replayer.i != -1:
         return
     print("replaying")
     time.sleep(0.01)
@@ -240,7 +240,7 @@ def finish() -> None:
     print("done", Replayer.count)
     while Replayer.log:
         print(*Replayer.log.pop(0))
-    Replayer.i = None
+    Replayer.i = -1
 
 
 def get_all_hexes() -> typing.List[int]:
