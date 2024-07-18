@@ -244,11 +244,11 @@ def finish() -> None:
 
 
 def get_all_hexes() -> typing.List[int]:
-    direction_string = ''.join(direction_string_to_hexes[True].keys())
-    attack_string = ''.join(attack_string_to_hex[True].keys())
-    p1_move = direction_string + attack_string
-    move = '%s/%s' % (p1_move, p1_move)
-    return move_to_hexes(move)
+    return list(direction_string_to_hexes[True].values()) + \
+        list(direction_string_to_hexes[False].values(
+        )) + \
+        list(attack_string_to_hex[True].values()) + \
+        list(attack_string_to_hex[False].values())
 
 # negative number means late
 # positive means early
@@ -263,11 +263,11 @@ def get_diff() -> float:
 def replay_move(move: str) -> bool:
     state_log = TekkenBot420.TekkenBot420.t.game_log.state_log
     if len(state_log) == 0:
-        reverse = False
+        is_on_left = True
     else:
         last_state = TekkenBot420.TekkenBot420.t.game_log.state_log[-1]
-        reverse = last_state.facing_bool
-    hex_key_codes = move_to_hexes(move, reverse)
+        is_on_left = last_state.facing_bool
+    hex_key_codes = move_to_hexes(move, is_on_left, True)
     to_release = [i for i in Replayer.pressed if i not in hex_key_codes]
     to_press = [i for i in hex_key_codes if i not in Replayer.pressed]
 
@@ -286,17 +286,17 @@ def replay_move(move: str) -> bool:
     return False
 
 
-def move_to_hexes(move: str, reverse: bool = False, p1: bool = True) -> typing.List[int]:
+def move_to_hexes(move: str, is_on_left: bool, p1: bool) -> typing.List[int]:
     if '/' in move:
         p1_move, p2_move = move.split('/')
-        p1_codes = move_to_hexes(p1_move, reverse, True)
-        p2_codes = move_to_hexes(p2_move, reverse, False)
+        p1_codes = move_to_hexes(p1_move, is_on_left, True)
+        p2_codes = move_to_hexes(p2_move, is_on_left, False)
         return p1_codes + p2_codes
     direction_string, attack_string = move_to_strings(move)
     if direction_string in ['NULL', 'N']:
         direction_hexes = []
     else:
-        if reverse ^ (not p1):
+        if is_on_left ^ p1:
             direction_string = direction_string.replace('b', 'F').replace(
                 'f', 'B').replace('F', 'f').replace('B', 'b')
         direction_hexes = [direction_string_to_hexes[p1][d]
