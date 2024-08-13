@@ -437,7 +437,8 @@ def find_offset_from_expected(
     def f(offset: int) -> bool:
         if not for_move_timer:
             for block in blocks:
-                first_value = get_game_reader().get_4_bytes_from_data_block(block, offset + extra_offset)
+                first_value = get_game_reader().get_4_bytes_from_data_block(
+                    block, offset + extra_offset)
                 if first_value not in expected:
                     return False
 
@@ -850,5 +851,3 @@ to_update: typing.List[typing.Tuple[typing.Tuple[str, str], typing.Callable[[], 
      get_player_data_pointer_offset),
     (("NonPlayerDataAddresses", "opponent_side"), get_opponent_side),
 ]
-
-does_mypy_really_run_or_nah

@@ -39,8 +39,8 @@ def init_tk(tk: Tk, **kwargs: int) -> Text:
     tk.iconbitmap(Path.path('./img/favicon.ico'))
 
     text = Text(tk, wrap="word")
-    sys.stdout = TextRedirector(text, sys.stdout, "stdout")  # type: ignore
-    sys.stderr = TextRedirector(text, sys.stderr, "stderr")  # type: ignore
+    sys.stdout = TextRedirector(text, sys.stdout, "stdout")
+    sys.stderr = TextRedirector(text, sys.stderr, "stderr")
     text.tag_configure("stderr", foreground="#b22222")
 
     text.pack(fill=BOTH, **kwargs)  # type: ignore
