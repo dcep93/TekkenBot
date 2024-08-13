@@ -419,13 +419,28 @@ def find_offset_from_f(f: typing.Callable[[int], bool]) -> typing.List[int]:
 
         if f(offset):
             possibilities.append(offset)
+
+    if len(possibilities) == 0:
+        raise Exception("no offset found")
+
     return possibilities
 
 
-def find_offset_from_expected(blocks: typing.List[bytes], expected: typing.List[int], extra_offset: int = 0) -> typing.List[int]:
+def find_offset_from_expected(
+    blocks: typing.List[bytes],
+    expected: typing.List[int],
+    extra_offset: int = 0,
+    for_move_timer: bool = False,
+) -> typing.List[int]:
     expected_str = stringify(expected)
 
     def f(offset: int) -> bool:
+        if not for_move_timer:
+            for block in blocks:
+                first_value = get_game_reader().get_4_bytes_from_data_block(block, offset + extra_offset)
+                if first_value not in expected:
+                    return False
+
         values = get_values_from_blocks(blocks, offset + extra_offset)
 
         values_str = stringify(values)
@@ -475,7 +490,7 @@ def get_pointer_offset(
                     next_candidates[source] = [offset] + prev
         candidates = next_candidates
 
-    possibilities = sorted([i for i in [[source - get_expected_module_address()] +
+    possibilities = sorted([i for i in [[source - get_expected_module_address()[0]] +
                                         prev for source, prev in candidates.items()] if i[0] > 0])
 
     while len(possibilities) > 1:
@@ -484,18 +499,23 @@ def get_pointer_offset(
         t_tkinter.Label(popup, text="\n".join([
             "too many pointer offsets were found",
             "please close the game, reopen, and reenter practice mode",
-            "then click to proceed",
+            "then close to proceed",
         ])).pack(pady=10)
-        t_tkinter.Button(popup, text="proceed").pack(pady=10)
         popup.wait_window()
 
         get_game_reader().reacquire_module()
 
         if not get_game_reader().process_handle:
             log(["tekken not found"])
-            continue
 
-        possibilities = [p for p in possibilities if f(p)]
+        _next = []
+        for p in possibilities:
+            try:
+                if f(p):
+                    _next.append(p)
+            except Exception as e:
+                print(e)
+        possibilities = _next
 
     return possibilities[0]
 
@@ -574,7 +594,7 @@ def get_p2_data_offset() -> typing.List[int]:
             [MoveInfoEnums.SimpleMoveStates.STANDING_BACK.value] * 31 +
             [MoveInfoEnums.SimpleMoveStates.STANDING.value] * 10
         ),
-        get_simple_move_state()[0],
+        extra_offset=get_simple_move_state()[0],
     )
 
 
@@ -615,7 +635,7 @@ def get_hit_outcome() -> typing.List[int]:
             [MoveInfoEnums.HitOutcome.BLOCKED_STANDING.value] * 31 +
             [MoveInfoEnums.HitOutcome.NONE.value] * 10
         ),
-        get_p2_data_offset()[0],
+        extra_offset=get_p2_data_offset()[0],
     )
 
 
@@ -628,7 +648,7 @@ def get_stun_type() -> typing.List[int]:
             [MoveInfoEnums.StunStates.GETTING_HIT.value] * 58 +
             [MoveInfoEnums.StunStates.NONE.value] * 10
         ),
-        get_p2_data_offset()[0],
+        extra_offset=get_p2_data_offset()[0],
     )
 
 
@@ -641,7 +661,7 @@ def get_throw_tech() -> typing.List[int]:
             [MoveInfoEnums.ThrowTechs.TE2.value] * 120 +
             [MoveInfoEnums.ThrowTechs.BROKEN_ThrowTechs.value] * 29
         ),
-        get_p2_data_offset()[0],
+        extra_offset=get_p2_data_offset()[0],
     )
 
 
@@ -669,7 +689,7 @@ def get_damage_taken() -> typing.List[int]:
             [0] * 37 +
             [5] * 74
         ),
-        get_p2_data_offset()[0],
+        extra_offset=get_p2_data_offset()[0],
     )
 
 
@@ -746,6 +766,7 @@ def get_move_timer() -> typing.List[int]:
             list(range(1, 7)) +
             list(range(1, 11))
         ),
+        for_move_timer=True,
     )
 
 
@@ -785,7 +806,9 @@ def get_opponent_side() -> typing.List[int]:
     bytes_to_find = list(map(lambda x: int(x, 16), bytes_to_find_str.split()))
     found_bytes = list(find_bytes(bytes(bytes_to_find[::-1])))
     if len(found_bytes) != 1:
-        raise Exception(f"get_opponent_side {len(found_bytes)}")
+        # perhaps should throw here
+        print(f"get_opponent_side {len(found_bytes)}")
+        return [-1]
     destination = found_bytes[0]
     address = destination[0] + destination[1]
 
@@ -827,3 +850,5 @@ to_update: typing.List[typing.Tuple[typing.Tuple[str, str], typing.Callable[[], 
      get_player_data_pointer_offset),
     (("NonPlayerDataAddresses", "opponent_side"), get_opponent_side),
 ]
+
+does_mypy_really_run_or_nah

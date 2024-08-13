@@ -97,8 +97,12 @@ class GameReader:
         p1_snapshot = GameSnapshot.PlayerSnapshot(p1_dict)
         p2_snapshot = GameSnapshot.PlayerSnapshot(p2_dict)
 
-        is_player_player_one = self.get_8_bytes_at_end_of_pointer_trail(
-            self.c['NonPlayerDataAddresses']["opponent_side"]) == 1
+        try:
+            is_player_player_one = self.get_8_bytes_at_end_of_pointer_trail(
+                self.c['NonPlayerDataAddresses']["opponent_side"],
+            ) == 1
+        except ReadProcessMemoryException:
+            is_player_player_one = True
 
         if not is_player_player_one:
             p1_snapshot, p2_snapshot = p2_snapshot, p1_snapshot
