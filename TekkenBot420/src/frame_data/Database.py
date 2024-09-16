@@ -47,7 +47,7 @@ class Database:
 
     def record_move(self, entry: Entry.Entry) -> None:
         raw_char_name = entry[Entry.DataColumns.char_name]
-        if isinstance(raw_char_name, int):
+        if raw_char_name == MoveInfoEnums.CharacterCodes._DUMMY.name or isinstance(raw_char_name, int):
             return
         char_name = raw_char_name.lower()
 

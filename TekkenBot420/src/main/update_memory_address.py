@@ -7,6 +7,7 @@ import collections
 import ctypes
 import re
 import time
+import traceback
 import typing
 
 
@@ -448,7 +449,12 @@ def find_offset_from_expected(
 
         return expected_str in values_str
 
-    return find_offset_from_f(f)
+    try:
+        return find_offset_from_f(f)
+    except Exception as e:
+        print(e)
+        print(traceback.format_exc())
+        return [-1]
 
 
 def get_values_from_blocks(blocks: typing.List[bytes], offset: int) -> typing.List[int]:
@@ -496,9 +502,11 @@ def get_pointer_offset(
 
     while len(possibilities) > 1:
         print(f"pruning {len(possibilities)} possibilities")
+        Vars.tk.withdraw()
+        Vars.tk.update()
         popup = t_tkinter.Toplevel(Vars.tk)
         t_tkinter.Label(popup, text="\n".join([
-            "too many pointer offsets were found",
+            f"too many pointer offsets were found ({len(possibilities)})",
             "please close the game, reopen, and reenter practice mode",
             "then close to proceed",
         ])).pack(pady=10)
@@ -783,19 +791,22 @@ def get_facing() -> typing.List[int]:
 
 
 def get_player_data_pointer_offset() -> typing.List[int]:
-    pointers_map = get_pointers_map()
     move_id_address, _ = get_point_slope()
 
-    address = move_id_address - get_move_id_offset()[0]
+    move_id_offset = get_move_id_offset()[0]
+    base_address = move_id_address - move_id_offset
 
-    sources = pointers_map.get(hex(address), [])
+    pointers_map = get_pointers_map()
+    sources = pointers_map.get(hex(base_address), [])
 
     if len(sources) == 0:
-        raise Exception(f"get_player_data_pointer_offset {hex(address)} {len(pointers_map)}")  # nopep8
+        raise Exception(f"get_player_data_pointer_offset {hex(base_address)} {len(pointers_map)}")  # nopep8
 
     def f(pointers: typing.List[int]) -> bool:
-        address = get_game_reader().get_8_bytes_at_end_of_pointer_trail(pointers)
-        value = get_game_reader().get_int_from_address(address, 4)
+        potential_base_address = get_game_reader(
+        ).get_8_bytes_at_end_of_pointer_trail(pointers)
+        potential_address = potential_base_address + move_id_offset
+        value = get_game_reader().get_int_from_address(potential_address, 4)
         return value == MoveInfoEnums.UniversalMoves.STANDING.value
 
     return get_pointer_offset(sources, 0x100, 5, f)
@@ -803,7 +814,7 @@ def get_player_data_pointer_offset() -> typing.List[int]:
 
 def get_opponent_side() -> typing.List[int]:
     # https://github.com/WAZAAAAA0/TekkenBot/issues/57#issuecomment-2087909057
-    bytes_to_find_str = "01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 02 00 00 00 02 00 00 00 02 00 00 00 02 00 00 00 02 00 00 00 02 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 08 00 00 00 08 00 00 00 08 00 00 00 08 00 00 00 08 00 00 00 08 00 00 00 10 00 00 00 10 00 00 00 10 00 00 00 10 00 00 00 10 00 00 00 10 00 00 00 20 00 00 00 20 00 00 00 20 00 00 00 20 00 00 00 20 00 00 00 20 00 00 00 00 00 00 00 40 00 00 00 40 00 00 00 40 00 00 00 40 00 00 00 40"
+    bytes_to_find_str = "01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 01 00 00 00 02 00 00 00 02 00 00 00 02 00 00 00 02 00 00 00 02 00 00 00 02 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 08 00 00 00 08 00 00 00 08 00 00 00 08 00 00 00 08 00 00 00 08 00 00 00 10 00 00 00 10 00 00 00 10 00 00 00 10 00 00 00 10 00 00 00 10 00 00 00 20 00 00 00 20 00 00 00 20 00 00 00 20 00 00 00 20 00 00 00 20 00 00 00 00 00 00 00 00 00 00 00 40 00 00 00 40 00 00 00 40 00 00 00 40"
     bytes_to_find = list(map(lambda x: int(x, 16), bytes_to_find_str.split()))
     found_bytes = list(find_bytes(bytes(bytes_to_find[::-1])))
     if len(found_bytes) != 1:

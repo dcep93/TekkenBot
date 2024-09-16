@@ -224,4 +224,5 @@ class CharacterCodes(enum.Enum):
     VICTOR = 30
     RAVEN = 31
     EDDY = 33
+    LIDIA = 34
     _DUMMY = 116
