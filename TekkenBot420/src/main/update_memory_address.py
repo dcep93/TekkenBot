@@ -37,6 +37,7 @@ def main() -> None:
         "with practice options set to Opponent Actions -> Standing / Action After a Hit or Block -> Block All :",
         "if you're not on that screen already, you'll need to restart this tool",
         "do not make any inputs until the end of the throw animation",
+        "this entire process takes about 15 minutes",
         "",
     ]))
     get_all_memory()
