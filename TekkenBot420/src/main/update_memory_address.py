@@ -805,7 +805,11 @@ def get_player_data_pointer_offset() -> typing.List[int]:
             candidate_address = base_address+additional_offset
             if hex(candidate_address) in pointers_map:
                 new_move_id = hex(move_id_offset-additional_offset)
-                print(f"potential move_id offset: {new_move_id}")
+                print(f"potential move_id offset: {new_move_id} {len(pointers_map[new_move_id])}")
+        print("could not find pointer to base_address")
+        print("move_id offset has likely changed")
+        print("pick a potential offset and update memory_address.ini manually with that value, and run again")
+        print("a higher number after the offset is more likely to be correct")
         raise Exception(f"get_player_data_pointer_offset {hex(base_address)} {len(pointers_map)}")  # nopep8
 
     def f(pointers: typing.List[int]) -> bool:
