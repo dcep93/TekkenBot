@@ -18,6 +18,7 @@ jobs:
       # https://github.com/softprops/action-gh-release
       - name: Release
         uses: softprops/action-gh-release@v2
+        if: startsWith(github.event.commits[0].message, 'v')
         with:
           tag_name: sha/${{ github.sha }}
           name: ${{ github.event.commits[0].message }}

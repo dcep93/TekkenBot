@@ -801,6 +801,11 @@ def get_player_data_pointer_offset() -> typing.List[int]:
     sources = pointers_map.get(hex(base_address), [])
 
     if len(sources) == 0:
+        for additional_offset in range(-0x100, 0x100+1):
+            candidate_address = base_address+additional_offset
+            if hex(candidate_address) in pointers_map:
+                new_move_id = hex(move_id_offset-additional_offset)
+                print(f"potential move_id offset: {new_move_id}")
         raise Exception(f"get_player_data_pointer_offset {hex(base_address)} {len(pointers_map)}")  # nopep8
 
     def f(pointers: typing.List[int]) -> bool:
